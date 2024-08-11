@@ -11,7 +11,7 @@ app.post('/api/purchase', async (req, res) => {
     const { name, email, item } = req.body;
 
     // Discord Webhook URL (replace with your webhook URL)
-    const discordWebhookUrl = 'https://discord.com/api/webhooks/your-webhook-id/your-webhook-token';
+    const discordWebhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI';
 
     // Send message to Discord
     try {
