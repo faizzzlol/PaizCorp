@@ -18,9 +18,12 @@
             </ul>
         </nav>
         <a href="/PaizCorp/PaizChicken/order" class="cta-button">Order Now</a>
-        <label for="theme-switch" class="theme-switcher">
-        <input type="checkbox" id="theme-switch">
-        <span>Dark Mode</span>
+        <label for="language-switcher" class="language-switcher">
+            <select id="language-switcher">
+                <option value="en">English</option>
+                <option value="ms">Bahasa Melayu</option>
+            </select>
+        </label>
     </header>
 
     <section class="hero">
@@ -72,6 +75,51 @@
     </footer>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        const languageSwitcher = document.getElementById('language-switcher');
+        const elementsToTranslate = {
+            'nav-home': 'home',
+            'nav-menu': 'menu',
+            'nav-about_us': 'about_us',
+            'nav-contact_us': 'contact_us',
+            'cta-button': 'order_now',
+            'welcome': 'welcome',
+            'best_fried_chicken': 'best_fried_chicken',
+            'see_menu': 'see_menu',
+            'current_promotions': 'current_promotions',
+            'learn_more': 'learn_more',
+            'about_us_title': 'about_us_title',
+            'about_us_text': 'about_us_text',
+            'contact_title': 'contact_title',
+            'name': 'name',
+            'email': 'email',
+            'message': 'message',
+            'send_message': 'send_message'
+        };
+
+        function translatePage(language) {
+            fetch(`${language}.json`)
+                .then(response => response.json())
+                .then(translations => {
+                    Object.keys(elementsToTranslate).forEach(elementId => {
+                        const element = document.querySelector(`.${elementId}`);
+                        if (element) {
+                            element.textContent = translations[elementsToTranslate[elementId]];
+                        }
+                    });
+                });
+        }
+
+        const savedLanguage = localStorage.getItem('language') || 'en';
+        languageSwitcher.value = savedLanguage;
+        translatePage(savedLanguage);
+
+        languageSwitcher.addEventListener('change', () => {
+            const newLanguage = languageSwitcher.value;
+            localStorage.setItem('language', newLanguage);
+            translatePage(newLanguage);
+        });
+
+        // Theme switcher script
         const toggleSwitch = document.getElementById('theme-switch');
         const currentTheme = localStorage.getItem('theme') || 'light';
 
@@ -84,6 +132,5 @@
         });
     });
 </script>
-
 </body>
 </html>
