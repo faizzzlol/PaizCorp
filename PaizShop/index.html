@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiz Shop</title>
+    <link rel="stylesheet" href="PaizCorp/PaizShop/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Paiz Shop</h1>
+    </header>
+    <main>
+        <section id="shop-items">
+            <div class="item">
+                <h2>Shulker Box</h2>
+                <img src="PaizCorp/PaizShop/shulker_box.png" alt="Shulker Box">
+                <p>$5.00</p>
+                <button class="buy-btn" data-item="shulker-box">Buy Now</button>
+            </div>
+            <div class="item">
+                <h2>Bone Block</h2>
+                <img src="PaizCorp/PaizShop/bone_block.png" alt="Bone Block">
+                <p>$2.00</p>
+                <button class="buy-btn" data-item="bone-block">Buy Now</button>
+            </div>
+        </section>
+        <section id="checkout">
+            <h2>Checkout</h2>
+            <form id="checkout-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <input type="hidden" id="item" name="item">
+                <button type="submit">Complete Purchase</button>
+            </form>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
 
