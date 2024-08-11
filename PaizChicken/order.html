@@ -1,2 +1,178 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="order_now">Paiz Chicken - Order Now</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for the loading popup */
+        .loading-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .loading-popup img {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Paiz Chicken</div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="nav-home" data-translate="home"></a></li>
+                <li><a href="menu.html" class="nav-menu" data-translate="menu"></a></li>
+                <li><a href="about.html" class="nav-about_us" data-translate="about_us"></a></li>
+                <li><a href="contact.html" class="nav-contact_us" data-translate="contact_us"></a></li>
+            </ul>
+        </nav>
+        <a href="order.html" class="cta-button" data-translate="order_now"></a>
+        <label for="theme-switch" class="theme-switcher">
+            <input type="checkbox" id="theme-switch">
+            <span>Dark Mode</span>
+        </label>
+        <label for="language-switcher" class="language-switcher">
+            <select id="language-switcher">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+            </select>
+        </label>
+    </header>
+
+    <div class="loading-popup" id="loading-popup">
+        <img src="chicken.jpg" alt="Loading">
+        <p>Loading...</p>
+    </div>
+
+    <main>
+        <section class="order-form">
+            <h1 data-translate="order_now"></h1>
+            <form id="order-form">
+                <label for="name" data-translate="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email" data-translate="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone" data-translate="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="order-details" data-translate="order_details">Order Details:</label>
+                <textarea id="order-details" name="order-details" rows="5" required></textarea>
+
+                <button type="submit" data-translate="submit_order">Submit Order</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-media">
+            <!-- Add social media links -->
+        </div>
+        <div class="contact-info">
+            <p>Phone: (123) 456-7890</p>
+            <p>Email: info@paizchicken.com</p>
+            <p>Address: 123 Chicken Street, Food City</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="nav-home" data-translate="home"></a></li>
+                <li><a href="menu.html" class="nav-menu" data-translate="menu"></a></li>
+                <li><a href="about.html" class="nav-about_us" data-translate="about_us"></a></li>
+                <li><a href="contact.html" class="nav-contact_us" data-translate="contact_us"></a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const languageSwitcher = document.getElementById('language-switcher');
+            const elementsToTranslate = {
+                'nav-home': 'home',
+                'nav-menu': 'menu',
+                'nav-about_us': 'about_us',
+                'nav-contact_us': 'contact_us',
+                'cta-button': 'order_now',
+                'welcome': 'welcome',
+                'best_fried_chicken': 'best_fried_chicken',
+                'see_menu': 'see_menu',
+                'current_promotions': 'current_promotions',
+                'learn_more': 'learn_more',
+                'about_us_title': 'about_us_title',
+                'about_us_text': 'about_us_text',
+                'contact_title': 'contact_title',
+                'name': 'name',
+                'email': 'email',
+                'message': 'message',
+                'send_message': 'send_message',
+                'submit_order': 'submit_order',
+                'order_now': 'order_now',
+                'order_details': 'order_details',
+                'phone': 'phone'
+            };
+
+            function translatePage(language) {
+                fetch(`${language}.json`)
+                    .then(response => response.json())
+                    .then(translations => {
+                        Object.keys(elementsToTranslate).forEach(elementId => {
+                            const element = document.querySelector(`.${elementId}`);
+                            if (element) {
+                                element.textContent = translations[elementsToTranslate[elementId]];
+                            }
+                        });
+                    });
+            }
+
+            const savedLanguage = localStorage.getItem('language') || 'en';
+            languageSwitcher.value = savedLanguage;
+            translatePage(savedLanguage);
+
+            languageSwitcher.addEventListener('change', () => {
+                const newLanguage = languageSwitcher.value;
+                localStorage.setItem('language', newLanguage);
+                translatePage(newLanguage);
+            });
+
+            // Theme switcher script
+            const toggleSwitch = document.getElementById('theme-switch');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+
+            document.documentElement.setAttribute('data-theme', currentTheme);
+
+            toggleSwitch.addEventListener('change', () => {
+                const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Order form submission with loading popup
+            const orderForm = document.getElementById('order-form');
+            const loadingPopup = document.getElementById('loading-popup');
+
+            orderForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                loadingPopup.style.display = 'flex';
+
+                // Simulate form submission
+                setTimeout(() => {
+                    loadingPopup.style.display = 'none';
+                    alert('Order submitted successfully!');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
 </html>
