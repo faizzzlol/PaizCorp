@@ -3,7 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiz Shop</title>
+    <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop.png" sizes="96x96">
+    <link rel="apple-touch-icon" sizes="72x72" href="/PaizCorp/PaizShop/PaizShop.png" >
+    <link rel="apple-touch-icon" sizes="114x114" href="/PaizCorp/PaizShop/PaizShop.png" >
+    <link rel="apple-touch-icon" sizes="152x152" href="/PaizCorp/PaizShop/PaizShop.png" >
+    <title>Paiz Shops</title>
+    <meta name="description" content="Paiz Shop. Best item supplier in Skyxion.">
+    <meta name="keywords" content="The Legend Of Legiona, TheLoL, TheLoL Website, The LoL, TheLol Server, The LoL Server, The Legend of Legiona Website, faizzzlol, FaizGG, Faiz Gaming, The Sus, TLoL, TL, CornHub, 4k, Apple, iPhone 16, iPhone 15, Apple Watch, iPhone SE, YouTube, Netflix, Roblox, Twitch, Maybank, Instagram, Paiz Shop, Skyxion, Neverland, Paiz Corp, Paiz Chicken, Paiz Railways">
+        
+    <meta property="og:title" content="Paiz Shop"/>
+    <meta property="og:url" content="https://faizzzlol.github.io/PaizCorp/PaizShop/"/>
+    <meta property="og:image" content="/PaizCorp/PaizShop/PaizShop.png"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:description" content="Paiz Shop. Best item supplier in Skyxion."/>
     <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
 </head>
 <body>
@@ -14,29 +28,22 @@
         <section id="shop-items">
             <div class="item">
                 <h2>Shulker Box</h2>
-                <img src="/PaizCorp/PaizShop/shulker_box.png" alt="Shulker Box">
-                <p>$5.00</p>
-                <button class="buy-btn" data-item="shulker-box">Buy Now</button>
+                <img src="shulker_box.png" alt="Shulker Box">
+                <p>1 Diamond</p>
+                <label for="quantity-shulker-box">Quantity:</label>
+                <input type="number" id="quantity-shulker-box" class="quantity" value="1" min="1">
+                <button class="buy-btn" data-item="Shulker Box" data-quantity-id="quantity-shulker-box">Buy Now</button>
             </div>
             <div class="item">
-                <h2>Bone Block</h2>
-                <img src="/PaizCorp/PaizShop/bone_block.png" alt="Bone Block">
-                <p>$2.00</p>
-                <button class="buy-btn" data-item="bone-block">Buy Now</button>
+                <h2>Mending</h2>
+                <img src="mending.png" alt="Mending">
+                <p>3 Diamond</p>
+                <label for="quantity-mending">Quantity:</label>
+                <input type="number" id="quantity-mending" class="quantity" value="1" min="1">
+                <button class="buy-btn" data-item="Mending" data-quantity-id="quantity-mending">Buy Now</button>
             </div>
         </section>
-        <section id="checkout">
-            <h2>Checkout</h2>
-            <form id="checkout-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                <input type="hidden" id="item" name="item">
-                <button type="submit">Complete Purchase</button>
-            </form>
-        </section>
     </main>
-    <script src="script.js"></script>
+    <script src="/PaizCorp/PaizShop/script.js"></script>
 </body>
 </html>
