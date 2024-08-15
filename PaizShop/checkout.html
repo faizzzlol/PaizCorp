@@ -8,49 +8,38 @@
 </head>
 <body>
     <header>
-        <h1><a href="/PaizCorp/PaizShop/">Paiz Shop</a></h1>
+        <h1>Paiz Shop Checkout</h1>
     </header>
     <main>
-        <section id="checkout">
-            <h2>Checkout</h2>
-            <form id="checkout-form">
-                <label for="name">Name (Optional):</label>
-                <input type="text" id="name" name="name">
-                
-                <label for="minecraft-name">Minecraft Name (Required):</label>
-                <input type="text" id="minecraft-name" name="minecraft-name" required>
-                
-                <label for="delivery-option">Delivery Option (Required):</label>
-                <input type="radio" id="pickup" name="delivery-option" value="pickup" required> Pickup
-                <input type="radio" id="delivery" name="delivery-option" value="delivery" required> Delivery
-                
-                <div id="delivery-details" style="display: none;">
-                    <label for="coord-x">X Coordinate:</label>
-                    <input type="number" id="coord-x" name="coord-x">
-                    
-                    <label for="coord-y">Y Coordinate:</label>
-                    <input type="number" id="coord-y" name="coord-y">
-                    
-                    <label for="coord-z">Z Coordinate:</label>
-                    <input type="number" id="coord-z" name="coord-z">
-                </div>
-                
-                <div id="shop-address" style="display: none;">
-                    Shop Address: 1, Jalan Utama, The LoL City, The LoL
-                </div>
-                
-                <button type="button" id="checkout-btn">Checkout</button>
-            </form>
-            
-            <section id="order-summary">
-                <h3>Order Summary</h3>
-                <!-- Summary will be populated by JavaScript -->
-            </section>
-        </section>
+        <form id="checkout-form">
+            <label for="name">Name (Optional):</label>
+            <input type="text" id="name" name="name">
+
+            <label for="minecraft-name">Minecraft Name (Required):</label>
+            <input type="text" id="minecraft-name" name="minecraft-name" required>
+
+            <label for="order-type">Pickup / Delivery? (Required):</label>
+            <input type="radio" id="pickup" name="order-type" value="pickup" required> Pickup
+            <input type="radio" id="delivery" name="order-type" value="delivery"> Delivery
+
+            <div id="coordinate-fields" style="display:none;">
+                <label for="coord-x">X Coordinate (Required):</label>
+                <input type="number" id="coord-x" name="coord-x" required>
+
+                <label for="coord-y">Y Coordinate (Required):</label>
+                <input type="number" id="coord-y" name="coord-y" required>
+
+                <label for="coord-z">Z Coordinate (Required):</label>
+                <input type="number" id="coord-z" name="coord-z" required>
+            </div>
+
+            <div id="pickup-address" style="display:none;">
+                <p>Pickup Address: 1, Jalan Utama, The LoL City, The LoL</p>
+            </div>
+
+            <button type="submit" id="checkout-button">Checkout</button>
+        </form>
     </main>
-    <footer>
-        <p>&copy; 2024 Paiz Shop. All rights reserved.</p>
-    </footer>
     <script src="/PaizCorp/PaizShop/script.js"></script>
 </body>
 </html>
