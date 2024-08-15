@@ -1,76 +1,64 @@
+function buyItem(itemId) {
+    const stockElement = document.getElementById(`stock-${itemId}`);
+    const stock = parseInt(stockElement.textContent, 10);
+    
+    if (stock > 0) {
+        // Redirect to the checkout page with the item ID and quantity as query parameters
+        const quantity = document.getElementById(`quantity-${itemId}`).value;
+        window.location.href = `/PaizCorp/PaizShop/checkout?item=${itemId}&quantity=${quantity}`;
+    } else {
+        alert("This item is sold out!");
+    }
+}
+
+function calculateDeliveryFee(userX, userY, userZ) {
+    const shopX = 5000;
+    const shopY = 70;
+    const shopZ = 6000;
+
+    const distance = Math.sqrt(Math.pow(userX - shopX, 2) + Math.pow(userY - shopY, 2) + Math.pow(userZ - shopZ, 2));
+    const fee = Math.ceil(distance / 1000); // 1 diamond per 1000 blocks
+
+    return fee;
+}
+
+function updateOrderSummary() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const item = urlParams.get('item');
+    const quantity = parseInt(urlParams.get('quantity'), 10);
+
+    const itemName = item === 'shulker' ? 'Shulker Box' : 'Mending';
+    const itemPrice = item === 'shulker' ? 1 : 3;
+
+    const subtotal = itemPrice * quantity;
+    const tax = subtotal * 0.03;
+
+    let deliveryFee = 0;
+    const deliveryOption = document.querySelector('input[name="delivery-option"]:checked').value;
+    if (deliveryOption === 'delivery') {
+        const userX = parseInt(document.getElementById('coord-x').value, 10);
+        const userY = parseInt(document.getElementById('coord-y').value, 10);
+        const userZ = parseInt(document.getElementById('coord-z').value, 10);
+        deliveryFee = calculateDeliveryFee(userX, userY, userZ);
+    }
+
+    const total = subtotal + tax + deliveryFee;
+
+    document.getElementById('order-summary').innerHTML = `
+        ${quantity} x ${itemName} - ${subtotal} Diamonds
+        <br>
+        Subtotal: ${subtotal} Diamonds
+        <br>
+        Delivery Fee: ${deliveryFee} Diamonds
+        <br>
+        The LoL Tax (TST) (3%): ${tax.toFixed(2)} Diamonds
+        <br>
+        Total: ${total} Diamonds
+    `;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    const stock = {
-        shulker: 1755,
-        mending: 0
-    };
-
-    function validateStock(item) {
-        const quantityInput = document.getElementById(`quantity-${item}`);
-        if (quantityInput) {
-            const quantity = quantityInput.value;
-            const stockCount = stock[item];
-
-            console.log(`Validating stock for ${item}: quantity=${quantity}, stockCount=${stockCount}`);
-
-            if (quantity > stockCount) {
-                quantityInput.value = stockCount;
-            }
-        }
+    if (window.location.pathname.includes('/PaizCorp/PaizShop/checkout')) {
+        document.getElementById('checkout-btn').addEventListener('click', updateOrderSummary);
     }
-
-    function buyItem(item) {
-        const quantityInput = document.getElementById(`quantity-${item}`);
-        if (quantityInput) {
-            const quantity = parseInt(quantityInput.value, 10);
-            const stockCount = stock[item];
-
-            console.log(`Buying item ${item}: quantity=${quantity}, stockCount=${stockCount}`);
-
-            if (quantity <= stockCount) {
-                stock[item] -= quantity;
-                const stockElem = document.getElementById(`stock-${item}`);
-                if (stockElem) stockElem.innerText = stock[item];
-
-                if (stock[item] === 0) {
-                    const buyBtn = document.getElementById(`buy-${item}`);
-                    const soldOutElem = document.getElementById(`sold-out-${item}`);
-                    if (buyBtn) buyBtn.disabled = true;
-                    if (soldOutElem) soldOutElem.style.display = 'block';
-                }
-
-                // Store the item and quantity in session storage
-                sessionStorage.setItem('item', item);
-                sessionStorage.setItem('quantity', quantity);
-
-                // Redirect to the checkout page
-                window.location.href = '/checkout';
-            } else {
-                alert('Not enough stock available.');
-            }
-        } else {
-            console.error(`Quantity input for item '${item}' not found.`);
-        }
-    }
-
-    // Initialize the stock display and button state on page load
-    Object.keys(stock).forEach(item => {
-        const stockElem = document.getElementById(`stock-${item}`);
-        const buyBtn = document.getElementById(`buy-${item}`);
-        const soldOutElem = document.getElementById(`sold-out-${item}`);
-
-        if (stockElem) stockElem.innerText = stock[item];
-        if (stock[item] === 0) {
-            if (buyBtn) buyBtn.disabled = true;
-            if (soldOutElem) soldOutElem.style.display = 'block';
-        }
-    });
-
-    const buyButtons = document.querySelectorAll('.buy-btn');
-
-    buyButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const item = button.getAttribute('data-item').toLowerCase().replace(/\s+/g, '');
-            buyItem(item);
-        });
-    });
 });
