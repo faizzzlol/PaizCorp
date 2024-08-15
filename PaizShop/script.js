@@ -4,7 +4,7 @@ function buyItem(itemId) {
 
     if (stock > 0) {
         const quantity = document.getElementById(`quantity-${itemId}`).value;
-        window.location.href = `checkout.html?item=${itemId}&quantity=${quantity}`;
+        window.location.href = `/PaizCorp/PaizShop/checkout?item=${itemId}&quantity=${quantity}`;
     } else {
         alert("This item is sold out!");
     }
@@ -51,7 +51,7 @@ function updateOrderSummary() {
         <br>
         Delivery Fee: ${deliveryFee} Diamonds
         <br>
-        The LoL Tax (TST) (3%): ${tax.toFixed(2)} Diamonds
+        The LoL Tax TST 3%: ${tax.toFixed(2)} Diamonds
         <br>
         Total: ${total} Diamonds
     `;
