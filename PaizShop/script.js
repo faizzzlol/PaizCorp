@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const quantity = quantityInput.value;
             const stockCount = stock[item];
 
+            console.log(`Validating stock for ${item}: quantity=${quantity}, stockCount=${stockCount}`);
+
             if (quantity > stockCount) {
                 quantityInput.value = stockCount;
             }
@@ -19,15 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function buyItem(item) {
         const quantityInput = document.getElementById(`quantity-${item}`);
         if (quantityInput) {
-            const quantity = quantityInput.value;
+            const quantity = parseInt(quantityInput.value, 10);
             const stockCount = stock[item];
+
+            console.log(`Buying item ${item}: quantity=${quantity}, stockCount=${stockCount}`);
 
             if (quantity <= stockCount) {
                 stock[item] -= quantity;
                 const stockElem = document.getElementById(`stock-${item}`);
                 if (stockElem) stockElem.innerText = stock[item];
 
-                if (stock[item] == 0) {
+                if (stock[item] === 0) {
                     const buyBtn = document.getElementById(`buy-${item}`);
                     const soldOutElem = document.getElementById(`sold-out-${item}`);
                     if (buyBtn) buyBtn.disabled = true;
@@ -39,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 sessionStorage.setItem('quantity', quantity);
 
                 // Redirect to the checkout page
-                window.location.href = 'checkout.html';
+                window.location.href = '/checkout';
             } else {
                 alert('Not enough stock available.');
             }
@@ -55,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const soldOutElem = document.getElementById(`sold-out-${item}`);
 
         if (stockElem) stockElem.innerText = stock[item];
-        if (stock[item] == 0) {
+        if (stock[item] === 0) {
             if (buyBtn) buyBtn.disabled = true;
             if (soldOutElem) soldOutElem.style.display = 'block';
         }
