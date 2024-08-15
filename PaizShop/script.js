@@ -1,15 +1,15 @@
 function buyItem(itemId) {
     const stockElement = document.getElementById(`stock-${itemId}`);
     const stock = parseInt(stockElement.textContent, 10);
-    
+
     if (stock > 0) {
-        // Redirect to the checkout page with the item ID and quantity as query parameters
         const quantity = document.getElementById(`quantity-${itemId}`).value;
-        window.location.href = `/PaizCorp/PaizShop/checkout?item=${itemId}&quantity=${quantity}`;
+        window.location.href = `checkout.html?item=${itemId}&quantity=${quantity}`;
     } else {
         alert("This item is sold out!");
     }
 }
+
 
 function calculateDeliveryFee(userX, userY, userZ) {
     const shopX = 5000;
