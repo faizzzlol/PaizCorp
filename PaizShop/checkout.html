@@ -3,56 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
-    <link rel="apple-touch-icon" sizes="72x72" href="/PaizCorp/PaizShop/PaizShop2.png">
     <title>Checkout - Paiz Shop</title>
-    <meta name="description" content="Checkout for Paiz Shop purchases.">
-    <meta name="keywords" content="Paiz Shop, checkout, purchase, Minecraft items">
     <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
 </head>
 <body>
     <header>
-        <h1>
-            <img src="/PaizCorp/PaizShop/PaizShop2.png" alt="Paiz Shop Logo" id="shop-logo">
-            <a href="index.html" id="shop-link">Paiz Shop</a>
-        </h1>
+        <h1><a href="/PaizCorp/PaizShop/">Paiz Shop</a></h1>
     </header>
     <main>
-        <h2>Checkout</h2>
-        <form id="checkout-form">
-            <label for="name">Name (optional):</label>
-            <input type="text" id="name" name="name">
-
-            <label for="minecraft-name">Minecraft Name (required):</label>
-            <input type="text" id="minecraft-name" name="minecraft-name" required>
-
-            <label for="delivery-option">Pickup / Delivery?</label>
-            <select id="delivery-option" name="delivery-option">
-                <option value="pickup">Pickup</option>
-                <option value="delivery">Delivery</option>
-            </select>
-
-            <div id="delivery-details" style="display:none;">
-                <h3>Delivery Coordinates</h3>
-                <label for="coordinate-x">X:</label>
-                <input type="number" id="coordinate-x" name="coordinate-x" required>
-                <label for="coordinate-y">Y:</label>
-                <input type="number" id="coordinate-y" name="coordinate-y" required>
-                <label for="coordinate-z">Z:</label>
-                <input type="number" id="coordinate-z" name="coordinate-z" required>
-            </div>
-
-            <div id="pickup-details" style="display:none;">
-                <h3>Pickup Location</h3>
-                <p>1, Jalan Utama, The LoL City, The LoL</p>
-            </div>
-
-            <button type="button" id="checkout-button">Checkout</button>
-        </form>
+        <section id="checkout">
+            <h2>Checkout</h2>
+            <form id="checkout-form">
+                <label for="name">Name (Optional):</label>
+                <input type="text" id="name" name="name">
+                
+                <label for="minecraft-name">Minecraft Name (Required):</label>
+                <input type="text" id="minecraft-name" name="minecraft-name" required>
+                
+                <label for="delivery-option">Delivery Option (Required):</label>
+                <input type="radio" id="pickup" name="delivery-option" value="pickup" required> Pickup
+                <input type="radio" id="delivery" name="delivery-option" value="delivery" required> Delivery
+                
+                <div id="delivery-details" style="display: none;">
+                    <label for="coord-x">X Coordinate:</label>
+                    <input type="number" id="coord-x" name="coord-x">
+                    
+                    <label for="coord-y">Y Coordinate:</label>
+                    <input type="number" id="coord-y" name="coord-y">
+                    
+                    <label for="coord-z">Z Coordinate:</label>
+                    <input type="number" id="coord-z" name="coord-z">
+                </div>
+                
+                <div id="shop-address" style="display: none;">
+                    Shop Address: 1, Jalan Utama, The LoL City, The LoL
+                </div>
+                
+                <button type="button" id="checkout-btn">Checkout</button>
+            </form>
+            
+            <section id="order-summary">
+                <h3>Order Summary</h3>
+                <!-- Summary will be populated by JavaScript -->
+            </section>
+        </section>
     </main>
-    <script src="/PaizCorp/PaizShop/checkout.js"></script>
     <footer>
         <p>&copy; 2024 Paiz Shop. All rights reserved.</p>
     </footer>
+    <script src="/PaizCorp/PaizShop/script.js"></script>
 </body>
 </html>
