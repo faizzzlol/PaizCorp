@@ -25,6 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById(`buy-${item}`).disabled = true;
                 document.getElementById(`sold-out-${item}`).style.display = 'block';
             }
+
+            // Store the item and quantity in session storage
+            sessionStorage.setItem('item', item);
+            sessionStorage.setItem('quantity', quantity);
+
+            // Redirect to the checkout page
+            window.location.href = 'checkout.html';
+        } else {
+            alert('Not enough stock available.');
         }
     }
 
@@ -40,38 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const buyButtons = document.querySelectorAll('.buy-btn');
 
     buyButtons.forEach(button => {
-        button.addEventListener('click', async () => {
+        button.addEventListener('click', () => {
             const item = button.getAttribute('data-item').toLowerCase().replace(/\s+/g, '');
-            const quantityInputId = button.getAttribute('data-quantity-id');
-            const quantity = document.getElementById(quantityInputId).value;
-            const userName = prompt("Enter your name:");
-            const userEmail = prompt("Enter your email:");
-
-            if (userName && userEmail) {
-                const data = {
-                    name: userName,
-                    email: userEmail,
-                    item: item,
-                    quantity: quantity
-                };
-
-                const response = await fetch('/api/purchase', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                if (response.ok) {
-                    alert('Purchase complete!');
-                    buyItem(item); // Call buyItem after successful purchase
-                } else {
-                    alert('Error completing purchase.');
-                }
-            } else {
-                alert('Purchase cancelled.');
-            }
+            buyItem(item);
         });
     });
 });
