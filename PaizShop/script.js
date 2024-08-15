@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sessionStorage.setItem('quantity', quantity);
 
             // Redirect to the checkout page
-            window.location.href = 'checkout.html';
+            window.location.href = '/PaizCorp/PaizShop/checkout';
         } else {
             alert('Not enough stock available.');
         }
