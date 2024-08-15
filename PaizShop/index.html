@@ -30,12 +30,14 @@
     <main>
         <section id="shop-items">
             <div class="item">
-                <h2>Shulker Box</h2>
-                <img src="/PaizCorp/PaizShop/shulker_box.png" alt="Shulker Box">
+                <h3>Shulker Box</h3>
+                <img src="shulker_box.png" alt="Shulker Box">
                 <p>1 Diamond</p>
-                <label for="quantity-shulker-box">Quantity:</label>
-                <input type="number" id="quantity-shulker-box" class="quantity" value="1" min="1">
-                <button class="buy-btn" data-item="Shulker Box" data-quantity-id="quantity-shulker-box">Buy Now</button>
+                <p>Available Stock: <span id="stock-shulker">1755</span></p> <!-- Example stock number -->
+                <div class="sold-out" id="sold-out-shulker" style="display:none;">Sold Out</div>
+                <label for="quantity-shulker">Quantity:</label>
+                <input type="number" id="quantity-shulker" min="1" value="1" oninput="validateStock('shulker')">
+                <button id="buy-shulker" onclick="buyItem('shulker')">Buy Now</button>
             </div>
             <div class="item">
                 <h2>Mending</h2>
