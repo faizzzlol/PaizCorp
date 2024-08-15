@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Paiz Shop Checkout</h1>
+        <h1>Checkout</h1>
     </header>
     <main>
         <form id="checkout-form">
@@ -18,26 +18,28 @@
             <label for="minecraft-name">Minecraft Name (Required):</label>
             <input type="text" id="minecraft-name" name="minecraft-name" required>
 
-            <label for="order-type">Pickup / Delivery? (Required):</label>
-            <input type="radio" id="pickup" name="order-type" value="pickup" required> Pickup
-            <input type="radio" id="delivery" name="order-type" value="delivery"> Delivery
+            <label for="pickup">Pickup:</label>
+            <input type="radio" id="pickup" name="delivery-option" value="pickup" checked onclick="toggleDelivery(false)">
 
-            <div id="coordinate-fields" style="display:none;">
-                <label for="coord-x">X Coordinate (Required):</label>
-                <input type="number" id="coord-x" name="coord-x" required>
+            <label for="delivery">Delivery:</label>
+            <input type="radio" id="delivery" name="delivery-option" value="delivery" onclick="toggleDelivery(true)">
 
-                <label for="coord-y">Y Coordinate (Required):</label>
-                <input type="number" id="coord-y" name="coord-y" required>
+            <div id="coordinates" style="display:none;">
+                <label for="coord-x">Coordinate X:</label>
+                <input type="number" id="coord-x" name="coord-x">
 
-                <label for="coord-z">Z Coordinate (Required):</label>
-                <input type="number" id="coord-z" name="coord-z" required>
+                <label for="coord-y">Coordinate Y:</label>
+                <input type="number" id="coord-y" name="coord-y">
+
+                <label for="coord-z">Coordinate Z:</label>
+                <input type="number" id="coord-z" name="coord-z">
             </div>
 
             <div id="pickup-address" style="display:none;">
                 <p>Pickup Address: 1, Jalan Utama, The LoL City, The LoL</p>
             </div>
 
-            <button type="submit" id="checkout-button">Checkout</button>
+            <button type="submit">Checkout</button>
         </form>
     </main>
     <script src="/PaizCorp/PaizShop/script.js"></script>
