@@ -74,7 +74,7 @@ header {
 }
 
 #shop-logo {
-    height: 50px; /* Adjust the height as needed */
+    height: 50px; /* Adjust the height to make the logo smaller */
     margin-right: 10px; /* Space between the logo and the text */
 }
 
@@ -82,5 +82,8 @@ h1 {
     color: white;
     font-size: 2rem;
     margin: 0;
+    display: flex;
+    align-items: center;
 }
+
 
