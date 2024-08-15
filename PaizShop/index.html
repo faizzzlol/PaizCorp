@@ -33,7 +33,7 @@
                 <h3>Shulker Box</h3>
                 <img src="shulker_box.png" alt="Shulker Box">
                 <p>1 Diamond</p>
-                <p>Available Stock: <span id="stock-shulker">1755</span></p> <!-- Example stock number -->
+                <p>Available Stock: <span id="stock-shulker">1755</span></p> <!-- stock number -->
                 <div class="sold-out" id="sold-out-shulker" style="display:none;">Sold Out</div>
                 <label for="quantity-shulker">Quantity:</label>
                 <input type="number" id="quantity-shulker" min="1" value="1" oninput="validateStock('shulker')">
@@ -43,9 +43,11 @@
                 <h2>Mending</h2>
                 <img src="/PaizCorp/PaizShop/mending.png" alt="Mending">
                 <p>3 Diamond</p>
+                <p>Available Stock: <span id="stock-mending">0</span></p> <!-- stock number -->
+                <div class="sold-out" id="sold-out-mending" style="display:none;">Sold Out</div>
                 <label for="quantity-mending">Quantity:</label>
-                <input type="number" id="quantity-mending" class="quantity" value="1" min="1">
-                <button class="buy-btn" data-item="Mending" data-quantity-id="quantity-mending">Buy Now</button>
+                <input type="number" id="quantity-mending" min="1" value="1" oninput="validateStock('mending')">
+                <button class="buy-btn" data-item="Mending" data-quantity-id="quantity-mending" id="buy-mending" onclick="buyItem('mending')">Buy Now</button>
             </div>
         </section>
     </main>
