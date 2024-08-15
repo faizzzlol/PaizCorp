@@ -6,36 +6,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function validateStock(item) {
         const quantityInput = document.getElementById(`quantity-${item}`);
-        const quantity = quantityInput ? quantityInput.value : 0;
-        const stockCount = stock[item];
+        if (quantityInput) {
+            const quantity = quantityInput.value;
+            const stockCount = stock[item];
 
-        if (quantity > stockCount) {
-            if (quantityInput) quantityInput.value = stockCount;
+            if (quantity > stockCount) {
+                quantityInput.value = stockCount;
+            }
         }
     }
 
     function buyItem(item) {
         const quantityInput = document.getElementById(`quantity-${item}`);
-        const quantity = quantityInput ? quantityInput.value : 0;
-        const stockCount = stock[item];
+        if (quantityInput) {
+            const quantity = quantityInput.value;
+            const stockCount = stock[item];
 
-        if (quantity <= stockCount) {
-            stock[item] -= quantity;
-            document.getElementById(`stock-${item}`).innerText = stock[item];
+            if (quantity <= stockCount) {
+                stock[item] -= quantity;
+                const stockElem = document.getElementById(`stock-${item}`);
+                if (stockElem) stockElem.innerText = stock[item];
 
-            if (stock[item] == 0) {
-                document.getElementById(`buy-${item}`).disabled = true;
-                document.getElementById(`sold-out-${item}`).style.display = 'block';
+                if (stock[item] == 0) {
+                    const buyBtn = document.getElementById(`buy-${item}`);
+                    const soldOutElem = document.getElementById(`sold-out-${item}`);
+                    if (buyBtn) buyBtn.disabled = true;
+                    if (soldOutElem) soldOutElem.style.display = 'block';
+                }
+
+                // Store the item and quantity in session storage
+                sessionStorage.setItem('item', item);
+                sessionStorage.setItem('quantity', quantity);
+
+                // Redirect to the checkout page
+                window.location.href = 'checkout.html';
+            } else {
+                alert('Not enough stock available.');
             }
-
-            // Store the item and quantity in session storage
-            sessionStorage.setItem('item', item);
-            sessionStorage.setItem('quantity', quantity);
-
-            // Redirect to the checkout page
-            window.location.href = '/PaizCorp/PaizShop/checkout';
         } else {
-            alert('Not enough stock available.');
+            console.error(`Quantity input for item '${item}' not found.`);
         }
     }
 
