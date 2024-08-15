@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Initial stock levels for each item
             let stock = {
                 shulker: 1755,
-                mending: 5
+                mending: 0
             };
 
             // Function to validate stock levels when user inputs quantity
