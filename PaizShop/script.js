@@ -62,3 +62,27 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('checkout-btn').addEventListener('click', updateOrderSummary);
     }
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const deliveryRadio = document.getElementById('delivery');
+    const pickupRadio = document.getElementById('pickup');
+    const coordinateFields = document.getElementById('coordinate-fields');
+    const pickupAddress = document.getElementById('pickup-address');
+
+    function updateForm() {
+        if (deliveryRadio.checked) {
+            coordinateFields.style.display = 'block';
+            pickupAddress.style.display = 'none';
+        } else if (pickupRadio.checked) {
+            coordinateFields.style.display = 'none';
+            pickupAddress.style.display = 'block';
+        }
+    }
+
+    // Update form on page load
+    updateForm();
+
+    // Add event listeners to the radio buttons
+    deliveryRadio.addEventListener('change', updateForm);
+    pickupRadio.addEventListener('change', updateForm);
+});
+
