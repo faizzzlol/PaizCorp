@@ -74,7 +74,7 @@ header {
 }
 
 #shop-logo {
-    height: 40px; /* Adjust the height to make the logo smaller */
+    height: 49px; /* Adjust the height to make the logo smaller */
     margin-right: 10px; /* Space between the logo and the text */
 }
 
@@ -84,6 +84,14 @@ h1 {
     margin: 0;
     display: flex;
     align-items: center;
+}
+#shop-link {
+    color: white;
+    text-decoration: none;
+}
+
+#shop-link:hover {
+    text-decoration: underline; /* Optional: Add underline on hover to indicate it's a link */
 }
 
 
