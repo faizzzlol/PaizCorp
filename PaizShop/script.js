@@ -5,16 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function validateStock(item) {
-        const quantity = document.getElementById(`quantity-${item}`).value;
+        const quantityInput = document.getElementById(`quantity-${item}`);
+        const quantity = quantityInput ? quantityInput.value : 0;
         const stockCount = stock[item];
 
         if (quantity > stockCount) {
-            document.getElementById(`quantity-${item}`).value = stockCount;
+            if (quantityInput) quantityInput.value = stockCount;
         }
     }
 
     function buyItem(item) {
-        const quantity = document.getElementById(`quantity-${item}`).value;
+        const quantityInput = document.getElementById(`quantity-${item}`);
+        const quantity = quantityInput ? quantityInput.value : 0;
         const stockCount = stock[item];
 
         if (quantity <= stockCount) {
@@ -39,10 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize the stock display and button state on page load
     Object.keys(stock).forEach(item => {
-        document.getElementById(`stock-${item}`).innerText = stock[item];
+        const stockElem = document.getElementById(`stock-${item}`);
+        const buyBtn = document.getElementById(`buy-${item}`);
+        const soldOutElem = document.getElementById(`sold-out-${item}`);
+
+        if (stockElem) stockElem.innerText = stock[item];
         if (stock[item] == 0) {
-            document.getElementById(`buy-${item}`).disabled = true;
-            document.getElementById(`sold-out-${item}`).style.display = 'block';
+            if (buyBtn) buyBtn.disabled = true;
+            if (soldOutElem) soldOutElem.style.display = 'block';
         }
     });
 
