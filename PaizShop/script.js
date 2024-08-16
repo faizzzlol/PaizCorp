@@ -1,43 +1,3 @@
-// Validate Stock and Enable/Disable Buttons
-function validateStock(item) {
-    const quantityInput = document.getElementById(`quantity-${item}`);
-    const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
-    const buyButton = document.getElementById(`buy-${item}`);
-
-    if (quantityInput.value > stock) {
-        quantityInput.value = stock;
-    }
-
-    if (stock === 0) {
-        document.getElementById(`sold-out-${item}`).style.display = 'block';
-        buyButton.disabled = true;
-    } else {
-        document.getElementById(`sold-out-${item}`).style.display = 'none';
-        buyButton.disabled = false;
-    }
-}
-
-// Handle "Buy Now" button
-function buyItem(item, price) {
-    const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
-    const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
-
-    if (quantity > stock || stock === 0) {
-        alert("Not enough stock available!");
-        return;
-    }
-
-    // Store the item details in sessionStorage to use on the checkout page
-    sessionStorage.setItem('selectedItem', JSON.stringify({
-        item: item,
-        quantity: quantity,
-        price: price
-    }));
-
-    // Redirect to the checkout page
-    window.location.href = 'checkout';
-}
-
 // Toggle delivery fields based on user selection
 function toggleDelivery(isDelivery) {
     const coordinatesDiv = document.getElementById('coordinates');
@@ -86,7 +46,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 deliveryFee = calculateDeliveryFee(coordX, coordY, coordZ);
             }
 
-            const total = subtotal + tax + deliveryFee;
+            let total = subtotal + tax + deliveryFee;
+
+            // Round the total to the nearest whole number (since diamonds don't have cents)
+            total = Math.round(total);
 
             sessionStorage.setItem('orderDetails', JSON.stringify({
                 item: selectedItem.item,
@@ -95,14 +58,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 subtotal: subtotal.toFixed(2),
                 tax: tax.toFixed(2),
                 deliveryFee: deliveryFee.toFixed(2),
-                total: total.toFixed(2),
+                total: total,
                 delivery: deliveryRadio,
                 pickup: pickupRadio,
                 address: pickupRadio ? '1, Jalan Utama, The LoL City, The LoL' : '',
                 coordinates: deliveryRadio ? { x: coordX, y: coordY, z: coordZ } : null
             }));
 
-            window.location.href = 'order-summary';
+            window.location.href = 'order-summary.html';
         });
     }
 
@@ -120,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p>The LoL Tax (3%): ${orderDetails.tax} Diamonds</p>
             <hr>
             <p>Total: ${orderDetails.total} Diamonds</p>
-            <p>Paid with: <img src="/PaizCorp/PaizShop/diamond.png" alt="Diamond Logo" style="height: 20px;"> Diamonds on delivery</p>
+            <p>Paid with: <img src="diamond.png" alt="Diamond Logo" style="height: 20px;"> Diamonds on delivery</p>
         `;
     }
 
