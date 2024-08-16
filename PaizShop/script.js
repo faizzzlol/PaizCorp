@@ -4,10 +4,12 @@ function validateStock(item) {
     const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
     const buyButton = document.getElementById(`buy-${item}`);
 
+    // Ensure quantity does not exceed stock
     if (quantityInput.value > stock) {
         quantityInput.value = stock;
     }
 
+    // Show "Sold Out" message and disable button if stock is 0
     if (stock === 0) {
         document.getElementById(`sold-out-${item}`).style.display = 'block';
         buyButton.disabled = true;
@@ -22,12 +24,13 @@ function buyItem(item, price) {
     const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
     const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
 
+    // Check stock availability
     if (quantity > stock || stock === 0) {
         alert("Not enough stock available!");
         return;
     }
 
-    // Store the item details in sessionStorage to use on the checkout page
+    // Store the item details in sessionStorage for checkout
     sessionStorage.setItem('selectedItem', JSON.stringify({
         item: item,
         quantity: quantity,
@@ -35,7 +38,7 @@ function buyItem(item, price) {
     }));
 
     // Redirect to the checkout page
-    window.location.href = 'checkout';
+    window.location.href = 'checkout'; // Ensure this path matches your actual checkout page
 }
 
 // Toggle delivery fields based on user selection
@@ -43,6 +46,7 @@ function toggleDelivery(isDelivery) {
     const coordinatesDiv = document.getElementById('coordinates');
     const pickupAddressDiv = document.getElementById('pickup-address');
 
+    // Show/hide delivery and pickup sections
     if (isDelivery) {
         coordinatesDiv.style.display = 'block';
         pickupAddressDiv.style.display = 'none';
@@ -66,11 +70,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const coordY = document.getElementById('coord-y').value;
             const coordZ = document.getElementById('coord-z').value;
 
+            // Validate Minecraft name
             if (!minecraftName) {
                 alert("Minecraft Name is required!");
                 return;
             }
 
+            // Validate coordinates if delivery is selected
             if (deliveryRadio && (!coordX || !coordY || !coordZ)) {
                 alert("Coordinates are required for delivery!");
                 return;
@@ -81,15 +87,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const tax = subtotal * 0.03;
             let deliveryFee = 0;
 
+            // Calculate delivery fee if delivery is selected
             if (deliveryRadio) {
                 deliveryFee = calculateDeliveryFee(coordX, coordY, coordZ);
             }
 
+            // Round the total to the nearest whole number
             let total = subtotal + tax + deliveryFee;
-
-            // Round the total to the nearest whole number (since diamonds don't have cents)
             total = Math.round(total);
 
+            // Store order details in sessionStorage
             sessionStorage.setItem('orderDetails', JSON.stringify({
                 item: selectedItem.item,
                 quantity: selectedItem.quantity,
@@ -105,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }));
 
             // Redirect to the order summary page
-            window.location.href = 'order-summary';
+            window.location.href = 'order-summary'; // Ensure this path matches your actual order summary page
         });
     }
 
@@ -114,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (orderSummaryDiv) {
         const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
 
+        // Display order summary
         orderSummaryDiv.innerHTML = `
             <h2>Order Summary</h2>
             <p>${orderDetails.quantity}x ${orderDetails.item} - ${orderDetails.subtotal} Diamonds</p>
@@ -154,6 +162,7 @@ function calculateDeliveryFee(x, y, z) {
     return distance / 1000; // 1 diamond per 1000 blocks
 }
 
+// Function to send order details to Discord
 function sendOrderToDiscord(orderDetails) {
     const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Your actual webhook URL
 
