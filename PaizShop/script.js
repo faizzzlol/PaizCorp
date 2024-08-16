@@ -154,12 +154,22 @@ function calculateDeliveryFee(x, y, z) {
     return distance / 1000; // 1 diamond per 1000 blocks
 }
 
-// Send Order Details to Discord
 function sendOrderToDiscord(orderDetails) {
-    const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Replace with your actual webhook URL
+    const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Your actual webhook URL
 
     const message = {
-        content: `**New Order Placed**\n\n**Item:** ${orderDetails.quantity}x ${orderDetails.item}\n**Subtotal:** ${orderDetails.subtotal} Diamonds\n**Delivery Fee:** ${orderDetails.deliveryFee} Diamonds\n**Tax:** ${orderDetails.tax} Diamonds\n**Total:** ${orderDetails.total} Diamonds\n**Minecraft Name:** ${orderDetails.minecraftName}\n${orderDetails.delivery ? `**Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}` : `**Pickup Address:** ${orderDetails.address}`}`
+        content: `**📦 New Order Placed 📦**\n\n` +
+                 `**🛒 Order Details:**\n` +
+                 `- **Item:** ${orderDetails.quantity}x ${orderDetails.item}\n` +
+                 `- **Subtotal:** ${orderDetails.subtotal} Diamonds\n` +
+                 `- **Delivery Fee:** ${orderDetails.deliveryFee} Diamonds (if applicable)\n` +
+                 `- **Tax (3%):** ${orderDetails.tax} Diamonds\n` +
+                 `- **Total Amount:** ${orderDetails.total} Diamonds\n\n` +
+                 `**👤 Minecraft Name:**\n` +
+                 `- ${orderDetails.minecraftName}\n\n` +
+                 `${orderDetails.delivery ? '**🚚 Delivery Option:**\n` +
+                 `- **Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}` : '**📍 Pickup Option:**\n' +
+                 `- **Pickup Address:** ${orderDetails.address}`}`
     };
 
     fetch(webhookUrl, {
