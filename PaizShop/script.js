@@ -1,3 +1,43 @@
+// Validate Stock and Enable/Disable Buttons
+function validateStock(item) {
+    const quantityInput = document.getElementById(`quantity-${item}`);
+    const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
+    const buyButton = document.getElementById(`buy-${item}`);
+
+    if (quantityInput.value > stock) {
+        quantityInput.value = stock;
+    }
+
+    if (stock === 0) {
+        document.getElementById(`sold-out-${item}`).style.display = 'block';
+        buyButton.disabled = true;
+    } else {
+        document.getElementById(`sold-out-${item}`).style.display = 'none';
+        buyButton.disabled = false;
+    }
+}
+
+// Handle "Buy Now" button
+function buyItem(item, price) {
+    const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
+    const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
+
+    if (quantity > stock || stock === 0) {
+        alert("Not enough stock available!");
+        return;
+    }
+
+    // Store the item details in sessionStorage to use on the checkout page
+    sessionStorage.setItem('selectedItem', JSON.stringify({
+        item: item,
+        quantity: quantity,
+        price: price
+    }));
+
+    // Redirect to the checkout page
+    window.location.href = 'checkout';
+}
+
 // Toggle delivery fields based on user selection
 function toggleDelivery(isDelivery) {
     const coordinatesDiv = document.getElementById('coordinates');
@@ -22,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const minecraftName = document.getElementById('minecraft-name').value;
             const deliveryRadio = document.getElementById('delivery').checked;
-            const pickupRadio = document.getElementById('pickup').checked;
             const coordX = document.getElementById('coord-x').value;
             const coordY = document.getElementById('coord-y').value;
             const coordZ = document.getElementById('coord-z').value;
@@ -54,18 +93,19 @@ document.addEventListener('DOMContentLoaded', function () {
             sessionStorage.setItem('orderDetails', JSON.stringify({
                 item: selectedItem.item,
                 quantity: selectedItem.quantity,
-                price: selectedItem.price,
                 subtotal: subtotal.toFixed(2),
                 tax: tax.toFixed(2),
                 deliveryFee: deliveryFee.toFixed(2),
                 total: total,
+                minecraftName: minecraftName,
                 delivery: deliveryRadio,
-                pickup: pickupRadio,
-                address: pickupRadio ? '1, Jalan Utama, The LoL City, The LoL' : '',
+                pickup: !deliveryRadio,
+                address: !deliveryRadio ? '1, Jalan Utama, The LoL City, The LoL' : '',
                 coordinates: deliveryRadio ? { x: coordX, y: coordY, z: coordZ } : null
             }));
 
-            window.location.href = 'order-summary.html';
+            // Redirect to the order summary page
+            window.location.href = 'order-summary';
         });
     }
 
@@ -91,13 +131,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const placeOrderButton = document.getElementById('place-order');
     if (placeOrderButton) {
         placeOrderButton.addEventListener('click', function () {
+            const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+            sendOrderToDiscord(orderDetails);
             alert("Order has been placed!");
-            // You can add further actions here, like sending data to a server
+            // Optionally clear the cart or redirect the user
         });
     }
 });
 
-// Example function to calculate delivery fee
+// Function to calculate delivery fee
 function calculateDeliveryFee(x, y, z) {
     const shopX = 5000;
     const shopY = 70;
@@ -110,4 +152,29 @@ function calculateDeliveryFee(x, y, z) {
     );
 
     return distance / 1000; // 1 diamond per 1000 blocks
+}
+
+// Send Order Details to Discord
+function sendOrderToDiscord(orderDetails) {
+    const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Replace with your actual webhook URL
+
+    const message = {
+        content: `**New Order Placed**\n\n**Item:** ${orderDetails.quantity}x ${orderDetails.item}\n**Subtotal:** ${orderDetails.subtotal} Diamonds\n**Delivery Fee:** ${orderDetails.deliveryFee} Diamonds\n**Tax:** ${orderDetails.tax} Diamonds\n**Total:** ${orderDetails.total} Diamonds\n**Minecraft Name:** ${orderDetails.minecraftName}\n${orderDetails.delivery ? `**Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}` : `**Pickup Address:** ${orderDetails.address}`}`
+    };
+
+    fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(message)
+    }).then(response => {
+        if (response.ok) {
+            alert('Order sent to Discord!');
+        } else {
+            alert('Failed to send order to Discord.');
+        }
+    }).catch(error => {
+        alert('Error:', error);
+    });
 }
