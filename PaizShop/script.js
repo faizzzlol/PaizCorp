@@ -38,7 +38,7 @@ function buyItem(item, price) {
     }));
 
     // Redirect to the checkout page
-    window.location.href = 'checkout'; // Ensure this path matches your actual checkout page
+    window.location.href = '/PaizCorp/PaizShop/checkout'; // Ensure this path matches your actual checkout page
 }
 
 // Toggle delivery fields based on user selection
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }));
 
             // Redirect to the order summary page
-            window.location.href = 'order-summary'; // Ensure this path matches your actual order summary page
+            window.location.href = '/PaizCorp/PaizShop/order-summary'; // Ensure this path matches your actual order summary page
         });
     }
 
