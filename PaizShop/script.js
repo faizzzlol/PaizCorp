@@ -35,7 +35,7 @@ function buyItem(item, price) {
     }));
 
     // Redirect to the checkout page
-    window.location.href = 'checkout.html';
+    window.location.href = 'checkout';
 }
 
 // Toggle delivery fields based on user selection
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 coordinates: deliveryRadio ? { x: coordX, y: coordY, z: coordZ } : null
             }));
 
-            window.location.href = 'order-summary.html';
+            window.location.href = 'order-summary';
         });
     }
 
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p>The LoL Tax (3%): ${orderDetails.tax} Diamonds</p>
             <hr>
             <p>Total: ${orderDetails.total} Diamonds</p>
-            <p>Paid with: <img src="diamond.png" alt="Diamond Logo" style="height: 20px;"> Diamonds on delivery</p>
+            <p>Paid with: <img src="/PaizCorp/PaizShop/diamond.png" alt="Diamond Logo" style="height: 20px;"> Diamonds on delivery</p>
         `;
     }
 
