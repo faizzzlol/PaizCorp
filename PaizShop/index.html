@@ -60,6 +60,30 @@
     <footer>
         <p>&copy; 2024 Paiz Shop. All rights reserved.</p>
     </footer>
+    <script>
+    function buyItem(item, price) {
+        alert("Buy Now button clicked!");
+
+        const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
+        const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
+
+        // Check stock availability
+        if (quantity > stock || stock === 0) {
+            alert("Not enough stock available!");
+            return;
+        }
+
+        // Store the item details in sessionStorage for checkout
+        sessionStorage.setItem('selectedItem', JSON.stringify({
+            item: item,
+            quantity: quantity,
+            price: price
+        }));
+
+        // Redirect to the checkout page
+        window.location.href = '/PaizCorp/PaizShop/checkout';
+    }
+</script>
     <script src="/PaizCorp/PaizShop/script.js"></script>
 </body>
 </html>
