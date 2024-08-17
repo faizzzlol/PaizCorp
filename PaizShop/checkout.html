@@ -42,6 +42,82 @@
             <button type="submit">Checkout</button>
         </form>
     </main>
+    <script>
+    // Toggle delivery fields based on user selection
+function toggleDelivery(isDelivery) {
+    const coordinatesDiv = document.getElementById('coordinates');
+    const pickupAddressDiv = document.getElementById('pickup-address');
+
+    // Show/hide delivery and pickup sections
+    if (isDelivery) {
+        coordinatesDiv.style.display = 'block';
+        pickupAddressDiv.style.display = 'none';
+    } else {
+        coordinatesDiv.style.display = 'none';
+        pickupAddressDiv.style.display = 'block';
+    }
+}
+
+// Handle Checkout Form Submission
+document.addEventListener('DOMContentLoaded', function () {
+    const checkoutForm = document.getElementById('checkout-form');
+
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const minecraftName = document.getElementById('minecraft-name').value;
+            const deliveryRadio = document.getElementById('delivery').checked;
+            const coordX = document.getElementById('coord-x').value;
+            const coordY = document.getElementById('coord-y').value;
+            const coordZ = document.getElementById('coord-z').value;
+
+            // Validate Minecraft name
+            if (!minecraftName) {
+                alert("Minecraft Name is required!");
+                return;
+            }
+
+            // Validate coordinates if delivery is selected
+            if (deliveryRadio && (!coordX || !coordY || !coordZ)) {
+                alert("Coordinates are required for delivery!");
+                return;
+            }
+
+            const selectedItem = JSON.parse(sessionStorage.getItem('selectedItem'));
+            const subtotal = selectedItem.quantity * selectedItem.price;
+            const tax = subtotal * 0.03;
+            let deliveryFee = 0;
+
+            // Calculate delivery fee if delivery is selected
+            if (deliveryRadio) {
+                deliveryFee = calculateDeliveryFee(coordX, coordY, coordZ);
+            }
+
+            // Round the total to the nearest whole number
+            let total = subtotal + tax + deliveryFee;
+            total = Math.round(total);
+
+            // Store order details in sessionStorage
+            sessionStorage.setItem('orderDetails', JSON.stringify({
+                item: selectedItem.item,
+                quantity: selectedItem.quantity,
+                subtotal: subtotal.toFixed(2),
+                tax: tax.toFixed(2),
+                deliveryFee: deliveryFee.toFixed(2),
+                total: total,
+                minecraftName: minecraftName,
+                delivery: deliveryRadio,
+                pickup: !deliveryRadio,
+                address: !deliveryRadio ? '1, Jalan Utama, The LoL City, The LoL' : '',
+                coordinates: deliveryRadio ? { x: coordX, y: coordY, z: coordZ } : null
+            }));
+
+            // Redirect to the order summary page
+            window.location.href = '/PaizCorp/PaizShop/order-summary'; // Ensure this path matches your actual order summary page
+        });
+    }
+    </script>
     <script src="/PaizCorp/PaizShop/script.js"></script>
 </body>
 </html>
