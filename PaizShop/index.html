@@ -61,10 +61,8 @@
         <p>&copy; 2024 Paiz Shop. All rights reserved.</p>
     </footer>
     <script>
+    // Handle "Buy Now" button
     function buyItem(item, price) {
-        return;
-    }
-
         const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
         const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
 
@@ -82,9 +80,9 @@
         }));
 
         // Redirect to the checkout page
-        window.location.href = '/PaizCorp/PaizShop/checkout';
+        window.location.href = '/PaizCorp/PaizShop/checkout'; // Ensure this path matches your actual checkout page
     }
-</script>
+    </script>
     <script src="/PaizCorp/PaizShop/script.js"></script>
 </body>
 </html>
