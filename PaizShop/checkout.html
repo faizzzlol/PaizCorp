@@ -16,13 +16,13 @@
             <label for="name">Name (Optional):</label>
             <input type="text" id="name" name="name">
 
-            <label for="minecraft-name">Minecraft Name (Required):</label>
+            <label for="minecraft-name">*Minecraft Name (Required):</label>
             <input type="text" id="minecraft-name" name="minecraft-name" required>
 
-            <label for="pickup">Pickup:</label>
+            <label for="pickup">*Pickup:</label>
             <input type="radio" id="pickup" name="delivery-option" value="pickup" checked onclick="toggleDelivery(false)">
 
-            <label for="delivery">Delivery:</label>
+            <label for="delivery">*Delivery:</label>
             <input type="radio" id="delivery" name="delivery-option" value="delivery" onclick="toggleDelivery(true)">
 
             <div id="coordinates" style="display:none;">
