@@ -105,7 +105,7 @@
             function sendOrderToDiscordUser(discordUsername, orderDetails) {
                 // Implement user ID resolution logic here
                 const userId = resolveDiscordUsernameToId(discordUsername); // Placeholder function
-                const botToken = process.env.BOT_TOKEN; // Use environment variable
+                const botToken = process.env.DISCORD_BOT_TOKEN; // Use environment variable
 
                 if (!userId) {
                     alert("Could not find user with this Discord username!");
