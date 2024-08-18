@@ -176,7 +176,7 @@ function sendOrderToDiscord(orderDetails) {
                  `- **Total Amount:** ${orderDetails.total} Diamonds\n\n` +
                  `**👤 Minecraft Name:**\n` +
                  `- ${orderDetails.minecraftName}\n\n` +
-                 `${orderDetails.delivery ? '**🚚 Delivery Option:**\n` +
+                 `- ${orderDetails.delivery ? '**🚚 Delivery Option:**\n` +
                  `- **Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}` : '**📍 Pickup Option:**\n' +
                  `- **Pickup Address:** ${orderDetails.address}`}`
     };
