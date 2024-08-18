@@ -73,7 +73,7 @@
             const placeOrderButton = document.getElementById('place-order');
             if (placeOrderButton) {
                 placeOrderButton.addEventListener('click', function () {
-                    const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Replace with your actual webhook URL
+                    const webhookUrl = process.env.DISCORD_WEBHOOK_URL; // Use environment variable
                     sendOrderToDiscord(orderDetails, webhookUrl);
                     alert("Order has been placed!");
                     // Optionally clear the cart or redirect the user
@@ -105,7 +105,7 @@
             function sendOrderToDiscordUser(discordUsername, orderDetails) {
                 // Implement user ID resolution logic here
                 const userId = resolveDiscordUsernameToId(discordUsername); // Placeholder function
-                const botToken = 'MTI3NDY0ODk4ODI0Njg3MjE0Nw.G9hi6j.1_lNeter_CrioeKb2mjivPeF4TfT-_XYBn-GCI'; // Replace with your bot token
+                const botToken = process.env.BOT_TOKEN; // Use environment variable
 
                 if (!userId) {
                     alert("Could not find user with this Discord username!");
