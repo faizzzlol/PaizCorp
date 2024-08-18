@@ -27,5 +27,5 @@ jobs:
     - name: Deploy
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
       run: npm run deploy # Adjust this if you're using a different deploy command
