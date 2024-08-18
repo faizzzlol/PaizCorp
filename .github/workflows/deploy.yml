@@ -3,28 +3,29 @@ name: Deploy
 on:
   push:
     branches:
-      - main
+      - main # Adjust this if your main branch has a different name
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Deploy
-        run: |
-          npm run build
-          # Deploy your build to the server
-        env:
-          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+    - name: Build project
+      run: npm run build
+
+    - name: Deploy
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      run: npm run deploy # Adjust this if you're using a different deploy command
