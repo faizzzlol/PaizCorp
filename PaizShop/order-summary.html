@@ -21,6 +21,9 @@
         document.addEventListener('DOMContentLoaded', function () {
             const orderSummaryDiv = document.getElementById('order-summary');
             const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+            
+            // Debugging output
+            console.log('Order Details:', orderDetails);
 
             if (orderDetails) {
                 const summaryHTML = `
@@ -51,7 +54,7 @@
         });
 
         function sendOrderToDiscord(orderDetails) {
-            const webhookURL = 'YOUR_DISCORD_WEBHOOK_URL'; // Replace with your actual Discord webhook URL
+            const webhookURL = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Replace with your actual Discord webhook URL
 
             const discordMessage = {
                 username: 'Paiz Shop',
