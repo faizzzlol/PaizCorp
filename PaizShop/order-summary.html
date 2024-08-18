@@ -6,6 +6,27 @@
     <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
     <title>Order Summary - Paiz Shop</title>
     <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
+    <style>
+        /* Add styles for the popup */
+        #discord-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        #discord-popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -16,9 +37,21 @@
             <!-- Order Summary details will be dynamically inserted here -->
         </div>
         <button id="place-order">Place Order</button>
+        <button id="send-to-me">Send to Me</button>
     </main>
+
+    <!-- Popup for Discord username input -->
+    <div id="discord-popup">
+        <div id="discord-popup-content">
+            <h2>Send Order Summary</h2>
+            <label for="discord-username">Discord Username:</label>
+            <input type="text" id="discord-username" placeholder="Your Discord Username">
+            <button id="send-summary">Send</button>
+            <button id="close-popup">Cancel</button>
+        </div>
+    </div>
+
     <script>
-        // Load Order Summary on Order Summary Page
         document.addEventListener('DOMContentLoaded', function () {
             const orderSummaryDiv = document.getElementById('order-summary');
             const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
@@ -35,7 +68,7 @@
                 <p>Total: ${orderDetails.total} Diamonds</p>
                 <p>Paid with: <img src="diamond.png" alt="Diamond Logo" style="height: 20px;"> Diamonds on delivery</p>
             `;
-            
+
             // Handle Place Order
             const placeOrderButton = document.getElementById('place-order');
             if (placeOrderButton) {
@@ -46,8 +79,96 @@
                     // Optionally clear the cart or redirect the user
                 });
             }
+
+            // Handle "Send to Me" button click
+            document.getElementById('send-to-me').addEventListener('click', function () {
+                document.getElementById('discord-popup').style.display = 'flex';
+            });
+
+            // Handle "Send" button click in the popup
+            document.getElementById('send-summary').addEventListener('click', function () {
+                const discordUsername = document.getElementById('discord-username').value;
+                if (discordUsername) {
+                    const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+                    sendOrderToDiscordUser(discordUsername, orderDetails);
+                } else {
+                    alert('Please enter your Discord username.');
+                }
+            });
+
+            // Handle "Cancel" button click in the popup
+            document.getElementById('close-popup').addEventListener('click', function () {
+                document.getElementById('discord-popup').style.display = 'none';
+            });
+
+            // Function to send order details to buyer's Discord account
+            function sendOrderToDiscordUser(discordUsername, orderDetails) {
+                // Implement user ID resolution logic here
+                const userId = resolveDiscordUsernameToId(discordUsername); // Placeholder function
+                const botToken = 'MTI3NDY0ODk4ODI0Njg3MjE0Nw.G9hi6j.1_lNeter_CrioeKb2mjivPeF4TfT-_XYBn-GCI'; // Replace with your bot token
+
+                if (!userId) {
+                    alert("Could not find user with this Discord username!");
+                    return;
+                }
+
+                const message = {
+                    "content": null,
+                    "embeds": [
+                        {
+                            "title": "📦 New Order Placed 📦",
+                            "color": 5814783,
+                            "fields": [
+                                {
+                                    "name": "🛒 Order Details",
+                                    "value": `- **Item:** ${orderDetails.quantity}x ${orderDetails.item}\n- **Subtotal:** 💎${orderDetails.subtotal} Diamonds\n- **Delivery Fee:** 💎${orderDetails.deliveryFee} Diamonds (if applicable)\n- **Tax (3%):** 💎${orderDetails.tax}\n\n**Total Amount:** 💎${orderDetails.total} Diamonds`
+                                },
+                                {
+                                    "name": "👤 Minecraft Name",
+                                    "value": orderDetails.minecraftName
+                                },
+                                {
+                                    "name": orderDetails.delivery ? "🚚 Delivery Option" : "📍 Pickup Option",
+                                    "value": orderDetails.delivery ? `- **Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}` : `- **Pickup Address:** ${orderDetails.address}`
+                                }
+                            ],
+                            "footer": {
+                                "text": "Order placed on Paiz Shop"
+                            }
+                        }
+                    ],
+                    "attachments": []
+                };
+
+                fetch(`https://discord.com/api/v10/users/${userId}/messages`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bot ${botToken}`
+                    },
+                    body: JSON.stringify(message)
+                }).then(response => {
+                    if (response.ok) {
+                        alert('Order summary sent to your Discord account!');
+                        document.getElementById('discord-popup').style.display = 'none';
+                    } else {
+                        alert('Failed to send order summary to Discord.');
+                    }
+                }).catch(error => {
+                    alert('Error:', error);
+                });
+            }
+
+            // Function to resolve Discord username to user ID (placeholder)
+            function resolveDiscordUsernameToId(username) {
+                // Replace this with actual logic to resolve username to user ID
+                // This could involve using a bot to lookup users in a server or a database
+                // For demonstration purposes, this returns a placeholder ID
+                return '123456789012345678'; // Placeholder user ID
+            }
         });
 
+        // Function to send order details to Discord webhook
         function sendOrderToDiscord(orderDetails, webhookUrl) {
             const embed = {
                 "content": null,
