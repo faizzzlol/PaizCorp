@@ -18,69 +18,63 @@
         <button id="place-order">Place Order</button>
     </main>
     <script>
-            // Load Order Summary on Order Summary Page
+        // Load Order Summary on Order Summary Page
+        document.addEventListener('DOMContentLoaded', function () {
             const orderSummaryDiv = document.getElementById('order-summary');
-            if (orderSummaryDiv) {
-                const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+            const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
 
-                // Display order summary
-                orderSummaryDiv.innerHTML = `
-                    <h2>Order Summary</h2>
-                    <p>${orderDetails.quantity}x ${orderDetails.item} - ${orderDetails.subtotal} Diamonds</p>
-                    <hr>
-                    <p>Subtotal: ${orderDetails.subtotal} Diamonds</p>
-                    <p>Delivery Fee: ${orderDetails.deliveryFee} Diamonds</p>
-                    <p>The LoL Tax (3%): ${orderDetails.tax} Diamonds</p>
-                    <hr>
-                    <p>Total: ${orderDetails.total} Diamonds</p>
-                    <p>Paid with: <img src="diamond.png" alt="Diamond Logo" style="height: 20px;"> Diamonds on delivery</p>
-                `;
-            }
-
+            // Display order summary
+            orderSummaryDiv.innerHTML = `
+                <h2>Order Summary</h2>
+                <p>${orderDetails.quantity}x ${orderDetails.item} - ${orderDetails.subtotal} Diamonds</p>
+                <hr>
+                <p>Subtotal: ${orderDetails.subtotal} Diamonds</p>
+                <p>Delivery Fee: ${orderDetails.deliveryFee} Diamonds</p>
+                <p>The LoL Tax (3%): ${orderDetails.tax} Diamonds</p>
+                <hr>
+                <p>Total: ${orderDetails.total} Diamonds</p>
+                <p>Paid with: <img src="diamond.png" alt="Diamond Logo" style="height: 20px;"> Diamonds on delivery</p>
+            `;
+            
             // Handle Place Order
             const placeOrderButton = document.getElementById('place-order');
             if (placeOrderButton) {
                 placeOrderButton.addEventListener('click', function () {
-                    const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
-                    sendOrderToDiscord(orderDetails);
+                    const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Replace with your actual webhook URL
+                    sendOrderToDiscord(orderDetails, webhookUrl);
                     alert("Order has been placed!");
                     // Optionally clear the cart or redirect the user
                 });
             }
         });
 
-        // Function to calculate delivery fee
-        function calculateDeliveryFee(x, y, z) {
-            const shopX = 5000;
-            const shopY = 70;
-            const shopZ = 6000;
-
-            const distance = Math.sqrt(
-                Math.pow((x - shopX), 2) +
-                Math.pow((y - shopY), 2) +
-                Math.pow((z - shopZ), 2)
-            );
-
-            return distance / 1000; // 1 diamond per 1000 blocks
-        }
-
-        // Function to send order details to Discord
-        function sendOrderToDiscord(orderDetails) {
-            const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Your actual webhook URL
-
-            const message = {
-                content: `**📦 New Order Placed 📦**\n\n` +
-                         `**🛒 Order Details:**\n` +
-                         `- **Item:** ${orderDetails.quantity}x ${orderDetails.item}\n` +
-                         `- **Subtotal:** ${orderDetails.subtotal} Diamonds\n` +
-                         `- **Delivery Fee:** ${orderDetails.deliveryFee} Diamonds (if applicable)\n` +
-                         `- **Tax (3%):** ${orderDetails.tax} Diamonds\n` +
-                         `- **Total Amount:** ${orderDetails.total} Diamonds\n\n` +
-                         `**👤 Minecraft Name:**\n` +
-                         `- ${orderDetails.minecraftName}\n\n` +
-                         `${orderDetails.delivery ? '**🚚 Delivery Option:**\n` +
-                         `- **Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}` : '**📍 Pickup Option:**\n' +
-                         `- **Pickup Address:** ${orderDetails.address}`}`
+        function sendOrderToDiscord(orderDetails, webhookUrl) {
+            const embed = {
+                "content": null,
+                "embeds": [
+                    {
+                        "title": "📦 New Order Placed 📦",
+                        "color": 5814783,
+                        "fields": [
+                            {
+                                "name": "🛒 Order Details",
+                                "value": `- **Item:** ${orderDetails.quantity}x ${orderDetails.item}\n- **Subtotal:** 💎${orderDetails.subtotal} Diamonds\n- **Delivery Fee:** 💎${orderDetails.deliveryFee} Diamonds (if applicable)\n- **Tax (3%):** 💎${orderDetails.tax}\n\n**Total Amount:** 💎${orderDetails.total} Diamonds`
+                            },
+                            {
+                                "name": "👤 Minecraft Name",
+                                "value": orderDetails.minecraftName
+                            },
+                            {
+                                "name": orderDetails.delivery ? "🚚 Delivery Option" : "📍 Pickup Option",
+                                "value": orderDetails.delivery ? `- **Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}` : `- **Pickup Address:** ${orderDetails.address}`
+                            }
+                        ],
+                        "footer": {
+                            "text": "Order placed on Paiz Shop"
+                        }
+                    }
+                ],
+                "attachments": []
             };
 
             fetch(webhookUrl, {
@@ -88,15 +82,15 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(message)
+                body: JSON.stringify(embed)
             }).then(response => {
                 if (response.ok) {
-                    alert('Order sent to Discord!');
+                    console.log('Order sent to Discord!');
                 } else {
-                    alert('Failed to send order to Discord.');
+                    console.error('Failed to send order to Discord.');
                 }
             }).catch(error => {
-                alert('Error:', error);
+                console.error('Error:', error);
             });
         }
     </script>
