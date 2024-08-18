@@ -18,7 +18,110 @@
         <button id="place-order">Place Order</button>
     </main>
     <script>
-        
+        document.addEventListener('DOMContentLoaded', function () {
+            const orderSummaryDiv = document.getElementById('order-summary');
+            const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+
+            if (orderDetails) {
+                const summaryHTML = `
+                    <h2>Items</h2>
+                    <ul>
+                        ${orderDetails.items.map(item => `<li>${item.name} - ${item.quantity} x ${item.price} Diamonds</li>`).join('')}
+                    </ul>
+                    <p><strong>Subtotal:</strong> ${orderDetails.subtotal} Diamonds</p>
+                    ${orderDetails.delivery ? `<p><strong>Delivery Fee:</strong> ${orderDetails.deliveryFee} Diamonds</p>` : ''}
+                    <p><strong>Tax:</strong> ${orderDetails.tax} Diamonds</p>
+                    <p><strong>Total:</strong> ${orderDetails.total} Diamonds</p>
+                    <h2>Buyer Details</h2>
+                    <p><strong>Minecraft Name:</strong> ${orderDetails.minecraftName}</p>
+                    ${orderDetails.delivery ? `<p><strong>Delivery Coordinates:</strong> X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}</p>` : `<p><strong>Pickup Address:</strong> ${orderDetails.address}</p>`}
+                `;
+                orderSummaryDiv.innerHTML = summaryHTML;
+            } else {
+                orderSummaryDiv.innerHTML = '<p>No order details available. Please go back and complete your order.</p>';
+            }
+
+            document.getElementById('place-order').addEventListener('click', function () {
+                if (orderDetails) {
+                    sendOrderToDiscord(orderDetails);
+                } else {
+                    alert('No order details available.');
+                }
+            });
+        });
+
+        function sendOrderToDiscord(orderDetails) {
+            const webhookURL = 'YOUR_DISCORD_WEBHOOK_URL'; // Replace with your actual Discord webhook URL
+
+            const discordMessage = {
+                username: 'Paiz Shop',
+                embeds: [{
+                    title: 'New Order Received',
+                    color: 3447003, // Discord color code (optional)
+                    fields: [
+                        {
+                            name: 'Minecraft Name',
+                            value: orderDetails.minecraftName,
+                            inline: true
+                        },
+                        {
+                            name: 'Items',
+                            value: orderDetails.items.map(item => `${item.name} - ${item.quantity} x ${item.price} Diamonds`).join('\n'),
+                            inline: false
+                        },
+                        {
+                            name: 'Subtotal',
+                            value: `${orderDetails.subtotal} Diamonds`,
+                            inline: true
+                        },
+                        {
+                            name: 'Tax',
+                            value: `${orderDetails.tax} Diamonds`,
+                            inline: true
+                        },
+                        {
+                            name: 'Total',
+                            value: `${orderDetails.total} Diamonds`,
+                            inline: true
+                        },
+                        orderDetails.delivery ? {
+                            name: 'Delivery Fee',
+                            value: `${orderDetails.deliveryFee} Diamonds`,
+                            inline: true
+                        } : {
+                            name: 'Pickup Address',
+                            value: orderDetails.address,
+                            inline: false
+                        },
+                        orderDetails.delivery ? {
+                            name: 'Delivery Coordinates',
+                            value: `X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}`,
+                            inline: false
+                        } : {}
+                    ]
+                }]
+            };
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(discordMessage)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Order placed successfully!');
+                    sessionStorage.removeItem('orderDetails');
+                } else {
+                    alert('Failed to send order to Discord. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error sending order to Discord.');
+            });
+        }
     </script>
     <script src="/PaizCorp/PaizShop/script.js"></script>
 </body>
