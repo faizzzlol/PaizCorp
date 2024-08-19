@@ -17,6 +17,7 @@
         </div>
         <button id="place-order">Place Order</button>
     </main>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const orderSummaryDiv = document.getElementById('order-summary');
@@ -49,6 +50,8 @@
 
         // Function to send order details to Discord webhook
         function sendOrderToDiscord(orderDetails, webhookUrl) {
+            const currentTime = new Date().toLocaleString();  // Get the current date and time
+
             const embed = {
                 "content": null,
                 "embeds": [
@@ -67,6 +70,10 @@
                             {
                                 "name": orderDetails.delivery ? "🚚 Delivery Option" : "📍 Pickup Option",
                                 "value": orderDetails.delivery ? `- **Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}` : `- **Pickup Address:** ${orderDetails.address}`
+                            },
+                            {
+                                "name": "🕒 Order Time",
+                                "value": `Placed on: ${currentTime}`
                             }
                         ],
                         "footer": {
