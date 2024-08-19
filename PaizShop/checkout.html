@@ -137,6 +137,92 @@
                     window.location.href = '/PaizCorp/PaizShop/order-summary'; // Ensure this path matches your actual order summary page
                 });
             }
+
+            // Load Order Summary on Order Summary Page
+            const orderSummaryDiv = document.getElementById('order-summary');
+            if (orderSummaryDiv) {
+                const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+
+                // Display order summary
+                orderSummaryDiv.innerHTML = `
+                    <h2>Order Summary</h2>
+                    <p>${orderDetails.quantity}x ${orderDetails.item} - ${orderDetails.subtotal} Diamonds</p>
+                    <hr>
+                    <p>Subtotal: ${orderDetails.subtotal} Diamonds</p>
+                    <p>Delivery Fee: ${orderDetails.deliveryFee} Diamonds</p>
+                    <p>The LoL Tax (3%): ${orderDetails.tax} Diamonds</p>
+                    <hr>
+                    <p>Total: ${orderDetails.total} Diamonds</p>
+                    <p>Paid with: <img src="diamond.png" alt="Diamond Logo" style="height: 20px;"> Diamonds on delivery</p>
+                `;
+            }
+
+            // Handle Place Order
+            const placeOrderButton = document.getElementById('place-order');
+            if (placeOrderButton) {
+                placeOrderButton.addEventListener('click', function () {
+                    const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+                    sendOrderToDiscord(orderDetails);
+                    alert("Order has been placed!");
+                    // Optionally clear the cart or redirect the user
+                });
+            }
+        });
+
+        // Function to calculate delivery fee
+        function calculateDeliveryFee(x, y, z) {
+            const shopX = 5000;
+            const shopY = 70;
+            const shopZ = 6000;
+
+            const distance = Math.sqrt(
+                Math.pow((x - shopX), 2) +
+                Math.pow((y - shopY), 2) +
+                Math.pow((z - shopZ), 2)
+            );
+
+            return distance / 1000; // 1 diamond per 1000 blocks
+        }
+
+        // Function to send order details to Discord
+        function sendOrderToDiscord(orderDetails) {
+            const webhookUrl = 'YOUR_DISCORD_WEBHOOK_URL_HERE'; // Replace with your actual webhook URL
+
+            const orderId = Math.floor(Math.random() * 1000000); // Generate a random order number
+            const orderTime = new Date().toLocaleString(); // Get the current date and time
+
+            const embed = {
+                content: `**📦 New Order Placed 📦**\n\n` +
+                    `**🛒 Order Details:**\n` +
+                    `- **Order ID:** ${orderId}\n` +
+                    `- **Item:** ${orderDetails.quantity}x ${orderDetails.item}\n` +
+                    `- **Subtotal:** ${orderDetails.subtotal} Diamonds\n` +
+                    `- **Delivery Fee:** ${orderDetails.deliveryFee} Diamonds\n` +
+                    `- **The LoL Tax:** ${orderDetails.tax} Diamonds\n` +
+                    `- **Total:** ${orderDetails.total} Diamonds\n\n` +
+                    `**👤 Buyer Details:**\n` +
+                    `- **Minecraft Name:** ${orderDetails.minecraftName}\n` +
+                    `- **Contact Information:** ${orderDetails.contactInfo}\n` +
+                    (orderDetails.delivery ? `- **Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}\n` : `- **Pickup Address:** ${orderDetails.address}\n`) +
+                    `- **Order Placed At:** ${orderTime}`,
+            };
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ embeds: [embed] })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Order details sent to Discord successfully.');
+                } else {
+                    console.error('Failed to send order details to Discord.');
+                }
+            })
+            .catch(error => {
+                console.error('Error sending order details to Discord:', error);
+            });
+        }
     </script>
 </body>
 
