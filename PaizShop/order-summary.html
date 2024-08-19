@@ -23,9 +23,13 @@
             const orderSummaryDiv = document.getElementById('order-summary');
             const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
 
+            // Generate a unique order number (e.g., a random number or based on timestamp)
+            const orderNumber = 'PS' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0'); // Example: PS123456
+
             // Display order summary
             orderSummaryDiv.innerHTML = `
                 <h2>Order Summary</h2>
+                <p>Order Number: ${orderNumber}</p>
                 <p>${orderDetails.quantity}x ${orderDetails.item} - ${orderDetails.subtotal} Diamonds</p>
                 <hr>
                 <p>Subtotal: ${orderDetails.subtotal} Diamonds</p>
@@ -41,7 +45,7 @@
             if (placeOrderButton) {
                 placeOrderButton.addEventListener('click', function () {
                     const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Replace with your actual webhook URL
-                    sendOrderToDiscord(orderDetails, webhookUrl);
+                    sendOrderToDiscord(orderDetails, orderNumber, webhookUrl);
                     alert("Order has been placed!");
                     // Optionally clear the cart or redirect the user
                 });
@@ -49,7 +53,7 @@
         });
 
         // Function to send order details to Discord webhook
-        function sendOrderToDiscord(orderDetails, webhookUrl) {
+        function sendOrderToDiscord(orderDetails, orderNumber, webhookUrl) {
             const currentTime = new Date().toLocaleString();  // Get the current date and time
 
             const embed = {
@@ -74,6 +78,10 @@
                             {
                                 "name": "🕒 Order Time",
                                 "value": `Placed on: ${currentTime}`
+                            },
+                            {
+                                "name": "📦 Order Number",
+                                "value": orderNumber
                             }
                         ],
                         "footer": {
