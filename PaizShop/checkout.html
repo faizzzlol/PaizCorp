@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Checkout - Paiz Shop</title>
     <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
 </head>
+
 <body>
     <header>
         <h1>Checkout</h1>
@@ -18,6 +20,9 @@
 
             <label for="minecraft-name">*Minecraft Name (Required):</label>
             <input type="text" id="minecraft-name" name="minecraft-name" required>
+
+            <label for="contact-info">*Contact Information (Discord/WhatsApp Number) (Required):</label>
+            <input type="text" id="contact-info" name="contact-info" required>
 
             <label for="pickup">*Pickup:</label>
             <input type="radio" id="pickup" name="delivery-option" value="pickup" checked onclick="toggleDelivery(false)">
@@ -65,49 +70,6 @@
             toggleDelivery(deliveryRadio);
         });
 
-        // Validate Stock and Enable/Disable Buttons
-        function validateStock(item) {
-            const quantityInput = document.getElementById(`quantity-${item}`);
-            const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
-            const buyButton = document.getElementById(`buy-${item}`);
-
-            // Ensure quantity does not exceed stock
-            if (quantityInput.value > stock) {
-                quantityInput.value = stock;
-            }
-
-            // Show "Sold Out" message and disable button if stock is 0
-            if (stock === 0) {
-                document.getElementById(`sold-out-${item}`).style.display = 'block';
-                buyButton.disabled = true;
-            } else {
-                document.getElementById(`sold-out-${item}`).style.display = 'none';
-                buyButton.disabled = false;
-            }
-        }
-
-        // Handle "Buy Now" button
-        function buyItem(item, price) {
-            const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
-            const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
-
-            // Check stock availability
-            if (quantity > stock || stock === 0) {
-                alert("Not enough stock available!");
-                return;
-            }
-
-            // Store the item details in sessionStorage for checkout
-            sessionStorage.setItem('selectedItem', JSON.stringify({
-                item: item,
-                quantity: quantity,
-                price: price
-            }));
-
-            // Redirect to the checkout page
-            window.location.href = '/PaizCorp/PaizShop/checkout'; // Ensure this path matches your actual checkout page
-        }
-
         // Handle Checkout Form Submission
         document.addEventListener('DOMContentLoaded', function () {
             const checkoutForm = document.getElementById('checkout-form');
@@ -117,6 +79,7 @@
                     event.preventDefault();
 
                     const minecraftName = document.getElementById('minecraft-name').value;
+                    const contactInfo = document.getElementById('contact-info').value;
                     const deliveryRadio = document.getElementById('delivery').checked;
                     const coordX = document.getElementById('coord-x').value;
                     const coordY = document.getElementById('coord-y').value;
@@ -125,6 +88,12 @@
                     // Validate Minecraft name
                     if (!minecraftName) {
                         alert("Minecraft Name is required!");
+                        return;
+                    }
+
+                    // Validate contact information
+                    if (!contactInfo) {
+                        alert("Contact Information is required!");
                         return;
                     }
 
@@ -157,6 +126,7 @@
                         deliveryFee: deliveryFee.toFixed(2),
                         total: total,
                         minecraftName: minecraftName,
+                        contactInfo: contactInfo,
                         delivery: deliveryRadio,
                         pickup: !deliveryRadio,
                         address: !deliveryRadio ? '1, Jalan Utama, The LoL City, The LoL' : '',
@@ -167,87 +137,7 @@
                     window.location.href = '/PaizCorp/PaizShop/order-summary'; // Ensure this path matches your actual order summary page
                 });
             }
-
-            // Load Order Summary on Order Summary Page
-            const orderSummaryDiv = document.getElementById('order-summary');
-            if (orderSummaryDiv) {
-                const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
-
-                // Display order summary
-                orderSummaryDiv.innerHTML = `
-                    <h2>Order Summary</h2>
-                    <p>${orderDetails.quantity}x ${orderDetails.item} - ${orderDetails.subtotal} Diamonds</p>
-                    <hr>
-                    <p>Subtotal: ${orderDetails.subtotal} Diamonds</p>
-                    <p>Delivery Fee: ${orderDetails.deliveryFee} Diamonds</p>
-                    <p>The LoL Tax (3%): ${orderDetails.tax} Diamonds</p>
-                    <hr>
-                    <p>Total: ${orderDetails.total} Diamonds</p>
-                    <p>Paid with: <img src="diamond.png" alt="Diamond Logo" style="height: 20px;"> Diamonds on delivery</p>
-                `;
-            }
-
-            // Handle Place Order
-            const placeOrderButton = document.getElementById('place-order');
-            if (placeOrderButton) {
-                placeOrderButton.addEventListener('click', function () {
-                    const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
-                    sendOrderToDiscord(orderDetails);
-                    alert("Order has been placed!");
-                    // Optionally clear the cart or redirect the user
-                });
-            }
-        });
-
-        // Function to calculate delivery fee
-        function calculateDeliveryFee(x, y, z) {
-            const shopX = 5000;
-            const shopY = 70;
-            const shopZ = 6000;
-
-            const distance = Math.sqrt(
-                Math.pow((x - shopX), 2) +
-                Math.pow((y - shopY), 2) +
-                Math.pow((z - shopZ), 2)
-            );
-
-            return distance / 1000; // 1 diamond per 1000 blocks
-        }
-
-        // Function to send order details to Discord
-        function sendOrderToDiscord(orderDetails) {
-            const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Your actual webhook URL
-
-            const message = {
-                content: `**📦 New Order Placed 📦**\n\n` +
-                         `**🛒 Order Details:**\n` +
-                         `- **Item:** ${orderDetails.quantity}x ${orderDetails.item}\n` +
-                         `- **Subtotal:** ${orderDetails.subtotal} Diamonds\n` +
-                         `- **Delivery Fee:** ${orderDetails.deliveryFee} Diamonds\n` +
-                         `- **The LoL Tax:** ${orderDetails.tax} Diamonds\n` +
-                         `- **Total:** ${orderDetails.total} Diamonds\n\n` +
-                         `**👤 Buyer Details:**\n` +
-                         `- **Minecraft Name:** ${orderDetails.minecraftName}\n` +
-                         (orderDetails.delivery ? `- **Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}\n` : `- **Pickup Address:** ${orderDetails.address}\n`),
-            };
-
-            fetch(webhookUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(message)
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Order details sent to Discord successfully.');
-                } else {
-                    console.error('Error sending order details to Discord:', response.statusText);
-                }
-            })
-            .catch(error => {
-                console.error('Error sending order details to Discord:', error);
-            });
-        }
     </script>
-    <script src="/PaizCorp/PaizShop/script.js"></script>
 </body>
+
 </html>
