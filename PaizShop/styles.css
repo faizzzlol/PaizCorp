@@ -66,6 +66,7 @@ nav a:hover {
 main {
     padding: 2rem;
     margin-top: 80px; /* Adjusted to avoid overlap with the fixed header */
+    margin-bottom: 80px; /* Added margin to prevent overlap with footer */
 }
 
 #shop-items {
@@ -83,6 +84,7 @@ main {
     width: calc(50% - 20px); /* Adjusted for responsiveness */
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative; /* Added to ensure proper stacking of elements */
 }
 
 .item img {
@@ -134,6 +136,7 @@ footer {
     bottom: 0;
     left: 0;
     box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    z-index: 100; /* Ensures the footer stays on top */
 }
 
 footer p {
