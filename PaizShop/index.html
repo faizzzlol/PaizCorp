@@ -60,27 +60,40 @@
         <p>&copy; 2024 Paiz Shop. All rights reserved.</p>
     </footer>
     <script>
-    // Handle "Buy Now" button
-    function buyItem(item, price) {
-        const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
-        const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
+        // Handle "Buy Now" button
+        function buyItem(item, price) {
+            const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
+            const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
 
-        // Check stock availability
-        if (quantity > stock || stock === 0) {
-            alert("Not enough stock available!");
-            return;
+            // Check stock availability
+            if (quantity > stock || stock === 0) {
+                alert("Not enough stock available!");
+                return;
+            }
+
+            // Store the item details in sessionStorage for checkout
+            sessionStorage.setItem('selectedItem', JSON.stringify({
+                item: item,
+                quantity: quantity,
+                price: price
+            }));
+
+            // Redirect to the checkout page
+            window.location.href = '/PaizCorp/PaizShop/checkout'; // Ensure this path matches your actual checkout page
         }
 
-        // Store the item details in sessionStorage for checkout
-        sessionStorage.setItem('selectedItem', JSON.stringify({
-            item: item,
-            quantity: quantity,
-            price: price
-        }));
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
 
-        // Redirect to the checkout page
-        window.location.href = '/PaizCorp/PaizShop/checkout'; // Ensure this path matches your actual checkout page
-    }
+        document.body.setAttribute('data-theme', currentTheme);
+        themeToggle.checked = currentTheme === 'dark';
+
+        themeToggle.addEventListener('change', () => {
+            const newTheme = themeToggle.checked ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme); // Save theme preference
+        });
     </script>
     <script src="/PaizCorp/PaizShop/script.js"></script>
 </body>
