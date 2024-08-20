@@ -27,9 +27,16 @@
             </ul>
         </nav>
         <!-- Dark Mode Toggle Switch -->
-        <div id="theme-switcher">
-            <label for="theme-toggle">Dark Mode:</label>
-            <input type="checkbox" id="theme-toggle">
+        <div id="theme-switcher" class="theme-toggle">
+            <input type="checkbox" id="theme-toggle" class="toggle-checkbox">
+            <label for="theme-toggle" class="toggle-label">
+                <div class="toggle-inner">
+                    <div class="toggle-icon sun">☀️</div>
+                    <div class="toggle-icon moon">🌙</div>
+                </div>
+                <div class="toggle-text">DAYMODE</div>
+                <div class="toggle-text">NIGHTMODE</div>
+            </label>
         </div>
     </header>
     <main>
@@ -60,40 +67,40 @@
         <p>&copy; 2024 Paiz Shop. All rights reserved.</p>
     </footer>
     <script>
-        // Handle "Buy Now" button
-        function buyItem(item, price) {
-            const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
-            const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
+    // Handle "Buy Now" button
+    function buyItem(item, price) {
+        const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
+        const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
 
-            // Check stock availability
-            if (quantity > stock || stock === 0) {
-                alert("Not enough stock available!");
-                return;
-            }
-
-            // Store the item details in sessionStorage for checkout
-            sessionStorage.setItem('selectedItem', JSON.stringify({
-                item: item,
-                quantity: quantity,
-                price: price
-            }));
-
-            // Redirect to the checkout page
-            window.location.href = '/PaizCorp/PaizShop/checkout'; // Ensure this path matches your actual checkout page
+        // Check stock availability
+        if (quantity > stock || stock === 0) {
+            alert("Not enough stock available!");
+            return;
         }
 
-        // Theme Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const currentTheme = localStorage.getItem('theme') || 'light';
+        // Store the item details in sessionStorage for checkout
+        sessionStorage.setItem('selectedItem', JSON.stringify({
+            item: item,
+            quantity: quantity,
+            price: price
+        }));
 
-        document.body.setAttribute('data-theme', currentTheme);
-        themeToggle.checked = currentTheme === 'dark';
+        // Redirect to the checkout page
+        window.location.href = '/PaizCorp/PaizShop/checkout'; // Ensure this path matches your actual checkout page
+    }
 
-        themeToggle.addEventListener('change', () => {
-            const newTheme = themeToggle.checked ? 'dark' : 'light';
-            document.body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme); // Save theme preference
-        });
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+
+    document.body.setAttribute('data-theme', currentTheme);
+    themeToggle.checked = currentTheme === 'dark';
+
+    themeToggle.addEventListener('change', () => {
+        const newTheme = themeToggle.checked ? 'dark' : 'light';
+        document.body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme); // Save theme preference
+    });
     </script>
     <script src="/PaizCorp/PaizShop/script.js"></script>
 </body>
