@@ -197,3 +197,15 @@ function sendOrderToDiscord(orderDetails) {
         alert('Error:', error);
     });
 }
+// Theme Toggle
+const themeToggle = document.getElementById('theme-toggle');
+const currentTheme = localStorage.getItem('theme') || 'light';
+
+document.body.setAttribute('data-theme', currentTheme);
+themeToggle.checked = currentTheme === 'dark';
+
+themeToggle.addEventListener('change', () => {
+    const newTheme = themeToggle.checked ? 'dark' : 'light';
+    document.body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme); // Save theme preference
+});
