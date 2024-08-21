@@ -21,7 +21,7 @@ header {
     padding: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Adjusted to fit the theme switcher */
+    justify-content: space-between;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
 }
@@ -75,21 +75,90 @@ nav a:hover {
 }
 
 /* Theme Switcher */
-#theme-switcher {
-    display: flex;
+.theme-toggle {
+    display: inline-flex;
     align-items: center;
-    font-size: 1rem;
+    position: relative;
 }
 
-#theme-toggle {
-    margin-left: 10px;
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle-label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-checkbox:checked+.toggle-label {
+    background-color: #2c2c2c;
+}
+
+.toggle-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+    margin-right: 5px;
+}
+
+.toggle-checkbox:checked+.toggle-label .toggle-inner {
+    transform: translateX(30px);
+}
+
+.toggle-icon {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sun {
+    display: inline-block;
+}
+
+.moon {
+    display: none;
+}
+
+.toggle-checkbox:checked+.toggle-label .sun {
+    display: none;
+}
+
+.toggle-checkbox:checked+.toggle-label .moon {
+    display: inline-block;
+}
+
+.toggle-text {
+    font-size: 12px;
+    margin-left: 5px;
+    color: #333;
+    display: none;
+}
+
+.toggle-checkbox:checked+.toggle-label .toggle-text:nth-child(3) {
+    display: inline;
+    color: #ffffff;
+}
+
+.toggle-checkbox:not(:checked)+.toggle-label .toggle-text:nth-child(2) {
+    display: inline;
 }
 
 /* Main Section Styling */
 main {
     padding: 2rem;
-    margin-top: 80px; /* Adjusted to avoid overlap with the fixed header */
-    margin-bottom: 80px; /* Added margin to prevent overlap with footer */
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
 
 #shop-items {
@@ -104,10 +173,10 @@ main {
     border-radius: 8px;
     background: #fff;
     padding: 1rem;
-    width: calc(50% - 20px); /* Adjusted for responsiveness */
+    width: calc(50% - 20px);
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: relative; /* Added to ensure proper stacking of elements */
+    position: relative;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -175,7 +244,7 @@ footer {
     bottom: 0;
     left: 0;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 100; /* Ensures the footer stays on top */
+    z-index: 100;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
