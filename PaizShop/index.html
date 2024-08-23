@@ -64,65 +64,73 @@
 
     <!-- JavaScript for Stock Validation and Theme Toggle -->
     <script>
-    // Handle "Buy Now" button
-    function buyItem(item, price) {
-        const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
-        const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
+        // Handle "Buy Now" button
+        function buyItem(item, price) {
+            const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
+            const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
 
-        // Check stock availability
-        if (quantity > stock || stock === 0) {
-            alert("Not enough stock available!");
-            return;
+            // Check stock availability
+            if (quantity > stock || stock === 0) {
+                alert("Not enough stock available!");
+                return;
+            }
+
+            // Store the item details in sessionStorage for checkout
+            sessionStorage.setItem('selectedItem', JSON.stringify({
+                item: item,
+                quantity: quantity,
+                price: price
+            }));
+
+            // Redirect to the checkout page
+            window.location.href = '/PaizCorp/PaizShop/checkout'; // Ensure this path matches your actual checkout page
         }
 
-        // Store the item details in sessionStorage for checkout
-        sessionStorage.setItem('selectedItem', JSON.stringify({
-            item: item,
-            quantity: quantity,
-            price: price
-        }));
+        // Validate stock on quantity change
+        function validateStock(item) {
+            const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
+            const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
+            const buyButton = document.getElementById(`buy-${item}`);
+            const soldOut = document.getElementById(`sold-out-${item}`);
 
-        // Redirect to the checkout page
-        window.location.href = '/PaizCorp/PaizShop/checkout'; // Ensure this path matches your actual checkout page
-    }
-
-    // Validate stock on quantity change
-    function validateStock(item) {
-        const stock = parseInt(document.getElementById(`stock-${item}`).innerText);
-        const quantity = parseInt(document.getElementById(`quantity-${item}`).value);
-        const buyButton = document.getElementById(`buy-${item}`);
-        const soldOut = document.getElementById(`sold-out-${item}`);
-
-        if (quantity > stock || stock === 0) {
-            buyButton.disabled = true;
-            soldOut.style.display = 'block';
-        } else {
-            buyButton.disabled = false;
-            soldOut.style.display = 'none';
+            if (quantity > stock || stock === 0) {
+                buyButton.disabled = true;
+                soldOut.style.display = 'block';
+            } else {
+                buyButton.disabled = false;
+                soldOut.style.display = 'none';
+            }
         }
-    }
 
-    // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const modeLabel = document.querySelector('.mode-label');
-    const currentTheme = localStorage.getItem('theme') || 'light';
+        // Theme Toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeSwitcher = document.querySelector('.theme-switcher input[type="checkbox"]');
+            const currentTheme = localStorage.getItem('theme');
 
-    document.body.setAttribute('data-theme', currentTheme);
-    themeToggle.checked = currentTheme === 'dark';
-    modeLabel.textContent = currentTheme === 'dark' ? 'NIGHTMODE' : 'DAYMODE';
+            if (currentTheme) {
+                document.body.setAttribute('data-theme', currentTheme);
 
-    themeToggle.addEventListener('change', () => {
-        const newTheme = themeToggle.checked ? 'dark' : 'light';
-        document.body.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme); // Save theme preference
-        modeLabel.textContent = newTheme === 'dark' ? 'NIGHTMODE' : 'DAYMODE';
-    });
-        
-    // Initial Stock Validation
-    document.addEventListener('DOMContentLoaded', () => {
-        validateStock('shulker');
-        validateStock('mending');
-    });
+                if (currentTheme === 'dark') {
+                    themeSwitcher.checked = true;
+                }
+            }
+
+            themeSwitcher.addEventListener('change', function () {
+                if (this.checked) {
+                    document.body.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+        });
+
+        // Initial Stock Validation
+        document.addEventListener('DOMContentLoaded', () => {
+            validateStock('shulker');
+            validateStock('mending');
+        });
     </script>
 </body>
 </html>
