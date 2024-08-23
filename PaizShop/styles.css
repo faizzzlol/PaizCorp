@@ -74,19 +74,17 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* Theme Switcher Styling */
+/* Theme Switcher */
 .theme-switcher {
     display: flex;
     align-items: center;
-    font-size: 1rem;
 }
 
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
-    margin-right: 10px;
+    width: 70px;
+    height: 30px;
 }
 
 .switch input {
@@ -104,7 +102,7 @@ nav a:hover {
     bottom: 0;
     background-color: #ccc;
     transition: 0.4s;
-    border-radius: 34px;
+    border-radius: 50px;
 }
 
 .slider:before {
@@ -112,8 +110,8 @@ nav a:hover {
     content: "";
     height: 26px;
     width: 26px;
-    left: 4px;
-    bottom: 4px;
+    left: 2px;
+    bottom: 2px;
     background-color: white;
     transition: 0.4s;
     border-radius: 50%;
@@ -128,18 +126,8 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(26px);
+    transform: translateX(40px);
     background-image: url('moon-icon.png'); /* Use the moon icon */
-}
-
-.mode-label {
-    margin-left: 10px;
-    font-size: 1rem;
-    color: #333;
-}
-
-body[data-theme='dark'] .mode-label {
-    color: #eee;
 }
 
 /* Main Section Styling */
@@ -160,98 +148,89 @@ main {
     border: 1px solid #ddd;
     border-radius: 8px;
     background: #fff;
-    padding: 20px;
-    width: 250px;
+    padding: 1rem;
+    width: calc(50% - 20px);
     text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.item[data-theme='dark'] {
-    background: #444;
+body[data-theme='dark'] .item {
+    background: #333;
     color: #eee;
-    border: 1px solid #555;
-}
-
-.item h3 {
-    margin: 0 0 10px;
+    border-color: #555;
 }
 
 .item img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.item h3 {
+    margin: 10px 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+body[data-theme='dark'] .item h3 {
+    color: #eee;
 }
 
 .item p {
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
-.sold-out {
-    color: red;
-    font-weight: bold;
-}
-
-.item input[type="number"] {
-    width: 60px;
-    padding: 5px;
-    margin: 10px 0;
-    text-align: center;
-}
-
-.item button {
-    background-color: #5cb85c;
-    color: white;
+button.buy-btn {
+    background-color: #28a745;
+    color: #fff;
     border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
     transition: background-color 0.3s ease;
 }
 
-.item button:disabled {
-    background-color: #bbb;
-    cursor: not-allowed;
+button.buy-btn:hover {
+    background-color: #218838;
 }
 
-.item button:hover:not(:disabled) {
-    background-color: #4cae4c;
+body[data-theme='dark'] button.buy-btn {
+    background-color: #218838;
+}
+
+/* Sold Out Styling */
+.sold-out {
+    color: #d9534f;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 10px;
 }
 
 /* Footer Styling */
 footer {
-    background-color: #444;
+    background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     position: fixed;
-    bottom: 0;
     width: 100%;
-    transition: background-color 0.3s ease;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 footer[data-theme='dark'] {
-    background-color: #333;
+    background-color: #222;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    #shop-items {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .theme-switcher {
-        font-size: 0.9rem;
-    }
-
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    nav li {
-        margin-left: 0;
-        margin-bottom: 10px;
-    }
+footer p {
+    margin: 0;
+    font-size: 1rem;
 }
 
 /* Checkout Form Styling */
@@ -281,4 +260,3 @@ body[data-theme='dark'] #checkout-form input {
     color: #eee;
     border-color: #555;
 }
-
