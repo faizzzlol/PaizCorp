@@ -29,7 +29,7 @@
         <!-- Dark Mode Toggle Switch -->
         <div class="theme-switcher">
             <label class="switch">
-                <input type="checkbox" id="theme-toggle">
+                <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
                 <span class="slider round"></span>
             </label>
         </div>
@@ -102,28 +102,29 @@
             }
         }
 
-        // Theme Toggle
-        document.addEventListener('DOMContentLoaded', function () {
-            const themeSwitcher = document.querySelector('.theme-switcher input[type="checkbox"]');
-            const currentTheme = localStorage.getItem('theme');
+        // Function to toggle between themes
+        function toggleTheme() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const isDarkMode = themeToggle.checked;
 
-            if (currentTheme) {
-                document.body.setAttribute('data-theme', currentTheme);
-
-                if (currentTheme === 'dark') {
-                    themeSwitcher.checked = true;
-                }
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light-mode');
             }
+        }
 
-            themeSwitcher.addEventListener('change', function () {
-                if (this.checked) {
-                    document.body.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.body.setAttribute('data-theme', 'light');
-                    localStorage.setItem('theme', 'light');
-                }
-            });
+        // Load the user's theme preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('theme-toggle');
+
+            if (savedTheme === 'dark-mode') {
+                document.body.classList.add('dark-mode');
+                themeToggle.checked = true;
+            }
         });
 
         // Initial Stock Validation
