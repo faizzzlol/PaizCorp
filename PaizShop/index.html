@@ -30,7 +30,7 @@
         <div class="theme-switcher">
             <label class="switch">
                 <input type="checkbox" id="theme-toggle">
-                <span class="slider"></span>
+                <span class="slider round"></span>
             </label>
             <span class="mode-label">DAYMODE</span>
         </div>
@@ -105,20 +105,20 @@
 
     // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
+    const modeLabel = document.querySelector('.mode-label');
     const currentTheme = localStorage.getItem('theme') || 'light';
 
     document.body.setAttribute('data-theme', currentTheme);
     themeToggle.checked = currentTheme === 'dark';
+    modeLabel.textContent = currentTheme === 'dark' ? 'NIGHTMODE' : 'DAYMODE';
 
     themeToggle.addEventListener('change', () => {
         const newTheme = themeToggle.checked ? 'dark' : 'light';
         document.body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme); // Save theme preference
-
-        // Update mode label
-        document.querySelector('.mode-label').textContent = themeToggle.checked ? 'NIGHTMODE' : 'DAYMODE';
+        modeLabel.textContent = newTheme === 'dark' ? 'NIGHTMODE' : 'DAYMODE';
     });
-
+        
     // Initial Stock Validation
     document.addEventListener('DOMContentLoaded', () => {
         validateStock('shulker');
