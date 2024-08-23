@@ -13,6 +13,13 @@
     <header>
         <h1>Checkout</h1>
     </header>
+    <!-- Theme Switcher HTML -->
+    <div id="theme-switcher">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+            <span class="slider round"></span>
+        </label>
+    </div>
     <main>
         <form id="checkout-form">
             <label for="name">Name (Optional):</label>
@@ -223,6 +230,31 @@
                 console.error('Error sending order details to Discord:', error);
             });
         }
+
+        // Function to toggle between themes
+        function toggleTheme() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const isDarkMode = themeToggle.checked;
+
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light-mode');
+            }
+        }
+
+        // Load the user's theme preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('theme-toggle');
+
+            if (savedTheme === 'dark-mode') {
+                document.body.classList.add('dark-mode');
+                themeToggle.checked = true;
+            }
+        });
     </script>
 </body>
 
