@@ -74,17 +74,19 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* Theme Switcher */
+/* Theme Switcher Styling */
 .theme-switcher {
     display: flex;
     align-items: center;
+    font-size: 1rem;
 }
 
 .switch {
     position: relative;
     display: inline-block;
-    width: 70px;
-    height: 30px;
+    width: 60px;
+    height: 34px;
+    margin-right: 10px;
 }
 
 .switch input {
@@ -102,7 +104,7 @@ nav a:hover {
     bottom: 0;
     background-color: #ccc;
     transition: 0.4s;
-    border-radius: 50px;
+    border-radius: 34px;
 }
 
 .slider:before {
@@ -110,8 +112,8 @@ nav a:hover {
     content: "";
     height: 26px;
     width: 26px;
-    left: 2px;
-    bottom: 2px;
+    left: 4px;
+    bottom: 4px;
     background-color: white;
     transition: 0.4s;
     border-radius: 50%;
@@ -126,7 +128,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(40px);
+    transform: translateX(26px);
     background-image: url('moon-icon.png'); /* Use the moon icon */
 }
 
@@ -158,89 +160,98 @@ main {
     border: 1px solid #ddd;
     border-radius: 8px;
     background: #fff;
-    padding: 1rem;
-    width: calc(50% - 20px);
+    padding: 20px;
+    width: 250px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: relative;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body[data-theme='dark'] .item {
-    background: #333;
+.item[data-theme='dark'] {
+    background: #444;
     color: #eee;
-    border-color: #555;
-}
-
-.item img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+    border: 1px solid #555;
 }
 
 .item h3 {
-    margin: 10px 0;
-    font-size: 1.25rem;
-    color: #333;
+    margin: 0 0 10px;
 }
 
-body[data-theme='dark'] .item h3 {
-    color: #eee;
+.item img {
+    width: 150px;
+    height: 150px;
 }
 
 .item p {
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
-button.buy-btn {
-    background-color: #28a745;
-    color: #fff;
+.sold-out {
+    color: red;
+    font-weight: bold;
+}
+
+.item input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.item button {
+    background-color: #5cb85c;
+    color: white;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+    padding: 10px 20px;
     cursor: pointer;
-    font-size: 1rem;
+    border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
-button.buy-btn:hover {
-    background-color: #218838;
+.item button:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
 }
 
-body[data-theme='dark'] button.buy-btn {
-    background-color: #218838;
-}
-
-/* Sold Out Styling */
-.sold-out {
-    color: #d9534f;
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-top: 10px;
+.item button:hover:not(:disabled) {
+    background-color: #4cae4c;
 }
 
 /* Footer Styling */
 footer {
-    background-color: #333;
+    background-color: #444;
     color: #fff;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     position: fixed;
-    width: 100%;
     bottom: 0;
-    left: 0;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+    transition: background-color 0.3s ease;
 }
 
 footer[data-theme='dark'] {
-    background-color: #222;
+    background-color: #333;
 }
 
-footer p {
-    margin: 0;
-    font-size: 1rem;
+/* Responsive Design */
+@media (max-width: 768px) {
+    #shop-items {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .theme-switcher {
+        font-size: 0.9rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
 }
 
 /* Checkout Form Styling */
@@ -270,3 +281,4 @@ body[data-theme='dark'] #checkout-form input {
     color: #eee;
     border-color: #555;
 }
+
