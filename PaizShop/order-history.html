@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
+    <title>Order History - Paiz Shop</title>
+    <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Order History</h1>
+        <!-- Theme Switcher HTML -->
+        <div id="theme-switcher">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </header>
+    <main>
+        <div id="ongoing-orders">
+            <h2>Ongoing Orders</h2>
+            <!-- Ongoing orders will be dynamically inserted here -->
+        </div>
+        <div id="order-history">
+            <h2>Order History</h2>
+            <!-- Past orders will be dynamically inserted here -->
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Paiz Shop. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ongoingOrdersDiv = document.getElementById('ongoing-orders');
+            const orderHistoryDiv = document.getElementById('order-history');
+
+            // Fetch ongoing orders from localStorage
+            const ongoingOrders = JSON.parse(localStorage.getItem('ongoingOrders')) || [];
+            const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+
+            // Display ongoing orders
+            if (ongoingOrders.length > 0) {
+                ongoingOrders.forEach(order => {
+                    ongoingOrdersDiv.innerHTML += `
+                        <div class="order">
+                            <p><strong>Order Number:</strong> ${order.orderNumber}</p>
+                            <p><strong>Item:</strong> ${order.quantity}x ${order.item}</p>
+                            <p><strong>Total:</strong> ${order.total} Diamonds</p>
+                            <p><strong>Status:</strong> ${order.status}</p>
+                            <hr>
+                        </div>
+                    `;
+                });
+            } else {
+                ongoingOrdersDiv.innerHTML = "<p>No ongoing orders.</p>";
+            }
+
+            // Display order history
+            if (orderHistory.length > 0) {
+                orderHistory.forEach(order => {
+                    orderHistoryDiv.innerHTML += `
+                        <div class="order">
+                            <p><strong>Order Number:</strong> ${order.orderNumber}</p>
+                            <p><strong>Item:</strong> ${order.quantity}x ${order.item}</p>
+                            <p><strong>Total:</strong> ${order.total} Diamonds</p>
+                            <p><strong>Status:</strong> ${order.status}</p>
+                            <hr>
+                        </div>
+                    `;
+                });
+            } else {
+                orderHistoryDiv.innerHTML = "<p>No order history available.</p>";
+            }
+        });
+
+        // Function to toggle between themes
+        function toggleTheme() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const isDarkMode = themeToggle.checked;
+
+            if (isDarkMode) {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load the user's theme preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('theme-toggle');
+
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.checked = true;
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                themeToggle.checked = false;
+            }
+        });
+    </script>
+</body>
+</html>
