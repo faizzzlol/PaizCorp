@@ -66,7 +66,7 @@
             }
         });
 
-        // Function to send order details to Discord webhook
+        // Function to send order details to Discord webhook and save to localStorage
         function sendOrderToDiscord(orderDetails, orderNumber, webhookUrl) {
             const currentTime = new Date().toLocaleString();  // Get the current date and time
 
@@ -119,6 +119,17 @@
             }).then(response => {
                 if (response.ok) {
                     console.log('Order sent to Discord!');
+                    
+                    // Update ongoing orders in localStorage
+                    const ongoingOrders = JSON.parse(localStorage.getItem('ongoingOrders')) || [];
+                    ongoingOrders.push({ ...orderDetails, orderNumber, status: "Processing" });
+                    localStorage.setItem('ongoingOrders', JSON.stringify(ongoingOrders));
+
+                    // Update order history in localStorage
+                    const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+                    orderHistory.push({ ...orderDetails, orderNumber, status: "Completed" });
+                    localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+
                 } else {
                     console.error('Failed to send order to Discord.');
                 }
