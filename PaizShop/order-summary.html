@@ -10,13 +10,13 @@
 <body>
     <header>
         <h1>Order Summary</h1>
-    <!-- Theme Switcher HTML -->
-    <div id="theme-switcher">
-        <label class="switch">
-            <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
-            <span class="slider round"></span>
-        </label>
-    </div>
+        <!-- Theme Switcher HTML -->
+        <div id="theme-switcher">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+                <span class="slider round"></span>
+            </label>
+        </div>
     </header>
     <main>
         <div id="order-summary">
@@ -52,9 +52,16 @@
             if (placeOrderButton) {
                 placeOrderButton.addEventListener('click', function () {
                     const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Replace with your actual webhook URL
+                    
+                    // Send order to Discord
                     sendOrderToDiscord(orderDetails, orderNumber, webhookUrl);
+
+                    // Disable the Place Order button
+                    placeOrderButton.disabled = true;
+                    placeOrderButton.textContent = 'Order Placed';
+                    placeOrderButton.style.backgroundColor = '#d9534f'; // Change the button color to indicate it's disabled
+
                     alert("Order has been placed!");
-                    // Optionally clear the cart or redirect the user
                 });
             }
         });
@@ -119,6 +126,7 @@
                 console.error('Error:', error);
             });
         }
+
         // Function to toggle between themes
         function toggleTheme() {
             const themeToggle = document.getElementById('theme-toggle');
