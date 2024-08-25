@@ -131,6 +131,25 @@
                 themeToggle.checked = false;
             }
         });
+
+        function clearUserData() {
+            // Clear theme preference
+            localStorage.removeItem('theme');
+            document.body.setAttribute('data-theme', 'light');
+
+            // Clear order history
+            localStorage.removeItem('orderHistory');
+    
+            // Clear any other user-specific data stored in localStorage
+            sessionStorage.clear();
+            localStorage.clear();
+
+            alert("Your data has been cleared!");
+
+            // Optionally, you can reload the page to apply the default theme and clear any session data
+            window.location.reload();
+        }
+
         
         // Initial Stock Validation
         document.addEventListener('DOMContentLoaded', () => {
