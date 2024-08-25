@@ -13,9 +13,10 @@
             display: inline-block;
             width: 16px;
             height: 16px;
-            background-image: url('info-icon.png');
+            background-image: url('/PaizCorp/PaizShop/info-icon.png'); /* Replace with your actual path */
             background-size: cover;
             margin-left: 5px;
+            position: relative;
         }
 
         /* Style for the popup */
@@ -28,11 +29,13 @@
             width: 250px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             z-index: 10;
+            right: -260px; /* Adjusted for better alignment */
+            top: -10px;
         }
 
         /* Hover effect for the info icon */
-        .info-icon:hover + .popup,
-        .info-icon:focus + .popup {
+        .info-icon:hover .popup,
+        .info-icon:focus .popup {
             display: block;
         }
 
@@ -59,14 +62,13 @@
         </div>
         <button id="place-order">Place Order</button>
     </main>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const orderSummaryDiv = document.getElementById('order-summary');
             const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
 
             // Generate a unique order number (e.g., a random number or based on timestamp)
-            const orderNumber = 'PS' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0'); // Example: PS123456
+            const orderNumber = 'PS' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
 
             // Display order summary
             orderSummaryDiv.innerHTML = `
@@ -75,9 +77,12 @@
                 <p>${orderDetails.quantity}x ${orderDetails.item} - ${orderDetails.subtotal} Diamonds</p>
                 <hr>
                 <p>Subtotal: ${orderDetails.subtotal} Diamonds</p>
-                <p>Delivery Fee: ${orderDetails.deliveryFee} Diamonds
-                    <span class="info-icon" tabindex="0"></span>
-                    <span class="popup right">Delivery charges are calculated at 1 diamond per 1000 blocks from the shop's location (X: 5000, Y: 70, Z: 6000) to your provided delivery coordinates.</span>
+                <p>Delivery Fee: ${orderDetails.deliveryFee} Diamonds 
+                    <span class="info-icon" tabindex="0">
+                        <div class="popup">
+                            Delivery charges are calculated at 1 diamond per 1000 blocks from the shop's location (X: 5000, Y: 70, Z: 6000) to your provided delivery coordinates.
+                        </div>
+                    </span>
                 </p>
                 <p>The LoL Tax (3%): ${orderDetails.tax} Diamonds</p>
                 <hr>
@@ -89,8 +94,8 @@
             const placeOrderButton = document.getElementById('place-order');
             if (placeOrderButton) {
                 placeOrderButton.addEventListener('click', function () {
-                    const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI'; // Replace with your actual webhook URL
-                    
+                    const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI';
+
                     // Send order to Discord
                     sendOrderToDiscord(orderDetails, orderNumber, webhookUrl);
 
@@ -98,7 +103,6 @@
                     placeOrderButton.disabled = true;
                     placeOrderButton.textContent = 'Order Placed';
                     placeOrderButton.style.backgroundColor = '#d9534f'; // Change the button color to indicate it's disabled
-
                     alert("Order has been placed!");
                 });
             }
@@ -106,8 +110,7 @@
 
         // Function to send order details to Discord webhook
         function sendOrderToDiscord(orderDetails, orderNumber, webhookUrl) {
-            const currentTime = new Date().toLocaleString();  // Get the current date and time
-
+            const currentTime = new Date().toLocaleString(); // Get the current date and time
             const embed = {
                 "content": null,
                 "embeds": [
@@ -119,30 +122,18 @@
                                 "name": "🛒 Order Details",
                                 "value": `- **Item:** ${orderDetails.quantity}x ${orderDetails.item}\n- **Subtotal:** 💎${orderDetails.subtotal} Diamonds\n- **Delivery Fee:** 💎${orderDetails.deliveryFee} Diamonds (if applicable)\n- **Tax (3%):** 💎${orderDetails.tax}\n\n**Total Amount:** 💎${orderDetails.total} Diamonds`
                             },
-                            {
-                                "name": "👤 Minecraft Name",
-                                "value": orderDetails.minecraftName
-                            },
+                            { "name": "👤 Minecraft Name", "value": orderDetails.minecraftName },
                             {
                                 "name": orderDetails.delivery ? "🚚 Delivery Option" : "📍 Pickup Option",
-                                "value": orderDetails.delivery ? `- **Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}` : `- **Pickup Address:** ${orderDetails.address}`
+                                "value": orderDetails.delivery
+                                    ? `- **Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}`
+                                    : `- **Pickup Address:** ${orderDetails.address}`
                             },
-                            {
-                                "name": "🕒 Order Time",
-                                "value": `Placed on: ${currentTime}`
-                            },
-                            {
-                                "name": "📦 Order Number",
-                                "value": orderNumber
-                            },
-                            {
-                                "name": "📞 Contact Information",
-                                "value": orderDetails.contactInfo || "Not provided"
-                            }
+                            { "name": "🕒 Order Time", "value": `Placed on: ${currentTime}` },
+                            { "name": "📦 Order Number", "value": orderNumber },
+                            { "name": "📞 Contact Information", "value": orderDetails.contactInfo || "Not provided" }
                         ],
-                        "footer": {
-                            "text": "Order placed on Paiz Shop"
-                        }
+                        "footer": { "text": "Order placed on Paiz Shop" }
                     }
                 ],
                 "attachments": []
@@ -150,9 +141,7 @@
 
             fetch(webhookUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(embed)
             }).then(response => {
                 if (response.ok) {
