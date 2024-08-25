@@ -25,6 +25,15 @@
         <button id="place-order">Place Order</button>
     </main>
 
+    <!-- Delivery Fee Note Popup -->
+    <div id="delivery-fee-note" class="popup">
+        <div class="popup-content">
+            <span class="close-popup" onclick="togglePopup()">&times;</span>
+            <h2>Delivery Fee Calculation</h2>
+            <p>Delivery charges are calculated at 1 diamond per 1000 blocks from the shop's location (X: 5894, Y: 69, Z: 5321) to your provided delivery coordinates.</p>
+        </div>
+    </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const orderSummaryDiv = document.getElementById('order-summary');
@@ -137,6 +146,11 @@
             }).catch(error => {
                 console.error('Error:', error);
             });
+        }
+
+        function togglePopup() {
+            const popup = document.getElementById('delivery-fee-note');
+            popup.classList.toggle('show');
         }
 
         // Function to toggle between themes
