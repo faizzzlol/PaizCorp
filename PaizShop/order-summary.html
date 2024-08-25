@@ -6,6 +6,41 @@
     <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
     <title>Order Summary - Paiz Shop</title>
     <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
+    <style>
+        /* Style for the info icon */
+        .info-icon {
+            cursor: pointer;
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: url('/path/to/your/info-icon.png');
+            background-size: cover;
+            margin-left: 5px;
+        }
+
+        /* Style for the popup */
+        .popup {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 8px;
+            width: 250px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        /* Hover effect for the info icon */
+        .info-icon:hover + .popup,
+        .info-icon:focus + .popup {
+            display: block;
+        }
+
+        /* Optional: Style to make sure the popup doesn't go off-screen */
+        .popup.right {
+            left: 105%; /* Adjust as needed */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -25,15 +60,6 @@
         <button id="place-order">Place Order</button>
     </main>
 
-    <!-- Delivery Fee Note Popup -->
-    <div id="delivery-fee-note" class="popup">
-        <div class="popup-content">
-            <span class="close-popup" onclick="togglePopup()">&times;</span>
-            <h2>Delivery Fee Calculation</h2>
-            <p>Delivery charges are calculated at 1 diamond per 1000 blocks from the shop's location (X: 5894, Y: 69, Z: 5321) to your provided delivery coordinates.</p>
-        </div>
-    </div>
-    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const orderSummaryDiv = document.getElementById('order-summary');
@@ -49,12 +75,14 @@
                 <p>${orderDetails.quantity}x ${orderDetails.item} - ${orderDetails.subtotal} Diamonds</p>
                 <hr>
                 <p>Subtotal: ${orderDetails.subtotal} Diamonds</p>
-                <p>Delivery Fee: ${orderDetails.deliveryFee} Diamonds</p>
+                <p>Delivery Fee: ${orderDetails.deliveryFee} Diamonds
+                    <span class="info-icon" tabindex="0"></span>
+                    <span class="popup right">Delivery charges are calculated at 1 diamond per 1000 blocks from the shop's location (X: 5000, Y: 70, Z: 6000) to your provided delivery coordinates.</span>
+                </p>
                 <p>The LoL Tax (3%): ${orderDetails.tax} Diamonds</p>
                 <hr>
                 <p>Total: ${orderDetails.total} Diamonds</p>
                 <p>Paid with: <img src="diamond.png" alt="Diamond Logo" style="height: 20px;"> Diamonds on delivery</p>
-                <p><strong>Note:</strong> Delivery charges are calculated at 1 diamond per 1000 blocks from the shop's location (X: 5894, Y: 69, Z: 5321) to your provided delivery coordinates.</p>
             `;
 
             // Handle Place Order
@@ -76,7 +104,7 @@
             }
         });
 
-        // Function to send order details to Discord webhook and save to localStorage
+        // Function to send order details to Discord webhook
         function sendOrderToDiscord(orderDetails, orderNumber, webhookUrl) {
             const currentTime = new Date().toLocaleString();  // Get the current date and time
 
@@ -129,28 +157,12 @@
             }).then(response => {
                 if (response.ok) {
                     console.log('Order sent to Discord!');
-                    
-                    // Update ongoing orders in localStorage
-                    const ongoingOrders = JSON.parse(localStorage.getItem('ongoingOrders')) || [];
-                    ongoingOrders.push({ ...orderDetails, orderNumber, status: "Processing" });
-                    localStorage.setItem('ongoingOrders', JSON.stringify(ongoingOrders));
-
-                    // Update order history in localStorage
-                    const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
-                    orderHistory.push({ ...orderDetails, orderNumber, status: "Completed" });
-                    localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
-
                 } else {
                     console.error('Failed to send order to Discord.');
                 }
             }).catch(error => {
                 console.error('Error:', error);
             });
-        }
-
-        function togglePopup() {
-            const popup = document.getElementById('delivery-fee-note');
-            popup.classList.toggle('show');
         }
 
         // Function to toggle between themes
