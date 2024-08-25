@@ -6,6 +6,9 @@ body {
     background-color: #f4f4f4;
     color: #333;
     transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Dark Mode */
@@ -18,11 +21,11 @@ body[data-theme='dark'] {
 header {
     background-color: #444;
     color: #fff;
-    padding: 10px 15px; /* Reduced for mobile */
+    padding: 10px 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    flex-wrap: wrap;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
 }
@@ -32,13 +35,13 @@ header[data-theme='dark'] {
 }
 
 #shop-logo {
-    height: 40px; /* Adjusted for mobile */
+    height: 40px;
     margin-right: 10px;
 }
 
 h1 {
     margin: 0;
-    font-size: 1.5rem; /* Reduced for better mobile fit */
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
 }
@@ -59,7 +62,7 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
-    flex-direction: column; /* Stack vertically on small screens */
+    flex-direction: column;
     align-items: center;
     width: 100%;
 }
@@ -71,7 +74,7 @@ nav li {
 nav a {
     color: #fff;
     text-decoration: none;
-    font-size: 0.9rem; /* Reduced font size for mobile */
+    font-size: 0.9rem;
 }
 
 nav a:hover {
@@ -81,17 +84,17 @@ nav a:hover {
 /* Theme Switcher */
 .theme-switcher {
     display: flex;
-    justify-content: center; /* Centered in mobile */
+    justify-content: center;
     align-items: center;
     margin-top: 10px;
     width: 100%;
-    order: 1; /* Move to top in mobile */
+    order: 1;
 }
 
 .switch {
     position: relative;
     display: inline-block;
-    width: 50px; /* Adjusted for mobile */
+    width: 50px;
     height: 24px;
 }
 
@@ -123,7 +126,7 @@ nav a:hover {
     background-color: white;
     transition: 0.4s;
     border-radius: 50%;
-    background-image: url('sun-icon.png'); /* Sun icon */
+    background-image: url('sun-icon.png');
     background-size: 14px;
     background-repeat: no-repeat;
     background-position: center;
@@ -135,7 +138,7 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(26px);
-    background-image: url('moon-icon.png'); /* Moon icon */
+    background-image: url('moon-icon.png');
 }
 
 /* Main Section Styling */
@@ -143,6 +146,7 @@ main {
     padding: 2rem;
     margin-top: 80px;
     margin-bottom: 80px;
+    flex: 1;
 }
 
 #shop-items {
@@ -242,6 +246,22 @@ footer p {
     font-size: 1rem;
 }
 
+/* Clear Data Button */
+.clear-data-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.clear-data-btn:hover {
+    background-color: #e60000;
+}
+
 /* Checkout Form Styling */
 #checkout {
     margin-top: 2rem;
@@ -273,33 +293,18 @@ body[data-theme='dark'] #checkout-form input {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     header {
-        flex-direction: column; /* Stack elements vertically */
+        flex-direction: column;
     }
 
     h1 {
-        font-size: 1.2rem; /* Further reduce font size */
+        font-size: 1.2rem;
     }
 
     nav ul {
-        flex-direction: column; /* Ensure vertical stacking */
+        flex-direction: column;
     }
 
     .theme-switcher {
-        margin-top: 10px; /* Adjust spacing */
+        margin-top: 10px;
     }
 }
-.clear-data-btn {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-top: 20px;
-}
-
-.clear-data-btn:hover {
-    background-color: #e60000;
-}
-
