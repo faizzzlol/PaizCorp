@@ -13,7 +13,6 @@
             display: inline-block;
             width: 16px;
             height: 16px;
-            background-image: url('/PaizCorp/PaizShop/info-icon.png'); /* Replace with your actual path */
             background-size: cover;
             margin-left: 5px;
             position: relative;
@@ -78,8 +77,8 @@
                 <hr>
                 <p>Subtotal: ${orderDetails.subtotal} Diamonds</p>
                 <p>Delivery Fee: ${orderDetails.deliveryFee} Diamonds 
-                    <a href="/how-to-use" class="info-icon">
-                        ℹ️
+                    <a href="how-to-use" class="info-icon" title="Click to learn more about delivery fees">
+                        <img src="info-icon.png" alt="Info" style="width: 16px; height: 16px;">
                     </a>
                 </p>
                 <p>The LoL Tax (3%): ${orderDetails.tax} Diamonds</p>
