@@ -308,10 +308,32 @@ body[data-theme='dark'] #checkout-form input {
         margin-top: 10px;
     }
 }
+/* Form group styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
 /* Star rating styling */
 #star-rating {
     display: flex;
-    gap: 5px;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .star {
@@ -325,7 +347,7 @@ body[data-theme='dark'] #checkout-form input {
     color: #ffd700;
 }
 
-/* Button styling */
+/* Submit button styling */
 .submit-btn {
     background-color: #28a745;
     color: #fff;
