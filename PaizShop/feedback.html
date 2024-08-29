@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Paiz Shop</title>
+    <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
+    <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Feedback</h1>
+        <nav>
+            <ul>
+                <li><a href="/PaizCorp/PaizShop/">Home</a></li>
+                <li><a href="/PaizCorp/PaizShop/how-to-use">How to Use</a></li>
+                <li><a href="/PaizCorp/PaizShop/contact">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="theme-switcher">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <h2>We value your feedback!</h2>
+            <form id="feedback-form">
+                <label for="user-name">Your Name:</label>
+                <input type="text" id="user-name" name="user-name" required>
+                
+                <label for="user-email">Your Email:</label>
+                <input type="email" id="user-email" name="user-email" required>
+                
+                <label for="rating">Rate Us:</label>
+                <div id="star-rating">
+                    <span class="star" data-value="1">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="5">&#9733;</span>
+                </div>
+                <input type="hidden" id="rating" name="rating" required>
+                
+                <label for="feedback">Your Feedback:</label>
+                <textarea id="feedback" name="feedback" rows="5" required></textarea>
+                
+                <button type="submit" class="submit-btn">Submit Feedback</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Paiz Shop. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Toggle theme function
+        function toggleTheme() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const isDarkMode = themeToggle.checked;
+
+            if (isDarkMode) {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load theme preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('theme-toggle');
+
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.checked = true;
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                themeToggle.checked = false;
+            }
+        });
+
+        // Star rating system
+        const stars = document.querySelectorAll('#star-rating .star');
+        const ratingInput = document.getElementById('rating');
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                stars.forEach(s => s.classList.remove('selected'));
+                star.classList.add('selected');
+                ratingInput.value = star.getAttribute('data-value');
+            });
+        });
+
+        // Form submission
+        document.getElementById('feedback-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const userName = document.getElementById('user-name').value;
+            const userEmail = document.getElementById('user-email').value;
+            const rating = document.getElementById('rating').value;
+            const feedback = document.getElementById('feedback').value;
+
+            const payload = {
+                username: "Paiz Shop Feedback",
+                content: `**New Feedback Received**\n**Name:** ${userName}\n**Email:** ${userEmail}\n**Rating:** ${rating} stars\n**Feedback:** ${feedback}`
+            };
+
+            fetch('https://discord.com/api/webhooks/1278727591943077898/HTBDdj-q1z8GQNLqacucV_SKHkkRM9jxekwqxU0KfWcdXZ_Bsb2Xcsdx3XyU0YyXsSIx', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                alert('Thank you for your feedback!');
+                document.getElementById('feedback-form').reset();
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('There was an issue submitting your feedback.');
+            });
+        });
+    </script>
+</body>
+</html>
