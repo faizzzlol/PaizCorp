@@ -42,6 +42,46 @@
         .popup.right {
             left: 105%; /* Adjust as needed */
         }
+
+        /* Button group styles */
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-group button:hover {
+            background-color: #4cae4c;
+        }
+
+        /* Adjust the color for "Back to homepage" button */
+        #back-home {
+            background-color: #f0ad4e;
+        }
+
+        #back-home:hover {
+            background-color: #ec971f;
+        }
+
+        /* Adjust the color for "View my order" button */
+        #view-order {
+            background-color: #5bc0de;
+        }
+
+        #view-order:hover {
+            background-color: #31b0d5;
+        }
     </style>
 </head>
 <body>
@@ -59,7 +99,11 @@
         <div id="order-summary">
             <!-- Order Summary details will be dynamically inserted here -->
         </div>
-        <button id="place-order">Place Order</button>
+        <div class="button-group">
+            <button id="place-order">Place Order</button>
+            <button id="back-home" onclick="location.href='/PaizCorp/PaizShop/index'">Back to homepage</button>
+            <button id="view-order" onclick="location.href='/PaizCorp/PaizShop/order-history'">View my order</button>
+        </div>
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -176,17 +220,12 @@
             }
         }
 
-        // Load the user's theme preference on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        // Preserve the user's theme preference on page load
+        document.addEventListener('DOMContentLoaded', function () {
             const savedTheme = localStorage.getItem('theme');
-            const themeToggle = document.getElementById('theme-toggle');
-
-            if (savedTheme === 'dark') {
-                document.body.setAttribute('data-theme', 'dark');
-                themeToggle.checked = true;
-            } else {
-                document.body.setAttribute('data-theme', 'light');
-                themeToggle.checked = false;
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                document.getElementById('theme-toggle').checked = (savedTheme === 'dark');
             }
         });
     </script>
