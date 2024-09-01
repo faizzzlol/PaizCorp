@@ -7,43 +7,36 @@
     <title>Order Summary - Paiz Shop</title>
     <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
     <style>
-        /* Style for the info icon */
-        .info-icon {
-            cursor: pointer;
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            background-size: cover;
-            margin-left: 5px;
-            position: relative;
+        /* Additional styling for better organization */
+        .order-summary-item {
+            margin-bottom: 15px;
         }
 
-        /* Style for the popup */
-        .popup {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
+        .order-summary-item h3 {
+            margin: 5px 0;
+        }
+
+        .order-summary-item p {
+            margin: 5px 0;
+        }
+
+        .order-summary-section {
             border: 1px solid #ccc;
-            padding: 8px;
-            width: 250px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            right: 0;
-            top: 25px;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
         }
 
-        /* Hover effect for the info icon */
-        .info-icon:hover .popup,
-        .info-icon:focus .popup {
-            display: block;
+        .stack-count {
+            color: #5cb85c;
+            font-weight: bold;
         }
 
-        /* Optional: Style to make sure the popup doesn't go off-screen */
-        .popup.right {
-            left: 105%; /* Adjust as needed */
+        .rounding-details {
+            color: #f0ad4e;
+            font-weight: bold;
         }
 
-        /* Button group styles */
         .button-group {
             margin-top: 20px;
             display: flex;
@@ -110,25 +103,51 @@
             const orderSummaryDiv = document.getElementById('order-summary');
             const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
 
+            // Calculate stack count
+            const diamondPerStack = 64;
+            const totalStacks = Math.floor(orderDetails.total / diamondPerStack);
+            const remainingDiamonds = orderDetails.total % diamondPerStack;
+
             // Generate a unique order number (e.g., a random number or based on timestamp)
             const orderNumber = 'PS' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
 
             // Display order summary
             orderSummaryDiv.innerHTML = `
-                <h2>Order Summary</h2>
-                <p>Order Number: ${orderNumber}</p>
-                <p>${orderDetails.quantity}x ${orderDetails.item} - ${orderDetails.subtotal} Diamonds</p>
-                <hr>
-                <p>Subtotal: ${orderDetails.subtotal} Diamonds</p>
-                <p>Delivery Fee: ${orderDetails.deliveryFee} Diamonds 
-                    <a href="how-to-use" class="info-icon" title="Click to learn more about delivery fees">
-                        <img src="info-icon.png" alt="Info" style="width: 16px; height: 16px;">
-                    </a>
-                </p>
-                <p>The LoL Tax (3%): ${orderDetails.tax} Diamonds</p>
-                <hr>
-                <p>Total: ${orderDetails.total} Diamonds</p>
-                <p>Paid with: <img src="diamond.png" alt="Diamond Logo" style="height: 20px;"> Diamonds on delivery</p>
+                <div class="order-summary-section">
+                    <h2>Order Summary</h2>
+                    <div class="order-summary-item">
+                        <h3>Order Number:</h3>
+                        <p>${orderNumber}</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Item Ordered:</h3>
+                        <p>${orderDetails.quantity}x ${orderDetails.item}</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Subtotal:</h3>
+                        <p>${orderDetails.subtotal} Diamonds</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Delivery Fee:</h3>
+                        <p>${orderDetails.deliveryFee} Diamonds</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>The LoL Tax (3%):</h3>
+                        <p>${orderDetails.tax} Diamonds</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Rounding Details:</h3>
+                        <p class="rounding-details">Total Rounded: ${orderDetails.total} Diamonds</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Stack Count:</h3>
+                        <p class="stack-count">${totalStacks} Stack(s) and ${remainingDiamonds} Diamond(s)</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Total Amount:</h3>
+                        <p>${orderDetails.total} Diamonds</p>
+                    </div>
+                </div>
             `;
 
             // Handle Place Order
@@ -138,7 +157,7 @@
                     const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI';
 
                     // Send order to Discord
-                    sendOrderToDiscord(orderDetails, orderNumber, webhookUrl);
+                    sendOrderToDiscord(orderDetails, orderNumber, webhookUrl, totalStacks, remainingDiamonds);
 
                     // Disable the Place Order button
                     placeOrderButton.disabled = true;
@@ -150,7 +169,7 @@
         });
 
         // Function to send order details to Discord webhook
-        function sendOrderToDiscord(orderDetails, orderNumber, webhookUrl) {
+        function sendOrderToDiscord(orderDetails, orderNumber, webhookUrl, totalStacks, remainingDiamonds) {
             const currentTime = new Date().toLocaleString(); // Get the current date and time
             const embed = {
                 "content": null,
@@ -159,20 +178,25 @@
                         "title": "📦 New Order Placed 📦",
                         "color": 5814783,
                         "fields": [
+                            { "name": "🛒 **Order Number**", "value": orderNumber },
                             {
-                                "name": "🛒 Order Details",
-                                "value": `- **Item:** ${orderDetails.quantity}x ${orderDetails.item}\n- **Subtotal:** 💎${orderDetails.subtotal} Diamonds\n- **Delivery Fee:** 💎${orderDetails.deliveryFee} Diamonds (if applicable)\n- **Tax (3%):** 💎${orderDetails.tax}\n\n**Total Amount:** 💎${orderDetails.total} Diamonds`
+                                "name": "🛒 **Order Details**",
+                                "value": `**Item:** ${orderDetails.quantity}x ${orderDetails.item}\n**Subtotal:** 💎${orderDetails.subtotal} Diamonds\n**Delivery Fee:** 💎${orderDetails.deliveryFee} Diamonds (if applicable)\n**Tax (3%):** 💎${orderDetails.tax}\n**Total:** 💎${orderDetails.total} Diamonds`
                             },
-                            { "name": "👤 Minecraft Name", "value": orderDetails.minecraftName },
+                            { "name": "📊 **Rounding Details**", "value": `Total Rounded: 💎${orderDetails.total} Diamonds` },
                             {
-                                "name": orderDetails.delivery ? "🚚 Delivery Option" : "📍 Pickup Option",
+                                "name": "🛠 **Stack Count**",
+                                "value": `${totalStacks} Stack(s) and ${remainingDiamonds} Diamond(s)`
+                            },
+                            { "name": "👤 **Minecraft Name**", "value": orderDetails.minecraftName },
+                            {
+                                "name": orderDetails.delivery ? "🚚 **Delivery Option**" : "📍 **Pickup Option**",
                                 "value": orderDetails.delivery
-                                    ? `- **Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}`
-                                    : `- **Pickup Address:** ${orderDetails.address}`
+                                    ? `**Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}`
+                                    : `**Pickup Address:** ${orderDetails.address}`
                             },
-                            { "name": "🕒 Order Time", "value": `Placed on: ${currentTime}` },
-                            { "name": "📦 Order Number", "value": orderNumber },
-                            { "name": "📞 Contact Information", "value": orderDetails.contactInfo || "Not provided" }
+                            { "name": "🕒 **Order Time**", "value": `Placed on: ${currentTime}` },
+                            { "name": "📞 **Contact Information**", "value": orderDetails.contactInfo || "Not provided" }
                         ],
                         "footer": { "text": "Order placed on Paiz Shop" }
                     }
@@ -195,27 +219,24 @@
 
                     // Update order history in localStorage
                     const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
-                    orderHistory.push({ ...orderDetails, orderNumber, status: "Completed" });
+                    orderHistory.push({ ...orderDetails, orderNumber });
                     localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
-
                 } else {
-                    console.error('Failed to send order to Discord.');
+                    console.error('Failed to send order to Discord:', response.statusText);
                 }
             }).catch(error => {
-                console.error('Error:', error);
+                console.error('Error sending order to Discord:', error);
             });
         }
 
-        // Function to toggle between themes
+        // Function to toggle theme between light and dark mode
         function toggleTheme() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const isDarkMode = themeToggle.checked;
-
-            if (isDarkMode) {
-                document.body.setAttribute('data-theme', 'dark');
+            const body = document.body;
+            if (body.getAttribute('data-theme') === 'light') {
+                body.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
             } else {
-                document.body.setAttribute('data-theme', 'light');
+                body.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
             }
         }
