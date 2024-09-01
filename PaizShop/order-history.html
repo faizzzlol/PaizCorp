@@ -6,6 +6,120 @@
     <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
     <title>Order History - Paiz Shop</title>
     <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
+    <style>
+        /* Additional styling for a modern, organized look */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #1f1f1f;
+            border-bottom: 2px solid #333;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        #theme-switcher {
+            display: flex;
+            align-items: center;
+        }
+
+        #ongoing-orders, #order-history {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+
+        .order {
+            background-color: #1f1f1f;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #333;
+        }
+
+        .order p {
+            margin: 0.5rem 0;
+        }
+
+        .order hr {
+            border: none;
+            border-top: 1px solid #333;
+            margin: 1rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #1f1f1f;
+            border-top: 2px solid #333;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -50,7 +164,6 @@
                             <p><strong>Item:</strong> ${order.quantity}x ${order.item}</p>
                             <p><strong>Total:</strong> ${order.total} Diamonds</p>
                             <p><strong>Status:</strong> ${order.status}</p>
-                            <hr>
                         </div>
                     `;
                 });
@@ -67,7 +180,6 @@
                             <p><strong>Item:</strong> ${order.quantity}x ${order.item}</p>
                             <p><strong>Total:</strong> ${order.total} Diamonds</p>
                             <p><strong>Status:</strong> ${order.status}</p>
-                            <hr>
                         </div>
                     `;
                 });
