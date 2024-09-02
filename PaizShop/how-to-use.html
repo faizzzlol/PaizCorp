@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,15 +11,15 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #3a3a3a;
+            color: #f5f5f5;
             padding: 15px;
             text-align: center;
             position: sticky;
@@ -39,7 +40,7 @@
         }
 
         nav ul li a {
-            color: white;
+            color: #f5f5f5;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.2em;
@@ -55,12 +56,13 @@
             padding: 20px;
             max-width: 1000px;
             margin: auto;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #2a2a2a;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
-        h1, h2 {
-            color: #4CAF50;
+        h1,
+        h2 {
+            color: #f5f5f5;
             text-align: center;
         }
 
@@ -83,10 +85,10 @@
             counter-increment: item;
             margin-bottom: 20px;
             padding: 10px;
-            background-color: #e9f5e9;
+            background-color: #3a3a3a;
             border-left: 5px solid #4CAF50;
             border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
 
         ol li::before {
@@ -94,7 +96,7 @@
             font-weight: bold;
             margin-right: 10px;
             color: #4CAF50;
-            background-color: #fff;
+            background-color: #2a2a2a;
             border-radius: 50%;
             width: 25px;
             height: 25px;
@@ -104,7 +106,7 @@
         }
 
         ol li strong {
-            color: #333;
+            color: #e0e0e0;
         }
 
         ol li p {
@@ -114,15 +116,15 @@
         footer {
             text-align: center;
             padding: 15px;
-            background-color: #4CAF50;
-            color: white;
+            background-color: #3a3a3a;
+            color: #f5f5f5;
             position: sticky;
             bottom: 0;
             z-index: 1000;
         }
 
         footer a {
-            color: white;
+            color: #f5f5f5;
             text-decoration: none;
         }
 
@@ -147,6 +149,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>How to Use Paiz Shop</h1>
@@ -176,23 +179,29 @@
                 </li>
                 <li>
                     <strong>Checking Stock:</strong>
-                    <p>Each item shows its available stock. If the item is out of stock, the "Buy Now" button will be disabled, and a "Sold Out" message will appear.</p>
+                    <p>Each item shows its available stock. If the item is out of stock, the "Buy Now" button will be
+                        disabled, and a "Sold Out" message will appear.</p>
                 </li>
                 <li>
                     <strong>Adding Items to Cart:</strong>
-                    <p>Enter the quantity you want and click the "Buy Now" button. If stock is available, the item will be added to your cart, and you’ll be redirected to the <a href="/PaizCorp/PaizShop/checkout">checkout page</a>.</p>
+                    <p>Enter the quantity you want and click the "Buy Now" button. If stock is available, the item will
+                        be added to your cart, and you’ll be redirected to the <a
+                            href="/PaizCorp/PaizShop/checkout">checkout page</a>.</p>
                 </li>
                 <li>
                     <strong>Reviewing Your Cart:</strong>
-                    <p>On the checkout page, review the items in your cart along with the subtotal, delivery fee, and tax.</p>
+                    <p>On the checkout page, review the items in your cart along with the subtotal, delivery fee, and
+                        tax.</p>
                 </li>
                 <li>
                     <strong>Choosing Delivery or Pickup:</strong>
-                    <p>During checkout, select whether you want your order delivered or if you’ll pick it up. If you choose delivery, you’ll need to provide your delivery coordinates (X, Y, Z).</p>
+                    <p>During checkout, select whether you want your order delivered or if you’ll pick it up. If you
+                        choose delivery, you’ll need to provide your delivery coordinates (X, Y, Z).</p>
                 </li>
                 <li>
                     <strong>Calculating Delivery Fees:</strong>
-                    <p>The delivery fee is calculated at 1 diamond per 1000 blocks based on the distance from the shop’s location (X: 5894, Y: 69, Z: 5321) to your delivery coordinates.</p>
+                    <p>The delivery fee is calculated at 1 diamond per 1000 blocks based on the distance from the shop’s
+                        location (X: 5894, Y: 69, Z: 5321) to your delivery coordinates.</p>
                 </li>
                 <li>
                     <strong>Viewing Delivery Fee Details:</strong>
@@ -200,19 +209,23 @@
                 </li>
                 <li>
                     <strong>Placing Your Order:</strong>
-                    <p>Once all details are reviewed, click the "Place Order" button to complete your purchase. Your order details will be sent to a Discord channel, including your contact information.</p>
+                    <p>Once all details are reviewed, click the "Place Order" button to complete your purchase. Your
+                        order details will be sent to a Discord channel, including your contact information.</p>
                 </li>
                 <li>
                     <strong>Tracking Orders:</strong>
-                    <p>You can view your <a href="/PaizCorp/PaizShop/order-history">Order History</a> and Ongoing Orders on the Order History page, where all your past and current orders are saved.</p>
+                    <p>You can view your <a href="/PaizCorp/PaizShop/order-history">Order History</a> and Ongoing Orders
+                        on the Order History page, where all your past and current orders are saved.</p>
                 </li>
                 <li>
                     <strong>Dark Mode:</strong>
-                    <p>Toggle between dark and light themes using the switch in the top-right corner of the page. Your preference will be saved for future visits.</p>
+                    <p>Toggle between dark and light themes using the switch in the top-right corner of the page. Your
+                        preference will be saved for future visits.</p>
                 </li>
                 <li>
                     <strong>Contact Us:</strong>
-                    <p>If you have any questions or need assistance, visit our <a href="/PaizCorp/PaizShop/contact">Contact Us</a> page or our Discord server for support.</p>
+                    <p>If you have any questions or need assistance, visit our <a
+                            href="/PaizCorp/PaizShop/contact">Contact Us</a> page or our Discord server for support.</p>
                 </li>
             </ol>
         </section>
@@ -226,7 +239,6 @@
         function toggleTheme() {
             const themeToggle = document.getElementById('theme-toggle');
             const isDarkMode = themeToggle.checked;
-
             if (isDarkMode) {
                 document.body.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
@@ -237,13 +249,14 @@
         }
 
         // Load the user's theme preference on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 document.body.setAttribute('data-theme', savedTheme);
-                document.getElementById('theme-toggle').checked = (savedTheme === 'dark');
+                document.getElementById('theme-toggle').checked = savedTheme === 'dark';
             }
         });
     </script>
 </body>
+
 </html>
