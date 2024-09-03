@@ -1,170 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
     <title>Paiz Shop</title>
-    <meta name="description" content="Paiz Shop. Best item supplier in Skyxion.">
-    <meta name="keywords" content="The Legend Of Legiona, TheLoL, TheLoL Website, The LoL, TheLol Server, The LoL Server, The Legend of Legiona Website, faizzzlol, FaizGG, Faiz Gaming, The Sus, TLoL, TL, CornHub, 4k, Apple, iPhone 16, iPhone 15, Apple Watch, iPhone SE, YouTube, Netflix, Roblox, Twitch, Maybank, Instagram, Paiz Shop, Skyxion, Neverland, Paiz Corp, Paiz Chicken, Paiz Railways">
-    <meta property="og:title" content="Paiz Shop"/>
-    <meta property="og:url" content="https://faizzzlol.github.io/PaizCorp/PaizShop/"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:description" content="Paiz Shop. Best item supplier in Skyxion."/>
-    <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
+        /* Global Styles */
         body {
-            background-color: #1a1a1a;
-            color: #e0e0e0;
+            background-color: #f4f4f4;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            color: #333;
         }
 
         header {
-            background-color: #2a2a2a;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #shop-logo {
-            height: 50px;
-        }
-
-        h1, nav ul {
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 a {
-            color: #f5f5f5;
-            text-decoration: none;
-            font-size: 24px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        nav ul li a {
-            color: #f5f5f5;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        .theme-switcher {
-            margin-left: auto;
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        #shop-items {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .item {
-            background-color: #2a2a2a;
-            padding: 20px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .item img {
-            height: 100px;
-            width: auto;
-            margin-right: 20px;
-            border-radius: 8px;
-        }
-
-        .item h3 {
-            margin: 0 0 10px;
-            font-size: 20px;
-        }
-
-        .item p {
-            margin: 5px 0;
-        }
-
-        .item label {
-            margin-right: 10px;
-        }
-
-        .item input[type="number"] {
-            width: 60px;
-            padding: 5px;
-            margin-right: 10px;
-            border-radius: 4px;
-            border: 1px solid #3a3a3a;
-            background-color: #3a3a3a;
-            color: #f5f5f5;
-        }
-
-        .item button {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .item button:disabled {
-            background-color: #777;
-            cursor: not-allowed;
-        }
-
-        .sold-out {
-            color: #ff4c4c;
-            font-weight: bold;
-        }
-
-        footer {
-            background-color: #2a2a2a;
+            background-color: #333;
             padding: 20px;
             text-align: center;
         }
 
-        .clear-data-btn {
-            background-color: #ff4c4c;
+        header h1 {
+            margin: 0;
+            color: white;
+            font-size: 24px;
+        }
+
+        nav {
+            text-align: right;
+            padding: 10px;
+            background-color: #333;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .item img {
+            width: 64px;
+            height: 64px;
+            margin-right: 20px;
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .item-title {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .item-price {
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .item-stock {
+            color: green;
+        }
+
+        .item-stock.sold-out {
+            color: red;
+        }
+
+        .item-actions {
+            text-align: right;
+        }
+
+        .item-actions input {
+            width: 40px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        .item-actions button {
+            padding: 1px 10px;
+            background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
-        .clear-data-btn:hover {
-            background-color: #e02c2c;
+        .item-actions button.sold-out {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .item-actions button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: relative;
+        }
+
+        footer button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -20px;
+        }
+
+        /* Toggle Switch */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>
-            <img src="/PaizCorp/PaizShop/PaizShop2.png" alt="Paiz Shop Logo" id="shop-logo">
+            <img src="PaizShop2.png" alt="Paiz Shop Logo" id="shop-logo">
             <a href="" id="shop-link">Paiz Shop</a>
         </h1>
-        <nav>
-            <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="/PaizCorp/PaizShop/order-history">Order History</a></li>
-                <li><a href="/PaizCorp/PaizShop/how-to-use">How to Use</a></li>
-                <li><a href="https://discord.gg/TB4T8qwN4R">Contact Us</a></li>
-            </ul>
-        </nav>
         <div class="theme-switcher">
             <label class="switch">
                 <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
@@ -172,37 +163,47 @@
             </label>
         </div>
     </header>
-    <main>
-        <section id="shop-items">
-            <div class="item">
-                <img src="/PaizCorp/PaizShop/shulker_box.png" alt="Shulker Box">
-                <div>
-                    <h3>Shulker Box</h3>
-                    <p>1 Diamond</p>
-                    <p>Available Stock: <span id="stock-shulker">1000</span></p>
-                    <div class="sold-out" id="sold-out-shulker" style="display:none;">Sold Out</div>
-                    <label for="quantity-shulker">Quantity:</label>
-                    <input type="number" id="quantity-shulker" min="1" value="1" oninput="validateStock('shulker')">
-                </div>
-                <button id="buy-shulker" onclick="buyItem('shulker', 1)">Buy Now</button>
+
+    <nav>
+        <a href="">Home</a>
+        <a href="order-history">Order History</a>
+        <a href="how-to-use">How to Use</a>
+        <a href="discord.gg/TB4T8qwN4R">Contact Us</a>
+    </nav>
+
+    <div class="container">
+        <!-- Shulker Box Item -->
+        <div class="item">
+            <img src="shulker_box.png" alt="Shulker Box">
+            <div class="item-details">
+                <h3 class="item-title">Shulker Box</h3>
+                <p class="item-price">1 Diamond</p>
+                <p class="item-stock">Available Stock: 1000</p>
             </div>
-            <div class="item">
-                <img src="/PaizCorp/PaizShop/mending.png" alt="Mending">
-                <div>
-                    <h3>Mending</h3>
-                    <p>3 Diamond</p>
-                    <p>Available Stock: <span id="stock-mending">0</span></p>
-                    <div class="sold-out" id="sold-out-mending">Sold Out</div>
-                    <label for="quantity-mending">Quantity:</label>
-                    <input type="number" id="quantity-mending" min="1" value="1" oninput="validateStock('mending')">
-                </div>
-                <button id="buy-mending" onclick="buyItem('mending', 3)" disabled>Buy Now</button>
+            <div class="item-actions">
+                <input type="number" value="1" min="1" max="1000">
+                <button onclick="buyItem('Shulker Box', 1, 1000)">Buy Now</button>
             </div>
-        </section>
-    </main>
+        </div>
+
+        <!-- Mending Item -->
+        <div class="item">
+            <img src="mending.png" alt="Mending">
+            <div class="item-details">
+                <h3 class="item-title">Mending</h3>
+                <p class="item-price">3 Diamond</p>
+                <p class="item-stock sold-out">Available Stock: 0</p>
+            </div>
+            <div class="item-actions">
+                <input type="number" value="1" min="1" max="0" disabled>
+                <button class="sold-out" disabled>Sold Out</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
-        <p>&copy; 2024 Paiz Shop. All rights reserved.</p>
-        <button onclick="clearUserData()" class="clear-data-btn">Clear My Data</button>
+        <p>© 2024 Paiz Shop. All rights reserved.</p>
+        <button onclick="clearUserData()">Clear My Data</button>
     </footer>
 
     <!-- JavaScript for Stock Validation and Theme Toggle -->
@@ -299,4 +300,5 @@
         });
     </script>
 </body>
+
 </html>
