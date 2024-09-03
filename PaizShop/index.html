@@ -12,144 +12,6 @@
     <meta property="og:type" content="website"/>
     <meta property="og:description" content="Paiz Shop. Best item supplier in Skyxion."/>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #2a2a2a;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #shop-logo {
-            height: 50px;
-        }
-
-        h1, nav ul {
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 a {
-            color: #f5f5f5;
-            text-decoration: none;
-            font-size: 24px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        nav ul li a {
-            color: #f5f5f5;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        .theme-switcher {
-            margin-left: auto;
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        #shop-items {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .item {
-            background-color: #2a2a2a;
-            padding: 20px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .item img {
-            height: 100px;
-            width: auto;
-            margin-right: 20px;
-            border-radius: 8px;
-        }
-
-        .item h3 {
-            margin: 0 0 10px;
-            font-size: 20px;
-        }
-
-        .item p {
-            margin: 5px 0;
-        }
-
-        .item label {
-            margin-right: 10px;
-        }
-
-        .item input[type="number"] {
-            width: 60px;
-            padding: 5px;
-            margin-right: 10px;
-            border-radius: 4px;
-            border: 1px solid #3a3a3a;
-            background-color: #3a3a3a;
-            color: #f5f5f5;
-        }
-
-        .item button {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .item button:disabled {
-            background-color: #777;
-            cursor: not-allowed;
-        }
-
-        .sold-out {
-            color: #ff4c4c;
-            font-weight: bold;
-        }
-
-        footer {
-            background-color: #2a2a2a;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .clear-data-btn {
-            background-color: #ff4c4c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .clear-data-btn:hover {
-            background-color: #e02c2c;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -178,8 +40,8 @@
                 <img src="shulker_box.png" alt="Shulker Box">
                 <div>
                     <h3>Shulker Box</h3>
-                    <p>1 Diamond</p>
-                    <p>Available Stock: <span id="stock-shulker">1000</span></p>
+                    <p>4 Diamond</p>
+                    <p>Available Stock: <span id="stock-shulker">100</span></p>
                     <div class="sold-out" id="sold-out-shulker" style="display:none;">Sold Out</div>
                     <label for="quantity-shulker">Quantity:</label>
                     <input type="number" id="quantity-shulker" min="1" value="1" oninput="validateStock('shulker')">
@@ -196,7 +58,7 @@
                     <label for="quantity-mending">Quantity:</label>
                     <input type="number" id="quantity-mending" min="1" value="1" oninput="validateStock('mending')">
                 </div>
-                <button id="buy-mending" onclick="buyItem('mending', 3)" disabled>Buy Now</button>
+                <button id="buy-mending" onclick="buyItem('mending', 1)" disabled>Buy Now</button>
             </div>
             <div class="item">
                 <img src="mending.png" alt="Unbreaking III">
@@ -208,7 +70,19 @@
                     <label for="quantity-unbreaking">Quantity:</label>
                     <input type="number" id="quantity-unbreaking" min="1" value="1" oninput="validateStock('unbreaking')">
                 </div>
-                <button id="buy-unbreaking" onclick="buyItem('unbreaking', 2)" disabled>Buy Now</button>
+                <button id="buy-unbreaking" onclick="buyItem('unbreaking', 1)" disabled>Buy Now</button>
+            </div>
+            <div class="item">
+                <img src="nether_wart.png" alt="Nether Wart">
+                <div>
+                    <h3>Nether Wart</h3>
+                    <p>3 Diamond</p>
+                    <p>Available Stock: <span id="stock-wart">10</span></p>
+                    <div class="sold-out" id="sold-out-wart" style="display:none;">Sold Out</div>
+                    <label for="quantity-wart">Quantity:</label>
+                    <input type="number" id="quantity-wart" min="1" value="1" oninput="validateStock('wart')">
+                </div>
+                <button id="buy-wart" onclick="buyItem('wart', 1)">Buy Now</button>
             </div>
         </section>
     </main>
@@ -309,6 +183,7 @@
             validateStock('shulker');
             validateStock('mending');
             validateStock('unbreaking');
+            validateStock('wart');
         });
     </script>
 </body>
