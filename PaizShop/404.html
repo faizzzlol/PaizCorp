@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
+    <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .error-container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: var(--main-bg-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-container h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--error-color);
+        }
+
+        .error-container p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .error-container a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-weight: bold;
+            border: 2px solid var(--link-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .error-container a:hover {
+            background-color: var(--link-hover-color);
+            color: var(--button-text-color);
+        }
+
+        .theme-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .theme-switcher label {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>404</h1>
+        <p>Oops! The page you're looking for doesn't exist.</p>
+        <a href="/PaizCorp/PaizShop/">Return Home</a>
+    </div>
+
+    <div class="theme-switcher">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+    <script>
+        // Toggle theme function
+        function toggleTheme() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const isDarkMode = themeToggle.checked;
+
+            if (isDarkMode) {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load theme preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('theme-toggle');
+
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.checked = true;
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                themeToggle.checked = false;
+            }
+        });
+    </script>
+</body>
+</html>
