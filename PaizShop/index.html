@@ -38,6 +38,13 @@
     </header>
     <main>
         <section id="shop-items">
+            <!-- Search bar to find items -->
+            <div id="search-container">
+                <input type="text" id="item-search" placeholder="Search for an item..." oninput="searchItems()">
+                <button onclick="searchItems()">Search</button>
+            </div>
+
+            <!-- Items list -->
             <div class="item">
                 <img src="shulker_box.png" alt="Shulker Box">
                 <div>
@@ -105,7 +112,7 @@
         <button onclick="clearUserData()" class="clear-data-btn">Clear My Data</button>
     </footer>
 
-    <!-- JavaScript for Stock Validation and Theme Toggle -->
+    <!-- JavaScript for Stock Validation, Theme Toggle, and Search -->
     <script>
         // Handle "Buy Now" button
         function buyItem(item, price) {
@@ -144,7 +151,7 @@
                 soldOut.style.display = 'none';
             }
         }
-        
+
         // Function to toggle between themes
         function toggleTheme() {
             const themeToggle = document.getElementById('theme-toggle');
@@ -171,8 +178,31 @@
                 document.body.setAttribute('data-theme', 'light');
                 themeToggle.checked = false;
             }
+
+            // Initialize stock validation
+            validateStock('shulker');
+            validateStock('mending');
+            validateStock('unbreaking');
+            validateStock('wart');
+            validateStock('iron_ingot');
         });
 
+        // Search items by name
+        function searchItems() {
+            const searchValue = document.getElementById('item-search').value.toLowerCase();
+            const items = document.querySelectorAll('.item');
+
+            items.forEach(item => {
+                const itemName = item.querySelector('h3').innerText.toLowerCase();
+                if (itemName.includes(searchValue)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Clear user data
         function clearUserData() {
             // Clear theme preference
             localStorage.removeItem('theme');
@@ -183,23 +213,10 @@
     
             // Clear any other user-specific data stored in localStorage
             sessionStorage.clear();
-            localStorage.clear();
-
-            alert("Your data has been cleared!");
-
-            // Optionally, you can reload the page to apply the default theme and clear any session data
-            window.location.reload();
+    
+            // Provide feedback to the user
+            alert("All user data has been cleared.");
         }
-
-        
-        // Initial Stock Validation
-        document.addEventListener('DOMContentLoaded', () => {
-            validateStock('shulker');
-            validateStock('mending');
-            validateStock('unbreaking');
-            validateStock('wart');
-            validateStock('iron_ingot');
-        });
     </script>
 </body>
 </html>
