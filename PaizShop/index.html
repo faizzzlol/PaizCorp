@@ -37,17 +37,26 @@
         </div>
     </header>
     <main>
-        <!-- Search bar to find items -->
+        <!-- Search bar and category filter -->
         <center>
             <div id="search-container">
-                <input type="text" id="item-search" placeholder="Search for an item..." oninput="searchItems()">
-                <button onclick="searchItems()">Search</button>
+                <input type="text" id="item-search" placeholder="Search for an item..." oninput="searchAndFilterItems()">
+                <button onclick="searchAndFilterItems()">Search</button>
+            </div>
+            <div id="category-container">
+                <label for="category-filter">Category:</label>
+                <select id="category-filter" onchange="searchAndFilterItems()">
+                    <option value="all">All</option>
+                    <option value="blocks">Blocks</option>
+                    <option value="books">Books</option>
+                    <option value="resources">Resources</option>
+                </select>
             </div>
         </center>
-        <section id="shop-items">
 
+        <section id="shop-items">
             <!-- Items list -->
-            <div class="item">
+            <div class="item" data-category="blocks">
                 <img src="shulker_box.png" alt="Shulker Box">
                 <div>
                     <h3>Shulker Box</h3>
@@ -59,7 +68,8 @@
                 </div>
                 <button id="buy-shulker" onclick="buyItem('shulker', 4)">Buy Now</button>
             </div>
-            <div class="item">
+
+            <div class="item" data-category="books">
                 <img src="mending.png" alt="Mending">
                 <div>
                     <h3>Mending I</h3>
@@ -71,8 +81,9 @@
                 </div>
                 <button id="buy-mending" onclick="buyItem('mending', 3)" disabled>Buy Now</button>
             </div>
-            <div class="item">
-                <img src="mending.png" alt="Unbreaking III">
+
+            <div class="item" data-category="books">
+                <img src="unbreaking.png" alt="Unbreaking III">
                 <div>
                     <h3>Unbreaking III</h3>
                     <p>2 Diamond</p>
@@ -83,7 +94,8 @@
                 </div>
                 <button id="buy-unbreaking" onclick="buyItem('unbreaking', 2)" disabled>Buy Now</button>
             </div>
-            <div class="item">
+
+            <div class="item" data-category="resources">
                 <img src="nether_wart.png" alt="Nether Wart">
                 <div>
                     <h3>Nether Wart</h3>
@@ -95,7 +107,8 @@
                 </div>
                 <button id="buy-wart" onclick="buyItem('wart', 3)">Buy Now</button>
             </div>
-            <div class="item">
+
+            <div class="item" data-category="resources">
                 <img src="iron_ingot.png" alt="Iron Ingot">
                 <div>
                     <h3>Iron Ingot</h3>
@@ -114,7 +127,7 @@
         <button onclick="clearUserData()" class="clear-data-btn">Clear My Data</button>
     </footer>
 
-    <!-- JavaScript for Stock Validation, Theme Toggle, and Search -->
+    <!-- JavaScript for Stock Validation, Theme Toggle, Search, and Category Filter -->
     <script>
         // Handle "Buy Now" button
         function buyItem(item, price) {
@@ -154,32 +167,44 @@
             }
         }
 
-        // Function to toggle between themes
+        // Theme toggle
         function toggleTheme() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const isDarkMode = themeToggle.checked;
-
-            if (isDarkMode) {
-                document.body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.body.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-            }
+            const body = document.body;
+            body.classList.toggle('dark-theme');
+            const theme = body.classList.contains('dark-theme') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
         }
 
-        // Load the user's theme preference on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        // Apply saved theme on page load
+        document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
-            const themeToggle = document.getElementById('theme-toggle');
-
-            if (savedTheme === 'dark') {
-                document.body.setAttribute('data-theme', 'dark');
-                themeToggle.checked = true;
-            } else {
-                document.body.setAttribute('data-theme', 'light');
-                themeToggle.checked = false;
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                document.getElementById('theme-toggle').checked = savedTheme === 'dark';
             }
+        });
+
+        // Search and filter items
+        function searchAndFilterItems() {
+            const searchQuery = document.getElementById('item-search').value.toLowerCase();
+            const selectedCategory = document.getElementById('category-filter').value;
+            const items = document.querySelectorAll('.item');
+
+            items.forEach(item => {
+                const itemName = item.querySelector('h3').innerText.toLowerCase();
+                const itemCategory = item.getAttribute('data-category');
+
+                // Filter based on both search query and category
+                const matchesSearch = itemName.includes(searchQuery);
+                const matchesCategory = selectedCategory === 'all' || itemCategory === selectedCategory;
+
+                if (matchesSearch && matchesCategory) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
 
             // Initialize stock validation
             validateStock('shulker');
@@ -189,22 +214,7 @@
             validateStock('iron_ingot');
         });
 
-        // Search items by name
-        function searchItems() {
-            const searchValue = document.getElementById('item-search').value.toLowerCase();
-            const items = document.querySelectorAll('.item');
-
-            items.forEach(item => {
-                const itemName = item.querySelector('h3').innerText.toLowerCase();
-                if (itemName.includes(searchValue)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-
-        // Clear user data
+        // Clear user data (for debugging or privacy purposes)
         function clearUserData() {
             // Clear theme preference
             localStorage.removeItem('theme');
