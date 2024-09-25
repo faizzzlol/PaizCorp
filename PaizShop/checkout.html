@@ -272,6 +272,58 @@
                 themeToggle.checked = false;
             }
         });
+        // Function to save form data to localStorage
+        function saveFormData() {
+            const name = document.querySelector('input[name="name"]').value;
+            const minecraftName = document.querySelector('input[name="minecraft-name"]').value;
+            const contactInfo = document.querySelector('input[name="contact-info"]').value;
+            const deliverySelected = document.querySelector('input[name="delivery"]:checked') ? true : false;
+            const pickupSelected = document.querySelector('input[name="pickup"]:checked') ? true : false;
+            
+            const coordX = document.querySelector('input[name="coordinate-x"]').value;
+            const coordY = document.querySelector('input[name="coordinate-y"]').value;
+            const coordZ = document.querySelector('input[name="coordinate-z"]').value;
+        
+            // Save the values in localStorage
+            localStorage.setItem('name', name);
+            localStorage.setItem('minecraftName', minecraftName);
+            localStorage.setItem('contactInfo', contactInfo);
+            localStorage.setItem('deliverySelected', deliverySelected);
+            localStorage.setItem('pickupSelected', pickupSelected);
+            localStorage.setItem('coordX', coordX);
+            localStorage.setItem('coordY', coordY);
+            localStorage.setItem('coordZ', coordZ);
+        }
+        
+        // Function to load form data from localStorage
+        function loadFormData() {
+            const name = localStorage.getItem('name');
+            const minecraftName = localStorage.getItem('minecraftName');
+            const contactInfo = localStorage.getItem('contactInfo');
+            const deliverySelected = localStorage.getItem('deliverySelected') === 'true';
+            const pickupSelected = localStorage.getItem('pickupSelected') === 'true';
+        
+            const coordX = localStorage.getItem('coordX');
+            const coordY = localStorage.getItem('coordY');
+            const coordZ = localStorage.getItem('coordZ');
+        
+            // Populate the form fields
+            if (name) document.querySelector('input[name="name"]').value = name;
+            if (minecraftName) document.querySelector('input[name="minecraft-name"]').value = minecraftName;
+            if (contactInfo) document.querySelector('input[name="contact-info"]').value = contactInfo;
+            if (deliverySelected) document.querySelector('input[name="delivery"]').checked = true;
+            if (pickupSelected) document.querySelector('input[name="pickup"]').checked = true;
+            
+            if (coordX) document.querySelector('input[name="coordinate-x"]').value = coordX;
+            if (coordY) document.querySelector('input[name="coordinate-y"]').value = coordY;
+            if (coordZ) document.querySelector('input[name="coordinate-z"]').value = coordZ;
+        }
+        
+        // Add event listeners to save data when the form is submitted
+        document.querySelector('form').addEventListener('submit', saveFormData);
+        
+        // Load form data when the page is loaded
+        window.onload = loadFormData;
     </script>
 </body>
 
