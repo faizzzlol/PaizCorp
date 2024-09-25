@@ -279,51 +279,46 @@
             const contactInfo = document.querySelector('input[name="contact-info"]').value;
             const deliverySelected = document.querySelector('input[name="delivery"]:checked') ? true : false;
             const pickupSelected = document.querySelector('input[name="pickup"]:checked') ? true : false;
-            
-            const coordX = document.querySelector('input[name="coordinate-x"]').value;
-            const coordY = document.querySelector('input[name="coordinate-y"]').value;
-            const coordZ = document.querySelector('input[name="coordinate-z"]').value;
         
-            // Save the values in localStorage
-            localStorage.setItem('name', name);
-            localStorage.setItem('minecraftName', minecraftName);
-            localStorage.setItem('contactInfo', contactInfo);
-            localStorage.setItem('deliverySelected', deliverySelected);
-            localStorage.setItem('pickupSelected', pickupSelected);
-            localStorage.setItem('coordX', coordX);
-            localStorage.setItem('coordY', coordY);
-            localStorage.setItem('coordZ', coordZ);
+            const coordX = document.querySelector('input[name="coord-x"]').value;
+            const coordY = document.querySelector('input[name="coord-y"]').value;
+            const coordZ = document.querySelector('input[name="coord-z"]').value;
+        
+            localStorage.setItem('checkoutFormData', JSON.stringify({
+                name: name,
+                minecraftName: minecraftName,
+                contactInfo: contactInfo,
+                deliverySelected: deliverySelected,
+                pickupSelected: pickupSelected,
+                coordX: coordX,
+                coordY: coordY,
+                coordZ: coordZ
+            }));
         }
         
         // Function to load form data from localStorage
         function loadFormData() {
-            const name = localStorage.getItem('name');
-            const minecraftName = localStorage.getItem('minecraftName');
-            const contactInfo = localStorage.getItem('contactInfo');
-            const deliverySelected = localStorage.getItem('deliverySelected') === 'true';
-            const pickupSelected = localStorage.getItem('pickupSelected') === 'true';
+            const savedData = JSON.parse(localStorage.getItem('checkoutFormData'));
+            if (savedData) {
+                document.querySelector('input[name="name"]').value = savedData.name;
+                document.querySelector('input[name="minecraft-name"]').value = savedData.minecraftName;
+                document.querySelector('input[name="contact-info"]').value = savedData.contactInfo;
+                document.querySelector('input[name="delivery"]').checked = savedData.deliverySelected;
+                document.querySelector('input[name="pickup"]').checked = savedData.pickupSelected;
         
-            const coordX = localStorage.getItem('coordX');
-            const coordY = localStorage.getItem('coordY');
-            const coordZ = localStorage.getItem('coordZ');
+                document.querySelector('input[name="coord-x"]').value = savedData.coordX;
+                document.querySelector('input[name="coord-y"]').value = savedData.coordY;
+                document.querySelector('input[name="coord-z"]').value = savedData.coordZ;
         
-            // Populate the form fields
-            if (name) document.querySelector('input[name="name"]').value = name;
-            if (minecraftName) document.querySelector('input[name="minecraft-name"]').value = minecraftName;
-            if (contactInfo) document.querySelector('input[name="contact-info"]').value = contactInfo;
-            if (deliverySelected) document.querySelector('input[name="delivery"]').checked = true;
-            if (pickupSelected) document.querySelector('input[name="pickup"]').checked = true;
-            
-            if (coordX) document.querySelector('input[name="coordinate-x"]').value = coordX;
-            if (coordY) document.querySelector('input[name="coordinate-y"]').value = coordY;
-            if (coordZ) document.querySelector('input[name="coordinate-z"]').value = coordZ;
+                toggleDelivery(savedData.deliverySelected); // Ensure the correct fields are shown
+            }
         }
         
-        // Add event listeners to save data when the form is submitted
-        document.querySelector('form').addEventListener('submit', saveFormData);
+        // Call loadFormData on page load
+        document.addEventListener('DOMContentLoaded', loadFormData);
         
-        // Load form data when the page is loaded
-        window.onload = loadFormData;
+        // Save form data before the user leaves the page
+        window.addEventListener('beforeunload', saveFormData);
     </script>
 </body>
 
