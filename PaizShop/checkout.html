@@ -295,7 +295,7 @@
                 coordZ: coordZ
             }));
         }
-        
+
         // Function to load form data from localStorage
         function loadFormData() {
             const savedData = JSON.parse(localStorage.getItem('checkoutFormData'));
@@ -303,17 +303,22 @@
                 document.querySelector('input[name="name"]').value = savedData.name;
                 document.querySelector('input[name="minecraft-name"]').value = savedData.minecraftName;
                 document.querySelector('input[name="contact-info"]').value = savedData.contactInfo;
-                document.querySelector('input[name="delivery"]').checked = savedData.deliverySelected;
-                document.querySelector('input[name="pickup"]').checked = savedData.pickupSelected;
         
+                if (savedData.deliverySelected) {
+                    document.querySelector('input[name="delivery"]').checked = true;
+                    toggleDelivery(true); // Show the coordinates section if Delivery is selected
+                } else {
+                    document.querySelector('input[name="pickup"]').checked = true;
+                    toggleDelivery(false); // Hide the coordinates section if Pickup is selected
+                }
+        
+                // Populate coordinates fields if delivery is selected
                 document.querySelector('input[name="coord-x"]').value = savedData.coordX;
                 document.querySelector('input[name="coord-y"]').value = savedData.coordY;
                 document.querySelector('input[name="coord-z"]').value = savedData.coordZ;
-        
-                toggleDelivery(savedData.deliverySelected); // Ensure the correct fields are shown
             }
         }
-        
+
         // Call loadFormData on page load
         document.addEventListener('DOMContentLoaded', loadFormData);
         
