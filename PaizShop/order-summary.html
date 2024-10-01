@@ -75,6 +75,11 @@
         #view-order:hover {
             background-color: #31b0d5;
         }
+        #download-receipt {
+            background-color: #007bff;
+            color: white;
+            margin: 10px;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -111,7 +116,7 @@
             <button id="place-order">Place Order</button>
             <button id="back-home" onclick="location.href='/PaizCorp/PaizShop/'">Back to homepage</button>
             <button id="view-order" onclick="location.href='/PaizCorp/PaizShop/order-history'">View my order</button>
-            <button id="downloadReceipt" class="btn btn-primary">Download Receipt</button>
+            <button id="download-receipt" class="btn btn-primary">Download Receipt</button>
         </div>
     </main>
     <script>
@@ -265,36 +270,37 @@
                 document.getElementById('theme-toggle').checked = (savedTheme === 'dark');
             }
         });
-        document.getElementById('downloadReceipt').addEventListener('click', function () {
-        // Get order details from the page
-        var orderNumber = document.querySelector('.order-number').innerText;
-        var itemOrdered = document.querySelector('.item-ordered').innerText;
-        var subtotal = document.querySelector('.subtotal').innerText;
-        var deliveryFee = document.querySelector('.delivery-fee').innerText;
-        var tax = document.querySelector('.tax').innerText;
-        var totalAmount = document.querySelector('.total-amount').innerText;
-        var roundingDetails = document.querySelector('.rounding-details').innerText;
-        var stackCount = document.querySelector('.stack-count').innerText;
-    
-        // Create a new jsPDF instance
-        var { jsPDF } = window.jspdf;
-        var doc = new jsPDF();
-    
-        // Add content to the PDF
-        doc.setFontSize(12);
-        doc.text("Paiz Shop Order Receipt", 20, 20);
-        doc.text("Order Number: " + orderNumber, 20, 30);
-        doc.text("Item Ordered: " + itemOrdered, 20, 40);
-        doc.text("Subtotal: " + subtotal, 20, 50);
-        doc.text("Delivery Fee: " + deliveryFee, 20, 60);
-        doc.text("Tax: " + tax, 20, 70);
-        doc.text("Rounding Details: " + roundingDetails, 20, 80);
-        doc.text("Stack Count: " + stackCount, 20, 90);
-        doc.text("Total Amount: " + totalAmount, 20, 100);
-    
-        // Save the PDF with a dynamic filename
-        doc.save("order_receipt_" + orderNumber + ".pdf");
-    });
+        document.getElementById("download-receipt").addEventListener("click", function() {
+            // Retrieve the order summary details
+            const orderNumber = document.querySelector(".order-number").innerText;
+            const itemOrdered = document.querySelector(".item-ordered").innerText;
+            const subtotal = document.querySelector(".subtotal").innerText;
+            const deliveryFee = document.querySelector(".delivery-fee").innerText;
+            const tax = document.querySelector(".tax").innerText;
+            const roundingDetails = document.querySelector(".rounding-details").innerText;
+            const stackCount = document.querySelector(".stack-count").innerText;
+            const totalAmount = document.querySelector(".total-amount").innerText;
+            
+            // Initialize jsPDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+        
+            // Add content to the PDF
+            doc.setFontSize(16);
+            doc.text("Paiz Shop - Order Receipt", 20, 20);
+            doc.setFontSize(12);
+            doc.text(`Order Number: ${orderNumber}`, 20, 30);
+            doc.text(`Item Ordered: ${itemOrdered}`, 20, 40);
+            doc.text(`Subtotal: ${subtotal}`, 20, 50);
+            doc.text(`Delivery Fee: ${deliveryFee}`, 20, 60);
+            doc.text(`The LoL Tax (3%): ${tax}`, 20, 70);
+            doc.text(`Rounding Details: ${roundingDetails}`, 20, 80);
+            doc.text(`Stack Count: ${stackCount}`, 20, 90);
+            doc.text(`Total Amount: ${totalAmount}`, 20, 100);
+        
+            // Save the PDF
+            doc.save(`Receipt_${orderNumber}.pdf`);
+        });
     </script>
 </body>
 </html>
