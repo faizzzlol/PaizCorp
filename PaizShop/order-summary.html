@@ -272,47 +272,32 @@
         });
         window.addEventListener('DOMContentLoaded', (event) => {
             document.getElementById("download-receipt").addEventListener("click", function() {
-                let orderNumber = document.querySelector(".order-number");
-                let itemOrdered = document.querySelector(".item-ordered");
-                let subtotal = document.querySelector(".subtotal");
-                let deliveryFee = document.querySelector(".delivery-fee");
-                let tax = document.querySelector(".tax");
-                let roundingDetails = document.querySelector(".rounding-details");
-                let stackCount = document.querySelector(".stack-count");
-                let totalAmount = document.querySelector(".total-amount");
-        
-                // Log each value to check if it's null
-                console.log('Order Number:', orderNumber);
-                console.log('Item Ordered:', itemOrdered);
-                console.log('Subtotal:', subtotal);
-                console.log('Delivery Fee:', deliveryFee);
-                console.log('Tax:', tax);
-                console.log('Rounding Details:', roundingDetails);
-                console.log('Stack Count:', stackCount);
-                console.log('Total Amount:', totalAmount);
-        
-                if (!orderNumber || !itemOrdered || !subtotal || !deliveryFee || !tax || !roundingDetails || !stackCount || !totalAmount) {
-                    alert("Some required elements are missing.");
-                    return;
-                }
-        
-                // Generate the PDF
+                let orderNumber = document.querySelector(".order-summary-item:nth-child(1) p").textContent;
+                let itemOrdered = document.querySelector(".order-summary-item:nth-child(2) p").textContent;
+                let subtotal = document.querySelector(".order-summary-item:nth-child(3) p").textContent;
+                let deliveryFee = document.querySelector(".order-summary-item:nth-child(4) p").textContent;
+                let tax = document.querySelector(".order-summary-item:nth-child(5) p").textContent;
+                let roundingDetails = document.querySelector(".order-summary-item:nth-child(6) p").textContent;
+                let stackCount = document.querySelector(".order-summary-item:nth-child(7) p").textContent;
+                let totalAmount = document.querySelector(".order-summary-item:nth-child(8) p").textContent;
+    
+                // Use jsPDF to generate a PDF receipt
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-        
-                doc.setFontSize(16);
-                doc.text("Paiz Shop - Order Receipt", 20, 20);
+    
+                doc.setFontSize(18);
+                doc.text('Paiz Shop - Order Receipt', 20, 20);
                 doc.setFontSize(12);
-                doc.text(`Order Number: ${orderNumber.innerText}`, 20, 30);
-                doc.text(`Item Ordered: ${itemOrdered.innerText}`, 20, 40);
-                doc.text(`Subtotal: ${subtotal.innerText}`, 20, 50);
-                doc.text(`Delivery Fee: ${deliveryFee.innerText}`, 20, 60);
-                doc.text(`The LoL Tax (3%): ${tax.innerText}`, 20, 70);
-                doc.text(`Rounding Details: ${roundingDetails.innerText}`, 20, 80);
-                doc.text(`Stack Count: ${stackCount.innerText}`, 20, 90);
-                doc.text(`Total Amount: ${totalAmount.innerText}`, 20, 100);
-        
-                doc.save(`Receipt_${orderNumber.innerText}.pdf`);
+                doc.text(`Order Number: ${orderNumber}`, 20, 40);
+                doc.text(`Item Ordered: ${itemOrdered}`, 20, 50);
+                doc.text(`Subtotal: ${subtotal}`, 20, 60);
+                doc.text(`Delivery Fee: ${deliveryFee}`, 20, 70);
+                doc.text(`Tax: ${tax}`, 20, 80);
+                doc.text(`Rounding Details: ${roundingDetails}`, 20, 90);
+                doc.text(`Stack Count: ${stackCount}`, 20, 100);
+                doc.text(`Total Amount: ${totalAmount}`, 20, 110);
+    
+                doc.save('PaizShop_Order_Receipt_${orderNumber.innerText}.pdf');
             });
         });
     </script>
