@@ -280,24 +280,25 @@
                 let roundingDetails = document.querySelector(".order-summary-item:nth-child(6) p").textContent;
                 let stackCount = document.querySelector(".order-summary-item:nth-child(7) p").textContent;
                 let totalAmount = document.querySelector(".order-summary-item:nth-child(8) p").textContent;
-    
-                // Use jsPDF to generate a PDF receipt
+
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-    
-                doc.setFontSize(18);
-                doc.text('Paiz Shop - Order Receipt', 20, 20);
-                doc.setFontSize(12);
+
+                // Setting up the PDF content
+                doc.setFontSize(22);
+                doc.text("Paiz Shop Receipt", 20, 20);
+                doc.setFontSize(14);
                 doc.text(`Order Number: ${orderNumber}`, 20, 40);
                 doc.text(`Item Ordered: ${itemOrdered}`, 20, 50);
                 doc.text(`Subtotal: ${subtotal}`, 20, 60);
                 doc.text(`Delivery Fee: ${deliveryFee}`, 20, 70);
-                doc.text(`Tax: ${tax}`, 20, 80);
+                doc.text(`The LoL Tax (3%): ${tax}`, 20, 80);
                 doc.text(`Rounding Details: ${roundingDetails}`, 20, 90);
                 doc.text(`Stack Count: ${stackCount}`, 20, 100);
                 doc.text(`Total Amount: ${totalAmount}`, 20, 110);
-    
-                doc.save('PaizShop_Order_Receipt_${orderNumber.innerText}.pdf');
+
+                // Saving the PDF
+                doc.save(`${orderNumber}_receipt.pdf`);
             });
         });
     </script>
