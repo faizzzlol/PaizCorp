@@ -271,34 +271,49 @@
             }
         });
         document.getElementById("download-receipt").addEventListener("click", function() {
-            // Retrieve the order summary details
-            const orderNumber = document.querySelector(".order-number").innerText || "N/A";
-            const itemOrdered = document.querySelector(".item-ordered").innerText || "N/A";
-            const subtotal = document.querySelector(".subtotal").innerText || "N/A";
-            const deliveryFee = document.querySelector(".delivery-fee").innerText || "N/A";
-            const tax = document.querySelector(".tax").innerText || "N/A";
-            const roundingDetails = document.querySelector(".rounding-details").innerText || "N/A";
-            const stackCount = document.querySelector(".stack-count").innerText || "N/A";
-            const totalAmount = document.querySelector(".total-amount").innerText || "N/A";
+            // Try retrieving each element and log it to the console
+            let orderNumber = document.querySelector(".order-number");
+            let itemOrdered = document.querySelector(".item-ordered");
+            let subtotal = document.querySelector(".subtotal");
+            let deliveryFee = document.querySelector(".delivery-fee");
+            let tax = document.querySelector(".tax");
+            let roundingDetails = document.querySelector(".rounding-details");
+            let stackCount = document.querySelector(".stack-count");
+            let totalAmount = document.querySelector(".total-amount");
         
+            // Log each value to check if it's null
+            console.log('Order Number:', orderNumber);
+            console.log('Item Ordered:', itemOrdered);
+            console.log('Subtotal:', subtotal);
+            console.log('Delivery Fee:', deliveryFee);
+            console.log('Tax:', tax);
+            console.log('Rounding Details:', roundingDetails);
+            console.log('Stack Count:', stackCount);
+            console.log('Total Amount:', totalAmount);
+        
+            // Check if any of them are null and handle the error
+            if (!orderNumber || !itemOrdered || !subtotal || !deliveryFee || !tax || !roundingDetails || !stackCount || !totalAmount) {
+                alert("Some required elements are missing.");
+                return;
+            }
+        
+            // Once verified, use .innerText for non-null elements
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
         
-            // Add content to the PDF
             doc.setFontSize(16);
             doc.text("Paiz Shop - Order Receipt", 20, 20);
             doc.setFontSize(12);
-            doc.text(`Order Number: ${orderNumber}`, 20, 30);
-            doc.text(`Item Ordered: ${itemOrdered}`, 20, 40);
-            doc.text(`Subtotal: ${subtotal}`, 20, 50);
-            doc.text(`Delivery Fee: ${deliveryFee}`, 20, 60);
-            doc.text(`The LoL Tax (3%): ${tax}`, 20, 70);
-            doc.text(`Rounding Details: ${roundingDetails}`, 20, 80);
-            doc.text(`Stack Count: ${stackCount}`, 20, 90);
-            doc.text(`Total Amount: ${totalAmount}`, 20, 100);
+            doc.text(`Order Number: ${orderNumber.innerText}`, 20, 30);
+            doc.text(`Item Ordered: ${itemOrdered.innerText}`, 20, 40);
+            doc.text(`Subtotal: ${subtotal.innerText}`, 20, 50);
+            doc.text(`Delivery Fee: ${deliveryFee.innerText}`, 20, 60);
+            doc.text(`The LoL Tax (3%): ${tax.innerText}`, 20, 70);
+            doc.text(`Rounding Details: ${roundingDetails.innerText}`, 20, 80);
+            doc.text(`Stack Count: ${stackCount.innerText}`, 20, 90);
+            doc.text(`Total Amount: ${totalAmount.innerText}`, 20, 100);
         
-            // Save the PDF
-            doc.save(`Receipt_${orderNumber}.pdf`);
+            doc.save(`Receipt_${orderNumber.innerText}.pdf`);
         });
     </script>
 </body>
