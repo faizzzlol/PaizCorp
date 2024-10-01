@@ -6,6 +6,7 @@
     <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
     <title>Order Summary - Paiz Shop</title>
     <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         /* Additional styling for better organization */
         .order-summary-item {
@@ -81,7 +82,6 @@
             margin: 10px;
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <header>
@@ -272,16 +272,15 @@
         });
         document.getElementById("download-receipt").addEventListener("click", function() {
             // Retrieve the order summary details
-            const orderNumber = document.querySelector(".order-number").innerText;
-            const itemOrdered = document.querySelector(".item-ordered").innerText;
-            const subtotal = document.querySelector(".subtotal").innerText;
-            const deliveryFee = document.querySelector(".delivery-fee").innerText;
-            const tax = document.querySelector(".tax").innerText;
-            const roundingDetails = document.querySelector(".rounding-details").innerText;
-            const stackCount = document.querySelector(".stack-count").innerText;
-            const totalAmount = document.querySelector(".total-amount").innerText;
-            
-            // Initialize jsPDF
+            const orderNumber = document.querySelector(".order-number").innerText || "N/A";
+            const itemOrdered = document.querySelector(".item-ordered").innerText || "N/A";
+            const subtotal = document.querySelector(".subtotal").innerText || "N/A";
+            const deliveryFee = document.querySelector(".delivery-fee").innerText || "N/A";
+            const tax = document.querySelector(".tax").innerText || "N/A";
+            const roundingDetails = document.querySelector(".rounding-details").innerText || "N/A";
+            const stackCount = document.querySelector(".stack-count").innerText || "N/A";
+            const totalAmount = document.querySelector(".total-amount").innerText || "N/A";
+        
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
         
