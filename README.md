@@ -1,6 +1,6 @@
 # PaizCorp
 
-Welcome to **PaizCorp**, the company behind Minecraft-themed projects, including **Paiz Chicken** and **Paiz Shop**. This repository holds the codebase for these web applications and serves as a platform for managing your Minecraft items and food shop.
+Welcome to **PaizCorp**, the company behind [The LoL](https://faizzzlol.github.io/thelol/) projects, including **Paiz Chicken** and **[PaizCorp](https://faizzzlol.github.io/PaizCorp/PaizShop/)**. This repository holds the codebase for these web applications and serves as a platform for managing your items and food shop.
 
 ## Projects
 
