@@ -210,8 +210,12 @@
             localStorage.removeItem('theme');
             document.body.setAttribute('data-theme', 'light');
 
+            // Clear checkout data form
+            localStorage.removeItem('checkoutFormData');
+            
             // Clear order history
             localStorage.removeItem('orderHistory');
+            localStorage.removeItem('ongoingOrder');
     
             // Clear any other user-specific data stored in localStorage
             sessionStorage.clear();
