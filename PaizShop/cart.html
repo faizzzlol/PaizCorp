@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Include your existing CSS -->
+    <title>Paiz Shop - Your Cart</title>
+</head>
+<body>
+    <header>
+        <h1>Paiz Shop</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="order-history.html">Order History</a>
+            <a href="how-to-use.html">How to Use</a>
+            <a href="currency.html">Currency</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="feedback.html">Feedback</a>
+            <a href="donate.html">Donate</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your Cart</h2>
+        <div id="cart-items" class="cart-items-container"></div>
+
+        <p>Total: <span id="total">0</span> Diamonds</p>
+        <button onclick="goToCheckout()">Proceed to Checkout</button>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Paiz Shop. All rights reserved.</p>
+        <button onclick="clearUserData()">Clear My Data</button>
+    </footer>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function displayCartItems() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            let total = 0;
+
+            cartItemsDiv.innerHTML = ''; // Clear cart
+
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+
+                cartItemsDiv.innerHTML += `
+                    <div class="cart-item">
+                        <h3>${item.name} - ${item.price} Diamond</h3>
+                        <p>Quantity: <input type="number" value="${item.quantity}" min="1" 
+                            onchange="updateQuantity(${index}, this.value)">
+                        </p>
+                        <button onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `;
+            });
+
+            document.getElementById('total').textContent = total;
+        }
+
+        function updateQuantity(index, newQuantity) {
+            cart[index].quantity = parseInt(newQuantity);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+        }
+
+        function goToCheckout() {
+            window.location.href = 'checkout.html';
+        }
+
+        // Load cart items on page load
+        displayCartItems();
+    </script>
+</body>
+</html>
