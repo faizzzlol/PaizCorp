@@ -277,103 +277,60 @@ body[data-theme='dark'] #checkout-form input {
     color: #eee;
     border-color: #555;
 }
+/* root valu */
+:root{
+    --primary:#ef4444;
+    --primary-light: #f87171;
+    --dark: #1c212e;
+    --gray-dark:#3f4656;
+    --gray: #6c7486;
+    --gray-light: #cdd9ed;
+    --white:#fff;
+    --green:#16bf78;
+    --sand: #fbbf24;
+    --sand-light: #fbbf24;
+}
 
-/* Star rating styling */
-#star-rating {
+html{
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body{
+    min-height: 100vh;
+    font-family: "Roboto", arial;
     display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+    background: #0f172a;
 }
 
-.star {
-    font-size: 2rem;
-    cursor: pointer;
-    color: #ccc;
-    transition: color 0.3s, transform 0.2s;
-}
-
-.star.selected {
-    color: #ffd700;
-}
-
-.star:hover {
-    transform: scale(1.2);
-}
-
-/* Submit button styling */
-.submit-btn {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.submit-btn:hover, .submit-btn:focus {
-    background-color: #218838;
-    transform: scale(1.05);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    #shop-items {
-        flex-direction: column;
-    }
-
-    .theme-switcher {
-        margin-top: 10px;
-    }
-
-    .item {
-        width: 100%;
-    }
-}
-
-/* Form group styling */
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
+body .dribbble {
+    position: fixed;
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    right: 20px;
+    bottom: 20px;
 }
 
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+body .dribbble img{
+    display: block;
+    height: 28px;
 }
 
-textarea {
-    resize: none;
-    height: 100px;
-}
 .order{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     border: 0;
-    background: var(--dark);
+    background: #439b18;
     position: relative;
     height: 63px;
     width: 240px;
@@ -857,4 +814,81 @@ textarea {
         transform: translateX(0px);
         opacity: 0;
     }
+}
+/* Additional styling for better organization */
+.order-summary-item {
+	margin-bottom: 15px;
+}
+
+.order-summary-item h3 {
+    margin: 5px 0;
+}
+
+.order-summary-item p {
+    margin: 5px 0;
+}
+
+.order-summary-section {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.stack-count {
+    color: #5cb85c;
+    font-weight: bold;
+}
+
+.rounding-details {
+    color: #f0ad4e;
+    font-weight: bold;
+}
+
+.button-group {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+    background-color: #4cae4c;
+}
+
+/* Adjust the color for "Back to homepage" button */
+    #back-home {
+	background-color: #f0ad4e;
+}
+
+    #back-home:hover {
+    background-color: #ec971f;
+}
+
+/* Adjust the color for "View my order" button */
+#view-order {
+    background-color: #5bc0de;
+}
+
+#view-order:hover {
+    background-color: #31b0d5;
+}
+#download-receipt {
+    background-color: #007bff;
+    color: white;
+    margin: 10px;
+}
+button[disabled] {
+    cursor: not-allowed; /* Disable the pointer */
+    opacity: 0.6; /* Optional: Reduce opacity for disabled state */
 }
