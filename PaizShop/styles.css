@@ -892,3 +892,4 @@ button[disabled] {
     cursor: not-allowed; /* Disable the pointer */
     opacity: 0.6; /* Optional: Reduce opacity for disabled state */
 }
+
