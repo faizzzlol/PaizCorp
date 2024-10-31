@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiz Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Paiz Shop</h1>
+        <div class="top-bar">
+            <button class="top-btn">Cart</button>
+            <button class="top-btn">Order History</button>
+            <button class="top-btn">How to use</button>
+            <button class="top-btn">Currency Converter</button>
+            <button class="top-btn">Feedback</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for items..." id="searchInput">
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-btn active">All</button>
+            <button class="tab-btn">Blocks</button>
+            <button class="tab-btn">Items</button>
+            <button class="tab-btn">Storage</button>
+            <button class="tab-btn">Ore</button>
+            <button class="tab-btn">Enchantment</button>
+            <button class="tab-btn">Potion</button>
+        </div>
+        
+        <section class="product-grid">
+            <!-- Example Product Card -->
+            <div class="product-card">
+                <img src="path/to/iron_ingot.png" alt="Iron Ingot">
+                <h3>Iron Ingot</h3>
+                <span class="price-tag">1 coin</span>
+                <button class="add-cart-btn">Add to Cart</button>
+            </div>
+            <!-- Add more product cards similarly -->
+        </section>
+    </main>
+
+    <footer>
+        <button class="settings-btn" onclick="toggleSettings()">Settings</button>
+        <div class="settings-modal" id="settingsModal">
+            <button class="close-btn" onclick="toggleSettings()">✖</button>
+            <h3>Settings / Preferences</h3>
+            <button class="settings-option">Language / Bahasa</button>
+            <div class="dark-mode-toggle">
+                <span>Dark Mode</span>
+                <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+            </div>
+            <button class="clear-btn" onclick="clearData()">Clear my data</button>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
