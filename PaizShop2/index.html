@@ -6,46 +6,52 @@
     <title>Paiz Shop</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="light-theme" onload="loadSettings()">
+
+    <!-- Navbar -->
     <header>
         <div class="logo">Paiz Shop</div>
-        <div class="nav">
-            <button id="cart-button">Cart (0)</button>
-            <button onclick="openSettings()">Settings</button>
-        </div>
+        <input type="text" placeholder="Search for item..." id="searchBox">
+        <button onclick="openCart()">Cart <span id="cartCount">0</span></button>
+        <button onclick="openSettings()">Settings</button>
     </header>
 
-    <div class="container">
-        <input type="text" placeholder="Search for item...">
-        <div class="tabs">
-            <button>Blocks</button>
-            <button>Items</button>
-            <button>Storage</button>
-            <button>Ore</button>
-            <button>Enchantments</button>
-            <button>Potion</button>
+    <!-- Categories -->
+    <nav>
+        <button onclick="filterCategory('all')">All</button>
+        <button onclick="filterCategory('blocks')">Blocks</button>
+        <button onclick="filterCategory('items')">Items</button>
+        <button onclick="filterCategory('potions')">Potion</button>
+    </nav>
+
+    <!-- Items Grid -->
+    <main id="itemGrid">
+        <!-- Example Item -->
+        <div class="item" data-category="blocks">
+            <img src="path/to/item-image.png" alt="Iron Ingot">
+            <p>Iron Ingot</p>
+            <span class="quantity">Stock: 10</span>
+            <button onclick="addToCart('Iron Ingot', 1)">Add to cart</button>
         </div>
-        
-        <div class="item-grid">
-            <!-- Each item card -->
-            <div class="item">
-                <img src="iron.png" alt="Iron Ingot">
-                <p>Iron Ingot</p>
-                <button onclick="addToCart('Iron Ingot')">Add to cart</button>
-            </div>
-            <!-- Repeat item blocks for each item, use unique names -->
+        <!-- Add more items similarly -->
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeSettings()" class="close">&times;</span>
+            <h2>Settings / Preferences</h2>
+            <label for="languageSelect">Language:</label>
+            <select id="languageSelect" onchange="saveSettings()">
+                <option value="en">English</option>
+                <option value="ms">Bahasa</option>
+            </select>
+            <label for="themeToggle">Dark Mode:</label>
+            <input type="checkbox" id="themeToggle" onclick="toggleTheme()">
+            <button onclick="clearData()">Clear my data</button>
         </div>
     </div>
 
-    <!-- Settings Popup -->
-    <div id="settings-popup" class="popup">
-        <h3>Settings / Preferences</h3>
-        <button onclick="toggleTheme()">Toggle Dark Mode</button>
-        <button onclick="toggleLanguage()">Toggle Language</button>
-        <button onclick="clearData()">Clear Data</button>
-        <button onclick="closeSettings()">Close</button>
-    </div>
-
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
