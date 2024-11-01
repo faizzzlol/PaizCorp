@@ -1,55 +1,59 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* Light Theme */
-body {
+body.light-theme {
     background-color: #f5f5f5;
     color: #333;
-    font-family: Arial, sans-serif;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
+header, nav, .item, .modal-content {
+    background-color: #fff;
+    border-radius: 8px;
     padding: 10px;
-    background-color: #4b0082;
-    color: #fff;
-}
-
-.container {
-    padding: 20px;
-}
-
-.item-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-}
-
-.item {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-}
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -20%);
-    background: white;
-    padding: 20px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-}
-
-.popup.visible {
-    display: block;
 }
 
 /* Dark Theme */
-body.dark {
+body.dark-theme {
     background-color: #333;
     color: #f5f5f5;
 }
 
-body.dark header {
-    background-color: #222;
+header.dark-theme, nav.dark-theme, .item.dark-theme, .modal-content.dark-theme {
+    background-color: #444;
+}
+
+button {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+/* Cart Count Badge */
+#cartCount {
+    background: red;
+    color: #fff;
+    padding: 0 5px;
+    border-radius: 50%;
 }
