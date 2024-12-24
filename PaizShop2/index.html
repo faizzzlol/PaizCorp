@@ -57,5 +57,109 @@
             <button id="cancel-order">Cancel</button>
         </div>
     </div>
+
+    <footer>
+        <p>Paiz Shop &copy; 2024. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript functionality
+        const items = document.querySelectorAll('.add-to-cart');
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        const checkoutButton = document.getElementById('checkout-button');
+        const checkoutModal = document.getElementById('checkout-modal');
+        const deliveryCoordinates = document.getElementById('delivery-coordinates');
+        const pickupMethod = document.getElementById('pickup-method');
+        const deliveryCharge = document.getElementById('delivery-charge');
+        const confirmOrder = document.getElementById('confirm-order');
+        const cancelOrder = document.getElementById('cancel-order');
+
+        let cart = [];
+
+        function updateCart() {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <p>${item.name} - ${item.quantity} x ${item.price} Diamonds</p>
+                    <button class="remove-item" data-index="${index}">Remove</button>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+                total += item.quantity * item.price;
+            });
+            cartTotal.textContent = total;
+        }
+
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                const name = item.getAttribute('data-name');
+                const price = parseInt(item.getAttribute('data-price'), 10);
+                const existingItem = cart.find(cartItem => cartItem.name === name);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ name, price, quantity: 1 });
+                }
+                updateCart();
+            });
+        });
+
+        cartItemsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-item')) {
+                const index = e.target.getAttribute('data-index');
+                cart.splice(index, 1);
+                updateCart();
+            }
+        });
+
+        checkoutButton.addEventListener('click', () => {
+            checkoutModal.style.display = 'block';
+        });
+
+        pickupMethod.addEventListener('change', () => {
+            if (pickupMethod.checked) {
+                deliveryCharge.textContent = 'No delivery charge for pickup.';
+            } else {
+                deliveryCharge.textContent = '';
+            }
+        });
+
+        confirmOrder.addEventListener('click', () => {
+            const coordinates = deliveryCoordinates.value;
+            if (!pickupMethod.checked && !coordinates) {
+                alert('Please provide delivery coordinates or select pickup method.');
+                return;
+            }
+
+            const orderDetails = {
+                cart,
+                coordinates: pickupMethod.checked ? 'Pickup' : coordinates,
+                total: cartTotal.textContent
+            };
+
+            console.log('Order Confirmed:', orderDetails);
+
+            // Simulate sending to Discord
+            alert('Order sent to Discord!');
+
+            cart = [];
+            updateCart();
+            checkoutModal.style.display = 'none';
+        });
+
+        cancelOrder.addEventListener('click', () => {
+            alert('Order canceled and sent to Discord!');
+            checkoutModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === checkoutModal) {
+                checkoutModal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
