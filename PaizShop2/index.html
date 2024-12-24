@@ -5,53 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paiz Shop</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
-<body class="light-theme" onload="loadSettings()">
-
-    <!-- Navbar -->
-    <header>
-        <div class="logo">Paiz Shop</div>
-        <input type="text" placeholder="Search for item..." id="searchBox">
-        <button onclick="openCart()">Cart <span id="cartCount">0</span></button>
-        <button onclick="openSettings()">Settings</button>
+<body>
+    <header class="header">
+        <h1>Paiz Shop</h1>
     </header>
+    
+    <main>
+        <section class="shop">
+            <h2>Available Items</h2>
+            <div class="items">
+                <div class="item">
+                    <h3>Enchantment Book</h3>
+                    <p>Price: 5 Diamonds</p>
+                    <button class="add-to-cart" data-name="Enchantment Book" data-price="5">Add to Cart</button>
+                </div>
+                <div class="item">
+                    <h3>Shulker Box</h3>
+                    <p>Price: 10 Diamonds</p>
+                    <button class="add-to-cart" data-name="Shulker Box" data-price="10">Add to Cart</button>
+                </div>
+                <!-- Add more items here -->
+            </div>
+        </section>
 
-    <!-- Categories -->
-    <nav>
-        <button onclick="filterCategory('all')">All</button>
-        <button onclick="filterCategory('blocks')">Blocks</button>
-        <button onclick="filterCategory('items')">Items</button>
-        <button onclick="filterCategory('potions')">Potion</button>
-    </nav>
-
-    <!-- Items Grid -->
-    <main id="itemGrid">
-        <!-- Example Item -->
-        <div class="item" data-category="blocks">
-            <img src="path/to/item-image.png" alt="Iron Ingot">
-            <p>Iron Ingot</p>
-            <span class="quantity">Stock: 10</span>
-            <button onclick="addToCart('Iron Ingot', 1)">Add to cart</button>
-        </div>
-        <!-- Add more items similarly -->
+        <section class="cart">
+            <h2>Your Cart</h2>
+            <div class="cart-items">
+                <!-- Cart items will appear here -->
+            </div>
+            <div class="cart-summary">
+                <p>Total: <span id="cart-total">0</span> Diamonds</p>
+            </div>
+            <button id="checkout-button">Checkout</button>
+        </section>
     </main>
 
-    <!-- Settings Modal -->
-    <div id="settingsModal" class="modal">
+    <div id="checkout-modal" class="modal">
         <div class="modal-content">
-            <span onclick="closeSettings()" class="close">&times;</span>
-            <h2>Settings / Preferences</h2>
-            <label for="languageSelect">Language:</label>
-            <select id="languageSelect" onchange="saveSettings()">
-                <option value="en">English</option>
-                <option value="ms">Bahasa</option>
-            </select>
-            <label for="themeToggle">Dark Mode:</label>
-            <input type="checkbox" id="themeToggle" onclick="toggleTheme()">
-            <button onclick="clearData()">Clear my data</button>
+            <h2>Checkout</h2>
+            <label>
+                Delivery Coordinates:
+                <input type="text" id="delivery-coordinates">
+            </label>
+            <label>
+                <input type="checkbox" id="pickup-method"> Pickup Method (No Charge)
+            </label>
+            <p id="delivery-charge"></p>
+            <button id="confirm-order">Confirm Order</button>
+            <button id="cancel-order">Cancel</button>
         </div>
     </div>
-
-    <script src="scripts.js"></script>
 </body>
 </html>
