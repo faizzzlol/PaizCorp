@@ -3,13 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
     <title>Order Summary - Paiz Shop</title>
-    <!-- css api -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <!-- css link -->
-    <link rel="stylesheet" href="OrderSUMMARYstyles.css">
+    <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        /* Additional styling for better organization */
+        .order-summary-item {
+            margin-bottom: 15px;
+        }
+
+        .order-summary-item h3 {
+            margin: 5px 0;
+        }
+
+        .order-summary-item p {
+            margin: 5px 0;
+        }
+
+        .order-summary-section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .stack-count {
+            color: #5cb85c;
+            font-weight: bold;
+        }
+
+        .rounding-details {
+            color: #f0ad4e;
+            font-weight: bold;
+        }
+
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-group button:hover {
+            background-color: #4cae4c;
+        }
+
+        /* Adjust the color for "Back to homepage" button */
+        #back-home {
+            background-color: #f0ad4e;
+        }
+
+        #back-home:hover {
+            background-color: #ec971f;
+        }
+
+        /* Adjust the color for "View my order" button */
+        #view-order {
+            background-color: #5bc0de;
+        }
+
+        #view-order:hover {
+            background-color: #31b0d5;
+        }
+        #download-receipt {
+            background-color: #007bff;
+            color: white;
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -40,30 +112,195 @@
         <div id="order-summary">
             <!-- Order Summary details will be dynamically inserted here -->
         </div>
-    <button id="place-order" class="order">
-        <span class="default">Place Order</span>
-        <span class="success">Order Placed <svg viewbox="0 0 12 10">
-            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-        </svg></span>
-        <div class="box"></div>
-        <div class="truck">
-            <div class="back"></div>
-            <div class="fronts">
-                <div class="window"></div>
-            </div>
-            <div class="light top"></div>
-            <div class="light bottom"></div>
-        </div>
-        <div class="lines"></div>
-    </button>
         <div class="button-group">
+            <button id="place-order">Place Order</button>
             <button id="back-home" onclick="location.href='/PaizCorp/PaizShop/'">Back to homepage</button>
             <button id="view-order" onclick="location.href='/PaizCorp/PaizShop/order-history'">View my order</button>
+            <button id="download-receipt" class="btn btn-primary">Download Receipt</button>
         </div>
     </main>
-    <!-- js api -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-    <!-- js link-->
-    <script src="orderSUMMARY.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const orderSummaryDiv = document.getElementById('order-summary');
+            const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+
+            // Calculate stack count
+            const diamondPerStack = 64;
+            const totalStacks = Math.floor(orderDetails.total / diamondPerStack);
+            const remainingDiamonds = orderDetails.total % diamondPerStack;
+
+            // Generate a unique order number (e.g., a random number or based on timestamp)
+            const orderNumber = 'PS' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+
+            // Display order summary
+            orderSummaryDiv.innerHTML = `
+                <div class="order-summary-section">
+                    <h2>Order Summary</h2>
+                    <div class="order-summary-item">
+                        <h3>Order Number:</h3>
+                        <p>${orderNumber}</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Item Ordered:</h3>
+                        <p>${orderDetails.quantity}x ${orderDetails.item}</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Subtotal:</h3>
+                        <p>${orderDetails.subtotal} Diamonds</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Delivery Fee:</h3>
+                        <p>${orderDetails.deliveryFee} Diamonds</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>The LoL Tax (3%):</h3>
+                        <p>${orderDetails.tax} Diamonds</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Rounding Details:</h3>
+                        <p class="rounding-details">Total Rounded: ${orderDetails.total} Diamonds</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Stack Count:</h3>
+                        <p class="stack-count">${totalStacks} Stack(s) and ${remainingDiamonds} Diamond(s)</p>
+                    </div>
+                    <div class="order-summary-item">
+                        <h3>Total Amount:</h3>
+                        <p>${orderDetails.total} Diamonds</p>
+                    </div>
+                </div>
+            `;
+
+            // Handle Place Order
+            const placeOrderButton = document.getElementById('place-order');
+            if (placeOrderButton) {
+                placeOrderButton.addEventListener('click', function () {
+                    const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI';
+
+                    // Send order to Discord
+                    sendOrderToDiscord(orderDetails, orderNumber, webhookUrl, totalStacks, remainingDiamonds);
+
+                    // Disable the Place Order button
+                    placeOrderButton.disabled = true;
+                    placeOrderButton.textContent = 'Order Placed';
+                    placeOrderButton.style.backgroundColor = '#d9534f'; // Change the button color to indicate it's disabled
+                    alert("Order has been placed!");
+                });
+            }
+        });
+
+        // Function to send order details to Discord webhook
+        function sendOrderToDiscord(orderDetails, orderNumber, webhookUrl, totalStacks, remainingDiamonds) {
+            const currentTime = new Date().toLocaleString(); // Get the current date and time
+            const embed = {
+                "content": null,
+                "embeds": [
+                    {
+                        "title": "📦 New Order Placed 📦",
+                        "color": 5814783,
+                        "fields": [
+                            { "name": "🛒 **Order Number**", "value": orderNumber },
+                            {
+                                "name": "🛒 **Order Details**",
+                                "value": `**Item:** ${orderDetails.quantity}x ${orderDetails.item}\n**Subtotal:** 💎${orderDetails.subtotal} Diamonds\n**Delivery Fee:** 💎${orderDetails.deliveryFee} Diamonds (if applicable)\n**Tax (3%):** 💎${orderDetails.tax}\n**Total:** 💎${orderDetails.total} Diamonds`
+                            },
+                            { "name": "📊 **Rounding Details**", "value": `Total Rounded: 💎${orderDetails.total} Diamonds` },
+                            {
+                                "name": "🛠 **Stack Count**",
+                                "value": `${totalStacks} Stack(s) and ${remainingDiamonds} Diamond(s)`
+                            },
+                            { "name": "👤 **Minecraft Name**", "value": orderDetails.minecraftName },
+                            {
+                                "name": orderDetails.delivery ? "🚚 **Delivery Option**" : "📍 **Pickup Option**",
+                                "value": orderDetails.delivery
+                                    ? `**Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}`
+                                    : `**Pickup Address:** ${orderDetails.address}`
+                            },
+                            { "name": "🕒 **Order Time**", "value": `Placed on: ${currentTime}` },
+                            { "name": "📞 **Contact Information**", "value": orderDetails.contactInfo || "Not provided" }
+                        ],
+                        "footer": { "text": "Order placed on Paiz Shop" }
+                    }
+                ],
+                "attachments": []
+            };
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(embed)
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Order sent to Discord!');
+
+                    // Update ongoing orders in localStorage
+                    const ongoingOrders = JSON.parse(localStorage.getItem('ongoingOrders')) || [];
+                    ongoingOrders.push({ ...orderDetails, orderNumber, status: "Processing" });
+                    localStorage.setItem('ongoingOrders', JSON.stringify(ongoingOrders));
+
+                    // Update order history in localStorage
+                    const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+                    orderHistory.push({ ...orderDetails, orderNumber });
+                    localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+                } else {
+                    console.error('Failed to send order to Discord:', response.statusText);
+                }
+            }).catch(error => {
+                console.error('Error sending order to Discord:', error);
+            });
+        }
+
+        // Function to toggle theme between light and dark mode
+        function toggleTheme() {
+            const body = document.body;
+            if (body.getAttribute('data-theme') === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Preserve the user's theme preference on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                document.getElementById('theme-toggle').checked = (savedTheme === 'dark');
+            }
+        });
+        window.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById("download-receipt").addEventListener("click", function() {
+                let orderNumber = document.querySelector(".order-summary-item:nth-child(1) p").textContent;
+                let itemOrdered = document.querySelector(".order-summary-item:nth-child(2) p").textContent;
+                let subtotal = document.querySelector(".order-summary-item:nth-child(3) p").textContent;
+                let deliveryFee = document.querySelector(".order-summary-item:nth-child(4) p").textContent;
+                let tax = document.querySelector(".order-summary-item:nth-child(5) p").textContent;
+                let roundingDetails = document.querySelector(".order-summary-item:nth-child(6) p").textContent;
+                let stackCount = document.querySelector(".order-summary-item:nth-child(7) p").textContent;
+                let totalAmount = document.querySelector(".order-summary-item:nth-child(8) p").textContent;
+
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                // Setting up the PDF content
+                doc.setFontSize(22);
+                doc.text("Paiz Shop Receipt", 20, 20);
+                doc.setFontSize(14);
+                doc.text(`Order Number: ${orderNumber}`, 20, 40);
+                doc.text(`Item Ordered: ${itemOrdered}`, 20, 50);
+                doc.text(`Subtotal: ${subtotal}`, 20, 60);
+                doc.text(`Delivery Fee: ${deliveryFee}`, 20, 70);
+                doc.text(`The LoL Tax (3%): ${tax}`, 20, 80);
+                doc.text(`Rounding Details: ${roundingDetails}`, 20, 90);
+                doc.text(`Stack Count: ${stackCount}`, 20, 100);
+                doc.text(`Total Amount: ${totalAmount}`, 20, 110);
+
+                // Saving the PDF
+                doc.save(`${orderNumber}_receipt.pdf`);
+            });
+        });
+    </script>
 </body>
 </html>
