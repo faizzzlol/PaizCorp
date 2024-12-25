@@ -114,13 +114,12 @@
                 return;
             }
 
-            // Log order details to the console
             console.log("Order Details Loaded:", orderDetails);
 
             // Calculate stack count
             const diamondPerStack = 64;
             const totalStacks = Math.floor(orderDetails.total / diamondPerStack);
-            const remainingDiamonds = orderDetails.total % diamondPerStack;
+            const remainingDiamonds = orderDetails.total % diamondPerStack);
 
             // Generate a unique order number
             const orderNumber = 'PS' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
@@ -131,35 +130,35 @@
                     <h2>Order Summary</h2>
                     <div class="order-summary-item">
                         <h3>Order Number:</h3>
-                        <p>${orderNumber}</p>
+                        <p id="order-number">${orderNumber}</p>
                     </div>
                     <div class="order-summary-item">
                         <h3>Item Ordered:</h3>
-                        <p>${orderDetails.quantity}x ${orderDetails.item}</p>
+                        <p id="item-ordered">${orderDetails.quantity}x ${orderDetails.item}</p>
                     </div>
                     <div class="order-summary-item">
                         <h3>Subtotal:</h3>
-                        <p>${orderDetails.subtotal} Diamonds</p>
+                        <p id="subtotal">${orderDetails.subtotal} Diamonds</p>
                     </div>
                     <div class="order-summary-item">
                         <h3>Delivery Fee:</h3>
-                        <p>${orderDetails.deliveryFee} Diamonds</p>
+                        <p id="delivery-fee">${orderDetails.deliveryFee} Diamonds</p>
                     </div>
                     <div class="order-summary-item">
                         <h3>The LoL Tax (3%):</h3>
-                        <p>${orderDetails.tax} Diamonds</p>
+                        <p id="tax">${orderDetails.tax} Diamonds</p>
                     </div>
                     <div class="order-summary-item">
                         <h3>Rounding Details:</h3>
-                        <p class="rounding-details">Total Rounded: ${orderDetails.total} Diamonds</p>
+                        <p class="rounding-details" id="rounding-details">Total Rounded: ${orderDetails.total} Diamonds</p>
                     </div>
                     <div class="order-summary-item">
                         <h3>Stack Count:</h3>
-                        <p class="stack-count">${totalStacks} Stack(s) and ${remainingDiamonds} Diamond(s)</p>
+                        <p class="stack-count" id="stack-count">${totalStacks} Stack(s) and ${remainingDiamonds} Diamond(s)</p>
                     </div>
                     <div class="order-summary-item">
                         <h3>Total Amount:</h3>
-                        <p>${orderDetails.total} Diamonds</p>
+                        <p id="total-amount">${orderDetails.total} Diamonds</p>
                     </div>
                 </div>
             `;
@@ -171,14 +170,15 @@
             downloadReceiptBtn.addEventListener("click", function() {
                 console.log("Download Receipt button clicked!");
 
-                let orderNumber = document.querySelector(".order-summary-item:nth-child(1) p").textContent;
-                let itemOrdered = document.querySelector(".order-summary-item:nth-child(2) p").textContent;
-                let subtotal = document.querySelector(".order-summary-item:nth-child(3) p").textContent;
-                let deliveryFee = document.querySelector(".order-summary-item:nth-child(4) p").textContent;
-                let tax = document.querySelector(".order-summary-item:nth-child(5) p").textContent;
-                let roundingDetails = document.querySelector(".order-summary-item:nth-child(6) p").textContent;
-                let stackCount = document.querySelector(".order-summary-item:nth-child(7) p").textContent;
-                let totalAmount = document.querySelector(".order-summary-item:nth-child(8) p").textContent;
+                // Fetch content from DOM safely
+                let orderNumber = document.getElementById("order-number") ? document.getElementById("order-number").textContent : "N/A";
+                let itemOrdered = document.getElementById("item-ordered") ? document.getElementById("item-ordered").textContent : "N/A";
+                let subtotal = document.getElementById("subtotal") ? document.getElementById("subtotal").textContent : "N/A";
+                let deliveryFee = document.getElementById("delivery-fee") ? document.getElementById("delivery-fee").textContent : "N/A";
+                let tax = document.getElementById("tax") ? document.getElementById("tax").textContent : "N/A";
+                let roundingDetails = document.getElementById("rounding-details") ? document.getElementById("rounding-details").textContent : "N/A";
+                let stackCount = document.getElementById("stack-count") ? document.getElementById("stack-count").textContent : "N/A";
+                let totalAmount = document.getElementById("total-amount") ? document.getElementById("total-amount").textContent : "N/A";
 
                 // Debugging: log the order data for the receipt
                 console.log("Receipt Data:", {
