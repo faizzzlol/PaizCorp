@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
+        /* Additional styling for better organization */
         .order-summary-item {
             margin-bottom: 15px;
         }
@@ -58,6 +59,7 @@
             background-color: #4cae4c;
         }
 
+        /* Adjust the color for "Back to homepage" button */
         #back-home {
             background-color: #f0ad4e;
         }
@@ -66,6 +68,7 @@
             background-color: #ec971f;
         }
 
+        /* Adjust the color for "View my order" button */
         #view-order {
             background-color: #5bc0de;
         }
@@ -98,6 +101,7 @@
                 <li><a href="https://sociabuzz.com/faizgg/donate">Donate</a></li>
             </ul>
         </nav>
+        <!-- Theme Switcher HTML -->
         <div id="theme-switcher">
             <label class="switch">
                 <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
@@ -113,7 +117,7 @@
             <button id="place-order">Place Order</button>
             <button id="back-home" onclick="location.href='/PaizCorp/PaizShop/'">Back to homepage</button>
             <button id="view-order" onclick="location.href='/PaizCorp/PaizShop/order-history'">View my order</button>
-            <button id="download-receipt" class="btn btn-primary">Download Receipt</button>
+            <button id="download-receipt" class="btn btn-primary" disabled>Download Receipt</button>
         </div>
     </main>
     <script>
@@ -121,12 +125,20 @@
             const orderSummaryDiv = document.getElementById('order-summary');
             const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
 
+            if (!orderDetails) {
+                console.error("Order details not found in sessionStorage.");
+                return;
+            }
+
+            // Calculate stack count
             const diamondPerStack = 64;
             const totalStacks = Math.floor(orderDetails.total / diamondPerStack);
             const remainingDiamonds = orderDetails.total % diamondPerStack;
 
+            // Generate a unique order number
             const orderNumber = 'PS' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
 
+            // Display order summary
             orderSummaryDiv.innerHTML = `
                 <div class="order-summary-section">
                     <h2>Order Summary</h2>
@@ -165,23 +177,59 @@
                 </div>
             `;
 
+            // Enable Download Receipt button once the order is rendered
+            document.getElementById("download-receipt").disabled = false;
+
+            // Handle Place Order
             const placeOrderButton = document.getElementById('place-order');
-            if (placeOrderButton) {
-                placeOrderButton.addEventListener('click', function () {
-                    const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI';
+            placeOrderButton.addEventListener('click', function () {
+                const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI';
 
-                    sendOrderToDiscord(orderDetails, orderNumber, webhookUrl, totalStacks, remainingDiamonds);
+                // Send order to Discord
+                sendOrderToDiscord(orderDetails, orderNumber, webhookUrl, totalStacks, remainingDiamonds);
 
-                    placeOrderButton.disabled = true;
-                    placeOrderButton.textContent = 'Order Placed';
-                    placeOrderButton.style.backgroundColor = '#d9534f'; 
-                    alert("Order has been placed!");
-                });
-            }
+                // Disable the Place Order button
+                placeOrderButton.disabled = true;
+                placeOrderButton.textContent = 'Order Placed';
+                placeOrderButton.style.backgroundColor = '#d9534f'; // Change the button color to indicate it's disabled
+                alert("Order has been placed!");
+            });
+
+            // Download Receipt Functionality
+            document.getElementById("download-receipt").addEventListener("click", function() {
+                let orderNumber = document.querySelector(".order-summary-item:nth-child(1) p").textContent;
+                let itemOrdered = document.querySelector(".order-summary-item:nth-child(2) p").textContent;
+                let subtotal = document.querySelector(".order-summary-item:nth-child(3) p").textContent;
+                let deliveryFee = document.querySelector(".order-summary-item:nth-child(4) p").textContent;
+                let tax = document.querySelector(".order-summary-item:nth-child(5) p").textContent;
+                let roundingDetails = document.querySelector(".order-summary-item:nth-child(6) p").textContent;
+                let stackCount = document.querySelector(".order-summary-item:nth-child(7) p").textContent;
+                let totalAmount = document.querySelector(".order-summary-item:nth-child(8) p").textContent;
+
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                // Setting up the PDF content
+                doc.setFontSize(22);
+                doc.text("Paiz Shop Receipt", 20, 20);
+                doc.setFontSize(14);
+                doc.text(`Order Number: ${orderNumber}`, 20, 40);
+                doc.text(`Item Ordered: ${itemOrdered}`, 20, 50);
+                doc.text(`Subtotal: ${subtotal}`, 20, 60);
+                doc.text(`Delivery Fee: ${deliveryFee}`, 20, 70);
+                doc.text(`The LoL Tax (3%): ${tax}`, 20, 80);
+                doc.text(`Rounding Details: ${roundingDetails}`, 20, 90);
+                doc.text(`Stack Count: ${stackCount}`, 20, 100);
+                doc.text(`Total Amount: ${totalAmount}`, 20, 110);
+
+                // Saving the PDF
+                doc.save(`${orderNumber}_receipt.pdf`);
+            });
         });
 
+        // Function to send order details to Discord webhook
         function sendOrderToDiscord(orderDetails, orderNumber, webhookUrl, totalStacks, remainingDiamonds) {
-            const currentTime = new Date().toLocaleString();
+            const currentTime = new Date().toLocaleString(); // Get the current date and time
             const embed = {
                 "content": null,
                 "embeds": [
@@ -211,7 +259,8 @@
                         ],
                         "footer": { "text": "Order placed on Paiz Shop" }
                     }
-                ]
+                ],
+                "attachments": []
             };
 
             fetch(webhookUrl, {
@@ -221,14 +270,6 @@
             }).then(response => {
                 if (response.ok) {
                     console.log('Order sent to Discord!');
-
-                    const ongoingOrders = JSON.parse(localStorage.getItem('ongoingOrders')) || [];
-                    ongoingOrders.push({ ...orderDetails, orderNumber, status: "Processing" });
-                    localStorage.setItem('ongoingOrders', JSON.stringify(ongoingOrders));
-
-                    const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
-                    orderHistory.push({ ...orderDetails, orderNumber });
-                    localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
                 } else {
                     console.error('Failed to send order to Discord:', response.statusText);
                 }
@@ -237,6 +278,7 @@
             });
         }
 
+        // Function to toggle theme between light and dark mode
         function toggleTheme() {
             const body = document.body;
             if (body.getAttribute('data-theme') === 'light') {
@@ -248,45 +290,13 @@
             }
         }
 
+        // Preserve the user's theme preference on page load
         document.addEventListener('DOMContentLoaded', function () {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 document.body.setAttribute('data-theme', savedTheme);
                 document.getElementById('theme-toggle').checked = (savedTheme === 'dark');
             }
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById("download-receipt").addEventListener("click", function () {
-                let orderNumber = document.querySelector(".order-summary-item:nth-child(1) p").textContent;
-                let itemOrdered = document.querySelector(".order-summary-item:nth-child(2) p").textContent;
-                let subtotal = document.querySelector(".order-summary-item:nth-child(3) p").textContent;
-                let deliveryFee = document.querySelector(".order-summary-item:nth-child(4) p").textContent;
-                let tax = document.querySelector(".order-summary-item:nth-child(5) p").textContent;
-                let roundingDetails = document.querySelector(".order-summary-item:nth-child(6) p").textContent;
-                let stackCount = document.querySelector(".order-summary-item:nth-child(7) p").textContent;
-                let totalAmount = document.querySelector(".order-summary-item:nth-child(8) p").textContent;
-    
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-    
-                // Adding title
-                doc.setFontSize(22);
-                doc.text("Paiz Shop Receipt", 20, 20);
-    
-                // Adding order details
-                doc.setFontSize(14);
-                doc.text(`Order Number: ${orderNumber}`, 20, 40);
-                doc.text(`Item Ordered: ${itemOrdered}`, 20, 50);
-                doc.text(`Subtotal: ${subtotal}`, 20, 60);
-                doc.text(`Delivery Fee: ${deliveryFee}`, 20, 70);
-                doc.text(`The LoL Tax (3%): ${tax}`, 20, 80);
-                doc.text(`Rounding Details: ${roundingDetails}`, 20, 90);
-                doc.text(`Stack Count: ${stackCount}`, 20, 100);
-                doc.text(`Total Amount: ${totalAmount}`, 20, 110);
-    
-                // Save the PDF file with the order number
-                doc.save(`${orderNumber}_receipt.pdf`);
-            });
         });
     </script>
 </body>
