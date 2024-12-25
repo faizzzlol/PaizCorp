@@ -255,6 +255,39 @@
                 document.getElementById('theme-toggle').checked = (savedTheme === 'dark');
             }
         });
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById("download-receipt").addEventListener("click", function () {
+                let orderNumber = document.querySelector(".order-summary-item:nth-child(1) p").textContent;
+                let itemOrdered = document.querySelector(".order-summary-item:nth-child(2) p").textContent;
+                let subtotal = document.querySelector(".order-summary-item:nth-child(3) p").textContent;
+                let deliveryFee = document.querySelector(".order-summary-item:nth-child(4) p").textContent;
+                let tax = document.querySelector(".order-summary-item:nth-child(5) p").textContent;
+                let roundingDetails = document.querySelector(".order-summary-item:nth-child(6) p").textContent;
+                let stackCount = document.querySelector(".order-summary-item:nth-child(7) p").textContent;
+                let totalAmount = document.querySelector(".order-summary-item:nth-child(8) p").textContent;
+    
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+    
+                // Adding title
+                doc.setFontSize(22);
+                doc.text("Paiz Shop Receipt", 20, 20);
+    
+                // Adding order details
+                doc.setFontSize(14);
+                doc.text(`Order Number: ${orderNumber}`, 20, 40);
+                doc.text(`Item Ordered: ${itemOrdered}`, 20, 50);
+                doc.text(`Subtotal: ${subtotal}`, 20, 60);
+                doc.text(`Delivery Fee: ${deliveryFee}`, 20, 70);
+                doc.text(`The LoL Tax (3%): ${tax}`, 20, 80);
+                doc.text(`Rounding Details: ${roundingDetails}`, 20, 90);
+                doc.text(`Stack Count: ${stackCount}`, 20, 100);
+                doc.text(`Total Amount: ${totalAmount}`, 20, 110);
+    
+                // Save the PDF file with the order number
+                doc.save(`${orderNumber}_receipt.pdf`);
+            });
+        });
     </script>
 </body>
 </html>
