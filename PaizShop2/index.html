@@ -3,162 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiz Shop</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
-</head>
-<body>
-    <header class="header">
-        <h1>Paiz Shop</h1>
-    </header>
-    
-    <main>
-        <section class="shop">
-            <h2>Available Items</h2>
-            <div class="items">
-                <div class="item">
-                    <h3>Enchantment Book</h3>
-                    <p>Price: 5 Diamonds</p>
-                    <button class="add-to-cart" data-name="Enchantment Book" data-price="5">Add to Cart</button>
-                </div>
-                <div class="item">
-                    <h3>Shulker Box</h3>
-                    <p>Price: 10 Diamonds</p>
-                    <button class="add-to-cart" data-name="Shulker Box" data-price="10">Add to Cart</button>
-                </div>
-                <!-- Add more items here -->
-            </div>
-        </section>
-
-        <section class="cart">
-            <h2>Your Cart</h2>
-            <div class="cart-items">
-                <!-- Cart items will appear here -->
-            </div>
-            <div class="cart-summary">
-                <p>Total: <span id="cart-total">0</span> Diamonds</p>
-            </div>
-            <button id="checkout-button">Checkout</button>
-        </section>
-    </main>
-
-    <div id="checkout-modal" class="modal">
-        <div class="modal-content">
-            <h2>Checkout</h2>
-            <label>
-                Delivery Coordinates:
-                <input type="text" id="delivery-coordinates">
-            </label>
-            <label>
-                <input type="checkbox" id="pickup-method"> Pickup Method (No Charge)
-            </label>
-            <p id="delivery-charge"></p>
-            <button id="confirm-order">Confirm Order</button>
-            <button id="cancel-order">Cancel</button>
-        </div>
-    </div>
-
-    <footer>
-        <p>Paiz Shop &copy; 2024. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // JavaScript functionality
-        const items = document.querySelectorAll('.add-to-cart');
-        const cartItemsContainer = document.querySelector('.cart-items');
-        const cartTotal = document.getElementById('cart-total');
-        const checkoutButton = document.getElementById('checkout-button');
-        const checkoutModal = document.getElementById('checkout-modal');
-        const deliveryCoordinates = document.getElementById('delivery-coordinates');
-        const pickupMethod = document.getElementById('pickup-method');
-        const deliveryCharge = document.getElementById('delivery-charge');
-        const confirmOrder = document.getElementById('confirm-order');
-        const cancelOrder = document.getElementById('cancel-order');
-
-        let cart = [];
-
-        function updateCart() {
-            cartItemsContainer.innerHTML = '';
-            let total = 0;
-            cart.forEach((item, index) => {
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    <p>${item.name} - ${item.quantity} x ${item.price} Diamonds</p>
-                    <button class="remove-item" data-index="${index}">Remove</button>
-                `;
-                cartItemsContainer.appendChild(cartItem);
-                total += item.quantity * item.price;
-            });
-            cartTotal.textContent = total;
+    <title>Checkout</title>
+    <style>
+        .checkout-form {
+            background-color: #2c2c2c;
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        items.forEach(item => {
-            item.addEventListener('click', () => {
-                const name = item.getAttribute('data-name');
-                const price = parseInt(item.getAttribute('data-price'), 10);
-                const existingItem = cart.find(cartItem => cartItem.name === name);
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    cart.push({ name, price, quantity: 1 });
-                }
-                updateCart();
+        .checkout-form h2 {
+            text-align: center;
+            color: #4caf50;
+        }
+
+        .checkout-form label {
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .checkout-form input[type="text"],
+        .checkout-form input[type="radio"] {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #555;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #444;
+            color: white;
+        }
+
+        .checkout-form button {
+            width: 48%;
+            padding: 0.8rem;
+            margin: 0.5rem 1%;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .checkout-form button#clear-data-btn {
+            background-color: #f44336;
+        }
+
+        .checkout-form button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-form">
+        <h2>Checkout</h2>
+        <form id="checkout-form">
+            <label for="name">Name (Optional):</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" />
+
+            <label for="minecraft-name">*Minecraft Name (Required):</label>
+            <input type="text" id="minecraft-name" name="minecraft-name" placeholder="Enter your Minecraft name" required />
+
+            <label for="contact-info">*Contact Information (Discord/WhatsApp):</label>
+            <input type="text" id="contact-info" name="contact-info" placeholder="Enter your contact information" required />
+
+            <label>*Pickup or Delivery:</label>
+            <div>
+                <input type="radio" id="pickup" name="method" value="pickup" />
+                <label for="pickup">Pickup</label>
+
+                <input type="radio" id="delivery" name="method" value="delivery" />
+                <label for="delivery">Delivery</label>
+            </div>
+
+            <div id="coordinates" style="display: none;">
+                <label>Coordinates (For Delivery Only):</label>
+                <input type="text" id="coord-x" name="coord-x" placeholder="Coordinate X" />
+                <input type="text" id="coord-y" name="coord-y" placeholder="Coordinate Y" />
+                <input type="text" id="coord-z" name="coord-z" placeholder="Coordinate Z" />
+            </div>
+
+            <button type="submit" id="checkout-btn">Checkout</button>
+            <button type="button" id="clear-data-btn">Clear Data</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Retrieve saved data from local storage
+            const name = localStorage.getItem("name") || "";
+            const minecraftName = localStorage.getItem("minecraft-name") || "";
+            const contactInfo = localStorage.getItem("contact-info") || "";
+            const method = localStorage.getItem("method") || "";
+            const coordX = localStorage.getItem("coord-x") || "";
+            const coordY = localStorage.getItem("coord-y") || "";
+            const coordZ = localStorage.getItem("coord-z") || "";
+
+            // Populate fields with saved data
+            document.getElementById("name").value = name;
+            document.getElementById("minecraft-name").value = minecraftName;
+            document.getElementById("contact-info").value = contactInfo;
+            if (method === "pickup") {
+                document.getElementById("pickup").checked = true;
+            } else if (method === "delivery") {
+                document.getElementById("delivery").checked = true;
+                document.getElementById("coordinates").style.display = "block";
+                document.getElementById("coord-x").value = coordX;
+                document.getElementById("coord-y").value = coordY;
+                document.getElementById("coord-z").value = coordZ;
+            }
+
+            // Show/hide coordinates based on selected method
+            document.querySelectorAll('input[name="method"]').forEach((radio) => {
+                radio.addEventListener("change", function () {
+                    if (this.value === "delivery") {
+                        document.getElementById("coordinates").style.display = "block";
+                    } else {
+                        document.getElementById("coordinates").style.display = "none";
+                    }
+                });
             });
-        });
 
-        cartItemsContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('remove-item')) {
-                const index = e.target.getAttribute('data-index');
-                cart.splice(index, 1);
-                updateCart();
-            }
-        });
+            // Save data to local storage on form submit
+            document.getElementById("checkout-form").addEventListener("submit", function (e) {
+                e.preventDefault(); // Prevent actual form submission
 
-        checkoutButton.addEventListener('click', () => {
-            checkoutModal.style.display = 'block';
-        });
+                localStorage.setItem("name", document.getElementById("name").value);
+                localStorage.setItem("minecraft-name", document.getElementById("minecraft-name").value);
+                localStorage.setItem("contact-info", document.getElementById("contact-info").value);
 
-        pickupMethod.addEventListener('change', () => {
-            if (pickupMethod.checked) {
-                deliveryCharge.textContent = 'No delivery charge for pickup.';
-            } else {
-                deliveryCharge.textContent = '';
-            }
-        });
+                const selectedMethod = document.querySelector('input[name="method"]:checked');
+                if (selectedMethod) {
+                    localStorage.setItem("method", selectedMethod.value);
+                }
 
-        confirmOrder.addEventListener('click', () => {
-            const coordinates = deliveryCoordinates.value;
-            if (!pickupMethod.checked && !coordinates) {
-                alert('Please provide delivery coordinates or select pickup method.');
-                return;
-            }
+                if (selectedMethod && selectedMethod.value === "delivery") {
+                    localStorage.setItem("coord-x", document.getElementById("coord-x").value);
+                    localStorage.setItem("coord-y", document.getElementById("coord-y").value);
+                    localStorage.setItem("coord-z", document.getElementById("coord-z").value);
+                }
 
-            const orderDetails = {
-                cart,
-                coordinates: pickupMethod.checked ? 'Pickup' : coordinates,
-                total: cartTotal.textContent
-            };
+                alert("Checkout details saved successfully!");
+            });
 
-            console.log('Order Confirmed:', orderDetails);
-
-            // Simulate sending to Discord
-            alert('Order sent to Discord!');
-
-            cart = [];
-            updateCart();
-            checkoutModal.style.display = 'none';
-        });
-
-        cancelOrder.addEventListener('click', () => {
-            alert('Order canceled and sent to Discord!');
-            checkoutModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === checkoutModal) {
-                checkoutModal.style.display = 'none';
-            }
+            // Clear data from local storage
+            document.getElementById("clear-data-btn").addEventListener("click", function () {
+                localStorage.clear();
+                alert("All saved data has been cleared!");
+                document.getElementById("checkout-form").reset();
+                document.getElementById("coordinates").style.display = "none";
+            });
         });
     </script>
 </body>
