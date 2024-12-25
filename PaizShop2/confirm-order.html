@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Order - Paiz Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #50b3a2;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul li {
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        .items-section, .cart-section {
+            margin: 20px 0;
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .items-section h2, .cart-section h2 {
+            margin-top: 0;
+        }
+        .cart-section {
+            background-color: #f9f9f9;
+        }
+        .checkout-button {
+            background: #50b3a2;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .checkout-button:hover {
+            background: #429488;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Paiz Shop</h1>
+    </div>
+</header>
+
+<div class="container">
+    <!-- Items Section -->
+    <div class="items-section">
+        <h2>Available Items</h2>
+        <div id="items">
+            <!-- Items will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <!-- Cart Section -->
+    <div class="cart-section">
+        <h2>Your Cart</h2>
+        <div id="cart">
+            <!-- Cart items will be dynamically loaded here -->
+        </div>
+        <button class="checkout-button" id="checkoutButton">Checkout</button>
+    </div>
+</div>
+
+<script>
+    const shopCoordinates = { x: 6969, y: 64, z: 6969 };
+    const taxRate = 0.03;
+    const diamondPerBlock = 1 / 1000;
+
+    let cart = [];
+    let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+    function calculateDistance(coord1, coord2) {
+        const dx = coord2.x - coord1.x;
+        const dy = coord2.y - coord1.y;
+        const dz = coord2.z - coord1.z;
+        return Math.sqrt(dx * dx + dy * dy + dz * dz);
+    }
+
+    function calculatePriceBreakdown(cart, buyerCoordinates) {
+        const merchandisePrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const distance = calculateDistance(shopCoordinates, buyerCoordinates);
+        const shippingFee = Math.ceil(distance * diamondPerBlock);
+        const subtotal = merchandisePrice + shippingFee;
+        const tax = Math.ceil(subtotal * taxRate);
+        const total = subtotal + tax;
+
+        return {
+            merchandisePrice,
+            shippingFee,
+            subtotal,
+            tax,
+            discounts: 0, // Assuming no discounts for now
+            total
+        };
+    }
+
+    function sendToDiscordWebhook(orderDetails) {
+        const webhookUrl = 'YOUR_DISCORD_WEBHOOK_URL'; // Replace with actual webhook URL
+        const data = {
+            content: JSON.stringify(orderDetails, null, 2)
+        };
+
+        fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (!response.ok) {
+                console.error('Failed to send to Discord Webhook');
+            }
+        });
+    }
+
+    document.getElementById('checkoutButton').addEventListener('click', () => {
+        const buyerCoordinates = {
+            x: parseInt(prompt('Enter Delivery Coordinate X:')), 
+            y: parseInt(prompt('Enter Delivery Coordinate Y:')), 
+            z: parseInt(prompt('Enter Delivery Coordinate Z:'))
+        };
+
+        const priceBreakdown = calculatePriceBreakdown(cart, buyerCoordinates);
+
+        const orderDetails = {
+            buyerCoordinates,
+            cart,
+            priceBreakdown
+        };
+
+        transactions.push(orderDetails);
+        localStorage.setItem('transactions', JSON.stringify(transactions));
+        sendToDiscordWebhook(orderDetails);
+
+        alert(`Order Confirmed! Total to Pay: ${priceBreakdown.total} Diamonds`);
+        cart = [];
+        updateCartUI();
+    });
+
+    function updateCartUI() {
+        const cartDiv = document.getElementById('cart');
+        cartDiv.innerHTML = cart.map(item => `
+            <div>
+                ${item.name} x ${item.quantity} - ${item.price} Diamonds each
+            </div>
+        `).join('');
+    }
+</script>
+
+</body>
+</html>
