@@ -8,42 +8,34 @@
     <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        /* Additional styling for better organization */
         .order-summary-item {
             margin-bottom: 15px;
         }
-
         .order-summary-item h3 {
             margin: 5px 0;
         }
-
         .order-summary-item p {
             margin: 5px 0;
         }
-
         .order-summary-section {
             border: 1px solid #ccc;
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 20px;
         }
-
         .stack-count {
             color: #5cb85c;
             font-weight: bold;
         }
-
         .rounding-details {
             color: #f0ad4e;
             font-weight: bold;
         }
-
         .button-group {
             margin-top: 20px;
             display: flex;
             gap: 10px;
         }
-
         .button-group button {
             padding: 10px 20px;
             border: none;
@@ -54,29 +46,21 @@
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
-
         .button-group button:hover {
             background-color: #4cae4c;
         }
-
-        /* Adjust the color for "Back to homepage" button */
         #back-home {
             background-color: #f0ad4e;
         }
-
         #back-home:hover {
             background-color: #ec971f;
         }
-
-        /* Adjust the color for "View my order" button */
         #view-order {
             background-color: #5bc0de;
         }
-
         #view-order:hover {
             background-color: #31b0d5;
         }
-
         #download-receipt {
             background-color: #007bff;
             color: white;
@@ -101,7 +85,6 @@
                 <li><a href="https://sociabuzz.com/faizgg/donate">Donate</a></li>
             </ul>
         </nav>
-        <!-- Theme Switcher HTML -->
         <div id="theme-switcher">
             <label class="switch">
                 <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
@@ -110,9 +93,7 @@
         </div>
     </header>
     <main>
-        <div id="order-summary">
-            <!-- Order Summary details will be dynamically inserted here -->
-        </div>
+        <div id="order-summary"></div>
         <div class="button-group">
             <button id="place-order">Place Order</button>
             <button id="back-home" onclick="location.href='/PaizCorp/PaizShop/'">Back to homepage</button>
@@ -120,15 +101,21 @@
             <button id="download-receipt" class="btn btn-primary" disabled>Download Receipt</button>
         </div>
     </main>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const orderSummaryDiv = document.getElementById('order-summary');
-            const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+            const downloadReceiptBtn = document.getElementById('download-receipt');
 
+            // Check if order details are present
+            const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
             if (!orderDetails) {
                 console.error("Order details not found in sessionStorage.");
                 return;
             }
+
+            // Log order details to the console
+            console.log("Order Details Loaded:", orderDetails);
 
             // Calculate stack count
             const diamondPerStack = 64;
@@ -178,25 +165,12 @@
             `;
 
             // Enable Download Receipt button once the order is rendered
-            document.getElementById("download-receipt").disabled = false;
+            downloadReceiptBtn.disabled = false;
 
-            // Handle Place Order
-            const placeOrderButton = document.getElementById('place-order');
-            placeOrderButton.addEventListener('click', function () {
-                const webhookUrl = 'https://discord.com/api/webhooks/1272139292889841677/sBsjI4ABTBTDhayfyDIVDk1cdmQ2Uc4hWeAsS81cj0-GXJEpvXi2g95PIFtbhcFjhYOI';
+            // Handle the Download Receipt button click
+            downloadReceiptBtn.addEventListener("click", function() {
+                console.log("Download Receipt button clicked!");
 
-                // Send order to Discord
-                sendOrderToDiscord(orderDetails, orderNumber, webhookUrl, totalStacks, remainingDiamonds);
-
-                // Disable the Place Order button
-                placeOrderButton.disabled = true;
-                placeOrderButton.textContent = 'Order Placed';
-                placeOrderButton.style.backgroundColor = '#d9534f'; // Change the button color to indicate it's disabled
-                alert("Order has been placed!");
-            });
-
-            // Download Receipt Functionality
-            document.getElementById("download-receipt").addEventListener("click", function() {
                 let orderNumber = document.querySelector(".order-summary-item:nth-child(1) p").textContent;
                 let itemOrdered = document.querySelector(".order-summary-item:nth-child(2) p").textContent;
                 let subtotal = document.querySelector(".order-summary-item:nth-child(3) p").textContent;
@@ -206,10 +180,14 @@
                 let stackCount = document.querySelector(".order-summary-item:nth-child(7) p").textContent;
                 let totalAmount = document.querySelector(".order-summary-item:nth-child(8) p").textContent;
 
+                // Debugging: log the order data for the receipt
+                console.log("Receipt Data:", {
+                    orderNumber, itemOrdered, subtotal, deliveryFee, tax, roundingDetails, stackCount, totalAmount
+                });
+
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
 
-                // Setting up the PDF content
                 doc.setFontSize(22);
                 doc.text("Paiz Shop Receipt", 20, 20);
                 doc.setFontSize(14);
@@ -225,11 +203,21 @@
                 // Saving the PDF
                 doc.save(`${orderNumber}_receipt.pdf`);
             });
+
+            // Handle Place Order button
+            const placeOrderButton = document.getElementById('place-order');
+            placeOrderButton.addEventListener('click', function () {
+                const webhookUrl = 'https://discord.com/api/webhooks/...';
+                sendOrderToDiscord(orderDetails, orderNumber, webhookUrl, totalStacks, remainingDiamonds);
+                placeOrderButton.disabled = true;
+                placeOrderButton.textContent = 'Order Placed';
+                placeOrderButton.style.backgroundColor = '#d9534f'; 
+                alert("Order has been placed!");
+            });
         });
 
-        // Function to send order details to Discord webhook
         function sendOrderToDiscord(orderDetails, orderNumber, webhookUrl, totalStacks, remainingDiamonds) {
-            const currentTime = new Date().toLocaleString(); // Get the current date and time
+            const currentTime = new Date().toLocaleString();
             const embed = {
                 "content": null,
                 "embeds": [
@@ -243,24 +231,12 @@
                                 "value": `**Item:** ${orderDetails.quantity}x ${orderDetails.item}\n**Subtotal:** 💎${orderDetails.subtotal} Diamonds\n**Delivery Fee:** 💎${orderDetails.deliveryFee} Diamonds (if applicable)\n**Tax (3%):** 💎${orderDetails.tax}\n**Total:** 💎${orderDetails.total} Diamonds`
                             },
                             { "name": "📊 **Rounding Details**", "value": `Total Rounded: 💎${orderDetails.total} Diamonds` },
-                            {
-                                "name": "🛠 **Stack Count**",
-                                "value": `${totalStacks} Stack(s) and ${remainingDiamonds} Diamond(s)`
-                            },
-                            { "name": "👤 **Minecraft Name**", "value": orderDetails.minecraftName },
-                            {
-                                "name": orderDetails.delivery ? "🚚 **Delivery Option**" : "📍 **Pickup Option**",
-                                "value": orderDetails.delivery
-                                    ? `**Delivery Coordinates:** X: ${orderDetails.coordinates.x}, Y: ${orderDetails.coordinates.y}, Z: ${orderDetails.coordinates.z}`
-                                    : `**Pickup Address:** ${orderDetails.address}`
-                            },
-                            { "name": "🕒 **Order Time**", "value": `Placed on: ${currentTime}` },
-                            { "name": "📞 **Contact Information**", "value": orderDetails.contactInfo || "Not provided" }
+                            { "name": "🛠 **Stack Count**", "value": `${totalStacks} Stack(s) and ${remainingDiamonds} Diamond(s)` },
+                            { "name": "🕒 **Order Time**", "value": `Placed on: ${currentTime}` }
                         ],
                         "footer": { "text": "Order placed on Paiz Shop" }
                     }
-                ],
-                "attachments": []
+                ]
             };
 
             fetch(webhookUrl, {
@@ -278,7 +254,6 @@
             });
         }
 
-        // Function to toggle theme between light and dark mode
         function toggleTheme() {
             const body = document.body;
             if (body.getAttribute('data-theme') === 'light') {
@@ -290,7 +265,6 @@
             }
         }
 
-        // Preserve the user's theme preference on page load
         document.addEventListener('DOMContentLoaded', function () {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
