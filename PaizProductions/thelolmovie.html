@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The LoL: The Movie</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <style>
+    .tab-content { display: none; }
+    .tab-active { display: block; }
+  </style>
+</head>
+<body class="bg-black text-white font-sans">
+
+  <!-- Hero Section -->
+  <section class="relative bg-cover bg-center h-screen" style="background-image: url('https://placehold.co/1600x900');">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black"></div>
+    <div class="relative z-10 p-10 flex flex-col justify-end h-full">
+      <h1 class="text-5xl font-bold drop-shadow-lg">The LoL: The Movie</h1>
+      <p class="text-lg mt-4 max-w-xl drop-shadow-md">
+        Witness the untold story of The Legend of Legiona – rebellion, war, power, and unity.
+      </p>
+      <div class="mt-6 flex gap-4">
+        <a href="#" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded">▶ Watch Trailer</a>
+        <a href="#" class="border border-white py-2 px-4 rounded">Get Tickets</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <section class="bg-zinc-900 p-10">
+    <div class="flex space-x-4 mb-6">
+      <button onclick="showTab('synopsis')" class="bg-zinc-800 py-2 px-4 rounded">Synopsis</button>
+      <button onclick="showTab('cast')" class="bg-zinc-800 py-2 px-4 rounded">Cast</button>
+      <button onclick="showTab('gallery')" class="bg-zinc-800 py-2 px-4 rounded">Gallery</button>
+      <button onclick="showTab('lore')" class="bg-zinc-800 py-2 px-4 rounded">TLIO Lore</button>
+    </div>
+
+    <div id="synopsis" class="tab-content tab-active">
+      <h2 class="text-3xl font-semibold">About the Movie</h2>
+      <p class="mt-4">
+        In an alternate universe where nations rise and fall within Minecraft's vast realm,
+        one legendary nation – The LoL – emerges to battle tyranny, betrayal, and chaos.
+        From the creation of TLIO to the fall of UltraX2020's communist regime,
+        this cinematic masterpiece brings Faiz4224, Imii Kun, and Dyno's iconic journey to life.
+      </p>
+    </div>
+
+    <div id="cast" class="tab-content">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+        <div class="text-center">
+          <img src="https://placehold.co/200x200" class="rounded-xl mb-2" alt="Faiz4224">
+          <p class="font-semibold">Faiz4224</p>
+          <p class="text-sm text-zinc-400">as Himself / President</p>
+        </div>
+        <div class="text-center">
+          <img src="https://placehold.co/200x200" class="rounded-xl mb-2" alt="Imii Kun">
+          <p class="font-semibold">Imii Kun</p>
+          <p class="text-sm text-zinc-400">as Himself / VP</p>
+        </div>
+        <div class="text-center">
+          <img src="https://placehold.co/200x200" class="rounded-xl mb-2" alt="Dyno">
+          <p class="font-semibold">Dyno</p>
+          <p class="text-sm text-zinc-400">as Himself / Defence Minister</p>
+        </div>
+        <div class="text-center">
+          <img src="https://placehold.co/200x200" class="rounded-xl mb-2" alt="UltraX2020">
+          <p class="font-semibold">UltraX2020</p>
+          <p class="text-sm text-zinc-400">as Himself / The Opponent</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="gallery" class="tab-content">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+        <img src="https://placehold.co/400x250" class="rounded-xl" alt="Scene 1">
+        <img src="https://placehold.co/400x250" class="rounded-xl" alt="Scene 2">
+        <img src="https://placehold.co/400x250" class="rounded-xl" alt="Scene 3">
+      </div>
+    </div>
+
+    <div id="lore" class="tab-content">
+      <h3 class="text-2xl font-bold mt-6">TLIO Intelligence Lore</h3>
+      <p class="mt-2">
+        Founded in resistance against the oppressive UltraX2020, TLIO became the shield of The LoL Nation.
+        Strategic, silent, and unbreakable – the organization ensured peace during post-war reconstruction.
+      </p>
+      <ul class="list-disc list-inside mt-2">
+        <li>Founded by Faiz4224 during communist uprising</li>
+        <li>Rebranded from "Persatuan Pengkhianat TheLoL"</li>
+        <li>Inspired by real-world agencies like the CIA & MI6</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="bg-black text-zinc-400 text-center p-6 mt-10 text-sm">
+    &copy; 2025 The LoL: The Movie. Crafted by the LoL Nation. All rights reserved.
+  </footer>
+
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('tab-active'));
+      document.getElementById(id).classList.add('tab-active');
+    }
+  </script>
+</body>
+</html>
