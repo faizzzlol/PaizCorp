@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Items - Paiz Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-light: #f9f9fb;
+      --bg-dark: #121212;
+      --text-light: #1a1a1a;
+      --text-dark: #f0f0f0;
+      --primary: #a96cff;
+      --card-bg-light: #fff;
+      --card-bg-dark: #1e1e1e;
+      --border-color-light: #e0e0e0;
+      --border-color-dark: #2a2a2a;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .item {
+      background: var(--card-bg-light);
+      border: 1px solid var(--border-color-light);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+    }
+
+    .item:hover {
+      transform: translateY(-4px);
+    }
+
+    body.dark .item {
+      background: var(--card-bg-dark);
+      border: 1px solid var(--border-color-dark);
+    }
+
+    .item h3 {
+      margin: 0.5rem 0;
+    }
+
+    .tags {
+      color: gray;
+      font-size: 0.85rem;
+    }
+
+    button.add-btn {
+      margin-top: 1rem;
+      background: var(--primary);
+      border: none;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .cart {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>All Items - Paiz Shop</h1>
+  </header>
+
+  <div class="cart" onclick="viewCart()">🛒 Cart (<span id="cartCount">0</span>)</div>
+
+  <div class="container">
+    <div class="item-grid">
+      <div class="item" data-name="Shulker Box" data-price="4">
+        <h3>Shulker Box</h3>
+        <p>Price: 4 💎</p>
+        <div class="tags">Tags: Storage, Utility</div>
+        <button class="add-btn" onclick="addToCart(this)">Add to Cart</button>
+      </div>
+
+      <div class="item" data-name="Iron Ingot" data-price="1">
+        <h3>Iron Ingot</h3>
+        <p>Price: 1 💎</p>
+        <div class="tags">Tags: Material, Metal</div>
+        <button class="add-btn" onclick="addToCart(this)">Add to Cart</button>
+      </div>
+
+      <div class="item" data-name="Other Item" data-price="0">
+        <h3>Other Item</h3>
+        <p>Price: 0 💎</p>
+        <div class="tags">Tags: Misc</div>
+        <button class="add-btn" onclick="addToCart(this)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('paiz_cart')) || [];
+
+    function addToCart(button) {
+      const item = button.closest('.item');
+      const name = item.dataset.name;
+      const price = parseInt(item.dataset.price);
+
+      const found = cart.find(i => i.name === name);
+      if (found) {
+        found.qty++;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+
+      localStorage.setItem('paiz_cart', JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById('cartCount').textContent = count;
+    }
+
+    function viewCart() {
+      alert(cart.length ? JSON.stringify(cart, null, 2) : 'Cart is empty!');
+    }
+
+    updateCartCount();
+  </script>
+</body>
+</html>
