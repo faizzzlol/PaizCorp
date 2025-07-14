@@ -1,165 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <style>
-        .checkout-form {
-            background-color: #2c2c2c;
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: auto;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paiz Shop</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #0d0d0d;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --primary: #9f5cf5;
+    }
 
-        .checkout-form h2 {
-            text-align: center;
-            color: #4caf50;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+    }
 
-        .checkout-form label {
-            display: block;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
 
-        .checkout-form input[type="text"],
-        .checkout-form input[type="radio"] {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1rem;
-            border: 1px solid #555;
-            border-radius: 5px;
-            box-sizing: border-box;
-            background-color: #444;
-            color: white;
-        }
+    header {
+      background: var(--primary);
+      padding: 1rem;
+      text-align: center;
+      color: white;
+    }
 
-        .checkout-form button {
-            width: 48%;
-            padding: 0.8rem;
-            margin: 0.5rem 1%;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #4caf50;
-            color: white;
-        }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: #eee;
+      padding: 0.5rem;
+    }
 
-        .checkout-form button#clear-data-btn {
-            background-color: #f44336;
-        }
+    nav a {
+      text-decoration: none;
+      color: var(--primary);
+    }
 
-        .checkout-form button:hover {
-            opacity: 0.8;
-        }
-    </style>
+    .container {
+      padding: 1rem;
+    }
+
+    .item {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+    }
+
+    .tags {
+      margin-top: 0.5rem;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .controls {
+      margin: 1rem 0;
+    }
+
+    input[type="search"] {
+      padding: 0.5rem;
+      width: 60%;
+      max-width: 300px;
+    }
+  </style>
 </head>
 <body>
-    <div class="checkout-form">
-        <h2>Checkout</h2>
-        <form id="checkout-form">
-            <label for="name">Name (Optional):</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" />
+  <header>
+    <img src="PaizShop.png" alt="Paiz Shop Logo" height="80">
+    <h1>Paiz Shop</h1>
+    <p>Your Minecraft Item Store by Paiz Corp</p>
+  </header>
 
-            <label for="minecraft-name">*Minecraft Name (Required):</label>
-            <input type="text" id="minecraft-name" name="minecraft-name" placeholder="Enter your Minecraft name" required />
+  <nav>
+    <a href="#">Home</a>
+    <a href="#how">How to Use</a>
+    <a href="#orders">Order History</a>
+    <a href="#feedback">Feedback</a>
+    <button onclick="toggleTheme()">Toggle Theme</button>
+    <button onclick="clearSettings()">Clear My Data</button>
+  </nav>
 
-            <label for="contact-info">*Contact Information (Discord/WhatsApp):</label>
-            <input type="text" id="contact-info" name="contact-info" placeholder="Enter your contact information" required />
-
-            <label>*Pickup or Delivery:</label>
-            <div>
-                <input type="radio" id="pickup" name="method" value="pickup" />
-                <label for="pickup">Pickup</label>
-
-                <input type="radio" id="delivery" name="method" value="delivery" />
-                <label for="delivery">Delivery</label>
-            </div>
-
-            <div id="coordinates" style="display: none;">
-                <label>Coordinates (For Delivery Only):</label>
-                <input type="text" id="coord-x" name="coord-x" placeholder="Coordinate X" />
-                <input type="text" id="coord-y" name="coord-y" placeholder="Coordinate Y" />
-                <input type="text" id="coord-z" name="coord-z" placeholder="Coordinate Z" />
-            </div>
-
-            <button type="submit" id="checkout-btn">Checkout</button>
-            <button type="button" id="clear-data-btn">Clear Data</button>
-        </form>
+  <div class="container">
+    <div class="controls">
+      <input type="search" id="searchBox" placeholder="Search items..." oninput="filterItems()">
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Retrieve saved data from local storage
-            const name = localStorage.getItem("name") || "";
-            const minecraftName = localStorage.getItem("minecraft-name") || "";
-            const contactInfo = localStorage.getItem("contact-info") || "";
-            const method = localStorage.getItem("method") || "";
-            const coordX = localStorage.getItem("coord-x") || "";
-            const coordY = localStorage.getItem("coord-y") || "";
-            const coordZ = localStorage.getItem("coord-z") || "";
+    <div id="items">
+      <div class="item" data-tags="storage,utility">
+        <h3>Shulker Box - 4 Diamonds</h3>
+        <div class="tags">Tags: Storage, Utility</div>
+      </div>
+      <div class="item" data-tags="material,metal">
+        <h3>Iron Ingot - 1 Diamond</h3>
+        <div class="tags">Tags: Material, Metal</div>
+      </div>
+      <div class="item" data-tags="misc">
+        <h3>Other Item - 0 Diamonds</h3>
+        <div class="tags">Tags: Misc</div>
+      </div>
+    </div>
 
-            // Populate fields with saved data
-            document.getElementById("name").value = name;
-            document.getElementById("minecraft-name").value = minecraftName;
-            document.getElementById("contact-info").value = contactInfo;
-            if (method === "pickup") {
-                document.getElementById("pickup").checked = true;
-            } else if (method === "delivery") {
-                document.getElementById("delivery").checked = true;
-                document.getElementById("coordinates").style.display = "block";
-                document.getElementById("coord-x").value = coordX;
-                document.getElementById("coord-y").value = coordY;
-                document.getElementById("coord-z").value = coordZ;
-            }
+    <section id="how">
+      <h2>How to Use</h2>
+      <p>Browse the items, search by name or tag, then place your order through our Minecraft server or Discord bot. We'll deliver it in-game!</p>
+    </section>
 
-            // Show/hide coordinates based on selected method
-            document.querySelectorAll('input[name="method"]').forEach((radio) => {
-                radio.addEventListener("change", function () {
-                    if (this.value === "delivery") {
-                        document.getElementById("coordinates").style.display = "block";
-                    } else {
-                        document.getElementById("coordinates").style.display = "none";
-                    }
-                });
-            });
+    <section id="orders">
+      <h2>Order History</h2>
+      <p>No orders yet. (Feature coming soon!)</p>
+    </section>
 
-            // Save data to local storage on form submit
-            document.getElementById("checkout-form").addEventListener("submit", function (e) {
-                e.preventDefault(); // Prevent actual form submission
+    <section id="feedback">
+      <h2>Feedback</h2>
+      <p>We'd love to hear from you! Drop your feedback via our Discord or in the in-game mailbox.</p>
+    </section>
+  </div>
 
-                localStorage.setItem("name", document.getElementById("name").value);
-                localStorage.setItem("minecraft-name", document.getElementById("minecraft-name").value);
-                localStorage.setItem("contact-info", document.getElementById("contact-info").value);
+  <script>
+    const body = document.body;
 
-                const selectedMethod = document.querySelector('input[name="method"]:checked');
-                if (selectedMethod) {
-                    localStorage.setItem("method", selectedMethod.value);
-                }
+    function toggleTheme() {
+      body.classList.toggle('dark');
+      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+    }
 
-                if (selectedMethod && selectedMethod.value === "delivery") {
-                    localStorage.setItem("coord-x", document.getElementById("coord-x").value);
-                    localStorage.setItem("coord-y", document.getElementById("coord-y").value);
-                    localStorage.setItem("coord-z", document.getElementById("coord-z").value);
-                }
+    function clearSettings() {
+      localStorage.clear();
+      location.reload();
+    }
 
-                alert("Checkout details saved successfully!");
-            });
+    function loadTheme() {
+      const theme = localStorage.getItem('theme');
+      if (theme === 'dark') body.classList.add('dark');
+    }
 
-            // Clear data from local storage
-            document.getElementById("clear-data-btn").addEventListener("click", function () {
-                localStorage.clear();
-                alert("All saved data has been cleared!");
-                document.getElementById("checkout-form").reset();
-                document.getElementById("coordinates").style.display = "none";
-            });
-        });
-    </script>
+    function filterItems() {
+      const search = document.getElementById('searchBox').value.toLowerCase();
+      const items = document.querySelectorAll('.item');
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const tags = item.dataset.tags.toLowerCase();
+        item.style.display = (text.includes(search) || tags.includes(search)) ? 'block' : 'none';
+      });
+    }
+
+    loadTheme();
+  </script>
 </body>
 </html>
