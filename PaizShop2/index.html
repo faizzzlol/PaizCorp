@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paiz Shop</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paiz Shop - Minecraft Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-light: #ffffff;
-      --bg-dark: #0d0d0d;
-      --text-light: #000000;
+      --bg-light: #f9f9fb;
+      --bg-dark: #121212;
+      --text-light: #1a1a1a;
       --text-dark: #f0f0f0;
-      --primary: #9f5cf5;
+      --primary: #a96cff;
+      --card-bg-light: #fff;
+      --card-bg-dark: #1e1e1e;
+      --border-color-light: #e0e0e0;
+      --border-color-dark: #2a2a2a;
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
       background-color: var(--bg-light);
@@ -28,56 +33,104 @@
     }
 
     header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
       background: var(--primary);
-      padding: 1rem;
-      text-align: center;
       color: white;
+    }
+
+    header img {
+      height: 80px;
+      margin-bottom: 0.5rem;
     }
 
     nav {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
-      background: #eee;
-      padding: 0.5rem;
+      padding: 1rem;
+      background-color: var(--card-bg-light);
+      border-bottom: 1px solid var(--border-color-light);
     }
 
-    nav a {
+    body.dark nav {
+      background-color: var(--card-bg-dark);
+      border-bottom: 1px solid var(--border-color-dark);
+    }
+
+    nav a, nav button {
       text-decoration: none;
       color: var(--primary);
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
 
     .container {
-      padding: 1rem;
-    }
-
-    .item {
-      border: 1px solid #ccc;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 5px;
-    }
-
-    .tags {
-      margin-top: 0.5rem;
-      font-size: 0.9em;
-      color: #666;
+      max-width: 960px;
+      margin: auto;
+      padding: 2rem;
     }
 
     .controls {
-      margin: 1rem 0;
+      margin: 2rem 0;
+      text-align: center;
     }
 
     input[type="search"] {
-      padding: 0.5rem;
-      width: 60%;
-      max-width: 300px;
+      padding: 0.75rem 1rem;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color-light);
+    }
+
+    body.dark input[type="search"] {
+      background-color: var(--card-bg-dark);
+      color: var(--text-dark);
+      border: 1px solid var(--border-color-dark);
+    }
+
+    .item {
+      background: var(--card-bg-light);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color-light);
+    }
+
+    body.dark .item {
+      background: var(--card-bg-dark);
+      border: 1px solid var(--border-color-dark);
+    }
+
+    .item h3 {
+      margin: 0 0 0.5rem;
+    }
+
+    .tags {
+      font-size: 0.85rem;
+      color: gray;
+    }
+
+    section {
+      margin-top: 3rem;
+    }
+
+    h2 {
+      border-left: 4px solid var(--primary);
+      padding-left: 0.5rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="PaizShop.png" alt="Paiz Shop Logo" height="80">
+    <img src="PaizShop.png" alt="Paiz Shop Logo" />
     <h1>Paiz Shop</h1>
     <p>Your Minecraft Item Store by Paiz Corp</p>
   </header>
@@ -87,8 +140,8 @@
     <a href="#how">How to Use</a>
     <a href="#orders">Order History</a>
     <a href="#feedback">Feedback</a>
-    <button onclick="toggleTheme()">Toggle Theme</button>
-    <button onclick="clearSettings()">Clear My Data</button>
+    <button onclick="toggleTheme()">🌓 Toggle Theme</button>
+    <button onclick="clearSettings()">🗑️ Clear My Data</button>
   </nav>
 
   <div class="container">
@@ -98,31 +151,31 @@
 
     <div id="items">
       <div class="item" data-tags="storage,utility">
-        <h3>Shulker Box - 4 Diamonds</h3>
+        <h3>Shulker Box <span>- 4💎</span></h3>
         <div class="tags">Tags: Storage, Utility</div>
       </div>
       <div class="item" data-tags="material,metal">
-        <h3>Iron Ingot - 1 Diamond</h3>
+        <h3>Iron Ingot <span>- 1💎</span></h3>
         <div class="tags">Tags: Material, Metal</div>
       </div>
       <div class="item" data-tags="misc">
-        <h3>Other Item - 0 Diamonds</h3>
+        <h3>Other Item <span>- 0💎</span></h3>
         <div class="tags">Tags: Misc</div>
       </div>
     </div>
 
     <section id="how">
-      <h2>How to Use</h2>
+      <h2>📘 How to Use</h2>
       <p>Browse the items, search by name or tag, then place your order through our Minecraft server or Discord bot. We'll deliver it in-game!</p>
     </section>
 
     <section id="orders">
-      <h2>Order History</h2>
+      <h2>📦 Order History</h2>
       <p>No orders yet. (Feature coming soon!)</p>
     </section>
 
     <section id="feedback">
-      <h2>Feedback</h2>
+      <h2>💬 Feedback</h2>
       <p>We'd love to hear from you! Drop your feedback via our Discord or in the in-game mailbox.</p>
     </section>
   </div>
