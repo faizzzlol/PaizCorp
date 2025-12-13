@@ -1,127 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiz Productions</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaizProductions | A PaizCorp Subsidiary</title>
+  <meta name="description" content="PaizProductions — a PaizCorp subsidiary crafting cinematic worlds, films, and experimental storytelling." />
 
-        body {
-            background-color: #f4f4f9;
-            color: #333;
-            line-height: 1.6;
-        }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-        header {
-            background: #111;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
+  <style>
+    :root {
+      --bg: #0b0c0f;
+      --panel: #14161c;
+      --ink: #e8e8e8;
+      --muted: #9aa0aa;
+      --signal: #ff2d2d;
+      --line: rgba(255,255,255,0.08);
+    }
 
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        header p {
-            font-size: 1.2em;
-            font-style: italic;
-        }
+    body {
+      font-family: 'Archivo', sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,45,45,0.08), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255,255,255,0.04), transparent 40%),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+    }
 
-        nav {
-            background: #444;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      background: rgba(11,12,15,0.7);
+      border-bottom: 1px solid var(--line);
+    }
 
-        nav a {
-            color: #fff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 1.1em;
-            transition: color 0.3s;
-        }
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+    }
 
-        nav a:hover {
-            color: #ff4081;
-        }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
 
-        section {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 20px auto;
-        }
+    .brand span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--signal);
+      margin-left: 6px;
+    }
 
-        .about, .commitment {
-            background: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    nav a {
+      margin-left: 28px;
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      position: relative;
+    }
 
-        .about h2, .commitment h2 {
-            margin-bottom: 15px;
-            font-size: 2em;
-        }
+    nav a:hover { color: var(--ink); }
 
-        footer {
-            text-align: center;
-            padding: 10px;
-            background: #111;
-            color: #fff;
-            margin-top: 20px;
-        }
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 120px 24px;
+    }
 
-        footer p {
-            font-size: 0.9em;
-        }
+    .hero {
+      padding-top: 160px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
 
-        .btn {
-            display: inline-block;
-            margin: 10px 0;
-            padding: 10px 20px;
-            background: #ff4081;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1em;
-            transition: background 0.3s;
-        }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
 
-        .btn:hover {
-            background: #e91e63;
-        }
-    </style>
+    .hero h1 span { color: var(--signal); }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .hero .meta {
+      margin-top: 32px;
+      display: flex;
+      gap: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+      border: 1px solid var(--line);
+      padding: 32px;
+    }
+
+    h2 {
+      font-size: 2.1rem;
+      margin-bottom: 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 28px;
+      transition: transform .2s ease, border .2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--signal);
+    }
+
+    .card h3 { margin-bottom: 10px; }
+
+    .card p { color: var(--muted); font-size: 0.95rem; }
+
+    .projects {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+    }
+
+    .project-item {
+      border-left: 4px solid var(--signal);
+      padding-left: 20px;
+      margin-bottom: 24px;
+    }
+
+    .project-item span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 60px 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      nav a { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Paiz Productions</h1>
-        <p>A Subsidiary of Paiz Corp, Committed to the Art of Film and Content Creation</p>
-    </header>
+
+<header>
+  <div class="nav">
+    <div class="brand">PaizProductions <span>PaizCorp</span></div>
     <nav>
-        <a href="#about">About Us</a>
-        <a href="#commitment">Our Commitment</a>
-        <a href="#contact">Contact</a>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <section id="about" class="about">
-        <h2>About Paiz Productions</h2>
-        <p>Paiz Productions is a modern, innovative company dedicated to creating high-quality films, documentaries, and multimedia content. As a proud sub-company of Paiz Corp, we strive to bring compelling stories to life through visual artistry and technology.</p>
-    </section>
-    <section id="commitment" class="commitment">
-        <h2>Our Commitment</h2>
-        <p>At Paiz Productions, we are passionate about excellence in storytelling. From breathtaking documentaries to immersive content, we push the boundaries of creativity and innovation.</p>
-        <p>Meanwhile, Paiz Corp remains dedicated to pioneering developments in The LoL universe.</p>
-    </section>
-    <footer>
-        <p>&copy; 2024 Paiz Productions. All Rights Reserved.</p>
-    </footer>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Crafting <span>Cinematic Worlds</span><br>Beyond the Screen</h1>
+    <p>
+      PaizProductions is a PaizCorp subsidiary focused on film, experimental media, and long-form storytelling inside original universes.
+    </p>
+    <div class="meta">
+      <div>EST. 2024</div>
+      <div>FILM / LORE / MEDIA</div>
+      <div>PAIZCORP</div>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Currently in Production</h3>
+    <p style="margin-top:12px;color:var(--muted)">The LoL : The Movie</p>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About the Studio</h2>
+  <div class="grid">
+    <div class="card"><h3>Who We Are</h3><p>A next-gen production studio blending fiction, politics, and digital worlds.</p></div>
+    <div class="card"><h3>Our Philosophy</h3><p>Story first. Worldbuilding always. No generic narratives.</p></div>
+    <div class="card"><h3>Parent Company</h3><p>Operating under PaizCorp as a creative and narrative division.</p></div>
+  </div>
+</section>
+
+<section id="work">
+  <h2>What We Do</h2>
+  <div class="grid">
+    <div class="card"><h3>🎬 Films</h3><p>Original cinematic projects and experimental movies.</p></div>
+    <div class="card"><h3>📖 Lore Design</h3><p>Political systems, factions, timelines, and in-world history.</p></div>
+    <div class="card"><h3>🧠 Narrative Systems</h3><p>Stories that evolve across platforms and media.</p></div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div>
+      <div class="project-item">
+        <span>FEATURE FILM</span>
+        <h3>The LoL : The Movie</h3>
+        <p>A political Minecraft epic set in Skyxion: Ragnarok.</p>
+      </div>
+      <div class="project-item">
+        <span>INTEL / LORE</span>
+        <h3>TLIO Archives</h3>
+        <p>Classified intelligence narratives within The LoL universe.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Upcoming</h3>
+      <p style="margin-top:12px;color:var(--muted)">Additional PaizCorp media initiatives currently under review.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="panel">
+    <p>Official inquiries via PaizCorp internal channels.</p>
+    <p style="margin-top:8px;font-family:JetBrains Mono;font-size:0.85rem">confidential@paizcorp.internal</p>
+  </div>
+</section>
+
+<footer>
+  © 2025 PaizProductions. A subsidiary of PaizCorp. All Rights Reserved.
+</footer>
+
 </body>
 </html>
