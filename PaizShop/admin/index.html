@@ -615,10 +615,10 @@ function saveConfig() {
 /* ── GITHUB API ──────────────────────────────────── */
 function getConfig() {
   return {
-    token:   localStorage.getItem(LS.TOKEN)   || '',
+    token:   localStorage.getItem(LS.TOKEN)   || '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',
     repo:    localStorage.getItem(LS.REPO)    || 'faizzzlol/PaizCorp',
     path:    localStorage.getItem(LS.PATH)    || 'PaizShop/products.json',
-    webhook: localStorage.getItem(LS.WEBHOOK) || ''
+    webhook: localStorage.getItem(LS.WEBHOOK) || 'https://discord.com/api/webhooks/1480129962932441118/3PxQQIjuufm2tQb8Ipj0vCP2IX2Ni6WaIWf4teWxCBxnC3aU_vH6vzGMvcXL5JQuEhg9'
   };
 }
 
