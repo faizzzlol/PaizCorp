@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paiz Shop Admin — Manager Panel</title>
+<link rel="icon" href="https://faizzzlol.github.io/thelol/TheLoL2.png">
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0a0b09;
+  --bg2:     #0f110d;
+  --bg3:     #151812;
+  --bg4:     #1a1e17;
+  --surface: #21261d;
+  --border:  rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.04);
+  --green:   #4ade80;
+  --green-dk:#22c55e;
+  --green-dim:rgba(74,222,128,0.08);
+  --gold:    #fbbf24;
+  --gold-dim:rgba(251,191,36,0.08);
+  --red:     #f87171;
+  --red-dim: rgba(248,113,113,0.09);
+  --blue:    #60a5fa;
+  --blue-dim:rgba(96,165,250,0.08);
+  --amber:   #fb923c;
+  --txt:     #e8ede2;
+  --txt2:    rgba(232,237,226,0.65);
+  --txt3:    rgba(232,237,226,0.38);
+  --txt4:    rgba(232,237,226,0.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;min-height:100vh}
+
+/* ── LOGIN SCREEN ─────────────────────────────────── */
+#login-screen{
+  position:fixed;inset:0;background:var(--bg);z-index:1000;
+  display:flex;align-items:center;justify-content:center;padding:1rem;
+}
+.login-box{
+  background:var(--bg2);border:1px solid var(--border);
+  padding:3rem 2.5rem;width:min(420px,100%);
+  animation:fadeIn 0.4s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.login-icon{font-size:2rem;display:block;margin-bottom:1.2rem;text-align:center}
+.login-box h2{
+  font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;
+  color:var(--txt);letter-spacing:-0.3px;text-align:center;margin-bottom:0.3rem;
+}
+.login-sub{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;color:var(--txt4);text-align:center;margin-bottom:2rem}
+.login-group{margin-bottom:1rem}
+.login-label{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt4);display:block;margin-bottom:0.45rem}
+.login-input{
+  width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);
+  color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.9rem;
+  outline:none;transition:border-color 0.2s;
+}
+.login-input:focus{border-color:var(--green)}
+.login-input::placeholder{color:var(--txt4)}
+.login-hint{font-size:0.76rem;color:var(--txt4);margin-top:3px}
+.login-btn{
+  width:100%;padding:12px;background:var(--green);color:#000;
+  border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;
+  font-size:0.6rem;font-weight:500;letter-spacing:2px;
+  transition:background 0.2s;margin-top:0.5rem;
+}
+.login-btn:hover{background:var(--green-dk)}
+.login-error{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;text-align:center;margin-top:0.8rem;display:none}
+
+/* ── ADMIN APP ────────────────────────────────────── */
+#app{display:none}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:200;height:56px;
+  display:flex;align-items:center;padding:0 4%;gap:14px;
+  background:rgba(10,11,9,0.97);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.nav-sq{width:28px;height:28px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;color:#fff;letter-spacing:0.5px}
+.nav-name{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;color:var(--txt);letter-spacing:-0.2px}
+.nav-tag{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:2px;padding:3px 8px;background:var(--red-dim);border:1px solid rgba(248,113,113,0.2);color:var(--red)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);transition:all 0.2s}
+.nav-link:hover{color:var(--green);border-color:rgba(74,222,128,0.2)}
+.logout-btn{padding:6px 14px;background:transparent;border:1px solid rgba(248,113,113,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--red);transition:all 0.2s}
+.logout-btn:hover{background:var(--red-dim)}
+
+/* HEADER */
+.admin-header{
+  padding:2.5rem 4% 2rem;border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;
+  position:relative;overflow:hidden;
+}
+.admin-header::before{content:'';position:absolute;top:-40%;right:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(248,113,113,0.05) 0%,transparent 65%);pointer-events:none}
+.ah-left{}
+.ah-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--red);opacity:0.7;margin-bottom:0.6rem}
+.ah-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;letter-spacing:-1px;color:var(--txt);line-height:1;margin-bottom:0.3rem}
+.ah-sub{font-size:0.88rem;color:var(--txt3);font-weight:300}
+.ah-stats{display:flex;gap:2px}
+.ah-stat{background:var(--bg2);border:1px solid var(--border);padding:0.8rem 1.2rem;text-align:center;min-width:80px}
+.ahs-val{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;display:block;line-height:1;margin-bottom:2px}
+.ahs-key{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4)}
+
+/* SETUP BANNER */
+.setup-banner{
+  background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);
+  padding:1rem 1.5rem;margin:1.5rem 4%;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.sb-icon{font-size:1.1rem;flex-shrink:0}
+.sb-txt{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;color:var(--gold);flex:1}
+.sb-btn{padding:6px 14px;background:var(--gold-dim);border:1px solid rgba(251,191,36,0.3);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--gold);flex-shrink:0;transition:all 0.2s}
+.sb-btn:hover{background:rgba(251,191,36,0.15)}
+#setup-banner{display:none}
+
+/* MAIN LAYOUT */
+.main{max-width:1300px;margin:0 auto;padding:2rem 4%;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+
+/* PRODUCTS TABLE AREA */
+.table-area{}
+.section-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border)}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
+.add-new-btn{
+  padding:8px 18px;background:var(--green);color:#000;
+  border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;
+  font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:background 0.2s;
+  display:flex;align-items:center;gap:6px;
+}
+.add-new-btn:hover{background:var(--green-dk)}
+
+/* SEARCH BAR */
+.table-search{
+  width:100%;padding:9px 14px;background:var(--bg2);
+  border:1px solid var(--border);color:var(--txt);
+  font-family:'Outfit',sans-serif;font-size:0.88rem;
+  outline:none;margin-bottom:8px;transition:border-color 0.2s;
+}
+.table-search:focus{border-color:var(--green)}
+.table-search::placeholder{color:var(--txt4)}
+
+/* PRODUCT ROWS */
+.prod-list{display:flex;flex-direction:column;gap:2px}
+.prod-row{
+  background:var(--bg2);border:1px solid var(--border2);
+  padding:1rem 1.2rem;
+  display:grid;grid-template-columns:48px 1fr auto auto;
+  gap:14px;align-items:center;
+  transition:background 0.2s;position:relative;overflow:hidden;
+}
+.prod-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;opacity:0;transition:opacity 0.2s}
+.prod-row.status-listed::before{background:var(--green);opacity:1}
+.prod-row.status-unlisted::before{background:var(--txt4);opacity:1}
+.prod-row:hover{background:var(--bg3)}
+.prod-row.status-unlisted{opacity:0.6}
+
+.pr-img{width:48px;height:48px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pr-img img{width:36px;height:36px;object-fit:contain;image-rendering:pixelated}
+.pr-img-ph{font-size:1.3rem}
+
+.pr-info{}
+.pr-name{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--txt);letter-spacing:-0.2px;margin-bottom:2px}
+.pr-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pr-price{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--gold)}
+.pr-cat{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt4);padding:2px 6px;border:1px solid var(--border2)}
+.pr-status-tag{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;padding:2px 7px;border:1px solid}
+.tag-listed{border-color:rgba(74,222,128,0.3);color:var(--green);background:var(--green-dim)}
+.tag-unlisted{border-color:rgba(255,255,255,0.12);color:var(--txt4);background:transparent}
+
+.pr-stock-wrap{text-align:center;min-width:80px}
+.pr-stock-num{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--txt);display:block;line-height:1}
+.pr-stock-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4)}
+.pr-stock-num.zero{color:var(--red)}
+
+.pr-actions{display:flex;gap:4px;flex-shrink:0}
+.act-btn{width:32px;height:32px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;color:var(--txt3);font-size:0.8rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;position:relative}
+.act-btn:hover{background:var(--bg4)}
+.act-btn[title]:hover::after{content:attr(title);position:absolute;bottom:calc(100% + 5px);left:50%;transform:translateX(-50%);background:var(--bg4);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.45rem;letter-spacing:1px;white-space:nowrap;padding:3px 8px;border:1px solid var(--border);pointer-events:none;z-index:10}
+.act-edit{color:var(--blue)}
+.act-stock{color:var(--gold)}
+.act-toggle.listed{color:var(--green)}
+.act-toggle.unlisted{color:var(--txt4)}
+.act-del{color:var(--red)}
+
+/* RIGHT PANEL */
+.right-panel{display:flex;flex-direction:column;gap:12px;position:sticky;top:76px}
+
+.panel-box{background:var(--bg2);border:1px solid var(--border);padding:1.4rem}
+.panel-title{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2.5px;color:var(--txt4);margin-bottom:1rem}
+
+/* Config form in panel */
+.cfg-group{margin-bottom:0.9rem}
+.cfg-label{font-family:'IBM Plex Mono',monospace;font-size:0.49rem;letter-spacing:1.5px;color:var(--txt4);display:block;margin-bottom:0.4rem}
+.cfg-input{
+  width:100%;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);
+  color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.62rem;
+  outline:none;transition:border-color 0.2s;
+}
+.cfg-input:focus{border-color:var(--green)}
+.cfg-input::placeholder{color:var(--txt4)}
+.cfg-save-btn{
+  width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);
+  cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;
+  letter-spacing:2px;color:var(--txt2);transition:all 0.2s;margin-top:0.3rem;
+}
+.cfg-save-btn:hover{background:var(--green-dim);border-color:rgba(74,222,128,0.25);color:var(--green)}
+
+/* Activity log */
+.log-list{display:flex;flex-direction:column;gap:4px;max-height:280px;overflow-y:auto}
+.log-item{background:var(--bg3);border:1px solid var(--border2);padding:0.6rem 0.8rem}
+.log-action{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1px;color:var(--txt2);margin-bottom:2px}
+.log-time{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:1px;color:var(--txt4)}
+.log-empty{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt4);text-align:center;padding:1rem 0}
+
+/* Quick stats */
+.qs-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.qs-item{background:var(--bg3);padding:0.8rem;text-align:center}
+.qs-val{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;display:block;line-height:1;margin-bottom:2px}
+.qs-key{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:1.5px;color:var(--txt4)}
+
+/* ── MODALS ───────────────────────────────────────── */
+.m-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:500;backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1rem}
+.m-overlay.open{display:flex}
+.modal{background:var(--bg2);width:min(500px,100%);max-height:90vh;overflow-y:auto;border:1px solid var(--border);animation:mIn 0.25s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.modal-hd{padding:1.3rem 1.6rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.modal-hd h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
+.modal-close{width:28px;height:28px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;color:var(--txt3);font-size:0.85rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.modal-close:hover{background:var(--bg4)}
+.modal-body{padding:1.5rem}
+.fg{margin-bottom:1rem}
+.flabel{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt4);display:block;margin-bottom:0.4rem}
+.flabel .req{color:var(--red)}
+.finput,.fselect{width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;appearance:none}
+.finput:focus,.fselect:focus{border-color:var(--green)}
+.finput::placeholder{color:var(--txt4)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fhint{font-size:0.76rem;color:var(--txt4);margin-top:3px}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg3);border:1px solid var(--border)}
+.toggle-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.53rem;letter-spacing:1.5px;color:var(--txt2)}
+.toggle{position:relative;width:42px;height:22px;cursor:pointer}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.toggle-slider{position:absolute;inset:0;background:var(--bg4);border:1px solid var(--border);transition:0.25s}
+.toggle-slider::before{content:'';position:absolute;width:16px;height:16px;left:2px;top:2px;background:var(--txt4);transition:0.25s}
+.toggle input:checked + .toggle-slider{background:var(--green-dim);border-color:rgba(74,222,128,0.4)}
+.toggle input:checked + .toggle-slider::before{background:var(--green);transform:translateX(20px)}
+.modal-ft{padding:1rem 1.6rem;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
+.btn-cancel{padding:8px 18px;background:transparent;border:1px solid var(--border);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--txt3);transition:all 0.2s}
+.btn-cancel:hover{border-color:var(--txt3);color:var(--txt)}
+.btn-save{padding:8px 20px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;letter-spacing:2px;transition:background 0.2s;display:flex;align-items:center;gap:8px}
+.btn-save:hover:not(:disabled){background:var(--green-dk)}
+.btn-save:disabled{background:var(--bg4);color:var(--txt4);cursor:not-allowed}
+.btn-danger{padding:8px 20px;background:var(--red-dim);color:var(--red);border:1px solid rgba(248,113,113,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;transition:all 0.2s}
+.btn-danger:hover{background:rgba(248,113,113,0.15)}
+
+/* Stock modal specific */
+.stock-current{text-align:center;padding:1.5rem 0 1rem;border-bottom:1px solid var(--border);margin-bottom:1.2rem}
+.sc-val{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:var(--txt);display:block;line-height:1;margin-bottom:4px}
+.sc-val.zero{color:var(--red)}
+.sc-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt4)}
+.stock-presets{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:1rem}
+.preset-btn{padding:5px 12px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;color:var(--txt3);transition:all 0.2s}
+.preset-btn:hover{border-color:var(--green);color:var(--green)}
+
+/* Confirm modal */
+.confirm-body{padding:2rem 1.5rem;text-align:center}
+.confirm-icon{font-size:2.5rem;display:block;margin-bottom:0.8rem}
+.confirm-body h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);margin-bottom:0.5rem;letter-spacing:-0.3px}
+.confirm-body p{font-size:0.88rem;color:var(--txt3);font-weight:300;line-height:1.7}
+
+/* SAVING OVERLAY */
+.saving-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:600;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+.saving-overlay.show{display:flex}
+.saving-spin{width:36px;height:36px;border:3px solid rgba(74,222,128,0.2);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.saving-txt{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:2px;color:var(--green)}
+
+/* TOAST */
+.toast-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:700;display:flex;flex-direction:column;gap:6px}
+.toast{padding:10px 16px;background:var(--bg3);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;border:1px solid var(--border);display:flex;align-items:center;gap:8px;animation:tIn 0.25s ease;max-width:300px}
+.toast.ok{border-left:3px solid var(--green)}
+.toast.err{border-left:3px solid var(--red)}
+.toast.info{border-left:3px solid var(--blue)}
+@keyframes tIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.main{grid-template-columns:1fr}.right-panel{position:static}}
+@media(max-width:600px){.prod-row{grid-template-columns:40px 1fr auto};.pr-stock-wrap{display:none}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-box">
+    <span class="login-icon">🔒</span>
+    <h2>Admin Access</h2>
+    <div class="login-sub">PAIZ SHOP MANAGER PANEL</div>
+    <div class="login-group">
+      <label class="login-label">PASSWORD</label>
+      <input type="password" class="login-input" id="login-pass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()">
+    </div>
+    <button class="login-btn" onclick="login()">ENTER PANEL</button>
+    <div class="login-error" id="login-err">⚠ Incorrect password</div>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="app">
+
+  <nav>
+    <div class="nav-brand">
+      <div class="nav-sq">ADM</div>
+      <span class="nav-name">Paiz Shop</span>
+    </div>
+    <span class="nav-tag">MANAGER PANEL</span>
+    <div class="nav-right">
+      <a href="/PaizCorp/PaizShop/" class="nav-link" target="_blank">← VIEW SHOP</a>
+      <button class="logout-btn" onclick="logout()">LOGOUT</button>
+    </div>
+  </nav>
+
+  <div class="admin-header">
+    <div class="ah-left">
+      <div class="ah-eyebrow">ADMIN · PRODUCT MANAGEMENT</div>
+      <div class="ah-title">Manager Panel</div>
+      <div class="ah-sub">Add, edit, stock, list/unlist, and delete products. All changes sync to GitHub.</div>
+    </div>
+    <div class="ah-stats">
+      <div class="ah-stat"><span class="ahs-val" id="st-total" style="color:var(--blue)">—</span><span class="ahs-key">TOTAL</span></div>
+      <div class="ah-stat"><span class="ahs-val" id="st-listed" style="color:var(--green)">—</span><span class="ahs-key">LISTED</span></div>
+      <div class="ah-stat"><span class="ahs-val" id="st-stock" style="color:var(--gold)">—</span><span class="ahs-key">IN STOCK</span></div>
+      <div class="ah-stat"><span class="ahs-val" id="st-out" style="color:var(--red)">—</span><span class="ahs-key">SOLD OUT</span></div>
+    </div>
+  </div>
+
+  <!-- CONFIG SETUP BANNER -->
+  <div id="setup-banner" class="setup-banner">
+    <span class="sb-icon">⚙️</span>
+    <span class="sb-txt">GitHub token or webhook not configured. Set them in the Config panel → then reload.</span>
+    <button class="sb-btn" onclick="document.querySelector('.right-panel').scrollIntoView({behavior:'smooth'})">CONFIGURE →</button>
+  </div>
+
+  <div class="main">
+    <!-- LEFT: Products Table -->
+    <div class="table-area">
+      <div class="section-hd">
+        <span class="sec-title">Products</span>
+        <button class="add-new-btn" onclick="openAddModal()">＋ ADD PRODUCT</button>
+      </div>
+      <input type="text" class="table-search" placeholder="Search products..." oninput="renderTable()">
+      <div class="prod-list" id="prod-list">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);padding:2rem;text-align:center">Loading products...</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Config + Log -->
+    <div class="right-panel">
+
+      <!-- Quick Stats -->
+      <div class="panel-box">
+        <div class="panel-title">QUICK STATS</div>
+        <div class="qs-grid">
+          <div class="qs-item"><span class="qs-val" id="qs-total" style="color:var(--blue)">—</span><span class="qs-key">PRODUCTS</span></div>
+          <div class="qs-item"><span class="qs-val" id="qs-listed" style="color:var(--green)">—</span><span class="qs-key">LISTED</span></div>
+          <div class="qs-item"><span class="qs-val" id="qs-instock" style="color:var(--gold)">—</span><span class="qs-key">IN STOCK</span></div>
+          <div class="qs-item"><span class="qs-val" id="qs-hidden" style="color:var(--txt4)">—</span><span class="qs-key">HIDDEN</span></div>
+        </div>
+      </div>
+
+      <!-- Config -->
+      <div class="panel-box">
+        <div class="panel-title">CONFIGURATION</div>
+        <div class="cfg-group">
+          <label class="cfg-label">GITHUB TOKEN (PAT)</label>
+          <input type="password" class="cfg-input" id="cfg-token" placeholder="ghp_xxxxxxxxxxxx">
+          <div style="font-size:0.72rem;color:var(--txt4);margin-top:3px">Needs <code style="color:var(--gold)">repo</code> scope. Stored in browser only.</div>
+        </div>
+        <div class="cfg-group">
+          <label class="cfg-label">GITHUB REPO</label>
+          <input type="text" class="cfg-input" id="cfg-repo" placeholder="faizzzlol/PaizCorp">
+        </div>
+        <div class="cfg-group">
+          <label class="cfg-label">PRODUCTS.JSON PATH</label>
+          <input type="text" class="cfg-input" id="cfg-path" placeholder="PaizShop/products.json">
+        </div>
+        <div class="cfg-group">
+          <label class="cfg-label">DISCORD WEBHOOK (ADMIN LOG)</label>
+          <input type="text" class="cfg-input" id="cfg-webhook" placeholder="https://discord.com/api/webhooks/...">
+        </div>
+        <button class="cfg-save-btn" onclick="saveConfig()">SAVE CONFIG</button>
+      </div>
+
+      <!-- Activity Log -->
+      <div class="panel-box">
+        <div class="panel-title">ACTIVITY LOG</div>
+        <div class="log-list" id="log-list">
+          <div class="log-empty">No activity yet.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ADD / EDIT MODAL -->
+<div class="m-overlay" id="product-modal">
+  <div class="modal">
+    <div class="modal-hd">
+      <h3 id="pmodal-title">Add Product</h3>
+      <button class="modal-close" onclick="closeProductModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="pm-edit-id">
+      <div class="frow">
+        <div class="fg">
+          <label class="flabel">PRODUCT ID <span class="req">*</span></label>
+          <input type="text" class="finput" id="pm-id" placeholder="e.g. shulker_box">
+          <div class="fhint">Lowercase, underscores only</div>
+        </div>
+        <div class="fg">
+          <label class="flabel">NAME <span class="req">*</span></label>
+          <input type="text" class="finput" id="pm-name" placeholder="Shulker Box">
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fg">
+          <label class="flabel">PRICE <span class="req">*</span></label>
+          <input type="number" class="finput" id="pm-price" placeholder="4" min="0" step="1">
+        </div>
+        <div class="fg">
+          <label class="flabel">CURRENCY UNIT</label>
+          <input type="text" class="finput" id="pm-unit" placeholder="Diamond" value="Diamond">
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fg">
+          <label class="flabel">INITIAL STOCK</label>
+          <input type="number" class="finput" id="pm-stock" placeholder="0" min="0" step="1" value="0">
+        </div>
+        <div class="fg">
+          <label class="flabel">CATEGORY</label>
+          <input type="text" class="finput" id="pm-category" placeholder="Materials">
+        </div>
+      </div>
+      <div class="fg">
+        <label class="flabel">IMAGE PATH</label>
+        <input type="text" class="finput" id="pm-image" placeholder="img/iron_ingot.png">
+        <div class="fhint">Relative to PaizShop folder</div>
+      </div>
+      <div class="fg">
+        <label class="flabel">DESCRIPTION</label>
+        <input type="text" class="finput" id="pm-desc" placeholder="Short product description">
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-lbl">LISTED (visible in shop)</span>
+        <label class="toggle">
+          <input type="checkbox" id="pm-listed" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn-cancel" onclick="closeProductModal()">CANCEL</button>
+      <button class="btn-save" id="pmodal-save-btn" onclick="saveProduct()">
+        <span id="pmodal-spin" style="width:13px;height:13px;border:2px solid rgba(0,0,0,0.3);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite;display:none"></span>
+        SAVE
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- STOCK MODAL -->
+<div class="m-overlay" id="stock-modal">
+  <div class="modal">
+    <div class="modal-hd">
+      <h3>Update Stock</h3>
+      <button class="modal-close" onclick="closeStockModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);margin-bottom:0.5rem" id="sm-product-name">—</div>
+      <div class="stock-current">
+        <span class="sc-val" id="sm-current">0</span>
+        <span class="sc-lbl">CURRENT STOCK</span>
+      </div>
+      <input type="hidden" id="sm-id">
+      <div class="fg">
+        <label class="flabel">SET STOCK TO</label>
+        <input type="number" class="finput" id="sm-value" placeholder="0" min="0" step="1">
+      </div>
+      <div class="stock-presets">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt4);align-self:center">QUICK SET:</span>
+        <button class="preset-btn" onclick="document.getElementById('sm-value').value=0">0</button>
+        <button class="preset-btn" onclick="document.getElementById('sm-value').value=5">5</button>
+        <button class="preset-btn" onclick="document.getElementById('sm-value').value=10">10</button>
+        <button class="preset-btn" onclick="document.getElementById('sm-value').value=20">20</button>
+        <button class="preset-btn" onclick="document.getElementById('sm-value').value=50">50</button>
+        <button class="preset-btn" onclick="document.getElementById('sm-value').value=99">99</button>
+      </div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn-cancel" onclick="closeStockModal()">CANCEL</button>
+      <button class="btn-save" onclick="saveStock()">UPDATE STOCK</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM / DELETE MODAL -->
+<div class="m-overlay" id="confirm-modal">
+  <div class="modal">
+    <div class="confirm-body">
+      <span class="confirm-icon" id="cm-icon">⚠️</span>
+      <h3 id="cm-title">Are you sure?</h3>
+      <p id="cm-msg">This action cannot be undone.</p>
+    </div>
+    <div class="modal-ft">
+      <button class="btn-cancel" onclick="closeConfirm()">CANCEL</button>
+      <button class="btn-danger" id="cm-confirm-btn">CONFIRM</button>
+    </div>
+  </div>
+</div>
+
+<!-- SAVING OVERLAY -->
+<div class="saving-overlay" id="saving-overlay">
+  <div class="saving-spin"></div>
+  <div class="saving-txt" id="saving-txt">SAVING TO GITHUB...</div>
+</div>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   PAIZ SHOP ADMIN PANEL
+   - Login: password stored in localStorage
+   - Products: loaded from + saved to GitHub API
+   - Actions: logged to Discord webhook
+══════════════════════════════════════════════════════ */
+
+/* ── CONSTANTS ────────────────────────────────────── */
+const ADMIN_PASSWORD = 'PaizAdmin2026'; // CHANGE THIS BEFORE DEPLOYING
+const LS = {
+  SESSION:  'ps_admin_session',
+  TOKEN:    'ps_admin_token',
+  REPO:     'ps_admin_repo',
+  PATH:     'ps_admin_path',
+  WEBHOOK:  'ps_admin_webhook',
+  LOG:      'ps_admin_log'
+};
+
+/* ── STATE ───────────────────────────────────────── */
+let products  = [];
+let fileSha   = '';   // GitHub file SHA (required for PUT)
+let editingId = null; // null = add, string = edit
+
+/* ── LOGIN ───────────────────────────────────────── */
+function login() {
+  const pass = document.getElementById('login-pass').value;
+  if (pass === ADMIN_PASSWORD) {
+    localStorage.setItem(LS.SESSION, '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initApp();
+  } else {
+    document.getElementById('login-err').style.display = 'block';
+    setTimeout(()=>document.getElementById('login-err').style.display='none', 2500);
+  }
+}
+
+function logout() {
+  localStorage.removeItem(LS.SESSION);
+  location.reload();
+}
+
+/* ── INIT ─────────────────────────────────────────── */
+function initApp() {
+  // Load saved config into fields
+  document.getElementById('cfg-token').value   = localStorage.getItem(LS.TOKEN)   || '';
+  document.getElementById('cfg-repo').value    = localStorage.getItem(LS.REPO)    || 'faizzzlol/PaizCorp';
+  document.getElementById('cfg-path').value    = localStorage.getItem(LS.PATH)    || 'PaizShop/products.json';
+  document.getElementById('cfg-webhook').value = localStorage.getItem(LS.WEBHOOK) || '';
+
+  const token   = localStorage.getItem(LS.TOKEN);
+  const repo    = localStorage.getItem(LS.REPO);
+  const path    = localStorage.getItem(LS.PATH);
+  const webhook = localStorage.getItem(LS.WEBHOOK);
+
+  if (!token || !repo || !path) {
+    document.getElementById('setup-banner').style.display = 'flex';
+    products = [];
+    renderTable();
+    renderLog();
+    updateStats();
+    return;
+  }
+
+  loadProducts();
+  renderLog();
+}
+
+function saveConfig() {
+  localStorage.setItem(LS.TOKEN,   document.getElementById('cfg-token').value.trim());
+  localStorage.setItem(LS.REPO,    document.getElementById('cfg-repo').value.trim());
+  localStorage.setItem(LS.PATH,    document.getElementById('cfg-path').value.trim());
+  localStorage.setItem(LS.WEBHOOK, document.getElementById('cfg-webhook').value.trim());
+  toast('Config saved! Reloading products...', 'ok');
+  document.getElementById('setup-banner').style.display = 'none';
+  setTimeout(()=>loadProducts(), 500);
+}
+
+/* ── GITHUB API ──────────────────────────────────── */
+function getConfig() {
+  return {
+    token:   localStorage.getItem(LS.TOKEN)   || '',
+    repo:    localStorage.getItem(LS.REPO)    || 'faizzzlol/PaizCorp',
+    path:    localStorage.getItem(LS.PATH)    || 'PaizShop/products.json',
+    webhook: localStorage.getItem(LS.WEBHOOK) || ''
+  };
+}
+
+async function loadProducts() {
+  const { token, repo, path } = getConfig();
+  if (!token) return;
+  showSaving('LOADING FROM GITHUB...');
+  try {
+    const r = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+      headers: { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!r.ok) throw new Error('GitHub API: ' + r.status);
+    const data = await r.json();
+    fileSha  = data.sha;
+    products = JSON.parse(atob(data.content.replace(/\n/g, '')));
+    hideSaving();
+    renderTable();
+    updateStats();
+  } catch (e) {
+    hideSaving();
+    toast('Failed to load from GitHub: ' + e.message, 'err');
+    renderTable();
+  }
+}
+
+async function saveToGithub(commitMsg) {
+  const { token, repo, path } = getConfig();
+  if (!token) { toast('No GitHub token configured', 'err'); return false; }
+
+  showSaving('SAVING TO GITHUB...');
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(products, null, 2))));
+    const body = { message: commitMsg, content, sha: fileSha };
+
+    const r = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: 'token ' + token,
+        Accept:        'application/vnd.github.v3+json',
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    if (!r.ok) {
+      const err = await r.json();
+      throw new Error(err.message || r.status);
+    }
+
+    const data = await r.json();
+    fileSha = data.content.sha;
+    hideSaving();
+    return true;
+  } catch (e) {
+    hideSaving();
+    toast('GitHub save failed: ' + e.message, 'err');
+    return false;
+  }
+}
+
+/* ── DISCORD LOG ─────────────────────────────────── */
+async function discordLog(action, details, color) {
+  const { webhook } = getConfig();
+  if (!webhook) return;
+  const ts = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
+  try {
+    await fetch(webhook, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: 'Paiz Shop Admin',
+        avatar_url: 'https://faizzzlol.github.io/thelol/TheLoL2.png',
+        embeds: [{
+          title: '⚙️ Admin Action — ' + action,
+          color: color || 0x60a5fa,
+          description: details,
+          footer: { text: 'Paiz Shop Admin · ' + ts },
+          timestamp: new Date().toISOString()
+        }]
+      })
+    });
+  } catch {}
+}
+
+/* ── LOCAL LOG ───────────────────────────────────── */
+function addLog(action) {
+  const log  = JSON.parse(localStorage.getItem(LS.LOG) || '[]');
+  const ts   = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
+  log.unshift({ action, ts });
+  localStorage.setItem(LS.LOG, JSON.stringify(log.slice(0, 30)));
+  renderLog();
+}
+
+function renderLog() {
+  const log = JSON.parse(localStorage.getItem(LS.LOG) || '[]');
+  const el  = document.getElementById('log-list');
+  if (!log.length) { el.innerHTML='<div class="log-empty">No activity yet.</div>'; return; }
+  el.innerHTML = log.map(l=>`
+    <div class="log-item">
+      <div class="log-action">${l.action}</div>
+      <div class="log-time">${l.ts}</div>
+    </div>`).join('');
+}
+
+/* ── RENDER TABLE ────────────────────────────────── */
+function renderTable() {
+  const q    = (document.querySelector('.table-search')?.value || '').toLowerCase();
+  const list = products.filter(p => !q || p.name.toLowerCase().includes(q) || (p.id||'').includes(q));
+  const el   = document.getElementById('prod-list');
+
+  if (!list.length) {
+    el.innerHTML = `<div style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);padding:2rem;text-align:center">NO PRODUCTS FOUND</div>`;
+    return;
+  }
+
+  el.innerHTML = list.map(p => {
+    const isListed = p.listed;
+    const rowCls   = isListed ? 'status-listed' : 'status-unlisted';
+    const tagCls   = isListed ? 'tag-listed' : 'tag-unlisted';
+    const tagTxt   = isListed ? 'LISTED' : 'HIDDEN';
+    const toggleCls= isListed ? 'listed' : 'unlisted';
+    const toggleTip= isListed ? 'Hide from shop' : 'Show in shop';
+    const stockCls = p.stock <= 0 ? 'zero' : '';
+
+    return `
+    <div class="prod-row ${rowCls}">
+      <div class="pr-img">
+        ${p.image
+          ? `<img src="../${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="pr-img-ph" style="display:none">📦</span>`
+          : `<span class="pr-img-ph">📦</span>`}
+      </div>
+      <div class="pr-info">
+        <div class="pr-name">${p.name}</div>
+        <div class="pr-meta">
+          <span class="pr-price">◆ ${p.price} ${p.unit||'Diamond'}</span>
+          ${p.category?`<span class="pr-cat">${p.category}</span>`:''}
+          <span class="pr-status-tag ${tagCls}">${tagTxt}</span>
+        </div>
+      </div>
+      <div class="pr-stock-wrap">
+        <span class="pr-stock-num ${stockCls}">${p.stock}</span>
+        <span class="pr-stock-lbl">STOCK</span>
+      </div>
+      <div class="pr-actions">
+        <button class="act-btn act-edit"   title="Edit product"     onclick="openEditModal('${p.id}')">✏️</button>
+        <button class="act-btn act-stock"  title="Update stock"     onclick="openStockModal('${p.id}')">📦</button>
+        <button class="act-btn act-toggle ${toggleCls}" title="${toggleTip}" onclick="toggleListed('${p.id}')">${isListed?'👁':'🚫'}</button>
+        <button class="act-btn act-del"    title="Delete product"   onclick="confirmDelete('${p.id}')">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── STATS ───────────────────────────────────────── */
+function updateStats() {
+  const total   = products.length;
+  const listed  = products.filter(p=>p.listed).length;
+  const inStock = products.filter(p=>p.listed && p.stock>0).length;
+  const out     = products.filter(p=>p.listed && p.stock<=0).length;
+  const hidden  = total - listed;
+
+  ['st-total','qs-total'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=total});
+  ['st-listed','qs-listed'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=listed});
+  ['st-stock','qs-instock'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=inStock});
+  document.getElementById('st-out').textContent   = out;
+  document.getElementById('qs-hidden').textContent = hidden;
+}
+
+/* ── ADD PRODUCT MODAL ───────────────────────────── */
+function openAddModal() {
+  editingId = null;
+  document.getElementById('pmodal-title').textContent = 'Add Product';
+  ['pm-id','pm-name','pm-price','pm-category','pm-image','pm-desc'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('pm-unit').value    = 'Diamond';
+  document.getElementById('pm-stock').value   = '0';
+  document.getElementById('pm-listed').checked = true;
+  document.getElementById('pm-id').disabled   = false;
+  document.getElementById('product-modal').classList.add('open');
+}
+
+function openEditModal(id) {
+  const p = products.find(x=>x.id===id);
+  if (!p) return;
+  editingId = id;
+  document.getElementById('pmodal-title').textContent = 'Edit Product';
+  document.getElementById('pm-edit-id').value = id;
+  document.getElementById('pm-id').value      = p.id;
+  document.getElementById('pm-name').value    = p.name;
+  document.getElementById('pm-price').value   = p.price;
+  document.getElementById('pm-unit').value    = p.unit || 'Diamond';
+  document.getElementById('pm-stock').value   = p.stock;
+  document.getElementById('pm-category').value= p.category || '';
+  document.getElementById('pm-image').value   = p.image || '';
+  document.getElementById('pm-desc').value    = p.description || '';
+  document.getElementById('pm-listed').checked= p.listed;
+  document.getElementById('pm-id').disabled   = true; // can't change ID when editing
+  document.getElementById('product-modal').classList.add('open');
+}
+
+function closeProductModal() {
+  document.getElementById('product-modal').classList.remove('open');
+  editingId = null;
+}
+
+async function saveProduct() {
+  const id    = document.getElementById('pm-id').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');
+  const name  = document.getElementById('pm-name').value.trim();
+  const price = parseInt(document.getElementById('pm-price').value) || 0;
+  const unit  = document.getElementById('pm-unit').value.trim() || 'Diamond';
+  const stock = parseInt(document.getElementById('pm-stock').value) || 0;
+  const cat   = document.getElementById('pm-category').value.trim();
+  const image = document.getElementById('pm-image').value.trim();
+  const desc  = document.getElementById('pm-desc').value.trim();
+  const listed= document.getElementById('pm-listed').checked;
+
+  if (!id || !name || price < 0) { toast('Fill in ID, Name, and Price', 'err'); return; }
+
+  const btn  = document.getElementById('pmodal-save-btn');
+  const spin = document.getElementById('pmodal-spin');
+  btn.disabled = true; spin.style.display = 'block';
+
+  if (editingId) {
+    // Update existing
+    const idx = products.findIndex(p=>p.id===editingId);
+    if (idx === -1) { toast('Product not found', 'err'); btn.disabled=false; spin.style.display='none'; return; }
+    products[idx] = { ...products[idx], name, price, unit, stock, category:cat, image, description:desc, listed };
+    const ok = await saveToGithub(`[PaizShop] Edit product: ${name}`);
+    if (ok) {
+      addLog(`Edited: ${name}`);
+      discordLog('PRODUCT EDITED', `**${name}** (${id})\nPrice: ◆ ${price}\nStock: ${stock}\nListed: ${listed?'Yes':'No'}`, 0x60a5fa);
+      toast('Product updated!', 'ok');
+      closeProductModal();
+      renderTable(); updateStats();
+    }
+  } else {
+    // Add new
+    if (products.find(p=>p.id===id)) { toast('ID already exists!', 'err'); btn.disabled=false; spin.style.display='none'; return; }
+    products.push({ id, name, price, unit, stock, category:cat, image, description:desc, listed });
+    const ok = await saveToGithub(`[PaizShop] Add product: ${name}`);
+    if (ok) {
+      addLog(`Added: ${name}`);
+      discordLog('PRODUCT ADDED', `**${name}** (${id})\nPrice: ◆ ${price}\nStock: ${stock}\nCategory: ${cat||'—'}`, 0x4ade80);
+      toast('Product added!', 'ok');
+      closeProductModal();
+      renderTable(); updateStats();
+    }
+  }
+
+  btn.disabled=false; spin.style.display='none';
+}
+
+/* ── STOCK MODAL ─────────────────────────────────── */
+function openStockModal(id) {
+  const p = products.find(x=>x.id===id);
+  if (!p) return;
+  document.getElementById('sm-id').value = id;
+  document.getElementById('sm-product-name').textContent = p.name.toUpperCase();
+  const cur = document.getElementById('sm-current');
+  cur.textContent = p.stock;
+  cur.className   = 'sc-val' + (p.stock<=0 ? ' zero' : '');
+  document.getElementById('sm-value').value = p.stock;
+  document.getElementById('stock-modal').classList.add('open');
+}
+
+function closeStockModal() { document.getElementById('stock-modal').classList.remove('open'); }
+
+async function saveStock() {
+  const id    = document.getElementById('sm-id').value;
+  const val   = parseInt(document.getElementById('sm-value').value);
+  if (isNaN(val) || val < 0) { toast('Enter a valid stock number', 'err'); return; }
+
+  const p   = products.find(x=>x.id===id);
+  if (!p) return;
+  const old = p.stock;
+  p.stock   = val;
+
+  const ok = await saveToGithub(`[PaizShop] Stock update: ${p.name} → ${val}`);
+  if (ok) {
+    addLog(`Stock: ${p.name} ${old} → ${val}`);
+    discordLog('STOCK UPDATED',
+      `**${p.name}**\n${old} → **${val}** ${val===0?'(SOLD OUT)':val>old?'(restocked)':'(reduced)'}`,
+      val===0 ? 0xf87171 : 0xfbbf24
+    );
+    toast('Stock updated!', 'ok');
+    closeStockModal();
+    renderTable(); updateStats();
+  } else {
+    p.stock = old; // revert on fail
+  }
+}
+
+/* ── TOGGLE LISTED ───────────────────────────────── */
+async function toggleListed(id) {
+  const p  = products.find(x=>x.id===id);
+  if (!p) return;
+  const was = p.listed;
+  p.listed  = !was;
+
+  const ok = await saveToGithub(`[PaizShop] ${p.listed?'Listed':'Unlisted'}: ${p.name}`);
+  if (ok) {
+    addLog(`${p.listed?'Listed':'Unlisted'}: ${p.name}`);
+    discordLog(p.listed ? 'PRODUCT LISTED' : 'PRODUCT UNLISTED',
+      `**${p.name}** is now ${p.listed?'visible in shop':'hidden from shop'}`,
+      p.listed ? 0x4ade80 : 0x6b7280
+    );
+    toast(`${p.name} ${p.listed?'listed':'unlisted'}!`, 'ok');
+    renderTable(); updateStats();
+  } else {
+    p.listed = was; // revert
+  }
+}
+
+/* ── DELETE ──────────────────────────────────────── */
+let _deleteId = null;
+
+function confirmDelete(id) {
+  const p = products.find(x=>x.id===id);
+  if (!p) return;
+  _deleteId = id;
+  document.getElementById('cm-title').textContent = 'Delete "' + p.name + '"?';
+  document.getElementById('cm-msg').textContent   = 'This will permanently remove the product from products.json. This cannot be undone.';
+  document.getElementById('cm-confirm-btn').onclick = executeDelete;
+  document.getElementById('confirm-modal').classList.add('open');
+}
+
+function closeConfirm() {
+  document.getElementById('confirm-modal').classList.remove('open');
+  _deleteId = null;
+}
+
+async function executeDelete() {
+  const id = _deleteId;
+  const p  = products.find(x=>x.id===id);
+  if (!p) { closeConfirm(); return; }
+
+  closeConfirm();
+  products = products.filter(x=>x.id!==id);
+
+  const ok = await saveToGithub(`[PaizShop] Delete product: ${p.name}`);
+  if (ok) {
+    addLog(`Deleted: ${p.name}`);
+    discordLog('PRODUCT DELETED', `**${p.name}** (${id}) has been removed from the shop.`, 0xf87171);
+    toast('Product deleted!', 'info');
+    renderTable(); updateStats();
+  } else {
+    products.push(p); // restore on fail
+    renderTable();
+  }
+}
+
+/* ── SAVING OVERLAY ──────────────────────────────── */
+function showSaving(msg) {
+  document.getElementById('saving-txt').textContent = msg || 'SAVING...';
+  document.getElementById('saving-overlay').classList.add('show');
+}
+function hideSaving() { document.getElementById('saving-overlay').classList.remove('show'); }
+
+/* ── TOAST ───────────────────────────────────────── */
+function toast(msg, type='ok') {
+  const wrap = document.getElementById('toast-wrap');
+  const el   = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.textContent = msg;
+  wrap.appendChild(el);
+  setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity 0.4s'; setTimeout(()=>el.remove(), 400); }, 3500);
+}
+
+/* ── AUTO-LOGIN ──────────────────────────────────── */
+if (localStorage.getItem(LS.SESSION)) {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  initApp();
+}
+</script>
+</body>
+</html>
