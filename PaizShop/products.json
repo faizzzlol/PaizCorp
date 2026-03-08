@@ -1,0 +1,57 @@
+[
+  {
+    "id": "shulker_box",
+    "name": "Shulker Box",
+    "price": 4,
+    "unit": "Diamond",
+    "stock": 0,
+    "image": "img/shulker_box.png",
+    "category": "Storage",
+    "listed": true,
+    "description": "Store and carry items in bulk."
+  },
+  {
+    "id": "mending",
+    "name": "Mending I",
+    "price": 3,
+    "unit": "Diamond",
+    "stock": 0,
+    "image": "img/mending.png",
+    "category": "Enchantment",
+    "listed": true,
+    "description": "Repair items using XP orbs."
+  },
+  {
+    "id": "unbreaking_iii",
+    "name": "Unbreaking III",
+    "price": 2,
+    "unit": "Diamond",
+    "stock": 0,
+    "image": "img/mending.png",
+    "category": "Enchantment",
+    "listed": true,
+    "description": "Greatly increases item durability."
+  },
+  {
+    "id": "nether_wart",
+    "name": "Nether Wart",
+    "price": 3,
+    "unit": "Diamond",
+    "stock": 0,
+    "image": "img/nether_wart.png",
+    "category": "Farming",
+    "listed": true,
+    "description": "Essential ingredient for potion brewing."
+  },
+  {
+    "id": "iron_ingot",
+    "name": "Iron Ingot",
+    "price": 1,
+    "unit": "Diamond",
+    "stock": 0,
+    "image": "img/iron_ingot.png",
+    "category": "Materials",
+    "listed": true,
+    "description": "Versatile crafting material."
+  }
+]
