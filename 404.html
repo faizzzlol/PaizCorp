@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found | Paiz® Corp</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream:    #faf6ee;
+  --cream2:   #f2ead8;
+  --cream3:   #e8ddc4;
+  --ink:      #1a1209;
+  --ink2:     #2e2010;
+  --ink3:     rgba(26,18,9,0.62);
+  --ink4:     rgba(26,18,9,0.38);
+  --ink5:     rgba(26,18,9,0.16);
+  --gold:     #b8860b;
+  --gold2:    #d4a017;
+  --red:      #8b1a00;
+  --void:     #07050f;
+  --void2:    #0d0818;
+  --purple:   #6b21a8;
+  --border:   rgba(26,18,9,0.12);
+}
+
+html { height: 100%; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ── LAYOUT ── */
+.page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(250,246,238,0.85);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.corp-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  text-decoration: none;
+}
+.corp-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+}
+.corp-logo-reg {
+  font-size: 0.55rem;
+  vertical-align: super;
+  color: var(--gold);
+}
+.corp-logo-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.38rem;
+  letter-spacing: 2px;
+  color: var(--ink4);
+  margin-left: 2px;
+}
+.topbar-status {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.44rem;
+  letter-spacing: 2px;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.topbar-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+/* ── VOID SECTION ── */
+.void-section {
+  background: var(--void);
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Stars */
+.stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle var(--d, 3s) ease-in-out infinite;
+  opacity: var(--o, 0.4);
+}
+@keyframes twinkle { 0%,100%{opacity:var(--o,0.4)} 50%{opacity:0.1} }
+
+/* Void gradient fade */
+.void-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--cream));
+  pointer-events: none;
+}
+
+/* 404 BIG NUMBER */
+.void-404 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(7rem, 22vw, 14rem);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.08);
+  line-height: 0.85;
+  letter-spacing: -4px;
+  position: relative;
+  z-index: 1;
+  user-select: none;
+  text-align: center;
+}
+.void-404 span {
+  display: inline-block;
+  animation: floatNum var(--nd, 4s) ease-in-out infinite;
+}
+@keyframes floatNum { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+/* FALLING PIXEL CHARACTER */
+.pixel-char {
+  position: relative;
+  z-index: 2;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  animation: fall 3s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes fall {
+  0%   { transform: translateY(-8px) rotate(-3deg); }
+  30%  { transform: translateY(4px) rotate(2deg); }
+  60%  { transform: translateY(-4px) rotate(-1deg); }
+  100% { transform: translateY(-8px) rotate(-3deg); }
+}
+
+/* pixel art SVG character inline */
+.char-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.pixel-row {
+  display: flex;
+  gap: 2px;
+}
+.px {
+  width: 8px;
+  height: 8px;
+  border-radius: 0;
+}
+.void-subtitle {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  padding-bottom: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  padding: 4rem 2.5rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.error-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.48rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+.error-eyebrow::before, .error-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ink5);
+}
+
+.error-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+.error-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.error-desc {
+  font-size: 1rem;
+  color: var(--ink3);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+/* CURRENT PATH */
+.path-display {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  background: var(--cream2);
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  color: var(--ink3);
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 3rem;
+}
+.path-display span { color: var(--red); }
+
+/* DIVIDER */
+.section-div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+.section-div-line { flex: 1; height: 1px; background: var(--ink5); }
+.section-div-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.44rem;
+  letter-spacing: 3px;
+  color: var(--ink4);
+}
+
+/* SITE GRID */
+.sites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+
+.site-card {
+  background: var(--cream);
+  padding: 1.2rem 1.4rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.site-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  transition: width 0.3s ease;
+}
+.site-card:hover { background: var(--cream2); }
+.site-card:hover::after { width: 100%; }
+
+.sc-corp::after  { background: var(--gold); }
+.sc-shop::after  { background: #4ade80; }
+.sc-chick::after { background: #cc2200; }
+.sc-rail::after  { background: #60a5fa; }
+.sc-build::after { background: #fb923c; }
+.sc-prod::after  { background: #a855f7; }
+.sc-lol::after   { background: var(--gold2); }
+
+.sc-icon { font-size: 1.4rem; margin-bottom: 2px; }
+.sc-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.2px;
+}
+.sc-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.4rem;
+  letter-spacing: 2px;
+  color: var(--ink4);
+}
+.sc-arrow {
+  font-size: 0.75rem;
+  color: var(--ink4);
+  margin-top: 4px;
+  transition: transform 0.2s, color 0.2s;
+}
+.site-card:hover .sc-arrow { transform: translateX(4px); color: var(--ink2); }
+
+/* BACK HOME BTN */
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--cream);
+  text-decoration: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 2.5px;
+  padding: 13px 28px;
+  transition: background 0.2s, transform 0.15s;
+  border: none;
+  cursor: pointer;
+}
+.home-btn:hover { background: var(--ink2); transform: translateY(-1px); }
+.home-btn-gold {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid rgba(184,134,11,0.35);
+  margin-left: 10px;
+}
+.home-btn-gold:hover { background: rgba(184,134,11,0.08); transform: translateY(-1px); }
+
+/* ── FOOTER ── */
+footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding: 1.4rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: var(--cream2);
+}
+.foot-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.8rem;
+  color: var(--ink3);
+}
+.foot-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.4rem;
+  letter-spacing: 2px;
+  color: var(--ink4);
+}
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 0.6s ease forwards;
+}
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+.d1 { animation-delay: 0.1s; }
+.d2 { animation-delay: 0.2s; }
+.d3 { animation-delay: 0.3s; }
+.d4 { animation-delay: 0.45s; }
+.d5 { animation-delay: 0.6s; }
+
+@media (max-width: 600px) {
+  .topbar { padding: 1rem 1.2rem; }
+  .main { padding: 2.5rem 1.2rem 2rem; }
+  footer { padding: 1rem 1.2rem; }
+  .home-btn-gold { margin-left: 0; margin-top: 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <a href="https://faizzzlol.github.io/PaizCorp/" class="corp-logo">
+      <span class="corp-logo-text">Paiz<span class="corp-logo-reg">®</span> Corp</span>
+      <span class="corp-logo-tag">CONGLOMERATE</span>
+    </a>
+    <span class="topbar-status">404 ERROR</span>
+  </header>
+
+  <!-- VOID -->
+  <div class="void-section">
+    <!-- Stars -->
+    <div class="stars" id="stars"></div>
+
+    <div class="void-404">
+      <span style="--nd:3.8s">4</span><span style="--nd:4.2s">0</span><span style="--nd:3.5s">4</span>
+    </div>
+
+    <!-- Pixel art character falling -->
+    <div class="pixel-char">
+      <div class="char-wrap">
+        <!-- Head -->
+        <div class="pixel-row">
+          <div class="px" style="background:#c8a46e"></div>
+          <div class="px" style="background:#c8a46e"></div>
+          <div class="px" style="background:#c8a46e"></div>
+          <div class="px" style="background:#c8a46e"></div>
+        </div>
+        <!-- Eyes -->
+        <div class="pixel-row">
+          <div class="px" style="background:#c8a46e"></div>
+          <div class="px" style="background:#2c1a0e"></div>
+          <div class="px" style="background:#c8a46e"></div>
+          <div class="px" style="background:#2c1a0e"></div>
+          <div class="px" style="background:#c8a46e"></div>
+        </div>
+        <!-- Body -->
+        <div class="pixel-row">
+          <div class="px" style="background:#4a7c3f"></div>
+          <div class="px" style="background:#4a7c3f"></div>
+          <div class="px" style="background:#4a7c3f"></div>
+          <div class="px" style="background:#4a7c3f"></div>
+          <div class="px" style="background:#4a7c3f"></div>
+        </div>
+        <div class="pixel-row">
+          <div class="px" style="background:#5a9c4e"></div>
+          <div class="px" style="background:#4a7c3f"></div>
+          <div class="px" style="background:#4a7c3f"></div>
+          <div class="px" style="background:#4a7c3f"></div>
+          <div class="px" style="background:#5a9c4e"></div>
+        </div>
+        <!-- Legs -->
+        <div class="pixel-row">
+          <div class="px" style="background:#3b5998"></div>
+          <div class="px" style="background:#3b5998"></div>
+          <div class="px" style="background:transparent"></div>
+          <div class="px" style="background:#3b5998"></div>
+          <div class="px" style="background:#3b5998"></div>
+        </div>
+        <div class="pixel-row">
+          <div class="px" style="background:#2a3f6e"></div>
+          <div class="px" style="background:#3b5998"></div>
+          <div class="px" style="background:transparent"></div>
+          <div class="px" style="background:#3b5998"></div>
+          <div class="px" style="background:#2a3f6e"></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="void-subtitle">YOU HAVE FALLEN INTO THE VOID</p>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <div class="error-eyebrow fade-up d1">HTTP 404 — NOT FOUND</div>
+
+    <h1 class="error-title fade-up d2">
+      This page doesn't<br><em>exist</em> anywhere.
+    </h1>
+
+    <p class="error-desc fade-up d3">
+      The URL you followed led you somewhere empty — like a chunk that hasn't loaded yet.
+      Maybe it was moved, renamed, or it never existed at all.
+    </p>
+
+    <div class="path-display fade-up d3">
+      REQUESTED: <span id="bad-path">/unknown</span>
+    </div>
+
+    <div class="section-div fade-up d4">
+      <div class="section-div-line"></div>
+      <div class="section-div-label">FIND YOUR WAY BACK</div>
+      <div class="section-div-line"></div>
+    </div>
+
+    <div class="sites-grid fade-up d4">
+      <a class="site-card sc-corp" href="https://faizzzlol.github.io/PaizCorp/">
+        <span class="sc-icon">🏛</span>
+        <span class="sc-name">Paiz® Corp</span>
+        <span class="sc-tag">CORPORATE HOMEPAGE</span>
+        <span class="sc-arrow">→</span>
+      </a>
+      <a class="site-card sc-shop" href="https://faizzzlol.github.io/PaizCorp/PaizShop/">
+        <span class="sc-icon">🏪</span>
+        <span class="sc-name">Paiz Shop</span>
+        <span class="sc-tag">MINECRAFT ITEM STORE</span>
+        <span class="sc-arrow">→</span>
+      </a>
+      <a class="site-card sc-chick" href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">
+        <span class="sc-icon">🍗</span>
+        <span class="sc-name">Paiz Chicken</span>
+        <span class="sc-tag">FOOD CHAIN</span>
+        <span class="sc-arrow">→</span>
+      </a>
+      <a class="site-card sc-rail" href="https://faizzzlol.github.io/PaizCorp/TLRailways/">
+        <span class="sc-icon">🚂</span>
+        <span class="sc-name">TL Railways</span>
+        <span class="sc-tag">NATIONAL RAIL</span>
+        <span class="sc-arrow">→</span>
+      </a>
+      <a class="site-card sc-build" href="https://faizzzlol.github.io/PaizCorp/PaizConstruction/">
+        <span class="sc-icon">🏗</span>
+        <span class="sc-name">Paiz™ Construction</span>
+        <span class="sc-tag">ENGINEERING & BUILD</span>
+        <span class="sc-arrow">→</span>
+      </a>
+      <a class="site-card sc-prod" href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">
+        <span class="sc-icon">🎬</span>
+        <span class="sc-name">PaizProductions</span>
+        <span class="sc-tag">FILM STUDIO</span>
+        <span class="sc-arrow">→</span>
+      </a>
+      <a class="site-card sc-lol" href="https://faizzzlol.github.io/thelol/">
+        <span class="sc-icon">🏰</span>
+        <span class="sc-name">The Legend of Legiona</span>
+        <span class="sc-tag">THE LOL HOMEPAGE</span>
+        <span class="sc-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="fade-up d5">
+      <a href="https://faizzzlol.github.io/PaizCorp/" class="home-btn">← PAIZ® CORP HOME</a>
+      <a href="javascript:history.back()" class="home-btn home-btn-gold">GO BACK</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="foot-brand">Paiz<sup style="font-size:0.55rem">®</sup> Corp — The Legend of Legiona</span>
+    <span class="foot-note">SKYXION: RAGNAROK · ALL RIGHTS RESERVED</span>
+  </footer>
+
+</div>
+
+<script>
+// Show the bad path
+(function() {
+  const p = window.location.pathname;
+  document.getElementById('bad-path').textContent = p || '/unknown';
+})();
+
+// Generate random stars in the void
+(function() {
+  const container = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.5 + 0.5;
+    s.style.cssText = [
+      'width:' + size + 'px',
+      'height:' + size + 'px',
+      'top:' + Math.random() * 100 + '%',
+      'left:' + Math.random() * 100 + '%',
+      '--d:' + (Math.random() * 3 + 2) + 's',
+      '--o:' + (Math.random() * 0.5 + 0.1),
+      'animation-delay:' + (Math.random() * 4) + 's'
+    ].join(';');
+    container.appendChild(s);
+  }
+})();
+</script>
+</body>
+</html>
