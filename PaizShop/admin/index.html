@@ -115,6 +115,9 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .act-btn{width:32px;height:32px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;color:var(--txt2);font-size:0.8rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;position:relative}
 .act-btn:hover{background:var(--bg4)}
 .act-btn[title]:hover::after{content:attr(title);position:absolute;bottom:calc(100% + 5px);left:50%;transform:translateX(-50%);background:var(--bg4);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.45rem;letter-spacing:1px;white-space:nowrap;padding:3px 8px;border:1px solid var(--border);pointer-events:none;z-index:10}
+.pr-sold{font-family:"IBM Plex Mono",monospace;font-size:0.48rem;letter-spacing:1px;color:var(--txt4);padding:2px 6px;border:1px solid var(--border2)}
+.pr-sold.has-sales{color:var(--green);border-color:rgba(74,222,128,0.2);background:var(--green-dim)}
+.best-badge{font-family:"IBM Plex Mono",monospace;font-size:0.44rem;letter-spacing:1.5px;padding:2px 7px;background:var(--gold-dim);border:1px solid rgba(251,191,36,0.3);color:var(--gold);vertical-align:middle;margin-left:6px}
 
 /* TRANSACTIONS TAB */
 .txn-wrap{padding:2rem 4%;max-width:1300px;margin:0 auto}
@@ -367,6 +370,10 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
           <button class="cfg-save-btn" onclick="saveConfig()">SAVE CONFIG &amp; RELOAD</button>
         </div>
         <div class="panel-box">
+          <div class="panel-title">🏆 BEST SELLERS</div>
+          <div id="best-sellers-list"><div class="log-empty">No sales data yet.</div></div>
+        </div>
+        <div class="panel-box">
           <div class="panel-title">ACTIVITY LOG</div>
           <div class="log-list" id="log-list"><div class="log-empty">No activity yet.</div></div>
         </div>
@@ -535,7 +542,7 @@ function cfg(){return{token:localStorage.getItem(LS.TOKEN)||'',repo:localStorage
 async function ghGet(path){const c=cfg();const r=await fetch(`https://api.github.com/repos/${c.repo}/contents/${path}`,{headers:{Authorization:'token '+c.token,Accept:'application/vnd.github.v3+json'}});if(r.status===401){handle401();return null;}if(!r.ok)throw new Error('GH '+r.status);return r.json();}
 async function ghPut(path,data,sha,msg){const c=cfg();const r=await fetch(`https://api.github.com/repos/${c.repo}/contents/${path}`,{method:'PUT',headers:{Authorization:'token '+c.token,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify({message:msg,content:btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2)))),sha})});if(r.status===401){handle401();return null;}if(!r.ok){const e=await r.json();throw new Error(e.message||r.status);}return r.json();}
 
-async function loadProducts(){const c=cfg();showSaving('LOADING...');try{const d=await ghGet(c.path);if(!d){hideSaving();return;}fileSha=d.sha;products=JSON.parse(atob(d.content.replace(/\n/g,'')));setTS('ok','Connected · '+products.length+' products');document.getElementById('token-banner').style.display='none';document.getElementById('cfg-token').classList.remove('highlight');}catch(e){setTS('err',e.message);toast('Load failed: '+e.message,'err');}hideSaving();renderTable();updateStats();}
+async function loadProducts(){const c=cfg();showSaving('LOADING...');try{const d=await ghGet(c.path);if(!d){hideSaving();return;}fileSha=d.sha;products=JSON.parse(atob(d.content.replace(/\n/g,'')));setTS('ok','Connected · '+products.length+' products');document.getElementById('token-banner').style.display='none';document.getElementById('cfg-token').classList.remove('highlight');}catch(e){setTS('err',e.message);toast('Load failed: '+e.message,'err');}hideSaving();renderTable();renderBestSellers();updateStats();}
 async function loadTransactions(){const c=cfg();try{const d=await ghGet(c.txnPath);if(!d)return;txnSha=d.sha;transactions=JSON.parse(atob(d.content.replace(/\n/g,'')));}catch(e){transactions=[];if(!e.message.includes('404'))toast('transactions.json missing — upload it to your repo first','info');}renderTxns();updateStats();}
 async function saveProd(msg){const c=cfg();showSaving('SAVING...');try{const d=await ghPut(c.path,products,fileSha,msg);if(!d){hideSaving();return false;}fileSha=d.content.sha;hideSaving();return true;}catch(e){hideSaving();toast('Save failed: '+e.message,'err');return false;}}
 async function saveTxns(msg){const c=cfg();showSaving('SAVING...');try{const d=await ghPut(c.txnPath,transactions,txnSha,msg);if(!d){hideSaving();return false;}txnSha=d.content.sha;hideSaving();return true;}catch(e){hideSaving();toast('Save failed: '+e.message,'err');return false;}}
@@ -573,10 +580,22 @@ function renderTable(){
   const el=document.getElementById('prod-list');
   if(!products.length)return;
   if(!list.length){el.innerHTML=`<div style="padding:2rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4)">NO PRODUCTS FOUND</div>`;return;}
-  el.innerHTML=list.map(p=>`
+  const maxSold=Math.max(...products.map(p=>p.sold||0),0);
+  el.innerHTML=list.map(p=>{
+    const isBest=maxSold>0&&(p.sold||0)===maxSold;
+    const sold=p.sold||0;
+    return `
   <div class="prod-row ${p.listed?'status-listed':'status-unlisted'}">
     <div class="pr-img">${p.image?`<img src="../${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="pr-img-ph" style="display:none">📦</span>`:`<span class="pr-img-ph">📦</span>`}</div>
-    <div class="pr-info"><div class="pr-name">${p.name}</div><div class="pr-meta"><span class="pr-price">◆ ${p.price} ${p.unit||'Diamond'}</span>${p.category?`<span class="pr-cat">${p.category}</span>`:''}<span class="pr-status-tag ${p.listed?'tag-listed':'tag-unlisted'}">${p.listed?'LISTED':'HIDDEN'}</span></div></div>
+    <div class="pr-info">
+      <div class="pr-name">${p.name}${isBest?'<span class="best-badge">👑 BEST SELLER</span>':''}</div>
+      <div class="pr-meta">
+        <span class="pr-price">◆ ${p.price} ${p.unit||'Diamond'}</span>
+        ${p.category?`<span class="pr-cat">${p.category}</span>`:''}
+        <span class="pr-status-tag ${p.listed?'tag-listed':'tag-unlisted'}">${p.listed?'LISTED':'HIDDEN'}</span>
+        <span class="pr-sold ${sold>0?'has-sales':''}">📦 ${sold} sold</span>
+      </div>
+    </div>
     <div class="pr-stock-wrap"><span class="pr-stock-num ${p.stock<=0?'zero':''}">${p.stock}</span><span class="pr-stock-lbl">STOCK</span></div>
     <div class="pr-actions">
       <button class="act-btn" title="Edit"   onclick="openEditModal('${p.id}')">✏️</button>
@@ -584,7 +603,8 @@ function renderTable(){
       <button class="act-btn" title="${p.listed?'Hide':'Show'}" onclick="toggleListed('${p.id}')">${p.listed?'👁':'🚫'}</button>
       <button class="act-btn" title="Delete" onclick="confirmDel('${p.id}')">🗑</button>
     </div>
-  </div>`).join('');
+  </div>`}).join('');
+  renderBestSellers();
 }
 
 /* TRANSACTIONS RENDER */
@@ -618,13 +638,54 @@ function renderTxns(){
   }).join('');
 }
 
+/* STOCK HELPERS */
+function findProdByName(name){const n=name.trim().toLowerCase();return products.find(p=>p.name.toLowerCase()===n||p.id===n.replace(/\s+/g,'_'));}
+function applyStockOp(items,op){
+  // op: -1=deduct, +1=restore
+  let changed=false;
+  (items||[]).forEach(item=>{
+    const p=findProdByName(item.name);
+    if(p){
+      const qty=item.qty||1;
+      if(op===-1){p.stock=Math.max(0,p.stock-qty);p.sold=(p.sold||0)+qty;}
+      else{p.stock=p.stock+qty;p.sold=Math.max(0,(p.sold||0)-qty);}
+      changed=true;
+    }
+  });
+  return changed;
+}
+
 /* TRANSACTION STATUS */
 async function setStatus(id,ns){
   const t=transactions.find(x=>x.id===id);if(!t)return;
-  const os=t.status;t.status=ns;t.statusUpdatedTs=new Date().toLocaleString('en-MY',{timeZone:'Asia/Kuala_Lumpur'});
+  const os=t.status;
+
+  // Stock logic: deduct on pending→confirmed, restore on confirmed/delivered→cancelled/pending
+  let stockChanged=false;
+  if(os==='pending'&&ns==='confirmed'){
+    stockChanged=applyStockOp(t.items,-1);
+  } else if((os==='confirmed'||os==='delivered')&&(ns==='cancelled'||ns==='pending')){
+    stockChanged=applyStockOp(t.items,+1);
+  }
+
+  t.status=ns;t.statusUpdatedTs=new Date().toLocaleString('en-MY',{timeZone:'Asia/Kuala_Lumpur'});
   const ok=await saveTxns(`[PaizShop] ${id} → ${ns}`);
-  if(ok){addLog(`${id}: ${os} → ${ns}`);dLog('STATUS UPDATE',`**${id}** (${t.ign})\n${os} → **${ns}**\n◆ ${t.total}`,ns==='delivered'?0x4ade80:ns==='confirmed'?0x60a5fa:ns==='cancelled'?0xf87171:0x6b7280);toast(`${id} → ${ns}!`,'ok');renderTxns();updateStats();}
-  else{t.status=os;renderTxns();}
+  if(!ok){
+    // rollback
+    t.status=os;
+    if(stockChanged){applyStockOp(t.items,os==='pending'&&ns==='confirmed'?+1:-1);}
+    renderTxns();return;
+  }
+  // Save products if stock changed
+  if(stockChanged){
+    await saveProd(`[PaizShop] Stock/sales update from order ${id} (${ns})`);
+    renderTable();
+  }
+  const note=stockChanged?'\n📦 Stock updated automatically':'';
+  addLog(`${id}: ${os} → ${ns}${stockChanged?' + stock updated':''}`);
+  dLog('STATUS UPDATE',`**${id}** (${t.ign})\n${os} → **${ns}**\n◆ ${t.total}${note}`,ns==='delivered'?0x4ade80:ns==='confirmed'?0x60a5fa:ns==='cancelled'?0xf87171:0x6b7280);
+  toast(`${id} → ${ns}!${stockChanged?' Stock updated.':''}`,'ok');
+  renderTxns();updateStats();
 }
 
 /* ADD/EDIT TXN */
@@ -675,6 +736,27 @@ function closeConfirm(){document.getElementById('confirm-modal').classList.remov
 async function execDel(){const id=_delId;const p=products.find(x=>x.id===id);if(!p){closeConfirm();return;}closeConfirm();products=products.filter(x=>x.id!==id);const ok=await saveProd(`[PaizShop] Delete: ${p.name}`);if(ok){addLog(`Deleted: ${p.name}`);dLog('DELETED',`**${p.name}**`,0xf87171);toast('Deleted!','info');renderTable();updateStats();}else{products.push(p);renderTable();}}
 
 /* SAVING / TOAST */
+function renderBestSellers(){
+  const el=document.getElementById('best-sellers-list');if(!el)return;
+  const sorted=[...products].filter(p=>(p.sold||0)>0).sort((a,b)=>(b.sold||0)-(a.sold||0)).slice(0,5);
+  if(!sorted.length){el.innerHTML='<div class="log-empty">No sales yet.</div>';return;}
+  el.innerHTML=sorted.map((p,i)=>{
+    const medal=i===0?'👑':i===1?'🥈':i===2?'🥉':`#${i+1}`;
+    const pct=sorted[0].sold>0?Math.round(((p.sold||0)/sorted[0].sold)*100):0;
+    return `<div style="background:var(--bg3);border:1px solid var(--border2);padding:8px 10px;margin-bottom:2px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:0.8rem;width:18px">${medal}</span>
+          <span style="font-size:0.82rem;color:var(--txt2)">${p.name}</span>
+        </div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--green)">${p.sold} sold</span>
+      </div>
+      <div style="height:3px;background:var(--bg4);border-radius:0">
+        <div style="height:3px;background:${i===0?'var(--gold)':'var(--green)'};width:${pct}%;transition:width 0.4s"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
 function showSaving(m){document.getElementById('saving-txt').textContent=m||'SAVING...';document.getElementById('saving-overlay').classList.add('show');}
 function hideSaving(){document.getElementById('saving-overlay').classList.remove('show');}
 function toast(msg,type='ok'){const wrap=document.getElementById('toast-wrap');const el=document.createElement('div');el.className=`toast ${type}`;el.textContent=msg;wrap.appendChild(el);setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity 0.4s';setTimeout(()=>el.remove(),400);},3500);}
