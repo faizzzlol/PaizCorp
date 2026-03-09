@@ -1,128 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
-    <title>How to Use - Paiz Shop</title>
-    <meta name="description" content="Instructions on how to use Paiz Shop and buy items.">
-    <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Use — Paiz Shop</title>
+<link rel="icon" href="https://faizzzlol.github.io/thelol/TheLoL2.png">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#171d16;--bg2:#1d2420;--bg3:#232b22;--bg4:#2a3228;
+  --border:rgba(255,255,255,0.10);--border2:rgba(255,255,255,0.06);
+  --green:#4ade80;--green-dk:#22c55e;--green-dim:rgba(74,222,128,0.10);
+  --gold:#fbbf24;--gold-dim:rgba(251,191,36,0.10);
+  --red:#f87171;--red-dim:rgba(248,113,113,0.10);
+  --blue:#60a5fa;--blue-dim:rgba(96,165,250,0.10);
+  --txt:#edf2e7;--txt2:rgba(237,242,231,0.78);--txt3:rgba(237,242,231,0.52);--txt4:rgba(237,242,231,0.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;padding:0 5%;gap:12px;background:rgba(23,29,22,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-sq{width:28px;height:28px;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;color:#000}
+.nav-name{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;color:var(--txt);letter-spacing:-0.2px}
+.nav-links{display:flex;gap:2px;margin-left:auto}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);transition:all 0.2s}
+.nav-link:hover{color:var(--green);border-color:rgba(74,222,128,0.2)}
+.nav-link.cta{background:var(--green);color:#000;border-color:var(--green)}
+.nav-link.cta:hover{background:var(--green-dk)}
+
+/* HERO */
+.hero{padding:4rem 5% 3rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-30%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(74,222,128,0.05) 0%,transparent 65%);pointer-events:none}
+.hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--green);opacity:0.8;margin-bottom:0.6rem}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-1.5px;color:var(--txt);line-height:1;margin-bottom:0.6rem}
+.hero-sub{font-size:1rem;color:var(--txt3);font-weight:300;max-width:480px;line-height:1.8}
+
+/* QUICK STEPS */
+.quick-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:2.5rem 5%;background:var(--border2);border:1px solid var(--border)}
+.qs{background:var(--bg2);padding:1.2rem 1rem;position:relative;overflow:hidden}
+.qs::after{content:attr(data-n);position:absolute;top:-10px;right:8px;font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:rgba(74,222,128,0.05);line-height:1}
+.qs-icon{font-size:1.5rem;margin-bottom:0.5rem;display:block}
+.qs-title{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;color:var(--txt);margin-bottom:0.3rem}
+.qs-desc{font-size:0.78rem;color:var(--txt3);font-weight:300}
+
+/* CONTENT */
+.content-wrap{max-width:800px;margin:0 auto;padding:3rem 5%}
+.section{margin-bottom:3rem}
+.section-number{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--green);margin-bottom:0.4rem}
+.section-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--txt);letter-spacing:-0.5px;margin-bottom:1.2rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border)}
+
+/* STEP CARDS */
+.steps{display:flex;flex-direction:column;gap:3px}
+.step{display:grid;grid-template-columns:40px 1fr;gap:16px;align-items:start;background:var(--bg2);border:1px solid var(--border2);padding:1.2rem;position:relative;overflow:hidden;transition:background 0.2s}
+.step:hover{background:var(--bg3)}
+.step::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green);opacity:0}
+.step:hover::before{opacity:1}
+.step-num{width:40px;height:40px;background:var(--green-dim);border:1px solid rgba(74,222,128,0.25);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;font-weight:500;color:var(--green);flex-shrink:0;margin-top:2px}
+.step-content{}
+.step-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--txt);margin-bottom:0.3rem;letter-spacing:-0.2px}
+.step-desc{font-size:0.88rem;color:var(--txt2);font-weight:300;line-height:1.8}
+.step-desc a{color:var(--green);text-decoration:none;border-bottom:1px solid rgba(74,222,128,0.3)}
+.step-desc a:hover{border-bottom-color:var(--green)}
+
+/* TIP BOXES */
+.tip{background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--gold);padding:1rem 1.2rem;margin-top:0.6rem;font-size:0.82rem;color:var(--txt2);font-weight:300;line-height:1.8}
+.tip strong{color:var(--gold);font-weight:500}
+.info-box{background:var(--blue-dim);border:1px solid rgba(96,165,250,0.2);padding:1rem 1.2rem;margin-top:0.6rem;font-size:0.82rem;color:var(--txt2);font-weight:300;line-height:1.8}
+.info-box strong{color:var(--blue);font-weight:500}
+
+/* CURRENCY TABLE */
+.currency-table{width:100%;border-collapse:collapse;margin-top:0.8rem}
+.currency-table th{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--txt4);text-align:left;padding:6px 12px;border-bottom:1px solid var(--border)}
+.currency-table td{font-size:0.85rem;color:var(--txt2);padding:10px 12px;border-bottom:1px solid var(--border2)}
+.currency-table tr:last-child td{border-bottom:none}
+.currency-table tr:hover td{background:var(--bg3)}
+.val{font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--gold)}
+
+/* DISCORD BOX */
+.discord-box{background:var(--bg2);border:1px solid rgba(88,101,242,0.3);padding:1.5rem;margin-top:1.5rem;display:flex;align-items:center;gap:20px}
+.dc-icon{font-size:2.5rem;flex-shrink:0}
+.dc-content{}
+.dc-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--txt);margin-bottom:0.3rem}
+.dc-desc{font-size:0.85rem;color:var(--txt3);font-weight:300}
+.dc-link{display:inline-flex;margin-top:0.7rem;padding:7px 16px;background:rgba(88,101,242,0.15);border:1px solid rgba(88,101,242,0.35);color:#7289da;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;text-decoration:none;transition:all 0.2s}
+.dc-link:hover{background:rgba(88,101,242,0.25)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:2rem}
+.footer-brand{font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;color:var(--txt3)}
+.footer-note{font-family:'IBM Plex Mono',monospace;font-size:0.45rem;letter-spacing:1.5px;color:var(--txt4)}
+
+@media(max-width:700px){.quick-steps{grid-template-columns:1fr 1fr}.step{grid-template-columns:32px 1fr}.discord-box{flex-direction:column;gap:12px}}
+@media(max-width:480px){.quick-steps{grid-template-columns:1fr}.nav-links{gap:2px}.nav-link{padding:5px 7px;font-size:0.44rem}}
+</style>
 </head>
-
 <body>
-    <header>
-        <h1>
-            <img src="PaizShop2.png" alt="Paiz Shop Logo" id="shop-logo">
-            How to Use Paiz Shop
-        </h1>
-        <nav>
-            <ul>
-                <li><a href="/PaizCorp/PaizShop/">Home</a></li>
-                <li><a href="/PaizCorp/PaizShop/order-history">Order History</a></li>
-                <li><a href="/thelol/finance/currency-converter">Currency</a></li>
-                <li><a href="https://discord.gg/TB4T8qwN4R">Contact Us</a></li>
-                <li><a href="/PaizCorp/PaizShop/feedback">Feedback</a></li>
-                <li><a href="https://sociabuzz.com/faizgg/donate">Donate</a></li>
-            </ul>
-        </nav>
-        <!-- Dark Mode Toggle Switch -->
-        <div class="theme-switcher">
-            <label class="switch" aria-label="Toggle dark mode">
-                <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
-                <span class="slider round"></span>
-            </label>
+
+<nav>
+  <a href="/PaizCorp/PaizShop/" class="nav-logo">
+    <div class="nav-sq">PS</div>
+    <span class="nav-name">Paiz Shop</span>
+  </a>
+  <div class="nav-links">
+    <a href="/PaizCorp/PaizShop/" class="nav-link">SHOP</a>
+    <a href="/PaizCorp/PaizShop/order-history" class="nav-link">ORDERS</a>
+    <a href="/thelol/finance/currency-converter" class="nav-link">CURRENCY</a>
+    <a href="https://discord.gg/TB4T8qwN4R" class="nav-link" target="_blank">DISCORD</a>
+    <a href="https://sociabuzz.com/faizgg/donate" class="nav-link cta" target="_blank">DONATE</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">PAIZ SHOP · GUIDE</div>
+  <div class="hero-title">How to Use</div>
+  <div class="hero-sub">Everything you need to know to browse, order, and receive your items on Skyxion: Ragnarok.</div>
+</div>
+
+<div class="quick-steps">
+  <div class="qs" data-n="1"><span class="qs-icon">🛒</span><div class="qs-title">Browse Items</div><div class="qs-desc">Find what you need in the shop</div></div>
+  <div class="qs" data-n="2"><span class="qs-icon">🛍️</span><div class="qs-title">Add to Cart</div><div class="qs-desc">Pick your qty and add to cart</div></div>
+  <div class="qs" data-n="3"><span class="qs-icon">📋</span><div class="qs-title">Checkout</div><div class="qs-desc">Fill in your IGN and details</div></div>
+  <div class="qs" data-n="4"><span class="qs-icon">📦</span><div class="qs-title">Receive Order</div><div class="qs-desc">Pick up or get it delivered</div></div>
+</div>
+
+<div class="content-wrap">
+
+  <!-- SECTION 1: BROWSING -->
+  <div class="section">
+    <div class="section-number">SECTION 01</div>
+    <div class="section-title">Browsing &amp; Finding Items</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-title">Visit the Shop</div>
+          <div class="step-desc">Head to the <a href="/PaizCorp/PaizShop/">Paiz Shop homepage</a>. All available items are displayed in a grid. Items marked <strong style="color:var(--green)">IN STOCK</strong> can be added to cart immediately.</div>
         </div>
-    </header>
-    <main>
-        <section>
-            <h2>How to Use the Website</h2>
-            <p>Welcome to Paiz Shop! Follow these instructions to make the most of our website:</p>
-            <ol>
-                <li>
-                    <strong>Browsing Items:</strong>
-                    <p>Explore the available items listed on the <a href="/PaizCorp/PaizShop/">homepage</a>.</p>
-                </li>
-                <li>
-                    <strong>Checking Stock:</strong>
-                    <p>Each item shows its available stock. If the item is out of stock, the "Buy Now" button will be
-                        disabled, and a "Sold Out" message will appear.</p>
-                </li>
-                <li>
-                    <strong>Adding Items to Cart:</strong>
-                    <p>Enter the quantity you want and click the "Buy Now" button. If stock is available, the item will
-                        be added to your cart, and you’ll be redirected to the <a
-                            href="/PaizCorp/PaizShop/checkout">checkout page</a>.</p>
-                </li>
-                <li>
-                    <strong>Reviewing Your Cart:</strong>
-                    <p>On the checkout page, review the items in your cart along with the subtotal, delivery fee, and
-                        tax.</p>
-                </li>
-                <li>
-                    <strong>Choosing Delivery or Pickup:</strong>
-                    <p>During checkout, select whether you want your order delivered or if you’ll pick it up. If you
-                        choose delivery, you’ll need to provide your delivery coordinates (X, Y, Z).</p>
-                </li>
-                <li>
-                    <strong>Calculating Delivery Fees:</strong>
-                    <p>The delivery fee is calculated at 1 diamond per 1000 blocks based on the distance from the shop’s
-                        location (X: 5894, Y: 69, Z: 5321) to your delivery coordinates.</p>
-                </li>
-                <li>
-                    <strong>Viewing Delivery Fee Details:</strong>
-                    <p>Hover over the info icon next to the delivery fee to view more details.</p>
-                </li>
-                <li>
-                    <strong>Placing Your Order:</strong>
-                    <p>Once all details are reviewed, click the "Place Order" button to complete your purchase. Your
-                        order details will be sent to a Discord channel, including your contact information.</p>
-                </li>
-                <li>
-                    <strong>Tracking Orders:</strong>
-                    <p>You can view your <a href="/PaizCorp/PaizShop/order-history">Order History</a> and Ongoing Orders
-                        on the Order History page, where all your past and current orders are saved.</p>
-                </li>
-                <li>
-                    <strong>Dark Mode:</strong>
-                    <p>Toggle between dark and light themes using the switch in the top-right corner of the page. Your
-                        preference will be saved for future visits.</p>
-                </li>
-                <li>
-                    <strong>Contact Us:</strong>
-                    <p>If you have any questions or need assistance, visit our <a
-                            href="https://discord.gg/TB4T8qwN4R">Discord server</a> for support.</p>
-                </li>
-            </ol>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Paiz Shop. All rights reserved.</p>
-        <p><a href="#top">Back to Top</a></p>
-    </footer>
-    <script>
-        // Function to toggle between themes
-        function toggleTheme() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const isDarkMode = themeToggle.checked;
-            if (isDarkMode) {
-                document.body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.body.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-            }
-        }
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-title">Search &amp; Filter</div>
+          <div class="step-desc">Use the search bar on the left to find items by name. You can also filter by category (Materials, Enchantments, Farming, Storage, etc.) or sort by price.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-title">Check Stock</div>
+          <div class="step-desc">Each product card shows the current stock count. Items that are <strong style="color:var(--red)">SOLD OUT</strong> cannot be added to cart — check back later or DM the shop owner on Discord.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        // Load the user's theme preference on page load
-        document.addEventListener('DOMContentLoaded', function () {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.body.setAttribute('data-theme', savedTheme);
-                document.getElementById('theme-toggle').checked = savedTheme === 'dark';
-            }
-        });
-    </script>
+  <!-- SECTION 2: ORDERING -->
+  <div class="section">
+    <div class="section-number">SECTION 02</div>
+    <div class="section-title">Adding to Cart &amp; Checkout</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <div class="step-title">Set Quantity &amp; Add to Cart</div>
+          <div class="step-desc">Use the − / + buttons to set how many you want, then click <strong>ADD TO CART</strong>. The cart drawer will slide open from the right showing all your selected items.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <div class="step-title">Review Your Cart</div>
+          <div class="step-desc">Click the cart icon (top right) anytime to open the cart drawer. You can adjust quantities or remove items. Your total is shown in Diamonds (◆) at the bottom.</div>
+          <div class="tip"><strong>💡 TIP:</strong> You can add multiple different items to one order — no need to check out separately for each item.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">06</div>
+        <div class="step-content">
+          <div class="step-title">Proceed to Checkout</div>
+          <div class="step-desc">Click <strong>CHECKOUT</strong> at the bottom of the cart. A checkout modal will appear asking for your details.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">07</div>
+        <div class="step-content">
+          <div class="step-title">Fill in Your Details</div>
+          <div class="step-desc">You'll need to provide:<br>
+            • <strong>Minecraft IGN</strong> — your in-game username<br>
+            • <strong>Discord username</strong> — so we can contact you<br>
+            • <strong>Delivery preference</strong> — Pickup or Delivery<br>
+            • <strong>Location</strong> — your coordinates if choosing delivery (X Y Z format)
+          </div>
+          <div class="tip"><strong>💡 DELIVERY:</strong> Choose <em>Pickup</em> to collect from the shop, or <em>Delivery</em> to have items brought to your location in-game.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">08</div>
+        <div class="step-content">
+          <div class="step-title">Place Your Order</div>
+          <div class="step-desc">Click <strong>PLACE ORDER</strong>. Your order is automatically sent to our Discord channel as a notification. You'll get a success confirmation with your Order ID — <strong>save it!</strong></div>
+          <div class="info-box"><strong>📋 Order ID:</strong> Every order gets a unique ID like <code>ORD-IIVC4J</code>. You'll need this to track your order status on the <a href="/PaizCorp/PaizShop/order-history" style="color:var(--blue)">Order History</a> page.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: TRACKING -->
+  <div class="section">
+    <div class="section-number">SECTION 03</div>
+    <div class="section-title">Tracking Your Order</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">09</div>
+        <div class="step-content">
+          <div class="step-title">Visit Order History</div>
+          <div class="step-desc">Go to the <a href="/PaizCorp/PaizShop/order-history">Order History</a> page to see all orders you've placed on this device. Your orders are saved to your browser automatically.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">10</div>
+        <div class="step-content">
+          <div class="step-title">Check Live Status</div>
+          <div class="step-desc">The order history page fetches the latest status directly from the shop. Status updates in real-time as the shop owner processes your order.</div>
+          <div class="tip">
+            <strong>⏳ PENDING</strong> — Order received, waiting to be confirmed<br>
+            <strong style="color:var(--blue)">✅ CONFIRMED</strong> — Shop owner confirmed, preparing your items<br>
+            <strong style="color:var(--green)">📦 DELIVERED</strong> — Items delivered or ready for pickup<br>
+            <strong style="color:var(--red)">❌ CANCELLED</strong> — Order was cancelled (check Discord for reason)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: CURRENCY -->
+  <div class="section">
+    <div class="section-number">SECTION 04</div>
+    <div class="section-title">Currency &amp; Pricing</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">11</div>
+        <div class="step-content">
+          <div class="step-title">We Use Diamonds ◆</div>
+          <div class="step-desc">All prices in Paiz Shop are in <strong style="color:var(--gold)">Diamonds</strong>. Bring the exact amount in Diamonds when collecting or receiving your order.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">12</div>
+        <div class="step-content">
+          <div class="step-title">Currency Converter</div>
+          <div class="step-desc">Need to convert between Minecraft currencies and The LoL Dollar (TL$)? Use our <a href="/thelol/finance/currency-converter">Currency Converter</a> tool.</div>
+          <table class="currency-table">
+            <thead><tr><th>CURRENCY</th><th>VALUE IN TL$</th></tr></thead>
+            <tbody>
+              <tr><td>💛 Gold Ingot</td><td class="val">3 TL$</td></tr>
+              <tr><td>🩶 Iron Ingot</td><td class="val">2 TL$</td></tr>
+              <tr><td>💚 Emerald</td><td class="val">15 TL$</td></tr>
+              <tr><td>💎 Diamond</td><td class="val">50 TL$</td></tr>
+              <tr><td>⬛ Netherite Ingot</td><td class="val">250 TL$</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCORD -->
+  <div class="discord-box">
+    <div class="dc-icon">💬</div>
+    <div class="dc-content">
+      <div class="dc-title">Need Help?</div>
+      <div class="dc-desc">If your order isn't showing up, you have a question about stock, or need to modify/cancel an order — reach out on Discord. The shop owner will get back to you there.</div>
+      <a href="https://discord.gg/TB4T8qwN4R" class="dc-link" target="_blank">JOIN DISCORD SERVER →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="footer-brand">Paiz Shop</span>
+  <span class="footer-note">© PAIZ® CORP · SKYXION: RAGNAROK · THE LOL</span>
+</footer>
+
 </body>
-
 </html>
