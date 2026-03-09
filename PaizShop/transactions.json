@@ -3,7 +3,7 @@
     "id": "ORD-IK53NR",
     "ign": "Faiz4224",
     "discord": "faizzzlol",
-    "status": "pending",
+    "status": "confirmed",
     "delivery": "Pickup",
     "server": "Skyxion: Ragnarok",
     "location": "",
@@ -17,6 +17,7 @@
         "price": 5
       }
     ],
-    "createdAt": "2026-03-09T14:52:30.634Z"
+    "createdAt": "2026-03-09T14:52:30.634Z",
+    "statusUpdatedTs": "09/03/2026, 10:52:35 pm"
   }
 ]
