@@ -51,7 +51,7 @@
     "stock": 0,
     "image": "img/iron_ingot.png",
     "category": "Materials",
-    "listed": true,
+    "listed": false,
     "description": "Versatile crafting material."
   },
   {
