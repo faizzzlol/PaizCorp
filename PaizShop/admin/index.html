@@ -284,7 +284,10 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
     <div class="login-sub">PAIZ SHOP MANAGER PANEL</div>
     <div class="login-group">
       <label class="login-label">PASSWORD</label>
-      <input type="password" class="login-input" id="login-pass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()">
+      <div style="position:relative">
+        <input type="password" class="login-input" id="login-pass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly')" style="padding-right:44px">
+        <button type="button" onclick="togglePassVis()" id="pass-eye" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--txt4);font-size:1rem;padding:0;line-height:1" title="Show/hide password">SHOW</button>
+      </div>
     </div>
     <button class="login-btn" onclick="login()">ENTER PANEL</button>
     <div class="login-error" id="login-err">⚠ Incorrect password</div>
@@ -512,6 +515,7 @@ const LS = { SESSION:'ps_admin_session', TOKEN:'ps_admin_token', REPO:'ps_admin_
 let products=[],transactions=[],fileSha='',txnSha='',editingId=null,editingTxnId=null,txnFilter='all',rowCount=0;
 
 /* LOGIN */
+function togglePassVis(){const f=document.getElementById('login-pass');const btn=document.getElementById('pass-eye');if(f.type==='password'){f.type='text';btn.textContent='HIDE';}else{f.type='password';btn.textContent='SHOW';}}
 function login(){const p=document.getElementById('login-pass').value;if(p===PASS){localStorage.setItem(LS.SESSION,'1');document.getElementById('login-screen').style.display='none';document.getElementById('app').style.display='block';initApp();}else{document.getElementById('login-err').style.display='block';setTimeout(()=>document.getElementById('login-err').style.display='none',2500);}}
 function logout(){localStorage.removeItem(LS.SESSION);location.reload();}
 
@@ -708,10 +712,7 @@ function parseDiscordMsg(){
 
   // Helper: extract field value after a label line
   function field(label){
-    // Discord "Copy Text" produces lines like: "👤 IGN
-Faiz4224
-💬 Discord
-..."
+    // Discord "Copy Text" produces lines like: label on one line, value on next
     // Fields appear as: label on one line, value on next line
     const re = new RegExp(label + '\\s*\n([^\n]+)','i');
     const m = raw.match(re);
