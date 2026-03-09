@@ -1,0 +1,110 @@
+[
+  {
+    "id": "cooked_chicken",
+    "name": "Cooked Chicken",
+    "price": 3,
+    "unit": "Diamond",
+    "stock": 64,
+    "category": "Mains",
+    "image": "img/cooked_chicken.png",
+    "description": "Classic juicy roasted chicken. The LoL staple.",
+    "listed": true,
+    "sold": 0
+  },
+  {
+    "id": "steak",
+    "name": "Steak",
+    "price": 4,
+    "unit": "Diamond",
+    "stock": 32,
+    "category": "Mains",
+    "image": "img/steak.png",
+    "description": "Premium cut beef steak, perfectly cooked.",
+    "listed": true,
+    "sold": 0
+  },
+  {
+    "id": "cooked_porkchop",
+    "name": "Cooked Porkchop",
+    "price": 3,
+    "unit": "Diamond",
+    "stock": 48,
+    "category": "Mains",
+    "image": "img/cooked_porkchop.png",
+    "description": "Tender grilled porkchop, farm fresh.",
+    "listed": true,
+    "sold": 0
+  },
+  {
+    "id": "bread",
+    "name": "Bread",
+    "price": 1,
+    "unit": "Diamond",
+    "stock": 99,
+    "category": "Snacks",
+    "image": "img/bread.png",
+    "description": "Freshly baked loaf. Great with anything.",
+    "listed": true,
+    "sold": 0
+  },
+  {
+    "id": "cookie",
+    "name": "Cookies (x8)",
+    "price": 2,
+    "unit": "Diamond",
+    "stock": 50,
+    "category": "Snacks",
+    "image": "img/cookie.png",
+    "description": "A batch of 8 freshly baked chocolate chip cookies.",
+    "listed": true,
+    "sold": 0
+  },
+  {
+    "id": "golden_apple",
+    "name": "Golden Apple",
+    "price": 8,
+    "unit": "Diamond",
+    "stock": 10,
+    "category": "Specials",
+    "image": "img/golden_apple.png",
+    "description": "Rare & powerful. Grants absorption and regeneration.",
+    "listed": true,
+    "sold": 0
+  },
+  {
+    "id": "suspicious_stew",
+    "name": "Suspicious Stew",
+    "price": 5,
+    "unit": "Diamond",
+    "stock": 15,
+    "category": "Specials",
+    "image": "img/suspicious_stew.png",
+    "description": "Mystery effects guaranteed. Eat at your own risk.",
+    "listed": true,
+    "sold": 0
+  },
+  {
+    "id": "cake",
+    "name": "Cake",
+    "price": 6,
+    "unit": "Diamond",
+    "stock": 20,
+    "category": "Sweets",
+    "image": "img/cake.png",
+    "description": "A whole cake! Feeds multiple hunger bars.",
+    "listed": true,
+    "sold": 0
+  },
+  {
+    "id": "pumpkin_pie",
+    "name": "Pumpkin Pie",
+    "price": 2,
+    "unit": "Diamond",
+    "stock": 40,
+    "category": "Sweets",
+    "image": "img/pumpkin_pie.png",
+    "description": "Seasonal classic. Filling and delicious.",
+    "listed": true,
+    "sold": 0
+  }
+]

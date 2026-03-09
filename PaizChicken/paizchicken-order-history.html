@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order History — Paiz Chicken</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0f0a05;--bg2:#17110a;--bg3:#211810;--bg4:#2b2015;
+  --txt:#fdf6e3;--txt2:rgba(253,246,227,0.82);--txt3:rgba(253,246,227,0.55);--txt4:rgba(253,246,227,0.32);
+  --red:#cc2200;--red2:#e53e1a;--red3:#ff4422;
+  --gold:#f5a623;--gold2:#fbbf24;
+  --green:#4ade80;
+  --border:rgba(253,246,227,0.09);--border2:rgba(253,246,227,0.05);
+  --check:rgba(253,246,227,0.025);
+}
+body{background:var(--bg);color:var(--txt);font-family:'Nunito',sans-serif;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background-image:repeating-conic-gradient(var(--check) 0% 25%, transparent 0% 50%);background-size:32px 32px;pointer-events:none;z-index:0;opacity:0.6}
+nav{position:sticky;top:0;z-index:100;background:var(--red);border-bottom:3px solid #a01a00;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:58px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{width:34px;height:34px;background:#0f0a05;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:2px solid rgba(255,255,255,0.2)}
+.nav-logo-text{font-family:'Anton',sans-serif;font-size:1.3rem;color:#fff;letter-spacing:1px}
+.nav-logo-sub{font-family:'IBM Plex Mono',monospace;font-size:0.38rem;letter-spacing:3px;color:rgba(255,255,255,0.6);display:block}
+.nav-back{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:rgba(255,255,255,0.85);text-decoration:none;padding:8px 14px;background:rgba(0,0,0,0.25);transition:background 0.2s}
+.nav-back:hover{background:rgba(0,0,0,0.4)}
+
+.page-wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:2rem}
+.page-hd{margin-bottom:2rem}
+.page-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:3px;color:var(--red3);margin-bottom:0.5rem;display:block}
+.page-title{font-family:'Anton',sans-serif;font-size:2.5rem;color:var(--txt);letter-spacing:-0.5px;line-height:1}
+.page-sub{font-size:0.85rem;color:var(--txt3);margin-top:0.5rem;font-weight:600}
+
+/* STATUS BAR */
+.status-bar{display:flex;gap:3px;margin-bottom:1.5rem;flex-wrap:wrap}
+.sb-btn{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;padding:7px 14px;background:var(--bg2);border:1px solid var(--border);color:var(--txt4);cursor:pointer;transition:all 0.15s}
+.sb-btn:hover{border-color:var(--border);color:var(--txt3)}
+.sb-btn.active{background:var(--red-dim);border-color:rgba(204,34,0,0.4);color:var(--txt)}
+.sb-badge{display:inline-block;background:var(--bg4);padding:1px 6px;font-size:0.42rem;margin-left:4px;color:var(--txt4)}
+
+/* CONTROLS */
+.controls{display:flex;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.srch{background:var(--bg2);border:1px solid var(--border);color:var(--txt);font-family:'Nunito',sans-serif;font-size:0.82rem;padding:8px 12px;outline:none;width:240px}
+.srch::placeholder{color:var(--txt4)}
+.srch:focus{border-color:rgba(204,34,0,0.4)}
+.ctrl-btns{display:flex;gap:6px}
+.ctrl-btn{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;padding:8px 14px;background:var(--bg2);border:1px solid var(--border);color:var(--txt3);cursor:pointer;transition:all 0.15s}
+.ctrl-btn:hover{border-color:var(--border);color:var(--txt2)}
+.ctrl-btn.danger:hover{background:rgba(204,34,0,0.1);border-color:rgba(204,34,0,0.4);color:var(--red3)}
+
+/* ORDER CARDS */
+.order-card{background:var(--bg2);border:1px solid var(--border2);margin-bottom:8px;overflow:hidden;transition:border-color 0.2s}
+.order-card:hover{border-color:var(--border)}
+.oc-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;gap:12px;flex-wrap:wrap}
+.oc-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.oc-icon{font-size:1.3rem;flex-shrink:0}
+.oc-id{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold);letter-spacing:2px;font-weight:500}
+.oc-ign{font-size:0.78rem;color:var(--txt2);font-weight:700;margin-left:2px}
+.oc-ts{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1px;color:var(--txt4)}
+.oc-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.oc-total{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--txt2)}
+.status-badge{font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:2px;padding:3px 10px;border:1px solid}
+.s-pending  {background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.3);color:#fbbf24}
+.s-confirmed{background:rgba(96,165,250,0.1);border-color:rgba(96,165,250,0.3);color:#60a5fa}
+.s-delivered{background:rgba(74,222,128,0.1);border-color:rgba(74,222,128,0.3);color:#4ade80}
+.s-cancelled{background:rgba(248,113,113,0.1);border-color:rgba(248,113,113,0.3);color:#f87171}
+.s-unknown  {background:rgba(107,114,128,0.1);border-color:rgba(107,114,128,0.3);color:#9ca3af}
+.oc-chevron{color:var(--txt4);font-size:0.7rem;transition:transform 0.25s}
+.oc-chevron.open{transform:rotate(180deg)}
+
+.oc-body{display:none;padding:0 16px 14px;border-top:1px solid var(--border2)}
+.oc-body.open{display:block}
+
+/* PROGRESS TRACKER */
+.progress-track{display:flex;align-items:center;margin-bottom:14px;padding-top:14px;gap:0}
+.pt-step{display:flex;flex-direction:column;align-items:center;flex:1;position:relative}
+.pt-step:not(:last-child)::after{content:'';position:absolute;top:10px;left:50%;width:100%;height:2px;background:var(--border);z-index:0}
+.pt-step.done:not(:last-child)::after{background:var(--green)}
+.pt-step.active:not(:last-child)::after{background:var(--border)}
+.pt-dot{width:20px;height:20px;border:2px solid var(--border);background:var(--bg4);z-index:1;position:relative;display:flex;align-items:center;justify-content:center;font-size:0.55rem}
+.pt-step.done .pt-dot{border-color:var(--green);background:rgba(74,222,128,0.15);color:var(--green)}
+.pt-step.active .pt-dot{border-color:var(--gold);background:rgba(245,166,35,0.15);color:var(--gold)}
+.pt-step.cancelled .pt-dot{border-color:#f87171;background:rgba(248,113,113,0.1);color:#f87171}
+.pt-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.36rem;letter-spacing:1.5px;color:var(--txt4);margin-top:5px;text-align:center}
+.pt-step.done .pt-lbl,.pt-step.active .pt-lbl{color:var(--txt3)}
+
+.oc-items{margin-bottom:10px}
+.oc-item{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border2);font-size:0.82rem;font-weight:600}
+.oc-item:last-child{border-bottom:none}
+.oc-item-name{color:var(--txt2)}
+.oc-item-price{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;color:var(--gold);letter-spacing:1px}
+.oc-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
+.oc-meta-item{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1px;color:var(--txt4)}
+.oc-meta-item span{color:var(--txt3)}
+.oc-del-btn{margin-top:10px;background:none;border:1px solid var(--border2);color:var(--txt4);font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;padding:6px 12px;cursor:pointer;transition:all 0.15s}
+.oc-del-btn:hover{background:rgba(204,34,0,0.1);border-color:rgba(204,34,0,0.3);color:var(--red3)}
+
+/* EMPTY */
+.empty{text-align:center;padding:5rem 2rem}
+.empty-icon{font-size:3.5rem;display:block;margin-bottom:1rem;opacity:0.4}
+.empty h3{font-family:'Anton',sans-serif;font-size:1.5rem;color:var(--txt3);margin-bottom:0.5rem;letter-spacing:1px}
+.empty p{font-size:0.82rem;color:var(--txt4);font-weight:600}
+.empty-link{display:inline-block;margin-top:1.5rem;background:var(--red);color:#fff;text-decoration:none;font-family:'Anton',sans-serif;font-size:0.9rem;letter-spacing:2px;padding:12px 28px;transition:background 0.2s}
+.empty-link:hover{background:var(--red2)}
+
+/* REFRESH */
+.refresh-bar{display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--border2);padding:10px 14px;margin-bottom:1.5rem;flex-wrap:wrap;gap:8px}
+.refresh-txt{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;color:var(--txt4)}
+.refresh-txt span{color:var(--green)}
+.refresh-btn{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;padding:6px 14px;background:transparent;border:1px solid var(--border);color:var(--txt3);cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:6px}
+.refresh-btn:hover{border-color:var(--green);color:var(--green)}
+.spin-sm{width:10px;height:10px;border:1.5px solid rgba(74,222,128,0.3);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite;display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.toast-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.toast{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;padding:10px 16px;background:var(--bg3);border:1px solid var(--border);color:var(--txt2);min-width:200px;animation:toastIn 0.3s ease}
+.toast.ok{border-left:3px solid #4ade80}
+.toast.err{border-left:3px solid var(--red3)}
+@keyframes toastIn{from{transform:translateX(20px);opacity:0}to{transform:translateX(0);opacity:1}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../" class="nav-logo">
+    <div class="nav-logo-icon">🍗</div>
+    <div>
+      <span class="nav-logo-text">PAIZ CHICKEN</span>
+      <span class="nav-logo-sub">PAIZ® CORP SUBSIDIARY</span>
+    </div>
+  </a>
+  <a href="../" class="nav-back">← BACK TO MENU</a>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-hd">
+    <span class="page-eyebrow">PAIZ CHICKEN</span>
+    <h1 class="page-title">ORDER HISTORY</h1>
+    <p class="page-sub">Your past orders, tracked live from our kitchen.</p>
+  </div>
+
+  <div class="refresh-bar">
+    <span class="refresh-txt" id="refresh-txt">Status fetched from GitHub — <span>up to date</span></span>
+    <button class="refresh-btn" onclick="refreshStatuses()">
+      <span class="spin-sm" id="refresh-spin"></span>
+      ↻ REFRESH STATUS
+    </button>
+  </div>
+
+  <div class="status-bar">
+    <button class="sb-btn active" data-sf="all"       onclick="setSF(this)">ALL <span class="sb-badge" id="sf-all">0</span></button>
+    <button class="sb-btn"        data-sf="pending"   onclick="setSF(this)">⏳ PENDING <span class="sb-badge" id="sf-pending">0</span></button>
+    <button class="sb-btn"        data-sf="confirmed" onclick="setSF(this)">✅ CONFIRMED <span class="sb-badge" id="sf-confirmed">0</span></button>
+    <button class="sb-btn"        data-sf="delivered" onclick="setSF(this)">📦 DELIVERED <span class="sb-badge" id="sf-delivered">0</span></button>
+    <button class="sb-btn"        data-sf="cancelled" onclick="setSF(this)">❌ CANCELLED <span class="sb-badge" id="sf-cancelled">0</span></button>
+  </div>
+
+  <div class="controls">
+    <input class="srch" id="srch" placeholder="Search by IGN or Order ID..." oninput="renderOrders()">
+    <div class="ctrl-btns">
+      <button class="ctrl-btn" onclick="refreshStatuses()">↻ REFRESH</button>
+      <button class="ctrl-btn danger" onclick="clearAll()">🗑 CLEAR ALL</button>
+    </div>
+  </div>
+
+  <div id="orders-list"></div>
+</div>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script>
+const TXN_URL = 'https://raw.githubusercontent.com/faizzzlol/PaizCorp/main/PaizChicken/transactions.json';
+let orders = [], statuses = {}, activeSF = 'all';
+
+function getStatusClass(s) {
+  const map = {pending:'s-pending',confirmed:'s-confirmed',delivered:'s-delivered',cancelled:'s-cancelled'};
+  return map[s] || 's-unknown';
+}
+function getStatusLabel(s) {
+  const map = {pending:'⏳ PENDING',confirmed:'✅ CONFIRMED',delivered:'📦 DELIVERED',cancelled:'❌ CANCELLED'};
+  return map[s] || '— UNKNOWN';
+}
+
+function progressSteps(status) {
+  const steps = [
+    {key:'placed',    label:'PLACED',    icon:'📋'},
+    {key:'confirmed', label:'CONFIRMED', icon:'✅'},
+    {key:'delivered', label:'DELIVERED', icon:'🍗'},
+  ];
+  const order = ['placed','confirmed','delivered'];
+  let activeIdx = 0;
+  if (status === 'confirmed') activeIdx = 1;
+  if (status === 'delivered') activeIdx = 2;
+  const cancelled = status === 'cancelled';
+
+  return steps.map((s, i) => {
+    let cls = '';
+    if (cancelled) { cls = i === 0 ? 'done' : i === 1 ? 'cancelled' : ''; }
+    else if (i < activeIdx) cls = 'done';
+    else if (i === activeIdx) cls = 'active';
+    const dot = cancelled && i === 1 ? '✕' : (i < activeIdx || i === activeIdx ? s.icon : '·');
+    return `<div class="pt-step ${cls}"><div class="pt-dot">${dot}</div><div class="pt-lbl">${s.label}</div></div>`;
+  }).join('');
+}
+
+async function refreshStatuses() {
+  const spin = document.getElementById('refresh-spin');
+  spin.style.display = 'block';
+  try {
+    const r = await fetch(TXN_URL + '?t=' + Date.now());
+    if (!r.ok) throw new Error();
+    const txns = await r.json();
+    statuses = {};
+    txns.forEach(t => { statuses[t.id] = t.status; });
+    document.getElementById('refresh-txt').innerHTML = 'Status fetched from GitHub — <span>' + new Date().toLocaleString('en-MY',{timeZone:'Asia/Kuala_Lumpur'}) + '</span>';
+    toast('Statuses updated!', 'ok');
+  } catch {
+    toast('Could not fetch status — check connection', 'err');
+  }
+  spin.style.display = 'none';
+  renderOrders();
+}
+
+function setSF(btn) {
+  document.querySelectorAll('[data-sf]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeSF = btn.dataset.sf;
+  renderOrders();
+}
+
+function renderOrders() {
+  orders = JSON.parse(localStorage.getItem('pc_orders') || '[]');
+  const q = (document.getElementById('srch').value || '').toLowerCase();
+
+  // Count by status
+  const counts = {all:0,pending:0,confirmed:0,delivered:0,cancelled:0};
+  orders.forEach(o => {
+    const s = statuses[o.id] || 'pending';
+    counts.all++;
+    if (counts[s] !== undefined) counts[s]++;
+  });
+  Object.keys(counts).forEach(k => {
+    const el = document.getElementById('sf-'+k);
+    if (el) el.textContent = counts[k];
+  });
+
+  let filtered = orders;
+  if (q) filtered = filtered.filter(o => o.id.toLowerCase().includes(q) || (o.ign||'').toLowerCase().includes(q));
+  if (activeSF !== 'all') filtered = filtered.filter(o => (statuses[o.id] || 'pending') === activeSF);
+
+  const el = document.getElementById('orders-list');
+  if (!filtered.length) {
+    el.innerHTML = `<div class="empty">
+      <span class="empty-icon">🍗</span>
+      <h3>${orders.length ? 'NO ORDERS MATCH' : 'NO ORDERS YET'}</h3>
+      <p>${orders.length ? 'Try a different filter or search.' : 'Head to the menu and place your first order!'}</p>
+      ${!orders.length ? '<a href="../" class="empty-link">VIEW MENU</a>' : ''}
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = filtered.map(o => {
+    const status = statuses[o.id] || 'pending';
+    const sCls   = getStatusClass(status);
+    const sLbl   = getStatusLabel(status);
+    return `
+    <div class="order-card">
+      <div class="oc-hd" onclick="toggleCard('${o.id}')">
+        <div class="oc-left">
+          <span class="oc-icon">🍗</span>
+          <div>
+            <div class="oc-id">${o.id} <span class="oc-ign">· ${o.ign}</span></div>
+            <div class="oc-ts">${o.ts || '—'}</div>
+          </div>
+        </div>
+        <div class="oc-right">
+          <span class="oc-total">◆ ${o.total}</span>
+          <span class="status-badge ${sCls}">${sLbl}</span>
+          <span class="oc-chevron" id="chev-${o.id}">▼</span>
+        </div>
+      </div>
+      <div class="oc-body" id="body-${o.id}">
+        <div class="progress-track">${progressSteps(status)}</div>
+        <div class="oc-items">
+          ${(o.items||[]).map(i => `
+          <div class="oc-item">
+            <span class="oc-item-name">${i.name} ×${i.qty}</span>
+            <span class="oc-item-price">◆ ${i.price * i.qty}</span>
+          </div>`).join('')}
+        </div>
+        <div class="oc-meta">
+          <div class="oc-meta-item">DELIVERY <span>${o.delivery||'—'}</span></div>
+          <div class="oc-meta-item">SERVER <span>${o.server||'—'}</span></div>
+          ${o.location ? `<div class="oc-meta-item">LOCATION <span>${o.location}</span></div>` : ''}
+          ${o.discord  ? `<div class="oc-meta-item">DISCORD <span>${o.discord}</span></div>` : ''}
+          ${o.notes    ? `<div class="oc-meta-item">NOTES <span>${o.notes}</span></div>` : ''}
+        </div>
+        <button class="oc-del-btn" onclick="deleteOrder('${o.id}')">🗑 REMOVE FROM HISTORY</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleCard(id) {
+  const body = document.getElementById('body-' + id);
+  const chev = document.getElementById('chev-' + id);
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+
+function deleteOrder(id) {
+  if (!confirm('Remove order ' + id + ' from history?')) return;
+  let orders = JSON.parse(localStorage.getItem('pc_orders') || '[]');
+  orders = orders.filter(o => o.id !== id);
+  localStorage.setItem('pc_orders', JSON.stringify(orders));
+  toast('Removed from history', 'ok');
+  renderOrders();
+}
+
+function clearAll() {
+  if (!confirm('Clear ALL order history? This cannot be undone.')) return;
+  localStorage.removeItem('pc_orders');
+  toast('History cleared', 'ok');
+  renderOrders();
+}
+
+function toast(msg, type='ok') {
+  const wrap = document.getElementById('toast-wrap');
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  wrap.appendChild(el);
+  setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity 0.4s'; setTimeout(() => el.remove(), 400); }, 3500);
+}
+
+refreshStatuses();
+</script>
+</body>
+</html>
