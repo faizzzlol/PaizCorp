@@ -450,9 +450,19 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
   <div class="modal">
     <div class="modal-hd"><h3 id="txn-modal-title">Add Order</h3><button class="modal-close" onclick="closeTxnModal()">✕</button></div>
     <div class="modal-body">
-      <div style="background:var(--blue-dim);border:1px solid rgba(96,165,250,0.2);padding:0.8rem 1rem;margin-bottom:1.2rem;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1px;color:var(--blue);line-height:1.8">
-        📋 See a Discord order notification? Copy the details here to track its status.
+      <!-- PASTE PARSER -->
+      <div id="paste-section" style="margin-bottom:1.2rem">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--txt4);margin-bottom:0.45rem">PASTE DISCORD NOTIFICATION <span style="color:var(--green);font-size:0.42rem">(RECOMMENDED)</span></div>
+        <textarea id="paste-input" style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.58rem;outline:none;resize:vertical;min-height:90px;line-height:1.7;transition:border-color 0.2s" placeholder="Copy the Discord order notification message and paste it here, then click Parse →"></textarea>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+          <button onclick="parseDiscordMsg()" style="padding:7px 18px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;letter-spacing:2px;transition:background 0.2s" onmouseover="this.style.background='#22c55e'" onmouseout="this.style.background='var(--green)'">⚡ PARSE & FILL</button>
+          <span id="parse-status" style="font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1px;color:var(--txt4)"></span>
+        </div>
+        <div style="margin-top:8px;border-top:1px solid var(--border2);padding-top:8px;font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1px;color:var(--txt4);line-height:2">
+          How to copy: Discord → right-click the order notification → <strong style="color:var(--txt2)">Copy Text</strong> → paste above
+        </div>
       </div>
+      <div style="border-top:1px solid var(--border2);padding-top:1.2rem;margin-bottom:1rem;font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4)">OR FILL MANUALLY ↓</div>
       <input type="hidden" id="tm-edit-id">
       <div class="frow">
         <div class="fg"><label class="flabel">ORDER ID <span class="req">*</span></label><input type="text" class="finput" id="tm-id" placeholder="ORD-IIVC4J"><div class="fhint">From the Discord notification</div></div>
@@ -689,8 +699,95 @@ async function setStatus(id,ns){
 }
 
 /* ADD/EDIT TXN */
-function openAddTxn(){editingTxnId=null;document.getElementById('txn-modal-title').textContent='Add Order';['tm-ign','tm-discord','tm-location','tm-notes'].forEach(id=>document.getElementById(id).value='');document.getElementById('tm-id').value='';document.getElementById('tm-id').disabled=false;document.getElementById('tm-server').value='Skyxion: Ragnarok';document.getElementById('tm-total').value='';document.getElementById('tm-status').value='pending';document.getElementById('tm-delivery').value='Delivery';document.getElementById('tm-ts').value=new Date().toLocaleString('en-MY',{timeZone:'Asia/Kuala_Lumpur'});document.getElementById('ib-rows').innerHTML='';addItemRow();document.getElementById('txn-modal').classList.add('open');}
-function editTxn(id){const t=transactions.find(x=>x.id===id);if(!t)return;editingTxnId=id;document.getElementById('txn-modal-title').textContent='Edit Order';document.getElementById('tm-id').value=t.id;document.getElementById('tm-id').disabled=true;document.getElementById('tm-ign').value=t.ign||'';document.getElementById('tm-discord').value=t.discord||'';document.getElementById('tm-server').value=t.server||'Skyxion: Ragnarok';document.getElementById('tm-location').value=t.location||'';document.getElementById('tm-total').value=t.total||0;document.getElementById('tm-ts').value=t.ts||'';document.getElementById('tm-notes').value=t.notes||'';document.getElementById('tm-status').value=t.status||'pending';document.getElementById('tm-delivery').value=t.delivery||'Delivery';document.getElementById('ib-rows').innerHTML='';(t.items||[]).forEach(i=>addItemRow(i.name,i.qty,i.price));if(!(t.items||[]).length)addItemRow();document.getElementById('txn-modal').classList.add('open');}
+function openAddTxn(){openTxnModal();}
+function editTxn(id){const t=transactions.find(x=>x.id===id);if(!t)return;editingTxnId=id;document.getElementById('paste-section').style.display='none';document.getElementById('txn-modal-title').textContent='Edit Order';document.getElementById('tm-id').value=t.id;document.getElementById('tm-id').disabled=true;document.getElementById('tm-ign').value=t.ign||'';document.getElementById('tm-discord').value=t.discord||'';document.getElementById('tm-server').value=t.server||'Skyxion: Ragnarok';document.getElementById('tm-location').value=t.location||'';document.getElementById('tm-total').value=t.total||0;document.getElementById('tm-ts').value=t.ts||'';document.getElementById('tm-notes').value=t.notes||'';document.getElementById('tm-status').value=t.status||'pending';document.getElementById('tm-delivery').value=t.delivery||'Delivery';document.getElementById('ib-rows').innerHTML='';(t.items||[]).forEach(i=>addItemRow(i.name,i.qty,i.price));if(!(t.items||[]).length)addItemRow();document.getElementById('txn-modal').classList.add('open');}
+function parseDiscordMsg(){
+  const raw = document.getElementById('paste-input').value.trim();
+  const status = document.getElementById('parse-status');
+  if(!raw){status.textContent='⚠ Paste something first';status.style.color='var(--gold)';return;}
+
+  // Helper: extract field value after a label line
+  function field(label){
+    // Discord "Copy Text" produces lines like: "👤 IGN
+Faiz4224
+💬 Discord
+..."
+    // Fields appear as: label on one line, value on next line
+    const re = new RegExp(label + '\\s*\n([^\n]+)','i');
+    const m = raw.match(re);
+    return m ? m[1].trim().replace(/`/g,'') : '';
+  }
+
+  // Extract Order ID from title line: "🛒 New Order — ORD-XXXXXX"
+  const titleMatch = raw.match(/New Order[^\n]*?[—-]\s*(ORD-[A-Z0-9]+)/i);
+  const orderId = titleMatch ? titleMatch[1].trim() : '';
+
+  const ign       = field('👤 IGN');
+  const discord   = field('💬 Discord');
+  const delivery  = field('📦 Delivery');
+  const server    = field('🌍 Server');
+  const location  = field('📍 Location');
+  const ts        = field('⏰ Time \(MY\)');
+  const notes     = field('📝 Notes');
+
+  // Total: "◆ 34 Diamond(s)"
+  const totalMatch = raw.match(/◆\s*(\d+)\s*Diamond/i);
+  const total = totalMatch ? totalMatch[1] : '';
+
+  // Items block: after "🛍 Items" line, parse "**Name** ×qty = ◆ price" lines
+  const itemsMatch = raw.match(/🛍 Items\s*\n([\s\S]*?)(?=\n📝|\n⏰|\n🌍|\n$|$)/i);
+  const itemLines = itemsMatch ? itemsMatch[1].trim().split('\n') : [];
+  const parsedItems = itemLines.map(line => {
+    // "**Shulker Box** ×5 = ◆ 25"
+    const m = line.match(/\*{0,2}(.+?)\*{0,2}\s*[×x](\d+)\s*=\s*◆\s*(\d+)/i);
+    return m ? {name: m[1].trim(), qty: parseInt(m[2]), price: parseInt(m[3])} : null;
+  }).filter(Boolean);
+
+  // Count what we got
+  let filled = 0;
+  if(orderId){ document.getElementById('tm-id').value = orderId; filled++; }
+  if(ign)    { document.getElementById('tm-ign').value = ign; filled++; }
+  if(discord){ document.getElementById('tm-discord').value = discord; filled++; }
+  if(delivery){ document.getElementById('tm-delivery').value = delivery; }
+  if(server) { document.getElementById('tm-server').value = server; }
+  if(location && location !== 'N/A'){ document.getElementById('tm-location').value = location; }
+  if(total)  { document.getElementById('tm-total').value = total; filled++; }
+  if(ts)     { document.getElementById('tm-ts').value = ts; }
+  if(notes && notes !== 'None'){ document.getElementById('tm-notes').value = notes; }
+
+  // Fill items
+  if(parsedItems.length){
+    document.getElementById('ib-rows').innerHTML = '';
+    parsedItems.forEach(it => addItemRow(it.name, it.qty, it.price));
+    filled++;
+  }
+
+  if(filled >= 3){
+    status.textContent = '✅ Filled ' + filled + ' fields!';
+    status.style.color = 'var(--green)';
+    // Collapse the paste section
+    document.getElementById('paste-input').style.borderColor = 'rgba(74,222,128,0.4)';
+  } else {
+    status.textContent = '⚠ Only found ' + filled + ' fields — check format';
+    status.style.color = 'var(--gold)';
+  }
+}
+
+function openTxnModal(){
+  editingTxnId=null;
+  document.getElementById('txn-modal-title').textContent='Add Order';
+  document.getElementById('paste-input').value='';
+  document.getElementById('parse-status').textContent='';
+  document.getElementById('paste-input').style.borderColor='';
+  ['tm-id','tm-ign','tm-discord','tm-location','tm-total','tm-ts','tm-notes'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('tm-status').value='pending';
+  document.getElementById('tm-delivery').value='Pickup';
+  document.getElementById('tm-server').value='Skyxion: Ragnarok';
+  document.getElementById('ib-rows').innerHTML='';
+  document.getElementById('paste-section').style.display='block';
+  document.getElementById('txn-modal').classList.add('open');
+}
+
 function closeTxnModal(){document.getElementById('txn-modal').classList.remove('open');editingTxnId=null;}
 function addItemRow(name='',qty='',price=''){const id='ir'+(++rowCount);const d=document.createElement('div');d.className='ib-row';d.id=id;d.innerHTML=`<input type="text" class="ib-inp" placeholder="Item name" value="${name}"><input type="number" class="ib-inp" placeholder="Qty" value="${qty}" min="1"><input type="number" class="ib-inp" placeholder="◆ Price" value="${price}" min="0"><button class="ib-del" onclick="document.getElementById('${id}').remove()">✕</button>`;document.getElementById('ib-rows').appendChild(d);}
 async function saveTxn(){
