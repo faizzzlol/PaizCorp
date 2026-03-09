@@ -710,53 +710,55 @@ function parseDiscordMsg(){
   const status = document.getElementById('parse-status');
   if(!raw){status.textContent='⚠ Paste something first';status.style.color='var(--gold)';return;}
 
-  // Helper: extract field value after a label line
-  function field(label){
-    // Discord "Copy Text" produces lines like: label on one line, value on next
-    // Fields appear as: label on one line, value on next line
-    const re = new RegExp(label + '\\s*\n([^\n]+)','i');
-    const m = raw.match(re);
-    return m ? m[1].trim().replace(/`/g,'') : '';
+  // Discord "Copy Text" strips emojis — format is: label (plain text), then value on next line
+  const lines = raw.split('\n').map(l=>l.trim()).filter(l=>l.length>0);
+
+  function afterLabel(label){
+    for(let i=0;i<lines.length-1;i++){
+      if(lines[i].toLowerCase()===label.toLowerCase()) return lines[i+1];
+    }
+    return '';
   }
 
-  // Extract Order ID from title line: "🛒 New Order — ORD-XXXXXX"
-  const titleMatch = raw.match(/New Order[^\n]*?[—-]\s*(ORD-[A-Z0-9]+)/i);
+  // Order ID from title: "New Order — ORD-IK53NR"
+  const titleMatch = raw.match(/New Order[^\n]*?[\u2014\-\u2013]\s*(ORD-[A-Z0-9]+)/i);
   const orderId = titleMatch ? titleMatch[1].trim() : '';
 
-  const ign       = field('👤 IGN');
-  const discord   = field('💬 Discord');
-  const delivery  = field('📦 Delivery');
-  const server    = field('🌍 Server');
-  const location  = field('📍 Location');
-  const ts        = field('⏰ Time \(MY\)');
-  const notes     = field('📝 Notes');
+  const ign      = afterLabel('IGN').replace(/`/g,'');
+  const discord  = afterLabel('Discord').replace(/`/g,'');
+  const delivery = afterLabel('Delivery');
+  const server   = afterLabel('Server');
+  const loc      = afterLabel('Location');
+  const ts       = afterLabel('Time (MY)');
+  const notes    = afterLabel('Notes');
 
-  // Total: "◆ 34 Diamond(s)"
+  // Total: line containing "◆ X Diamond(s)"
   const totalMatch = raw.match(/◆\s*(\d+)\s*Diamond/i);
   const total = totalMatch ? totalMatch[1] : '';
 
-  // Items block: after "🛍 Items" line, parse "**Name** ×qty = ◆ price" lines
-  const itemsMatch = raw.match(/🛍 Items\s*\n([\s\S]*?)(?=\n📝|\n⏰|\n🌍|\n$|$)/i);
-  const itemLines = itemsMatch ? itemsMatch[1].trim().split('\n') : [];
-  const parsedItems = itemLines.map(line => {
-    // "**Shulker Box** ×5 = ◆ 25"
-    const m = line.match(/\*{0,2}(.+?)\*{0,2}\s*[×x](\d+)\s*=\s*◆\s*(\d+)/i);
-    return m ? {name: m[1].trim(), qty: parseInt(m[2]), price: parseInt(m[3])} : null;
-  }).filter(Boolean);
+  // Items: lines after "Items" label, format: "Name ×1 = ◆ 5"
+  const parsedItems = [];
+  let inItems = false;
+  const stopLabels = ['notes','time (my)','server','location','delivery','discord','ign','total'];
+  for(let i=0;i<lines.length;i++){
+    if(lines[i].toLowerCase()==='items'){inItems=true;continue;}
+    if(inItems){
+      if(stopLabels.includes(lines[i].toLowerCase())){inItems=false;continue;}
+      const m = lines[i].match(/^(.+?)\s*[×x](\d+)\s*=\s*◆\s*(\d+)/i);
+      if(m) parsedItems.push({name:m[1].trim(),qty:parseInt(m[2]),price:parseInt(m[3])});
+    }
+  }
 
-  // Count what we got
   let filled = 0;
   if(orderId){ document.getElementById('tm-id').value = orderId; filled++; }
   if(ign)    { document.getElementById('tm-ign').value = ign; filled++; }
   if(discord){ document.getElementById('tm-discord').value = discord; filled++; }
   if(delivery){ document.getElementById('tm-delivery').value = delivery; }
   if(server) { document.getElementById('tm-server').value = server; }
-  if(location && location !== 'N/A'){ document.getElementById('tm-location').value = location; }
+  if(loc && loc !== 'N/A'){ document.getElementById('tm-location').value = loc; }
   if(total)  { document.getElementById('tm-total').value = total; filled++; }
   if(ts)     { document.getElementById('tm-ts').value = ts; }
-  if(notes && notes !== 'None'){ document.getElementById('tm-notes').value = notes; }
-
-  // Fill items
+  if(notes && notes.toLowerCase() !== 'none'){ document.getElementById('tm-notes').value = notes; }
   if(parsedItems.length){
     document.getElementById('ib-rows').innerHTML = '';
     parsedItems.forEach(it => addItemRow(it.name, it.qty, it.price));
@@ -764,16 +766,14 @@ function parseDiscordMsg(){
   }
 
   if(filled >= 3){
-    status.textContent = '✅ Filled ' + filled + ' fields!';
+    status.textContent = '✅ Auto-filled ' + filled + ' fields!';
     status.style.color = 'var(--green)';
-    // Collapse the paste section
     document.getElementById('paste-input').style.borderColor = 'rgba(74,222,128,0.4)';
   } else {
     status.textContent = '⚠ Only found ' + filled + ' fields — check format';
     status.style.color = 'var(--gold)';
   }
 }
-
 function openTxnModal(){
   editingTxnId=null;
   document.getElementById('txn-modal-title').textContent='Add Order';
