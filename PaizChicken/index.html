@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paiz Chicken — Official LoL Food Chain</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0f0a05;--bg2:#17110a;--bg3:#211810;--bg4:#2b2015;
+  --txt:#fdf6e3;--txt2:rgba(253,246,227,0.82);--txt3:rgba(253,246,227,0.55);--txt4:rgba(253,246,227,0.32);
+  --red:#cc2200;--red2:#e53e1a;--red3:#ff4422;
+  --gold:#f5a623;--gold2:#fbbf24;--gold-dim:rgba(245,166,35,0.12);
+  --red-dim:rgba(204,34,0,0.12);
+  --border:rgba(253,246,227,0.09);--border2:rgba(253,246,227,0.05);
+  --check:rgba(253,246,227,0.025);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* CHECKERED TEXTURE */
+body::before{content:'';position:fixed;inset:0;background-image:repeating-conic-gradient(var(--check) 0% 25%, transparent 0% 50%);background-size:32px 32px;pointer-events:none;z-index:0;opacity:0.6}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--red);border-bottom:3px solid #a01a00;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:58px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{width:34px;height:34px;background:#0f0a05;border-radius:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:2px solid rgba(255,255,255,0.2);flex-shrink:0}
+.nav-logo-text{font-family:'Anton',sans-serif;font-size:1.3rem;color:#fff;letter-spacing:1px;line-height:1}
+.nav-logo-sub{font-family:'IBM Plex Mono',monospace;font-size:0.38rem;letter-spacing:3px;color:rgba(255,255,255,0.6);display:block;margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:0}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:rgba(255,255,255,0.85);text-decoration:none;padding:6px 14px;transition:color 0.2s;text-transform:uppercase}
+.nav-link:hover{color:#fff}
+.nav-divider{width:1px;height:14px;background:rgba(255,255,255,0.2)}
+.cart-btn{background:#0f0a05;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 16px;color:var(--gold);font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;transition:all 0.2s;margin-left:1rem;border:2px solid rgba(245,166,35,0.4)}
+.cart-btn:hover{background:var(--gold);color:#0f0a05;border-color:var(--gold)}
+.cart-count{background:var(--gold);color:#0f0a05;font-weight:900;font-size:0.58rem;padding:1px 6px;min-width:20px;text-align:center;font-family:'Anton',sans-serif}
+
+/* TICKER */
+.ticker{background:#0f0a05;border-bottom:1px solid var(--border);padding:7px 0;overflow:hidden;position:relative;z-index:1}
+.ticker-track{display:flex;gap:0;animation:tickerRoll 25s linear infinite;white-space:nowrap}
+.ticker-item{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--gold);padding:0 2rem;flex-shrink:0}
+.ticker-dot{color:var(--red);margin:0 0.5rem}
+@keyframes tickerRoll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:4rem 2rem 3rem;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--red),var(--gold),var(--red),transparent)}
+.hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:4px;color:var(--red3);margin-bottom:0.8rem;display:block}
+.hero-title{font-family:'Anton',sans-serif;font-size:clamp(3.5rem,10vw,7rem);color:var(--txt);line-height:0.9;letter-spacing:-1px;margin-bottom:0.5rem}
+.hero-title span{color:var(--red3);display:block}
+.hero-tagline{font-family:'Nunito',sans-serif;font-size:1rem;color:var(--txt3);font-weight:600;letter-spacing:1px;margin-bottom:2rem}
+.hero-badge{display:inline-flex;align-items:center;gap:12px;background:var(--red-dim);border:1px solid rgba(204,34,0,0.3);padding:8px 20px;font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt2)}
+.hero-badge-sep{color:var(--red)}
+.hero-stripe{position:absolute;top:0;right:-80px;width:300px;height:100%;background:repeating-linear-gradient(-55deg,transparent,transparent 20px,rgba(204,34,0,0.04) 20px,rgba(204,34,0,0.04) 40px);pointer-events:none}
+.hero-stripe-left{left:-80px;right:auto;background:repeating-linear-gradient(55deg,transparent,transparent 20px,rgba(245,166,35,0.03) 20px,rgba(245,166,35,0.03) 40px)}
+
+/* STATS BAR */
+.stats-bar{position:relative;z-index:1;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;justify-content:center;gap:0}
+.stat-item{padding:14px 32px;text-align:center;border-right:1px solid var(--border)}
+.stat-item:last-child{border-right:none}
+.stat-val{font-family:'Anton',sans-serif;font-size:1.5rem;color:var(--gold);display:block;line-height:1}
+.stat-key{font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:2px;color:var(--txt4);margin-top:2px;display:block}
+
+/* LAYOUT */
+.layout{position:relative;z-index:1;display:grid;grid-template-columns:230px 1fr;gap:0;max-width:1300px;margin:0 auto;padding:2rem}
+@media(max-width:768px){.layout{grid-template-columns:1fr;padding:1rem}.sidebar{display:none}}
+
+/* SIDEBAR */
+.sidebar{padding-right:1.5rem}
+.s-section{margin-bottom:1.8rem}
+.s-label{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:3px;color:var(--txt4);margin-bottom:0.6rem;display:block}
+.s-search{width:100%;background:var(--bg2);border:1px solid var(--border);color:var(--txt);font-family:'Nunito',sans-serif;font-size:0.82rem;padding:9px 12px;outline:none;transition:border-color 0.2s}
+.s-search::placeholder{color:var(--txt4)}
+.s-search:focus{border-color:rgba(204,34,0,0.5)}
+.f-btn{width:100%;background:transparent;border:1px solid var(--border2);color:var(--txt3);font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;padding:8px 12px;cursor:pointer;text-align:left;transition:all 0.15s;margin-bottom:3px;display:flex;align-items:center;gap:8px}
+.f-btn:hover{background:var(--bg3);color:var(--txt2);border-color:var(--border)}
+.f-btn.active{background:var(--red-dim);border-color:rgba(204,34,0,0.4);color:var(--txt)}
+.f-btn.active::before{content:'▶';font-size:0.4rem;color:var(--red3)}
+.s-divider{height:1px;background:var(--border);margin:1.5rem 0}
+
+/* MAIN */
+.main-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:8px}
+.item-count{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt4)}
+.sort-btns{display:flex;gap:3px}
+.sort-btn{background:transparent;border:1px solid var(--border2);color:var(--txt4);font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1px;padding:5px 10px;cursor:pointer;transition:all 0.15s}
+.sort-btn:hover{border-color:var(--border);color:var(--txt3)}
+.sort-btn.active{background:var(--red-dim);border-color:rgba(204,34,0,0.4);color:var(--txt2)}
+
+/* MENU GRID */
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--border2)}
+.mc{background:var(--bg2);display:flex;flex-direction:column;transition:transform 0.2s,background 0.2s;cursor:default;position:relative}
+.mc:hover{background:var(--bg3);transform:translateY(-2px)}
+.mc.sold-out{opacity:0.55}
+.mc-img-area{position:relative;height:170px;background:var(--bg3);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid var(--border2)}
+.mc-img-area::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,transparent 40%,rgba(15,10,5,0.5) 100%);pointer-events:none}
+.mc-img{width:90px;height:90px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 4px 16px rgba(204,34,0,0.3));z-index:1;position:relative}
+.mc-img-ph{font-size:3rem;z-index:1;position:relative}
+.mc-status{position:absolute;top:10px;left:10px;font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:2px;padding:3px 8px;z-index:2}
+.badge-out{background:#1a0800;border:1px solid rgba(204,34,0,0.4);color:var(--red3)}
+.badge-low{background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.35);color:var(--gold)}
+.badge-stock{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:#4ade80}
+.mc-cat{position:absolute;top:10px;right:10px;font-family:'IBM Plex Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:var(--txt4);background:rgba(15,10,5,0.7);padding:2px 7px;border:1px solid var(--border2)}
+.mc-body{padding:1rem 1rem 1.2rem;display:flex;flex-direction:column;flex:1}
+.mc-name{font-family:'Anton',sans-serif;font-size:1.15rem;color:var(--txt);letter-spacing:0.5px;line-height:1.1;margin-bottom:4px}
+.mc-price{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold);letter-spacing:1px;margin-bottom:5px}
+.mc-price-wrap{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:5px}
+.mc-price-old{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--txt4);text-decoration:line-through}
+.price-drop{font-family:'IBM Plex Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;padding:2px 6px;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);color:#4ade80;animation:pricePulse 2s ease-in-out infinite}
+.price-up{font-family:'IBM Plex Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;padding:2px 6px;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.3);color:#f87171}
+@keyframes pricePulse{0%,100%{opacity:1}50%{opacity:0.6}}
+.mc-desc{font-size:0.8rem;color:var(--txt3);line-height:1.5;margin-bottom:0.7rem;font-weight:600;flex:1}
+.mc-meta-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem}
+.mc-stock-txt{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;color:var(--txt4)}
+.mc-sold{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;color:var(--gold2);letter-spacing:1px}
+.mc-best-badge{font-family:'IBM Plex Mono',monospace;font-size:0.38rem;letter-spacing:1.5px;padding:2px 6px;background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.3);color:var(--gold);display:inline-block;margin-left:6px}
+.qty-row{display:flex;align-items:center;gap:8px;margin-bottom:0.8rem}
+.qty-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4)}
+.qty-ctrl{display:flex;align-items:center;gap:0}
+.qty-b{width:28px;height:28px;background:var(--bg4);border:1px solid var(--border);color:var(--txt2);font-size:1rem;cursor:pointer;transition:all 0.15s;font-family:'Anton',sans-serif;line-height:1}
+.qty-b:hover:not(:disabled){background:var(--red);border-color:var(--red);color:#fff}
+.qty-b:disabled{opacity:0.3;cursor:not-allowed}
+.qty-n{width:44px;height:28px;background:var(--bg3);border:1px solid var(--border);border-left:none;border-right:none;color:var(--txt);text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;outline:none}
+.qty-n::-webkit-inner-spin-button{-webkit-appearance:none}
+.add-btn{width:100%;padding:10px;background:var(--red);border:none;color:#fff;font-family:'Anton',sans-serif;font-size:0.9rem;letter-spacing:2px;cursor:pointer;transition:all 0.2s;border:2px solid var(--red)}
+.add-btn:hover:not(:disabled){background:var(--red2);border-color:var(--red2)}
+.add-btn:disabled{background:var(--bg4);border-color:var(--border);color:var(--txt4);cursor:not-allowed}
+.empty-state{padding:3rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);background:var(--bg2);grid-column:1/-1}
+
+/* CART DRAWER */
+.drawer-overlay{position:fixed;inset:0;background:rgba(15,10,5,0.7);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(2px)}
+.drawer-overlay.open{opacity:1;pointer-events:all}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:var(--bg2);border-left:1px solid var(--border);z-index:201;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{background:var(--red);padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #a01a00;flex-shrink:0}
+.drawer-title{font-family:'Anton',sans-serif;font-size:1.2rem;color:#fff;letter-spacing:1px}
+.drawer-close{background:rgba(0,0,0,0.3);border:none;color:#fff;width:30px;height:30px;cursor:pointer;font-size:1.1rem;transition:background 0.2s}
+.drawer-close:hover{background:rgba(0,0,0,0.5)}
+.drawer-body{flex:1;overflow-y:auto;padding:1rem}
+.drawer-empty{padding:3rem 1rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;color:var(--txt4);line-height:2.5}
+.ci{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border2);align-items:center}
+.ci-img{width:44px;height:44px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;border:1px solid var(--border2)}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-family:'Anton',sans-serif;font-size:0.85rem;color:var(--txt);letter-spacing:0.5px}
+.ci-price{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;color:var(--gold);margin-top:2px}
+.ci-qty{display:flex;align-items:center;gap:5px}
+.ci-qb{width:22px;height:22px;background:var(--bg4);border:1px solid var(--border);color:var(--txt3);font-size:0.75rem;cursor:pointer;transition:all 0.15s}
+.ci-qb:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.ci-qn{width:30px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--txt);background:none;border:none;outline:none}
+.ci-del{background:none;border:none;color:var(--txt4);cursor:pointer;font-size:0.85rem;padding:4px;transition:color 0.2s;margin-left:4px}
+.ci-del:hover{color:var(--red3)}
+.drawer-ft{flex-shrink:0;padding:1rem 1.2rem;border-top:1px solid var(--border);background:var(--bg3)}
+.drawer-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.drawer-total-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt3)}
+.drawer-total-val{font-family:'Anton',sans-serif;font-size:1.4rem;color:var(--gold)}
+.checkout-btn{width:100%;padding:13px;background:var(--red);border:none;color:#fff;font-family:'Anton',sans-serif;font-size:1rem;letter-spacing:3px;cursor:pointer;transition:all 0.2s;border:2px solid var(--red)}
+.checkout-btn:hover{background:var(--red2)}
+.checkout-btn:disabled{background:var(--bg4);border-color:var(--border);color:var(--txt4);cursor:not-allowed}
+
+/* MODALS */
+.m-overlay{position:fixed;inset:0;background:rgba(15,10,5,0.85);z-index:300;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity 0.25s;backdrop-filter:blur(3px)}
+.m-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--bg2);border:1px solid var(--border);width:min(520px,100%);max-height:90vh;overflow-y:auto;animation:modalIn 0.25s ease}
+@keyframes modalIn{from{transform:scale(0.96) translateY(10px)}to{transform:scale(1) translateY(0)}}
+.modal-hd{background:var(--red);padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #a01a00;position:sticky;top:0}
+.modal-hd h3{font-family:'Anton',sans-serif;font-size:1.1rem;color:#fff;letter-spacing:1px}
+.modal-close{background:rgba(0,0,0,0.3);border:none;color:#fff;width:28px;height:28px;cursor:pointer;font-size:1rem}
+.modal-body{padding:1.2rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.fg{display:flex;flex-direction:column;margin-bottom:10px}
+.flabel{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4);margin-bottom:5px}
+.req{color:var(--red3)}
+.finput,.fselect,.ftextarea{background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'Nunito',sans-serif;font-size:0.85rem;padding:8px 12px;outline:none;width:100%;transition:border-color 0.2s}
+.finput:focus,.fselect:focus,.ftextarea:focus{border-color:rgba(204,34,0,0.5)}
+.fselect{cursor:pointer}
+.ftextarea{min-height:70px;resize:vertical;line-height:1.5}
+.modal-ft{padding:1rem 1.2rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;background:var(--bg3)}
+.btn-cancel{background:transparent;border:1px solid var(--border);color:var(--txt3);font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;padding:9px 18px;cursor:pointer;transition:all 0.2s}
+.btn-cancel:hover{border-color:var(--txt3);color:var(--txt)}
+.btn-order{background:var(--red);border:2px solid var(--red);color:#fff;font-family:'Anton',sans-serif;font-size:0.85rem;letter-spacing:2px;padding:9px 22px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:8px}
+.btn-order:hover{background:var(--red2)}
+.btn-order:disabled{opacity:0.6;cursor:not-allowed}
+.order-summary-box{background:var(--bg3);border:1px solid var(--border2);padding:0.8rem 1rem;margin-bottom:1rem}
+.os-title{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4);margin-bottom:0.6rem}
+.os-item{display:flex;justify-content:space-between;font-size:0.8rem;color:var(--txt2);padding:2px 0;font-weight:600}
+.os-total{display:flex;justify-content:space-between;border-top:1px solid var(--border);margin-top:8px;padding-top:8px}
+.os-total-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--txt3)}
+.os-total-val{font-family:'Anton',sans-serif;font-size:1rem;color:var(--gold)}
+
+/* SUCCESS MODAL */
+.success-body{padding:2.5rem 1.5rem;text-align:center}
+.success-icon{font-size:3rem;display:block;margin-bottom:1rem;animation:bounceIn 0.5s ease}
+@keyframes bounceIn{0%{transform:scale(0)}80%{transform:scale(1.15)}100%{transform:scale(1)}}
+.success-body h3{font-family:'Anton',sans-serif;font-size:1.8rem;color:var(--txt);letter-spacing:1px;margin-bottom:0.5rem}
+.success-body p{font-size:0.85rem;color:var(--txt3);line-height:1.7;margin-bottom:1rem;font-weight:600}
+.success-id{font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--gold);background:var(--bg3);border:1px solid var(--border);padding:8px 20px;display:inline-block;letter-spacing:3px;margin-bottom:1.5rem}
+.success-note{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;color:var(--txt4);line-height:2;background:var(--bg3);border:1px solid var(--border2);padding:0.8rem 1rem}
+.btn-done{background:var(--red);border:2px solid var(--red);color:#fff;font-family:'Anton',sans-serif;font-size:0.9rem;letter-spacing:2px;padding:10px 28px;cursor:pointer;transition:all 0.2s;width:100%;margin-top:1rem}
+.btn-done:hover{background:var(--red2)}
+
+/* TOAST */
+.toast-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.toast{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;padding:10px 16px;background:var(--bg3);border:1px solid var(--border);color:var(--txt2);min-width:200px;animation:toastIn 0.3s ease;pointer-events:all}
+.toast.ok{border-left:3px solid #4ade80}
+.toast.err{border-left:3px solid var(--red3)}
+.toast.info{border-left:3px solid var(--gold)}
+@keyframes toastIn{from{transform:translateX(20px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2rem;margin-top:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-family:'Anton',sans-serif;font-size:0.9rem;color:var(--txt3);letter-spacing:1px}
+.footer-links{display:flex;gap:16px;align-items:center}
+.footer-link{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4);text-decoration:none}
+.footer-link:hover{color:var(--gold)}
+
+/* SAVING OVERLAY */
+.saving-overlay{position:fixed;inset:0;background:rgba(15,10,5,0.6);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;opacity:0;pointer-events:none;transition:opacity 0.2s;backdrop-filter:blur(4px)}
+.saving-overlay.show{opacity:1;pointer-events:all}
+.saving-spin{width:36px;height:36px;border:3px solid rgba(204,34,0,0.3);border-top-color:var(--red);border-radius:50%;animation:spin 0.7s linear infinite}
+.saving-txt{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--txt3)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">🍗</div>
+    <div>
+      <span class="nav-logo-text">PAIZ CHICKEN</span>
+      <span class="nav-logo-sub">PAIZ® CORP SUBSIDIARY</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="order-history/" class="nav-link">ORDER HISTORY</a>
+    <div class="nav-divider"></div>
+    <a href="https://discord.gg/thelol" target="_blank" class="nav-link">DISCORD</a>
+    <div class="nav-divider"></div>
+    <a href="https://faizzzlol.github.io/thelol" class="nav-link">THE LOL</a>
+  </div>
+  <button class="cart-btn" onclick="openCart()">
+    🛒 ORDER — <span class="cart-count" id="cart-count">0</span>
+  </button>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker-track">
+    <span class="ticker-item">🍗 PAIZ CHICKEN<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">SKYXION: RAGNAROK<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">PAY WITH DIAMONDS<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">THE LEGEND OF LEGIONA<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">DELIVERY AVAILABLE<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">PAIZ® CORP SUBSIDIARY<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">ORDERS VIA DISCORD<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">🍗 PAIZ CHICKEN<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">SKYXION: RAGNAROK<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">PAY WITH DIAMONDS<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">THE LEGEND OF LEGIONA<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">DELIVERY AVAILABLE<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">PAIZ® CORP SUBSIDIARY<span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">ORDERS VIA DISCORD<span class="ticker-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-stripe"></div>
+  <div class="hero-stripe hero-stripe-left"></div>
+  <span class="hero-eyebrow">ESTABLISHED IN THE LEGEND OF LEGIONA</span>
+  <h1 class="hero-title">PAIZ<span>CHICKEN</span></h1>
+  <p class="hero-tagline">Hot, fresh & delivered to your doorstep — in Minecraft.</p>
+  <div class="hero-badge">
+    <span>MAINS</span><span class="hero-badge-sep">✦</span>
+    <span>SNACKS</span><span class="hero-badge-sep">✦</span>
+    <span>SPECIALS</span><span class="hero-badge-sep">✦</span>
+    <span>SWEETS</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-val" id="stat-items">—</span><span class="stat-key">MENU ITEMS</span></div>
+  <div class="stat-item"><span class="stat-val" id="stat-avail">—</span><span class="stat-key">AVAILABLE NOW</span></div>
+  <div class="stat-item"><span class="stat-val" id="stat-sold">—</span><span class="stat-key">TOTAL SOLD</span></div>
+  <div class="stat-item"><span class="stat-val" id="stat-cats">—</span><span class="stat-key">CATEGORIES</span></div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="s-section">
+      <span class="s-label">SEARCH MENU</span>
+      <input class="s-search" id="srch" placeholder="e.g. chicken, steak..." oninput="render()">
+    </div>
+    <div class="s-divider"></div>
+    <div class="s-section">
+      <span class="s-label">CATEGORY</span>
+      <button class="f-btn active" data-cat="all" onclick="setCat(this)">ALL ITEMS</button>
+      <div id="cat-list"></div>
+    </div>
+    <div class="s-divider"></div>
+    <div class="s-section">
+      <span class="s-label">AVAILABILITY</span>
+      <button class="f-btn active" data-avail="all"      onclick="setAvail(this)">ALL</button>
+      <button class="f-btn"        data-avail="in-stock" onclick="setAvail(this)">IN STOCK</button>
+      <button class="f-btn"        data-avail="sold-out" onclick="setAvail(this)">SOLD OUT</button>
+    </div>
+    <div class="s-divider"></div>
+    <div class="s-section">
+      <span class="s-label">LINKS</span>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/" class="f-btn" style="text-decoration:none">🏪 PAIZ SHOP</a>
+      <a href="https://faizzzlol.github.io/thelol" class="f-btn" style="text-decoration:none">🏰 THE LOL</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+    <div class="main-top">
+      <span class="item-count" id="tb-count">LOADING...</span>
+      <div class="sort-btns">
+        <button class="sort-btn active" data-sort="default" onclick="setSort(this)">DEFAULT</button>
+        <button class="sort-btn" data-sort="asc"     onclick="setSort(this)">◆↑</button>
+        <button class="sort-btn" data-sort="desc"    onclick="setSort(this)">◆↓</button>
+        <button class="sort-btn" data-sort="az"      onclick="setSort(this)">A-Z</button>
+      </div>
+    </div>
+    <div class="menu-grid" id="menu-grid"></div>
+  </main>
+</div>
+
+<!-- CART DRAWER -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeCart()"></div>
+<div class="drawer" id="cart-drawer">
+  <div class="drawer-hd">
+    <span class="drawer-title">🛒 YOUR ORDER</span>
+    <button class="drawer-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="drawer-body" id="cart-items"></div>
+  <div class="drawer-ft">
+    <div class="drawer-total">
+      <span class="drawer-total-lbl">ORDER TOTAL</span>
+      <span class="drawer-total-val">◆ <span id="cart-total">0</span></span>
+    </div>
+    <button class="checkout-btn" id="checkout-btn" onclick="openCheckout()" disabled>PLACE ORDER</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="m-overlay" id="checkout-modal">
+  <div class="modal">
+    <div class="modal-hd"><h3>PLACE YOUR ORDER</h3><button class="modal-close" onclick="closeCheckout()">✕</button></div>
+    <div class="modal-body">
+      <div class="order-summary-box">
+        <div class="os-title">ORDER SUMMARY</div>
+        <div id="os-items"></div>
+        <div class="os-total">
+          <span class="os-total-lbl">TOTAL</span>
+          <span class="os-total-val">◆ <span id="os-total">0</span></span>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="flabel">MINECRAFT IGN <span class="req">*</span></label><input class="finput" id="f-ign" placeholder="YourIGN"></div>
+        <div class="fg"><label class="flabel">DISCORD <span class="req">*</span></label><input class="finput" id="f-discord" placeholder="yourdiscord"></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="flabel">DELIVERY TYPE <span class="req">*</span></label>
+          <select class="fselect" id="f-delivery">
+            <option value="">— Select —</option>
+            <option value="Pickup">Pickup</option>
+            <option value="Delivery">Delivery</option>
+          </select>
+        </div>
+        <div class="fg"><label class="flabel">SERVER</label><input class="finput" id="f-server" value="Skyxion: Ragnarok"></div>
+      </div>
+      <div class="fg"><label class="flabel">LOCATION / COORDS</label><input class="finput" id="f-location" placeholder="e.g. 7000 120 -7000 or Capital City"></div>
+      <div class="fg"><label class="flabel">SPECIAL REQUESTS</label><textarea class="ftextarea" id="f-notes" placeholder="Any special requests? Extra crispy?"></textarea></div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn-cancel" onclick="closeCheckout()">CANCEL</button>
+      <button class="btn-order" id="order-btn" onclick="placeOrder()">
+        <span id="order-spin" style="width:13px;height:13px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;display:none"></span>
+        CONFIRM ORDER
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="m-overlay" id="success-modal">
+  <div class="modal">
+    <div class="success-body">
+      <span class="success-icon">🍗</span>
+      <h3>ORDER PLACED!</h3>
+      <p>Your order has been sent to our kitchen via Discord.<br>Save your order ID to track status.</p>
+      <div class="success-id" id="success-id">PCK-XXXXXX</div>
+      <div class="success-note">
+        TRACK STATUS → ORDER HISTORY PAGE<br>
+        PAYMENT → DIAMONDS UPON DELIVERY/PICKUP<br>
+        QUESTIONS → DISCORD SERVER
+      </div>
+      <button class="btn-done" onclick="closeSuccess()">GOT IT, THANKS!</button>
+    </div>
+  </div>
+</div>
+
+<div class="saving-overlay" id="saving-overlay"><div class="saving-spin"></div><div class="saving-txt">LOADING MENU...</div></div>
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<footer>
+  <span class="footer-brand">PAIZ CHICKEN™ — PAIZ® CORP</span>
+  <div class="footer-links">
+    <a class="footer-link" href="https://faizzzlol.github.io/thelol">THE LEGEND OF LEGIONA</a>
+    <a class="footer-link" href="https://faizzzlol.github.io/PaizCorp/">PAIZ® CORP</a>
+    <a class="footer-link" href="https://faizzzlol.github.io/PaizCorp/PaizShop/">PAIZ SHOP</a>
+  </div>
+</footer>
+
+<script>
+const CFG = {
+  MENU_URL:      'https://raw.githubusercontent.com/faizzzlol/PaizCorp/main/PaizChicken/menu.json',
+  ORDER_WEBHOOK: 'YOUR_PAIZCHICKEN_DISCORD_WEBHOOK_HERE',
+  CACHE_TTL:     5 * 60 * 1000,
+};
+
+let menu = [], cart = [], activeCat = 'all', activeAvail = 'all', activeSort = 'default';
+
+/* ── LOAD MENU ── */
+async function loadMenu() {
+  document.getElementById('saving-overlay').classList.add('show');
+  const cached   = localStorage.getItem('pc_products');
+  const cacheAge = Date.now() - parseInt(localStorage.getItem('pc_cache_t') || '0');
+  if (cached && cacheAge < CFG.CACHE_TTL) {
+    menu = JSON.parse(cached);
+    document.getElementById('saving-overlay').classList.remove('show');
+    return initShop();
+  }
+  try {
+    const r = await fetch(CFG.MENU_URL + '?t=' + Date.now());
+    if (!r.ok) throw new Error();
+    const fresh = await r.json();
+    // Track price changes
+    if (cached) {
+      const prev = JSON.parse(cached);
+      const prevMap = {};
+      prev.forEach(p => { prevMap[p.id] = p.price; });
+      const hist = JSON.parse(localStorage.getItem('pc_price_history') || '{}');
+      let changed = false;
+      fresh.forEach(p => {
+        if (prevMap[p.id] !== undefined && prevMap[p.id] !== p.price) {
+          hist[p.id] = { oldPrice: prevMap[p.id], newPrice: p.price, ts: Date.now() };
+          changed = true;
+        }
+      });
+      if (changed) localStorage.setItem('pc_price_history', JSON.stringify(hist));
+    }
+    menu = fresh;
+    localStorage.setItem('pc_products', JSON.stringify(menu));
+    localStorage.setItem('pc_cache_t', Date.now().toString());
+  } catch {
+    menu = JSON.parse(cached || '[]');
+    if (!menu.length) menu = getDefaults();
+    toast('Could not load menu — showing cached data', 'err');
+  }
+  document.getElementById('saving-overlay').classList.remove('show');
+  initShop();
+}
+
+function getDefaults() {
+  return [
+    {id:'cooked_chicken',  name:'Cooked Chicken',   price:3,  unit:'Diamond', stock:64, category:'Mains',    listed:true, description:'Classic juicy roasted chicken. The LoL staple.', image:'img/cooked_chicken.png', sold:0},
+    {id:'steak',           name:'Steak',             price:4,  unit:'Diamond', stock:32, category:'Mains',    listed:true, description:'Premium cut beef steak, perfectly cooked.', image:'img/steak.png', sold:0},
+    {id:'cooked_porkchop', name:'Cooked Porkchop',   price:3,  unit:'Diamond', stock:48, category:'Mains',    listed:true, description:'Tender grilled porkchop, farm fresh.', image:'img/cooked_porkchop.png', sold:0},
+    {id:'bread',           name:'Bread',             price:1,  unit:'Diamond', stock:99, category:'Snacks',   listed:true, description:'Freshly baked loaf. Great with anything.', image:'img/bread.png', sold:0},
+    {id:'cookie',          name:'Cookies (x8)',      price:2,  unit:'Diamond', stock:50, category:'Snacks',   listed:true, description:'A batch of 8 freshly baked chocolate chip cookies.', image:'img/cookie.png', sold:0},
+    {id:'golden_apple',    name:'Golden Apple',      price:8,  unit:'Diamond', stock:10, category:'Specials', listed:true, description:'Rare & powerful. Grants absorption and regeneration.', image:'img/golden_apple.png', sold:0},
+    {id:'suspicious_stew', name:'Suspicious Stew',   price:5,  unit:'Diamond', stock:15, category:'Specials', listed:true, description:'Mystery effects guaranteed. Eat at your own risk.', image:'img/suspicious_stew.png', sold:0},
+    {id:'cake',            name:'Cake',              price:6,  unit:'Diamond', stock:20, category:'Sweets',   listed:true, description:'A whole cake! Feeds multiple hunger bars.', image:'img/cake.png', sold:0},
+    {id:'pumpkin_pie',     name:'Pumpkin Pie',       price:2,  unit:'Diamond', stock:40, category:'Sweets',   listed:true, description:'Seasonal classic. Filling and delicious.', image:'img/pumpkin_pie.png', sold:0},
+  ];
+}
+
+/* ── INIT ── */
+function initShop() {
+  const listed = menu.filter(p => p.listed);
+  const cats = [...new Set(listed.map(p => p.category).filter(Boolean))];
+  const catEl = document.getElementById('cat-list');
+  catEl.innerHTML = cats.map(c => `<button class="f-btn" data-cat="${c}" onclick="setCat(this)">${c.toUpperCase()}</button>`).join('');
+
+  document.getElementById('stat-items').textContent = listed.length;
+  document.getElementById('stat-avail').textContent = listed.filter(p => p.stock > 0).length;
+  document.getElementById('stat-sold').textContent  = listed.reduce((s, p) => s + (p.sold || 0), 0);
+  document.getElementById('stat-cats').textContent  = cats.length;
+
+  cart = JSON.parse(localStorage.getItem('pc_cart') || '[]');
+  // Sync cart quantities to current stock
+  cart = cart.map(ci => {
+    const p = menu.find(x => x.id === ci.id);
+    if (!p) return null;
+    return { ...ci, price: p.price, name: p.name };
+  }).filter(Boolean);
+  saveCart(); updateCartUI(); render();
+}
+
+/* ── FILTERS ── */
+function setCat(btn) {
+  document.querySelectorAll('[data-cat]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeCat = btn.dataset.cat;
+  render();
+}
+function setAvail(btn) {
+  document.querySelectorAll('[data-avail]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeAvail = btn.dataset.avail;
+  render();
+}
+function setSort(btn) {
+  document.querySelectorAll('[data-sort]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeSort = btn.dataset.sort;
+  render();
+}
+
+/* ── PRICE BADGE ── */
+function getPriceBadge(p) {
+  var hist = JSON.parse(localStorage.getItem('pc_price_history') || '{}');
+  var ph = hist[p.id];
+  var EXPIRE = 3 * 24 * 60 * 60 * 1000;
+  if (ph && (Date.now() - ph.ts) < EXPIRE) {
+    var diff = ph.newPrice - ph.oldPrice;
+    var arrow = diff < 0 ? '\u25bc' : '\u25b2';
+    var cls   = diff < 0 ? 'price-drop' : 'price-up';
+    var lbl   = diff < 0 ? Math.abs(diff) + '\u25c6 CHEAPER' : diff + '\u25c6 PRICIER';
+    return '<div class="mc-price-wrap">'
+      + '<span class="mc-price">\u25c6 ' + p.price + ' ' + (p.unit || 'Diamond') + '</span>'
+      + '<span class="mc-price-old">\u25c6 ' + ph.oldPrice + '</span>'
+      + '<span class="' + cls + '">' + arrow + ' ' + lbl + '</span>'
+      + '</div>';
+  }
+  return '<div class="mc-price">\u25c6 ' + p.price + ' ' + (p.unit || 'Diamond') + '</div>';
+}
+
+/* ── RENDER ── */
+function render() {
+  const q = (document.getElementById('srch')?.value || '').toLowerCase();
+  let list = menu.filter(p => p.listed);
+  if (q) list = list.filter(p => p.name.toLowerCase().includes(q) || (p.description||'').toLowerCase().includes(q) || (p.category||'').toLowerCase().includes(q));
+  if (activeCat !== 'all') list = list.filter(p => p.category === activeCat);
+  if (activeAvail === 'in-stock') list = list.filter(p => p.stock > 0);
+  if (activeAvail === 'sold-out') list = list.filter(p => p.stock <= 0);
+  if (activeSort === 'asc')  list.sort((a,b) => a.price - b.price);
+  if (activeSort === 'desc') list.sort((a,b) => b.price - a.price);
+  if (activeSort === 'az')   list.sort((a,b) => a.name.localeCompare(b.name));
+
+  document.getElementById('tb-count').textContent = 'SHOWING ' + list.length + ' ITEM' + (list.length !== 1 ? 'S' : '');
+  const grid = document.getElementById('menu-grid');
+  if (!list.length) { grid.innerHTML = '<div class="empty-state">NO ITEMS MATCH YOUR FILTERS</div>'; return; }
+
+  const maxSold = Math.max(...menu.map(p => p.sold || 0), 0);
+  grid.innerHTML = list.map(p => {
+    const isBest = maxSold > 0 && (p.sold || 0) === maxSold;
+    const out  = p.stock <= 0;
+    const low  = p.stock > 0 && p.stock <= 5;
+    const bCls = out ? 'badge-out' : low ? 'badge-low' : 'badge-stock';
+    const bTxt = out ? 'SOLD OUT' : low ? p.stock + ' LEFT' : 'IN STOCK';
+    const inCart = cart.find(c => c.id === p.id)?.qty || 0;
+    return `
+    <div class="mc${out ? ' sold-out' : ''}">
+      <div class="mc-img-area">
+        <span class="mc-status ${bCls}">${bTxt}</span>
+        <span class="mc-cat">${p.category || ''}</span>
+        ${p.image ? `<img class="mc-img" src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ''}
+        <div class="mc-img-ph" style="${p.image ? 'display:none' : ''}">🍗</div>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">${p.name}${isBest ? '<span class="mc-best-badge">👑 BEST</span>' : ''}</div>
+        ${getPriceBadge(p)}
+        ${p.description ? `<div class="mc-desc">${p.description}</div>` : ''}
+        <div class="mc-meta-row">
+          <span class="mc-stock-txt">STOCK: ${out ? 'OUT' : p.stock + ' left'}</span>
+          ${(p.sold || 0) > 0 ? `<span class="mc-sold">◆ ${p.sold} sold</span>` : ''}
+        </div>
+        <div class="qty-row">
+          <span class="qty-lbl">QTY</span>
+          <div class="qty-ctrl">
+            <button class="qty-b" onclick="chQty('q_${p.id}',-1)" ${out ? 'disabled' : ''}>−</button>
+            <input type="number" class="qty-n" id="q_${p.id}" value="1" min="1" max="${out ? 1 : p.stock}" ${out ? 'disabled' : ''}>
+            <button class="qty-b" onclick="chQty('q_${p.id}',1)"  ${out ? 'disabled' : ''}>+</button>
+          </div>
+        </div>
+        <button class="add-btn" onclick="addToCart('${p.id}')" ${out ? 'disabled' : ''}>
+          ${out ? 'SOLD OUT' : 'ADD TO ORDER'}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── CART ── */
+function chQty(id, d) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const pid = id.replace('q_', '');
+  const p = menu.find(x => x.id === pid);
+  if (!p) return;
+  const inCart = cart.find(c => c.id === pid)?.qty || 0;
+  let v = (parseInt(el.value) || 1) + d;
+  v = Math.max(1, Math.min(v, p.stock - inCart + (cart.find(c=>c.id===pid)?.qty||0)));
+  el.value = v;
+}
+
+function addToCart(id) {
+  const p = menu.find(x => x.id === id);
+  if (!p || p.stock <= 0) return;
+  const qEl = document.getElementById('q_' + id);
+  const qty = parseInt(qEl?.value || 1);
+  const inCart = cart.find(c => c.id === id);
+  const add = Math.min(qty, p.stock - (inCart?.qty || 0));
+  if (add <= 0) { toast('Max stock already in order!', 'err'); return; }
+  if (inCart) inCart.qty += add;
+  else cart.push({ id, name: p.name, price: p.price, qty: add, image: p.image || '' });
+  if (qEl) qEl.value = 1;
+  saveCart(); updateCartUI();
+  toast(p.name + ' added to order!', 'ok');
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  saveCart(); updateCartUI();
+}
+
+function changeCartQty(id, d) {
+  const p = menu.find(x => x.id === id);
+  const ci = cart.find(c => c.id === id);
+  if (!ci || !p) return;
+  ci.qty = Math.max(1, Math.min(ci.qty + d, p.stock));
+  if (ci.qty <= 0) return removeFromCart(id);
+  saveCart(); updateCartUI();
+}
+
+function cartTotal() { return cart.reduce((s, c) => s + c.price * c.qty, 0); }
+function saveCart()  { localStorage.setItem('pc_cart', JSON.stringify(cart)); }
+
+function updateCartUI() {
+  const total = cartTotal();
+  const count = cart.reduce((s, c) => s + c.qty, 0);
+  document.getElementById('cart-count').textContent = count;
+  document.getElementById('cart-total').textContent  = total;
+  document.getElementById('checkout-btn').disabled = cart.length === 0;
+
+  const body = document.getElementById('cart-items');
+  if (!cart.length) {
+    body.innerHTML = '<div class="drawer-empty">🍗<br><br>YOUR ORDER IS EMPTY<br><br>ADD ITEMS FROM THE MENU</div>';
+    return;
+  }
+  body.innerHTML = cart.map(ci => `
+  <div class="ci">
+    <div class="ci-img">${ci.image ? `<img src="${ci.image}" style="width:36px;height:36px;object-fit:contain;image-rendering:pixelated" onerror="this.innerText='🍗'">` : '🍗'}</div>
+    <div class="ci-info">
+      <div class="ci-name">${ci.name}</div>
+      <div class="ci-price">◆ ${ci.price * ci.qty} (${ci.qty} × ${ci.price})</div>
+    </div>
+    <div class="ci-qty">
+      <button class="ci-qb" onclick="changeCartQty('${ci.id}',-1)">−</button>
+      <span class="ci-qn">${ci.qty}</span>
+      <button class="ci-qb" onclick="changeCartQty('${ci.id}',1)">+</button>
+    </div>
+    <button class="ci-del" onclick="removeFromCart('${ci.id}')">✕</button>
+  </div>`).join('');
+}
+
+function openCart()  { document.getElementById('cart-drawer').classList.add('open'); document.getElementById('drawer-overlay').classList.add('open'); }
+function closeCart() { document.getElementById('cart-drawer').classList.remove('open'); document.getElementById('drawer-overlay').classList.remove('open'); }
+
+/* ── CHECKOUT ── */
+function openCheckout() {
+  if (!cart.length) return;
+  const total = cartTotal();
+  document.getElementById('os-total').textContent = total;
+  document.getElementById('os-items').innerHTML = cart.map(c =>
+    `<div class="os-item"><span>${c.name} ×${c.qty}</span><span>◆ ${c.price * c.qty}</span></div>`
+  ).join('');
+  document.getElementById('checkout-modal').classList.add('open');
+  closeCart();
+}
+function closeCheckout() { document.getElementById('checkout-modal').classList.remove('open'); }
+
+function genOrderId() {
+  return 'PCK-' + Math.random().toString(36).substr(2,6).toUpperCase();
+}
+
+async function placeOrder() {
+  const ign      = document.getElementById('f-ign').value.trim();
+  const discord  = document.getElementById('f-discord').value.trim();
+  const delivery = document.getElementById('f-delivery').value;
+  const server   = document.getElementById('f-server').value.trim() || 'Skyxion: Ragnarok';
+  const location = document.getElementById('f-location').value.trim();
+  const notes    = document.getElementById('f-notes').value.trim();
+  if (!ign || !discord || !delivery) { toast('Fill in all required fields', 'err'); return; }
+
+  const orderId = genOrderId();
+  const total   = cartTotal();
+  const ts      = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
+  const itemLines = cart.map(c => `**${c.name}** \u00d7${c.qty} = \u25c6 ${c.price * c.qty}`).join('\n');
+
+  const payload = {
+    username: 'Paiz Chicken',
+    avatar_url: 'https://faizzzlol.github.io/thelol/TheLoL2.png',
+    embeds: [{
+      title: '\ud83c\udf57 New Order \u2014 ' + orderId,
+      color: 0xcc2200,
+      fields: [
+        { name: '\ud83d\udc64 IGN',       value: '`' + ign + '`',            inline: true },
+        { name: '\ud83d\udcac Discord',   value: discord,                    inline: true },
+        { name: '\ud83d\udce6 Delivery',  value: delivery,                   inline: true },
+        { name: '\ud83c\udf0d Server',    value: server,                     inline: true },
+        { name: '\ud83d\udccd Location',  value: location || 'N/A',          inline: true },
+        { name: '\ud83d\udcb0 Total',     value: '**\u25c6 ' + total + ' Diamond(s)**', inline: true },
+        { name: '\ud83c\udf57 Items',     value: itemLines,                  inline: false },
+        { name: '\ud83d\udcdd Notes',     value: notes || 'None',            inline: false },
+        { name: '\u23f0 Time (MY)',       value: ts,                         inline: true },
+      ],
+      footer: { text: 'Paiz Chicken \u00b7 Paiz\u00ae Corp \u00b7 The Legend of Legiona' },
+      timestamp: new Date().toISOString()
+    }]
+  };
+
+  const btn  = document.getElementById('order-btn');
+  const spin = document.getElementById('order-spin');
+  btn.disabled = true; spin.style.display = 'block';
+
+  try {
+    const r = await fetch(CFG.ORDER_WEBHOOK, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+    });
+    if (!r.ok && r.status !== 204) throw new Error();
+
+    const hist = JSON.parse(localStorage.getItem('pc_orders') || '[]');
+    hist.unshift({ id: orderId, items: [...cart], total, ign, discord, delivery, server, location, notes, ts });
+    localStorage.setItem('pc_orders', JSON.stringify(hist.slice(0, 50)));
+
+    cart = []; saveCart(); updateCartUI();
+    closeCheckout();
+    document.getElementById('success-id').textContent = orderId;
+    document.getElementById('success-modal').classList.add('open');
+    ['f-ign','f-discord','f-location','f-notes'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-delivery').value = '';
+  } catch {
+    toast('Could not send order — check webhook or try again', 'err');
+  }
+  btn.disabled = false; spin.style.display = 'none';
+}
+
+function closeSuccess() { document.getElementById('success-modal').classList.remove('open'); }
+
+/* ── TOAST ── */
+function toast(msg, type='ok') {
+  const wrap = document.getElementById('toast-wrap');
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  wrap.appendChild(el);
+  setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity 0.4s'; setTimeout(() => el.remove(), 400); }, 3500);
+}
+
+loadMenu();
+</script>
+</body>
+</html>
