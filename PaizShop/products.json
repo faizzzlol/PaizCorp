@@ -4,7 +4,7 @@
     "name": "Shulker Box",
     "price": 5,
     "unit": "Diamond",
-    "stock": 5,
+    "stock": 0,
     "image": "img/shulker_box.png",
     "category": "Storage",
     "listed": true,
