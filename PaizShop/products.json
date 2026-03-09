@@ -30,7 +30,7 @@
     "image": "img/mending.png",
     "category": "Enchantment",
     "listed": false,
-    "description": "Greatly increases item durability."
+    "description": "(1x). Greatly increases item durability."
   },
   {
     "id": "nether_wart",
