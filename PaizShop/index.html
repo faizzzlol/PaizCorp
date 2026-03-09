@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paiz Shop — Official Minecraft Store</title>
+<title>Paiz Shop — Official Items Store</title>
 <link rel="icon" href="https://faizzzlol.github.io/thelol/TheLoL2.png">
 <meta name="description" content="Buy Minecraft items with Diamonds. Official store of The Legend of Legiona.">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -128,6 +128,10 @@ nav{position:sticky;top:0;z-index:300;height:58px;display:flex;align-items:cente
 .pc-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--txt);letter-spacing:-0.2px;margin-bottom:3px;line-height:1.2}
 .pc-price{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--gold);letter-spacing:1px;margin-bottom:6px}
 .pc-stock-txt{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;color:var(--txt3);margin-bottom:0.9rem;flex:1}
+.pc-sold-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.9rem}
+.pc-sold-txt{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;color:var(--txt3)}
+.pc-sold-num{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;color:var(--green);letter-spacing:1px}
+.pc-best-badge{font-family:'IBM Plex Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;padding:1px 6px;background:rgba(251,191,36,0.10);border:1px solid rgba(251,191,36,0.3);color:#fbbf24;margin-left:6px;vertical-align:middle}
 .pc-desc{font-size:0.82rem;color:var(--txt2);font-weight:300;line-height:1.6;margin-bottom:0.9rem;flex:1}
 .qty-row{display:flex;align-items:center;gap:8px;margin-bottom:0.75rem}
 .qty-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt4);flex-shrink:0}
@@ -556,7 +560,9 @@ function render() {
 
   if (!list.length) { grid.innerHTML='<div class="empty-state">NO ITEMS MATCH YOUR FILTERS</div>'; return; }
 
+  const maxSold = Math.max(...products.map(p=>p.sold||0), 0);
   grid.innerHTML = list.map(p => {
+    const isBest = maxSold > 0 && (p.sold||0) === maxSold;
     const out  = p.stock <= 0;
     const low  = p.stock > 0 && p.stock <= 5;
     const bCls = out ? 'badge-out' : low ? 'badge-low' : 'badge-stock';
@@ -572,10 +578,15 @@ function render() {
         <div class="pc-img-ph" style="${p.image?'display:none':''}">📦</div>
       </div>
       <div class="pc-body">
-        <div class="pc-name">${p.name}</div>
+        <div class="pc-name">${p.name}${isBest?'<span class="pc-best-badge">👑 BEST</span>':''}</div>
         <div class="pc-price">◆ ${p.price} ${p.unit||'Diamond'}</div>
         ${p.description?`<div class="pc-desc">${p.description}</div>`:''}
-        <div class="pc-stock-txt">STOCK: ${out?'OUT OF STOCK':p.stock+' available'}</div>
+        <div class="pc-sold-row">
+          <div>
+            <span class="pc-stock-txt" style="margin-bottom:0">STOCK: ${out?'OUT OF STOCK':p.stock+' available'}</span>
+          </div>
+          ${(p.sold||0)>0?`<span class="pc-sold-num">📦 ${p.sold} sold</span>`:''}
+        </div>
         <div class="qty-row">
           <span class="qty-lbl">QTY</span>
           <div class="qty-ctrl">
