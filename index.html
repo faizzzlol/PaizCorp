@@ -1,298 +1,632 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PaizCorp — Parent Company</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paiz® Corp — National Conglomerate of The Legend of Legiona</title>
+<link rel="icon" href="https://faizzzlol.github.io/thelol/TheLoL2.png">
+<meta name="description" content="Paiz® Corp — The national conglomerate of The Legend of Legiona. Railways, construction, retail, film, and food.">
+<meta property="og:title" content="Paiz® Corp">
+<meta property="og:description" content="The national conglomerate of The Legend of Legiona. Five subsidiaries. One vision.">
+<meta property="og:url" content="https://faizzzlol.github.io/PaizCorp/">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   PAIZ® CORP — CONGLOMERATE HOMEPAGE
+   Warm cream / deep ink / signal green
+═══════════════════════════════════════════ */
+:root {
+  --cream:     #f4f0e8;
+  --cream2:    #ede8de;
+  --cream3:    #e4dfd3;
+  --cream4:    #d8d2c4;
+  --ink:       #161410;
+  --ink2:      #211e19;
+  --green:     #2a6647;
+  --green-dk:  #1d4a33;
+  --green-lt:  #34885d;
+  --green-dim: rgba(42,102,71,0.08);
+  --gold:      #a07020;
+  --border:    rgba(22,20,16,0.1);
+  --border2:   rgba(22,20,16,0.05);
+  --txt:       #161410;
+  --txt2:      #3a3630;
+  --muted:     rgba(22,20,16,0.48);
+  --faint:     rgba(22,20,16,0.25);
+  --xfaint:    rgba(22,20,16,0.12);
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  /* Subsidiary accents */
+  --tlr:   #2a6647;
+  --con:   #7a5c1e;
+  --shop:  #1a5c7a;
+  --prod:  #5c1a4a;
+  --chick: #8a3a10;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--txt);line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
 
-  <!-- Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+/* ── NAV ──────────────────────────────────────── */
+nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:center;padding:0 5%;background:rgba(244,240,232,0.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);gap:16px}
+.nav-wordmark{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--ink);text-decoration:none;letter-spacing:-0.5px;flex-shrink:0}
+.nav-wordmark .reg{font-size:0.58rem;vertical-align:super;color:var(--green);font-weight:700}
+.nav-sep{width:1px;height:20px;background:var(--border);flex-shrink:0}
+.nav-links{display:flex;gap:2px}
+.nav-links a{padding:5px 12px;font-family:'DM Mono',monospace;font-size:0.57rem;letter-spacing:1.5px;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.on{color:var(--green)}
+.nav-right{margin-left:auto;display:flex;gap:8px}
+.nav-pill{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;padding:5px 12px;border:1px solid var(--border);color:var(--faint);text-decoration:none;transition:all 0.2s}
+.nav-pill:hover{color:var(--green);border-color:rgba(42,102,71,0.25)}
 
-  <style>
-    :root {
-      --bg: #05010d;
-      --card: rgba(255,255,255,0.05);
-      --border: rgba(255,255,255,0.1);
-      --accent: #7c3aed;
-      --accent-2: #22d3ee;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-    }
+/* ── HERO ─────────────────────────────────────── */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:90vh}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:6rem 5%;position:relative}
+.h-eyebrow{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:3px;color:var(--green);margin-bottom:1.8rem;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp 0.7s ease 0.1s forwards}
+.h-eyebrow::before{content:'';width:24px;height:1px;background:var(--green);opacity:0.5}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5vw,5.2rem);font-weight:900;line-height:1.0;letter-spacing:-2px;color:var(--ink);margin-bottom:1.4rem;opacity:0;animation:fadeUp 0.7s ease 0.2s forwards}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--green)}
+.hero h1 .stroke{color:transparent;-webkit-text-stroke:1.5px rgba(22,20,16,0.18)}
+.hero-sub{font-size:1rem;color:var(--muted);font-weight:300;max-width:420px;line-height:1.9;margin-bottom:2.8rem;opacity:0;animation:fadeUp 0.7s ease 0.3s forwards}
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.7s ease 0.4s forwards}
+.btn-ink{padding:12px 26px;background:var(--ink);color:var(--cream);text-decoration:none;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:2px;transition:background 0.2s,transform 0.18s}
+.btn-ink:hover{background:var(--ink2);transform:translateY(-2px)}
+.btn-ghost{padding:12px 26px;border:1px solid var(--border);color:var(--muted);text-decoration:none;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:2px;transition:all 0.2s}
+.btn-ghost:hover{border-color:var(--green);color:var(--green)}
 
-    body {
-      font-family: 'Space Grotesk', sans-serif;
-      background: radial-gradient(circle at top, #12002b, var(--bg));
-      color: var(--text);
-      overflow-x: hidden;
-    }
+.hero-right{background:var(--ink);position:relative;overflow:hidden;opacity:0;animation:fadeIn 0.9s ease 0.3s forwards}
+.hero-right::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-52deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px)}
+.hero-right::after{content:'';position:absolute;top:20%;left:10%;width:70%;height:70%;background:radial-gradient(circle,rgba(42,102,71,0.18) 0%,transparent 70%)}
+.hero-mark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:28vw;font-weight:900;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(42,102,71,0.13);pointer-events:none;z-index:1;letter-spacing:-8px}
+.hero-panel{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:3rem;z-index:2}
+.hp-label{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:2.5px;color:rgba(255,255,255,0.2);margin-bottom:0.8rem}
+.hp-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.hp-stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);padding:1.1rem 1.3rem}
+.hps-val{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:rgba(255,255,255,0.9);display:block;line-height:1;margin-bottom:3px}
+.hps-val em{font-style:italic;color:var(--green-lt)}
+.hps-key{font-family:'DM Mono',monospace;font-size:0.45rem;letter-spacing:2px;color:rgba(255,255,255,0.2);display:block}
 
-    header {
-      position: fixed;
-      top: 0; width: 100%; z-index: 100;
-      background: rgba(5,1,13,0.6);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
+/* ── TICKER ───────────────────────────────────── */
+.ticker{background:var(--green);padding:0.6rem 0;overflow:hidden}
+.ticker-track{display:flex;animation:ticker 28s linear infinite;white-space:nowrap}
+.ti{display:inline-flex;align-items:center;gap:18px;padding:0 26px;font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:2px;color:rgba(255,255,255,0.78);flex-shrink:0}
+.td{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.3)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    .nav {
-      max-width: 1200px;
-      margin: auto;
-      padding: 18px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+/* ── ABOUT STRIP ──────────────────────────────── */
+.about-strip{display:grid;grid-template-columns:1fr 2fr;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.as-left{background:var(--ink);padding:4rem 5%;display:flex;flex-direction:column;justify-content:center}
+.as-tag{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:2.5px;color:rgba(255,255,255,0.22);margin-bottom:0.8rem}
+.as-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#fff;line-height:1.1;letter-spacing:-0.5px}
+.as-title em{font-style:italic;color:var(--green-lt);font-weight:400}
+.as-right{padding:4rem 5%;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.asr-body p{font-size:0.96rem;color:var(--muted);line-height:1.9;font-weight:300;margin-bottom:1.1rem}
+.asr-body p:last-child{margin-bottom:0}
+.asr-body strong{color:var(--txt2);font-weight:500}
+.values{display:flex;flex-direction:column;gap:1px}
+.val-item{padding:1rem 1.3rem;background:var(--cream2);border:1px solid var(--border2);display:flex;align-items:center;gap:14px;transition:background 0.2s}
+.val-item:hover{background:var(--cream3)}
+.vi-num{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:rgba(42,102,71,0.2);flex-shrink:0;line-height:1}
+.vi-text h4{font-size:0.9rem;font-weight:600;color:var(--txt);margin-bottom:1px}
+.vi-text p{font-size:0.76rem;color:var(--faint);line-height:1.5;font-weight:300}
 
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+/* ── SECTION BASE ─────────────────────────────── */
+.sec{padding:5.5rem 5%}
+.sec.alt{background:var(--cream2);border-top:1px solid var(--border2)}
+.sec.dark{background:var(--ink)}
+.s-inner{max-width:1280px;margin:0 auto}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;padding-bottom:1.4rem;border-bottom:1px solid var(--border)}
+.sec.dark .sec-head{border-bottom-color:rgba(255,255,255,0.07)}
+.sh-left .eyebrow{font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:3px;color:var(--green);margin-bottom:0.5rem}
+.sec.dark .eyebrow{color:var(--green-lt)}
+.sh-left h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.5px;line-height:1.1;color:var(--txt)}
+.sh-left h2 em{font-style:italic;color:var(--green);font-weight:400}
+.sec.dark h2{color:#fff}
+.sec.dark h2 em{color:var(--green-lt)}
+.sh-right{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--faint);text-align:right;line-height:2}
+.sec.dark .sh-right{color:rgba(255,255,255,0.2)}
 
-    .nav a {
-      margin-left: 24px;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.3s;
-    }
+/* ── SUBSIDIARIES ─────────────────────────────── */
+.subs-top{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border2);border:1px solid var(--border)}
+.subs-bot{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border2);border:1px solid var(--border);border-top:none}
+.sub{background:var(--cream);padding:2.8rem 2.5rem;position:relative;overflow:hidden;display:flex;flex-direction:column;transition:background 0.22s}
+.sub:hover{background:var(--cream2)}
+.sub::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;transform:scaleY(0);transform-origin:bottom;transition:transform 0.32s}
+.sub:hover::before{transform:scaleY(1)}
+.sub.tlr::before{background:var(--tlr)}
+.sub.con::before{background:var(--con)}
+.sub.shop::before{background:var(--shop)}
+.sub.prod::before{background:var(--prod)}
+.sub.chick::before{background:var(--chick)}
+.sub-bg{position:absolute;bottom:-15px;right:10px;font-family:'Playfair Display',serif;font-size:7rem;font-weight:900;color:rgba(22,20,16,0.035);line-height:1;pointer-events:none}
+.sub-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:0.46rem;letter-spacing:2px;padding:2px 8px;border:1px solid;margin-bottom:1.3rem;align-self:flex-start}
+.sub.tlr  .sub-badge{border-color:rgba(42,102,71,0.3);color:var(--tlr);background:rgba(42,102,71,0.06)}
+.sub.con  .sub-badge{border-color:rgba(122,92,30,0.3);color:var(--con);background:rgba(122,92,30,0.06)}
+.sub.shop .sub-badge{border-color:rgba(26,92,122,0.3);color:var(--shop);background:rgba(26,92,122,0.06)}
+.sub.prod .sub-badge{border-color:rgba(92,26,74,0.3);color:var(--prod);background:rgba(92,26,74,0.06)}
+.sub.chick .sub-badge{border-color:rgba(138,58,16,0.3);color:var(--chick);background:rgba(138,58,16,0.06)}
+.sub h3{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:900;letter-spacing:-0.5px;color:var(--txt);margin-bottom:0.5rem;line-height:1.15}
+.sub h3 em{font-style:italic;font-weight:400}
+.sub.tlr  h3 em{color:var(--tlr)}
+.sub.con  h3 em{color:var(--con)}
+.sub.shop h3 em{color:var(--shop)}
+.sub.prod h3 em{color:var(--prod)}
+.sub.chick h3 em{color:var(--chick)}
+.sub-desc{font-size:0.9rem;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:1.8rem;flex:1}
+.sub-stats{display:flex;gap:22px;padding-top:1.1rem;border-top:1px solid var(--border);margin-bottom:1.4rem}
+.ss-val{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;display:block;line-height:1}
+.sub.tlr  .ss-val{color:var(--tlr)}
+.sub.con  .ss-val{color:var(--con)}
+.sub.shop .ss-val{color:var(--shop)}
+.sub.prod .ss-val{color:var(--prod)}
+.sub.chick .ss-val{color:var(--chick)}
+.ss-key{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--faint);display:block;margin-top:3px}
+.sub-link{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:2px;text-decoration:none;border-bottom:1px solid;padding-bottom:2px;transition:gap 0.2s;align-self:flex-start;margin-top:auto}
+.sub.tlr  .sub-link{color:var(--tlr);border-color:rgba(42,102,71,0.3)}
+.sub.con  .sub-link{color:var(--con);border-color:rgba(122,92,30,0.3)}
+.sub.shop .sub-link{color:var(--shop);border-color:rgba(26,92,122,0.3)}
+.sub.prod .sub-link{color:var(--prod);border-color:rgba(92,26,74,0.3)}
+.sub.chick .sub-link{color:var(--chick);border-color:rgba(138,58,16,0.3)}
+.sub-link:hover{gap:14px}
 
-    .nav a:hover { color: var(--text); }
+/* ── PORTFOLIO (dark) ─────────────────────────── */
+.proj-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2px;background:rgba(255,255,255,0.04)}
+.proj{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:2.3rem 2rem;position:relative;overflow:hidden;transition:background 0.2s}
+.proj:hover{background:rgba(255,255,255,0.07)}
+.proj::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--green-lt);transform:scaleX(0);transform-origin:left;transition:transform 0.32s}
+.proj:hover::after{transform:scaleX(1)}
+.proj-id{font-family:'DM Mono',monospace;font-size:0.47rem;letter-spacing:2.5px;color:rgba(255,255,255,0.18);margin-bottom:1.1rem}
+.proj h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:rgba(255,255,255,0.92);margin-bottom:0.5rem;line-height:1.25;letter-spacing:-0.2px}
+.proj h3 em{font-style:italic;color:var(--green-lt);font-weight:400}
+.proj p{font-size:0.86rem;color:rgba(255,255,255,0.36);line-height:1.8;font-weight:300;margin-bottom:1.2rem}
+.proj-chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:1.1rem}
+.chip{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;padding:2px 7px;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.25)}
+.status{display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;color:var(--green-lt)}
+.status::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green-lt);animation:blink 2.2s infinite}
+.status.done{color:rgba(255,255,255,0.22)}
+.status.done::before{background:rgba(255,255,255,0.2);animation:none}
+.status.wip{color:#fbbf24}
+.status.wip::before{background:#fbbf24}
+.proj-link{display:block;margin-top:1rem;font-family:'DM Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--green-lt);text-decoration:none;opacity:0.6;transition:opacity 0.2s}
+.proj-link:hover{opacity:1}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
 
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 140px 24px 80px;
-      text-align: center;
-    }
+/* ── METRICS ──────────────────────────────────── */
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--border);background:var(--cream)}
+.metric{padding:1.8rem 1.2rem;border-right:1px solid var(--border);text-align:center}
+.metric:last-child{border-right:none}
+.m-val{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;color:var(--green);display:block;line-height:1;margin-bottom:4px}
+.m-val em{font-style:italic}
+.m-key{font-family:'DM Mono',monospace;font-size:0.46rem;letter-spacing:2px;color:var(--faint)}
 
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 24px;
-    }
+/* ── TIMELINE ─────────────────────────────────── */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:grid;grid-template-columns:100px 1fr;gap:32px;padding:2rem 0;border-bottom:1px solid var(--border2)}
+.tl-item:last-child{border-bottom:none}
+.tl-year{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--green-lt);padding-top:4px;text-align:right}
+.tl-body h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:4px;letter-spacing:-0.2px}
+.tl-body p{font-size:0.88rem;color:rgba(255,255,255,0.38);line-height:1.7;font-weight:300}
 
-    .hero h1 span {
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+/* ── FOUNDER ──────────────────────────────────── */
+.founder{display:grid;grid-template-columns:1fr 1fr;min-height:400px}
+.f-left{background:var(--green-dk);padding:5rem 5%;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.f-left::before{content:'F';position:absolute;right:-25px;bottom:-50px;font-family:'Playfair Display',serif;font-size:22rem;font-weight:900;color:rgba(255,255,255,0.03);line-height:1}
+.fl-tag{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:2.5px;color:rgba(255,255,255,0.22);margin-bottom:0.9rem}
+.fl-name{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:900;color:#fff;letter-spacing:-1px;line-height:1.05;margin-bottom:0.5rem}
+.fl-role{font-family:'DM Mono',monospace;font-size:0.57rem;letter-spacing:2px;color:var(--green-lt);margin-bottom:1.4rem}
+.fl-quote{font-size:0.97rem;color:rgba(255,255,255,0.42);font-weight:300;font-style:italic;line-height:1.9;max-width:360px;border-left:2px solid rgba(255,255,255,0.1);padding-left:1.2rem}
+.f-right{background:var(--cream2);padding:5rem 5%;display:flex;flex-direction:column;justify-content:center}
+.fr-tag{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:2.5px;color:var(--green);opacity:0.7;margin-bottom:1rem}
+.fr-title{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:var(--txt);margin-bottom:1.1rem;letter-spacing:-0.3px}
+.fr-title em{font-style:italic;color:var(--green);font-weight:400}
+.fr-body p{font-size:0.95rem;color:var(--muted);line-height:1.9;font-weight:300;margin-bottom:0.9rem}
+.fr-body strong{color:var(--txt2);font-weight:500}
 
-    .hero p {
-      max-width: 720px;
-      margin: auto;
-      font-size: 1.1rem;
-      color: var(--muted);
-    }
+/* ── FOOTER ───────────────────────────────────── */
+footer{background:var(--ink)}
+.ft-main{max-width:1280px;margin:0 auto;padding:4rem 5% 2.5rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px}
+.ft-brand{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900;color:#fff;letter-spacing:-0.5px;margin-bottom:0.4rem}
+.ft-brand .reg{font-size:0.6rem;vertical-align:super;color:var(--green-lt)}
+.ft-tag{font-family:'DM Mono',monospace;font-size:0.47rem;letter-spacing:2px;color:rgba(255,255,255,0.17);margin-bottom:1.1rem}
+.ft-desc{font-size:0.87rem;color:rgba(255,255,255,0.25);line-height:1.8;font-weight:300;max-width:280px}
+.ft-col h5{font-family:'DM Mono',monospace;font-size:0.48rem;letter-spacing:2.5px;color:rgba(255,255,255,0.18);margin-bottom:1rem}
+.ft-col a{display:block;font-size:0.87rem;color:rgba(255,255,255,0.28);text-decoration:none;margin-bottom:0.55rem;font-weight:300;transition:color 0.2s}
+.ft-col a:hover{color:var(--green-lt)}
+.ft-bottom{border-top:1px solid rgba(255,255,255,0.07);padding:1.2rem 5%}
+.ft-bottom-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.ft-bottom p{font-family:'DM Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;color:rgba(255,255,255,0.13)}
 
-    .hero .cta {
-      margin-top: 36px;
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+/* ── ANIMATIONS ───────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.in{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease}
+.stagger.in>*:nth-child(1){opacity:1;transform:none}
+.stagger.in>*:nth-child(2){opacity:1;transform:none;transition-delay:.08s}
+.stagger.in>*:nth-child(3){opacity:1;transform:none;transition-delay:.16s}
+.stagger.in>*:nth-child(4){opacity:1;transform:none;transition-delay:.24s}
+.stagger.in>*:nth-child(5){opacity:1;transform:none;transition-delay:.32s}
+.stagger.in>*:nth-child(6){opacity:1;transform:none;transition-delay:.4s}
 
-    .btn {
-      padding: 14px 26px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 10px 40px rgba(124,58,237,0.35);
-    }
-
-    .btn.secondary {
-      background: transparent;
-      box-shadow: none;
-      color: var(--text);
-    }
-
-    section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 100px 24px;
-    }
-
-    section h2 {
-      font-size: 2.2rem;
-      margin-bottom: 16px;
-    }
-
-    section p.sub {
-      color: var(--muted);
-      margin-bottom: 48px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 28px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s, border 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: var(--accent);
-    }
-
-    .card i {
-      width: 32px; height: 32px;
-      margin-bottom: 16px;
-      color: var(--accent-2);
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-    }
-
-    .timeline {
-      border-left: 2px solid var(--border);
-      padding-left: 32px;
-    }
-
-    .timeline-item {
-      margin-bottom: 32px;
-    }
-
-    .timeline-item span {
-      color: var(--accent-2);
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 24px;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    footer strong {
-      color: var(--text);
-    }
-  </style>
+/* ── RESPONSIVE ───────────────────────────────── */
+@media(max-width:1100px){
+  .ft-main{grid-template-columns:1fr 1fr;gap:30px}
+  .metrics{grid-template-columns:repeat(3,1fr)}
+  .metric:nth-child(3){border-right:none}
+  .metric:nth-child(4){border-top:1px solid var(--border)}
+  .metric:nth-child(5){border-top:1px solid var(--border);border-right:none}
+}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-right{min-height:300px}
+  .hero-mark{font-size:50vw}
+  .about-strip{grid-template-columns:1fr}
+  .as-right{grid-template-columns:1fr}
+  .subs-top,.subs-bot{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .founder{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@media(max-width:600px){
+  .metrics{grid-template-columns:1fr 1fr}
+  .metric{border-right:none!important;border-top:1px solid var(--border)!important}
+  .metric:first-child{border-top:none!important}
+  .ft-main{grid-template-columns:1fr}
+  .hp-grid{grid-template-columns:1fr 1fr}
+  .hero-ctas{flex-direction:column}
+  .ft-bottom-inner{flex-direction:column;text-align:center;gap:6px}
+}
+</style>
 </head>
 <body>
 
-<header>
-  <div class="nav">
-    <div class="logo">PaizCorp</div>
-    <nav>
-      <a href="#vision">Vision</a>
-      <a href="#companies">Companies</a>
-      <a href="#technology">Technology</a>
-      <a href="#timeline">Timeline</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<!-- NAV -->
+<nav>
+  <a href="/PaizCorp/" class="nav-wordmark">Paiz<span class="reg">®</span> Corp</a>
+  <div class="nav-sep"></div>
+  <div class="nav-links">
+    <a href="#subsidiaries">SUBSIDIARIES</a>
+    <a href="#portfolio">PORTFOLIO</a>
+    <a href="#timeline">TIMELINE</a>
+    <a href="#leadership">LEADERSHIP</a>
   </div>
-</header>
+  <div class="nav-right">
+    <a href="https://faizzzlol.github.io/thelol/" class="nav-pill">← THE LOL</a>
+  </div>
+</nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div>
-    <h1>Building Worlds.<br><span>Controlling Universes.</span></h1>
-    <p>PaizCorp is a next-generation parent company overseeing creative studios, digital systems, and cinematic universes — including PaizProductions and The LoL franchise.</p>
-    <div class="cta">
-      <a href="#companies" class="btn">Explore Companies</a>
-      <a href="#vision" class="btn secondary">Our Vision</a>
+  <div class="hero-left">
+    <div class="h-eyebrow">NATIONAL CONGLOMERATE · EST. 2023</div>
+    <h1>Five <em>companies.</em><br>One <span class="stroke">Vision.</span></h1>
+    <p class="hero-sub">Paiz® Corp is the national conglomerate of The Legend of Legiona — spanning railways, construction, retail, film production, and food. Built to serve The LoL. Built to last.</p>
+    <div class="hero-ctas">
+      <a href="#subsidiaries" class="btn-ink">OUR COMPANIES</a>
+      <a href="#portfolio" class="btn-ghost">VIEW PORTFOLIO</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-mark">P</div>
+    <div class="hero-panel">
+      <div class="hp-label">PAIZ® CORP — AT A GLANCE</div>
+      <div class="hp-grid">
+        <div class="hp-stat"><span class="hps-val"><em>5</em></span><span class="hps-key">SUBSIDIARIES</span></div>
+        <div class="hp-stat"><span class="hps-val">6+</span><span class="hps-key">PROJECTS</span></div>
+        <div class="hp-stat"><span class="hps-val">4,800+</span><span class="hps-key">BLOCKS · TLSRL</span></div>
+        <div class="hp-stat"><span class="hps-val">2023</span><span class="hps-key">FOUNDED</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="companies">
-  <h2>Subsidiary Companies</h2>
-  <p class="sub">Each division operates independently, powered by PaizCorp infrastructure.</p>
-  <div class="grid">
-    <div class="card">
-      <i data-lucide="film"></i>
-      <h3>PaizProductions</h3>
-      <p>Film & cinematic studio behind <strong>The LoL : The Movie</strong> and narrative universes.</p>
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-track">
+  <span class="ti">TL RAILWAYS<span class="td"></span></span>
+  <span class="ti">PAIZ™ CONSTRUCTION<span class="td"></span></span>
+  <span class="ti">PAIZ SHOP<span class="td"></span></span>
+  <span class="ti">PAIZ PRODUCTIONS<span class="td"></span></span>
+  <span class="ti">PAIZ CHICKEN<span class="td"></span></span>
+  <span class="ti">TLSRL · 4,800+ BLOCKS<span class="td"></span></span>
+  <span class="ti">THE LOL MOVIE<span class="td"></span></span>
+  <span class="ti">SKYXION: RAGNAROK<span class="td"></span></span>
+  <span class="ti">TL RAILWAYS<span class="td"></span></span>
+  <span class="ti">PAIZ™ CONSTRUCTION<span class="td"></span></span>
+  <span class="ti">PAIZ SHOP<span class="td"></span></span>
+  <span class="ti">PAIZ PRODUCTIONS<span class="td"></span></span>
+  <span class="ti">PAIZ CHICKEN<span class="td"></span></span>
+  <span class="ti">TLSRL · 4,800+ BLOCKS<span class="td"></span></span>
+  <span class="ti">THE LOL MOVIE<span class="td"></span></span>
+  <span class="ti">SKYXION: RAGNAROK<span class="td"></span></span>
+</div></div>
+
+<!-- ABOUT -->
+<div class="about-strip reveal" id="about">
+  <div class="as-left">
+    <div class="as-tag">WHO WE ARE</div>
+    <div class="as-title">The nation's<br><em>builder.</em></div>
+  </div>
+  <div class="as-right">
+    <div class="asr-body">
+      <p><strong>Paiz® Corp</strong> is the national conglomerate of The Legend of Legiona — the single entity responsible for building, operating, and maintaining the infrastructure and culture that powers The LoL's national ambition.</p>
+      <p>Founded by <strong>Faiz4224</strong>, Paiz® Corp operates across five subsidiaries covering every sector The LoL needs: transport, construction, retail, entertainment, and food.</p>
     </div>
-    <div class="card">
-      <i data-lucide="shopping-cart"></i>
-      <h3>Paiz Shop</h3>
-      <p>Digital commerce systems for virtual economies and Minecraft-based worlds.</p>
+    <div class="values">
+      <div class="val-item"><span class="vi-num">01</span><div class="vi-text"><h4>Build with Ambition</h4><p>Every project is the most ambitious version of itself.</p></div></div>
+      <div class="val-item"><span class="vi-num">02</span><div class="vi-text"><h4>Serve the Nation</h4><p>Our work exists to serve the citizens of The LoL.</p></div></div>
+      <div class="val-item"><span class="vi-num">03</span><div class="vi-text"><h4>Built to Last</h4><p>Infrastructure that outlasts any political era.</p></div></div>
     </div>
-    <div class="card">
-      <i data-lucide="utensils"></i>
-      <h3>Paiz Chicken</h3>
-      <p>Experimental food-brand logistics simulated inside virtual environments.</p>
+  </div>
+</div>
+
+<!-- SUBSIDIARIES -->
+<section class="sec" id="subsidiaries">
+  <div class="s-inner">
+    <div class="sec-head reveal">
+      <div class="sh-left">
+        <div class="eyebrow">OUR COMPANIES</div>
+        <h2>The Paiz® Corp <em>Family.</em></h2>
+      </div>
+      <div class="sh-right">5 SUBSIDIARIES<br>ALL OPERATIONAL</div>
+    </div>
+
+    <!-- Row 1: 3 cards -->
+    <div class="subs-top stagger">
+      <div class="sub tlr">
+        <div class="sub-bg">01</div>
+        <div class="sub-badge">SUBSIDIARY-01 · TRANSPORT</div>
+        <h3>TL <em>Railways</em></h3>
+        <p class="sub-desc">The national rail operator of The LoL. Four lines across Skyxion — TLSRL, Monorail, LRT/MRT, and the High-Speed Boat Link — connecting The LoL to the wider world with regular, express, and cargo services.</p>
+        <div class="sub-stats">
+          <div><span class="ss-val">4</span><span class="ss-key">LINES</span></div>
+          <div><span class="ss-val">4,800+</span><span class="ss-key">BLOCKS</span></div>
+          <div><span class="ss-val">3</span><span class="ss-key">SERVICES</span></div>
+        </div>
+        <a href="https://faizzzlol.github.io/thelol/tlr/" class="sub-link">VISIT TL RAILWAYS →</a>
+      </div>
+
+      <div class="sub con">
+        <div class="sub-bg">02</div>
+        <div class="sub-badge">SUBSIDIARY-02 · CONSTRUCTION</div>
+        <h3>Paiz™ <em>Construction</em></h3>
+        <p class="sub-desc">The engineering and build arm of Paiz® Corp. Delivered every major structure in The LoL — from the 4,800-block TLSRL track to the TLCC Twin Towers that define The LoL City skyline.</p>
+        <div class="sub-stats">
+          <div><span class="ss-val">5+</span><span class="ss-key">PROJECTS</span></div>
+          <div><span class="ss-val">2023</span><span class="ss-key">EST.</span></div>
+        </div>
+        <a href="https://faizzzlol.github.io/thelol/PaizCorp/tlsrl" class="sub-link">VIEW TLSRL →</a>
+      </div>
+
+      <div class="sub shop">
+        <div class="sub-bg">03</div>
+        <div class="sub-badge">SUBSIDIARY-03 · RETAIL</div>
+        <h3>Paiz <em>Shop</em></h3>
+        <p class="sub-desc">The LoL's official Minecraft item store. Purchase Shulker Boxes, enchanted books, resources, and rare materials — all priced in Diamonds. Features live stock management, delivery, and pickup.</p>
+        <div class="sub-stats">
+          <div><span class="ss-val">5+</span><span class="ss-key">ITEMS</span></div>
+          <div><span class="ss-val">◆</span><span class="ss-key">DIAMONDS</span></div>
+        </div>
+        <a href="/PaizCorp/PaizShop/" class="sub-link">OPEN SHOP →</a>
+      </div>
+    </div>
+
+    <!-- Row 2: 2 wide cards -->
+    <div class="subs-bot stagger">
+      <div class="sub prod">
+        <div class="sub-bg">04</div>
+        <div class="sub-badge">SUBSIDIARY-04 · FILM & MEDIA</div>
+        <h3>Paiz <em>Productions</em></h3>
+        <p class="sub-desc">The cinematic and media arm of Paiz® Corp. Currently producing <strong style="color:var(--txt2)">The LoL: The Movie</strong> — a political Minecraft epic documenting the rise, fracture, and reinvention of The Legend of Legiona across four phases. This is not a fantasy. This is a warning.</p>
+        <div class="sub-stats">
+          <div><span class="ss-val">1</span><span class="ss-key">FEATURE FILM</span></div>
+          <div><span class="ss-val">4</span><span class="ss-key">PHASES</span></div>
+          <div><span class="ss-val">4</span><span class="ss-key">KEY FIGURES</span></div>
+        </div>
+        <a href="/PaizCorp/PaizProductions/thelolmovie" class="sub-link">THE LOL MOVIE →</a>
+      </div>
+
+      <div class="sub chick">
+        <div class="sub-bg">05</div>
+        <div class="sub-badge">SUBSIDIARY-05 · FOOD & HOSPITALITY</div>
+        <h3>Paiz <em>Chicken</em></h3>
+        <p class="sub-desc">The LoL's virtual food and hospitality brand. Paiz Chicken is an online ordering system for virtual fried chicken and Minecraft food items — with live stock management, delivery and pickup options, and delivery fees calculated by distance within Skyxion.</p>
+        <div class="sub-stats">
+          <div><span class="ss-val">◈</span><span class="ss-key">ORDERING</span></div>
+          <div><span class="ss-val">2</span><span class="ss-key">MODES</span></div>
+        </div>
+        <a href="/PaizCorp/PaizChicken/" class="sub-link">ORDER NOW →</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="technology">
-  <h2>Core Capabilities</h2>
-  <p class="sub">What makes PaizCorp different from ordinary companies.</p>
-  <div class="grid">
-    <div class="card">
-      <i data-lucide="cpu"></i>
-      <h3>Unified Systems</h3>
-      <p>All subsidiaries run on shared data, lore, and infrastructure.</p>
+<!-- PORTFOLIO -->
+<section class="sec dark" id="portfolio">
+  <div class="s-inner">
+    <div class="sec-head reveal">
+      <div class="sh-left">
+        <div class="eyebrow">PROJECT PORTFOLIO</div>
+        <h2>What We've <em>Built.</em></h2>
+      </div>
+      <div class="sh-right">ALL PROJECTS<br>THE LOL TERRITORY</div>
     </div>
-    <div class="card">
-      <i data-lucide="globe"></i>
-      <h3>World-Building</h3>
-      <p>We treat brands like universes, not products.</p>
-    </div>
-    <div class="card">
-      <i data-lucide="shield"></i>
-      <h3>Lore Protection</h3>
-      <p>Continuity, canon, and narrative integrity are enforced.</p>
+    <div class="proj-grid stagger">
+      <div class="proj">
+        <div class="proj-id">PROJECT-TLSRL-001 · FLAGSHIP · TRANSPORT</div>
+        <h3>The LoL–Spawn <em>Railway Link</em></h3>
+        <p>4,800+ blocks of enclosed rail track connecting The LoL directly to Spawn — the heart of Skyxion. Regular, Express, and Cargo services operated by TL Railways. Six stations: TLL → LLC → LLO → MPS → SXJ → SPN.</p>
+        <div class="proj-chips"><span class="chip">4,800+ BLOCKS</span><span class="chip">~10 MIN</span><span class="chip">3 SERVICES</span><span class="chip">6 STATIONS</span></div>
+        <div class="status">OPERATIONAL</div>
+        <a href="https://faizzzlol.github.io/thelol/PaizCorp/tlsrl" class="proj-link">VIEW PROJECT BRIEF →</a>
+      </div>
+      <div class="proj">
+        <div class="proj-id">PROJECT-FILM-002 · MEDIA</div>
+        <h3>The LoL: <em>The Movie</em></h3>
+        <p>A political Minecraft epic. Four phases. Faiz4224, Imii Kun, Dyno, UltraX2020. This is not a fantasy.</p>
+        <div class="status wip">IN PRODUCTION</div>
+        <a href="/PaizCorp/PaizProductions/thelolmovie" class="proj-link">VIEW FILM PAGE →</a>
+      </div>
+      <div class="proj">
+        <div class="proj-id">PROJECT-SHOP-003 · RETAIL</div>
+        <h3>Paiz <em>Shop</em></h3>
+        <p>Live Minecraft item store priced in Diamonds. Discord webhook orders. Stock management. Delivery & pickup.</p>
+        <div class="status">OPERATIONAL</div>
+        <a href="/PaizCorp/PaizShop/" class="proj-link">VISIT SHOP →</a>
+      </div>
+      <div class="proj">
+        <div class="proj-id">PROJECT-TLCC-004 · ARCHITECTURE</div>
+        <h3>TLCC <em>Twin Towers</em></h3>
+        <p>The defining skyline of The LoL City. The Convention Centre Twin Towers — Paiz™ Construction's most iconic build.</p>
+        <div class="status done">COMPLETED</div>
+      </div>
+      <div class="proj">
+        <div class="proj-id">PROJECT-NFC-005 · ECONOMY</div>
+        <h3>National Farm <em>Complex</em></h3>
+        <p>Three automated farms — Iron, Totem, and Gold — powering The LoL's resource economy.</p>
+        <div class="status">OPERATIONAL</div>
+      </div>
+      <div class="proj">
+        <div class="proj-id">PROJECT-CHICK-006 · FOOD</div>
+        <h3>Paiz <em>Chicken</em></h3>
+        <p>Virtual food ordering system with stock management and distance-based delivery fees across Skyxion.</p>
+        <div class="status">OPERATIONAL</div>
+        <a href="/PaizCorp/PaizChicken/" class="proj-link">ORDER →</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="timeline">
-  <h2>Corporate Timeline</h2>
-  <p class="sub">How PaizCorp evolved into a multi-division entity.</p>
-  <div class="timeline">
-    <div class="timeline-item">
-      <span>2023</span>
-      <p>Foundation of PaizCorp as a digital systems entity.</p>
+<!-- METRICS -->
+<div class="metrics reveal">
+  <div class="metric"><span class="m-val"><em>5</em></span><div class="m-key">SUBSIDIARIES</div></div>
+  <div class="metric"><span class="m-val">6+</span><div class="m-key">PROJECTS</div></div>
+  <div class="metric"><span class="m-val">4,800+</span><div class="m-key">BLOCKS · TLSRL</div></div>
+  <div class="metric"><span class="m-val"><em>1</em></span><div class="m-key">FEATURE FILM</div></div>
+  <div class="metric"><span class="m-val">◆</span><div class="m-key">DIAMOND ECONOMY</div></div>
+</div>
+
+<!-- TIMELINE -->
+<section class="sec dark" id="timeline">
+  <div class="s-inner">
+    <div class="sec-head reveal">
+      <div class="sh-left">
+        <div class="eyebrow">CORPORATE HISTORY</div>
+        <h2>How We <em>Grew.</em></h2>
+      </div>
+      <div class="sh-right">SKYXION: RAGNAROK<br>THE LOL TERRITORY</div>
     </div>
-    <div class="timeline-item">
-      <span>2024</span>
-      <p>Launch of Paiz Shop and Paiz Chicken platforms.</p>
-    </div>
-    <div class="timeline-item">
-      <span>2025</span>
-      <p>Creation of PaizProductions and The LoL cinematic universe.</p>
+    <div class="timeline stagger">
+      <div class="tl-item">
+        <div class="tl-year">2023</div>
+        <div class="tl-body">
+          <h4>Foundation of Paiz® Corp</h4>
+          <p>Faiz4224 establishes Paiz® Corp as the national conglomerate of The Legend of Legiona. Paiz™ Construction and TL Railways created as the first two subsidiaries.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2023</div>
+        <div class="tl-body">
+          <h4>TLSRL Construction Begins</h4>
+          <p>Paiz™ Construction begins work on the 4,800-block TLSRL railway — The LoL's most ambitious infrastructure project. First major build under the Paiz® Corp banner.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024</div>
+        <div class="tl-body">
+          <h4>Paiz Shop & Paiz Chicken Launch</h4>
+          <p>The retail and food divisions launch — expanding Paiz® Corp beyond infrastructure into commerce and hospitality. The LoL's digital economy begins.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025</div>
+        <div class="tl-body">
+          <h4>PaizProductions & The LoL Movie</h4>
+          <p>The fifth subsidiary is established. PaizProductions begins production on The LoL: The Movie — a political Minecraft epic spanning four phases of The LoL's history.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026</div>
+        <div class="tl-body">
+          <h4>Conglomerate Expansion</h4>
+          <p>All five subsidiaries fully operational. Paiz Shop upgraded with Discord webhook ordering and admin management system. Paiz® Corp enters its most ambitious phase yet.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<footer id="contact">
-  <p><strong>PaizCorp</strong> © 2025 — Parent Company of PaizProductions</p>
-  <p>Built for worlds, not websites.</p>
+<!-- FOUNDER / LEADERSHIP -->
+<div class="founder reveal" id="leadership">
+  <div class="f-left">
+    <div class="fl-tag">FOUNDER & CHAIRMAN</div>
+    <div class="fl-name">Faiz4224</div>
+    <div class="fl-role">FOUNDER, PAIZ® CORP · FIRST PRESIDENT, THE LOL</div>
+    <div class="fl-quote">"Five companies. One mission. Everything we build, we build for The LoL."</div>
+  </div>
+  <div class="f-right">
+    <div class="fr-tag">ABOUT THE FOUNDER</div>
+    <div class="fr-title">The mind behind <em>Paiz® Corp.</em></div>
+    <div class="fr-body">
+      <p><strong>Faiz4224</strong> founded Paiz® Corp as The LoL's answer to one question: how do you build a self-sufficient sovereign nation from nothing? The answer — a national conglomerate spanning every sector the nation needs.</p>
+      <p>As First President of The Legend of Legiona, Faiz4224 proposed the TLSRL railway, commissioned the TLCC Twin Towers, established TL Railways, launched PaizShop, greenlit The LoL Movie through PaizProductions, and opened Paiz Chicken. Every company exists to serve The LoL's citizens.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <div class="ft-brand">Paiz<span class="reg">®</span> Corp</div>
+      <div class="ft-tag">NATIONAL CONGLOMERATE OF THE LEGEND OF LEGIONA</div>
+      <p class="ft-desc">Railways. Construction. Retail. Film. Food. Building the infrastructure and culture of The LoL since 2023.</p>
+    </div>
+    <div class="ft-col">
+      <h5>SUBSIDIARIES</h5>
+      <a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways</a>
+      <a href="https://faizzzlol.github.io/thelol/PaizCorp/tlsrl">Paiz™ Construction</a>
+      <a href="/PaizCorp/PaizShop/">Paiz Shop</a>
+      <a href="/PaizCorp/PaizProductions/thelolmovie">PaizProductions</a>
+      <a href="/PaizCorp/PaizChicken/">Paiz Chicken</a>
+    </div>
+    <div class="ft-col">
+      <h5>PROJECTS</h5>
+      <a href="https://faizzzlol.github.io/thelol/PaizCorp/tlsrl">TLSRL</a>
+      <a href="/PaizCorp/PaizProductions/thelolmovie">The LoL Movie</a>
+      <a href="/PaizCorp/PaizShop/">Paiz Shop</a>
+      <a href="/PaizCorp/PaizChicken/">Paiz Chicken</a>
+    </div>
+    <div class="ft-col">
+      <h5>THE LOL</h5>
+      <a href="https://faizzzlol.github.io/thelol/">Nation Home</a>
+      <a href="https://faizzzlol.github.io/thelol/gov/">Government</a>
+      <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
+      <a href="https://faizzzlol.github.io/thelol/about">History</a>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-bottom-inner">
+      <p>© 2026 PAIZ® CORP — ALL RIGHTS RESERVED — THE LEGEND OF LEGIONA</p>
+      <p>FOUNDED BY FAIZ4224 · SKYXION: RAGNAROK</p>
+    </div>
+  </div>
 </footer>
 
 <script>
-  lucide.createIcons();
-</script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal, .stagger').forEach(el => obs.observe(el));
 
+  const secs = ['subsidiaries','portfolio','timeline','leadership'];
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(id => { const el = document.getElementById(id); if (el && window.scrollY >= el.offsetTop - 110) cur = id; });
+    links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + cur));
+  });
+</script>
 </body>
 </html>
