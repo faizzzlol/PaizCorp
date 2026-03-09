@@ -4,12 +4,12 @@
     "name": "Shulker Box",
     "price": 2,
     "unit": "Diamond",
-    "stock": 0,
+    "stock": 1,
     "image": "img/shulker_box.png",
     "category": "Storage",
     "listed": true,
     "description": "(1x) Store and carry items in bulk.",
-    "sold": 1
+    "sold": 0
   },
   {
     "id": "mending",
