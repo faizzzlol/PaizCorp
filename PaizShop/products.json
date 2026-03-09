@@ -2,9 +2,9 @@
   {
     "id": "shulker_box",
     "name": "Shulker Box",
-    "price": 4,
+    "price": 5,
     "unit": "Diamond",
-    "stock": 0,
+    "stock": 32,
     "image": "img/shulker_box.png",
     "category": "Storage",
     "listed": true,
