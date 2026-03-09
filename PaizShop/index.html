@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paiz Shop — Official Items Store</title>
+<title>Paiz Shop — Official Minecraft Store</title>
 <link rel="icon" href="https://faizzzlol.github.io/thelol/TheLoL2.png">
 <meta name="description" content="Buy Minecraft items with Diamonds. Official store of The Legend of Legiona.">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -131,6 +131,11 @@ nav{position:sticky;top:0;z-index:300;height:58px;display:flex;align-items:cente
 .pc-sold-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.9rem}
 .pc-sold-txt{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;color:var(--txt3)}
 .pc-sold-num{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;color:var(--green);letter-spacing:1px}
+.pc-price-wrap{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.pc-price-old{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--txt4);text-decoration:line-through;letter-spacing:1px}
+.price-drop{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;padding:2px 7px;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.35);color:#4ade80;white-space:nowrap;animation:pricePulse 2s ease-in-out infinite}
+.price-up{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;padding:2px 7px;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.35);color:#f87171;white-space:nowrap}
+@keyframes pricePulse{0%,100%{opacity:1}50%{opacity:0.6}}
 .pc-best-badge{font-family:'IBM Plex Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;padding:1px 6px;background:rgba(251,191,36,0.10);border:1px solid rgba(251,191,36,0.3);color:#fbbf24;margin-left:6px;vertical-align:middle}
 .pc-desc{font-size:0.82rem;color:var(--txt2);font-weight:300;line-height:1.6;margin-bottom:0.9rem;flex:1}
 .qty-row{display:flex;align-items:center;gap:8px;margin-bottom:0.75rem}
@@ -482,6 +487,23 @@ async function loadProducts() {
     const r = await fetch(CFG.PRODUCTS_URL + '?t=' + Date.now());
     if (!r.ok) throw new Error();
     products = await r.json();
+    // Track price changes before overwriting cache
+    const prevRaw = localStorage.getItem('ps_products');
+    if(prevRaw){
+      const prev = JSON.parse(prevRaw);
+      const prevMap = {};
+      prev.forEach(p=>{ prevMap[p.id]={price:p.price,ts:Date.now()}; });
+      const existing = JSON.parse(localStorage.getItem('ps_price_history')||'{}');
+      let changed = false;
+      products.forEach(p=>{
+        const old = prevMap[p.id];
+        if(old && old.price !== p.price){
+          existing[p.id]={oldPrice:old.price,newPrice:p.price,ts:Date.now()};
+          changed = true;
+        }
+      });
+      if(changed) localStorage.setItem('ps_price_history', JSON.stringify(existing));
+    }
     localStorage.setItem('ps_products', JSON.stringify(products));
     localStorage.setItem('ps_cache_t', Date.now().toString());
   } catch {
@@ -540,6 +562,24 @@ function setSort(btn) {
   btn.classList.add('active'); activeSort = btn.dataset.sort; render();
 }
 
+function getPriceBadge(p) {
+  var hist = JSON.parse(localStorage.getItem('ps_price_history') || '{}');
+  var ph = hist[p.id];
+  var EXPIRE = 3 * 24 * 60 * 60 * 1000;
+  if (ph && (Date.now() - ph.ts) < EXPIRE) {
+    var diff = ph.newPrice - ph.oldPrice;
+    var arrow = diff < 0 ? '▼' : '▲';
+    var cls   = diff < 0 ? 'price-drop' : 'price-up';
+    var lbl   = diff < 0 ? Math.abs(diff) + '◆ CHEAPER' : diff + '◆ PRICIER';
+    return '<div class="pc-price-wrap">'
+      + '<span class="pc-price">◆ ' + p.price + ' ' + (p.unit || 'Diamond') + '</span>'
+      + '<span class="pc-price-old">◆ ' + ph.oldPrice + '</span>'
+      + '<span class="' + cls + '">' + arrow + ' ' + lbl + '</span>'
+      + '</div>';
+  }
+  return '<div class="pc-price">◆ ' + p.price + ' ' + (p.unit || 'Diamond') + '</div>';
+}
+
 function render() {
   const q = document.getElementById('search-inp').value.toLowerCase();
   let list = products.filter(p => {
@@ -579,7 +619,7 @@ function render() {
       </div>
       <div class="pc-body">
         <div class="pc-name">${p.name}${isBest?'<span class="pc-best-badge">👑 BEST</span>':''}</div>
-        <div class="pc-price">◆ ${p.price} ${p.unit||'Diamond'}</div>
+        ${getPriceBadge(p)}
         ${p.description?`<div class="pc-desc">${p.description}</div>`:''}
         <div class="pc-sold-row">
           <div>
