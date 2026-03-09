@@ -1,119 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/PaizCorp/PaizShop/PaizShop2.png" sizes="16x16">
-    <title>Order History - Paiz Shop</title>
-    <link rel="stylesheet" href="/PaizCorp/PaizShop/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order History — Paiz Shop</title>
+<link rel="icon" href="https://faizzzlol.github.io/thelol/TheLoL2.png">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #171d16;
+  --bg2:       #1d2420;
+  --bg3:       #232b22;
+  --bg4:       #2a3228;
+  --surface:   #303930;
+  --border:    rgba(255,255,255,0.10);
+  --border2:   rgba(255,255,255,0.06);
+  --green:     #4ade80;
+  --green-dk:  #22c55e;
+  --green-dim: rgba(74,222,128,0.10);
+  --gold:      #fbbf24;
+  --gold-dim:  rgba(251,191,36,0.10);
+  --red:       #f87171;
+  --red-dim:   rgba(248,113,113,0.10);
+  --blue:      #60a5fa;
+  --blue-dim:  rgba(96,165,250,0.10);
+  --txt:       #edf2e7;
+  --txt2:      rgba(237,242,231,0.78);
+  --txt3:      rgba(237,242,231,0.52);
+  --txt4:      rgba(237,242,231,0.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9998}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:300;height:58px;display:flex;align-items:center;padding:0 4%;background:rgba(23,29,22,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);gap:14px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.nav-logo-sq{width:30px;height:30px;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;color:#000;letter-spacing:0.5px}
+.nav-wordmark{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
+.nav-sep{width:1px;height:18px;background:var(--border);flex-shrink:0}
+.nav-links{display:flex;gap:2px}
+.nav-links a{padding:5px 11px;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--green)}
+.nav-right{margin-left:auto}
+.back-btn{display:flex;align-items:center;gap:8px;padding:7px 16px;background:var(--bg3);color:var(--txt2);border:1px solid var(--border);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1.5px;transition:all 0.2s}
+.back-btn:hover{background:var(--bg4);color:var(--green);border-color:rgba(74,222,128,0.3)}
+
+/* HERO */
+.hero{padding:3rem 4% 2.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(74,222,128,0.06) 0%,transparent 65%);pointer-events:none}
+.hero-tag{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--green);opacity:0.8;margin-bottom:0.8rem;display:flex;align-items:center;gap:10px}
+.hero-tag::before{content:'';width:22px;height:1px;background:var(--green);opacity:0.6}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:800;letter-spacing:-1.5px;line-height:1;color:var(--txt);margin-bottom:0.4rem}
+.hero h1 span{color:var(--green)}
+.hero-sub{font-size:0.95rem;color:var(--txt3);font-weight:300}
+.hero-stats{display:flex;gap:2px;flex-shrink:0}
+.hero-stat{background:var(--bg3);border:1px solid var(--border);padding:0.9rem 1.3rem;text-align:center;min-width:90px}
+.hs-val{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--green);display:block;line-height:1;margin-bottom:3px}
+.hs-key{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4);display:block}
+
+/* TICKER */
+.ticker{background:var(--green);padding:0.45rem 0;overflow:hidden}
+.ticker-track{display:flex;animation:ticker 20s linear infinite;white-space:nowrap}
+.ticker-item{display:inline-flex;align-items:center;gap:16px;padding:0 24px;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;color:rgba(0,0,0,0.65);flex-shrink:0}
+.tdot{width:3px;height:3px;border-radius:50%;background:rgba(0,0,0,0.3)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* MAIN */
+.main-wrap{max-width:960px;margin:0 auto;padding:2.5rem 4%}
+
+/* TOOLBAR */
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem;flex-wrap:wrap;gap:10px}
+.tb-left{display:flex;align-items:center;gap:8px}
+.tb-count{font-family:'IBM Plex Mono',monospace;font-size:0.53rem;letter-spacing:2px;color:var(--txt4)}
+.search-wrap{position:relative}
+.search-inp{padding:8px 32px 8px 12px;background:var(--bg2);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.85rem;outline:none;transition:border-color 0.2s;width:220px}
+.search-inp::placeholder{color:var(--txt4)}
+.search-inp:focus{border-color:var(--green)}
+.search-ico{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--txt4);font-size:0.75rem;pointer-events:none}
+.clear-all-btn{padding:7px 14px;background:transparent;border:1px solid rgba(248,113,113,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--red);transition:all 0.2s}
+.clear-all-btn:hover{background:var(--red-dim)}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:5rem 2rem;border:1px solid var(--border);background:var(--bg2)}
+.es-icon{font-size:3rem;display:block;margin-bottom:1rem;opacity:0.5}
+.es-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--txt);margin-bottom:0.4rem;letter-spacing:-0.3px}
+.es-sub{font-size:0.9rem;color:var(--txt3);margin-bottom:1.5rem;font-weight:300}
+.es-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:var(--green);color:#000;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:0.57rem;font-weight:500;letter-spacing:2px;transition:background 0.2s}
+.es-btn:hover{background:var(--green-dk)}
+
+/* ORDER CARDS */
+.orders-list{display:flex;flex-direction:column;gap:2px}
+
+.order-card{background:var(--bg2);border:1px solid var(--border2);overflow:hidden;transition:background 0.2s;position:relative}
+.order-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green);opacity:0}
+.order-card.expanded::before{opacity:1}
+.order-card:hover{background:var(--bg3)}
+
+.order-header{display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;padding:1.1rem 1.4rem;cursor:pointer;user-select:none}
+.oh-left{}
+.order-id{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--green);margin-bottom:4px}
+.order-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.order-ign{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--txt);letter-spacing:-0.2px}
+.order-delivery{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;padding:2px 7px;border:1px solid}
+.del-pickup{border-color:rgba(96,165,250,0.3);color:var(--blue);background:var(--blue-dim)}
+.del-delivery{border-color:rgba(251,191,36,0.3);color:var(--gold);background:var(--gold-dim)}
+.order-ts{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1px;color:var(--txt4)}
+.oh-total{text-align:right;flex-shrink:0}
+.total-val{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--gold);display:block;line-height:1}
+.total-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:2px;color:var(--txt4)}
+.oh-arrow{color:var(--txt4);font-size:0.8rem;transition:transform 0.25s;flex-shrink:0}
+.order-card.expanded .oh-arrow{transform:rotate(180deg)}
+
+/* ORDER BODY */
+.order-body{display:none;border-top:1px solid var(--border);padding:1.2rem 1.4rem}
+.order-card.expanded .order-body{display:block}
+
+.ob-section{margin-bottom:1.1rem}
+.ob-section:last-child{margin-bottom:0}
+.ob-label{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2.5px;color:var(--txt4);margin-bottom:0.6rem}
+
+/* Items */
+.item-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border2)}
+.item-row:last-child{border-bottom:none}
+.item-img{width:40px;height:40px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.item-img img{width:30px;height:30px;object-fit:contain;image-rendering:pixelated}
+.item-img-ph{font-size:1.1rem}
+.item-name{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:var(--txt);flex:1;letter-spacing:-0.2px}
+.item-qty{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;color:var(--txt3)}
+.item-price{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--gold);flex-shrink:0}
+
+/* Info grid */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:4px}
+.info-cell{background:var(--bg3);padding:0.7rem 0.9rem}
+.ic-label{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:2px;color:var(--txt4);display:block;margin-bottom:2px}
+.ic-val{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--txt2)}
+
+/* Notes */
+.notes-box{background:var(--bg3);border:1px solid var(--border2);padding:0.8rem 1rem;font-size:0.88rem;color:var(--txt3);font-weight:300;line-height:1.6}
+
+/* Order total row */
+.order-total-row{display:flex;justify-content:space-between;align-items:center;padding:0.8rem 0 0;border-top:1px solid var(--border)}
+.otr-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;color:var(--txt4)}
+.otr-val{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--gold)}
+
+/* Delete button */
+.delete-order-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;background:transparent;border:1px solid rgba(248,113,113,0.2);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--red);transition:all 0.2s;margin-top:0.8rem}
+.delete-order-btn:hover{background:var(--red-dim);border-color:rgba(248,113,113,0.35)}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem 4%;margin-top:4rem}
+.footer-inner{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-brand{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
+.footer-links{display:flex;gap:4px;flex-wrap:wrap}
+.footer-links a{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt4);text-decoration:none;padding:4px 9px;border:1px solid var(--border2);transition:all 0.2s}
+.footer-links a:hover{color:var(--green);border-color:rgba(74,222,128,0.2)}
+.footer-copy{width:100%;font-family:'IBM Plex Mono',monospace;font-size:0.46rem;letter-spacing:1.5px;color:var(--txt4);padding-top:1rem;border-top:1px solid var(--border2)}
+
+/* TOAST */
+.toast-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:600;display:flex;flex-direction:column;gap:6px}
+.toast{padding:10px 16px;background:var(--bg3);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.57rem;letter-spacing:1px;border:1px solid var(--border);display:flex;align-items:center;gap:8px;animation:tIn 0.25s ease;max-width:280px}
+.toast.ok{border-left:3px solid var(--green)}
+.toast.err{border-left:3px solid var(--red)}
+@keyframes tIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+@media(max-width:700px){
+  .hero-stats{display:none}
+  .nav-links{display:none}
+  .order-header{grid-template-columns:1fr auto auto;gap:10px}
+  .info-grid{grid-template-columns:1fr 1fr}
+  .toolbar{flex-direction:column;align-items:flex-start}
+  .search-inp{width:100%}
+  .search-wrap{width:100%}
+}
+</style>
 </head>
 <body>
-    <header>
-        <h1>
-            <img src="PaizShop2.png" alt="Paiz Shop Logo" id="shop-logo">
-            Order History
-        </h1>
-        <nav>
-            <ul>
-                <li><a href="/PaizCorp/PaizShop/">Home</a></li>
-                <li><a href="/PaizCorp/PaizShop/how-to-use">How to Use</a></li>
-                <li><a href="/thelol/finance/currency-converter">Currency</a></li>
-                <li><a href="https://discord.gg/TB4T8qwN4R">Contact Us</a></li>
-                <li><a href="/PaizCorp/PaizShop/feedback">Feedback</a></li>
-                <li><a href="https://sociabuzz.com/faizgg/donate">Donate</a></li>
-            </ul>
-        </nav>
-        <!-- Theme Switcher HTML -->
-        <div id="theme-switcher">
-            <label class="switch">
-                <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
-                <span class="slider round"></span>
-            </label>
+
+<nav>
+  <a href="/PaizCorp/PaizShop/" class="nav-logo">
+    <div class="nav-logo-sq">PS</div>
+    <span class="nav-wordmark">Paiz Shop</span>
+  </a>
+  <div class="nav-sep"></div>
+  <div class="nav-links">
+    <a href="/PaizCorp/PaizShop/">SHOP</a>
+    <a href="/PaizCorp/PaizShop/order-history" class="active">ORDER HISTORY</a>
+    <a href="/PaizCorp/PaizShop/how-to-use">HOW TO USE</a>
+    <a href="/thelol/finance/currency-converter">CURRENCY</a>
+    <a href="https://discord.gg/TB4T8qwN4R" target="_blank">DISCORD</a>
+  </div>
+  <div class="nav-right">
+    <a href="/PaizCorp/PaizShop/" class="back-btn">← BACK TO SHOP</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">MY ORDERS · PAIZ SHOP</div>
+    <h1>Order <span>History.</span></h1>
+    <div class="hero-sub">Your past orders placed through Paiz Shop. Stored locally on this device.</div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="hs-val" id="stat-orders">0</span><span class="hs-key">ORDERS</span></div>
+    <div class="hero-stat"><span class="hs-val" id="stat-spent">0</span><span class="hs-key">◆ SPENT</span></div>
+    <div class="hero-stat"><span class="hs-val" id="stat-items">0</span><span class="hs-key">ITEMS BOUGHT</span></div>
+  </div>
+</div>
+
+<div class="ticker"><div class="ticker-track">
+  <span class="ticker-item">ORDER HISTORY <span class="tdot"></span></span>
+  <span class="ticker-item">STORED LOCALLY <span class="tdot"></span></span>
+  <span class="ticker-item">PAIZ SHOP <span class="tdot"></span></span>
+  <span class="ticker-item">SKYXION: RAGNAROK <span class="tdot"></span></span>
+  <span class="ticker-item">THE LEGEND OF LEGIONA <span class="tdot"></span></span>
+  <span class="ticker-item">ORDER HISTORY <span class="tdot"></span></span>
+  <span class="ticker-item">STORED LOCALLY <span class="tdot"></span></span>
+  <span class="ticker-item">PAIZ SHOP <span class="tdot"></span></span>
+  <span class="ticker-item">SKYXION: RAGNAROK <span class="tdot"></span></span>
+  <span class="ticker-item">THE LEGEND OF LEGIONA <span class="tdot"></span></span>
+</div></div>
+
+<div class="main-wrap">
+  <div class="toolbar">
+    <div class="tb-left">
+      <div class="tb-count" id="tb-count">—</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <div class="search-wrap">
+        <input type="text" class="search-inp" id="search-inp" placeholder="Search by IGN or Order ID..." oninput="render()">
+        <span class="search-ico">⌕</span>
+      </div>
+      <button class="clear-all-btn" onclick="clearAll()">🗑 CLEAR ALL</button>
+    </div>
+  </div>
+
+  <div id="orders-container"></div>
+</div>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Paiz Shop</div>
+    <div class="footer-links">
+      <a href="/PaizCorp/PaizShop/">SHOP</a>
+      <a href="/PaizCorp/PaizShop/how-to-use">HOW TO USE</a>
+      <a href="https://discord.gg/TB4T8qwN4R" target="_blank">DISCORD</a>
+      <a href="https://sociabuzz.com/faizgg/donate" target="_blank">DONATE</a>
+      <a href="/PaizCorp/">PAIZ CORP</a>
+    </div>
+    <div class="footer-copy">© 2026 PAIZ SHOP · PAIZ® CORP SUBSIDIARY · THE LEGEND OF LEGIONA · Orders stored locally on this device only.</div>
+  </div>
+</footer>
+
+<script>
+let orders = [];
+
+function loadOrders() {
+  orders = JSON.parse(localStorage.getItem('ps_orders') || '[]');
+}
+
+function updateStats() {
+  const totalSpent = orders.reduce((s, o) => s + (o.total || 0), 0);
+  const totalItems = orders.reduce((s, o) => s + (o.items || []).reduce((si, i) => si + i.qty, 0), 0);
+  document.getElementById('stat-orders').textContent = orders.length;
+  document.getElementById('stat-spent').textContent  = totalSpent;
+  document.getElementById('stat-items').textContent  = totalItems;
+}
+
+function render() {
+  const q   = document.getElementById('search-inp').value.toLowerCase();
+  let list  = orders;
+  if (q) {
+    list = orders.filter(o =>
+      (o.id||'').toLowerCase().includes(q) ||
+      (o.ign||'').toLowerCase().includes(q) ||
+      (o.discord||'').toLowerCase().includes(q)
+    );
+  }
+
+  document.getElementById('tb-count').textContent = `SHOWING ${list.length} ORDER${list.length !== 1 ? 'S' : ''}`;
+  const container = document.getElementById('orders-container');
+
+  if (!list.length) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <span class="es-icon">📋</span>
+        <div class="es-title">${orders.length ? 'No results found' : 'No orders yet'}</div>
+        <div class="es-sub">${orders.length ? 'Try a different search term.' : 'Orders you place will appear here automatically.'}</div>
+        <a href="/PaizCorp/PaizShop/" class="es-btn">← BROWSE SHOP</a>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = `<div class="orders-list">${list.map(o => buildOrderCard(o)).join('')}</div>`;
+}
+
+function buildOrderCard(o) {
+  const delCls = (o.delivery || '').toLowerCase() === 'pickup' ? 'del-pickup' : 'del-delivery';
+  const items  = o.items || [];
+  const total  = o.total || items.reduce((s, i) => s + i.price * i.qty, 0);
+
+  const itemsHTML = items.map(i => `
+    <div class="item-row">
+      <div class="item-img">
+        ${i.image
+          ? `<img src="${i.image}" alt="${i.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="item-img-ph" style="display:none">📦</span>`
+          : `<span class="item-img-ph">📦</span>`}
+      </div>
+      <span class="item-name">${i.name}</span>
+      <span class="item-qty">×${i.qty}</span>
+      <span class="item-price">◆ ${i.price * i.qty}</span>
+    </div>`).join('');
+
+  return `
+  <div class="order-card" id="card-${o.id}">
+    <div class="order-header" onclick="toggleCard('${o.id}')">
+      <div class="oh-left">
+        <div class="order-id">${o.id || 'ORDER'}</div>
+        <div class="order-meta">
+          <span class="order-ign">${o.ign || '—'}</span>
+          <span class="order-delivery ${delCls}">${o.delivery || 'N/A'}</span>
+          <span class="order-ts">${o.ts || ''}</span>
         </div>
-    </header>
-    <main>
-        <div id="ongoing-orders">
-            <h2>Ongoing Orders</h2>
-            <!-- Ongoing orders will be dynamically inserted here -->
+      </div>
+      <div class="oh-total">
+        <span class="total-val">◆ ${total}</span>
+        <span class="total-lbl">TOTAL</span>
+      </div>
+      <span class="oh-arrow">▾</span>
+    </div>
+    <div class="order-body">
+      <div class="ob-section">
+        <div class="ob-label">ITEMS ORDERED</div>
+        ${itemsHTML || '<div style="color:var(--txt4);font-size:0.8rem">No item data</div>'}
+        <div class="order-total-row">
+          <span class="otr-lbl">ORDER TOTAL</span>
+          <span class="otr-val">◆ ${total} Diamond${total !== 1 ? 's' : ''}</span>
         </div>
-        <div id="order-history">
-            <h2>Order History</h2>
-            <!-- Past orders will be dynamically inserted here -->
+      </div>
+      <div class="ob-section">
+        <div class="ob-label">ORDER DETAILS</div>
+        <div class="info-grid">
+          <div class="info-cell"><span class="ic-label">MINECRAFT IGN</span><span class="ic-val">${o.ign || '—'}</span></div>
+          <div class="info-cell"><span class="ic-label">DISCORD</span><span class="ic-val">${o.discord || '—'}</span></div>
+          <div class="info-cell"><span class="ic-label">DELIVERY TYPE</span><span class="ic-val">${o.delivery || '—'}</span></div>
+          <div class="info-cell"><span class="ic-label">SERVER</span><span class="ic-val">${o.server || 'Skyxion: Ragnarok'}</span></div>
+          ${o.location ? `<div class="info-cell"><span class="ic-label">LOCATION</span><span class="ic-val">${o.location}</span></div>` : ''}
+          <div class="info-cell"><span class="ic-label">ORDER TIME</span><span class="ic-val">${o.ts || '—'}</span></div>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2024 Paiz Shop. All Rights Reserved.</p>
-    </footer>
+      </div>
+      ${o.notes ? `
+      <div class="ob-section">
+        <div class="ob-label">NOTES</div>
+        <div class="notes-box">${o.notes}</div>
+      </div>` : ''}
+      <button class="delete-order-btn" onclick="deleteOrder('${o.id}')">🗑 REMOVE FROM HISTORY</button>
+    </div>
+  </div>`;
+}
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const ongoingOrdersDiv = document.getElementById('ongoing-orders');
-            const orderHistoryDiv = document.getElementById('order-history');
+function toggleCard(id) {
+  const card = document.getElementById('card-' + id);
+  if (card) card.classList.toggle('expanded');
+}
 
-            // Fetch ongoing orders from localStorage
-            const ongoingOrders = JSON.parse(localStorage.getItem('ongoingOrders')) || [];
-            const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+function deleteOrder(id) {
+  if (!confirm('Remove this order from your local history?')) return;
+  orders = orders.filter(o => o.id !== id);
+  localStorage.setItem('ps_orders', JSON.stringify(orders));
+  updateStats();
+  render();
+  toast('Order removed from history', 'ok');
+}
 
-            // Display ongoing orders
-            if (ongoingOrders.length > 0) {
-                ongoingOrders.forEach(order => {
-                    ongoingOrdersDiv.innerHTML += `
-                        <div class="order">
-                            <p><strong>Order Number:</strong> ${order.orderNumber}</p>
-                            <p><strong>Item:</strong> ${order.quantity}x ${order.item}</p>
-                            <p><strong>Total:</strong> ${order.total} Diamonds</p>
-                            <p><strong>Status:</strong> ${order.status}</p>
-                        </div>
-                    `;
-                });
-            } else {
-                ongoingOrdersDiv.innerHTML = "<p>No ongoing orders.</p>";
-            }
+function clearAll() {
+  if (!orders.length) { toast('No orders to clear', 'err'); return; }
+  if (!confirm(`Clear all ${orders.length} order(s) from your local history? This cannot be undone.`)) return;
+  orders = [];
+  localStorage.setItem('ps_orders', JSON.stringify([]));
+  updateStats();
+  render();
+  toast('All orders cleared', 'ok');
+}
 
-            // Display order history
-            if (orderHistory.length > 0) {
-                orderHistory.forEach(order => {
-                    orderHistoryDiv.innerHTML += `
-                        <div class="order">
-                            <p><strong>Order Number:</strong> ${order.orderNumber}</p>
-                            <p><strong>Item:</strong> ${order.quantity}x ${order.item}</p>
-                            <p><strong>Total:</strong> ${order.total} Diamonds</p>
-                            <p><strong>Status:</strong> ${order.status}</p>
-                        </div>
-                    `;
-                });
-            } else {
-                orderHistoryDiv.innerHTML = "<p>No order history available.</p>";
-            }
-        });
+function toast(msg, type = 'ok') {
+  const wrap = document.getElementById('toast-wrap');
+  const el   = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.textContent = msg;
+  wrap.appendChild(el);
+  setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity 0.4s'; setTimeout(()=>el.remove(), 400); }, 3000);
+}
 
-        // Function to toggle between themes
-        function toggleTheme() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const isDarkMode = themeToggle.checked;
-
-            if (isDarkMode) {
-                document.body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.body.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Load the user's theme preference on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme');
-            const themeToggle = document.getElementById('theme-toggle');
-
-            if (savedTheme === 'dark') {
-                document.body.setAttribute('data-theme', 'dark');
-                themeToggle.checked = true;
-            } else {
-                document.body.setAttribute('data-theme', 'light');
-                themeToggle.checked = false;
-            }
-        });
-    </script>
+/* INIT */
+loadOrders();
+updateStats();
+render();
+</script>
 </body>
 </html>
