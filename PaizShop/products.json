@@ -40,7 +40,7 @@
     "stock": 0,
     "image": "img/nether_wart.png",
     "category": "Farming",
-    "listed": true,
+    "listed": false,
     "description": "Essential ingredient for potion brewing."
   },
   {
