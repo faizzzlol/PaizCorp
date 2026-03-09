@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The LoL: The Movie — PaizProductions</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060407;
+  --bg2:#0c0810;
+  --bg3:#130d18;
+  --red:#c0391a;
+  --red2:#d9481e;
+  --red3:#e85228;
+  --orange:#e8720a;
+  --yellow:#f5c518;
+  --yellow2:#fbd44a;
+  --glow-r:rgba(192,57,26,0.35);
+  --glow-y:rgba(245,197,24,0.2);
+  --txt:#f5f0ea;
+  --txt2:rgba(245,240,234,0.78);
+  --txt3:rgba(245,240,234,0.5);
+  --txt4:rgba(245,240,234,0.28);
+  --border:rgba(245,240,234,0.07);
+  --border2:rgba(245,240,234,0.04);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;overflow-x:hidden}
+
+/* GRAIN */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;opacity:0.5}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:56px;background:linear-gradient(to bottom,rgba(6,4,7,0.95),transparent);transition:background 0.3s}
+nav.scrolled{background:rgba(6,4,7,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--txt3);font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:2px;transition:color 0.2s}
+.nav-back:hover{color:var(--yellow)}
+.nav-back svg{width:14px;height:14px;opacity:0.6}
+.nav-title{font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:3px;color:var(--txt4)}
+.nav-pp{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:var(--red3)}
+
+/* ══ HERO ══════════════════════════════════════════════ */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
+
+/* Poster-style background */
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg-img{width:100%;height:100%;object-fit:cover;filter:brightness(0.35) saturate(1.4)}
+.hero-bg-placeholder{width:100%;height:100%;background:linear-gradient(160deg,#1a0803 0%,#2a0e05 25%,#0d0510 50%,#07050f 100%);position:relative;overflow:hidden}
+.hero-bg-placeholder::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 40%,rgba(232,114,10,0.2) 0%,transparent 50%),radial-gradient(ellipse at 80% 60%,rgba(192,57,26,0.15) 0%,transparent 45%)}
+
+/* Vignette */
+.hero-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(6,4,7,0.7) 100%)}
+
+/* Bottom fade */
+.hero-fade{position:absolute;bottom:0;left:0;right:0;height:280px;z-index:2;background:linear-gradient(to bottom,transparent,var(--bg))}
+
+.hero-content{position:relative;z-index:3;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 5rem 5rem;max-width:1400px;margin:0 auto;width:100%}
+
+/* THE badge */
+.film-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:1rem;width:fit-content}
+.badge-studio{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:3px;color:var(--txt4);border:1px solid var(--border);padding:4px 10px;background:rgba(6,4,7,0.6)}
+.badge-dot{width:3px;height:3px;background:var(--red);border-radius:50%;flex-shrink:0}
+.badge-status{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:3px;color:var(--red3)}
+
+/* FILM TITLE — CSS recreation of the logo */
+.film-logo{margin-bottom:1.5rem;user-select:none}
+.fl-the{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,4vw,3rem);color:var(--yellow);letter-spacing:6px;display:block;text-shadow:0 2px 0 #7a5f00,-1px -1px 0 #1a0800,1px 1px 0 #1a0800;line-height:1;margin-left:4px}
+.fl-lol{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,16vw,13rem);color:var(--red);letter-spacing:-4px;display:block;line-height:0.82;text-shadow:0 6px 0 #6b1a08,0 12px 0 rgba(0,0,0,0.4),0 0 60px var(--glow-r);-webkit-text-stroke:2px #2a0800;position:relative}
+.fl-lol::after{content:'LOL';position:absolute;left:0;top:0;color:var(--red2);-webkit-text-stroke:0;background:linear-gradient(to bottom,var(--red3) 0%,var(--red) 60%,#7a1a08 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;clip-path:inset(0 0 40% 0)}
+.fl-movie{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,4.5vw,3.5rem);color:var(--yellow);letter-spacing:8px;display:block;text-shadow:0 3px 0 #7a5f00,-1px -1px 0 #1a0800,1px 1px 0 #1a0800;line-height:1}
+
+/* Cast credits */
+.hero-cast{display:flex;gap:2.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.cast-item{text-align:center}
+.cast-name{font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;color:var(--yellow);letter-spacing:4px;display:block;text-shadow:0 0 20px rgba(245,197,24,0.5)}
+.cast-role{font-family:'DM Mono',monospace;font-size:0.36rem;letter-spacing:2px;color:var(--txt4);display:block;margin-top:2px}
+
+/* Play button */
+.hero-play{display:inline-flex;align-items:center;gap:14px;cursor:pointer;background:none;border:2px solid rgba(245,197,24,0.4);color:var(--yellow);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:4px;padding:14px 28px;transition:all 0.3s;width:fit-content;text-decoration:none}
+.hero-play:hover{background:rgba(245,197,24,0.1);border-color:var(--yellow);transform:scale(1.02)}
+.play-icon{width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent var(--yellow);flex-shrink:0;filter:drop-shadow(0 0 4px var(--yellow))}
+.hero-play:hover .play-icon{filter:drop-shadow(0 0 8px var(--yellow))}
+
+/* Right side meta */
+.hero-meta-aside{position:absolute;right:5rem;bottom:5rem;z-index:3;display:flex;flex-direction:column;gap:1rem;text-align:right}
+.hma-item{display:flex;flex-direction:column;gap:2px}
+.hma-label{font-family:'DM Mono',monospace;font-size:0.36rem;letter-spacing:2.5px;color:var(--txt4)}
+.hma-value{font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;font-weight:700;color:var(--txt3);letter-spacing:1px}
+
+/* ══ TRAILER SECTION ══════════════════════════════════ */
+.trailer-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 5rem}
+.ts-inner{max-width:1100px;margin:0 auto}
+.ts-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.ts-eyebrow{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:4px;color:var(--yellow);display:flex;align-items:center;gap:8px}
+.ts-eyebrow::before{content:'';width:20px;height:1px;background:var(--yellow)}
+.ts-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--txt);letter-spacing:1px;line-height:1}
+.ts-sub{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:var(--txt4)}
+
+/* YouTube embed wrapper */
+.yt-wrapper{position:relative;width:100%;padding-top:56.25%;background:#000;border:1px solid var(--border);overflow:hidden}
+.yt-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+
+/* Placeholder for when no video ID */
+.yt-placeholder{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;background:linear-gradient(135deg,#100808,#1a0c04,#0a0610);cursor:pointer}
+.yt-placeholder-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(192,57,26,0.12) 0%,transparent 65%);pointer-events:none}
+.yt-play-btn{width:72px;height:72px;background:rgba(245,197,24,0.15);border:2px solid rgba(245,197,24,0.5);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;position:relative;z-index:1}
+.yt-play-btn::after{content:'';width:0;height:0;border-style:solid;border-width:14px 0 14px 28px;border-color:transparent transparent transparent var(--yellow);margin-left:5px}
+.yt-placeholder:hover .yt-play-btn{background:rgba(245,197,24,0.25);transform:scale(1.05)}
+.yt-placeholder-text{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;color:var(--yellow);position:relative;z-index:1}
+.yt-placeholder-sub{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:var(--txt4);position:relative;z-index:1}
+
+/* ══ SYNOPSIS + DETAILS ══════════════════════════════ */
+.info-section{padding:5rem;max-width:1400px;margin:0 auto}
+.info-grid{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start}
+@media(max-width:900px){.info-grid{grid-template-columns:1fr}}
+
+.synopsis-label{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:4px;color:var(--yellow);display:flex;align-items:center;gap:8px;margin-bottom:1.2rem}
+.synopsis-label::before{content:'';width:20px;height:1px;background:var(--yellow)}
+.synopsis-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);letter-spacing:1px;margin-bottom:1.5rem;line-height:0.95}
+.synopsis-text{font-size:1rem;color:var(--txt3);line-height:1.85;font-weight:400;max-width:560px}
+.synopsis-text+.synopsis-text{margin-top:1rem}
+
+/* Divider */
+.info-divider{width:40px;height:2px;background:linear-gradient(to right,var(--red),transparent);margin:2rem 0}
+
+.details-card{background:var(--bg2);border:1px solid var(--border);padding:2rem;position:sticky;top:80px}
+.dc-title{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:3px;color:var(--txt4);margin-bottom:1.2rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border)}
+.dc-row{display:flex;align-items:baseline;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid var(--border2)}
+.dc-row:last-child{border-bottom:none}
+.dc-label{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;color:var(--txt4)}
+.dc-val{font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;font-weight:700;color:var(--txt2);text-align:right;letter-spacing:0.5px}
+.dc-val.yellow{color:var(--yellow)}
+.dc-val.red{color:var(--red3)}
+
+/* STATUS BADGE */
+.status-prod{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:var(--yellow);background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.25);padding:4px 10px;margin-top:1.5rem;width:100%;justify-content:center}
+.sp-dot{width:6px;height:6px;background:var(--yellow);border-radius:50%;animation:spBlink 1.5s ease-in-out infinite;flex-shrink:0}
+@keyframes spBlink{0%,100%{opacity:1}50%{opacity:0.2}}
+
+/* ══ CAST ════════════════════════════════════════════ */
+.cast-section{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 5rem}
+.cs-inner{max-width:1400px;margin:0 auto}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:4px;color:var(--yellow);display:flex;align-items:center;gap:8px;margin-bottom:0.6rem}
+.section-eyebrow::before{content:'';width:20px;height:1px;background:var(--yellow)}
+.section-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:1px;margin-bottom:2.5rem}
+.cast-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2)}
+@media(max-width:700px){.cast-grid{grid-template-columns:1fr}}
+.cast-card{background:var(--bg);padding:2rem;position:relative;overflow:hidden;transition:background 0.2s}
+.cast-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--red),var(--yellow));transform:scaleX(0);transition:transform 0.3s;transform-origin:left}
+.cast-card:hover{background:var(--bg2)}
+.cast-card:hover::after{transform:scaleX(1)}
+.cc-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:rgba(245,197,24,0.08);line-height:1;position:absolute;right:1.5rem;top:1rem;user-select:none}
+.cc-ign{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:2px;color:var(--yellow);line-height:1;margin-bottom:4px}
+.cc-role{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2.5px;color:var(--red3);margin-bottom:0.8rem}
+.cc-desc{font-size:0.85rem;color:var(--txt4);line-height:1.6;font-weight:400}
+
+/* ══ PRODUCTION NOTES ════════════════════════════════ */
+.notes-section{padding:5rem;max-width:1400px;margin:0 auto}
+.notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--border2);border:1px solid var(--border)}
+.note-card{background:var(--bg);padding:1.8rem;position:relative;overflow:hidden}
+.note-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transition:transform 0.4s ease;transform-origin:left}
+.note-card:hover::before{transform:scaleX(1)}
+.nc-icon{font-size:1.5rem;margin-bottom:1rem;display:block}
+.nc-label{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:3px;color:var(--red3);margin-bottom:0.4rem}
+.nc-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--txt);margin-bottom:0.5rem}
+.nc-text{font-size:0.82rem;color:var(--txt4);line-height:1.65;font-weight:400}
+
+/* ══ CTA FOOTER ══════════════════════════════════════ */
+.film-cta{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 5rem;text-align:center;position:relative;overflow:hidden}
+.film-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(192,57,26,0.08) 0%,transparent 70%);pointer-events:none}
+.fcta-logo{font-family:'Bebas Neue',sans-serif;margin-bottom:0.5rem;position:relative;z-index:1}
+.fcta-the{font-size:1rem;color:var(--yellow);letter-spacing:5px;display:block}
+.fcta-lol{font-size:4rem;color:var(--red);letter-spacing:-2px;display:block;line-height:0.9;text-shadow:0 4px 0 #6b1a08}
+.fcta-movie{font-size:1rem;color:var(--yellow);letter-spacing:5px;display:block}
+.fcta-sub{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:3px;color:var(--txt4);margin:1.2rem 0 2rem;position:relative;z-index:1}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
+.btn-red{background:var(--red);color:#fff;text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:3px;padding:13px 28px;transition:all 0.2s;border:2px solid var(--red)}
+.btn-red:hover{background:var(--red2);transform:translateY(-2px)}
+.btn-out{background:transparent;color:var(--yellow);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:3px;padding:13px 28px;border:2px solid rgba(245,197,24,0.35);transition:all 0.2s}
+.btn-out:hover{background:rgba(245,197,24,0.08);border-color:var(--yellow);transform:translateY(-2px)}
+
+footer{background:var(--bg);border-top:1px solid var(--border);padding:1.2rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem}
+.foot-l{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;color:var(--txt4)}
+.foot-r{display:flex;gap:1.5rem}
+.foot-a{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;color:var(--txt4);text-decoration:none;transition:color 0.2s}
+.foot-a:hover{color:var(--yellow)}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  nav{padding:0 1.2rem}
+  .hero-content{padding:0 1.5rem 4rem}
+  .hero-meta-aside{display:none}
+  .trailer-section,.info-section,.cast-section,.notes-section,.film-cta{padding:3rem 1.5rem}
+  footer{padding:1.2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="../" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    PAIZPRODUCTIONS
+  </a>
+  <span class="nav-title">THE LOL: THE MOVIE</span>
+  <span class="nav-pp">A PAIZ® CORP FILM</span>
+</nav>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-bg">
+    <!-- Replace src with actual poster image path once uploaded -->
+    <!-- <img class="hero-bg-img" src="../img/thelol-movie-poster.jpg" alt="The LoL: The Movie Poster"> -->
+    <div class="hero-bg-placeholder"></div>
+  </div>
+  <div class="hero-vignette"></div>
+  <div class="hero-fade"></div>
+
+  <div class="hero-content">
+    <div class="film-badge">
+      <span class="badge-studio">PAIZPRODUCTIONS</span>
+      <span class="badge-dot"></span>
+      <span class="badge-status">NOW IN PRODUCTION</span>
+    </div>
+
+    <div class="film-logo">
+      <span class="fl-the">THE</span>
+      <span class="fl-lol">LOL</span>
+      <span class="fl-movie">THE MOVIE</span>
+    </div>
+
+    <div class="hero-cast">
+      <div class="cast-item">
+        <span class="cast-name">FAIZ4224</span>
+        <span class="cast-role">LEAD</span>
+      </div>
+      <div class="cast-item">
+        <span class="cast-name">IMII KUN</span>
+        <span class="cast-role">LEAD</span>
+      </div>
+      <div class="cast-item">
+        <span class="cast-name">LONELYDYNOZZ</span>
+        <span class="cast-role">LEAD</span>
+      </div>
+    </div>
+
+    <a href="#trailer" class="hero-play">
+      <span class="play-icon"></span>
+      WATCH TRAILER
+    </a>
+  </div>
+
+  <!-- Right meta -->
+  <div class="hero-meta-aside">
+    <div class="hma-item">
+      <span class="hma-label">STUDIO</span>
+      <span class="hma-value">PAIZPRODUCTIONS</span>
+    </div>
+    <div class="hma-item">
+      <span class="hma-label">UNIVERSE</span>
+      <span class="hma-value">THE LEGEND OF LEGIONA</span>
+    </div>
+    <div class="hma-item">
+      <span class="hma-label">PLATFORM</span>
+      <span class="hma-value">MINECRAFT</span>
+    </div>
+    <div class="hma-item">
+      <span class="hma-label">YEAR</span>
+      <span class="hma-value">2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TRAILER ══ -->
+<div class="trailer-section" id="trailer">
+  <div class="ts-inner">
+    <div class="ts-header">
+      <div>
+        <div class="ts-eyebrow">OFFICIAL TRAILER</div>
+        <h2 class="ts-title">WATCH THE TRAILER</h2>
+      </div>
+      <span class="ts-sub">THE LOL: THE MOVIE · 2026</span>
+    </div>
+
+    <div class="yt-wrapper" id="yt-container">
+      <!-- ═══════════════════════════════════════════════════
+           REPLACE THE VIDEO ID BELOW WITH YOUR TRAILER ID
+           Example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                    → Video ID is: dQw4w9WgXcQ
+           ═══════════════════════════════════════════════════ -->
+      <iframe
+        id="yt-iframe"
+        src="about:blank"
+        data-src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE?autoplay=0&rel=0&color=white&modestbranding=1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        title="The LoL: The Movie — Official Trailer"
+        style="display:none">
+      </iframe>
+
+      <!-- Placeholder shown until video ID is set -->
+      <div class="yt-placeholder" id="yt-placeholder" onclick="loadVideo()">
+        <div class="yt-placeholder-bg"></div>
+        <div class="yt-play-btn"></div>
+        <div class="yt-placeholder-text">OFFICIAL TRAILER</div>
+        <div class="yt-placeholder-sub">UPDATE VIDEO ID IN HTML TO EMBED</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SYNOPSIS + DETAILS ══ -->
+<div class="info-section reveal">
+  <div class="info-grid">
+    <div class="synopsis-col">
+      <div class="synopsis-label">THE STORY</div>
+      <h2 class="synopsis-title">SYNOPSIS</h2>
+      <p class="synopsis-text">
+        In the world of The Legend of Legiona, three players stand at the heart of a nation 
+        built block by block. When their world is threatened, they must fight — not just as 
+        players, but as a people.
+      </p>
+      <p class="synopsis-text">
+        The first ever full-length film produced by PaizProductions, shot entirely inside 
+        Minecraft on the Skyxion: Ragnarok server. A story of loyalty, war, and survival.
+      </p>
+      <div class="info-divider"></div>
+      <p class="synopsis-text" style="font-size:0.85rem;font-style:italic;color:var(--txt4)">
+        "A Paiz® Corp Original Production — The Legend of Legiona"
+      </p>
+    </div>
+
+    <div class="details-col">
+      <div class="details-card">
+        <div class="dc-title">FILM DETAILS</div>
+        <div class="dc-row"><span class="dc-label">TITLE</span><span class="dc-val">The LoL: The Movie</span></div>
+        <div class="dc-row"><span class="dc-label">STUDIO</span><span class="dc-val yellow">PaizProductions</span></div>
+        <div class="dc-row"><span class="dc-label">STATUS</span><span class="dc-val red">In Production</span></div>
+        <div class="dc-row"><span class="dc-label">PLATFORM</span><span class="dc-val">Minecraft</span></div>
+        <div class="dc-row"><span class="dc-label">SERVER</span><span class="dc-val">Skyxion: Ragnarok</span></div>
+        <div class="dc-row"><span class="dc-label">GENRE</span><span class="dc-val">Action · Adventure</span></div>
+        <div class="dc-row"><span class="dc-label">YEAR</span><span class="dc-val">2026</span></div>
+        <div class="dc-row"><span class="dc-label">UNIVERSE</span><span class="dc-val yellow">The Legend of Legiona</span></div>
+        <div class="status-prod">
+          <span class="sp-dot"></span>
+          CURRENTLY IN PRODUCTION
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CAST ══ -->
+<div class="cast-section reveal">
+  <div class="cs-inner">
+    <div class="section-eyebrow">STARRING</div>
+    <h2 class="section-heading">THE CAST</h2>
+    <div class="cast-grid">
+      <div class="cast-card">
+        <span class="cc-num">01</span>
+        <div class="cc-ign">FAIZ4224</div>
+        <div class="cc-role">LEAD · DIRECTOR</div>
+        <p class="cc-desc">Leader of The Legend of Legiona, founder of Paiz® Corp, and the driving force behind The LoL: The Movie.</p>
+      </div>
+      <div class="cast-card">
+        <span class="cc-num">02</span>
+        <div class="cc-ign">IMII KUN</div>
+        <div class="cc-role">LEAD</div>
+        <p class="cc-desc">A key figure in the world of The LoL. Playing a central role in the story that unfolds across the nation.</p>
+      </div>
+      <div class="cast-card">
+        <span class="cc-num">03</span>
+        <div class="cc-ign">LONELYDYNOZZ</div>
+        <div class="cc-role">LEAD</div>
+        <p class="cc-desc">One of three players at the heart of the conflict. Their journey shapes the fate of Legiona.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRODUCTION NOTES ══ -->
+<div class="notes-section reveal">
+  <div class="section-eyebrow">BEHIND THE FILM</div>
+  <h2 class="section-heading" style="margin-bottom:2rem">PRODUCTION NOTES</h2>
+  <div class="notes-grid">
+    <div class="note-card">
+      <span class="nc-icon">🎬</span>
+      <div class="nc-label">PRODUCTION</div>
+      <div class="nc-title">FULLY IN-GAME</div>
+      <p class="nc-text">Every scene, every shot — filmed entirely inside Minecraft. No external tools. The world of LoL IS the film set.</p>
+    </div>
+    <div class="note-card">
+      <span class="nc-icon">🌍</span>
+      <div class="nc-label">UNIVERSE</div>
+      <div class="nc-title">CANON STORY</div>
+      <p class="nc-text">The events of The LoL: The Movie take place within the official timeline of The Legend of Legiona.</p>
+    </div>
+    <div class="note-card">
+      <span class="nc-icon">🏛</span>
+      <div class="nc-label">STUDIO</div>
+      <div class="nc-title">PAIZPRODUCTIONS</div>
+      <p class="nc-text">The official film studio of The LoL and a Paiz® Corp subsidiary. This is their debut feature-length production.</p>
+    </div>
+    <div class="note-card">
+      <span class="nc-icon">🎭</span>
+      <div class="nc-label">FORMAT</div>
+      <div class="nc-title">ORIGINAL CAST</div>
+      <p class="nc-text">All three leads — Faiz4224, Imii Kun, and LonelyDynozz — are real players from the Skyxion: Ragnarok server.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BOTTOM CTA ══ -->
+<div class="film-cta">
+  <div class="fcta-logo">
+    <span class="fcta-the">THE</span>
+    <span class="fcta-lol">LOL</span>
+    <span class="fcta-movie">THE MOVIE</span>
+  </div>
+  <p class="fcta-sub">A PAIZPRODUCTIONS ORIGINAL · THE LEGEND OF LEGIONA · 2026</p>
+  <div class="cta-btns">
+    <a href="https://discord.gg/thelol" class="btn-red" target="_blank">JOIN THE LOL DISCORD</a>
+    <a href="https://faizzzlol.github.io/thelol/" class="btn-out" target="_blank">VISIT THE LOL</a>
+    <a href="../" class="btn-out">PAIZPRODUCTIONS</a>
+  </div>
+</div>
+
+<footer>
+  <span class="foot-l">© 2026 PAIZPRODUCTIONS · PAIZ® CORP · THE LEGEND OF LEGIONA</span>
+  <div class="foot-r">
+    <a href="https://faizzzlol.github.io/PaizCorp/" class="foot-a">PAIZ CORP</a>
+    <a href="https://faizzzlol.github.io/thelol/" class="foot-a">THE LOL</a>
+    <a href="../" class="foot-a">PAIZPRODUCTIONS</a>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Load YouTube embed
+function loadVideo() {
+  const iframe = document.getElementById('yt-iframe');
+  const placeholder = document.getElementById('yt-placeholder');
+  const src = iframe.dataset.src;
+  // Only load if a real video ID has been set
+  if (src && !src.includes('YOUR_VIDEO_ID_HERE')) {
+    iframe.src = src + '&autoplay=1';
+    iframe.style.display = 'block';
+    placeholder.style.display = 'none';
+  } else {
+    placeholder.querySelector('.yt-placeholder-sub').textContent = 'SET YOUR VIDEO ID IN THE HTML FIRST';
+  }
+}
+
+// Smooth scroll to trailer
+document.querySelector('.hero-play').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.getElementById('trailer').scrollIntoView({ behavior: 'smooth' });
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+reveals.forEach(r => io.observe(r));
+</script>
+</body>
+</html>
