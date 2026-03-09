@@ -8,397 +8,472 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:        #171d16;
-  --bg2:       #1d2420;
-  --bg3:       #232b22;
-  --bg4:       #2a3228;
-  --surface:   #303930;
-  --border:    rgba(255,255,255,0.10);
-  --border2:   rgba(255,255,255,0.06);
-  --green:     #4ade80;
-  --green-dk:  #22c55e;
-  --green-dim: rgba(74,222,128,0.10);
-  --gold:      #fbbf24;
-  --gold-dim:  rgba(251,191,36,0.10);
-  --red:       #f87171;
-  --red-dim:   rgba(248,113,113,0.10);
-  --blue:      #60a5fa;
-  --blue-dim:  rgba(96,165,250,0.10);
-  --txt:       #edf2e7;
-  --txt2:      rgba(237,242,231,0.78);
-  --txt3:      rgba(237,242,231,0.52);
-  --txt4:      rgba(237,242,231,0.28);
+  --bg:#171d16;--bg2:#1d2420;--bg3:#232b22;--bg4:#2a3228;
+  --border:rgba(255,255,255,0.10);--border2:rgba(255,255,255,0.06);
+  --green:#4ade80;--green-dk:#22c55e;--green-dim:rgba(74,222,128,0.10);
+  --gold:#fbbf24;--gold-dim:rgba(251,191,36,0.10);
+  --red:#f87171;--red-dim:rgba(248,113,113,0.10);
+  --blue:#60a5fa;--blue-dim:rgba(96,165,250,0.10);
+  --txt:#edf2e7;--txt2:rgba(237,242,231,0.78);--txt3:rgba(237,242,231,0.52);--txt4:rgba(237,242,231,0.28);
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9998}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden}
 
 /* NAV */
-nav{position:sticky;top:0;z-index:300;height:58px;display:flex;align-items:center;padding:0 4%;background:rgba(23,29,22,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);gap:14px}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.nav-logo-sq{width:30px;height:30px;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;color:#000;letter-spacing:0.5px}
-.nav-wordmark{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
-.nav-sep{width:1px;height:18px;background:var(--border);flex-shrink:0}
-.nav-links{display:flex;gap:2px}
-.nav-links a{padding:5px 11px;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;transition:color 0.2s}
-.nav-links a:hover,.nav-links a.active{color:var(--green)}
-.nav-right{margin-left:auto}
-.back-btn{display:flex;align-items:center;gap:8px;padding:7px 16px;background:var(--bg3);color:var(--txt2);border:1px solid var(--border);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1.5px;transition:all 0.2s}
-.back-btn:hover{background:var(--bg4);color:var(--green);border-color:rgba(74,222,128,0.3)}
+nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;padding:0 5%;gap:12px;background:rgba(23,29,22,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-sq{width:28px;height:28px;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;color:#000}
+.nav-name{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;color:var(--txt);letter-spacing:-0.2px}
+.nav-sep{color:var(--txt4);font-family:'IBM Plex Mono',monospace;font-size:0.6rem}
+.nav-page{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt3)}
+.nav-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);transition:all 0.2s}
+.nav-link:hover{color:var(--green);border-color:rgba(74,222,128,0.2)}
 
-/* HERO */
-.hero{padding:3rem 4% 2.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-60%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(74,222,128,0.06) 0%,transparent 65%);pointer-events:none}
-.hero-tag{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--green);opacity:0.8;margin-bottom:0.8rem;display:flex;align-items:center;gap:10px}
-.hero-tag::before{content:'';width:22px;height:1px;background:var(--green);opacity:0.6}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:800;letter-spacing:-1.5px;line-height:1;color:var(--txt);margin-bottom:0.4rem}
-.hero h1 span{color:var(--green)}
-.hero-sub{font-size:0.95rem;color:var(--txt3);font-weight:300}
-.hero-stats{display:flex;gap:2px;flex-shrink:0}
-.hero-stat{background:var(--bg3);border:1px solid var(--border);padding:0.9rem 1.3rem;text-align:center;min-width:90px}
-.hs-val{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--green);display:block;line-height:1;margin-bottom:3px}
-.hs-key{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4);display:block}
+/* HEADER */
+.page-header{padding:3rem 5% 2rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;top:-30%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(74,222,128,0.04) 0%,transparent 65%);pointer-events:none}
+.ph-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--green);opacity:0.8;margin-bottom:0.6rem}
+.ph-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-1px;color:var(--txt);line-height:1;margin-bottom:0.4rem}
+.ph-sub{font-size:0.9rem;color:var(--txt3);font-weight:300;max-width:500px}
 
-/* TICKER */
-.ticker{background:var(--green);padding:0.45rem 0;overflow:hidden}
-.ticker-track{display:flex;animation:ticker 20s linear infinite;white-space:nowrap}
-.ticker-item{display:inline-flex;align-items:center;gap:16px;padding:0 24px;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;color:rgba(0,0,0,0.65);flex-shrink:0}
-.tdot{width:3px;height:3px;border-radius:50%;background:rgba(0,0,0,0.3)}
-@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:2rem 5% 0;background:var(--border2);border:1px solid var(--border)}
+.stat-cell{background:var(--bg2);padding:1.1rem 1.2rem;display:flex;align-items:center;gap:14px}
+.stat-icon{font-size:1.4rem;flex-shrink:0}
+.stat-val{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--txt);display:block;line-height:1;margin-bottom:2px}
+.stat-key{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4)}
+
+/* STATUS SUMMARY BAR */
+.status-bar{display:flex;gap:2px;margin:1rem 5% 0;flex-wrap:wrap}
+.sb-cell{background:var(--bg2);border:1px solid var(--border2);padding:0.6rem 1rem;display:flex;align-items:center;gap:8px;flex:1;min-width:100px}
+.sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sb-info{}
+.sb-val{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;display:block;line-height:1;margin-bottom:1px}
+.sb-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:1.5px;color:var(--txt4)}
 
 /* MAIN */
-.main-wrap{max-width:960px;margin:0 auto;padding:2.5rem 4%}
+main{max-width:860px;margin:0 auto;padding:2rem 5%}
 
 /* TOOLBAR */
-.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem;flex-wrap:wrap;gap:10px}
-.tb-left{display:flex;align-items:center;gap:8px}
-.tb-count{font-family:'IBM Plex Mono',monospace;font-size:0.53rem;letter-spacing:2px;color:var(--txt4)}
-.search-wrap{position:relative}
-.search-inp{padding:8px 32px 8px 12px;background:var(--bg2);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.85rem;outline:none;transition:border-color 0.2s;width:220px}
-.search-inp::placeholder{color:var(--txt4)}
-.search-inp:focus{border-color:var(--green)}
-.search-ico{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--txt4);font-size:0.75rem;pointer-events:none}
-.clear-all-btn{padding:7px 14px;background:transparent;border:1px solid rgba(248,113,113,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--red);transition:all 0.2s}
-.clear-all-btn:hover{background:var(--red-dim)}
+.toolbar{display:flex;gap:8px;margin-bottom:1.2rem;flex-wrap:wrap;align-items:center}
+.search-wrap{flex:1;position:relative;min-width:200px}
+.search-wrap input{width:100%;padding:9px 14px 9px 36px;background:var(--bg2);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s}
+.search-wrap input:focus{border-color:var(--green)}
+.search-wrap input::placeholder{color:var(--txt4)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--txt4);font-size:0.85rem;pointer-events:none}
+.filter-group{display:flex;gap:2px}
+.f-btn{padding:8px 14px;background:transparent;border:1px solid var(--border2);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt3);transition:all 0.2s}
+.f-btn:hover{border-color:var(--green);color:var(--green)}
+.f-btn.active{background:var(--green-dim);border-color:rgba(74,222,128,0.35);color:var(--green)}
+.clear-btn{padding:8px 14px;background:transparent;border:1px solid rgba(248,113,113,0.2);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--red);transition:all 0.2s}
+.clear-btn:hover{background:var(--red-dim)}
 
-/* EMPTY STATE */
-.empty-state{text-align:center;padding:5rem 2rem;border:1px solid var(--border);background:var(--bg2)}
-.es-icon{font-size:3rem;display:block;margin-bottom:1rem;opacity:0.5}
-.es-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--txt);margin-bottom:0.4rem;letter-spacing:-0.3px}
-.es-sub{font-size:0.9rem;color:var(--txt3);margin-bottom:1.5rem;font-weight:300}
-.es-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:var(--green);color:#000;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:0.57rem;font-weight:500;letter-spacing:2px;transition:background 0.2s}
-.es-btn:hover{background:var(--green-dk)}
+/* REFRESH STATUS */
+.refresh-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:8px}
+.last-checked{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt4)}
+.refresh-btn{padding:5px 14px;background:transparent;border:1px solid var(--border2);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt3);transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.refresh-btn:hover{border-color:var(--green);color:var(--green)}
+.refresh-spin{display:none;width:10px;height:10px;border:2px solid rgba(74,222,128,0.2);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 /* ORDER CARDS */
-.orders-list{display:flex;flex-direction:column;gap:2px}
+.order-list{display:flex;flex-direction:column;gap:8px}
+.order-card{background:var(--bg2);border:1px solid var(--border2);overflow:hidden;transition:border-color 0.2s;position:relative}
+.order-card:hover{border-color:rgba(255,255,255,0.15)}
+.order-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;transition:background 0.3s}
+.oc-pending::before{background:var(--txt4)}
+.oc-confirmed::before{background:var(--blue)}
+.oc-delivered::before{background:var(--green)}
+.oc-cancelled::before{background:var(--red)}
+.oc-unknown::before{background:var(--txt4)}
 
-.order-card{background:var(--bg2);border:1px solid var(--border2);overflow:hidden;transition:background 0.2s;position:relative}
-.order-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green);opacity:0}
-.order-card.expanded::before{opacity:1}
-.order-card:hover{background:var(--bg3)}
+.card-head{padding:1rem 1.2rem;display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;cursor:pointer;user-select:none}
+.ch-left{}
+.ch-id{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);margin-bottom:3px;display:flex;align-items:center;gap:8px}
+.ch-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--txt);letter-spacing:-0.2px;margin-bottom:2px}
+.ch-meta{font-family:'IBM Plex Mono',monospace;font-size:0.46rem;letter-spacing:1px;color:var(--txt3)}
+.ch-price{text-align:right;flex-shrink:0}
+.ch-price-val{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--gold);display:block;line-height:1}
+.ch-price-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:2px;color:var(--txt4)}
+.ch-chevron{color:var(--txt4);font-size:0.8rem;transition:transform 0.25s;flex-shrink:0}
+.order-card.expanded .ch-chevron{transform:rotate(180deg)}
 
-.order-header{display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;padding:1.1rem 1.4rem;cursor:pointer;user-select:none}
-.oh-left{}
-.order-id{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--green);margin-bottom:4px}
-.order-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.order-ign{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--txt);letter-spacing:-0.2px}
-.order-delivery{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;padding:2px 7px;border:1px solid}
-.del-pickup{border-color:rgba(96,165,250,0.3);color:var(--blue);background:var(--blue-dim)}
-.del-delivery{border-color:rgba(251,191,36,0.3);color:var(--gold);background:var(--gold-dim)}
-.order-ts{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1px;color:var(--txt4)}
-.oh-total{text-align:right;flex-shrink:0}
-.total-val{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--gold);display:block;line-height:1}
-.total-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:2px;color:var(--txt4)}
-.oh-arrow{color:var(--txt4);font-size:0.8rem;transition:transform 0.25s;flex-shrink:0}
-.order-card.expanded .oh-arrow{transform:rotate(180deg)}
+/* STATUS BADGE */
+.status-badge{font-family:'IBM Plex Mono',monospace;font-size:0.46rem;letter-spacing:1.5px;padding:2px 8px;border:1px solid;display:inline-flex;align-items:center;gap:5px}
+.status-badge::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-pending{border-color:rgba(255,255,255,0.12);color:var(--txt3)}.sb-pending::before{background:var(--txt4)}
+.sb-confirmed{border-color:rgba(96,165,250,0.3);color:var(--blue);background:var(--blue-dim)}.sb-confirmed::before{background:var(--blue);box-shadow:0 0 6px rgba(96,165,250,0.5)}
+.sb-delivered{border-color:rgba(74,222,128,0.35);color:var(--green);background:var(--green-dim)}.sb-delivered::before{background:var(--green);box-shadow:0 0 6px rgba(74,222,128,0.5)}
+.sb-cancelled{border-color:rgba(248,113,113,0.3);color:var(--red);background:var(--red-dim)}.sb-cancelled::before{background:var(--red)}
+.sb-unknown{border-color:rgba(255,255,255,0.08);color:var(--txt4)}.sb-unknown::before{background:var(--txt4)}
 
-/* ORDER BODY */
-.order-body{display:none;border-top:1px solid var(--border);padding:1.2rem 1.4rem}
-.order-card.expanded .order-body{display:block}
+/* STATUS TRACKER (progress bar) */
+.status-tracker{padding:1rem 1.2rem 0.2rem;border-top:1px solid var(--border2)}
+.tracker-label{font-family:'IBM Plex Mono',monospace;font-size:0.45rem;letter-spacing:2px;color:var(--txt4);margin-bottom:0.7rem}
+.tracker-steps{display:flex;align-items:center;gap:0}
+.t-step{display:flex;flex-direction:column;align-items:center;flex:1;position:relative}
+.t-step-dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:0.55rem;transition:all 0.3s;z-index:1;position:relative}
+.t-step-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.4rem;letter-spacing:1px;color:var(--txt4);margin-top:4px;text-align:center}
+.t-line{flex:1;height:2px;background:var(--border);margin-top:-12px;transition:background 0.3s}
+.t-step.done .t-step-dot{background:var(--green-dim);border-color:var(--green);color:var(--green)}
+.t-step.done .t-step-lbl{color:var(--green)}
+.t-step.done + .t-line{background:var(--green)}
+.t-step.active .t-step-dot{background:var(--blue-dim);border-color:var(--blue);color:var(--blue);box-shadow:0 0 8px rgba(96,165,250,0.3)}
+.t-step.active .t-step-lbl{color:var(--blue)}
+.t-step.cancelled .t-step-dot{background:var(--red-dim);border-color:var(--red);color:var(--red)}
+.t-step.cancelled .t-step-lbl{color:var(--red)}
 
-.ob-section{margin-bottom:1.1rem}
-.ob-section:last-child{margin-bottom:0}
-.ob-label{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2.5px;color:var(--txt4);margin-bottom:0.6rem}
+/* CARD BODY */
+.card-body{display:none;padding:1rem 1.2rem;border-top:1px solid var(--border2)}
+.order-card.expanded .card-body{display:block}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.detail-cell{background:var(--bg3);padding:0.7rem 0.9rem}
+.dc-key{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4);margin-bottom:3px}
+.dc-val{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--txt2)}
+.items-section{margin-bottom:1rem}
+.items-label{font-family:'IBM Plex Mono',monospace;font-size:0.46rem;letter-spacing:2px;color:var(--txt4);margin-bottom:0.5rem}
+.item-row{display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0.7rem;background:var(--bg3);margin-bottom:2px;border:1px solid var(--border2)}
+.item-name{font-size:0.85rem;color:var(--txt2)}
+.item-qty{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;color:var(--txt4)}
+.item-price{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;color:var(--gold)}
+.notes-box{background:var(--bg3);border:1px solid var(--border2);padding:0.8rem 0.9rem;font-size:0.85rem;color:var(--txt3);font-weight:300;border-left:3px solid rgba(251,191,36,0.3);margin-bottom:1rem}
+.card-footer{display:flex;justify-content:space-between;align-items:center;padding-top:0.6rem;border-top:1px solid var(--border2)}
+.status-updated{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1px;color:var(--txt4)}
+.del-btn{padding:5px 12px;background:transparent;border:1px solid rgba(248,113,113,0.2);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.45rem;letter-spacing:1.5px;color:rgba(248,113,113,0.5);transition:all 0.2s}
+.del-btn:hover{background:var(--red-dim);color:var(--red);border-color:rgba(248,113,113,0.35)}
 
-/* Items */
-.item-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border2)}
-.item-row:last-child{border-bottom:none}
-.item-img{width:40px;height:40px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.item-img img{width:30px;height:30px;object-fit:contain;image-rendering:pixelated}
-.item-img-ph{font-size:1.1rem}
-.item-name{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:var(--txt);flex:1;letter-spacing:-0.2px}
-.item-qty{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;color:var(--txt3)}
-.item-price{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--gold);flex-shrink:0}
-
-/* Info grid */
-.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:4px}
-.info-cell{background:var(--bg3);padding:0.7rem 0.9rem}
-.ic-label{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:2px;color:var(--txt4);display:block;margin-bottom:2px}
-.ic-val{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--txt2)}
-
-/* Notes */
-.notes-box{background:var(--bg3);border:1px solid var(--border2);padding:0.8rem 1rem;font-size:0.88rem;color:var(--txt3);font-weight:300;line-height:1.6}
-
-/* Order total row */
-.order-total-row{display:flex;justify-content:space-between;align-items:center;padding:0.8rem 0 0;border-top:1px solid var(--border)}
-.otr-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;color:var(--txt4)}
-.otr-val{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--gold)}
-
-/* Delete button */
-.delete-order-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;background:transparent;border:1px solid rgba(248,113,113,0.2);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--red);transition:all 0.2s;margin-top:0.8rem}
-.delete-order-btn:hover{background:var(--red-dim);border-color:rgba(248,113,113,0.35)}
+/* EMPTY */
+.empty-state{text-align:center;padding:5rem 2rem;background:var(--bg2);border:1px solid var(--border)}
+.empty-icon{font-size:3rem;display:block;margin-bottom:1rem}
+.empty-title{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--txt);margin-bottom:0.4rem;letter-spacing:-0.3px}
+.empty-sub{font-size:0.9rem;color:var(--txt3);font-weight:300}
+.empty-cta{display:inline-flex;margin-top:1.5rem;padding:10px 22px;background:var(--green);color:#000;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:background 0.2s}
+.empty-cta:hover{background:var(--green-dk)}
 
 /* FOOTER */
-footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem 4%;margin-top:4rem}
-.footer-inner{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.footer-brand{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
-.footer-links{display:flex;gap:4px;flex-wrap:wrap}
-.footer-links a{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt4);text-decoration:none;padding:4px 9px;border:1px solid var(--border2);transition:all 0.2s}
-.footer-links a:hover{color:var(--green);border-color:rgba(74,222,128,0.2)}
-.footer-copy{width:100%;font-family:'IBM Plex Mono',monospace;font-size:0.46rem;letter-spacing:1.5px;color:var(--txt4);padding-top:1rem;border-top:1px solid var(--border2)}
+footer{border-top:1px solid var(--border);padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:3rem}
+.footer-brand{font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;color:var(--txt3)}
+.footer-note{font-family:'IBM Plex Mono',monospace;font-size:0.45rem;letter-spacing:1.5px;color:var(--txt4)}
 
 /* TOAST */
-.toast-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:600;display:flex;flex-direction:column;gap:6px}
-.toast{padding:10px 16px;background:var(--bg3);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.57rem;letter-spacing:1px;border:1px solid var(--border);display:flex;align-items:center;gap:8px;animation:tIn 0.25s ease;max-width:280px}
-.toast.ok{border-left:3px solid var(--green)}
-.toast.err{border-left:3px solid var(--red)}
+.toast-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:700;display:flex;flex-direction:column;gap:6px}
+.toast{padding:10px 16px;background:var(--bg3);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;border:1px solid var(--border);display:flex;align-items:center;gap:8px;max-width:300px;animation:tIn 0.25s ease}
+.toast.ok{border-left:3px solid var(--green)}.toast.err{border-left:3px solid var(--red)}.toast.info{border-left:3px solid var(--blue)}
 @keyframes tIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-@media(max-width:700px){
-  .hero-stats{display:none}
-  .nav-links{display:none}
-  .order-header{grid-template-columns:1fr auto auto;gap:10px}
-  .info-grid{grid-template-columns:1fr 1fr}
-  .toolbar{flex-direction:column;align-items:flex-start}
-  .search-inp{width:100%}
-  .search-wrap{width:100%}
-}
+@media(max-width:600px){.stats-bar{grid-template-columns:1fr}.status-bar{flex-direction:column}.detail-grid{grid-template-columns:1fr}.toolbar{flex-direction:column}.card-head{grid-template-columns:1fr auto}}
 </style>
 </head>
 <body>
 
 <nav>
   <a href="/PaizCorp/PaizShop/" class="nav-logo">
-    <div class="nav-logo-sq">PS</div>
-    <span class="nav-wordmark">Paiz Shop</span>
+    <div class="nav-sq">PS</div>
+    <span class="nav-name">Paiz Shop</span>
   </a>
-  <div class="nav-sep"></div>
-  <div class="nav-links">
-    <a href="/PaizCorp/PaizShop/">SHOP</a>
-    <a href="/PaizCorp/PaizShop/order-history" class="active">ORDER HISTORY</a>
-    <a href="/PaizCorp/PaizShop/how-to-use">HOW TO USE</a>
-    <a href="/thelol/finance/currency-converter">CURRENCY</a>
-    <a href="https://discord.gg/TB4T8qwN4R" target="_blank">DISCORD</a>
-  </div>
+  <span class="nav-sep">/</span>
+  <span class="nav-page">ORDER HISTORY</span>
   <div class="nav-right">
-    <a href="/PaizCorp/PaizShop/" class="back-btn">← BACK TO SHOP</a>
+    <a href="/PaizCorp/PaizShop/" class="nav-link">← SHOP</a>
   </div>
 </nav>
 
-<div class="hero">
-  <div class="hero-left">
-    <div class="hero-tag">MY ORDERS · PAIZ SHOP</div>
-    <h1>Order <span>History.</span></h1>
-    <div class="hero-sub">Your past orders placed through Paiz Shop. Stored locally on this device.</div>
-  </div>
-  <div class="hero-stats">
-    <div class="hero-stat"><span class="hs-val" id="stat-orders">0</span><span class="hs-key">ORDERS</span></div>
-    <div class="hero-stat"><span class="hs-val" id="stat-spent">0</span><span class="hs-key">◆ SPENT</span></div>
-    <div class="hero-stat"><span class="hs-val" id="stat-items">0</span><span class="hs-key">ITEMS BOUGHT</span></div>
-  </div>
+<div class="page-header">
+  <div class="ph-eyebrow">PAIZ SHOP · SKYXION RAGNAROK</div>
+  <div class="ph-title">Order History</div>
+  <div class="ph-sub">Your past orders and live delivery status. Status updates from the shop owner.</div>
 </div>
 
-<div class="ticker"><div class="ticker-track">
-  <span class="ticker-item">ORDER HISTORY <span class="tdot"></span></span>
-  <span class="ticker-item">STORED LOCALLY <span class="tdot"></span></span>
-  <span class="ticker-item">PAIZ SHOP <span class="tdot"></span></span>
-  <span class="ticker-item">SKYXION: RAGNAROK <span class="tdot"></span></span>
-  <span class="ticker-item">THE LEGEND OF LEGIONA <span class="tdot"></span></span>
-  <span class="ticker-item">ORDER HISTORY <span class="tdot"></span></span>
-  <span class="ticker-item">STORED LOCALLY <span class="tdot"></span></span>
-  <span class="ticker-item">PAIZ SHOP <span class="tdot"></span></span>
-  <span class="ticker-item">SKYXION: RAGNAROK <span class="tdot"></span></span>
-  <span class="ticker-item">THE LEGEND OF LEGIONA <span class="tdot"></span></span>
-</div></div>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-cell"><span class="stat-icon">🧾</span><div><span class="stat-val" id="st-orders">0</span><span class="stat-key">TOTAL ORDERS</span></div></div>
+  <div class="stat-cell"><span class="stat-icon">💎</span><div><span class="stat-val" id="st-diamonds">0</span><span class="stat-key">DIAMONDS SPENT</span></div></div>
+  <div class="stat-cell"><span class="stat-icon">📦</span><div><span class="stat-val" id="st-items">0</span><span class="stat-key">ITEMS BOUGHT</span></div></div>
+</div>
 
-<div class="main-wrap">
+<!-- STATUS SUMMARY -->
+<div class="status-bar">
+  <div class="sb-cell"><div class="sb-dot" style="background:var(--txt4)"></div><div><span class="sb-val" id="sb-pending">0</span><span class="sb-lbl">PENDING</span></div></div>
+  <div class="sb-cell"><div class="sb-dot" style="background:var(--blue)"></div><div><span class="sb-val" id="sb-confirmed" style="color:var(--blue)">0</span><span class="sb-lbl">CONFIRMED</span></div></div>
+  <div class="sb-cell"><div class="sb-dot" style="background:var(--green)"></div><div><span class="sb-val" id="sb-delivered" style="color:var(--green)">0</span><span class="sb-lbl">DELIVERED</span></div></div>
+  <div class="sb-cell"><div class="sb-dot" style="background:var(--red)"></div><div><span class="sb-val" id="sb-cancelled" style="color:var(--red)">0</span><span class="sb-lbl">CANCELLED</span></div></div>
+</div>
+
+<main>
+  <!-- REFRESH -->
+  <div class="refresh-row">
+    <span class="last-checked" id="last-checked">Status: checking...</span>
+    <button class="refresh-btn" onclick="refreshStatus()" id="refresh-btn">
+      <span class="refresh-spin" id="refresh-spin"></span>
+      🔄 REFRESH STATUS
+    </button>
+  </div>
+
+  <!-- TOOLBAR -->
   <div class="toolbar">
-    <div class="tb-left">
-      <div class="tb-count" id="tb-count">—</div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="Search by IGN or Order ID..." oninput="renderOrders()">
     </div>
-    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-      <div class="search-wrap">
-        <input type="text" class="search-inp" id="search-inp" placeholder="Search by IGN or Order ID..." oninput="render()">
-        <span class="search-ico">⌕</span>
-      </div>
-      <button class="clear-all-btn" onclick="clearAll()">🗑 CLEAR ALL</button>
+    <div class="filter-group">
+      <button class="f-btn active" data-filter="all"       onclick="setFilter(this)">ALL</button>
+      <button class="f-btn"        data-filter="pending"   onclick="setFilter(this)">⏳</button>
+      <button class="f-btn"        data-filter="confirmed" onclick="setFilter(this)">✅</button>
+      <button class="f-btn"        data-filter="delivered" onclick="setFilter(this)">📦</button>
+      <button class="f-btn"        data-filter="cancelled" onclick="setFilter(this)">❌</button>
     </div>
+    <button class="clear-btn" onclick="clearAll()">🗑 CLEAR ALL</button>
   </div>
 
-  <div id="orders-container"></div>
-</div>
+  <div class="order-list" id="order-list"></div>
+</main>
+
+<footer>
+  <span class="footer-brand">Paiz Shop</span>
+  <span class="footer-note">© PAIZ® CORP · SKYXION: RAGNAROK · THE LOL</span>
+</footer>
 
 <div class="toast-wrap" id="toast-wrap"></div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">Paiz Shop</div>
-    <div class="footer-links">
-      <a href="/PaizCorp/PaizShop/">SHOP</a>
-      <a href="/PaizCorp/PaizShop/how-to-use">HOW TO USE</a>
-      <a href="https://discord.gg/TB4T8qwN4R" target="_blank">DISCORD</a>
-      <a href="https://sociabuzz.com/faizgg/donate" target="_blank">DONATE</a>
-      <a href="/PaizCorp/">PAIZ CORP</a>
-    </div>
-    <div class="footer-copy">© 2026 PAIZ SHOP · PAIZ® CORP SUBSIDIARY · THE LEGEND OF LEGIONA · Orders stored locally on this device only.</div>
-  </div>
-</footer>
-
 <script>
-let orders = [];
+/* ══════════════════════════════════
+   ORDER HISTORY — Live Status
+   Status read from GitHub transactions.json
+══════════════════════════════════ */
 
+const TXN_URL = 'https://raw.githubusercontent.com/faizzzlol/PaizCorp/main/PaizShop/transactions.json';
+
+let orders       = [];
+let txnMap       = {}; // id → transaction object
+let activeFilter = 'all';
+
+/* ── LOAD ORDERS FROM LOCALSTORAGE ── */
 function loadOrders() {
-  orders = JSON.parse(localStorage.getItem('ps_orders') || '[]');
+  try { orders = JSON.parse(localStorage.getItem('ps_orders') || '[]'); }
+  catch { orders = []; }
 }
 
-function updateStats() {
-  const totalSpent = orders.reduce((s, o) => s + (o.total || 0), 0);
-  const totalItems = orders.reduce((s, o) => s + (o.items || []).reduce((si, i) => si + i.qty, 0), 0);
-  document.getElementById('stat-orders').textContent = orders.length;
-  document.getElementById('stat-spent').textContent  = totalSpent;
-  document.getElementById('stat-items').textContent  = totalItems;
-}
+/* ── FETCH STATUS FROM GITHUB ── */
+async function refreshStatus() {
+  const spin = document.getElementById('refresh-spin');
+  const btn  = document.getElementById('refresh-btn');
+  spin.style.display = 'block'; btn.disabled = true;
+  document.getElementById('last-checked').textContent = 'Fetching latest status...';
 
-function render() {
-  const q   = document.getElementById('search-inp').value.toLowerCase();
-  let list  = orders;
-  if (q) {
-    list = orders.filter(o =>
-      (o.id||'').toLowerCase().includes(q) ||
-      (o.ign||'').toLowerCase().includes(q) ||
-      (o.discord||'').toLowerCase().includes(q)
-    );
+  try {
+    const r = await fetch(TXN_URL + '?t=' + Date.now());
+    if (r.ok) {
+      const txns = await r.json();
+      txnMap = {};
+      txns.forEach(t => { txnMap[t.id] = t; });
+      document.getElementById('last-checked').textContent =
+        'Last checked: ' + new Date().toLocaleTimeString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
+      toast('Status updated!', 'ok');
+    } else {
+      document.getElementById('last-checked').textContent = 'Status unavailable (GitHub error ' + r.status + ')';
+    }
+  } catch (e) {
+    document.getElementById('last-checked').textContent = 'Status unavailable — check your connection';
   }
 
-  document.getElementById('tb-count').textContent = `SHOWING ${list.length} ORDER${list.length !== 1 ? 'S' : ''}`;
-  const container = document.getElementById('orders-container');
+  spin.style.display = 'none'; btn.disabled = false;
+  renderOrders(); updateStats();
+}
+
+/* ── STATUS HELPERS ── */
+function getStatus(orderId) {
+  if (txnMap[orderId]) return txnMap[orderId].status || 'pending';
+  return 'unknown';
+}
+
+const STATUS_LABELS = {
+  pending:   '⏳ PENDING',
+  confirmed: '✅ CONFIRMED',
+  delivered: '📦 DELIVERED',
+  cancelled: '❌ CANCELLED',
+  unknown:   '— NOT TRACKED'
+};
+
+/* ── TRACKER STEPS ── */
+function buildTracker(status) {
+  if (status === 'cancelled') {
+    return `
+    <div class="status-tracker">
+      <div class="tracker-label">ORDER STATUS</div>
+      <div class="tracker-steps">
+        <div class="t-step done"><div class="t-step-dot">✓</div><div class="t-step-lbl">PLACED</div></div>
+        <div class="t-line" style="background:var(--red)"></div>
+        <div class="t-step cancelled"><div class="t-step-dot">✕</div><div class="t-step-lbl">CANCELLED</div></div>
+      </div>
+    </div>`;
+  }
+  if (status === 'unknown') return '';
+
+  const steps = [
+    { key: 'placed',    label: 'PLACED',    done: true },
+    { key: 'confirmed', label: 'CONFIRMED', done: status === 'confirmed' || status === 'delivered' },
+    { key: 'delivered', label: 'DELIVERED', done: status === 'delivered' }
+  ];
+
+  const activeIdx = status === 'delivered' ? -1 : status === 'confirmed' ? 1 : 0;
+
+  let html = `<div class="status-tracker"><div class="tracker-label">ORDER STATUS</div><div class="tracker-steps">`;
+  steps.forEach((s, i) => {
+    const cls = s.done ? 'done' : (i === activeIdx + 1 ? 'active' : '');
+    const icon = s.done ? '✓' : (i === activeIdx + 1 ? '●' : '○');
+    html += `<div class="t-step ${cls}"><div class="t-step-dot">${icon}</div><div class="t-step-lbl">${s.label}</div></div>`;
+    if (i < steps.length - 1) html += `<div class="t-line"></div>`;
+  });
+  html += `</div></div>`;
+  return html;
+}
+
+/* ── STATS ── */
+function updateStats() {
+  const total   = orders.length;
+  const diamonds= orders.reduce((s, o) => s + (o.total || 0), 0);
+  const items   = orders.reduce((s, o) => s + (o.items || []).reduce((a, it) => a + (it.qty || 1), 0), 0);
+
+  document.getElementById('st-orders').textContent   = total;
+  document.getElementById('st-diamonds').textContent = diamonds;
+  document.getElementById('st-items').textContent    = items;
+
+  // Status counts based on txnMap
+  let pen=0, conf=0, del=0, can=0;
+  orders.forEach(o => {
+    const s = getStatus(o.id);
+    if (s === 'pending')   pen++;
+    if (s === 'confirmed') conf++;
+    if (s === 'delivered') del++;
+    if (s === 'cancelled') can++;
+  });
+  document.getElementById('sb-pending').textContent   = pen;
+  document.getElementById('sb-confirmed').textContent = conf;
+  document.getElementById('sb-delivered').textContent = del;
+  document.getElementById('sb-cancelled').textContent = can;
+}
+
+/* ── FILTER ── */
+function setFilter(btn) {
+  document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); activeFilter = btn.dataset.filter; renderOrders();
+}
+
+/* ── RENDER ── */
+function renderOrders() {
+  const q   = (document.getElementById('search').value || '').toLowerCase();
+  const el  = document.getElementById('order-list');
+
+  let list = [...orders].sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+
+  if (q) list = list.filter(o =>
+    (o.ign || '').toLowerCase().includes(q) ||
+    (o.id  || '').toLowerCase().includes(q)
+  );
+
+  if (activeFilter !== 'all') {
+    list = list.filter(o => getStatus(o.id) === activeFilter);
+  }
 
   if (!list.length) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <span class="es-icon">📋</span>
-        <div class="es-title">${orders.length ? 'No results found' : 'No orders yet'}</div>
-        <div class="es-sub">${orders.length ? 'Try a different search term.' : 'Orders you place will appear here automatically.'}</div>
-        <a href="/PaizCorp/PaizShop/" class="es-btn">← BROWSE SHOP</a>
-      </div>`;
+    el.innerHTML = `
+    <div class="empty-state">
+      <span class="empty-icon">${orders.length ? '🔍' : '🛒'}</span>
+      <div class="empty-title">${orders.length ? 'No orders match' : "You haven't ordered yet"}</div>
+      <div class="empty-sub">${orders.length ? 'Try a different search or filter.' : 'Head to the shop and place your first order!'}</div>
+      ${!orders.length ? '<a href="/PaizCorp/PaizShop/" class="empty-cta">GO TO SHOP →</a>' : ''}
+    </div>`;
     return;
   }
 
-  container.innerHTML = `<div class="orders-list">${list.map(o => buildOrderCard(o)).join('')}</div>`;
+  el.innerHTML = list.map(o => {
+    const status   = getStatus(o.id);
+    const badgeCls = 'sb-' + (status || 'unknown');
+    const badgeTxt = STATUS_LABELS[status] || STATUS_LABELS.unknown;
+    const txn      = txnMap[o.id];
+
+    const items = (o.items || []);
+    const itemsHtml = items.length
+      ? `<div class="items-section"><div class="items-label">ITEMS</div>${
+          items.map(it => `<div class="item-row"><span class="item-name">${it.name}</span><span class="item-qty">×${it.qty}</span><span class="item-price">◆ ${(it.price||0)*(it.qty||1)}</span></div>`).join('')
+        }</div>`
+      : '';
+
+    const notesHtml = o.notes ? `<div class="notes-box">📝 ${o.notes}</div>` : '';
+
+    const statusUpdated = txn?.statusUpdatedTs
+      ? `<span class="status-updated">Last updated: ${txn.statusUpdatedTs}</span>`
+      : `<span class="status-updated">Awaiting shop owner to update</span>`;
+
+    return `
+    <div class="order-card oc-${status}" id="card-${o.id}">
+      <div class="card-head" onclick="toggleCard('${o.id}')">
+        <div class="ch-left">
+          <div class="ch-id">${o.id} <span class="status-badge ${badgeCls}">${badgeTxt}</span></div>
+          <div class="ch-name">${o.ign || '—'}</div>
+          <div class="ch-meta">${o.delivery || ''} ${o.ts ? '· ' + o.ts : ''}</div>
+        </div>
+        <div class="ch-price">
+          <span class="ch-price-val">◆ ${o.total || 0}</span>
+          <span class="ch-price-lbl">TOTAL</span>
+        </div>
+        <span class="ch-chevron">▼</span>
+      </div>
+
+      ${buildTracker(status)}
+
+      <div class="card-body">
+        <div class="detail-grid">
+          <div class="detail-cell"><div class="dc-key">MINECRAFT IGN</div><div class="dc-val">${o.ign || '—'}</div></div>
+          <div class="detail-cell"><div class="dc-key">DELIVERY TYPE</div><div class="dc-val">${o.delivery || '—'}</div></div>
+          <div class="detail-cell"><div class="dc-key">SERVER</div><div class="dc-val">${o.server || '—'}</div></div>
+          <div class="detail-cell"><div class="dc-key">LOCATION</div><div class="dc-val">${o.location || '—'}</div></div>
+        </div>
+        ${itemsHtml}
+        ${notesHtml}
+        <div class="card-footer">
+          ${statusUpdated}
+          <button class="del-btn" onclick="deleteOrder('${o.id}')">🗑 DELETE</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
-function buildOrderCard(o) {
-  const delCls = (o.delivery || '').toLowerCase() === 'pickup' ? 'del-pickup' : 'del-delivery';
-  const items  = o.items || [];
-  const total  = o.total || items.reduce((s, i) => s + i.price * i.qty, 0);
-
-  const itemsHTML = items.map(i => `
-    <div class="item-row">
-      <div class="item-img">
-        ${i.image
-          ? `<img src="${i.image}" alt="${i.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="item-img-ph" style="display:none">📦</span>`
-          : `<span class="item-img-ph">📦</span>`}
-      </div>
-      <span class="item-name">${i.name}</span>
-      <span class="item-qty">×${i.qty}</span>
-      <span class="item-price">◆ ${i.price * i.qty}</span>
-    </div>`).join('');
-
-  return `
-  <div class="order-card" id="card-${o.id}">
-    <div class="order-header" onclick="toggleCard('${o.id}')">
-      <div class="oh-left">
-        <div class="order-id">${o.id || 'ORDER'}</div>
-        <div class="order-meta">
-          <span class="order-ign">${o.ign || '—'}</span>
-          <span class="order-delivery ${delCls}">${o.delivery || 'N/A'}</span>
-          <span class="order-ts">${o.ts || ''}</span>
-        </div>
-      </div>
-      <div class="oh-total">
-        <span class="total-val">◆ ${total}</span>
-        <span class="total-lbl">TOTAL</span>
-      </div>
-      <span class="oh-arrow">▾</span>
-    </div>
-    <div class="order-body">
-      <div class="ob-section">
-        <div class="ob-label">ITEMS ORDERED</div>
-        ${itemsHTML || '<div style="color:var(--txt4);font-size:0.8rem">No item data</div>'}
-        <div class="order-total-row">
-          <span class="otr-lbl">ORDER TOTAL</span>
-          <span class="otr-val">◆ ${total} Diamond${total !== 1 ? 's' : ''}</span>
-        </div>
-      </div>
-      <div class="ob-section">
-        <div class="ob-label">ORDER DETAILS</div>
-        <div class="info-grid">
-          <div class="info-cell"><span class="ic-label">MINECRAFT IGN</span><span class="ic-val">${o.ign || '—'}</span></div>
-          <div class="info-cell"><span class="ic-label">DISCORD</span><span class="ic-val">${o.discord || '—'}</span></div>
-          <div class="info-cell"><span class="ic-label">DELIVERY TYPE</span><span class="ic-val">${o.delivery || '—'}</span></div>
-          <div class="info-cell"><span class="ic-label">SERVER</span><span class="ic-val">${o.server || 'Skyxion: Ragnarok'}</span></div>
-          ${o.location ? `<div class="info-cell"><span class="ic-label">LOCATION</span><span class="ic-val">${o.location}</span></div>` : ''}
-          <div class="info-cell"><span class="ic-label">ORDER TIME</span><span class="ic-val">${o.ts || '—'}</span></div>
-        </div>
-      </div>
-      ${o.notes ? `
-      <div class="ob-section">
-        <div class="ob-label">NOTES</div>
-        <div class="notes-box">${o.notes}</div>
-      </div>` : ''}
-      <button class="delete-order-btn" onclick="deleteOrder('${o.id}')">🗑 REMOVE FROM HISTORY</button>
-    </div>
-  </div>`;
-}
-
+/* ── TOGGLE CARD ── */
 function toggleCard(id) {
-  const card = document.getElementById('card-' + id);
-  if (card) card.classList.toggle('expanded');
+  document.getElementById('card-' + id)?.classList.toggle('expanded');
 }
 
+/* ── DELETE ── */
 function deleteOrder(id) {
-  if (!confirm('Remove this order from your local history?')) return;
+  if (!confirm('Remove this order from your local history? This does NOT affect the shop or Discord.')) return;
   orders = orders.filter(o => o.id !== id);
   localStorage.setItem('ps_orders', JSON.stringify(orders));
-  updateStats();
-  render();
-  toast('Order removed from history', 'ok');
+  renderOrders(); updateStats();
+  toast('Order removed from history', 'info');
 }
-
 function clearAll() {
-  if (!orders.length) { toast('No orders to clear', 'err'); return; }
-  if (!confirm(`Clear all ${orders.length} order(s) from your local history? This cannot be undone.`)) return;
-  orders = [];
-  localStorage.setItem('ps_orders', JSON.stringify([]));
-  updateStats();
-  render();
-  toast('All orders cleared', 'ok');
+  if (!orders.length) { toast('No orders to clear', 'info'); return; }
+  if (!confirm('Clear all orders from your local history? This is irreversible.')) return;
+  orders = []; localStorage.setItem('ps_orders', '[]');
+  renderOrders(); updateStats(); toast('History cleared', 'info');
 }
 
-function toast(msg, type = 'ok') {
+/* ── TOAST ── */
+function toast(msg, type='ok') {
   const wrap = document.getElementById('toast-wrap');
   const el   = document.createElement('div');
-  el.className = `toast ${type}`;
-  el.textContent = msg;
-  wrap.appendChild(el);
-  setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity 0.4s'; setTimeout(()=>el.remove(), 400); }, 3000);
+  el.className = `toast ${type}`; el.textContent = msg; wrap.appendChild(el);
+  setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity 0.4s'; setTimeout(()=>el.remove(),400); }, 3500);
 }
 
-/* INIT */
+/* ── INIT ── */
 loadOrders();
 updateStats();
-render();
+renderOrders();
+refreshStatus(); // auto-fetch on load
 </script>
 </body>
 </html>
