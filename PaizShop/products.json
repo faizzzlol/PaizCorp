@@ -28,7 +28,7 @@
     "price": 1,
     "unit": "Diamond",
     "stock": 0,
-    "image": "img/enchantment_book.png",
+    "image": "img/enchanted_book.gif",
     "category": "Enchantment",
     "listed": false,
     "description": "(1x). Greatly increases item durability."
