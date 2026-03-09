@@ -15,7 +15,7 @@
     "name": "Mending I",
     "price": 3,
     "unit": "Diamond",
-    "stock": 5,
+    "stock": 0,
     "image": "img/mending.png",
     "category": "Enchantment",
     "listed": true,
