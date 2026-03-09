@@ -3,7 +3,7 @@
     "id": "ORD-IWRD5R",
     "ign": "lyvwiz",
     "discord": "lyvwiz",
-    "status": "confirmed",
+    "status": "delivered",
     "delivery": "Delivery",
     "server": "Skyxion: Ragnarok",
     "location": "7000 120 -7000",
@@ -22,6 +22,7 @@
         "price": 9
       }
     ],
-    "createdAt": "2026-03-09T13:02:25.128Z"
+    "createdAt": "2026-03-09T13:02:25.128Z",
+    "statusUpdatedTs": "09/03/2026, 9:04:04 pm"
   }
 ]
