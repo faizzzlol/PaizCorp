@@ -35,13 +35,13 @@
   {
     "id": "nether_wart",
     "name": "Nether Wart",
-    "price": 3,
+    "price": 1,
     "unit": "Diamond",
     "stock": 0,
     "image": "img/nether_wart.png",
     "category": "Farming",
     "listed": false,
-    "description": "Essential ingredient for potion brewing."
+    "description": "(64x Nether Wart). Essential ingredient for potion brewing."
   },
   {
     "id": "iron_ingot",
