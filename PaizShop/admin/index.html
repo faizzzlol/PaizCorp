@@ -9,43 +9,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* ── Same lifted palette as shop for consistency ── */
-  --bg:      #171d16;
-  --bg2:     #1d2420;
-  --bg3:     #232b22;
-  --bg4:     #2a3228;
-  --surface: #303930;
-  --border:  rgba(255,255,255,0.10);
-  --border2: rgba(255,255,255,0.06);
-  --green:   #4ade80;
-  --green-dk:#22c55e;
-  --green-dim:rgba(74,222,128,0.10);
-  --gold:    #fbbf24;
-  --gold-dim:rgba(251,191,36,0.10);
-  --red:     #f87171;
-  --red-dim: rgba(248,113,113,0.10);
-  --blue:    #60a5fa;
-  --blue-dim:rgba(96,165,250,0.10);
-  --amber:   #fb923c;
-  --txt:     #edf2e7;
-  --txt2:    rgba(237,242,231,0.78);
-  --txt3:    rgba(237,242,231,0.52);
-  --txt4:    rgba(237,242,231,0.28);
+  --bg:#171d16;--bg2:#1d2420;--bg3:#232b22;--bg4:#2a3228;--surface:#303930;
+  --border:rgba(255,255,255,0.10);--border2:rgba(255,255,255,0.06);
+  --green:#4ade80;--green-dk:#22c55e;--green-dim:rgba(74,222,128,0.10);
+  --gold:#fbbf24;--gold-dim:rgba(251,191,36,0.10);
+  --red:#f87171;--red-dim:rgba(248,113,113,0.10);
+  --blue:#60a5fa;--blue-dim:rgba(96,165,250,0.10);
+  --txt:#edf2e7;--txt2:rgba(237,242,231,0.78);--txt3:rgba(237,242,231,0.52);--txt4:rgba(237,242,231,0.28);
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;min-height:100vh}
 
-/* ── LOGIN SCREEN ─────────────────────────────────── */
-#login-screen{
-  position:fixed;inset:0;background:var(--bg);z-index:1000;
-  display:flex;align-items:center;justify-content:center;padding:1rem;
-}
-.login-box{
-  background:var(--bg2);border:1px solid var(--border);
-  padding:3rem 2.5rem;width:min(420px,100%);
-  animation:fadeIn 0.4s ease;
-}
+/* LOGIN */
+#login-screen{position:fixed;inset:0;background:var(--bg);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem}
+.login-box{background:var(--bg2);border:1px solid var(--border);padding:3rem 2.5rem;width:min(420px,100%);animation:fadeIn 0.4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .login-icon{font-size:2rem;display:block;margin-bottom:1.2rem;text-align:center}
 .login-box h2{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px;text-align:center;margin-bottom:0.3rem}
@@ -53,19 +30,16 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-
 .login-group{margin-bottom:1rem}
 .login-label{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt4);display:block;margin-bottom:0.45rem}
 .login-input{width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s}
-.login-input:focus{border-color:var(--green)}
-.login-input::placeholder{color:var(--txt4)}
+.login-input:focus{border-color:var(--green)}.login-input::placeholder{color:var(--txt4)}
 .login-btn{width:100%;padding:12px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;letter-spacing:2px;transition:background 0.2s;margin-top:0.5rem}
 .login-btn:hover{background:var(--green-dk)}
 .login-error{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;text-align:center;margin-top:0.8rem;display:none}
-
-/* ── ADMIN APP ────────────────────────────────────── */
 #app{display:none}
 
 /* NAV */
 nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:center;padding:0 4%;gap:14px;background:rgba(23,29,22,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.nav-sq{width:28px;height:28px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;color:#fff;letter-spacing:0.5px}
+.nav-sq{width:28px;height:28px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;color:#fff}
 .nav-name{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;color:var(--txt);letter-spacing:-0.2px}
 .nav-tag{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:2px;padding:3px 8px;background:var(--red-dim);border:1px solid rgba(248,113,113,0.2);color:var(--red)}
 .nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
@@ -85,123 +59,158 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .ahs-val{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;display:block;line-height:1;margin-bottom:2px}
 .ahs-key{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4)}
 
-/* ── BANNERS ──────────────────────────────────────── */
+/* BANNERS */
 .banner{padding:1rem 1.5rem;margin:1.5rem 4% 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .banner-icon{font-size:1.1rem;flex-shrink:0}
 .banner-txt{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;flex:1;line-height:1.8}
 .banner-btn{padding:6px 14px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;border:1px solid;flex-shrink:0;transition:all 0.2s}
-
-/* Setup banner (gold) */
 #setup-banner{display:none;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2)}
 #setup-banner .banner-txt{color:var(--gold)}
 #setup-banner .banner-btn{color:var(--gold);border-color:rgba(251,191,36,0.3);background:var(--gold-dim)}
-#setup-banner .banner-btn:hover{background:rgba(251,191,36,0.15)}
-
-/* 401 Token error banner (red) */
 #token-banner{display:none;background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.25)}
 #token-banner .banner-txt{color:var(--red)}
 #token-banner .banner-btn{color:var(--red);border-color:rgba(248,113,113,0.3);background:var(--red-dim)}
-#token-banner .banner-btn:hover{background:rgba(248,113,113,0.15)}
 
-/* MAIN LAYOUT */
+/* TABS */
+.tabs-wrap{padding:0 4%;margin-top:1.5rem;border-bottom:1px solid var(--border)}
+.tabs{display:flex;gap:2px;max-width:1300px;margin:0 auto}
+.tab-btn{padding:10px 20px;background:transparent;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;display:flex;align-items:center;gap:8px}
+.tab-btn:hover{color:var(--txt2)}
+.tab-btn.active{color:var(--txt);border-bottom-color:var(--green)}
+.tab-badge{background:var(--bg3);border:1px solid var(--border);font-size:0.45rem;padding:1px 6px;color:var(--txt4)}
+.tab-btn.active .tab-badge{background:var(--green-dim);border-color:rgba(74,222,128,0.3);color:var(--green)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* MAIN GRID */
 .main{max-width:1300px;margin:0 auto;padding:2rem 4%;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
 
-/* PRODUCTS TABLE AREA */
+/* PRODUCTS */
 .section-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border)}
 .sec-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
-.add-new-btn{padding:8px 18px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:background 0.2s;display:flex;align-items:center;gap:6px}
+.add-new-btn{padding:8px 18px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:background 0.2s}
 .add-new-btn:hover{background:var(--green-dk)}
-
 .table-search{width:100%;padding:9px 14px;background:var(--bg2);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.88rem;outline:none;margin-bottom:8px;transition:border-color 0.2s}
-.table-search:focus{border-color:var(--green)}
-.table-search::placeholder{color:var(--txt4)}
-
-/* PRODUCT ROWS */
+.table-search:focus{border-color:var(--green)}.table-search::placeholder{color:var(--txt4)}
 .prod-list{display:flex;flex-direction:column;gap:2px}
 .prod-row{background:var(--bg2);border:1px solid var(--border2);padding:1rem 1.2rem;display:grid;grid-template-columns:48px 1fr auto auto;gap:14px;align-items:center;transition:background 0.2s;position:relative;overflow:hidden}
 .prod-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;opacity:0;transition:opacity 0.2s}
 .prod-row.status-listed::before{background:var(--green);opacity:1}
 .prod-row.status-unlisted::before{background:var(--txt4);opacity:1}
-.prod-row:hover{background:var(--bg3)}
-.prod-row.status-unlisted{opacity:0.6}
-
+.prod-row:hover{background:var(--bg3)}.prod-row.status-unlisted{opacity:0.6}
 .pr-img{width:48px;height:48px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .pr-img img{width:36px;height:36px;object-fit:contain;image-rendering:pixelated}
 .pr-img-ph{font-size:1.3rem}
-
 .pr-name{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--txt);letter-spacing:-0.2px;margin-bottom:2px}
 .pr-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .pr-price{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--gold)}
 .pr-cat{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt4);padding:2px 6px;border:1px solid var(--border2)}
 .pr-status-tag{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;padding:2px 7px;border:1px solid}
 .tag-listed{border-color:rgba(74,222,128,0.35);color:var(--green);background:var(--green-dim)}
-.tag-unlisted{border-color:rgba(255,255,255,0.1);color:var(--txt4);background:transparent}
-
+.tag-unlisted{border-color:rgba(255,255,255,0.1);color:var(--txt4)}
 .pr-stock-wrap{text-align:center;min-width:80px}
 .pr-stock-num{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--txt);display:block;line-height:1}
 .pr-stock-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4)}
 .pr-stock-num.zero{color:var(--red)}
-
 .pr-actions{display:flex;gap:4px;flex-shrink:0}
 .act-btn{width:32px;height:32px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;color:var(--txt2);font-size:0.8rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;position:relative}
 .act-btn:hover{background:var(--bg4)}
 .act-btn[title]:hover::after{content:attr(title);position:absolute;bottom:calc(100% + 5px);left:50%;transform:translateX(-50%);background:var(--bg4);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.45rem;letter-spacing:1px;white-space:nowrap;padding:3px 8px;border:1px solid var(--border);pointer-events:none;z-index:10}
 
+/* TRANSACTIONS TAB */
+.txn-wrap{padding:2rem 4%;max-width:1300px;margin:0 auto}
+.txn-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-bottom:1.4rem;background:var(--border2);border:1px solid var(--border)}
+.txn-stat{background:var(--bg2);padding:0.9rem 1rem;text-align:center}
+.txn-stat-val{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;display:block;line-height:1;margin-bottom:3px}
+.txn-stat-key{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:2px;color:var(--txt4)}
+.txn-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
+.txn-filters{display:flex;gap:3px;flex-wrap:wrap}
+.tf-btn{padding:6px 12px;background:transparent;border:1px solid var(--border2);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt3);transition:all 0.2s}
+.tf-btn:hover{border-color:var(--green);color:var(--green)}
+.tf-btn.active{background:var(--green-dim);border-color:rgba(74,222,128,0.35);color:var(--green)}
+.add-txn-btn{padding:8px 18px;background:var(--blue);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:all 0.2s}
+.add-txn-btn:hover{background:#93c5fd}
+
+/* TXN ROWS */
+.txn-list{display:flex;flex-direction:column;gap:2px}
+.txn-row{background:var(--bg2);border:1px solid var(--border2);padding:1rem 1.2rem;display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;position:relative;overflow:hidden;transition:background 0.2s}
+.txn-row:hover{background:var(--bg3)}
+.txn-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.txn-row.s-pending::before{background:var(--txt4)}
+.txn-row.s-confirmed::before{background:var(--blue)}
+.txn-row.s-delivered::before{background:var(--green)}
+.txn-row.s-cancelled::before{background:var(--red)}
+.txn-id-line{font-family:'IBM Plex Mono',monospace;font-size:0.57rem;letter-spacing:2px;color:var(--txt3);margin-bottom:3px;display:flex;align-items:center;gap:10px}
+.txn-main-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:2px}
+.txn-ign{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--txt);letter-spacing:-0.2px}
+.txn-discord{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;color:var(--txt4)}
+.txn-sub-line{font-family:'IBM Plex Mono',monospace;font-size:0.46rem;color:var(--txt4);display:flex;gap:10px;flex-wrap:wrap}
+.txn-total-wrap{text-align:right;flex-shrink:0}
+.txn-total-val{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--gold);display:block;line-height:1}
+.txn-total-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:2px;color:var(--txt4)}
+.txn-btns{display:flex;flex-direction:column;gap:3px;flex-shrink:0}
+.s-btn{padding:5px 10px;background:transparent;border:1px solid;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;transition:all 0.2s;white-space:nowrap}
+.s-btn-confirm{border-color:rgba(96,165,250,0.3);color:var(--blue)}.s-btn-confirm:hover{background:var(--blue-dim)}
+.s-btn-deliver{border-color:rgba(74,222,128,0.3);color:var(--green)}.s-btn-deliver:hover{background:var(--green-dim)}
+.s-btn-cancel{border-color:rgba(248,113,113,0.25);color:var(--red)}.s-btn-cancel:hover{background:var(--red-dim)}
+.s-btn-revert{border-color:rgba(255,255,255,0.12);color:var(--txt4)}.s-btn-revert:hover{background:rgba(255,255,255,0.05)}
+.s-btn-sm{font-size:0.43rem;letter-spacing:1px;border-color:rgba(255,255,255,0.08);color:var(--txt4)}.s-btn-sm:hover{color:var(--txt2);border-color:var(--border)}
+.txn-empty{text-align:center;padding:4rem;background:var(--bg2);border:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);line-height:2}
+
+/* STATUS BADGE */
+.st-badge{font-family:'IBM Plex Mono',monospace;font-size:0.46rem;letter-spacing:1.5px;padding:2px 8px;border:1px solid;display:inline-flex;align-items:center;gap:5px}
+.st-badge::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.st-pending{border-color:rgba(255,255,255,0.12);color:var(--txt3)}.st-pending::before{background:var(--txt4)}
+.st-confirmed{border-color:rgba(96,165,250,0.3);color:var(--blue);background:var(--blue-dim)}.st-confirmed::before{background:var(--blue);box-shadow:0 0 5px rgba(96,165,250,0.5)}
+.st-delivered{border-color:rgba(74,222,128,0.35);color:var(--green);background:var(--green-dim)}.st-delivered::before{background:var(--green);box-shadow:0 0 5px rgba(74,222,128,0.5)}
+.st-cancelled{border-color:rgba(248,113,113,0.3);color:var(--red);background:var(--red-dim)}.st-cancelled::before{background:var(--red)}
+
 /* RIGHT PANEL */
 .right-panel{display:flex;flex-direction:column;gap:12px;position:sticky;top:76px}
 .panel-box{background:var(--bg2);border:1px solid var(--border);padding:1.4rem}
 .panel-title{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2.5px;color:var(--txt4);margin-bottom:1rem}
-
-/* ── TOKEN STATUS INDICATOR ── */
 .token-status{display:flex;align-items:center;gap:8px;padding:8px 10px;margin-bottom:0.9rem;border:1px solid var(--border2);background:var(--bg3)}
 .ts-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .ts-dot.ok{background:var(--green);box-shadow:0 0 6px rgba(74,222,128,0.4)}
 .ts-dot.err{background:var(--red);box-shadow:0 0 6px rgba(248,113,113,0.4)}
 .ts-dot.idle{background:var(--txt4)}
 .ts-txt{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1px;color:var(--txt3)}
-
-/* Config form */
 .cfg-group{margin-bottom:0.9rem}
 .cfg-label{font-family:'IBM Plex Mono',monospace;font-size:0.49rem;letter-spacing:1.5px;color:var(--txt4);display:block;margin-bottom:0.4rem}
 .cfg-input{width:100%;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.62rem;outline:none;transition:border-color 0.2s}
-.cfg-input:focus{border-color:var(--green)}
-.cfg-input::placeholder{color:var(--txt4)}
+.cfg-input:focus{border-color:var(--green)}.cfg-input::placeholder{color:var(--txt4)}
 .cfg-input.highlight{border-color:rgba(248,113,113,0.5);background:rgba(248,113,113,0.04)}
 .cfg-save-btn{width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;color:var(--txt2);transition:all 0.2s;margin-top:0.3rem}
 .cfg-save-btn:hover{background:var(--green-dim);border-color:rgba(74,222,128,0.3);color:var(--green)}
 .cfg-hint{font-size:0.72rem;color:var(--txt4);margin-top:3px}
-
-/* Activity log */
 .log-list{display:flex;flex-direction:column;gap:4px;max-height:280px;overflow-y:auto}
 .log-item{background:var(--bg3);border:1px solid var(--border2);padding:0.6rem 0.8rem}
 .log-action{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1px;color:var(--txt2);margin-bottom:2px}
 .log-time{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:1px;color:var(--txt4)}
 .log-empty{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt4);text-align:center;padding:1rem 0}
-
-/* Quick stats */
 .qs-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
 .qs-item{background:var(--bg3);padding:0.8rem;text-align:center}
 .qs-val{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;display:block;line-height:1;margin-bottom:2px}
 .qs-key{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:1.5px;color:var(--txt4)}
 
 /* MODALS */
-.m-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1rem}
+.m-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:500;backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1rem}
 .m-overlay.open{display:flex}
-.modal{background:var(--bg2);width:min(500px,100%);max-height:90vh;overflow-y:auto;border:1px solid var(--border);animation:mIn 0.25s ease}
+.modal{background:var(--bg2);width:min(520px,100%);max-height:92vh;overflow-y:auto;border:1px solid var(--border);animation:mIn 0.25s ease}
 @keyframes mIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.modal-hd{padding:1.3rem 1.6rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.modal-hd{padding:1.3rem 1.6rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--bg2);z-index:1}
 .modal-hd h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
-.modal-close{width:28px;height:28px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;color:var(--txt2);font-size:0.85rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.modal-close{width:28px;height:28px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;color:var(--txt2);font-size:0.85rem;display:flex;align-items:center;justify-content:center}
 .modal-close:hover{background:var(--bg4)}
 .modal-body{padding:1.5rem}
 .fg{margin-bottom:1rem}
 .flabel{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt3);display:block;margin-bottom:0.4rem}
 .flabel .req{color:var(--red)}
-.finput,.fselect{width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;appearance:none}
-.finput:focus,.fselect:focus{border-color:var(--green)}
-.finput::placeholder{color:var(--txt4)}
+.finput,.fselect,.ftextarea{width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;appearance:none}
+.finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--green)}
+.finput::placeholder,.ftextarea::placeholder{color:var(--txt4)}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .fhint{font-size:0.76rem;color:var(--txt4);margin-top:3px}
+.ftextarea{resize:vertical;min-height:70px}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg3);border:1px solid var(--border)}
 .toggle-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.53rem;letter-spacing:1.5px;color:var(--txt2)}
 .toggle{position:relative;width:42px;height:22px;cursor:pointer}
@@ -219,6 +228,19 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .btn-danger{padding:8px 20px;background:var(--red-dim);color:var(--red);border:1px solid rgba(248,113,113,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;transition:all 0.2s}
 .btn-danger:hover{background:rgba(248,113,113,0.15)}
 
+/* Items builder */
+.items-builder{border:1px solid var(--border);background:var(--bg3)}
+.ib-header{padding:8px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.ib-label{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--txt4)}
+.ib-add{padding:4px 10px;background:var(--green-dim);border:1px solid rgba(74,222,128,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--green);transition:all 0.2s}
+.ib-add:hover{background:rgba(74,222,128,0.15)}
+.ib-rows{padding:8px;display:flex;flex-direction:column;gap:4px}
+.ib-row{display:grid;grid-template-columns:1fr 55px 65px 28px;gap:4px;align-items:center}
+.ib-inp{width:100%;padding:6px 8px;background:var(--bg4);border:1px solid var(--border2);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.82rem;outline:none}
+.ib-inp:focus{border-color:var(--green)}.ib-inp::placeholder{color:var(--txt4)}
+.ib-del{width:28px;height:28px;background:transparent;border:1px solid var(--border2);cursor:pointer;color:var(--red);font-size:0.7rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.ib-del:hover{background:var(--red-dim)}
+
 /* Stock modal */
 .stock-current{text-align:center;padding:1.5rem 0 1rem;border-bottom:1px solid var(--border);margin-bottom:1.2rem}
 .sc-val{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:var(--txt);display:block;line-height:1;margin-bottom:4px}
@@ -227,14 +249,12 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .stock-presets{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:1rem}
 .preset-btn{padding:5px 12px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;color:var(--txt2);transition:all 0.2s}
 .preset-btn:hover{border-color:var(--green);color:var(--green)}
-
-/* Confirm modal */
 .confirm-body{padding:2rem 1.5rem;text-align:center}
 .confirm-icon{font-size:2.5rem;display:block;margin-bottom:0.8rem}
 .confirm-body h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);margin-bottom:0.5rem;letter-spacing:-0.3px}
 .confirm-body p{font-size:0.88rem;color:var(--txt2);font-weight:300;line-height:1.7}
 
-/* SAVING OVERLAY */
+/* SAVING */
 .saving-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:600;align-items:center;justify-content:center;flex-direction:column;gap:12px}
 .saving-overlay.show{display:flex}
 .saving-spin{width:36px;height:36px;border:3px solid rgba(74,222,128,0.2);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
@@ -244,19 +264,16 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 /* TOAST */
 .toast-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:700;display:flex;flex-direction:column;gap:6px}
 .toast{padding:10px 16px;background:var(--bg3);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;border:1px solid var(--border);display:flex;align-items:center;gap:8px;animation:tIn 0.25s ease;max-width:300px}
-.toast.ok{border-left:3px solid var(--green)}
-.toast.err{border-left:3px solid var(--red)}
-.toast.info{border-left:3px solid var(--blue)}
+.toast.ok{border-left:3px solid var(--green)}.toast.err{border-left:3px solid var(--red)}.toast.info{border-left:3px solid var(--blue)}
 @keyframes tIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* RESPONSIVE */
 @media(max-width:1024px){.main{grid-template-columns:1fr}.right-panel{position:static}}
-@media(max-width:600px){.prod-row{grid-template-columns:40px 1fr auto}.pr-stock-wrap{display:none}}
+@media(max-width:700px){.txn-stats{grid-template-columns:repeat(3,1fr)}.txn-row{grid-template-columns:1fr auto}.txn-btns{flex-direction:row;flex-wrap:wrap}.ah-stats{display:none}}
+@media(max-width:600px){.prod-row{grid-template-columns:40px 1fr auto}.pr-stock-wrap{display:none}.frow{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
 <div id="login-screen">
   <div class="login-box">
     <span class="login-icon">🔒</span>
@@ -271,14 +288,9 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
   </div>
 </div>
 
-<!-- ADMIN APP -->
 <div id="app">
-
   <nav>
-    <div class="nav-brand">
-      <div class="nav-sq">ADM</div>
-      <span class="nav-name">Paiz Shop</span>
-    </div>
+    <div class="nav-brand"><div class="nav-sq">ADM</div><span class="nav-name">Paiz Shop</span></div>
     <span class="nav-tag">MANAGER PANEL</span>
     <div class="nav-right">
       <a href="/PaizCorp/PaizShop/" class="nav-link" target="_blank">← VIEW SHOP</a>
@@ -288,720 +300,386 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 
   <div class="admin-header">
     <div class="ah-left">
-      <div class="ah-eyebrow">ADMIN · PRODUCT MANAGEMENT</div>
+      <div class="ah-eyebrow">ADMIN · PAIZ SHOP</div>
       <div class="ah-title">Manager Panel</div>
-      <div class="ah-sub">Add, edit, stock, list/unlist, and delete products. All changes sync to GitHub.</div>
+      <div class="ah-sub">Manage products, track orders, and update statuses. Syncs to GitHub.</div>
     </div>
     <div class="ah-stats">
-      <div class="ah-stat"><span class="ahs-val" id="st-total" style="color:var(--blue)">—</span><span class="ahs-key">TOTAL</span></div>
+      <div class="ah-stat"><span class="ahs-val" id="st-total" style="color:var(--blue)">—</span><span class="ahs-key">PRODUCTS</span></div>
       <div class="ah-stat"><span class="ahs-val" id="st-listed" style="color:var(--green)">—</span><span class="ahs-key">LISTED</span></div>
-      <div class="ah-stat"><span class="ahs-val" id="st-stock" style="color:var(--gold)">—</span><span class="ahs-key">IN STOCK</span></div>
-      <div class="ah-stat"><span class="ahs-val" id="st-out" style="color:var(--red)">—</span><span class="ahs-key">SOLD OUT</span></div>
+      <div class="ah-stat"><span class="ahs-val" id="st-pending" style="color:var(--gold)">—</span><span class="ahs-key">PENDING</span></div>
+      <div class="ah-stat"><span class="ahs-val" id="st-confirmed" style="color:var(--blue)">—</span><span class="ahs-key">CONFIRMED</span></div>
     </div>
   </div>
 
-  <!-- SETUP BANNER (no token configured) -->
   <div id="setup-banner" class="banner">
     <span class="banner-icon">⚙️</span>
-    <span class="banner-txt">GitHub token or repo path not configured. Fill in the Config panel on the right, then click Save Config.</span>
+    <span class="banner-txt">GitHub token or repo not configured. Fill in Config and click Save.</span>
     <button class="banner-btn" onclick="scrollToConfig()">CONFIGURE →</button>
   </div>
-
-  <!-- 401 TOKEN EXPIRED BANNER -->
   <div id="token-banner" class="banner">
     <span class="banner-icon">🔑</span>
-    <span class="banner-txt">
-      <strong>GitHub token expired or invalid (401).</strong><br>
-      Generate a new Personal Access Token at github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens. Needs <strong>Contents: Read &amp; Write</strong> permission on your repo. Paste it in the Config panel below.
-    </span>
+    <span class="banner-txt"><strong>GitHub token expired (401).</strong> Generate a new Fine-grained PAT with Contents: Read &amp; Write. Paste it in Config.</span>
     <button class="banner-btn" onclick="scrollToConfig()">UPDATE TOKEN →</button>
   </div>
 
-  <div class="main">
-    <!-- LEFT: Products Table -->
-    <div class="table-area">
-      <div class="section-hd">
-        <span class="sec-title">Products</span>
-        <button class="add-new-btn" onclick="openAddModal()">＋ ADD PRODUCT</button>
+  <div class="tabs-wrap">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('products')">📦 PRODUCTS <span class="tab-badge" id="badge-products">0</span></button>
+      <button class="tab-btn"        onclick="switchTab('transactions')">🧾 TRANSACTIONS <span class="tab-badge" id="badge-transactions">0</span></button>
+    </div>
+  </div>
+
+  <!-- PRODUCTS TAB -->
+  <div id="tab-products" class="tab-panel active">
+    <div class="main">
+      <div>
+        <div class="section-hd">
+          <span class="sec-title">Products</span>
+          <button class="add-new-btn" onclick="openAddModal()">＋ ADD PRODUCT</button>
+        </div>
+        <input type="text" class="table-search" placeholder="Search products..." oninput="renderTable()">
+        <div class="prod-list" id="prod-list">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);padding:2rem;text-align:center">Loading products...</div>
+        </div>
       </div>
-      <input type="text" class="table-search" placeholder="Search products..." oninput="renderTable()">
-      <div class="prod-list" id="prod-list">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);padding:2rem;text-align:center">Loading products...</div>
+      <div class="right-panel" id="right-panel">
+        <div class="panel-box">
+          <div class="panel-title">QUICK STATS</div>
+          <div class="qs-grid">
+            <div class="qs-item"><span class="qs-val" id="qs-total" style="color:var(--blue)">—</span><span class="qs-key">PRODUCTS</span></div>
+            <div class="qs-item"><span class="qs-val" id="qs-listed" style="color:var(--green)">—</span><span class="qs-key">LISTED</span></div>
+            <div class="qs-item"><span class="qs-val" id="qs-instock" style="color:var(--gold)">—</span><span class="qs-key">IN STOCK</span></div>
+            <div class="qs-item"><span class="qs-val" id="qs-hidden" style="color:var(--txt4)">—</span><span class="qs-key">HIDDEN</span></div>
+          </div>
+        </div>
+        <div class="panel-box" id="config-panel">
+          <div class="panel-title">CONFIGURATION</div>
+          <div class="token-status" id="token-status">
+            <div class="ts-dot idle" id="ts-dot"></div>
+            <span class="ts-txt" id="ts-txt">Not connected</span>
+          </div>
+          <div class="cfg-group"><label class="cfg-label">GITHUB TOKEN (PAT)</label><input type="password" class="cfg-input" id="cfg-token" placeholder="github_pat_xxxx"><div class="cfg-hint">Needs <strong style="color:var(--gold)">Contents: Read &amp; Write</strong>. Browser only.</div></div>
+          <div class="cfg-group"><label class="cfg-label">GITHUB REPO</label><input type="text" class="cfg-input" id="cfg-repo" placeholder="faizzzlol/PaizCorp"></div>
+          <div class="cfg-group"><label class="cfg-label">PRODUCTS.JSON PATH</label><input type="text" class="cfg-input" id="cfg-path" placeholder="PaizShop/products.json"></div>
+          <div class="cfg-group"><label class="cfg-label">TRANSACTIONS.JSON PATH</label><input type="text" class="cfg-input" id="cfg-txn-path" placeholder="PaizShop/transactions.json"></div>
+          <div class="cfg-group"><label class="cfg-label">DISCORD WEBHOOK (ADMIN LOG)</label><input type="text" class="cfg-input" id="cfg-webhook" placeholder="https://discord.com/api/webhooks/..."></div>
+          <button class="cfg-save-btn" onclick="saveConfig()">SAVE CONFIG &amp; RELOAD</button>
+        </div>
+        <div class="panel-box">
+          <div class="panel-title">ACTIVITY LOG</div>
+          <div class="log-list" id="log-list"><div class="log-empty">No activity yet.</div></div>
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- RIGHT: Config + Log -->
-    <div class="right-panel" id="right-panel">
-
-      <!-- Quick Stats -->
-      <div class="panel-box">
-        <div class="panel-title">QUICK STATS</div>
-        <div class="qs-grid">
-          <div class="qs-item"><span class="qs-val" id="qs-total" style="color:var(--blue)">—</span><span class="qs-key">PRODUCTS</span></div>
-          <div class="qs-item"><span class="qs-val" id="qs-listed" style="color:var(--green)">—</span><span class="qs-key">LISTED</span></div>
-          <div class="qs-item"><span class="qs-val" id="qs-instock" style="color:var(--gold)">—</span><span class="qs-key">IN STOCK</span></div>
-          <div class="qs-item"><span class="qs-val" id="qs-hidden" style="color:var(--txt4)">—</span><span class="qs-key">HIDDEN</span></div>
-        </div>
+  <!-- TRANSACTIONS TAB -->
+  <div id="tab-transactions" class="tab-panel">
+    <div class="txn-wrap">
+      <div class="txn-stats">
+        <div class="txn-stat"><span class="txn-stat-val" id="txn-all"       style="color:var(--txt)">0</span><span class="txn-stat-key">TOTAL</span></div>
+        <div class="txn-stat"><span class="txn-stat-val" id="txn-pending"   style="color:var(--txt4)">0</span><span class="txn-stat-key">PENDING</span></div>
+        <div class="txn-stat"><span class="txn-stat-val" id="txn-confirmed" style="color:var(--blue)">0</span><span class="txn-stat-key">CONFIRMED</span></div>
+        <div class="txn-stat"><span class="txn-stat-val" id="txn-delivered" style="color:var(--green)">0</span><span class="txn-stat-key">DELIVERED</span></div>
+        <div class="txn-stat"><span class="txn-stat-val" id="txn-cancelled" style="color:var(--red)">0</span><span class="txn-stat-key">CANCELLED</span></div>
       </div>
-
-      <!-- Config -->
-      <div class="panel-box" id="config-panel">
-        <div class="panel-title">CONFIGURATION</div>
-
-        <!-- Token status indicator -->
-        <div class="token-status" id="token-status">
-          <div class="ts-dot idle" id="ts-dot"></div>
-          <span class="ts-txt" id="ts-txt">Token not tested yet</span>
+      <div class="txn-toolbar">
+        <div class="txn-filters">
+          <button class="tf-btn active" data-filter="all"       onclick="setFilter(this)">ALL</button>
+          <button class="tf-btn"        data-filter="pending"   onclick="setFilter(this)">⏳ PENDING</button>
+          <button class="tf-btn"        data-filter="confirmed" onclick="setFilter(this)">✅ CONFIRMED</button>
+          <button class="tf-btn"        data-filter="delivered" onclick="setFilter(this)">📦 DELIVERED</button>
+          <button class="tf-btn"        data-filter="cancelled" onclick="setFilter(this)">❌ CANCELLED</button>
         </div>
-
-        <div class="cfg-group">
-          <label class="cfg-label">GITHUB TOKEN (PAT)</label>
-          <input type="password" class="cfg-input" id="cfg-token" placeholder="github_pat_xxxxxxxxxxxx or ghp_xxxx">
-          <div class="cfg-hint">Needs <strong style="color:var(--gold)">Contents: Read &amp; Write</strong>. Stored in browser only.</div>
-        </div>
-        <div class="cfg-group">
-          <label class="cfg-label">GITHUB REPO</label>
-          <input type="text" class="cfg-input" id="cfg-repo" placeholder="faizzzlol/PaizCorp">
-        </div>
-        <div class="cfg-group">
-          <label class="cfg-label">PRODUCTS.JSON PATH</label>
-          <input type="text" class="cfg-input" id="cfg-path" placeholder="PaizShop/products.json">
-        </div>
-        <div class="cfg-group">
-          <label class="cfg-label">DISCORD WEBHOOK (ADMIN LOG)</label>
-          <input type="text" class="cfg-input" id="cfg-webhook" placeholder="https://discord.com/api/webhooks/...">
-        </div>
-        <button class="cfg-save-btn" onclick="saveConfig()">SAVE CONFIG &amp; RELOAD</button>
+        <button class="add-txn-btn" onclick="openAddTxn()">＋ ADD ORDER</button>
       </div>
-
-      <!-- Activity Log -->
-      <div class="panel-box">
-        <div class="panel-title">ACTIVITY LOG</div>
-        <div class="log-list" id="log-list">
-          <div class="log-empty">No activity yet.</div>
-        </div>
-      </div>
-
+      <div class="txn-list" id="txn-list"><div class="txn-empty">Loading transactions...</div></div>
     </div>
   </div>
 </div>
 
-<!-- ADD / EDIT MODAL -->
+<!-- PRODUCT MODAL -->
 <div class="m-overlay" id="product-modal">
   <div class="modal">
-    <div class="modal-hd">
-      <h3 id="pmodal-title">Add Product</h3>
-      <button class="modal-close" onclick="closeProductModal()">✕</button>
-    </div>
+    <div class="modal-hd"><h3 id="pm-title">Add Product</h3><button class="modal-close" onclick="closePM()">✕</button></div>
     <div class="modal-body">
       <input type="hidden" id="pm-edit-id">
-      <div class="frow">
-        <div class="fg">
-          <label class="flabel">PRODUCT ID <span class="req">*</span></label>
-          <input type="text" class="finput" id="pm-id" placeholder="e.g. shulker_box">
-          <div class="fhint">Lowercase, underscores only</div>
-        </div>
-        <div class="fg">
-          <label class="flabel">NAME <span class="req">*</span></label>
-          <input type="text" class="finput" id="pm-name" placeholder="Shulker Box">
-        </div>
-      </div>
-      <div class="frow">
-        <div class="fg">
-          <label class="flabel">PRICE <span class="req">*</span></label>
-          <input type="number" class="finput" id="pm-price" placeholder="4" min="0" step="1">
-        </div>
-        <div class="fg">
-          <label class="flabel">CURRENCY UNIT</label>
-          <input type="text" class="finput" id="pm-unit" placeholder="Diamond" value="Diamond">
-        </div>
-      </div>
-      <div class="frow">
-        <div class="fg">
-          <label class="flabel">INITIAL STOCK</label>
-          <input type="number" class="finput" id="pm-stock" placeholder="0" min="0" step="1" value="0">
-        </div>
-        <div class="fg">
-          <label class="flabel">CATEGORY</label>
-          <input type="text" class="finput" id="pm-category" placeholder="Materials">
-        </div>
-      </div>
-      <div class="fg">
-        <label class="flabel">IMAGE PATH</label>
-        <input type="text" class="finput" id="pm-image" placeholder="img/iron_ingot.png">
-        <div class="fhint">Relative to PaizShop folder</div>
-      </div>
-      <div class="fg">
-        <label class="flabel">DESCRIPTION</label>
-        <input type="text" class="finput" id="pm-desc" placeholder="Short product description">
-      </div>
-      <div class="toggle-row">
-        <span class="toggle-lbl">LISTED (visible in shop)</span>
-        <label class="toggle">
-          <input type="checkbox" id="pm-listed" checked>
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
+      <div class="frow"><div class="fg"><label class="flabel">ID <span class="req">*</span></label><input type="text" class="finput" id="pm-id" placeholder="shulker_box"><div class="fhint">Lowercase, underscores</div></div><div class="fg"><label class="flabel">NAME <span class="req">*</span></label><input type="text" class="finput" id="pm-name" placeholder="Shulker Box"></div></div>
+      <div class="frow"><div class="fg"><label class="flabel">PRICE <span class="req">*</span></label><input type="number" class="finput" id="pm-price" placeholder="4" min="0"></div><div class="fg"><label class="flabel">UNIT</label><input type="text" class="finput" id="pm-unit" placeholder="Diamond" value="Diamond"></div></div>
+      <div class="frow"><div class="fg"><label class="flabel">STOCK</label><input type="number" class="finput" id="pm-stock" placeholder="0" min="0" value="0"></div><div class="fg"><label class="flabel">CATEGORY</label><input type="text" class="finput" id="pm-category" placeholder="Materials"></div></div>
+      <div class="fg"><label class="flabel">IMAGE PATH</label><input type="text" class="finput" id="pm-image" placeholder="img/iron_ingot.png"></div>
+      <div class="fg"><label class="flabel">DESCRIPTION</label><input type="text" class="finput" id="pm-desc" placeholder="Short description"></div>
+      <div class="toggle-row"><span class="toggle-lbl">LISTED (visible in shop)</span><label class="toggle"><input type="checkbox" id="pm-listed" checked><span class="toggle-slider"></span></label></div>
     </div>
-    <div class="modal-ft">
-      <button class="btn-cancel" onclick="closeProductModal()">CANCEL</button>
-      <button class="btn-save" id="pmodal-save-btn" onclick="saveProduct()">
-        <span id="pmodal-spin" style="width:13px;height:13px;border:2px solid rgba(0,0,0,0.3);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite;display:none"></span>
-        SAVE
-      </button>
-    </div>
+    <div class="modal-ft"><button class="btn-cancel" onclick="closePM()">CANCEL</button><button class="btn-save" id="pm-save" onclick="saveProduct()"><span id="pm-spin" style="width:13px;height:13px;border:2px solid rgba(0,0,0,0.3);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite;display:none"></span>SAVE</button></div>
   </div>
 </div>
 
 <!-- STOCK MODAL -->
 <div class="m-overlay" id="stock-modal">
   <div class="modal">
-    <div class="modal-hd">
-      <h3>Update Stock</h3>
-      <button class="modal-close" onclick="closeStockModal()">✕</button>
-    </div>
+    <div class="modal-hd"><h3>Update Stock</h3><button class="modal-close" onclick="closeSM()">✕</button></div>
     <div class="modal-body">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);margin-bottom:0.5rem" id="sm-product-name">—</div>
-      <div class="stock-current">
-        <span class="sc-val" id="sm-current">0</span>
-        <span class="sc-lbl">CURRENT STOCK</span>
-      </div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);margin-bottom:0.5rem" id="sm-name">—</div>
+      <div class="stock-current"><span class="sc-val" id="sm-cur">0</span><span class="sc-lbl">CURRENT STOCK</span></div>
       <input type="hidden" id="sm-id">
-      <div class="fg">
-        <label class="flabel">SET STOCK TO</label>
-        <input type="number" class="finput" id="sm-value" placeholder="0" min="0" step="1">
-      </div>
-      <div class="stock-presets">
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt4);align-self:center">QUICK SET:</span>
-        <button class="preset-btn" onclick="document.getElementById('sm-value').value=0">0</button>
-        <button class="preset-btn" onclick="document.getElementById('sm-value').value=5">5</button>
-        <button class="preset-btn" onclick="document.getElementById('sm-value').value=10">10</button>
-        <button class="preset-btn" onclick="document.getElementById('sm-value').value=20">20</button>
-        <button class="preset-btn" onclick="document.getElementById('sm-value').value=50">50</button>
-        <button class="preset-btn" onclick="document.getElementById('sm-value').value=99">99</button>
+      <div class="fg"><label class="flabel">SET STOCK TO</label><input type="number" class="finput" id="sm-val" placeholder="0" min="0"></div>
+      <div class="stock-presets"><span style="font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt4);align-self:center">QUICK:</span>
+        <button class="preset-btn" onclick="document.getElementById('sm-val').value=0">0</button>
+        <button class="preset-btn" onclick="document.getElementById('sm-val').value=5">5</button>
+        <button class="preset-btn" onclick="document.getElementById('sm-val').value=10">10</button>
+        <button class="preset-btn" onclick="document.getElementById('sm-val').value=20">20</button>
+        <button class="preset-btn" onclick="document.getElementById('sm-val').value=50">50</button>
+        <button class="preset-btn" onclick="document.getElementById('sm-val').value=99">99</button>
       </div>
     </div>
-    <div class="modal-ft">
-      <button class="btn-cancel" onclick="closeStockModal()">CANCEL</button>
-      <button class="btn-save" onclick="saveStock()">UPDATE STOCK</button>
-    </div>
+    <div class="modal-ft"><button class="btn-cancel" onclick="closeSM()">CANCEL</button><button class="btn-save" onclick="saveStock()">UPDATE</button></div>
   </div>
 </div>
 
-<!-- CONFIRM / DELETE MODAL -->
+<!-- ADD/EDIT ORDER MODAL -->
+<div class="m-overlay" id="txn-modal">
+  <div class="modal">
+    <div class="modal-hd"><h3 id="txn-modal-title">Add Order</h3><button class="modal-close" onclick="closeTxnModal()">✕</button></div>
+    <div class="modal-body">
+      <div style="background:var(--blue-dim);border:1px solid rgba(96,165,250,0.2);padding:0.8rem 1rem;margin-bottom:1.2rem;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1px;color:var(--blue);line-height:1.8">
+        📋 See a Discord order notification? Copy the details here to track its status.
+      </div>
+      <input type="hidden" id="tm-edit-id">
+      <div class="frow">
+        <div class="fg"><label class="flabel">ORDER ID <span class="req">*</span></label><input type="text" class="finput" id="tm-id" placeholder="ORD-IIVC4J"><div class="fhint">From the Discord notification</div></div>
+        <div class="fg"><label class="flabel">STATUS</label><select class="fselect" id="tm-status"><option value="pending">⏳ Pending</option><option value="confirmed">✅ Confirmed</option><option value="delivered">📦 Delivered</option><option value="cancelled">❌ Cancelled</option></select></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="flabel">MINECRAFT IGN <span class="req">*</span></label><input type="text" class="finput" id="tm-ign" placeholder="Faiz4224"></div>
+        <div class="fg"><label class="flabel">DISCORD</label><input type="text" class="finput" id="tm-discord" placeholder="faizzzlol"></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="flabel">DELIVERY</label><select class="fselect" id="tm-delivery"><option value="Pickup">Pickup</option><option value="Delivery">Delivery</option></select></div>
+        <div class="fg"><label class="flabel">SERVER</label><input type="text" class="finput" id="tm-server" placeholder="Skyxion: Ragnarok" value="Skyxion: Ragnarok"></div>
+      </div>
+      <div class="fg"><label class="flabel">LOCATION</label><input type="text" class="finput" id="tm-location" placeholder="1 64 1"></div>
+      <div class="fg">
+        <label class="flabel">ITEMS ORDERED</label>
+        <div class="items-builder">
+          <div class="ib-header"><span class="ib-label">ITEMS (name / qty / price◆)</span><button class="ib-add" onclick="addItemRow()">＋ ADD ROW</button></div>
+          <div class="ib-rows" id="ib-rows"></div>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="flabel">TOTAL (◆) <span class="req">*</span></label><input type="number" class="finput" id="tm-total" placeholder="25" min="0"></div>
+        <div class="fg"><label class="flabel">ORDER TIME</label><input type="text" class="finput" id="tm-ts" placeholder="09/03/2026, 9:48 am"></div>
+      </div>
+      <div class="fg"><label class="flabel">NOTES</label><textarea class="ftextarea" id="tm-notes" placeholder="Customer notes..."></textarea></div>
+    </div>
+    <div class="modal-ft"><button class="btn-cancel" onclick="closeTxnModal()">CANCEL</button><button class="btn-save" id="txn-save" onclick="saveTxn()"><span id="txn-spin" style="width:13px;height:13px;border:2px solid rgba(0,0,0,0.3);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite;display:none"></span>SAVE ORDER</button></div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
 <div class="m-overlay" id="confirm-modal">
   <div class="modal">
-    <div class="confirm-body">
-      <span class="confirm-icon" id="cm-icon">⚠️</span>
-      <h3 id="cm-title">Are you sure?</h3>
-      <p id="cm-msg">This action cannot be undone.</p>
-    </div>
-    <div class="modal-ft">
-      <button class="btn-cancel" onclick="closeConfirm()">CANCEL</button>
-      <button class="btn-danger" id="cm-confirm-btn">CONFIRM</button>
-    </div>
+    <div class="confirm-body"><span class="confirm-icon" id="cm-icon">⚠️</span><h3 id="cm-title">Are you sure?</h3><p id="cm-msg">This cannot be undone.</p></div>
+    <div class="modal-ft"><button class="btn-cancel" onclick="closeConfirm()">CANCEL</button><button class="btn-danger" id="cm-btn">CONFIRM</button></div>
   </div>
 </div>
 
-<!-- SAVING OVERLAY -->
-<div class="saving-overlay" id="saving-overlay">
-  <div class="saving-spin"></div>
-  <div class="saving-txt" id="saving-txt">SAVING TO GITHUB...</div>
-</div>
-
+<div class="saving-overlay" id="saving-overlay"><div class="saving-spin"></div><div class="saving-txt" id="saving-txt">SAVING...</div></div>
 <div class="toast-wrap" id="toast-wrap"></div>
 
 <script>
-/* ══════════════════════════════════════════════════════
-   PAIZ SHOP ADMIN PANEL — Fixed version
-   - 401 detection with clear token-expired UX
-   - No hardcoded tokens (security fix)
-   - Lighter dark theme
-══════════════════════════════════════════════════════ */
+const PASS = 'PS@PAIZCORP_5202126';
+const LS = { SESSION:'ps_admin_session', TOKEN:'ps_admin_token', REPO:'ps_admin_repo', PATH:'ps_admin_path', TXN:'ps_admin_txn_path', WEBHOOK:'ps_admin_webhook', LOG:'ps_admin_log' };
 
-const ADMIN_PASSWORD = 'PS@PAIZCORP_5202126';
-const LS = {
-  SESSION: 'ps_admin_session',
-  TOKEN:   'ps_admin_token',
-  REPO:    'ps_admin_repo',
-  PATH:    'ps_admin_path',
-  WEBHOOK: 'ps_admin_webhook',
-  LOG:     'ps_admin_log'
-};
+let products=[],transactions=[],fileSha='',txnSha='',editingId=null,editingTxnId=null,txnFilter='all',rowCount=0;
 
-let products  = [];
-let fileSha   = '';
-let editingId = null;
+/* LOGIN */
+function login(){const p=document.getElementById('login-pass').value;if(p===PASS){localStorage.setItem(LS.SESSION,'1');document.getElementById('login-screen').style.display='none';document.getElementById('app').style.display='block';initApp();}else{document.getElementById('login-err').style.display='block';setTimeout(()=>document.getElementById('login-err').style.display='none',2500);}}
+function logout(){localStorage.removeItem(LS.SESSION);location.reload();}
 
-/* ── LOGIN ───────────────────────────────────────── */
-function login() {
-  const pass = document.getElementById('login-pass').value;
-  if (pass === ADMIN_PASSWORD) {
-    localStorage.setItem(LS.SESSION, '1');
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    initApp();
-  } else {
-    document.getElementById('login-err').style.display = 'block';
-    setTimeout(()=>document.getElementById('login-err').style.display='none', 2500);
-  }
+/* TABS */
+function switchTab(t){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));event.currentTarget.classList.add('active');document.getElementById('tab-'+t).classList.add('active');}
+
+/* INIT */
+function initApp(){
+  document.getElementById('cfg-token').value    = localStorage.getItem(LS.TOKEN)||'';
+  document.getElementById('cfg-repo').value     = localStorage.getItem(LS.REPO)||'faizzzlol/PaizCorp';
+  document.getElementById('cfg-path').value     = localStorage.getItem(LS.PATH)||'PaizShop/products.json';
+  document.getElementById('cfg-txn-path').value = localStorage.getItem(LS.TXN)||'PaizShop/transactions.json';
+  document.getElementById('cfg-webhook').value  = localStorage.getItem(LS.WEBHOOK)||'';
+  const tok=localStorage.getItem(LS.TOKEN);
+  if(!tok){document.getElementById('setup-banner').style.display='flex';setTS('idle','No token');renderTable();renderTxns();renderLog();updateStats();return;}
+  loadProducts(); loadTransactions(); renderLog();
 }
-
-function logout() {
-  localStorage.removeItem(LS.SESSION);
-  location.reload();
-}
-
-/* ── INIT ─────────────────────────────────────────── */
-function initApp() {
-  document.getElementById('cfg-token').value   = localStorage.getItem(LS.TOKEN)   || '';
-  document.getElementById('cfg-repo').value    = localStorage.getItem(LS.REPO)    || 'faizzzlol/PaizCorp';
-  document.getElementById('cfg-path').value    = localStorage.getItem(LS.PATH)    || 'PaizShop/products.json';
-  document.getElementById('cfg-webhook').value = localStorage.getItem(LS.WEBHOOK) || '';
-
-  const token = localStorage.getItem(LS.TOKEN);
-  const repo  = localStorage.getItem(LS.REPO);
-  const path  = localStorage.getItem(LS.PATH);
-
-  if (!token || !repo || !path) {
-    document.getElementById('setup-banner').style.display = 'flex';
-    setTokenStatus('idle', 'No token configured');
-    products = [];
-    renderTable();
-    renderLog();
-    updateStats();
-    return;
-  }
-
-  loadProducts();
-  renderLog();
-}
-
-function saveConfig() {
-  const token = document.getElementById('cfg-token').value.trim();
-  localStorage.setItem(LS.TOKEN,   token);
-  localStorage.setItem(LS.REPO,    document.getElementById('cfg-repo').value.trim());
-  localStorage.setItem(LS.PATH,    document.getElementById('cfg-path').value.trim());
-  localStorage.setItem(LS.WEBHOOK, document.getElementById('cfg-webhook').value.trim());
-
-  // Hide both banners
-  document.getElementById('setup-banner').style.display  = 'none';
-  document.getElementById('token-banner').style.display  = 'none';
+function saveConfig(){
+  localStorage.setItem(LS.TOKEN,  document.getElementById('cfg-token').value.trim());
+  localStorage.setItem(LS.REPO,   document.getElementById('cfg-repo').value.trim());
+  localStorage.setItem(LS.PATH,   document.getElementById('cfg-path').value.trim());
+  localStorage.setItem(LS.TXN,    document.getElementById('cfg-txn-path').value.trim());
+  localStorage.setItem(LS.WEBHOOK,document.getElementById('cfg-webhook').value.trim());
+  document.getElementById('setup-banner').style.display='none';
+  document.getElementById('token-banner').style.display='none';
   document.getElementById('cfg-token').classList.remove('highlight');
+  setTS('idle','Testing...'); toast('Config saved!','ok');
+  setTimeout(()=>{loadProducts();loadTransactions();},300);
+}
+function scrollToConfig(){document.getElementById('config-panel').scrollIntoView({behavior:'smooth'});document.getElementById('cfg-token').focus();}
 
-  setTokenStatus('idle', 'Testing token...');
-  toast('Config saved! Loading products...', 'ok');
-  setTimeout(()=>loadProducts(), 300);
+/* TOKEN STATUS */
+function setTS(state,msg){document.getElementById('ts-dot').className='ts-dot '+state;document.getElementById('ts-txt').textContent=msg;}
+function handle401(){setTS('err','401 — Token expired');document.getElementById('token-banner').style.display='flex';document.getElementById('cfg-token').classList.add('highlight');document.getElementById('cfg-token').value='';localStorage.removeItem(LS.TOKEN);toast('Token expired — update in Config','err');}
+
+/* GITHUB */
+function cfg(){return{token:localStorage.getItem(LS.TOKEN)||'',repo:localStorage.getItem(LS.REPO)||'faizzzlol/PaizCorp',path:localStorage.getItem(LS.PATH)||'PaizShop/products.json',txnPath:localStorage.getItem(LS.TXN)||'PaizShop/transactions.json',webhook:localStorage.getItem(LS.WEBHOOK)||''};}
+async function ghGet(path){const c=cfg();const r=await fetch(`https://api.github.com/repos/${c.repo}/contents/${path}`,{headers:{Authorization:'token '+c.token,Accept:'application/vnd.github.v3+json'}});if(r.status===401){handle401();return null;}if(!r.ok)throw new Error('GH '+r.status);return r.json();}
+async function ghPut(path,data,sha,msg){const c=cfg();const r=await fetch(`https://api.github.com/repos/${c.repo}/contents/${path}`,{method:'PUT',headers:{Authorization:'token '+c.token,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify({message:msg,content:btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2)))),sha})});if(r.status===401){handle401();return null;}if(!r.ok){const e=await r.json();throw new Error(e.message||r.status);}return r.json();}
+
+async function loadProducts(){const c=cfg();showSaving('LOADING...');try{const d=await ghGet(c.path);if(!d){hideSaving();return;}fileSha=d.sha;products=JSON.parse(atob(d.content.replace(/\n/g,'')));setTS('ok','Connected · '+products.length+' products');document.getElementById('token-banner').style.display='none';document.getElementById('cfg-token').classList.remove('highlight');}catch(e){setTS('err',e.message);toast('Load failed: '+e.message,'err');}hideSaving();renderTable();updateStats();}
+async function loadTransactions(){const c=cfg();try{const d=await ghGet(c.txnPath);if(!d)return;txnSha=d.sha;transactions=JSON.parse(atob(d.content.replace(/\n/g,'')));}catch(e){transactions=[];if(!e.message.includes('404'))toast('transactions.json missing — upload it to your repo first','info');}renderTxns();updateStats();}
+async function saveProd(msg){const c=cfg();showSaving('SAVING...');try{const d=await ghPut(c.path,products,fileSha,msg);if(!d){hideSaving();return false;}fileSha=d.content.sha;hideSaving();return true;}catch(e){hideSaving();toast('Save failed: '+e.message,'err');return false;}}
+async function saveTxns(msg){const c=cfg();showSaving('SAVING...');try{const d=await ghPut(c.txnPath,transactions,txnSha,msg);if(!d){hideSaving();return false;}txnSha=d.content.sha;hideSaving();return true;}catch(e){hideSaving();toast('Save failed: '+e.message,'err');return false;}}
+
+/* DISCORD */
+async function dLog(action,desc,color){const c=cfg();if(!c.webhook)return;try{await fetch(c.webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:'Paiz Shop Admin',avatar_url:'https://faizzzlol.github.io/thelol/TheLoL2.png',embeds:[{title:'⚙️ '+action,color:color||0x60a5fa,description:desc,footer:{text:'Paiz Shop Admin · '+new Date().toLocaleString('en-MY',{timeZone:'Asia/Kuala_Lumpur'})},timestamp:new Date().toISOString()}]})});}catch{}}
+
+/* LOG */
+function addLog(a){const log=JSON.parse(localStorage.getItem(LS.LOG)||'[]');log.unshift({action:a,ts:new Date().toLocaleString('en-MY',{timeZone:'Asia/Kuala_Lumpur'})});localStorage.setItem(LS.LOG,JSON.stringify(log.slice(0,30)));renderLog();}
+function renderLog(){const log=JSON.parse(localStorage.getItem(LS.LOG)||'[]');const el=document.getElementById('log-list');if(!log.length){el.innerHTML='<div class="log-empty">No activity yet.</div>';return;}el.innerHTML=log.map(l=>`<div class="log-item"><div class="log-action">${l.action}</div><div class="log-time">${l.ts}</div></div>`).join('');}
+
+/* STATS */
+function updateStats(){
+  const tot=products.length,listed=products.filter(p=>p.listed).length,inStock=products.filter(p=>p.listed&&p.stock>0).length;
+  const pen=transactions.filter(t=>t.status==='pending').length,conf=transactions.filter(t=>t.status==='confirmed').length,del=transactions.filter(t=>t.status==='delivered').length,can=transactions.filter(t=>t.status==='cancelled').length;
+  ['st-total','qs-total'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=tot;});
+  ['st-listed','qs-listed'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=listed;});
+  document.getElementById('qs-instock').textContent=inStock;
+  document.getElementById('qs-hidden').textContent=tot-listed;
+  document.getElementById('st-pending').textContent=pen;
+  document.getElementById('st-confirmed').textContent=conf;
+  document.getElementById('txn-all').textContent=transactions.length;
+  document.getElementById('txn-pending').textContent=pen;
+  document.getElementById('txn-confirmed').textContent=conf;
+  document.getElementById('txn-delivered').textContent=del;
+  document.getElementById('txn-cancelled').textContent=can;
+  document.getElementById('badge-products').textContent=tot;
+  document.getElementById('badge-transactions').textContent=transactions.length;
 }
 
-function scrollToConfig() {
-  document.getElementById('config-panel').scrollIntoView({behavior:'smooth'});
-  document.getElementById('cfg-token').focus();
+/* PRODUCTS RENDER */
+function renderTable(){
+  const q=(document.querySelector('.table-search')?.value||'').toLowerCase();
+  const list=products.filter(p=>!q||p.name.toLowerCase().includes(q)||(p.id||'').includes(q));
+  const el=document.getElementById('prod-list');
+  if(!products.length)return;
+  if(!list.length){el.innerHTML=`<div style="padding:2rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4)">NO PRODUCTS FOUND</div>`;return;}
+  el.innerHTML=list.map(p=>`
+  <div class="prod-row ${p.listed?'status-listed':'status-unlisted'}">
+    <div class="pr-img">${p.image?`<img src="../${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="pr-img-ph" style="display:none">📦</span>`:`<span class="pr-img-ph">📦</span>`}</div>
+    <div class="pr-info"><div class="pr-name">${p.name}</div><div class="pr-meta"><span class="pr-price">◆ ${p.price} ${p.unit||'Diamond'}</span>${p.category?`<span class="pr-cat">${p.category}</span>`:''}<span class="pr-status-tag ${p.listed?'tag-listed':'tag-unlisted'}">${p.listed?'LISTED':'HIDDEN'}</span></div></div>
+    <div class="pr-stock-wrap"><span class="pr-stock-num ${p.stock<=0?'zero':''}">${p.stock}</span><span class="pr-stock-lbl">STOCK</span></div>
+    <div class="pr-actions">
+      <button class="act-btn" title="Edit"   onclick="openEditModal('${p.id}')">✏️</button>
+      <button class="act-btn" title="Stock"  onclick="openSM('${p.id}')">📦</button>
+      <button class="act-btn" title="${p.listed?'Hide':'Show'}" onclick="toggleListed('${p.id}')">${p.listed?'👁':'🚫'}</button>
+      <button class="act-btn" title="Delete" onclick="confirmDel('${p.id}')">🗑</button>
+    </div>
+  </div>`).join('');
 }
 
-/* ── TOKEN STATUS ─────────────────────────────────── */
-function setTokenStatus(state, msg) {
-  const dot = document.getElementById('ts-dot');
-  const txt = document.getElementById('ts-txt');
-  dot.className = 'ts-dot ' + state;
-  txt.textContent = msg;
-}
-
-/* ── GITHUB API ──────────────────────────────────── */
-function getConfig() {
-  return {
-    token:   localStorage.getItem(LS.TOKEN)   || '',
-    repo:    localStorage.getItem(LS.REPO)    || 'faizzzlol/PaizCorp',
-    path:    localStorage.getItem(LS.PATH)    || 'PaizShop/products.json',
-    webhook: localStorage.getItem(LS.WEBHOOK) || ''
-  };
-}
-
-async function loadProducts() {
-  const { token, repo, path } = getConfig();
-  if (!token) {
-    document.getElementById('setup-banner').style.display = 'flex';
-    setTokenStatus('idle', 'No token configured');
-    return;
-  }
-
-  showSaving('LOADING FROM GITHUB...');
-  try {
-    const r = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
-      headers: { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json' }
-    });
-
-    if (r.status === 401) {
-      hideSaving();
-      handle401();
-      return;
-    }
-    if (r.status === 404) {
-      hideSaving();
-      setTokenStatus('err', '404 — repo/path not found');
-      toast('File not found. Check repo and path in Config.', 'err');
-      renderTable();
-      return;
-    }
-    if (!r.ok) throw new Error('GitHub API: ' + r.status);
-
-    const data = await r.json();
-    fileSha  = data.sha;
-    products = JSON.parse(atob(data.content.replace(/\n/g, '')));
-    hideSaving();
-    setTokenStatus('ok', 'Token valid · ' + products.length + ' products loaded');
-    document.getElementById('token-banner').style.display = 'none';
-    document.getElementById('cfg-token').classList.remove('highlight');
-    renderTable();
-    updateStats();
-
-  } catch (e) {
-    hideSaving();
-    setTokenStatus('err', 'Error: ' + e.message);
-    toast('Failed to load: ' + e.message, 'err');
-    renderTable();
-  }
-}
-
-/* ── 401 HANDLER ─────────────────────────────────── */
-function handle401() {
-  setTokenStatus('err', '401 — Token expired or invalid');
-  document.getElementById('token-banner').style.display = 'flex';
-  document.getElementById('cfg-token').classList.add('highlight');
-  document.getElementById('cfg-token').value = ''; // Clear the bad token
-  localStorage.removeItem(LS.TOKEN);              // Remove it from storage too
-  toast('GitHub token expired — please update it in Config', 'err');
-
-  // Show empty table with helpful message
-  document.getElementById('prod-list').innerHTML = `
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--red);padding:2rem;text-align:center;border:1px solid rgba(248,113,113,0.15);background:rgba(248,113,113,0.04)">
-      ⚠ TOKEN INVALID — Update your GitHub token in the Config panel to load products.
-    </div>`;
-}
-
-async function saveToGithub(commitMsg) {
-  const { token, repo, path } = getConfig();
-  if (!token) { toast('No GitHub token configured', 'err'); return false; }
-
-  showSaving('SAVING TO GITHUB...');
-  try {
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(products, null, 2))));
-    const body = { message: commitMsg, content, sha: fileSha };
-
-    const r = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
-      method: 'PUT',
-      headers: {
-        Authorization:  'token ' + token,
-        Accept:         'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    });
-
-    if (r.status === 401) { hideSaving(); handle401(); return false; }
-    if (!r.ok) {
-      const err = await r.json();
-      throw new Error(err.message || r.status);
-    }
-
-    const data = await r.json();
-    fileSha = data.content.sha;
-    hideSaving();
-    return true;
-  } catch (e) {
-    hideSaving();
-    toast('GitHub save failed: ' + e.message, 'err');
-    return false;
-  }
-}
-
-/* ── DISCORD LOG ─────────────────────────────────── */
-async function discordLog(action, details, color) {
-  const { webhook } = getConfig();
-  if (!webhook) return;
-  const ts = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
-  try {
-    await fetch(webhook, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        username: 'Paiz Shop Admin',
-        avatar_url: 'https://faizzzlol.github.io/thelol/TheLoL2.png',
-        embeds: [{
-          title: '⚙️ Admin Action — ' + action,
-          color: color || 0x60a5fa,
-          description: details,
-          footer: { text: 'Paiz Shop Admin · ' + ts },
-          timestamp: new Date().toISOString()
-        }]
-      })
-    });
-  } catch {}
-}
-
-/* ── LOCAL LOG ───────────────────────────────────── */
-function addLog(action) {
-  const log = JSON.parse(localStorage.getItem(LS.LOG) || '[]');
-  const ts  = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
-  log.unshift({ action, ts });
-  localStorage.setItem(LS.LOG, JSON.stringify(log.slice(0, 30)));
-  renderLog();
-}
-
-function renderLog() {
-  const log = JSON.parse(localStorage.getItem(LS.LOG) || '[]');
-  const el  = document.getElementById('log-list');
-  if (!log.length) { el.innerHTML='<div class="log-empty">No activity yet.</div>'; return; }
-  el.innerHTML = log.map(l=>`
-    <div class="log-item">
-      <div class="log-action">${l.action}</div>
-      <div class="log-time">${l.ts}</div>
-    </div>`).join('');
-}
-
-/* ── RENDER TABLE ────────────────────────────────── */
-function renderTable() {
-  const q    = (document.querySelector('.table-search')?.value || '').toLowerCase();
-  const list = products.filter(p => !q || p.name.toLowerCase().includes(q) || (p.id||'').includes(q));
-  const el   = document.getElementById('prod-list');
-
-  if (!products.length) return; // Don't overwrite 401 message
-
-  if (!list.length) {
-    el.innerHTML = `<div style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);padding:2rem;text-align:center">NO PRODUCTS FOUND</div>`;
-    return;
-  }
-
-  el.innerHTML = list.map(p => {
-    const isListed  = p.listed;
-    const rowCls    = isListed ? 'status-listed' : 'status-unlisted';
-    const tagCls    = isListed ? 'tag-listed' : 'tag-unlisted';
-    const tagTxt    = isListed ? 'LISTED' : 'HIDDEN';
-    const toggleTip = isListed ? 'Hide from shop' : 'Show in shop';
-    const stockCls  = p.stock <= 0 ? 'zero' : '';
-
+/* TRANSACTIONS RENDER */
+function setFilter(btn){document.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');txnFilter=btn.dataset.filter;renderTxns();}
+function renderTxns(){
+  const list=txnFilter==='all'?transactions:transactions.filter(t=>t.status===txnFilter);
+  const el=document.getElementById('txn-list');
+  if(!list.length){el.innerHTML=`<div class="txn-empty">${transactions.length?'NO ORDERS MATCH THIS FILTER':'NO ORDERS YET\n\nWhen a customer places an order on Discord,\nclick "+ ADD ORDER" to register and track it here.'}</div>`;return;}
+  const sorted=[...list].sort((a,b)=>new Date(b.createdAt||0)-new Date(a.createdAt||0));
+  const badges={pending:['st-pending','⏳ PENDING'],confirmed:['st-confirmed','✅ CONFIRMED'],delivered:['st-delivered','📦 DELIVERED'],cancelled:['st-cancelled','❌ CANCELLED']};
+  el.innerHTML=sorted.map(t=>{
+    const [bc,bt]=badges[t.status]||badges.pending;
+    const items=(t.items||[]).map(i=>`${i.name}×${i.qty}`).join(' · ');
     return `
-    <div class="prod-row ${rowCls}">
-      <div class="pr-img">
-        ${p.image
-          ? `<img src="../${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="pr-img-ph" style="display:none">📦</span>`
-          : `<span class="pr-img-ph">📦</span>`}
+    <div class="txn-row s-${t.status}">
+      <div class="txn-info">
+        <div class="txn-id-line">${t.id}&nbsp;<span class="st-badge ${bc}">${bt}</span></div>
+        <div class="txn-main-line"><span class="txn-ign">${t.ign||'—'}</span>${t.discord?`<span class="txn-discord">@${t.discord}</span>`:''}</div>
+        <div class="txn-sub-line"><span>${t.delivery||''}</span>${t.ts?`<span>${t.ts}</span>`:''} ${items?`<span>${items}</span>`:''}</div>
       </div>
-      <div class="pr-info">
-        <div class="pr-name">${p.name}</div>
-        <div class="pr-meta">
-          <span class="pr-price">◆ ${p.price} ${p.unit||'Diamond'}</span>
-          ${p.category?`<span class="pr-cat">${p.category}</span>`:''}
-          <span class="pr-status-tag ${tagCls}">${tagTxt}</span>
-        </div>
-      </div>
-      <div class="pr-stock-wrap">
-        <span class="pr-stock-num ${stockCls}">${p.stock}</span>
-        <span class="pr-stock-lbl">STOCK</span>
-      </div>
-      <div class="pr-actions">
-        <button class="act-btn" title="Edit product"   onclick="openEditModal('${p.id}')">✏️</button>
-        <button class="act-btn" title="Update stock"   onclick="openStockModal('${p.id}')">📦</button>
-        <button class="act-btn" title="${toggleTip}"   onclick="toggleListed('${p.id}')">${isListed?'👁':'🚫'}</button>
-        <button class="act-btn" title="Delete product" onclick="confirmDelete('${p.id}')">🗑</button>
+      <div class="txn-total-wrap"><span class="txn-total-val">◆ ${t.total||0}</span><span class="txn-total-lbl">TOTAL</span></div>
+      <div class="txn-btns">
+        ${t.status==='pending'   ?`<button class="s-btn s-btn-confirm" onclick="setStatus('${t.id}','confirmed')">✅ CONFIRM</button>`:''}
+        ${t.status==='confirmed' ?`<button class="s-btn s-btn-deliver" onclick="setStatus('${t.id}','delivered')">📦 DELIVERED</button>`:''}
+        ${t.status!=='cancelled'&&t.status!=='delivered'?`<button class="s-btn s-btn-cancel" onclick="setStatus('${t.id}','cancelled')">❌ CANCEL</button>`:''}
+        ${t.status!=='pending'   ?`<button class="s-btn s-btn-revert" onclick="setStatus('${t.id}','pending')">↩ REVERT</button>`:''}
+        <button class="s-btn s-btn-sm" onclick="editTxn('${t.id}')">✏️ EDIT</button>
+        <button class="s-btn s-btn-sm" onclick="delTxn('${t.id}')">🗑 DELETE</button>
       </div>
     </div>`;
   }).join('');
 }
 
-/* ── STATS ───────────────────────────────────────── */
-function updateStats() {
-  const total   = products.length;
-  const listed  = products.filter(p=>p.listed).length;
-  const inStock = products.filter(p=>p.listed && p.stock>0).length;
-  const out     = products.filter(p=>p.listed && p.stock<=0).length;
-  const hidden  = total - listed;
-  ['st-total','qs-total'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=total});
-  ['st-listed','qs-listed'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=listed});
-  ['st-stock','qs-instock'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=inStock});
-  document.getElementById('st-out').textContent    = out;
-  document.getElementById('qs-hidden').textContent = hidden;
+/* TRANSACTION STATUS */
+async function setStatus(id,ns){
+  const t=transactions.find(x=>x.id===id);if(!t)return;
+  const os=t.status;t.status=ns;t.statusUpdatedTs=new Date().toLocaleString('en-MY',{timeZone:'Asia/Kuala_Lumpur'});
+  const ok=await saveTxns(`[PaizShop] ${id} → ${ns}`);
+  if(ok){addLog(`${id}: ${os} → ${ns}`);dLog('STATUS UPDATE',`**${id}** (${t.ign})\n${os} → **${ns}**\n◆ ${t.total}`,ns==='delivered'?0x4ade80:ns==='confirmed'?0x60a5fa:ns==='cancelled'?0xf87171:0x6b7280);toast(`${id} → ${ns}!`,'ok');renderTxns();updateStats();}
+  else{t.status=os;renderTxns();}
 }
 
-/* ── ADD / EDIT MODAL ────────────────────────────── */
-function openAddModal() {
-  editingId = null;
-  document.getElementById('pmodal-title').textContent = 'Add Product';
-  ['pm-id','pm-name','pm-price','pm-category','pm-image','pm-desc'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('pm-unit').value     = 'Diamond';
-  document.getElementById('pm-stock').value    = '0';
-  document.getElementById('pm-listed').checked = true;
-  document.getElementById('pm-id').disabled    = false;
-  document.getElementById('product-modal').classList.add('open');
+/* ADD/EDIT TXN */
+function openAddTxn(){editingTxnId=null;document.getElementById('txn-modal-title').textContent='Add Order';['tm-ign','tm-discord','tm-location','tm-notes'].forEach(id=>document.getElementById(id).value='');document.getElementById('tm-id').value='';document.getElementById('tm-id').disabled=false;document.getElementById('tm-server').value='Skyxion: Ragnarok';document.getElementById('tm-total').value='';document.getElementById('tm-status').value='pending';document.getElementById('tm-delivery').value='Delivery';document.getElementById('tm-ts').value=new Date().toLocaleString('en-MY',{timeZone:'Asia/Kuala_Lumpur'});document.getElementById('ib-rows').innerHTML='';addItemRow();document.getElementById('txn-modal').classList.add('open');}
+function editTxn(id){const t=transactions.find(x=>x.id===id);if(!t)return;editingTxnId=id;document.getElementById('txn-modal-title').textContent='Edit Order';document.getElementById('tm-id').value=t.id;document.getElementById('tm-id').disabled=true;document.getElementById('tm-ign').value=t.ign||'';document.getElementById('tm-discord').value=t.discord||'';document.getElementById('tm-server').value=t.server||'Skyxion: Ragnarok';document.getElementById('tm-location').value=t.location||'';document.getElementById('tm-total').value=t.total||0;document.getElementById('tm-ts').value=t.ts||'';document.getElementById('tm-notes').value=t.notes||'';document.getElementById('tm-status').value=t.status||'pending';document.getElementById('tm-delivery').value=t.delivery||'Delivery';document.getElementById('ib-rows').innerHTML='';(t.items||[]).forEach(i=>addItemRow(i.name,i.qty,i.price));if(!(t.items||[]).length)addItemRow();document.getElementById('txn-modal').classList.add('open');}
+function closeTxnModal(){document.getElementById('txn-modal').classList.remove('open');editingTxnId=null;}
+function addItemRow(name='',qty='',price=''){const id='ir'+(++rowCount);const d=document.createElement('div');d.className='ib-row';d.id=id;d.innerHTML=`<input type="text" class="ib-inp" placeholder="Item name" value="${name}"><input type="number" class="ib-inp" placeholder="Qty" value="${qty}" min="1"><input type="number" class="ib-inp" placeholder="◆ Price" value="${price}" min="0"><button class="ib-del" onclick="document.getElementById('${id}').remove()">✕</button>`;document.getElementById('ib-rows').appendChild(d);}
+async function saveTxn(){
+  const id=document.getElementById('tm-id').value.trim().toUpperCase();
+  const ign=document.getElementById('tm-ign').value.trim();
+  if(!id||!ign){toast('Order ID and IGN required','err');return;}
+  const items=[...document.getElementById('ib-rows').querySelectorAll('.ib-row')].map(r=>{const ins=r.querySelectorAll('input');const name=ins[0].value.trim();const qty=parseInt(ins[1].value)||1;const price=parseInt(ins[2].value)||0;return name?{name,qty,price}:null;}).filter(Boolean);
+  const obj={id,ign,discord:document.getElementById('tm-discord').value.trim(),status:document.getElementById('tm-status').value,delivery:document.getElementById('tm-delivery').value,server:document.getElementById('tm-server').value.trim()||'Skyxion: Ragnarok',location:document.getElementById('tm-location').value.trim(),total:parseInt(document.getElementById('tm-total').value)||0,ts:document.getElementById('tm-ts').value.trim(),notes:document.getElementById('tm-notes').value.trim(),items};
+  const btn=document.getElementById('txn-save');const spin=document.getElementById('txn-spin');btn.disabled=true;spin.style.display='block';
+  if(editingTxnId){const idx=transactions.findIndex(t=>t.id===editingTxnId);if(idx===-1){toast('Not found','err');btn.disabled=false;spin.style.display='none';return;}transactions[idx]={...transactions[idx],...obj};const ok=await saveTxns(`[PaizShop] Edit order: ${id}`);if(ok){addLog(`Edited: ${id}`);toast('Order updated!','ok');closeTxnModal();renderTxns();updateStats();}}
+  else{if(transactions.find(t=>t.id===id)){toast('Order ID exists!','err');btn.disabled=false;spin.style.display='none';return;}transactions.push({...obj,createdAt:new Date().toISOString()});const ok=await saveTxns(`[PaizShop] Add order: ${id}`);if(ok){addLog(`Added order: ${id} (${ign})`);dLog('ORDER ADDED',`**${id}** — ${ign}\n◆ ${obj.total} Diamond(s)`,0x60a5fa);toast('Order added!','ok');closeTxnModal();renderTxns();updateStats();}}
+  btn.disabled=false;spin.style.display='none';
 }
+async function delTxn(id){if(!confirm(`Delete order ${id}?`))return;transactions=transactions.filter(t=>t.id!==id);const ok=await saveTxns(`[PaizShop] Delete order: ${id}`);if(ok){addLog(`Deleted: ${id}`);toast('Deleted','info');renderTxns();updateStats();}else{loadTransactions();}}
 
-function openEditModal(id) {
-  const p = products.find(x=>x.id===id);
-  if (!p) return;
-  editingId = id;
-  document.getElementById('pmodal-title').textContent  = 'Edit Product';
-  document.getElementById('pm-id').value       = p.id;
-  document.getElementById('pm-name').value     = p.name;
-  document.getElementById('pm-price').value    = p.price;
-  document.getElementById('pm-unit').value     = p.unit || 'Diamond';
-  document.getElementById('pm-stock').value    = p.stock;
-  document.getElementById('pm-category').value = p.category || '';
-  document.getElementById('pm-image').value    = p.image || '';
-  document.getElementById('pm-desc').value     = p.description || '';
-  document.getElementById('pm-listed').checked = p.listed;
-  document.getElementById('pm-id').disabled    = true;
-  document.getElementById('product-modal').classList.add('open');
+/* PRODUCT CRUD */
+function openAddModal(){editingId=null;document.getElementById('pm-title').textContent='Add Product';['pm-id','pm-name','pm-price','pm-category','pm-image','pm-desc'].forEach(id=>document.getElementById(id).value='');document.getElementById('pm-unit').value='Diamond';document.getElementById('pm-stock').value='0';document.getElementById('pm-listed').checked=true;document.getElementById('pm-id').disabled=false;document.getElementById('product-modal').classList.add('open');}
+function openEditModal(id){const p=products.find(x=>x.id===id);if(!p)return;editingId=id;document.getElementById('pm-title').textContent='Edit Product';document.getElementById('pm-id').value=p.id;document.getElementById('pm-name').value=p.name;document.getElementById('pm-price').value=p.price;document.getElementById('pm-unit').value=p.unit||'Diamond';document.getElementById('pm-stock').value=p.stock;document.getElementById('pm-category').value=p.category||'';document.getElementById('pm-image').value=p.image||'';document.getElementById('pm-desc').value=p.description||'';document.getElementById('pm-listed').checked=p.listed;document.getElementById('pm-id').disabled=true;document.getElementById('product-modal').classList.add('open');}
+function closePM(){document.getElementById('product-modal').classList.remove('open');editingId=null;}
+async function saveProduct(){
+  const id=document.getElementById('pm-id').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');
+  const name=document.getElementById('pm-name').value.trim();
+  const price=parseInt(document.getElementById('pm-price').value)||0;
+  const unit=document.getElementById('pm-unit').value.trim()||'Diamond';
+  const stock=parseInt(document.getElementById('pm-stock').value)||0;
+  const cat=document.getElementById('pm-category').value.trim();
+  const image=document.getElementById('pm-image').value.trim();
+  const desc=document.getElementById('pm-desc').value.trim();
+  const listed=document.getElementById('pm-listed').checked;
+  if(!id||!name){toast('ID and Name required','err');return;}
+  const btn=document.getElementById('pm-save');const spin=document.getElementById('pm-spin');btn.disabled=true;spin.style.display='block';
+  if(editingId){const idx=products.findIndex(p=>p.id===editingId);if(idx===-1){toast('Not found','err');btn.disabled=false;spin.style.display='none';return;}products[idx]={...products[idx],name,price,unit,stock,category:cat,image,description:desc,listed};const ok=await saveProd(`[PaizShop] Edit: ${name}`);if(ok){addLog(`Edited: ${name}`);dLog('EDITED',`**${name}**`,0x60a5fa);toast('Updated!','ok');closePM();renderTable();updateStats();}}
+  else{if(products.find(p=>p.id===id)){toast('ID exists!','err');btn.disabled=false;spin.style.display='none';return;}products.push({id,name,price,unit,stock,category:cat,image,description:desc,listed});const ok=await saveProd(`[PaizShop] Add: ${name}`);if(ok){addLog(`Added: ${name}`);dLog('ADDED',`**${name}**`,0x4ade80);toast('Added!','ok');closePM();renderTable();updateStats();}}
+  btn.disabled=false;spin.style.display='none';
 }
+function openSM(id){const p=products.find(x=>x.id===id);if(!p)return;document.getElementById('sm-id').value=id;document.getElementById('sm-name').textContent=p.name.toUpperCase();const c=document.getElementById('sm-cur');c.textContent=p.stock;c.className='sc-val'+(p.stock<=0?' zero':'');document.getElementById('sm-val').value=p.stock;document.getElementById('stock-modal').classList.add('open');}
+function closeSM(){document.getElementById('stock-modal').classList.remove('open');}
+async function saveStock(){const id=document.getElementById('sm-id').value;const v=parseInt(document.getElementById('sm-val').value);if(isNaN(v)||v<0){toast('Invalid stock','err');return;}const p=products.find(x=>x.id===id);if(!p)return;const old=p.stock;p.stock=v;const ok=await saveProd(`[PaizShop] Stock: ${p.name}→${v}`);if(ok){addLog(`Stock: ${p.name} ${old}→${v}`);dLog('STOCK',`**${p.name}** ${old}→**${v}**`,0xfbbf24);toast('Stock updated!','ok');closeSM();renderTable();updateStats();}else{p.stock=old;}}
+async function toggleListed(id){const p=products.find(x=>x.id===id);if(!p)return;const was=p.listed;p.listed=!was;const ok=await saveProd(`[PaizShop] ${p.listed?'Listed':'Unlisted'}: ${p.name}`);if(ok){addLog(`${p.listed?'Listed':'Unlisted'}: ${p.name}`);dLog(p.listed?'LISTED':'UNLISTED',`**${p.name}**`,p.listed?0x4ade80:0x6b7280);toast(`${p.name} ${p.listed?'listed':'unlisted'}!`,'ok');renderTable();updateStats();}else{p.listed=was;}}
+let _delId=null;
+function confirmDel(id){const p=products.find(x=>x.id===id);if(!p)return;_delId=id;document.getElementById('cm-title').textContent=`Delete "${p.name}"?`;document.getElementById('cm-msg').textContent='Permanently removes from products.json on GitHub.';document.getElementById('cm-btn').onclick=execDel;document.getElementById('confirm-modal').classList.add('open');}
+function closeConfirm(){document.getElementById('confirm-modal').classList.remove('open');_delId=null;}
+async function execDel(){const id=_delId;const p=products.find(x=>x.id===id);if(!p){closeConfirm();return;}closeConfirm();products=products.filter(x=>x.id!==id);const ok=await saveProd(`[PaizShop] Delete: ${p.name}`);if(ok){addLog(`Deleted: ${p.name}`);dLog('DELETED',`**${p.name}**`,0xf87171);toast('Deleted!','info');renderTable();updateStats();}else{products.push(p);renderTable();}}
 
-function closeProductModal() { document.getElementById('product-modal').classList.remove('open'); editingId = null; }
+/* SAVING / TOAST */
+function showSaving(m){document.getElementById('saving-txt').textContent=m||'SAVING...';document.getElementById('saving-overlay').classList.add('show');}
+function hideSaving(){document.getElementById('saving-overlay').classList.remove('show');}
+function toast(msg,type='ok'){const wrap=document.getElementById('toast-wrap');const el=document.createElement('div');el.className=`toast ${type}`;el.textContent=msg;wrap.appendChild(el);setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity 0.4s';setTimeout(()=>el.remove(),400);},3500);}
 
-async function saveProduct() {
-  const id    = document.getElementById('pm-id').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');
-  const name  = document.getElementById('pm-name').value.trim();
-  const price = parseInt(document.getElementById('pm-price').value) || 0;
-  const unit  = document.getElementById('pm-unit').value.trim() || 'Diamond';
-  const stock = parseInt(document.getElementById('pm-stock').value) || 0;
-  const cat   = document.getElementById('pm-category').value.trim();
-  const image = document.getElementById('pm-image').value.trim();
-  const desc  = document.getElementById('pm-desc').value.trim();
-  const listed= document.getElementById('pm-listed').checked;
-
-  if (!id || !name || price < 0) { toast('Fill in ID, Name, and Price', 'err'); return; }
-
-  const btn  = document.getElementById('pmodal-save-btn');
-  const spin = document.getElementById('pmodal-spin');
-  btn.disabled = true; spin.style.display = 'block';
-
-  if (editingId) {
-    const idx = products.findIndex(p=>p.id===editingId);
-    if (idx === -1) { toast('Product not found', 'err'); btn.disabled=false; spin.style.display='none'; return; }
-    products[idx] = { ...products[idx], name, price, unit, stock, category:cat, image, description:desc, listed };
-    const ok = await saveToGithub(`[PaizShop] Edit product: ${name}`);
-    if (ok) {
-      addLog(`Edited: ${name}`);
-      discordLog('PRODUCT EDITED', `**${name}** (${id})\nPrice: ◆ ${price}\nStock: ${stock}\nListed: ${listed?'Yes':'No'}`, 0x60a5fa);
-      toast('Product updated!', 'ok');
-      closeProductModal();
-      renderTable(); updateStats();
-    }
-  } else {
-    if (products.find(p=>p.id===id)) { toast('ID already exists!', 'err'); btn.disabled=false; spin.style.display='none'; return; }
-    products.push({ id, name, price, unit, stock, category:cat, image, description:desc, listed });
-    const ok = await saveToGithub(`[PaizShop] Add product: ${name}`);
-    if (ok) {
-      addLog(`Added: ${name}`);
-      discordLog('PRODUCT ADDED', `**${name}** (${id})\nPrice: ◆ ${price}\nStock: ${stock}\nCategory: ${cat||'—'}`, 0x4ade80);
-      toast('Product added!', 'ok');
-      closeProductModal();
-      renderTable(); updateStats();
-    }
-  }
-  btn.disabled=false; spin.style.display='none';
-}
-
-/* ── STOCK MODAL ─────────────────────────────────── */
-function openStockModal(id) {
-  const p = products.find(x=>x.id===id);
-  if (!p) return;
-  document.getElementById('sm-id').value = id;
-  document.getElementById('sm-product-name').textContent = p.name.toUpperCase();
-  const cur = document.getElementById('sm-current');
-  cur.textContent = p.stock;
-  cur.className   = 'sc-val' + (p.stock<=0 ? ' zero' : '');
-  document.getElementById('sm-value').value = p.stock;
-  document.getElementById('stock-modal').classList.add('open');
-}
-function closeStockModal() { document.getElementById('stock-modal').classList.remove('open'); }
-
-async function saveStock() {
-  const id  = document.getElementById('sm-id').value;
-  const val = parseInt(document.getElementById('sm-value').value);
-  if (isNaN(val) || val < 0) { toast('Enter a valid stock number', 'err'); return; }
-  const p   = products.find(x=>x.id===id);
-  if (!p) return;
-  const old = p.stock;
-  p.stock   = val;
-  const ok  = await saveToGithub(`[PaizShop] Stock update: ${p.name} → ${val}`);
-  if (ok) {
-    addLog(`Stock: ${p.name} ${old} → ${val}`);
-    discordLog('STOCK UPDATED', `**${p.name}**\n${old} → **${val}** ${val===0?'(SOLD OUT)':val>old?'(restocked)':'(reduced)'}`, val===0 ? 0xf87171 : 0xfbbf24);
-    toast('Stock updated!', 'ok');
-    closeStockModal();
-    renderTable(); updateStats();
-  } else {
-    p.stock = old;
-  }
-}
-
-/* ── TOGGLE LISTED ───────────────────────────────── */
-async function toggleListed(id) {
-  const p  = products.find(x=>x.id===id);
-  if (!p) return;
-  const was = p.listed;
-  p.listed  = !was;
-  const ok  = await saveToGithub(`[PaizShop] ${p.listed?'Listed':'Unlisted'}: ${p.name}`);
-  if (ok) {
-    addLog(`${p.listed?'Listed':'Unlisted'}: ${p.name}`);
-    discordLog(p.listed ? 'PRODUCT LISTED' : 'PRODUCT UNLISTED', `**${p.name}** is now ${p.listed?'visible in shop':'hidden from shop'}`, p.listed ? 0x4ade80 : 0x6b7280);
-    toast(`${p.name} ${p.listed?'listed':'unlisted'}!`, 'ok');
-    renderTable(); updateStats();
-  } else {
-    p.listed = was;
-  }
-}
-
-/* ── DELETE ──────────────────────────────────────── */
-let _deleteId = null;
-
-function confirmDelete(id) {
-  const p = products.find(x=>x.id===id);
-  if (!p) return;
-  _deleteId = id;
-  document.getElementById('cm-title').textContent = 'Delete "' + p.name + '"?';
-  document.getElementById('cm-msg').textContent   = 'This will permanently remove the product from products.json on GitHub. Cannot be undone.';
-  document.getElementById('cm-confirm-btn').onclick = executeDelete;
-  document.getElementById('confirm-modal').classList.add('open');
-}
-function closeConfirm() { document.getElementById('confirm-modal').classList.remove('open'); _deleteId = null; }
-
-async function executeDelete() {
-  const id = _deleteId;
-  const p  = products.find(x=>x.id===id);
-  if (!p) { closeConfirm(); return; }
-  closeConfirm();
-  products = products.filter(x=>x.id!==id);
-  const ok = await saveToGithub(`[PaizShop] Delete product: ${p.name}`);
-  if (ok) {
-    addLog(`Deleted: ${p.name}`);
-    discordLog('PRODUCT DELETED', `**${p.name}** (${id}) has been removed from the shop.`, 0xf87171);
-    toast('Product deleted!', 'info');
-    renderTable(); updateStats();
-  } else {
-    products.push(p);
-    renderTable();
-  }
-}
-
-/* ── SAVING OVERLAY ──────────────────────────────── */
-function showSaving(msg) { document.getElementById('saving-txt').textContent = msg || 'SAVING...'; document.getElementById('saving-overlay').classList.add('show'); }
-function hideSaving()    { document.getElementById('saving-overlay').classList.remove('show'); }
-
-/* ── TOAST ───────────────────────────────────────── */
-function toast(msg, type='ok') {
-  const wrap = document.getElementById('toast-wrap');
-  const el   = document.createElement('div');
-  el.className = `toast ${type}`;
-  el.textContent = msg;
-  wrap.appendChild(el);
-  setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity 0.4s'; setTimeout(()=>el.remove(), 400); }, 3500);
-}
-
-/* ── AUTO-LOGIN ──────────────────────────────────── */
-if (localStorage.getItem(LS.SESSION)) {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  initApp();
-}
+if(localStorage.getItem(LS.SESSION)){document.getElementById('login-screen').style.display='none';document.getElementById('app').style.display='block';initApp();}
 </script>
 </body>
 </html>
