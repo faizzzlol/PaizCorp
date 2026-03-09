@@ -29,7 +29,7 @@
     "stock": 0,
     "image": "img/mending.png",
     "category": "Enchantment",
-    "listed": true,
+    "listed": false,
     "description": "Greatly increases item durability."
   },
   {
