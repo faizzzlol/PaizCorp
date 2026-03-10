@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+
+  <!-- White background -->
+  <rect width="32" height="32" rx="6" fill="#ffffff"/>
+
+  <!-- Handle — thicker, fills top area -->
+  <path d="M9,17 C9,9 23,9 23,17"
+        fill="none" stroke="#DC2626" stroke-width="2.8"
+        stroke-linecap="round"/>
+
+  <!-- Bag body — much bigger, fills the square -->
+  <rect x="4" y="15" width="24" height="14" rx="2.5" fill="#DC2626"/>
+
+  <!-- Top fold -->
+  <rect x="4" y="15" width="24" height="3.5" rx="2.5" fill="#b91c1c"/>
+
+  <!-- PS bold and large -->
+  <text
+    x="16" y="27"
+    text-anchor="middle"
+    font-family="'Arial Black', Arial, sans-serif"
+    font-weight="900"
+    font-size="11"
+    letter-spacing="1"
+    fill="#ffffff">PS</text>
+
+</svg>
