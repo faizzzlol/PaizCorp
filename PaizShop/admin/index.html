@@ -9,13 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#171d16;--bg2:#1d2420;--bg3:#232b22;--bg4:#2a3228;--surface:#303930;
+  --bg:#141414;--bg2:#1a1a1a;--bg3:#202020;--bg4:#282828;--surface:#313131;
   --border:rgba(255,255,255,0.10);--border2:rgba(255,255,255,0.06);
-  --green:#4ade80;--green-dk:#22c55e;--green-dim:rgba(74,222,128,0.10);
+  --accent:#DC2626;--accent-dk:#b91c1c;--accent-dim:rgba(220,38,38,0.10);
   --gold:#fbbf24;--gold-dim:rgba(251,191,36,0.10);
   --red:#f87171;--red-dim:rgba(248,113,113,0.10);
   --blue:#60a5fa;--blue-dim:rgba(96,165,250,0.10);
-  --txt:#edf2e7;--txt2:rgba(237,242,231,0.78);--txt3:rgba(237,242,231,0.52);--txt4:rgba(237,242,231,0.28);
+  --txt:#f2f2f2;--txt2:rgba(242,242,242,0.78);--txt3:rgba(242,242,242,0.52);--txt4:rgba(242,242,242,0.28);
 }
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;min-height:100vh}
@@ -30,21 +30,21 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-
 .login-group{margin-bottom:1rem}
 .login-label{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt4);display:block;margin-bottom:0.45rem}
 .login-input{width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s}
-.login-input:focus{border-color:var(--green)}.login-input::placeholder{color:var(--txt4)}
-.login-btn{width:100%;padding:12px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;letter-spacing:2px;transition:background 0.2s;margin-top:0.5rem}
-.login-btn:hover{background:var(--green-dk)}
+.login-input:focus{border-color:var(--accent)}.login-input::placeholder{color:var(--txt4)}
+.login-btn{width:100%;padding:12px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;letter-spacing:2px;transition:background 0.2s;margin-top:0.5rem}
+.login-btn:hover{background:var(--accent-dk)}
 .login-error{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;text-align:center;margin-top:0.8rem;display:none}
 #app{display:none}
 
 /* NAV */
-nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:center;padding:0 4%;gap:14px;background:rgba(23,29,22,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:center;padding:0 4%;gap:14px;background:rgba(14,14,14,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
 .nav-sq{width:28px;height:28px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;color:#fff}
 .nav-name{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;color:var(--txt);letter-spacing:-0.2px}
 .nav-tag{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:2px;padding:3px 8px;background:var(--red-dim);border:1px solid rgba(248,113,113,0.2);color:var(--red)}
 .nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
 .nav-link{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);transition:all 0.2s}
-.nav-link:hover{color:var(--green);border-color:rgba(74,222,128,0.2)}
+.nav-link:hover{color:var(--accent);border-color:rgba(220,38,38,0.2)}
 .logout-btn{padding:6px 14px;background:transparent;border:1px solid rgba(248,113,113,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--red);transition:all 0.2s}
 .logout-btn:hover{background:var(--red-dim)}
 
@@ -76,9 +76,9 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .tabs{display:flex;gap:2px;max-width:1300px;margin:0 auto}
 .tab-btn{padding:10px 20px;background:transparent;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;display:flex;align-items:center;gap:8px}
 .tab-btn:hover{color:var(--txt2)}
-.tab-btn.active{color:var(--txt);border-bottom-color:var(--green)}
+.tab-btn.active{color:var(--txt);border-bottom-color:var(--accent)}
 .tab-badge{background:var(--bg3);border:1px solid var(--border);font-size:0.45rem;padding:1px 6px;color:var(--txt4)}
-.tab-btn.active .tab-badge{background:var(--green-dim);border-color:rgba(74,222,128,0.3);color:var(--green)}
+.tab-btn.active .tab-badge{background:var(--accent-dim);border-color:rgba(220,38,38,0.3);color:var(--accent)}
 .tab-panel{display:none}.tab-panel.active{display:block}
 
 /* MAIN GRID */
@@ -87,14 +87,14 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 /* PRODUCTS */
 .section-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border)}
 .sec-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
-.add-new-btn{padding:8px 18px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:background 0.2s}
-.add-new-btn:hover{background:var(--green-dk)}
+.add-new-btn{padding:8px 18px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:background 0.2s}
+.add-new-btn:hover{background:var(--accent-dk)}
 .table-search{width:100%;padding:9px 14px;background:var(--bg2);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.88rem;outline:none;margin-bottom:8px;transition:border-color 0.2s}
-.table-search:focus{border-color:var(--green)}.table-search::placeholder{color:var(--txt4)}
+.table-search:focus{border-color:var(--accent)}.table-search::placeholder{color:var(--txt4)}
 .prod-list{display:flex;flex-direction:column;gap:2px}
 .prod-row{background:var(--bg2);border:1px solid var(--border2);padding:1rem 1.2rem;display:grid;grid-template-columns:48px 1fr auto auto;gap:14px;align-items:center;transition:background 0.2s;position:relative;overflow:hidden}
 .prod-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;opacity:0;transition:opacity 0.2s}
-.prod-row.status-listed::before{background:var(--green);opacity:1}
+.prod-row.status-listed::before{background:var(--accent);opacity:1}
 .prod-row.status-unlisted::before{background:var(--txt4);opacity:1}
 .prod-row:hover{background:var(--bg3)}.prod-row.status-unlisted{opacity:0.6}
 .pr-img{width:48px;height:48px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -105,7 +105,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .pr-price{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--gold)}
 .pr-cat{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt4);padding:2px 6px;border:1px solid var(--border2)}
 .pr-status-tag{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;padding:2px 7px;border:1px solid}
-.tag-listed{border-color:rgba(74,222,128,0.35);color:var(--green);background:var(--green-dim)}
+.tag-listed{border-color:rgba(220,38,38,0.35);color:var(--accent);background:var(--accent-dim)}
 .tag-unlisted{border-color:rgba(255,255,255,0.1);color:var(--txt4)}
 .pr-stock-wrap{text-align:center;min-width:80px}
 .pr-stock-num{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--txt);display:block;line-height:1}
@@ -116,7 +116,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .act-btn:hover{background:var(--bg4)}
 .act-btn[title]:hover::after{content:attr(title);position:absolute;bottom:calc(100% + 5px);left:50%;transform:translateX(-50%);background:var(--bg4);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.45rem;letter-spacing:1px;white-space:nowrap;padding:3px 8px;border:1px solid var(--border);pointer-events:none;z-index:10}
 .pr-sold{font-family:"IBM Plex Mono",monospace;font-size:0.48rem;letter-spacing:1px;color:var(--txt4);padding:2px 6px;border:1px solid var(--border2)}
-.pr-sold.has-sales{color:var(--green);border-color:rgba(74,222,128,0.2);background:var(--green-dim)}
+.pr-sold.has-sales{color:var(--accent);border-color:rgba(220,38,38,0.2);background:var(--accent-dim)}
 .best-badge{font-family:"IBM Plex Mono",monospace;font-size:0.44rem;letter-spacing:1.5px;padding:2px 7px;background:var(--gold-dim);border:1px solid rgba(251,191,36,0.3);color:var(--gold);vertical-align:middle;margin-left:6px}
 
 /* TRANSACTIONS TAB */
@@ -128,8 +128,8 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .txn-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
 .txn-filters{display:flex;gap:3px;flex-wrap:wrap}
 .tf-btn{padding:6px 12px;background:transparent;border:1px solid var(--border2);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt3);transition:all 0.2s}
-.tf-btn:hover{border-color:var(--green);color:var(--green)}
-.tf-btn.active{background:var(--green-dim);border-color:rgba(74,222,128,0.35);color:var(--green)}
+.tf-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tf-btn.active{background:var(--accent-dim);border-color:rgba(220,38,38,0.35);color:var(--accent)}
 .add-txn-btn{padding:8px 18px;background:var(--blue);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:all 0.2s}
 .add-txn-btn:hover{background:#93c5fd}
 
@@ -140,7 +140,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .txn-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
 .txn-row.s-pending::before{background:var(--txt4)}
 .txn-row.s-confirmed::before{background:var(--blue)}
-.txn-row.s-delivered::before{background:var(--green)}
+.txn-row.s-delivered::before{background:var(--accent)}
 .txn-row.s-cancelled::before{background:var(--red)}
 .txn-id-line{font-family:'IBM Plex Mono',monospace;font-size:0.57rem;letter-spacing:2px;color:var(--txt3);margin-bottom:3px;display:flex;align-items:center;gap:10px}
 .txn-main-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:2px}
@@ -153,7 +153,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .txn-btns{display:flex;flex-direction:column;gap:3px;flex-shrink:0}
 .s-btn{padding:5px 10px;background:transparent;border:1px solid;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;transition:all 0.2s;white-space:nowrap}
 .s-btn-confirm{border-color:rgba(96,165,250,0.3);color:var(--blue)}.s-btn-confirm:hover{background:var(--blue-dim)}
-.s-btn-deliver{border-color:rgba(74,222,128,0.3);color:var(--green)}.s-btn-deliver:hover{background:var(--green-dim)}
+.s-btn-deliver{border-color:rgba(220,38,38,0.3);color:var(--accent)}.s-btn-deliver:hover{background:var(--accent-dim)}
 .s-btn-cancel{border-color:rgba(248,113,113,0.25);color:var(--red)}.s-btn-cancel:hover{background:var(--red-dim)}
 .s-btn-revert{border-color:rgba(255,255,255,0.12);color:var(--txt4)}.s-btn-revert:hover{background:rgba(255,255,255,0.05)}
 .s-btn-sm{font-size:0.43rem;letter-spacing:1px;border-color:rgba(255,255,255,0.08);color:var(--txt4)}.s-btn-sm:hover{color:var(--txt2);border-color:var(--border)}
@@ -164,7 +164,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .st-badge::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .st-pending{border-color:rgba(255,255,255,0.12);color:var(--txt3)}.st-pending::before{background:var(--txt4)}
 .st-confirmed{border-color:rgba(96,165,250,0.3);color:var(--blue);background:var(--blue-dim)}.st-confirmed::before{background:var(--blue);box-shadow:0 0 5px rgba(96,165,250,0.5)}
-.st-delivered{border-color:rgba(74,222,128,0.35);color:var(--green);background:var(--green-dim)}.st-delivered::before{background:var(--green);box-shadow:0 0 5px rgba(74,222,128,0.5)}
+.st-delivered{border-color:rgba(220,38,38,0.35);color:var(--accent);background:var(--accent-dim)}.st-delivered::before{background:var(--accent);box-shadow:0 0 5px rgba(220,38,38,0.4)}
 .st-cancelled{border-color:rgba(248,113,113,0.3);color:var(--red);background:var(--red-dim)}.st-cancelled::before{background:var(--red)}
 
 /* RIGHT PANEL */
@@ -173,17 +173,17 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .panel-title{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2.5px;color:var(--txt4);margin-bottom:1rem}
 .token-status{display:flex;align-items:center;gap:8px;padding:8px 10px;margin-bottom:0.9rem;border:1px solid var(--border2);background:var(--bg3)}
 .ts-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.ts-dot.ok{background:var(--green);box-shadow:0 0 6px rgba(74,222,128,0.4)}
+.ts-dot.ok{background:var(--accent);box-shadow:0 0 6px rgba(220,38,38,0.4)}
 .ts-dot.err{background:var(--red);box-shadow:0 0 6px rgba(248,113,113,0.4)}
 .ts-dot.idle{background:var(--txt4)}
 .ts-txt{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1px;color:var(--txt3)}
 .cfg-group{margin-bottom:0.9rem}
 .cfg-label{font-family:'IBM Plex Mono',monospace;font-size:0.49rem;letter-spacing:1.5px;color:var(--txt4);display:block;margin-bottom:0.4rem}
 .cfg-input{width:100%;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.62rem;outline:none;transition:border-color 0.2s}
-.cfg-input:focus{border-color:var(--green)}.cfg-input::placeholder{color:var(--txt4)}
+.cfg-input:focus{border-color:var(--accent)}.cfg-input::placeholder{color:var(--txt4)}
 .cfg-input.highlight{border-color:rgba(248,113,113,0.5);background:rgba(248,113,113,0.04)}
 .cfg-save-btn{width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;color:var(--txt2);transition:all 0.2s;margin-top:0.3rem}
-.cfg-save-btn:hover{background:var(--green-dim);border-color:rgba(74,222,128,0.3);color:var(--green)}
+.cfg-save-btn:hover{background:var(--accent-dim);border-color:rgba(220,38,38,0.3);color:var(--accent)}
 .cfg-hint{font-size:0.72rem;color:var(--txt4);margin-top:3px}
 .log-list{display:flex;flex-direction:column;gap:4px;max-height:280px;overflow-y:auto}
 .log-item{background:var(--bg3);border:1px solid var(--border2);padding:0.6rem 0.8rem}
@@ -209,7 +209,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .flabel{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt3);display:block;margin-bottom:0.4rem}
 .flabel .req{color:var(--red)}
 .finput,.fselect,.ftextarea{width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;appearance:none}
-.finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--green)}
+.finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--accent)}
 .finput::placeholder,.ftextarea::placeholder{color:var(--txt4)}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .fhint{font-size:0.76rem;color:var(--txt4);margin-top:3px}
@@ -220,13 +220,13 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .toggle input{opacity:0;width:0;height:0;position:absolute}
 .toggle-slider{position:absolute;inset:0;background:var(--bg4);border:1px solid var(--border);transition:0.25s}
 .toggle-slider::before{content:'';position:absolute;width:16px;height:16px;left:2px;top:2px;background:var(--txt4);transition:0.25s}
-.toggle input:checked + .toggle-slider{background:var(--green-dim);border-color:rgba(74,222,128,0.4)}
-.toggle input:checked + .toggle-slider::before{background:var(--green);transform:translateX(20px)}
+.toggle input:checked + .toggle-slider{background:var(--accent-dim);border-color:rgba(220,38,38,0.4)}
+.toggle input:checked + .toggle-slider::before{background:var(--accent);transform:translateX(20px)}
 .modal-ft{padding:1rem 1.6rem;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
 .btn-cancel{padding:8px 18px;background:transparent;border:1px solid var(--border);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--txt2);transition:all 0.2s}
 .btn-cancel:hover{border-color:var(--txt2);color:var(--txt)}
-.btn-save{padding:8px 20px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;letter-spacing:2px;transition:background 0.2s;display:flex;align-items:center;gap:8px}
-.btn-save:hover:not(:disabled){background:var(--green-dk)}
+.btn-save{padding:8px 20px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;letter-spacing:2px;transition:background 0.2s;display:flex;align-items:center;gap:8px}
+.btn-save:hover:not(:disabled){background:var(--accent-dk)}
 .btn-save:disabled{background:var(--bg4);color:var(--txt4);cursor:not-allowed}
 .btn-danger{padding:8px 20px;background:var(--red-dim);color:var(--red);border:1px solid rgba(248,113,113,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;transition:all 0.2s}
 .btn-danger:hover{background:rgba(248,113,113,0.15)}
@@ -235,12 +235,12 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .items-builder{border:1px solid var(--border);background:var(--bg3)}
 .ib-header{padding:8px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
 .ib-label{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--txt4)}
-.ib-add{padding:4px 10px;background:var(--green-dim);border:1px solid rgba(74,222,128,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--green);transition:all 0.2s}
-.ib-add:hover{background:rgba(74,222,128,0.15)}
+.ib-add{padding:4px 10px;background:var(--accent-dim);border:1px solid rgba(220,38,38,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--accent);transition:all 0.2s}
+.ib-add:hover{background:rgba(220,38,38,0.15)}
 .ib-rows{padding:8px;display:flex;flex-direction:column;gap:4px}
 .ib-row{display:grid;grid-template-columns:1fr 55px 65px 28px;gap:4px;align-items:center}
 .ib-inp{width:100%;padding:6px 8px;background:var(--bg4);border:1px solid var(--border2);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.82rem;outline:none}
-.ib-inp:focus{border-color:var(--green)}.ib-inp::placeholder{color:var(--txt4)}
+.ib-inp:focus{border-color:var(--accent)}.ib-inp::placeholder{color:var(--txt4)}
 .ib-del{width:28px;height:28px;background:transparent;border:1px solid var(--border2);cursor:pointer;color:var(--red);font-size:0.7rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
 .ib-del:hover{background:var(--red-dim)}
 
@@ -251,7 +251,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .sc-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt4)}
 .stock-presets{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:1rem}
 .preset-btn{padding:5px 12px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;color:var(--txt2);transition:all 0.2s}
-.preset-btn:hover{border-color:var(--green);color:var(--green)}
+.preset-btn:hover{border-color:var(--accent);color:var(--accent)}
 .confirm-body{padding:2rem 1.5rem;text-align:center}
 .confirm-icon{font-size:2.5rem;display:block;margin-bottom:0.8rem}
 .confirm-body h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);margin-bottom:0.5rem;letter-spacing:-0.3px}
@@ -260,14 +260,14 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 /* SAVING */
 .saving-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:600;align-items:center;justify-content:center;flex-direction:column;gap:12px}
 .saving-overlay.show{display:flex}
-.saving-spin{width:36px;height:36px;border:3px solid rgba(74,222,128,0.2);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
+.saving-spin{width:36px;height:36px;border:3px solid rgba(220,38,38,0.2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.saving-txt{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:2px;color:var(--green)}
+.saving-txt{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:2px;color:var(--accent)}
 
 /* TOAST */
 .toast-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:700;display:flex;flex-direction:column;gap:6px}
 .toast{padding:10px 16px;background:var(--bg3);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;border:1px solid var(--border);display:flex;align-items:center;gap:8px;animation:tIn 0.25s ease;max-width:300px}
-.toast.ok{border-left:3px solid var(--green)}.toast.err{border-left:3px solid var(--red)}.toast.info{border-left:3px solid var(--blue)}
+.toast.ok{border-left:3px solid var(--accent)}.toast.err{border-left:3px solid var(--red)}.toast.info{border-left:3px solid var(--blue)}
 @keyframes tIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
 @media(max-width:1024px){.main{grid-template-columns:1fr}.right-panel{position:static}}
@@ -312,7 +312,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
     </div>
     <div class="ah-stats">
       <div class="ah-stat"><span class="ahs-val" id="st-total" style="color:var(--blue)">—</span><span class="ahs-key">PRODUCTS</span></div>
-      <div class="ah-stat"><span class="ahs-val" id="st-listed" style="color:var(--green)">—</span><span class="ahs-key">LISTED</span></div>
+      <div class="ah-stat"><span class="ahs-val" id="st-listed" style="color:var(--accent)">—</span><span class="ahs-key">LISTED</span></div>
       <div class="ah-stat"><span class="ahs-val" id="st-pending" style="color:var(--gold)">—</span><span class="ahs-key">PENDING</span></div>
       <div class="ah-stat"><span class="ahs-val" id="st-confirmed" style="color:var(--blue)">—</span><span class="ahs-key">CONFIRMED</span></div>
     </div>
@@ -354,7 +354,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
           <div class="panel-title">QUICK STATS</div>
           <div class="qs-grid">
             <div class="qs-item"><span class="qs-val" id="qs-total" style="color:var(--blue)">—</span><span class="qs-key">PRODUCTS</span></div>
-            <div class="qs-item"><span class="qs-val" id="qs-listed" style="color:var(--green)">—</span><span class="qs-key">LISTED</span></div>
+            <div class="qs-item"><span class="qs-val" id="qs-listed" style="color:var(--accent)">—</span><span class="qs-key">LISTED</span></div>
             <div class="qs-item"><span class="qs-val" id="qs-instock" style="color:var(--gold)">—</span><span class="qs-key">IN STOCK</span></div>
             <div class="qs-item"><span class="qs-val" id="qs-hidden" style="color:var(--txt4)">—</span><span class="qs-key">HIDDEN</span></div>
           </div>
@@ -391,7 +391,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
         <div class="txn-stat"><span class="txn-stat-val" id="txn-all"       style="color:var(--txt)">0</span><span class="txn-stat-key">TOTAL</span></div>
         <div class="txn-stat"><span class="txn-stat-val" id="txn-pending"   style="color:var(--txt4)">0</span><span class="txn-stat-key">PENDING</span></div>
         <div class="txn-stat"><span class="txn-stat-val" id="txn-confirmed" style="color:var(--blue)">0</span><span class="txn-stat-key">CONFIRMED</span></div>
-        <div class="txn-stat"><span class="txn-stat-val" id="txn-delivered" style="color:var(--green)">0</span><span class="txn-stat-key">DELIVERED</span></div>
+        <div class="txn-stat"><span class="txn-stat-val" id="txn-delivered" style="color:var(--accent)">0</span><span class="txn-stat-key">DELIVERED</span></div>
         <div class="txn-stat"><span class="txn-stat-val" id="txn-cancelled" style="color:var(--red)">0</span><span class="txn-stat-key">CANCELLED</span></div>
       </div>
       <div class="txn-toolbar">
@@ -422,7 +422,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
       <div class="fg"><label class="flabel">DESCRIPTION</label><input type="text" class="finput" id="pm-desc" placeholder="Short description"></div>
       <div class="toggle-row"><span class="toggle-lbl">LISTED (visible in shop)</span><label class="toggle"><input type="checkbox" id="pm-listed" checked><span class="toggle-slider"></span></label></div>
     </div>
-    <div class="modal-ft"><button class="btn-cancel" onclick="closePM()">CANCEL</button><button class="btn-save" id="pm-save" onclick="saveProduct()"><span id="pm-spin" style="width:13px;height:13px;border:2px solid rgba(0,0,0,0.3);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite;display:none"></span>SAVE</button></div>
+    <div class="modal-ft"><button class="btn-cancel" onclick="closePM()">CANCEL</button><button class="btn-save" id="pm-save" onclick="saveProduct()"><span id="pm-spin" style="width:13px;height:13px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;display:none"></span>SAVE</button></div>
   </div>
 </div>
 
@@ -455,10 +455,10 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
     <div class="modal-body">
       <!-- PASTE PARSER -->
       <div id="paste-section" style="margin-bottom:1.2rem">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--txt4);margin-bottom:0.45rem">PASTE DISCORD NOTIFICATION <span style="color:var(--green);font-size:0.42rem">(RECOMMENDED)</span></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--txt4);margin-bottom:0.45rem">PASTE DISCORD NOTIFICATION <span style="color:var(--accent);font-size:0.42rem">(RECOMMENDED)</span></div>
         <textarea id="paste-input" style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.58rem;outline:none;resize:vertical;min-height:90px;line-height:1.7;transition:border-color 0.2s" placeholder="Copy the Discord order notification message and paste it here, then click Parse →"></textarea>
         <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
-          <button onclick="parseDiscordMsg()" style="padding:7px 18px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;letter-spacing:2px;transition:background 0.2s" onmouseover="this.style.background='#22c55e'" onmouseout="this.style.background='var(--green)'">⚡ PARSE & FILL</button>
+          <button onclick="parseDiscordMsg()" style="padding:7px 18px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;letter-spacing:2px;transition:background 0.2s" onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='var(--accent)'">⚡ PARSE & FILL</button>
           <span id="parse-status" style="font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1px;color:var(--txt4)"></span>
         </div>
         <div style="margin-top:8px;border-top:1px solid var(--border2);padding-top:8px;font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1px;color:var(--txt4);line-height:2">
@@ -493,7 +493,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
       </div>
       <div class="fg"><label class="flabel">NOTES</label><textarea class="ftextarea" id="tm-notes" placeholder="Customer notes..."></textarea></div>
     </div>
-    <div class="modal-ft"><button class="btn-cancel" onclick="closeTxnModal()">CANCEL</button><button class="btn-save" id="txn-save" onclick="saveTxn()"><span id="txn-spin" style="width:13px;height:13px;border:2px solid rgba(0,0,0,0.3);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite;display:none"></span>SAVE ORDER</button></div>
+    <div class="modal-ft"><button class="btn-cancel" onclick="closeTxnModal()">CANCEL</button><button class="btn-save" id="txn-save" onclick="saveTxn()"><span id="txn-spin" style="width:13px;height:13px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;display:none"></span>SAVE ORDER</button></div>
   </div>
 </div>
 
@@ -697,7 +697,7 @@ async function setStatus(id,ns){
   }
   const note=stockChanged?'\n📦 Stock updated automatically':'';
   addLog(`${id}: ${os} → ${ns}${stockChanged?' + stock updated':''}`);
-  dLog('STATUS UPDATE',`**${id}** (${t.ign})\n${os} → **${ns}**\n◆ ${t.total}${note}`,ns==='delivered'?0x4ade80:ns==='confirmed'?0x60a5fa:ns==='cancelled'?0xf87171:0x6b7280);
+  dLog('STATUS UPDATE',`**${id}** (${t.ign})\n${os} → **${ns}**\n◆ ${t.total}${note}`,ns==='delivered'?0xDC2626:ns==='confirmed'?0x60a5fa:ns==='cancelled'?0xf87171:0x6b7280);
   toast(`${id} → ${ns}!${stockChanged?' Stock updated.':''}`,'ok');
   renderTxns();updateStats();
 }
@@ -767,8 +767,8 @@ function parseDiscordMsg(){
 
   if(filled >= 3){
     status.textContent = '✅ Auto-filled ' + filled + ' fields!';
-    status.style.color = 'var(--green)';
-    document.getElementById('paste-input').style.borderColor = 'rgba(74,222,128,0.4)';
+    status.style.color = 'var(--accent)';
+    document.getElementById('paste-input').style.borderColor = 'rgba(220,38,38,0.4)';
   } else {
     status.textContent = '⚠ Only found ' + filled + ' fields — check format';
     status.style.color = 'var(--gold)';
@@ -821,13 +821,13 @@ async function saveProduct(){
   if(!id||!name){toast('ID and Name required','err');return;}
   const btn=document.getElementById('pm-save');const spin=document.getElementById('pm-spin');btn.disabled=true;spin.style.display='block';
   if(editingId){const idx=products.findIndex(p=>p.id===editingId);if(idx===-1){toast('Not found','err');btn.disabled=false;spin.style.display='none';return;}products[idx]={...products[idx],name,price,unit,stock,category:cat,image,description:desc,listed};const ok=await saveProd(`[PaizShop] Edit: ${name}`);if(ok){addLog(`Edited: ${name}`);dLog('EDITED',`**${name}**`,0x60a5fa);toast('Updated!','ok');closePM();renderTable();updateStats();}}
-  else{if(products.find(p=>p.id===id)){toast('ID exists!','err');btn.disabled=false;spin.style.display='none';return;}products.push({id,name,price,unit,stock,category:cat,image,description:desc,listed});const ok=await saveProd(`[PaizShop] Add: ${name}`);if(ok){addLog(`Added: ${name}`);dLog('ADDED',`**${name}**`,0x4ade80);toast('Added!','ok');closePM();renderTable();updateStats();}}
+  else{if(products.find(p=>p.id===id)){toast('ID exists!','err');btn.disabled=false;spin.style.display='none';return;}products.push({id,name,price,unit,stock,category:cat,image,description:desc,listed});const ok=await saveProd(`[PaizShop] Add: ${name}`);if(ok){addLog(`Added: ${name}`);dLog('ADDED',`**${name}**`,0xDC2626);toast('Added!','ok');closePM();renderTable();updateStats();}}
   btn.disabled=false;spin.style.display='none';
 }
 function openSM(id){const p=products.find(x=>x.id===id);if(!p)return;document.getElementById('sm-id').value=id;document.getElementById('sm-name').textContent=p.name.toUpperCase();const c=document.getElementById('sm-cur');c.textContent=p.stock;c.className='sc-val'+(p.stock<=0?' zero':'');document.getElementById('sm-val').value=p.stock;document.getElementById('stock-modal').classList.add('open');}
 function closeSM(){document.getElementById('stock-modal').classList.remove('open');}
 async function saveStock(){const id=document.getElementById('sm-id').value;const v=parseInt(document.getElementById('sm-val').value);if(isNaN(v)||v<0){toast('Invalid stock','err');return;}const p=products.find(x=>x.id===id);if(!p)return;const old=p.stock;p.stock=v;const ok=await saveProd(`[PaizShop] Stock: ${p.name}→${v}`);if(ok){addLog(`Stock: ${p.name} ${old}→${v}`);dLog('STOCK',`**${p.name}** ${old}→**${v}**`,0xfbbf24);toast('Stock updated!','ok');closeSM();renderTable();updateStats();}else{p.stock=old;}}
-async function toggleListed(id){const p=products.find(x=>x.id===id);if(!p)return;const was=p.listed;p.listed=!was;const ok=await saveProd(`[PaizShop] ${p.listed?'Listed':'Unlisted'}: ${p.name}`);if(ok){addLog(`${p.listed?'Listed':'Unlisted'}: ${p.name}`);dLog(p.listed?'LISTED':'UNLISTED',`**${p.name}**`,p.listed?0x4ade80:0x6b7280);toast(`${p.name} ${p.listed?'listed':'unlisted'}!`,'ok');renderTable();updateStats();}else{p.listed=was;}}
+async function toggleListed(id){const p=products.find(x=>x.id===id);if(!p)return;const was=p.listed;p.listed=!was;const ok=await saveProd(`[PaizShop] ${p.listed?'Listed':'Unlisted'}: ${p.name}`);if(ok){addLog(`${p.listed?'Listed':'Unlisted'}: ${p.name}`);dLog(p.listed?'LISTED':'UNLISTED',`**${p.name}**`,p.listed?0xDC2626:0x6b7280);toast(`${p.name} ${p.listed?'listed':'unlisted'}!`,'ok');renderTable();updateStats();}else{p.listed=was;}}
 let _delId=null;
 function confirmDel(id){const p=products.find(x=>x.id===id);if(!p)return;_delId=id;document.getElementById('cm-title').textContent=`Delete "${p.name}"?`;document.getElementById('cm-msg').textContent='Permanently removes from products.json on GitHub.';document.getElementById('cm-btn').onclick=execDel;document.getElementById('confirm-modal').classList.add('open');}
 function closeConfirm(){document.getElementById('confirm-modal').classList.remove('open');_delId=null;}
@@ -847,10 +847,10 @@ function renderBestSellers(){
           <span style="font-size:0.8rem;width:18px">${medal}</span>
           <span style="font-size:0.82rem;color:var(--txt2)">${p.name}</span>
         </div>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--green)">${p.sold} sold</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent)">${p.sold} sold</span>
       </div>
       <div style="height:3px;background:var(--bg4);border-radius:0">
-        <div style="height:3px;background:${i===0?'var(--gold)':'var(--green)'};width:${pct}%;transition:width 0.4s"></div>
+        <div style="height:3px;background:${i===0?'var(--gold)':'var(--accent)'};width:${pct}%;transition:width 0.4s"></div>
       </div>
     </div>`;
   }).join('');
