@@ -4,123 +4,112 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paiz Shop — Official Store</title>
-<link rel="icon" href="https://faizzzlol.github.io/PaizCorp/PaizShop/img/paizshop_logo.png">
+<link rel="icon" type="image/svg+xml" href="/PaizCorp/PaizShop/ps-logo-final.svg">
 <meta name="description" content="Buy Minecraft items with Diamonds. Official store of The Legend of Legiona.">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* ── Lifted from near-black to proper dark ── */
-  --bg:       #171d16;
-  --bg2:      #1d2420;
-  --bg3:      #232b22;
-  --bg4:      #2a3228;
-  --surface:  #303930;
+  --bg:       #141414;
+  --bg2:      #1a1a1a;
+  --bg3:      #202020;
+  --bg4:      #282828;
+  --surface:  #313131;
   --border:   rgba(255,255,255,0.10);
   --border2:  rgba(255,255,255,0.06);
-  --green:    #4ade80;
-  --green-dk: #22c55e;
-  --green-dim:rgba(74,222,128,0.10);
+  --accent:    #DC2626;
+  --accent-dk: #b91c1c;
+  --accent-dim:rgba(220,38,38,0.10);
   --gold:     #fbbf24;
   --gold-dim: rgba(251,191,36,0.10);
   --red:      #f87171;
   --red-dim:  rgba(248,113,113,0.10);
   --blue:     #60a5fa;
   --blue-dim: rgba(96,165,250,0.10);
-  /* ── Text boosted for readability ── */
-  --txt:      #edf2e7;
-  --txt2:     rgba(237,242,231,0.78);
-  --txt3:     rgba(237,242,231,0.52);
-  --txt4:     rgba(237,242,231,0.28);
+  --txt:      #f2f2f2;
+  --txt2:     rgba(242,242,242,0.78);
+  --txt3:     rgba(242,242,242,0.52);
+  --txt4:     rgba(242,242,242,0.28);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9998}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:300;height:58px;display:flex;align-items:center;padding:0 4%;background:rgba(23,29,22,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);gap:14px}
+nav{position:sticky;top:0;z-index:300;height:58px;display:flex;align-items:center;padding:0 4%;background:rgba(14,14,14,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);gap:14px}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.nav-logo-sq{width:30px;height:30px;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;color:#000;letter-spacing:0.5px}
+.nav-logo-sq{width:30px;height:30px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;color:#000;letter-spacing:0.5px}
 .nav-wordmark{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
 .nav-sep{width:1px;height:18px;background:var(--border);flex-shrink:0}
 .nav-links{display:flex;gap:2px}
 .nav-links a{padding:5px 11px;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;transition:color 0.2s}
-.nav-links a:hover{color:var(--green)}
+.nav-links a:hover{color:var(--accent)}
 .nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
-.cart-btn{display:flex;align-items:center;gap:8px;padding:7px 16px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.57rem;font-weight:500;letter-spacing:1.5px;transition:background 0.2s}
-.cart-btn:hover{background:var(--green-dk)}
-.cart-badge{background:#000;color:var(--green);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700}
+.cart-btn{display:flex;align-items:center;gap:8px;padding:7px 16px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.57rem;font-weight:500;letter-spacing:1.5px;transition:background 0.2s}
+.cart-btn:hover{background:var(--accent-dk)}
+.cart-badge{background:#000;color:var(--accent);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700}
 
-/* HERO */
 .hero{padding:3rem 4% 2.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-60%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(74,222,128,0.07) 0%,transparent 65%);pointer-events:none}
-.hero-tag{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--green);opacity:0.8;margin-bottom:0.8rem;display:flex;align-items:center;gap:10px}
-.hero-tag::before{content:'';width:22px;height:1px;background:var(--green);opacity:0.6}
+.hero::before{content:'';position:absolute;top:-60%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(220,38,38,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-tag{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--accent);opacity:0.8;margin-bottom:0.8rem;display:flex;align-items:center;gap:10px}
+.hero-tag::before{content:'';width:22px;height:1px;background:var(--accent);opacity:0.6}
 .hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:800;letter-spacing:-1.5px;line-height:1;color:var(--txt);margin-bottom:0.5rem}
-.hero h1 span{color:var(--green)}
+.hero h1 span{color:var(--accent)}
 .hero-sub{font-size:0.95rem;color:var(--txt3);font-weight:300;max-width:380px}
 .hero-stats{display:flex;gap:2px;flex-shrink:0}
 .hero-stat{background:var(--bg3);border:1px solid var(--border);padding:1rem 1.5rem;text-align:center;min-width:100px}
-.hs-val{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--green);display:block;line-height:1;margin-bottom:3px}
+.hs-val{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);display:block;line-height:1;margin-bottom:3px}
 .hs-key{font-family:'IBM Plex Mono',monospace;font-size:0.45rem;letter-spacing:2px;color:var(--txt4);display:block}
 
-/* TICKER */
-.ticker{background:var(--green);padding:0.55rem 0;overflow:hidden}
+.ticker{background:var(--accent);padding:0.55rem 0;overflow:hidden}
 .ticker-track{display:flex;animation:ticker 25s linear infinite;white-space:nowrap}
-.ticker-item{display:inline-flex;align-items:center;gap:16px;padding:0 24px;font-family:'IBM Plex Mono',monospace;font-size:0.54rem;letter-spacing:2px;color:rgba(0,0,0,0.7);flex-shrink:0}
-.tdot{width:3px;height:3px;border-radius:50%;background:rgba(0,0,0,0.3)}
+.ticker-item{display:inline-flex;align-items:center;gap:16px;padding:0 24px;font-family:'IBM Plex Mono',monospace;font-size:0.54rem;letter-spacing:2px;color:rgba(255,255,255,0.85);flex-shrink:0}
+.tdot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.4)}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* LAYOUT */
 .shop-wrap{max-width:1300px;margin:0 auto;padding:2.5rem 4%;display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:start}
 
-/* SIDEBAR */
 .sidebar{position:sticky;top:76px;display:flex;flex-direction:column;gap:8px}
 .sb-box{background:var(--bg2);border:1px solid var(--border);padding:1.4rem}
 .sb-label{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2.5px;color:var(--txt4);margin-bottom:0.9rem}
 .search-wrap{position:relative}
 .search-inp{width:100%;padding:9px 34px 9px 12px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s}
 .search-inp::placeholder{color:var(--txt4)}
-.search-inp:focus{border-color:var(--green)}
+.search-inp:focus{border-color:var(--accent)}
 .search-ico{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--txt4);font-size:0.8rem;pointer-events:none}
 .filter-list{display:flex;flex-direction:column;gap:3px}
 .f-btn{width:100%;padding:7px 10px;background:transparent;border:1px solid var(--border2);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.53rem;letter-spacing:1.5px;color:var(--txt3);text-align:left;transition:all 0.2s}
-.f-btn:hover{border-color:var(--green);color:var(--green)}
-.f-btn.active{background:var(--green-dim);border-color:rgba(74,222,128,0.35);color:var(--green)}
+.f-btn:hover{border-color:var(--accent);color:var(--accent)}
+.f-btn.active{background:var(--accent-dim);border-color:rgba(220,38,38,0.35);color:var(--accent)}
 .sb-links{display:flex;flex-direction:column;gap:3px}
 .sb-links a{padding:7px 10px;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;border:1px solid var(--border2);transition:all 0.2s}
-.sb-links a:hover{color:var(--green);border-color:rgba(74,222,128,0.2)}
+.sb-links a:hover{color:var(--accent);border-color:rgba(220,38,38,0.2)}
 
-/* PRODUCTS AREA */
 .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;padding-bottom:0.9rem;border-bottom:1px solid var(--border)}
 .tb-count{font-family:'IBM Plex Mono',monospace;font-size:0.53rem;letter-spacing:2px;color:var(--txt4)}
 .tb-sorts{display:flex;gap:3px}
 .s-btn{padding:5px 10px;background:transparent;border:1px solid var(--border);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt3);transition:all 0.2s}
-.s-btn:hover{border-color:var(--green);color:var(--green)}
+.s-btn:hover{border-color:var(--accent);color:var(--accent)}
 .s-btn.active{background:var(--txt);color:var(--bg);border-color:var(--txt)}
 
-/* GRID */
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px;background:var(--border2);border:1px solid var(--border)}
 .empty-state{grid-column:1/-1;padding:4rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4)}
 
-/* SKELETON */
 .skeleton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px;background:var(--border2);border:1px solid var(--border)}
 .sk-card{background:var(--bg2);padding:1.5rem;min-height:260px}
 .sk-img{width:64px;height:64px;background:var(--bg4);border-radius:2px;margin:0 auto 1.2rem;animation:pulse 1.5s infinite}
 .sk-line{height:10px;background:var(--bg4);border-radius:2px;margin-bottom:7px;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 
-/* PRODUCT CARD */
 .pc{background:var(--bg2);display:flex;flex-direction:column;transition:background 0.2s;position:relative;overflow:hidden}
 .pc:hover{background:var(--bg3)}
-.pc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
+.pc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
 .pc:hover::after{transform:scaleX(1)}
 .pc.sold-out{opacity:0.6}
 .pc-img-area{padding:1.6rem;display:flex;align-items:center;justify-content:center;background:var(--bg3);border-bottom:1px solid var(--border);min-height:120px;position:relative}
 .pc-img{width:64px;height:64px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4))}
 .pc-img-ph{width:64px;height:64px;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
 .pc-status-badge{position:absolute;top:8px;left:8px;font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:1.5px;padding:2px 7px;border:1px solid}
-.badge-stock{border-color:rgba(74,222,128,0.4);color:var(--green);background:var(--green-dim)}
+.badge-stock{border-color:rgba(220,38,38,0.4);color:var(--accent);background:var(--accent-dim)}
 .badge-low{border-color:rgba(251,191,36,0.4);color:var(--gold);background:var(--gold-dim)}
 .badge-out{border-color:rgba(248,113,113,0.3);color:var(--red);background:var(--red-dim)}
 .pc-cat{position:absolute;top:8px;right:8px;font-family:'IBM Plex Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;color:var(--txt4)}
@@ -130,10 +119,10 @@ nav{position:sticky;top:0;z-index:300;height:58px;display:flex;align-items:cente
 .pc-stock-txt{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;color:var(--txt3);margin-bottom:0.9rem;flex:1}
 .pc-sold-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.9rem}
 .pc-sold-txt{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;color:var(--txt3)}
-.pc-sold-num{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;color:var(--green);letter-spacing:1px}
+.pc-sold-num{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;color:var(--accent);letter-spacing:1px}
 .pc-price-wrap{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
 .pc-price-old{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--txt4);text-decoration:line-through;letter-spacing:1px}
-.price-drop{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;padding:2px 7px;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.35);color:#4ade80;white-space:nowrap;animation:pricePulse 2s ease-in-out infinite}
+.price-drop{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;padding:2px 7px;background:rgba(220,38,38,0.12);border:1px solid rgba(220,38,38,0.35);color:#DC2626;white-space:nowrap;animation:pricePulse 2s ease-in-out infinite}
 .price-up{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;padding:2px 7px;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.35);color:#f87171;white-space:nowrap}
 @keyframes pricePulse{0%,100%{opacity:1}50%{opacity:0.6}}
 .pc-best-badge{font-family:'IBM Plex Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;padding:1px 6px;background:rgba(251,191,36,0.10);border:1px solid rgba(251,191,36,0.3);color:#fbbf24;margin-left:6px;vertical-align:middle}
@@ -145,10 +134,9 @@ nav{position:sticky;top:0;z-index:300;height:58px;display:flex;align-items:cente
 .qty-b:hover:not(:disabled){background:var(--bg4)}
 .qty-n{width:30px;height:26px;background:transparent;border:none;border-left:1px solid var(--border);border-right:1px solid var(--border);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.72rem;text-align:center;outline:none}
 .add-btn{width:100%;padding:9px;background:var(--bg4);color:var(--txt2);border:1px solid var(--border);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;transition:all 0.2s}
-.add-btn:hover:not(:disabled){background:var(--green);color:#000;border-color:var(--green)}
+.add-btn:hover:not(:disabled){background:var(--accent);color:#fff;border-color:var(--accent)}
 .add-btn:disabled{cursor:not-allowed;color:var(--txt4);background:var(--bg3)}
 
-/* CART DRAWER */
 .cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:400;backdrop-filter:blur(6px)}
 .cart-overlay.open{display:block}
 .cart-drawer{position:fixed;right:0;top:0;bottom:0;width:min(420px,100vw);background:var(--bg2);z-index:401;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.32s ease;border-left:1px solid var(--border)}
@@ -176,11 +164,10 @@ nav{position:sticky;top:0;z-index:300;height:58px;display:flex;align-items:cente
 .cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
 .ct-label{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4)}
 .ct-val{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--gold)}
-.checkout-btn{width:100%;padding:12px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;letter-spacing:2px;transition:background 0.2s}
-.checkout-btn:hover:not(:disabled){background:var(--green-dk)}
+.checkout-btn{width:100%;padding:12px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;letter-spacing:2px;transition:background 0.2s}
+.checkout-btn:hover:not(:disabled){background:var(--accent-dk)}
 .checkout-btn:disabled{background:var(--bg4);color:var(--txt4);cursor:not-allowed}
 
-/* MODALS */
 .m-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:500;backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1rem}
 .m-overlay.open{display:flex}
 .modal{background:var(--bg2);width:min(520px,100%);max-height:90vh;overflow-y:auto;border:1px solid var(--border);animation:mIn 0.28s ease}
@@ -203,46 +190,42 @@ nav{position:sticky;top:0;z-index:300;height:58px;display:flex;align-items:cente
 .flabel .req{color:var(--red)}
 .finput,.fselect,.ftextarea{width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;appearance:none}
 .finput::placeholder,.ftextarea::placeholder{color:var(--txt4)}
-.finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--green)}
+.finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--accent)}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .ftextarea{resize:vertical;min-height:75px}
 .fhint{font-size:0.77rem;color:var(--txt4);margin-top:3px;font-weight:300}
 .modal-ft{padding:1.2rem 1.8rem;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
 .btn-cancel{padding:9px 20px;background:transparent;border:1px solid var(--border);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1.5px;color:var(--txt2);transition:all 0.2s}
 .btn-cancel:hover{border-color:var(--txt2);color:var(--txt)}
-.btn-submit{padding:9px 24px;background:var(--green);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:background 0.2s;display:flex;align-items:center;gap:8px}
-.btn-submit:hover:not(:disabled){background:var(--green-dk)}
+.btn-submit{padding:9px 24px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:background 0.2s;display:flex;align-items:center;gap:8px}
+.btn-submit:hover:not(:disabled){background:var(--accent-dk)}
 .btn-submit:disabled{background:var(--bg4);color:var(--txt4);cursor:not-allowed}
-.spinner{width:13px;height:13px;border:2px solid rgba(0,0,0,0.3);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite;display:none}
+.spinner{width:13px;height:13px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;display:none}
 .spinner.show{display:block}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* SUCCESS */
 .success-body{padding:2.5rem 1.8rem;text-align:center}
 .success-icon{font-size:2.8rem;display:block;margin-bottom:0.8rem}
 .success-body h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--txt);margin-bottom:0.4rem;letter-spacing:-0.3px}
 .success-body p{font-size:0.9rem;color:var(--txt2);line-height:1.8;max-width:340px;margin:0 auto 1.2rem;font-weight:300}
-.order-id-chip{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--green);padding:7px 18px;border:1px solid rgba(74,222,128,0.3);background:var(--green-dim);display:inline-block;margin-bottom:1.2rem}
+.order-id-chip{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--accent);padding:7px 18px;border:1px solid rgba(220,38,38,0.3);background:var(--accent-dim);display:inline-block;margin-bottom:1.2rem}
 
-/* TOAST */
 .toast-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:600;display:flex;flex-direction:column;gap:6px}
 .toast{padding:10px 16px;background:var(--bg3);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.57rem;letter-spacing:1px;border:1px solid var(--border);display:flex;align-items:center;gap:8px;animation:tIn 0.25s ease;max-width:280px}
-.toast.ok{border-left:3px solid var(--green)}
+.toast.ok{border-left:3px solid var(--accent)}
 .toast.err{border-left:3px solid var(--red)}
 @keyframes tIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* FOOTER */
 footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem 4%;margin-top:4rem}
 .footer-inner{max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .footer-brand{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
 .footer-links{display:flex;gap:4px;flex-wrap:wrap}
 .footer-links a{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;padding:4px 9px;border:1px solid var(--border2);transition:all 0.2s}
-.footer-links a:hover{color:var(--green);border-color:rgba(74,222,128,0.2)}
+.footer-links a:hover{color:var(--accent);border-color:rgba(220,38,38,0.2)}
 .footer-copy{width:100%;font-family:'IBM Plex Mono',monospace;font-size:0.46rem;letter-spacing:1.5px;color:var(--txt4);padding-top:1rem;border-top:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .clear-btn{background:none;border:none;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;color:inherit;transition:color 0.2s}
 .clear-btn:hover{color:var(--red)}
 
-/* RESPONSIVE */
 @media(max-width:900px){.shop-wrap{grid-template-columns:1fr}.sidebar{position:static}.nav-links{display:none}}
 @media(max-width:600px){.hero{flex-direction:column;align-items:flex-start}.hero-stats{display:none}.frow{grid-template-columns:1fr}}
 </style>
@@ -355,7 +338,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem 4%;
   </div>
 </div>
 
-<!-- CART OVERLAY + DRAWER -->
 <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cart-drawer">
   <div class="drawer-hd">
@@ -372,7 +354,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem 4%;
   </div>
 </div>
 
-<!-- CHECKOUT MODAL -->
 <div class="m-overlay" id="checkout-modal">
   <div class="modal">
     <div class="modal-hd">
@@ -432,7 +413,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem 4%;
   </div>
 </div>
 
-<!-- SUCCESS MODAL -->
 <div class="m-overlay" id="success-modal">
   <div class="modal">
     <div class="success-body">
@@ -479,15 +459,11 @@ let activeCat = 'All', activeAvail = 'all', activeSort = 'default';
 async function loadProducts() {
   const cached   = localStorage.getItem('ps_products');
   const cacheAge = Date.now() - parseInt(localStorage.getItem('ps_cache_t') || '0');
-  if (cached && cacheAge < CFG.CACHE_TTL) {
-    products = JSON.parse(cached);
-    return initShop();
-  }
+  if (cached && cacheAge < CFG.CACHE_TTL) { products = JSON.parse(cached); return initShop(); }
   try {
     const r = await fetch(CFG.PRODUCTS_URL + '?t=' + Date.now());
     if (!r.ok) throw new Error();
     products = await r.json();
-    // Track price changes before overwriting cache
     const prevRaw = localStorage.getItem('ps_products');
     if(prevRaw){
       const prev = JSON.parse(prevRaw);
@@ -495,13 +471,7 @@ async function loadProducts() {
       prev.forEach(p=>{ prevMap[p.id]={price:p.price,ts:Date.now()}; });
       const existing = JSON.parse(localStorage.getItem('ps_price_history')||'{}');
       let changed = false;
-      products.forEach(p=>{
-        const old = prevMap[p.id];
-        if(old && old.price !== p.price){
-          existing[p.id]={oldPrice:old.price,newPrice:p.price,ts:Date.now()};
-          changed = true;
-        }
-      });
+      products.forEach(p=>{ const old=prevMap[p.id]; if(old&&old.price!==p.price){existing[p.id]={oldPrice:old.price,newPrice:p.price,ts:Date.now()};changed=true;} });
       if(changed) localStorage.setItem('ps_price_history', JSON.stringify(existing));
     }
     localStorage.setItem('ps_products', JSON.stringify(products));
@@ -516,295 +486,80 @@ async function loadProducts() {
 
 function getDefaults() {
   return [
-    {id:'shulker_box',   name:'Shulker Box',    price:4, unit:'Diamond', stock:0, image:'img/shulker_box.png',  category:'Storage',     listed:true, description:'Store and carry items in bulk.'},
-    {id:'mending',       name:'Mending I',       price:3, unit:'Diamond', stock:0, image:'img/mending.png',      category:'Enchantment', listed:true, description:'Repair items using XP orbs.'},
-    {id:'unbreaking_iii',name:'Unbreaking III',  price:2, unit:'Diamond', stock:0, image:'img/mending.png',      category:'Enchantment', listed:true, description:'Increases item durability greatly.'},
-    {id:'nether_wart',   name:'Nether Wart',     price:3, unit:'Diamond', stock:0, image:'img/nether_wart.png',  category:'Farming',     listed:true, description:'Essential for potion brewing.'},
-    {id:'iron_ingot',    name:'Iron Ingot',      price:1, unit:'Diamond', stock:0, image:'img/iron_ingot.png',   category:'Materials',   listed:true, description:'Versatile crafting material.'}
+    {id:'shulker_box',name:'Shulker Box',price:4,unit:'Diamond',stock:0,image:'img/shulker_box.png',category:'Storage',listed:true,description:'Store and carry items in bulk.'},
+    {id:'mending',name:'Mending I',price:3,unit:'Diamond',stock:0,image:'img/mending.png',category:'Enchantment',listed:true,description:'Repair items using XP orbs.'},
+    {id:'unbreaking_iii',name:'Unbreaking III',price:2,unit:'Diamond',stock:0,image:'img/mending.png',category:'Enchantment',listed:true,description:'Increases item durability greatly.'},
+    {id:'nether_wart',name:'Nether Wart',price:3,unit:'Diamond',stock:0,image:'img/nether_wart.png',category:'Farming',listed:true,description:'Essential for potion brewing.'},
+    {id:'iron_ingot',name:'Iron Ingot',price:1,unit:'Diamond',stock:0,image:'img/iron_ingot.png',category:'Materials',listed:true,description:'Versatile crafting material.'}
   ];
 }
 
-function initShop() {
-  buildCatFilters();
-  render();
-  updateCartUI();
-  updateStats();
-  document.getElementById('skeleton').style.display = 'none';
-  document.getElementById('products-grid').style.display = 'grid';
-}
-
-function updateStats() {
-  const listed  = products.filter(p => p.listed);
-  const inStock = listed.filter(p => p.stock > 0);
-  document.getElementById('stat-listed').textContent  = listed.length;
-  document.getElementById('stat-instock').textContent = inStock.length;
-}
-
-function buildCatFilters() {
-  const cats = ['All', ...new Set(products.filter(p=>p.listed).map(p=>p.category).filter(Boolean))];
-  document.getElementById('cat-filters').innerHTML = cats.map(c =>
-    `<button class="f-btn${c==='All'?' active':''}" data-cat="${c}" onclick="setCat(this)">${c==='All'?'ALL ITEMS':c.toUpperCase()}</button>`
-  ).join('');
-}
-
-function setCat(btn) {
-  document.querySelectorAll('[data-cat]').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active'); activeCat = btn.dataset.cat; render();
-}
-
-function setAvail(btn) {
-  document.querySelectorAll('[data-avail]').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active'); activeAvail = btn.dataset.avail; render();
-}
-
-function setSort(btn) {
-  document.querySelectorAll('[data-sort]').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active'); activeSort = btn.dataset.sort; render();
-}
+function initShop() { buildCatFilters(); render(); updateCartUI(); updateStats(); document.getElementById('skeleton').style.display='none'; document.getElementById('products-grid').style.display='grid'; }
+function updateStats() { const l=products.filter(p=>p.listed); document.getElementById('stat-listed').textContent=l.length; document.getElementById('stat-instock').textContent=l.filter(p=>p.stock>0).length; }
+function buildCatFilters() { const cats=['All',...new Set(products.filter(p=>p.listed).map(p=>p.category).filter(Boolean))]; document.getElementById('cat-filters').innerHTML=cats.map(c=>`<button class="f-btn${c==='All'?' active':''}" data-cat="${c}" onclick="setCat(this)">${c==='All'?'ALL ITEMS':c.toUpperCase()}</button>`).join(''); }
+function setCat(btn) { document.querySelectorAll('[data-cat]').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); activeCat=btn.dataset.cat; render(); }
+function setAvail(btn) { document.querySelectorAll('[data-avail]').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); activeAvail=btn.dataset.avail; render(); }
+function setSort(btn) { document.querySelectorAll('[data-sort]').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); activeSort=btn.dataset.sort; render(); }
 
 function getPriceBadge(p) {
-  var hist = JSON.parse(localStorage.getItem('ps_price_history') || '{}');
-  var ph = hist[p.id];
-  var EXPIRE = 3 * 24 * 60 * 60 * 1000;
-  if (ph && (Date.now() - ph.ts) < EXPIRE) {
-    var diff = ph.newPrice - ph.oldPrice;
-    var arrow = diff < 0 ? '▼' : '▲';
-    var cls   = diff < 0 ? 'price-drop' : 'price-up';
-    var lbl   = diff < 0 ? Math.abs(diff) + '◆ CHEAPER' : diff + '◆ PRICIER';
-    return '<div class="pc-price-wrap">'
-      + '<span class="pc-price">◆ ' + p.price + ' ' + (p.unit || 'Diamond') + '</span>'
-      + '<span class="pc-price-old">◆ ' + ph.oldPrice + '</span>'
-      + '<span class="' + cls + '">' + arrow + ' ' + lbl + '</span>'
-      + '</div>';
-  }
-  return '<div class="pc-price">◆ ' + p.price + ' ' + (p.unit || 'Diamond') + '</div>';
+  var hist=JSON.parse(localStorage.getItem('ps_price_history')||'{}');var ph=hist[p.id];var EXPIRE=3*24*60*60*1000;
+  if(ph&&(Date.now()-ph.ts)<EXPIRE){var diff=ph.newPrice-ph.oldPrice;var arrow=diff<0?'▼':'▲';var cls=diff<0?'price-drop':'price-up';var lbl=diff<0?Math.abs(diff)+'◆ CHEAPER':diff+'◆ PRICIER';return '<div class="pc-price-wrap"><span class="pc-price">◆ '+p.price+' '+(p.unit||'Diamond')+'</span><span class="pc-price-old">◆ '+ph.oldPrice+'</span><span class="'+cls+'">'+arrow+' '+lbl+'</span></div>';}
+  return '<div class="pc-price">◆ '+p.price+' '+(p.unit||'Diamond')+'</div>';
 }
 
 function render() {
-  const q = document.getElementById('search-inp').value.toLowerCase();
-  let list = products.filter(p => {
-    if (!p.listed) return false;
-    if (activeCat !== 'All' && p.category !== activeCat) return false;
-    if (activeAvail === 'in-stock' && p.stock <= 0) return false;
-    if (activeAvail === 'sold-out' && p.stock  > 0) return false;
-    if (q && !p.name.toLowerCase().includes(q) && !(p.description||'').toLowerCase().includes(q)) return false;
-    return true;
-  });
-
-  if (activeSort === 'price-asc')  list.sort((a,b)=>a.price-b.price);
-  if (activeSort === 'price-desc') list.sort((a,b)=>b.price-a.price);
-  if (activeSort === 'name')       list.sort((a,b)=>a.name.localeCompare(b.name));
-
-  document.getElementById('tb-count').textContent = `SHOWING ${list.length} ITEM${list.length!==1?'S':''}`;
-  const grid = document.getElementById('products-grid');
-
-  if (!list.length) { grid.innerHTML='<div class="empty-state">NO ITEMS MATCH YOUR FILTERS</div>'; return; }
-
-  const maxSold = Math.max(...products.map(p=>p.sold||0), 0);
-  grid.innerHTML = list.map(p => {
-    const isBest = maxSold > 0 && (p.sold||0) === maxSold;
-    const out  = p.stock <= 0;
-    const low  = p.stock > 0 && p.stock <= 5;
-    const bCls = out ? 'badge-out' : low ? 'badge-low' : 'badge-stock';
-    const bTxt = out ? 'SOLD OUT' : low ? `${p.stock} LEFT` : 'IN STOCK';
-    return `
-    <div class="pc${out?' sold-out':''}">
-      <div class="pc-img-area">
-        <span class="pc-status-badge ${bCls}">${bTxt}</span>
-        <span class="pc-cat">${p.category||''}</span>
-        ${p.image
-          ? `<img class="pc-img" src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-          : ''}
-        <div class="pc-img-ph" style="${p.image?'display:none':''}">📦</div>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">${p.name}${isBest?'<span class="pc-best-badge">👑 BEST</span>':''}</div>
-        ${getPriceBadge(p)}
-        ${p.description?`<div class="pc-desc">${p.description}</div>`:''}
-        <div class="pc-sold-row">
-          <div>
-            <span class="pc-stock-txt" style="margin-bottom:0">STOCK: ${out?'OUT OF STOCK':p.stock+' available'}</span>
-          </div>
-          ${(p.sold||0)>0?`<span class="pc-sold-num">📦 ${p.sold} sold</span>`:''}
-        </div>
-        <div class="qty-row">
-          <span class="qty-lbl">QTY</span>
-          <div class="qty-ctrl">
-            <button class="qty-b" onclick="chQty('q_${p.id}',-1)" ${out?'disabled':''}>−</button>
-            <input type="number" class="qty-n" id="q_${p.id}" value="1" min="1" max="${out?1:p.stock}" ${out?'disabled':''}>
-            <button class="qty-b" onclick="chQty('q_${p.id}',1)"  ${out?'disabled':''}>+</button>
-          </div>
-        </div>
-        <button class="add-btn" onclick="addToCart('${p.id}')" ${out?'disabled':''}>
-          ${out?'SOLD OUT':'ADD TO CART'}
-        </button>
-      </div>
-    </div>`;
+  const q=document.getElementById('search-inp').value.toLowerCase();
+  let list=products.filter(p=>{if(!p.listed)return false;if(activeCat!=='All'&&p.category!==activeCat)return false;if(activeAvail==='in-stock'&&p.stock<=0)return false;if(activeAvail==='sold-out'&&p.stock>0)return false;if(q&&!p.name.toLowerCase().includes(q)&&!(p.description||'').toLowerCase().includes(q))return false;return true;});
+  if(activeSort==='price-asc')list.sort((a,b)=>a.price-b.price);
+  if(activeSort==='price-desc')list.sort((a,b)=>b.price-a.price);
+  if(activeSort==='name')list.sort((a,b)=>a.name.localeCompare(b.name));
+  document.getElementById('tb-count').textContent=`SHOWING ${list.length} ITEM${list.length!==1?'S':''}`;
+  const grid=document.getElementById('products-grid');
+  if(!list.length){grid.innerHTML='<div class="empty-state">NO ITEMS MATCH YOUR FILTERS</div>';return;}
+  const maxSold=Math.max(...products.map(p=>p.sold||0),0);
+  grid.innerHTML=list.map(p=>{
+    const isBest=maxSold>0&&(p.sold||0)===maxSold;const out=p.stock<=0;const low=p.stock>0&&p.stock<=5;
+    const bCls=out?'badge-out':low?'badge-low':'badge-stock';const bTxt=out?'SOLD OUT':low?`${p.stock} LEFT`:'IN STOCK';
+    return `<div class="pc${out?' sold-out':''}"><div class="pc-img-area"><span class="pc-status-badge ${bCls}">${bTxt}</span><span class="pc-cat">${p.category||''}</span>${p.image?`<img class="pc-img" src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:''}
+    <div class="pc-img-ph" style="${p.image?'display:none':''}">📦</div></div><div class="pc-body"><div class="pc-name">${p.name}${isBest?'<span class="pc-best-badge">👑 BEST</span>':''}</div>${getPriceBadge(p)}${p.description?`<div class="pc-desc">${p.description}</div>`:''}
+    <div class="pc-sold-row"><div><span class="pc-stock-txt" style="margin-bottom:0">STOCK: ${out?'OUT OF STOCK':p.stock+' available'}</span></div>${(p.sold||0)>0?`<span class="pc-sold-num">📦 ${p.sold} sold</span>`:''}</div>
+    <div class="qty-row"><span class="qty-lbl">QTY</span><div class="qty-ctrl"><button class="qty-b" onclick="chQty('q_${p.id}',-1)" ${out?'disabled':''}>−</button><input type="number" class="qty-n" id="q_${p.id}" value="1" min="1" max="${out?1:p.stock}" ${out?'disabled':''}><button class="qty-b" onclick="chQty('q_${p.id}',1)" ${out?'disabled':''}>+</button></div></div>
+    <button class="add-btn" onclick="addToCart('${p.id}')" ${out?'disabled':''}>${out?'SOLD OUT':'ADD TO CART'}</button></div></div>`;
   }).join('');
 }
 
-function chQty(id, d) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.value = Math.min(Math.max(1, (parseInt(el.value)||1)+d), parseInt(el.max)||999);
-}
-
-function addToCart(id) {
-  const p = products.find(x=>x.id===id);
-  if (!p || p.stock<=0) return;
-  const qty = parseInt(document.getElementById('q_'+id)?.value||'1');
-  const ex  = cart.find(i=>i.id===id);
-  const inCart = ex?ex.qty:0;
-  const add = Math.min(qty, p.stock-inCart);
-  if (add<=0) { toast('Max stock already in cart!','err'); return; }
-  if (ex) ex.qty+=add; else cart.push({id,name:p.name,price:p.price,unit:p.unit||'Diamond',image:p.image,qty:add});
-  saveCart(); updateCartUI(); toast(`${p.name} added to cart ✓`,'ok');
-}
-
-function removeFromCart(id) { cart=cart.filter(i=>i.id!==id); saveCart(); updateCartUI(); renderCartItems(); }
-
-function chCartQty(id, d) {
-  const item = cart.find(i=>i.id===id); if (!item) return;
-  item.qty = Math.max(1, item.qty+d);
-  const p = products.find(x=>x.id===id);
-  if (p) item.qty = Math.min(item.qty, p.stock);
-  saveCart(); updateCartUI(); renderCartItems();
-}
-
-function saveCart()     { localStorage.setItem('ps_cart', JSON.stringify(cart)); }
-function cartTotal()    { return cart.reduce((s,i)=>s+i.price*i.qty, 0); }
-function cartCount()    { return cart.reduce((s,i)=>s+i.qty, 0); }
-
-function updateCartUI() {
-  document.getElementById('cart-count').textContent  = cartCount();
-  document.getElementById('cart-total').textContent  = '◆ '+cartTotal();
-  document.getElementById('checkout-btn').disabled   = cart.length===0;
-}
-
-function renderCartItems() {
-  const el = document.getElementById('cart-items');
-  if (!cart.length) { el.innerHTML='<div class="cart-empty-msg">YOUR CART IS EMPTY</div>'; return; }
-  el.innerHTML = cart.map(i=>`
-    <div class="cart-item">
-      <div class="ci-thumb"><img src="${i.image}" alt="${i.name}" onerror="this.style.display='none'"></div>
-      <div class="ci-info">
-        <div class="ci-name">${i.name}</div>
-        <div class="ci-price">◆ ${i.price} × ${i.qty} = ${i.price*i.qty}</div>
-        <div class="ci-qty-row">
-          <button class="ci-qb" onclick="chCartQty('${i.id}',-1)">−</button>
-          <span class="ci-qn">${i.qty}</span>
-          <button class="ci-qb" onclick="chCartQty('${i.id}',1)">+</button>
-        </div>
-      </div>
-      <button class="ci-del" onclick="removeFromCart('${i.id}')">🗑</button>
-    </div>`).join('');
-}
-
-function openCart() {
-  renderCartItems();
-  document.getElementById('cart-overlay').classList.add('open');
-  document.getElementById('cart-drawer').classList.add('open');
-}
-function closeCart() {
-  document.getElementById('cart-overlay').classList.remove('open');
-  document.getElementById('cart-drawer').classList.remove('open');
-}
-
-function openCheckout() {
-  if (!cart.length) return;
-  closeCart();
-  document.getElementById('os-rows').innerHTML = cart.map(i=>
-    `<div class="os-row"><span>${i.name} × ${i.qty}</span><span>◆ ${i.price*i.qty}</span></div>`
-  ).join('');
-  document.getElementById('os-total').textContent = '◆ '+cartTotal();
-  document.getElementById('checkout-modal').classList.add('open');
-}
-function closeCheckout() { document.getElementById('checkout-modal').classList.remove('open'); }
+function chQty(id,d){const el=document.getElementById(id);if(!el)return;el.value=Math.min(Math.max(1,(parseInt(el.value)||1)+d),parseInt(el.max)||999);}
+function addToCart(id){const p=products.find(x=>x.id===id);if(!p||p.stock<=0)return;const qty=parseInt(document.getElementById('q_'+id)?.value||'1');const ex=cart.find(i=>i.id===id);const inCart=ex?ex.qty:0;const add=Math.min(qty,p.stock-inCart);if(add<=0){toast('Max stock already in cart!','err');return;}if(ex)ex.qty+=add;else cart.push({id,name:p.name,price:p.price,unit:p.unit||'Diamond',image:p.image,qty:add});saveCart();updateCartUI();toast(`${p.name} added to cart ✓`,'ok');}
+function removeFromCart(id){cart=cart.filter(i=>i.id!==id);saveCart();updateCartUI();renderCartItems();}
+function chCartQty(id,d){const item=cart.find(i=>i.id===id);if(!item)return;item.qty=Math.max(1,item.qty+d);const p=products.find(x=>x.id===id);if(p)item.qty=Math.min(item.qty,p.stock);saveCart();updateCartUI();renderCartItems();}
+function saveCart(){localStorage.setItem('ps_cart',JSON.stringify(cart));}
+function cartTotal(){return cart.reduce((s,i)=>s+i.price*i.qty,0);}
+function cartCount(){return cart.reduce((s,i)=>s+i.qty,0);}
+function updateCartUI(){document.getElementById('cart-count').textContent=cartCount();document.getElementById('cart-total').textContent='◆ '+cartTotal();document.getElementById('checkout-btn').disabled=cart.length===0;}
+function renderCartItems(){const el=document.getElementById('cart-items');if(!cart.length){el.innerHTML='<div class="cart-empty-msg">YOUR CART IS EMPTY</div>';return;}el.innerHTML=cart.map(i=>`<div class="cart-item"><div class="ci-thumb"><img src="${i.image}" alt="${i.name}" onerror="this.style.display='none'"></div><div class="ci-info"><div class="ci-name">${i.name}</div><div class="ci-price">◆ ${i.price} × ${i.qty} = ${i.price*i.qty}</div><div class="ci-qty-row"><button class="ci-qb" onclick="chCartQty('${i.id}',-1)">−</button><span class="ci-qn">${i.qty}</span><button class="ci-qb" onclick="chCartQty('${i.id}',1)">+</button></div></div><button class="ci-del" onclick="removeFromCart('${i.id}')">🗑</button></div>`).join('');}
+function openCart(){renderCartItems();document.getElementById('cart-overlay').classList.add('open');document.getElementById('cart-drawer').classList.add('open');}
+function closeCart(){document.getElementById('cart-overlay').classList.remove('open');document.getElementById('cart-drawer').classList.remove('open');}
+function openCheckout(){if(!cart.length)return;closeCart();document.getElementById('os-rows').innerHTML=cart.map(i=>`<div class="os-row"><span>${i.name} × ${i.qty}</span><span>◆ ${i.price*i.qty}</span></div>`).join('');document.getElementById('os-total').textContent='◆ '+cartTotal();document.getElementById('checkout-modal').classList.add('open');}
+function closeCheckout(){document.getElementById('checkout-modal').classList.remove('open');}
 
 async function submitOrder() {
-  const ign      = document.getElementById('f-ign').value.trim();
-  const discord  = document.getElementById('f-discord').value.trim();
-  const delivery = document.getElementById('f-delivery').value;
-  const server   = document.getElementById('f-server').value.trim() || 'Skyxion: Ragnarok';
-  const location = document.getElementById('f-location').value.trim();
-  const notes    = document.getElementById('f-notes').value.trim();
-
-  if (!ign || !discord || !delivery) { toast('Fill in all required fields', 'err'); return; }
-
-  const btn  = document.getElementById('submit-btn');
-  const spin = document.getElementById('submit-spin');
-  btn.disabled = true; spin.classList.add('show');
-
-  const orderId = 'ORD-' + Date.now().toString(36).toUpperCase().slice(-6);
-  const ts      = new Date().toLocaleString('en-MY', {timeZone:'Asia/Kuala_Lumpur'});
-  const total   = cartTotal();
-  const itemLines = cart.map(i=>`**${i.name}** ×${i.qty} = ◆ ${i.price*i.qty}`).join('\n');
-
-  const payload = {
-    username:   'Paiz Shop',
-    avatar_url: 'https://faizzzlol.github.io/thelol/TheLoL2.png',
-    embeds: [{
-      title: '🛒 New Order — ' + orderId,
-      color: 0x4ade80,
-      fields: [
-        { name: '👤 IGN',      value: '`'+ign+'`',   inline: true  },
-        { name: '💬 Discord',  value: discord,        inline: true  },
-        { name: '📦 Delivery', value: delivery,       inline: true  },
-        { name: '🌍 Server',   value: server,         inline: true  },
-        { name: '📍 Location', value: location||'N/A',inline: true  },
-        { name: '💎 Total',    value: '**◆ '+total+' Diamond(s)**', inline: true },
-        { name: '🛍 Items',    value: itemLines,      inline: false },
-        { name: '📝 Notes',    value: notes||'None',  inline: false },
-        { name: '⏰ Time (MY)',value: ts,             inline: true  },
-      ],
-      footer: { text: 'Paiz Shop · Paiz® Corp · The Legend of Legiona' },
-      timestamp: new Date().toISOString()
-    }]
-  };
-
+  const ign=document.getElementById('f-ign').value.trim();const discord=document.getElementById('f-discord').value.trim();const delivery=document.getElementById('f-delivery').value;const server=document.getElementById('f-server').value.trim()||'Skyxion: Ragnarok';const location=document.getElementById('f-location').value.trim();const notes=document.getElementById('f-notes').value.trim();
+  if(!ign||!discord||!delivery){toast('Fill in all required fields','err');return;}
+  const btn=document.getElementById('submit-btn');const spin=document.getElementById('submit-spin');btn.disabled=true;spin.classList.add('show');
+  const orderId='ORD-'+Date.now().toString(36).toUpperCase().slice(-6);const ts=new Date().toLocaleString('en-MY',{timeZone:'Asia/Kuala_Lumpur'});const total=cartTotal();const itemLines=cart.map(i=>`**${i.name}** ×${i.qty} = ◆ ${i.price*i.qty}`).join('\n');
+  const payload={username:'Paiz Shop',avatar_url:'https://faizzzlol.github.io/thelol/TheLoL2.png',embeds:[{title:'🛒 New Order — '+orderId,color:0xDC2626,fields:[{name:'👤 IGN',value:'`'+ign+'`',inline:true},{name:'💬 Discord',value:discord,inline:true},{name:'📦 Delivery',value:delivery,inline:true},{name:'🌍 Server',value:server,inline:true},{name:'📍 Location',value:location||'N/A',inline:true},{name:'💎 Total',value:'**◆ '+total+' Diamond(s)**',inline:true},{name:'🛍 Items',value:itemLines,inline:false},{name:'📝 Notes',value:notes||'None',inline:false},{name:'⏰ Time (MY)',value:ts,inline:true}],footer:{text:'Paiz Shop · Paiz® Corp · The Legend of Legiona'},timestamp:new Date().toISOString()}]};
   try {
-    const r = await fetch(CFG.ORDER_WEBHOOK, {
-      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
-    });
-    if (!r.ok && r.status!==204) throw new Error();
-
-    const hist = JSON.parse(localStorage.getItem('ps_orders')||'[]');
-    hist.unshift({id:orderId,items:[...cart],total,ign,discord,delivery,server,location,notes,ts});
-    localStorage.setItem('ps_orders', JSON.stringify(hist.slice(0,50)));
-
-    cart=[]; saveCart(); updateCartUI();
-    closeCheckout();
-    document.getElementById('success-id').textContent = orderId;
-    document.getElementById('success-modal').classList.add('open');
-
-  } catch {
-    toast('Failed to send order. DM us on Discord instead.','err');
-  } finally {
-    btn.disabled=false; spin.classList.remove('show');
-  }
+    const r=await fetch(CFG.ORDER_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(!r.ok&&r.status!==204)throw new Error();
+    const hist=JSON.parse(localStorage.getItem('ps_orders')||'[]');hist.unshift({id:orderId,items:[...cart],total,ign,discord,delivery,server,location,notes,ts});localStorage.setItem('ps_orders',JSON.stringify(hist.slice(0,50)));
+    cart=[];saveCart();updateCartUI();closeCheckout();document.getElementById('success-id').textContent=orderId;document.getElementById('success-modal').classList.add('open');
+  } catch { toast('Failed to send order. DM us on Discord instead.','err'); }
+  finally { btn.disabled=false;spin.classList.remove('show'); }
 }
 
-function closeSuccess() {
-  document.getElementById('success-modal').classList.remove('open');
-  ['f-ign','f-discord','f-location','f-notes'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('f-delivery').value='';
-  document.getElementById('f-server').value='';
-}
-
-function toast(msg, type='ok') {
-  const wrap = document.getElementById('toast-wrap');
-  const el   = document.createElement('div');
-  el.className = `toast ${type}`;
-  el.textContent = msg;
-  wrap.appendChild(el);
-  setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity 0.4s'; setTimeout(()=>el.remove(),400); }, 3000);
-}
-
-function clearData() {
-  if (!confirm('Clear cart, order history, and cached product data?')) return;
-  ['ps_cart','ps_orders','ps_products','ps_cache_t'].forEach(k=>localStorage.removeItem(k));
-  cart=[]; updateCartUI(); toast('Data cleared','ok');
-}
+function closeSuccess(){document.getElementById('success-modal').classList.remove('open');['f-ign','f-discord','f-location','f-notes'].forEach(id=>document.getElementById(id).value='');document.getElementById('f-delivery').value='';document.getElementById('f-server').value='';}
+function toast(msg,type='ok'){const wrap=document.getElementById('toast-wrap');const el=document.createElement('div');el.className=`toast ${type}`;el.textContent=msg;wrap.appendChild(el);setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity 0.4s';setTimeout(()=>el.remove(),400);},3000);}
+function clearData(){if(!confirm('Clear cart, order history, and cached product data?'))return;['ps_cart','ps_orders','ps_products','ps_cache_t'].forEach(k=>localStorage.removeItem(k));cart=[];updateCartUI();toast('Data cleared','ok');}
 
 loadProducts();
 </script>
