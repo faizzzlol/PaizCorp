@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- NO background — fully transparent -->
+
+  <!-- Meat body — main red -->
+  <path d="M16,3 C10,3 7,7 7,12 C7,17 10,20 14,21 L13,27 C13,29 14.5,30 16,30 C17.5,30 19,29 19,27 L18,21 C22,20 25,17 25,12 C25,7 22,3 16,3Z"
+        fill="#e53e1a"/>
+
+  <!-- Top fold / darker cap -->
+  <path d="M16,3 C10,3 7,7 7,12 C7,14 8,15.5 9.5,16.5 C10,10 13,5.5 16,5.5 C19,5.5 22,10 22.5,16.5 C24,15.5 25,14 25,12 C25,7 22,3 16,3Z"
+        fill="#cc2200"/>
+
+  <!-- Bone knob at bottom -->
+  <circle cx="16" cy="29" r="2.5" fill="#f5a623"/>
+  <!-- Bone highlight -->
+  <rect x="14.5" y="22" width="3" height="7" fill="#cc2200" opacity="0.2"/>
+
+  <!-- PC text -->
+  <text
+    x="16" y="16"
+    text-anchor="middle"
+    font-family="'Arial Black', Arial, sans-serif"
+    font-weight="900"
+    font-size="9"
+    letter-spacing="0.5"
+    fill="#ffffff">PC</text>
+</svg>
