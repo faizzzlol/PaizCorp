@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- NO background — transparent -->
+
+  <!-- Outer square border, elegant thin stroke -->
+  <rect x="2" y="2" width="28" height="28" rx="1"
+        fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+
+  <!-- Inner subtle fill -->
+  <rect x="3.5" y="3.5" width="25" height="25" rx="0.5" fill="#f5f0e8"/>
+
+  <!-- P letterform — serif style -->
+  <text
+    x="16" y="22"
+    text-anchor="middle"
+    font-family="'Georgia', 'Times New Roman', serif"
+    font-weight="700"
+    font-size="20"
+    fill="#1a1a1a">P</text>
+
+  <!-- Registered mark ® small top-right of P -->
+  <text
+    x="22.5" y="11.5"
+    text-anchor="middle"
+    font-family="'Georgia', serif"
+    font-weight="400"
+    font-size="5.5"
+    fill="#1a1a1a">®</text>
+</svg>
