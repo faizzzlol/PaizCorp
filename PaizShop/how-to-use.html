@@ -4,74 +4,66 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How to Use — Paiz Shop</title>
-<link rel="icon" href="https://faizzzlol.github.io/PaizCorp/PaizShop/img/paizshop_logo.png">
+<link rel="icon" type="image/svg+xml" href="/PaizCorp/PaizShop/ps-logo-final.svg">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#171d16;--bg2:#1d2420;--bg3:#232b22;--bg4:#2a3228;
+  --bg:#141414;--bg2:#1a1a1a;--bg3:#202020;--bg4:#282828;
   --border:rgba(255,255,255,0.10);--border2:rgba(255,255,255,0.06);
-  --green:#4ade80;--green-dk:#22c55e;--green-dim:rgba(74,222,128,0.10);
+  --accent:#DC2626;--accent-dk:#b91c1c;--accent-dim:rgba(220,38,38,0.10);
   --gold:#fbbf24;--gold-dim:rgba(251,191,36,0.10);
   --red:#f87171;--red-dim:rgba(248,113,113,0.10);
   --blue:#60a5fa;--blue-dim:rgba(96,165,250,0.10);
-  --txt:#edf2e7;--txt2:rgba(237,242,231,0.78);--txt3:rgba(237,242,231,0.52);--txt4:rgba(237,242,231,0.28);
+  --txt:#f2f2f2;--txt2:rgba(242,242,242,0.78);--txt3:rgba(242,242,242,0.52);--txt4:rgba(242,242,242,0.28);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;min-height:100vh}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;padding:0 5%;gap:12px;background:rgba(23,29,22,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;padding:0 5%;gap:12px;background:rgba(14,14,14,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-sq{width:28px;height:28px;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;color:#000}
+.nav-sq{width:28px;height:28px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;color:#000}
 .nav-name{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;color:var(--txt);letter-spacing:-0.2px}
 .nav-links{display:flex;gap:2px;margin-left:auto}
 .nav-link{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);transition:all 0.2s}
-.nav-link:hover{color:var(--green);border-color:rgba(74,222,128,0.2)}
-.nav-link.cta{background:var(--green);color:#000;border-color:var(--green)}
-.nav-link.cta:hover{background:var(--green-dk)}
+.nav-link:hover{color:var(--accent);border-color:rgba(220,38,38,0.2)}
+.nav-link.cta{background:var(--accent);color:#fff;border-color:var(--accent)}
+.nav-link.cta:hover{background:var(--accent-dk)}
 
-/* HERO */
 .hero{padding:4rem 5% 3rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-30%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(74,222,128,0.05) 0%,transparent 65%);pointer-events:none}
-.hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--green);opacity:0.8;margin-bottom:0.6rem}
+.hero::before{content:'';position:absolute;top:-30%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(220,38,38,0.05) 0%,transparent 65%);pointer-events:none}
+.hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--accent);opacity:0.8;margin-bottom:0.6rem}
 .hero-title{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-1.5px;color:var(--txt);line-height:1;margin-bottom:0.6rem}
 .hero-sub{font-size:1rem;color:var(--txt3);font-weight:300;max-width:480px;line-height:1.8}
 
-/* QUICK STEPS */
 .quick-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:2.5rem 5%;background:var(--border2);border:1px solid var(--border)}
 .qs{background:var(--bg2);padding:1.2rem 1rem;position:relative;overflow:hidden}
-.qs::after{content:attr(data-n);position:absolute;top:-10px;right:8px;font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:rgba(74,222,128,0.05);line-height:1}
+.qs::after{content:attr(data-n);position:absolute;top:-10px;right:8px;font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:rgba(220,38,38,0.05);line-height:1}
 .qs-icon{font-size:1.5rem;margin-bottom:0.5rem;display:block}
 .qs-title{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;color:var(--txt);margin-bottom:0.3rem}
 .qs-desc{font-size:0.78rem;color:var(--txt3);font-weight:300}
 
-/* CONTENT */
 .content-wrap{max-width:800px;margin:0 auto;padding:3rem 5%}
 .section{margin-bottom:3rem}
-.section-number{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--green);margin-bottom:0.4rem}
+.section-number{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--accent);margin-bottom:0.4rem}
 .section-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--txt);letter-spacing:-0.5px;margin-bottom:1.2rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border)}
 
-/* STEP CARDS */
 .steps{display:flex;flex-direction:column;gap:3px}
 .step{display:grid;grid-template-columns:40px 1fr;gap:16px;align-items:start;background:var(--bg2);border:1px solid var(--border2);padding:1.2rem;position:relative;overflow:hidden;transition:background 0.2s}
 .step:hover{background:var(--bg3)}
-.step::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green);opacity:0}
+.step::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);opacity:0}
 .step:hover::before{opacity:1}
-.step-num{width:40px;height:40px;background:var(--green-dim);border:1px solid rgba(74,222,128,0.25);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;font-weight:500;color:var(--green);flex-shrink:0;margin-top:2px}
-.step-content{}
+.step-num{width:40px;height:40px;background:var(--accent-dim);border:1px solid rgba(220,38,38,0.25);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;font-weight:500;color:var(--accent);flex-shrink:0;margin-top:2px}
 .step-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--txt);margin-bottom:0.3rem;letter-spacing:-0.2px}
 .step-desc{font-size:0.88rem;color:var(--txt2);font-weight:300;line-height:1.8}
-.step-desc a{color:var(--green);text-decoration:none;border-bottom:1px solid rgba(74,222,128,0.3)}
-.step-desc a:hover{border-bottom-color:var(--green)}
+.step-desc a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(220,38,38,0.3)}
+.step-desc a:hover{border-bottom-color:var(--accent)}
 
-/* TIP BOXES */
 .tip{background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--gold);padding:1rem 1.2rem;margin-top:0.6rem;font-size:0.82rem;color:var(--txt2);font-weight:300;line-height:1.8}
 .tip strong{color:var(--gold);font-weight:500}
 .info-box{background:var(--blue-dim);border:1px solid rgba(96,165,250,0.2);padding:1rem 1.2rem;margin-top:0.6rem;font-size:0.82rem;color:var(--txt2);font-weight:300;line-height:1.8}
 .info-box strong{color:var(--blue);font-weight:500}
 
-/* CURRENCY TABLE */
 .currency-table{width:100%;border-collapse:collapse;margin-top:0.8rem}
 .currency-table th{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--txt4);text-align:left;padding:6px 12px;border-bottom:1px solid var(--border)}
 .currency-table td{font-size:0.85rem;color:var(--txt2);padding:10px 12px;border-bottom:1px solid var(--border2)}
@@ -79,16 +71,13 @@ nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:cente
 .currency-table tr:hover td{background:var(--bg3)}
 .val{font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--gold)}
 
-/* DISCORD BOX */
 .discord-box{background:var(--bg2);border:1px solid rgba(88,101,242,0.3);padding:1.5rem;margin-top:1.5rem;display:flex;align-items:center;gap:20px}
 .dc-icon{font-size:2.5rem;flex-shrink:0}
-.dc-content{}
 .dc-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--txt);margin-bottom:0.3rem}
 .dc-desc{font-size:0.85rem;color:var(--txt3);font-weight:300}
 .dc-link{display:inline-flex;margin-top:0.7rem;padding:7px 16px;background:rgba(88,101,242,0.15);border:1px solid rgba(88,101,242,0.35);color:#7289da;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;text-decoration:none;transition:all 0.2s}
 .dc-link:hover{background:rgba(88,101,242,0.25)}
 
-/* FOOTER */
 footer{border-top:1px solid var(--border);padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:2rem}
 .footer-brand{font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;color:var(--txt3)}
 .footer-note{font-family:'IBM Plex Mono',monospace;font-size:0.45rem;letter-spacing:1.5px;color:var(--txt4)}
@@ -128,7 +117,6 @@ footer{border-top:1px solid var(--border);padding:1.5rem 5%;display:flex;justify
 
 <div class="content-wrap">
 
-  <!-- SECTION 1: BROWSING -->
   <div class="section">
     <div class="section-number">SECTION 01</div>
     <div class="section-title">Browsing &amp; Finding Items</div>
@@ -137,7 +125,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 5%;display:flex;justify
         <div class="step-num">01</div>
         <div class="step-content">
           <div class="step-title">Visit the Shop</div>
-          <div class="step-desc">Head to the <a href="/PaizCorp/PaizShop/">Paiz Shop homepage</a>. All available items are displayed in a grid. Items marked <strong style="color:var(--green)">IN STOCK</strong> can be added to cart immediately.</div>
+          <div class="step-desc">Head to the <a href="/PaizCorp/PaizShop/">Paiz Shop homepage</a>. All available items are displayed in a grid. Items marked <strong style="color:var(--accent)">IN STOCK</strong> can be added to cart immediately.</div>
         </div>
       </div>
       <div class="step">
@@ -157,7 +145,6 @@ footer{border-top:1px solid var(--border);padding:1.5rem 5%;display:flex;justify
     </div>
   </div>
 
-  <!-- SECTION 2: ORDERING -->
   <div class="section">
     <div class="section-number">SECTION 02</div>
     <div class="section-title">Adding to Cart &amp; Checkout</div>
@@ -208,7 +195,6 @@ footer{border-top:1px solid var(--border);padding:1.5rem 5%;display:flex;justify
     </div>
   </div>
 
-  <!-- SECTION 3: TRACKING -->
   <div class="section">
     <div class="section-number">SECTION 03</div>
     <div class="section-title">Tracking Your Order</div>
@@ -228,7 +214,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 5%;display:flex;justify
           <div class="tip">
             <strong>⏳ PENDING</strong> — Order received, waiting to be confirmed<br>
             <strong style="color:var(--blue)">✅ CONFIRMED</strong> — Shop owner confirmed, preparing your items<br>
-            <strong style="color:var(--green)">📦 DELIVERED</strong> — Items delivered or ready for pickup<br>
+            <strong style="color:var(--accent)">📦 DELIVERED</strong> — Items delivered or ready for pickup<br>
             <strong style="color:var(--red)">❌ CANCELLED</strong> — Order was cancelled (check Discord for reason)
           </div>
         </div>
@@ -236,7 +222,6 @@ footer{border-top:1px solid var(--border);padding:1.5rem 5%;display:flex;justify
     </div>
   </div>
 
-  <!-- SECTION 4: CURRENCY -->
   <div class="section">
     <div class="section-number">SECTION 04</div>
     <div class="section-title">Currency &amp; Pricing</div>
@@ -268,7 +253,6 @@ footer{border-top:1px solid var(--border);padding:1.5rem 5%;display:flex;justify
     </div>
   </div>
 
-  <!-- DISCORD -->
   <div class="discord-box">
     <div class="dc-icon">💬</div>
     <div class="dc-content">
