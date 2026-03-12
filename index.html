@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
-   PAIZ® CORP — CONGLOMERATE HOMEPAGE
+   PAIZ® CORP — INTEGRATED ECOSYSTEM HOMEPAGE
    Warm cream / deep ink / signal green
 ═══════════════════════════════════════════ */
 :root {
@@ -41,11 +41,24 @@
   --shop:  #1a5c7a;
   --prod:  #5c1a4a;
   --chick: #8a3a10;
+  --thelol:#8B1A1A;
 }
+
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--txt);line-height:1.7;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+/* ── SUPER-NAV (The LoL Network Banner) ─────── */
+.super-nav{background:var(--ink2);padding:0 5%;height:30px;display:flex;align-items:center;gap:0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.sn-label{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:2px;color:rgba(255,255,255,0.22);flex-shrink:0;margin-right:16px}
+.sn-links{display:flex;gap:0;flex:1}
+.sn-links a{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:1.5px;color:rgba(255,255,255,0.3);text-decoration:none;padding:0 10px;height:30px;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,0.06);transition:color 0.2s,background 0.2s}
+.sn-links a:hover{color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.04)}
+.sn-links a.active{color:var(--green-lt)}
+.sn-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.sn-dot{width:5px;height:5px;border-radius:50%;background:var(--green-lt);animation:blink 2.2s infinite;flex-shrink:0}
+.sn-status{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;color:rgba(255,255,255,0.2)}
 
 /* ── NAV ──────────────────────────────────────── */
 nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:center;padding:0 5%;background:rgba(244,240,232,0.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);gap:16px}
@@ -58,10 +71,11 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .nav-right{margin-left:auto;display:flex;gap:8px}
 .nav-pill{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;padding:5px 12px;border:1px solid var(--border);color:var(--faint);text-decoration:none;transition:all 0.2s}
 .nav-pill:hover{color:var(--green);border-color:rgba(42,102,71,0.25)}
+.nav-pill.primary{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.nav-pill.primary:hover{background:var(--green);border-color:var(--green);color:#fff}
 
 /* ── HERO ─────────────────────────────────────── */
-.hero{display:grid;grid-template-columns:1fr 1fr;min-height:90vh}
-
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh}
 .hero-left{display:flex;flex-direction:column;justify-content:center;padding:6rem 5%;position:relative}
 .h-eyebrow{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:3px;color:var(--green);margin-bottom:1.8rem;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp 0.7s ease 0.1s forwards}
 .h-eyebrow::before{content:'';width:24px;height:1px;background:var(--green);opacity:0.5}
@@ -93,6 +107,82 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .ti{display:inline-flex;align-items:center;gap:18px;padding:0 26px;font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:2px;color:rgba(255,255,255,0.78);flex-shrink:0}
 .td{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.3)}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── ECOSYSTEM MAP ────────────────────────────── */
+.ecosystem{padding:5.5rem 5%;background:var(--ink);border-top:1px solid rgba(255,255,255,0.06)}
+.ecosystem .s-inner{max-width:1280px;margin:0 auto}
+.eco-head{margin-bottom:3.5rem;padding-bottom:1.4rem;border-bottom:1px solid rgba(255,255,255,0.07)}
+.eco-head .eyebrow{font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:3px;color:var(--green-lt);margin-bottom:0.5rem}
+.eco-head h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.5rem);font-weight:900;letter-spacing:-0.5px;line-height:1.1;color:#fff}
+.eco-head h2 em{font-style:italic;color:var(--green-lt);font-weight:400}
+
+/* Hierarchy tree */
+.eco-tree{display:flex;flex-direction:column;gap:2px}
+
+/* Root node */
+.eco-root{background:rgba(139,26,26,0.12);border:1px solid rgba(139,26,26,0.25);padding:1.6rem 2rem;display:flex;align-items:center;gap:2rem;position:relative;transition:background 0.2s;text-decoration:none;cursor:pointer}
+.eco-root:hover{background:rgba(139,26,26,0.2)}
+.eco-root::before{content:'ROOT';position:absolute;top:12px;right:20px;font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:rgba(139,26,26,0.5)}
+.eco-root-icon{width:52px;height:52px;background:rgba(139,26,26,0.2);border:1px solid rgba(139,26,26,0.3);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:#c44;flex-shrink:0}
+.eco-root-body .eco-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:#fff;letter-spacing:-0.3px;margin-bottom:2px}
+.eco-root-body .eco-name em{font-style:italic;color:#c44;font-weight:400}
+.eco-root-body .eco-desc{font-family:'DM Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;color:rgba(255,255,255,0.25)}
+.eco-root-stats{margin-left:auto;display:flex;gap:24px}
+.ers-item{text-align:center}
+.ers-val{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:#c44;display:block;line-height:1}
+.ers-key{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;color:rgba(255,255,255,0.2);display:block;margin-top:3px}
+.eco-link-btn{font-family:'DM Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;color:#c44;border:1px solid rgba(139,26,26,0.3);padding:6px 14px;flex-shrink:0;transition:all 0.2s;text-decoration:none}
+.eco-link-btn:hover{background:rgba(139,26,26,0.2);color:#e66}
+
+/* Corp node */
+.eco-corp-wrap{padding-left:2rem;border-left:1px solid rgba(255,255,255,0.07);margin-left:26px;margin-top:2px;display:flex;flex-direction:column;gap:2px}
+.eco-corp{background:rgba(42,102,71,0.1);border:1px solid rgba(42,102,71,0.2);padding:1.4rem 1.8rem;display:flex;align-items:center;gap:2rem;position:relative;transition:background 0.2s;text-decoration:none}
+.eco-corp:hover{background:rgba(42,102,71,0.18)}
+.eco-corp::before{content:'PARENT CO.';position:absolute;top:10px;right:16px;font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:rgba(42,102,71,0.4)}
+.eco-corp-icon{width:44px;height:44px;background:rgba(42,102,71,0.15);border:1px solid rgba(42,102,71,0.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--green-lt);flex-shrink:0}
+.eco-corp-body .eco-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:#fff;letter-spacing:-0.2px;margin-bottom:2px}
+.eco-corp-body .eco-name em{font-style:italic;color:var(--green-lt);font-weight:400}
+.eco-corp-body .eco-desc{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;color:rgba(255,255,255,0.22)}
+.eco-corp-stats{margin-left:auto;display:flex;gap:20px}
+.ecs-val{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:900;color:var(--green-lt);display:block;line-height:1}
+.ecs-key{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:1.5px;color:rgba(255,255,255,0.18);display:block;margin-top:3px}
+.eco-corp-link{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:1.5px;color:var(--green-lt);border:1px solid rgba(42,102,71,0.25);padding:5px 12px;flex-shrink:0;transition:all 0.2s;text-decoration:none}
+.eco-corp-link:hover{background:rgba(42,102,71,0.15);color:#5cb880}
+
+/* Subsidiary nodes */
+.eco-subs-wrap{padding-left:2rem;border-left:1px solid rgba(255,255,255,0.05);margin-left:26px;margin-top:2px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.eco-sub{padding:1.2rem 1.5rem;border:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02);display:flex;flex-direction:column;gap:10px;transition:background 0.2s;text-decoration:none;position:relative}
+.eco-sub:hover{background:rgba(255,255,255,0.05)}
+.eco-sub-badge{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;padding:2px 7px;border:1px solid;align-self:flex-start}
+.eco-sub.s1 .eco-sub-badge{color:var(--tlr);border-color:rgba(42,102,71,0.3);background:rgba(42,102,71,0.06)}
+.eco-sub.s2 .eco-sub-badge{color:var(--con);border-color:rgba(122,92,30,0.3);background:rgba(122,92,30,0.06)}
+.eco-sub.s3 .eco-sub-badge{color:var(--shop);border-color:rgba(26,92,122,0.3);background:rgba(26,92,122,0.06)}
+.eco-sub.s4 .eco-sub-badge{color:var(--prod);border-color:rgba(92,26,74,0.3);background:rgba(92,26,74,0.06)}
+.eco-sub.s5 .eco-sub-badge{color:var(--chick);border-color:rgba(138,58,16,0.3);background:rgba(138,58,16,0.06)}
+.eco-sub-name{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:-0.2px;line-height:1.2}
+.eco-sub-name em{font-style:italic;font-weight:400}
+.eco-sub.s1 .eco-sub-name em{color:var(--tlr)}
+.eco-sub.s2 .eco-sub-name em{color:var(--con)}
+.eco-sub.s3 .eco-sub-name em{color:var(--shop)}
+.eco-sub.s4 .eco-sub-name em{color:var(--prod)}
+.eco-sub.s5 .eco-sub-name em{color:var(--chick)}
+.eco-sub-desc{font-size:0.8rem;color:rgba(255,255,255,0.28);line-height:1.7;font-weight:300;flex:1}
+.eco-sub-status{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;color:var(--green-lt);margin-top:auto}
+.eco-sub-status::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green-lt);animation:blink 2.2s infinite;flex-shrink:0}
+.eco-sub-status.wip{color:#fbbf24}
+.eco-sub-status.wip::before{background:#fbbf24}
+.eco-sub-arrow{position:absolute;bottom:14px;right:14px;font-family:'DM Mono',monospace;font-size:0.45rem;letter-spacing:1px;color:rgba(255,255,255,0.12);transition:color 0.2s}
+.eco-sub:hover .eco-sub-arrow{color:rgba(255,255,255,0.4)}
+
+/* Film child node */
+.eco-film-wrap{padding-left:2rem;border-left:1px solid rgba(255,255,255,0.04);margin-left:26px;margin-top:2px;display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+.eco-film{padding:1rem 1.4rem;border:1px solid rgba(92,26,74,0.15);background:rgba(92,26,74,0.04);text-decoration:none;transition:background 0.2s;display:flex;flex-direction:column;gap:8px}
+.eco-film:hover{background:rgba(92,26,74,0.1)}
+.eco-film-tag{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;color:rgba(92,26,74,0.7)}
+.eco-film-title{font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;color:rgba(255,255,255,0.8);line-height:1.2}
+.eco-film-title em{font-style:italic;color:#a060a0;font-weight:400}
+.eco-film-meta{font-size:0.76rem;color:rgba(255,255,255,0.22);font-weight:300;line-height:1.5}
+.eco-film-pill{align-self:flex-start;font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:1.5px;padding:2px 8px;border:1px solid rgba(92,26,74,0.3);color:rgba(92,26,74,0.8)}
 
 /* ── ABOUT STRIP ──────────────────────────────── */
 .about-strip{display:grid;grid-template-columns:1fr 2fr;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -169,6 +259,19 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .sub.prod .sub-link{color:var(--prod);border-color:rgba(92,26,74,0.3)}
 .sub.chick .sub-link{color:var(--chick);border-color:rgba(138,58,16,0.3)}
 .sub-link:hover{gap:14px}
+/* Sub child items */
+.sub-children{margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--border);display:flex;flex-direction:column;gap:4px}
+.sc-item{display:flex;align-items:center;gap:8px;text-decoration:none;padding:4px 0;transition:gap 0.15s}
+.sc-item:hover{gap:12px}
+.sc-tag{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;padding:1px 6px;border:1px solid}
+.sub.prod .sc-tag{border-color:rgba(92,26,74,0.2);color:var(--prod)}
+.sc-title{font-size:0.8rem;color:var(--muted);font-weight:300}
+.sc-arrow{font-family:'DM Mono',monospace;font-size:0.5rem;color:var(--faint);margin-left:auto}
+
+/* Sub item pills */
+.sub-items{margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--border);display:flex;flex-wrap:wrap;gap:4px}
+.si-pill{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:1px;padding:3px 8px;background:var(--cream3);border:1px solid var(--border);color:var(--faint);display:flex;align-items:center;gap:4px}
+.si-pill .si-price{color:var(--shop)}
 
 /* ── PORTFOLIO (dark) ─────────────────────────── */
 .proj-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2px;background:rgba(255,255,255,0.04)}
@@ -223,6 +326,22 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .fr-body p{font-size:0.95rem;color:var(--muted);line-height:1.9;font-weight:300;margin-bottom:0.9rem}
 .fr-body strong{color:var(--txt2);font-weight:500}
 
+/* ── NETWORK STATUS ───────────────────────────── */
+.net-status{padding:3rem 5%;background:var(--cream2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.ns-inner{max-width:1280px;margin:0 auto}
+.ns-head{display:flex;align-items:center;gap:16px;margin-bottom:1.8rem}
+.ns-title{font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:3px;color:var(--faint)}
+.ns-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 2.2s infinite}
+.ns-live{font-family:'DM Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--green)}
+.ns-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border)}
+.ns-site{background:var(--cream);padding:1.2rem 1rem;border:1px solid transparent;transition:all 0.2s;text-decoration:none;display:flex;flex-direction:column;gap:8px}
+.ns-site:hover{background:var(--cream2);border-color:var(--border)}
+.ns-site-id{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;color:var(--faint)}
+.ns-site-name{font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;color:var(--txt);line-height:1.2}
+.ns-site-url{font-family:'DM Mono',monospace;font-size:0.36rem;letter-spacing:1px;color:var(--faint);word-break:break-all;line-height:1.5}
+.ns-site-status{display:flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:1.5px;color:var(--green);margin-top:auto}
+.ns-site-status::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--green);animation:blink 2.2s infinite}
+
 /* ── FOOTER ───────────────────────────────────── */
 footer{background:var(--ink)}
 .ft-main{max-width:1280px;margin:0 auto;padding:4rem 5% 2.5rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px}
@@ -257,6 +376,8 @@ footer{background:var(--ink)}
   .metric:nth-child(3){border-right:none}
   .metric:nth-child(4){border-top:1px solid var(--border)}
   .metric:nth-child(5){border-top:1px solid var(--border);border-right:none}
+  .eco-subs-wrap{grid-template-columns:repeat(2,1fr)}
+  .ns-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:900px){
   .hero{grid-template-columns:1fr;min-height:auto}
@@ -268,6 +389,9 @@ footer{background:var(--ink)}
   .proj-grid{grid-template-columns:1fr}
   .founder{grid-template-columns:1fr}
   .nav-links{display:none}
+  .eco-subs-wrap,.eco-film-wrap{grid-template-columns:1fr}
+  .eco-root-stats,.eco-corp-stats{display:none}
+  .sn-links a{font-size:0.36rem;padding:0 6px}
 }
 @media(max-width:600px){
   .metrics{grid-template-columns:1fr 1fr}
@@ -277,23 +401,45 @@ footer{background:var(--ink)}
   .hp-grid{grid-template-columns:1fr 1fr}
   .hero-ctas{flex-direction:column}
   .ft-bottom-inner{flex-direction:column;text-align:center;gap:6px}
+  .ns-grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
 <body>
+
+<!-- SUPER NAV (The LoL Network) -->
+<div class="super-nav">
+  <span class="sn-label">THE LOL NETWORK</span>
+  <div class="sn-links">
+    <a href="https://faizzzlol.github.io/thelol/">THE LOL</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/" class="active">PAIZ® CORP</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">PAIZ SHOP</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">PAIZ CHICKEN</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PAIZPRODUCTIONS</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">THE LOL MOVIE</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/">GOVERNMENT</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
+    <a href="https://faizzzlol.github.io/thelol/tlr/">TL RAILWAYS</a>
+  </div>
+  <div class="sn-right">
+    <div class="sn-dot"></div>
+    <span class="sn-status">ALL SYSTEMS LIVE</span>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
   <a href="/PaizCorp/" class="nav-wordmark">Paiz<span class="reg">®</span> Corp</a>
   <div class="nav-sep"></div>
   <div class="nav-links">
+    <a href="#ecosystem">ECOSYSTEM</a>
     <a href="#subsidiaries">SUBSIDIARIES</a>
     <a href="#portfolio">PORTFOLIO</a>
     <a href="#timeline">TIMELINE</a>
     <a href="#leadership">LEADERSHIP</a>
   </div>
   <div class="nav-right">
-    <a href="https://faizzzlol.github.io/thelol/" class="nav-pill">← THE LOL</a>
+    <a href="https://faizzzlol.github.io/thelol/" class="nav-pill primary">← THE LOL</a>
   </div>
 </nav>
 
@@ -304,8 +450,8 @@ footer{background:var(--ink)}
     <h1>Five <em>companies.</em><br>One <span class="stroke">Vision.</span></h1>
     <p class="hero-sub">Paiz® Corp is the national conglomerate of The Legend of Legiona — spanning railways, construction, retail, film production, and food. Built to serve The LoL. Built to last.</p>
     <div class="hero-ctas">
-      <a href="#subsidiaries" class="btn-ink">OUR COMPANIES</a>
-      <a href="#portfolio" class="btn-ghost">VIEW PORTFOLIO</a>
+      <a href="#ecosystem" class="btn-ink">VIEW ECOSYSTEM</a>
+      <a href="#subsidiaries" class="btn-ghost">OUR COMPANIES</a>
     </div>
   </div>
   <div class="hero-right">
@@ -330,17 +476,175 @@ footer{background:var(--ink)}
   <span class="ti">PAIZ PRODUCTIONS<span class="td"></span></span>
   <span class="ti">PAIZ CHICKEN<span class="td"></span></span>
   <span class="ti">TLSRL · 4,800+ BLOCKS<span class="td"></span></span>
-  <span class="ti">THE LOL MOVIE<span class="td"></span></span>
+  <span class="ti">THE LOL MOVIE · IN PRODUCTION<span class="td"></span></span>
   <span class="ti">SKYXION: RAGNAROK<span class="td"></span></span>
+  <span class="ti">ISC · INTERNAL SECURITY CONTROL<span class="td"></span></span>
+  <span class="ti">◆ DIAMOND ECONOMY<span class="td"></span></span>
   <span class="ti">TL RAILWAYS<span class="td"></span></span>
   <span class="ti">PAIZ™ CONSTRUCTION<span class="td"></span></span>
   <span class="ti">PAIZ SHOP<span class="td"></span></span>
   <span class="ti">PAIZ PRODUCTIONS<span class="td"></span></span>
   <span class="ti">PAIZ CHICKEN<span class="td"></span></span>
   <span class="ti">TLSRL · 4,800+ BLOCKS<span class="td"></span></span>
-  <span class="ti">THE LOL MOVIE<span class="td"></span></span>
+  <span class="ti">THE LOL MOVIE · IN PRODUCTION<span class="td"></span></span>
   <span class="ti">SKYXION: RAGNAROK<span class="td"></span></span>
+  <span class="ti">ISC · INTERNAL SECURITY CONTROL<span class="td"></span></span>
+  <span class="ti">◆ DIAMOND ECONOMY<span class="td"></span></span>
 </div></div>
+
+<!-- ECOSYSTEM MAP -->
+<section class="ecosystem reveal" id="ecosystem">
+  <div class="s-inner">
+    <div class="eco-head">
+      <div class="eyebrow">WEB ECOSYSTEM · FULL NETWORK MAP</div>
+      <h2>The LoL <em>Universe.</em></h2>
+    </div>
+
+    <div class="eco-tree">
+      <!-- ROOT: The LoL -->
+      <a href="https://faizzzlol.github.io/thelol/" class="eco-root">
+        <div class="eco-root-icon">LoL</div>
+        <div class="eco-root-body">
+          <div class="eco-name">The Legend of <em>Legiona</em></div>
+          <div class="eco-desc">SOVEREIGN NATION · SKYXION: RAGNAROK · EST. 2023 · SUPER WEBSITE</div>
+        </div>
+        <div class="eco-root-stats">
+          <div class="ers-item"><span class="ers-val">3</span><span class="ers-key">FOUNDERS</span></div>
+          <div class="ers-item"><span class="ers-val">6+</span><span class="ers-key">MEGAPROJECTS</span></div>
+          <div class="ers-item"><span class="ers-val">2023</span><span class="ers-key">FOUNDED</span></div>
+        </div>
+        <span class="eco-link-btn">VISIT →</span>
+      </a>
+
+      <!-- CHILD: Paiz Corp + subs -->
+      <div class="eco-corp-wrap">
+
+        <!-- CORP NODE -->
+        <a href="https://faizzzlol.github.io/PaizCorp/" class="eco-corp">
+          <div class="eco-corp-icon">P®</div>
+          <div class="eco-corp-body">
+            <div class="eco-name">Paiz<sup style="font-size:0.5em">®</sup> <em>Corp</em></div>
+            <div class="eco-desc">NATIONAL CONGLOMERATE · PARENT OF ALL 5 SUBSIDIARIES · CURRENT PAGE</div>
+          </div>
+          <div class="eco-corp-stats">
+            <div><span class="ecs-val">5</span><span class="ecs-key">SUBSIDIARIES</span></div>
+            <div><span class="ecs-val">6+</span><span class="ecs-key">PROJECTS</span></div>
+          </div>
+          <span class="eco-corp-link">CURRENT PAGE</span>
+        </a>
+
+        <!-- SUBSIDIARY NODES (row) -->
+        <div class="eco-subs-wrap">
+          <a href="https://faizzzlol.github.io/thelol/tlr/" class="eco-sub s1">
+            <span class="eco-sub-badge">SUB-01 · TRANSPORT</span>
+            <div class="eco-sub-name">TL <em>Railways</em></div>
+            <div class="eco-sub-desc">National rail operator. Four lines: TLSRL, Monorail, LRT/MRT, High-Speed Boat Link. 4,800+ blocks of track.</div>
+            <div class="eco-sub-status">OPERATIONAL</div>
+            <span class="eco-sub-arrow">→</span>
+          </a>
+
+          <a href="https://faizzzlol.github.io/thelol/PaizCorp/tlsrl" class="eco-sub s2">
+            <span class="eco-sub-badge">SUB-02 · CONSTRUCTION</span>
+            <div class="eco-sub-name">Paiz™ <em>Construction</em></div>
+            <div class="eco-sub-desc">Engineering arm. Delivered TLSRL, TLCC Twin Towers, National Farm Complex, and all major national builds.</div>
+            <div class="eco-sub-status">OPERATIONAL</div>
+            <span class="eco-sub-arrow">→</span>
+          </a>
+
+          <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/" class="eco-sub s3">
+            <span class="eco-sub-badge">SUB-03 · RETAIL</span>
+            <div class="eco-sub-name">Paiz <em>Shop</em></div>
+            <div class="eco-sub-desc">Official Minecraft item store. Shulker Boxes, enchanted books, resources. Discord webhook orders. Priced in ◆.</div>
+            <div class="eco-sub-status">OPERATIONAL</div>
+            <span class="eco-sub-arrow">→</span>
+          </a>
+
+          <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/" class="eco-sub s4">
+            <span class="eco-sub-badge">SUB-04 · FILM & MEDIA</span>
+            <div class="eco-sub-name">Paiz <em>Productions</em></div>
+            <div class="eco-sub-desc">Official film studio. Producing The LoL Movie, LoL Chronicles, and ISC: Classified. Three productions total.</div>
+            <div class="eco-sub-status wip">IN PRODUCTION</div>
+            <span class="eco-sub-arrow">→</span>
+          </a>
+
+          <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/" class="eco-sub s5">
+            <span class="eco-sub-badge">SUB-05 · FOOD</span>
+            <div class="eco-sub-name">Paiz <em>Chicken</em></div>
+            <div class="eco-sub-desc">Virtual food ordering. Minecraft fried chicken & food items. Delivery + pickup. Distance-based fees across Skyxion.</div>
+            <div class="eco-sub-status">OPERATIONAL</div>
+            <span class="eco-sub-arrow">→</span>
+          </a>
+        </div>
+
+        <!-- FILM CHILDREN (under PaizProductions) -->
+        <div class="eco-film-wrap">
+          <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie" class="eco-film">
+            <span class="eco-film-tag">PAIZPRODUCTIONS · FEATURE FILM</span>
+            <div class="eco-film-title">The LoL: <em>The Movie</em></div>
+            <div class="eco-film-meta">4 phases · Faiz4224, Imii Kun, Dyno, UltraX2020 · Political Minecraft epic</div>
+            <span class="eco-film-pill">IN PRODUCTION</span>
+          </a>
+          <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/" class="eco-film">
+            <span class="eco-film-tag">PAIZPRODUCTIONS · ALL PRODUCTIONS</span>
+            <div class="eco-film-title">Studio <em>Portfolio</em></div>
+            <div class="eco-film-meta">The LoL Movie · LoL Chronicles · ISC: Classified — 3 productions in various stages</div>
+            <span class="eco-film-pill">VIEW ALL</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NETWORK STATUS -->
+<div class="net-status reveal">
+  <div class="ns-inner">
+    <div class="ns-head">
+      <span class="ns-title">LIVE NETWORK STATUS</span>
+      <div class="ns-dot"></div>
+      <span class="ns-live">ALL SITES OPERATIONAL</span>
+    </div>
+    <div class="ns-grid">
+      <a href="https://faizzzlol.github.io/thelol/" class="ns-site">
+        <div class="ns-site-id">ROOT-001</div>
+        <div class="ns-site-name">The Legend of Legiona</div>
+        <div class="ns-site-url">faizzzlol.github.io/thelol/</div>
+        <div class="ns-site-status">LIVE</div>
+      </a>
+      <a href="https://faizzzlol.github.io/PaizCorp/" class="ns-site">
+        <div class="ns-site-id">CORP-001</div>
+        <div class="ns-site-name">Paiz® Corp</div>
+        <div class="ns-site-url">faizzzlol.github.io/PaizCorp/</div>
+        <div class="ns-site-status">LIVE</div>
+      </a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/" class="ns-site">
+        <div class="ns-site-id">SUB-003</div>
+        <div class="ns-site-name">Paiz Shop</div>
+        <div class="ns-site-url">faizzzlol.github.io/PaizCorp/PaizShop/</div>
+        <div class="ns-site-status">LIVE</div>
+      </a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/" class="ns-site">
+        <div class="ns-site-id">SUB-005</div>
+        <div class="ns-site-name">Paiz Chicken</div>
+        <div class="ns-site-url">faizzzlol.github.io/PaizCorp/PaizChicken/</div>
+        <div class="ns-site-status">LIVE</div>
+      </a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/" class="ns-site">
+        <div class="ns-site-id">SUB-004</div>
+        <div class="ns-site-name">PaizProductions</div>
+        <div class="ns-site-url">faizzzlol.github.io/PaizCorp/PaizProductions/</div>
+        <div class="ns-site-status">LIVE</div>
+      </a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie" class="ns-site">
+        <div class="ns-site-id">FILM-001</div>
+        <div class="ns-site-name">The LoL: The Movie</div>
+        <div class="ns-site-url">faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie</div>
+        <div class="ns-site-status">LIVE</div>
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- ABOUT -->
 <div class="about-strip reveal" id="about">
@@ -372,13 +676,13 @@ footer{background:var(--ink)}
       <div class="sh-right">5 SUBSIDIARIES<br>ALL OPERATIONAL</div>
     </div>
 
-    <!-- Row 1: 3 cards -->
     <div class="subs-top stagger">
+      <!-- TL Railways -->
       <div class="sub tlr">
         <div class="sub-bg">01</div>
         <div class="sub-badge">SUBSIDIARY-01 · TRANSPORT</div>
         <h3>TL <em>Railways</em></h3>
-        <p class="sub-desc">The national rail operator of The LoL. Four lines across Skyxion — TLSRL, Monorail, LRT/MRT, and the High-Speed Boat Link — connecting The LoL to the wider world with regular, express, and cargo services.</p>
+        <p class="sub-desc">The national rail operator of The LoL. Four lines across Skyxion — TLSRL, Monorail, LRT/MRT, and the High-Speed Boat Link — connecting The LoL to the wider world with Regular, Express, and Cargo services.</p>
         <div class="sub-stats">
           <div><span class="ss-val">4</span><span class="ss-key">LINES</span></div>
           <div><span class="ss-val">4,800+</span><span class="ss-key">BLOCKS</span></div>
@@ -387,6 +691,7 @@ footer{background:var(--ink)}
         <a href="https://faizzzlol.github.io/thelol/tlr/" class="sub-link">VISIT TL RAILWAYS →</a>
       </div>
 
+      <!-- Paiz Construction -->
       <div class="sub con">
         <div class="sub-bg">02</div>
         <div class="sub-badge">SUBSIDIARY-02 · CONSTRUCTION</div>
@@ -399,44 +704,73 @@ footer{background:var(--ink)}
         <a href="https://faizzzlol.github.io/thelol/PaizCorp/tlsrl" class="sub-link">VIEW TLSRL →</a>
       </div>
 
+      <!-- Paiz Shop -->
       <div class="sub shop">
         <div class="sub-bg">03</div>
         <div class="sub-badge">SUBSIDIARY-03 · RETAIL</div>
         <h3>Paiz <em>Shop</em></h3>
-        <p class="sub-desc">The LoL's official Minecraft item store. Purchase Shulker Boxes, enchanted books, resources, and rare materials — all priced in Diamonds. Features live stock management, delivery, and pickup.</p>
+        <p class="sub-desc">The LoL's official Minecraft item store. Purchase Shulker Boxes, enchanted books, resources, and rare materials — all priced in Diamonds. Features live stock management, Discord webhook ordering, delivery, and pickup.</p>
         <div class="sub-stats">
-          <div><span class="ss-val">5+</span><span class="ss-key">ITEMS</span></div>
+          <div><span class="ss-val">5</span><span class="ss-key">ITEMS</span></div>
           <div><span class="ss-val">◆</span><span class="ss-key">DIAMONDS</span></div>
         </div>
-        <a href="/PaizCorp/PaizShop/" class="sub-link">OPEN SHOP →</a>
+        <!-- Shop items -->
+        <div class="sub-items">
+          <span class="si-pill">Shulker Box <span class="si-price">◆4</span></span>
+          <span class="si-pill">Mending I <span class="si-price">◆3</span></span>
+          <span class="si-pill">Unbreaking III <span class="si-price">◆2</span></span>
+          <span class="si-pill">Nether Wart <span class="si-price">◆3</span></span>
+          <span class="si-pill">Iron Ingot <span class="si-price">◆1</span></span>
+        </div>
+        <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/" class="sub-link" style="margin-top:1.2rem">OPEN SHOP →</a>
       </div>
     </div>
 
-    <!-- Row 2: 2 wide cards -->
     <div class="subs-bot stagger">
+      <!-- PaizProductions -->
       <div class="sub prod">
         <div class="sub-bg">04</div>
         <div class="sub-badge">SUBSIDIARY-04 · FILM & MEDIA</div>
         <h3>Paiz <em>Productions</em></h3>
-        <p class="sub-desc">The cinematic and media arm of Paiz® Corp. Currently producing <strong style="color:var(--txt2)">The LoL: The Movie</strong> — a political Minecraft epic documenting the rise, fracture, and reinvention of The Legend of Legiona across four phases. This is not a fantasy. This is a warning.</p>
+        <p class="sub-desc">The cinematic and media arm of Paiz® Corp. Currently producing <strong style="color:var(--txt2)">The LoL: The Movie</strong> — a political Minecraft epic documenting the rise, fracture, and reinvention of The Legend of Legiona across four phases. Three total productions in various stages.</p>
         <div class="sub-stats">
           <div><span class="ss-val">1</span><span class="ss-key">FEATURE FILM</span></div>
           <div><span class="ss-val">4</span><span class="ss-key">PHASES</span></div>
-          <div><span class="ss-val">4</span><span class="ss-key">KEY FIGURES</span></div>
+          <div><span class="ss-val">3</span><span class="ss-key">PRODUCTIONS</span></div>
         </div>
-        <a href="/PaizCorp/PaizProductions/thelolmovie" class="sub-link">THE LOL MOVIE →</a>
+        <!-- Sub productions -->
+        <div class="sub-children">
+          <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie" class="sc-item">
+            <span class="sc-tag">FEATURE</span>
+            <span class="sc-title">The LoL: The Movie — In Production</span>
+            <span class="sc-arrow">→</span>
+          </a>
+          <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/" class="sc-item">
+            <span class="sc-tag">SERIES</span>
+            <span class="sc-title">LoL Chronicles — In Development</span>
+            <span class="sc-arrow">→</span>
+          </a>
+          <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/" class="sc-item">
+            <span class="sc-tag">SHORT</span>
+            <span class="sc-title">ISC: Classified — Planned</span>
+            <span class="sc-arrow">→</span>
+          </a>
+        </div>
+        <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/" class="sub-link" style="margin-top:1rem">VISIT STUDIO →</a>
       </div>
 
+      <!-- Paiz Chicken -->
       <div class="sub chick">
         <div class="sub-bg">05</div>
         <div class="sub-badge">SUBSIDIARY-05 · FOOD & HOSPITALITY</div>
         <h3>Paiz <em>Chicken</em></h3>
-        <p class="sub-desc">The LoL's virtual food and hospitality brand. Paiz Chicken is an online ordering system for virtual fried chicken and Minecraft food items — with live stock management, delivery and pickup options, and delivery fees calculated by distance within Skyxion.</p>
+        <p class="sub-desc">The LoL's virtual food and hospitality brand. Order fried chicken and Minecraft food items online — with live stock management, Discord webhook ordering, delivery and pickup modes, and delivery fees calculated by distance within Skyxion. Pay in Diamonds.</p>
         <div class="sub-stats">
           <div><span class="ss-val">◈</span><span class="ss-key">ORDERING</span></div>
           <div><span class="ss-val">2</span><span class="ss-key">MODES</span></div>
+          <div><span class="ss-val">◆</span><span class="ss-key">DIAMONDS</span></div>
         </div>
-        <a href="/PaizCorp/PaizChicken/" class="sub-link">ORDER NOW →</a>
+        <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/" class="sub-link">ORDER NOW →</a>
       </div>
     </div>
   </div>
@@ -464,16 +798,16 @@ footer{background:var(--ink)}
       <div class="proj">
         <div class="proj-id">PROJECT-FILM-002 · MEDIA</div>
         <h3>The LoL: <em>The Movie</em></h3>
-        <p>A political Minecraft epic. Four phases. Faiz4224, Imii Kun, Dyno, UltraX2020. This is not a fantasy.</p>
+        <p>A political Minecraft epic. Four phases: Formation, Expansion, Ideological Collapse, Equality Restored. Cast: Faiz4224, Imii Kun, Dyno, UltraX2020.</p>
         <div class="status wip">IN PRODUCTION</div>
-        <a href="/PaizCorp/PaizProductions/thelolmovie" class="proj-link">VIEW FILM PAGE →</a>
+        <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie" class="proj-link">VIEW FILM PAGE →</a>
       </div>
       <div class="proj">
         <div class="proj-id">PROJECT-SHOP-003 · RETAIL</div>
         <h3>Paiz <em>Shop</em></h3>
-        <p>Live Minecraft item store priced in Diamonds. Discord webhook orders. Stock management. Delivery & pickup.</p>
+        <p>Live Minecraft item store priced in Diamonds. Discord webhook orders. Stock management. Delivery & pickup. 5 items from ◆1–◆4.</p>
         <div class="status">OPERATIONAL</div>
-        <a href="/PaizCorp/PaizShop/" class="proj-link">VISIT SHOP →</a>
+        <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/" class="proj-link">VISIT SHOP →</a>
       </div>
       <div class="proj">
         <div class="proj-id">PROJECT-TLCC-004 · ARCHITECTURE</div>
@@ -484,15 +818,15 @@ footer{background:var(--ink)}
       <div class="proj">
         <div class="proj-id">PROJECT-NFC-005 · ECONOMY</div>
         <h3>National Farm <em>Complex</em></h3>
-        <p>Three automated farms — Iron, Totem, and Gold — powering The LoL's resource economy.</p>
+        <p>Three automated farms — Iron, Totem, and Gold — powering The LoL's resource economy and citizen welfare.</p>
         <div class="status">OPERATIONAL</div>
       </div>
       <div class="proj">
         <div class="proj-id">PROJECT-CHICK-006 · FOOD</div>
         <h3>Paiz <em>Chicken</em></h3>
-        <p>Virtual food ordering system with stock management and distance-based delivery fees across Skyxion.</p>
+        <p>Virtual food ordering system with Discord webhook integration, stock management, and distance-based delivery fees across Skyxion.</p>
         <div class="status">OPERATIONAL</div>
-        <a href="/PaizCorp/PaizChicken/" class="proj-link">ORDER →</a>
+        <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/" class="proj-link">ORDER →</a>
       </div>
     </div>
   </div>
@@ -529,28 +863,28 @@ footer{background:var(--ink)}
         <div class="tl-year">2023</div>
         <div class="tl-body">
           <h4>TLSRL Construction Begins</h4>
-          <p>Paiz™ Construction begins work on the 4,800-block TLSRL railway — The LoL's most ambitious infrastructure project. First major build under the Paiz® Corp banner.</p>
+          <p>Paiz™ Construction begins work on the 4,800-block TLSRL railway — The LoL's most ambitious infrastructure project. Six stations. Three service classes. First major build under the Paiz® Corp banner.</p>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-year">2024</div>
         <div class="tl-body">
           <h4>Paiz Shop & Paiz Chicken Launch</h4>
-          <p>The retail and food divisions launch — expanding Paiz® Corp beyond infrastructure into commerce and hospitality. The LoL's digital economy begins.</p>
+          <p>The retail and food divisions launch — expanding Paiz® Corp beyond infrastructure into commerce and hospitality. Paiz Shop opens with Diamond-priced items; Paiz Chicken launches virtual food ordering with delivery across Skyxion.</p>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-year">2025</div>
         <div class="tl-body">
-          <h4>PaizProductions & The LoL Movie</h4>
-          <p>The fifth subsidiary is established. PaizProductions begins production on The LoL: The Movie — a political Minecraft epic spanning four phases of The LoL's history.</p>
+          <h4>PaizProductions Established</h4>
+          <p>The fifth subsidiary is created. PaizProductions begins production on The LoL: The Movie — a four-phase political Minecraft epic. LoL Chronicles and ISC: Classified also enter development and planning.</p>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-year">2026</div>
         <div class="tl-body">
-          <h4>Conglomerate Expansion</h4>
-          <p>All five subsidiaries fully operational. Paiz Shop upgraded with Discord webhook ordering and admin management system. Paiz® Corp enters its most ambitious phase yet.</p>
+          <h4>Conglomerate Expansion & Full Web Ecosystem</h4>
+          <p>All five subsidiaries fully operational. Paiz Shop upgraded with Discord webhook ordering and GitHub-powered admin system. Full web ecosystem live across 6 interconnected sites. Paiz® Corp enters its most ambitious phase yet.</p>
         </div>
       </div>
     </div>
@@ -587,40 +921,44 @@ footer{background:var(--ink)}
       <h5>SUBSIDIARIES</h5>
       <a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways</a>
       <a href="https://faizzzlol.github.io/thelol/PaizCorp/tlsrl">Paiz™ Construction</a>
-      <a href="/PaizCorp/PaizShop/">Paiz Shop</a>
-      <a href="/PaizCorp/PaizProductions/thelolmovie">PaizProductions</a>
-      <a href="/PaizCorp/PaizChicken/">Paiz Chicken</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Paiz Shop</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PaizProductions</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Paiz Chicken</a>
     </div>
     <div class="ft-col">
-      <h5>PROJECTS</h5>
-      <a href="https://faizzzlol.github.io/thelol/PaizCorp/tlsrl">TLSRL</a>
-      <a href="/PaizCorp/PaizProductions/thelolmovie">The LoL Movie</a>
-      <a href="/PaizCorp/PaizShop/">Paiz Shop</a>
-      <a href="/PaizCorp/PaizChicken/">Paiz Chicken</a>
+      <h5>PRODUCTIONS</h5>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">LoL Chronicles</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">ISC: Classified</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Paiz Shop</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Paiz Chicken</a>
     </div>
     <div class="ft-col">
-      <h5>THE LOL</h5>
+      <h5>THE LOL NETWORK</h5>
       <a href="https://faizzzlol.github.io/thelol/">Nation Home</a>
       <a href="https://faizzzlol.github.io/thelol/gov/">Government</a>
       <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
+      <a href="https://faizzzlol.github.io/thelol/gov/isc/search">ISC Archive</a>
       <a href="https://faizzzlol.github.io/thelol/about">History</a>
     </div>
   </div>
   <div class="ft-bottom">
     <div class="ft-bottom-inner">
       <p>© 2026 PAIZ® CORP — ALL RIGHTS RESERVED — THE LEGEND OF LEGIONA</p>
-      <p>FOUNDED BY FAIZ4224 · SKYXION: RAGNAROK</p>
+      <p>FOUNDED BY FAIZ4224 · SKYXION: RAGNAROK · 6 SITES · ALL LIVE</p>
     </div>
   </div>
 </footer>
 
 <script>
+  // Scroll reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.06 });
   document.querySelectorAll('.reveal, .stagger').forEach(el => obs.observe(el));
 
-  const secs = ['subsidiaries','portfolio','timeline','leadership'];
+  // Active nav highlight
+  const secs = ['ecosystem','subsidiaries','portfolio','timeline','leadership'];
   const links = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
     let cur = '';
