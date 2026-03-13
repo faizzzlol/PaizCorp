@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The LoL: The Movie — PaizProductions</title>
-<link rel="icon" type="image/svg+xml" href="/PaizCorp/PaizProductions/assets/thelolmovie-favicon.svg">
+<link rel="icon" type="image/png" href="/PaizCorp/PaizProductions/assets/thelolmovieLOGO.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -26,6 +26,7 @@
   --txt4:rgba(245,240,234,0.28);
   --border:rgba(245,240,234,0.07);
   --border2:rgba(245,240,234,0.04);
+  --net-bg:#0d0d0d;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;overflow-x:hidden}
@@ -35,64 +36,75 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
   mix-blend-mode:overlay;opacity:0.5}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:56px;background:linear-gradient(to bottom,rgba(6,4,7,0.95),transparent);transition:background 0.3s}
+/* ── NETWORK BAR ─────────────────────────────────────── */
+.network-bar{
+  position:fixed;top:0;left:0;right:0;z-index:400;
+  background:var(--net-bg);border-bottom:1px solid rgba(255,255,255,0.07);
+  height:30px;display:flex;align-items:center;padding:0 3rem;gap:16px;overflow:hidden;
+}
+.nb-label{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:3px;color:rgba(245,240,234,0.22);white-space:nowrap;flex-shrink:0}
+.nb-sep{width:1px;height:12px;background:rgba(255,255,255,0.1);flex-shrink:0}
+.nb-links{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;flex:1}
+.nb-links::-webkit-scrollbar{display:none}
+.nb-links a{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:1.8px;color:rgba(245,240,234,0.25);text-decoration:none;padding:0 10px;white-space:nowrap;transition:color 0.15s;border-right:1px solid rgba(255,255,255,0.06);line-height:30px}
+.nb-links a:first-child{border-left:1px solid rgba(255,255,255,0.06)}
+.nb-links a:hover{color:rgba(245,240,234,0.5)}
+.nb-links a.nb-current{color:var(--yellow);background:rgba(245,197,24,0.06)}
+.nb-right{margin-left:auto;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.nb-status{display:flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;color:rgba(74,222,128,0.65);white-space:nowrap}
+.nb-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,0.7);animation:nbPulse 2s ease-in-out infinite}
+@keyframes nbPulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* ── NAV ─────────────────────────────────────────────── */
+nav{position:fixed;top:30px;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:56px;background:linear-gradient(to bottom,rgba(6,4,7,0.95),transparent);transition:background 0.3s}
 nav.scrolled{background:rgba(6,4,7,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-left{display:flex;align-items:center;gap:16px}
 .nav-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--txt3);font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:2px;transition:color 0.2s}
 .nav-back:hover{color:var(--yellow)}
 .nav-back svg{width:14px;height:14px;opacity:0.6}
+.nav-back-sep{width:1px;height:14px;background:rgba(245,240,234,0.12)}
+.nav-back-corp{display:flex;align-items:center;gap:6px;text-decoration:none;color:rgba(245,240,234,0.28);font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:2px;transition:color 0.2s}
+.nav-back-corp:hover{color:var(--txt3)}
 .nav-title{font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:3px;color:var(--txt4)}
 .nav-pp{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:var(--red3)}
 
-/* ══ HERO ══════════════════════════════════════════════ */
+/* HERO */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
-
-/* Poster-style background */
 .hero-bg{position:absolute;inset:0;z-index:0}
 .hero-bg-img{width:100%;height:100%;object-fit:cover;filter:brightness(0.35) saturate(1.4)}
 .hero-bg-placeholder{width:100%;height:100%;background:linear-gradient(160deg,#1a0803 0%,#2a0e05 25%,#0d0510 50%,#07050f 100%);position:relative;overflow:hidden}
 .hero-bg-placeholder::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 40%,rgba(232,114,10,0.2) 0%,transparent 50%),radial-gradient(ellipse at 80% 60%,rgba(192,57,26,0.15) 0%,transparent 45%)}
-
-/* Vignette */
 .hero-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(6,4,7,0.7) 100%)}
-
-/* Bottom fade */
 .hero-fade{position:absolute;bottom:0;left:0;right:0;height:280px;z-index:2;background:linear-gradient(to bottom,transparent,var(--bg))}
-
 .hero-content{position:relative;z-index:3;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 5rem 5rem;max-width:1400px;margin:0 auto;width:100%}
 
-/* THE badge */
 .film-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:1rem;width:fit-content}
 .badge-studio{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:3px;color:var(--txt4);border:1px solid var(--border);padding:4px 10px;background:rgba(6,4,7,0.6)}
 .badge-dot{width:3px;height:3px;background:var(--red);border-radius:50%;flex-shrink:0}
 .badge-status{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:3px;color:var(--red3)}
 
-/* FILM TITLE — CSS recreation of the logo */
 .film-logo{margin-bottom:1.5rem;user-select:none}
 .fl-the{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,4vw,3rem);color:var(--yellow);letter-spacing:6px;display:block;text-shadow:0 2px 0 #7a5f00,-1px -1px 0 #1a0800,1px 1px 0 #1a0800;line-height:1;margin-left:4px}
 .fl-lol{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,16vw,13rem);color:var(--red);letter-spacing:-4px;display:block;line-height:0.82;text-shadow:0 6px 0 #6b1a08,0 12px 0 rgba(0,0,0,0.4),0 0 60px var(--glow-r);-webkit-text-stroke:2px #2a0800;position:relative}
 .fl-lol::after{content:'LOL';position:absolute;left:0;top:0;color:var(--red2);-webkit-text-stroke:0;background:linear-gradient(to bottom,var(--red3) 0%,var(--red) 60%,#7a1a08 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;clip-path:inset(0 0 40% 0)}
 .fl-movie{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,4.5vw,3.5rem);color:var(--yellow);letter-spacing:8px;display:block;text-shadow:0 3px 0 #7a5f00,-1px -1px 0 #1a0800,1px 1px 0 #1a0800;line-height:1}
 
-/* Cast credits */
 .hero-cast{display:flex;gap:2.5rem;margin-bottom:2rem;flex-wrap:wrap}
 .cast-item{text-align:center}
 .cast-name{font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;color:var(--yellow);letter-spacing:4px;display:block;text-shadow:0 0 20px rgba(245,197,24,0.5)}
 .cast-role{font-family:'DM Mono',monospace;font-size:0.36rem;letter-spacing:2px;color:var(--txt4);display:block;margin-top:2px}
 
-/* Play button */
 .hero-play{display:inline-flex;align-items:center;gap:14px;cursor:pointer;background:none;border:2px solid rgba(245,197,24,0.4);color:var(--yellow);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:4px;padding:14px 28px;transition:all 0.3s;width:fit-content;text-decoration:none}
 .hero-play:hover{background:rgba(245,197,24,0.1);border-color:var(--yellow);transform:scale(1.02)}
 .play-icon{width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent var(--yellow);flex-shrink:0;filter:drop-shadow(0 0 4px var(--yellow))}
 .hero-play:hover .play-icon{filter:drop-shadow(0 0 8px var(--yellow))}
 
-/* Right side meta */
 .hero-meta-aside{position:absolute;right:5rem;bottom:5rem;z-index:3;display:flex;flex-direction:column;gap:1rem;text-align:right}
 .hma-item{display:flex;flex-direction:column;gap:2px}
 .hma-label{font-family:'DM Mono',monospace;font-size:0.36rem;letter-spacing:2.5px;color:var(--txt4)}
 .hma-value{font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;font-weight:700;color:var(--txt3);letter-spacing:1px}
 
-/* ══ TRAILER SECTION ══════════════════════════════════ */
+/* TRAILER */
 .trailer-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 5rem}
 .ts-inner{max-width:1100px;margin:0 auto}
 .ts-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
@@ -101,11 +113,8 @@ nav.scrolled{background:rgba(6,4,7,0.97);backdrop-filter:blur(12px);border-botto
 .ts-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--txt);letter-spacing:1px;line-height:1}
 .ts-sub{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:var(--txt4)}
 
-/* YouTube embed wrapper */
 .yt-wrapper{position:relative;width:100%;padding-top:56.25%;background:#000;border:1px solid var(--border);overflow:hidden}
 .yt-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
-
-/* Placeholder for when no video ID */
 .yt-placeholder{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;background:linear-gradient(135deg,#100808,#1a0c04,#0a0610);cursor:pointer}
 .yt-placeholder-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(192,57,26,0.12) 0%,transparent 65%);pointer-events:none}
 .yt-play-btn{width:72px;height:72px;background:rgba(245,197,24,0.15);border:2px solid rgba(245,197,24,0.5);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;position:relative;z-index:1}
@@ -114,21 +123,17 @@ nav.scrolled{background:rgba(6,4,7,0.97);backdrop-filter:blur(12px);border-botto
 .yt-placeholder-text{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;color:var(--yellow);position:relative;z-index:1}
 .yt-placeholder-sub{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:var(--txt4);position:relative;z-index:1}
 
-/* ══ SYNOPSIS + DETAILS ══════════════════════════════ */
+/* SYNOPSIS + DETAILS */
 .info-section{padding:5rem;max-width:1400px;margin:0 auto}
 .info-grid{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start}
 @media(max-width:900px){.info-grid{grid-template-columns:1fr}}
-
 .synopsis-label{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:4px;color:var(--yellow);display:flex;align-items:center;gap:8px;margin-bottom:1.2rem}
 .synopsis-label::before{content:'';width:20px;height:1px;background:var(--yellow)}
 .synopsis-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);letter-spacing:1px;margin-bottom:1.5rem;line-height:0.95}
 .synopsis-text{font-size:1rem;color:var(--txt3);line-height:1.85;font-weight:400;max-width:560px}
 .synopsis-text+.synopsis-text{margin-top:1rem}
-
-/* Divider */
 .info-divider{width:40px;height:2px;background:linear-gradient(to right,var(--red),transparent);margin:2rem 0}
-
-.details-card{background:var(--bg2);border:1px solid var(--border);padding:2rem;position:sticky;top:80px}
+.details-card{background:var(--bg2);border:1px solid var(--border);padding:2rem;position:sticky;top:100px}
 .dc-title{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:3px;color:var(--txt4);margin-bottom:1.2rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border)}
 .dc-row{display:flex;align-items:baseline;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid var(--border2)}
 .dc-row:last-child{border-bottom:none}
@@ -136,13 +141,11 @@ nav.scrolled{background:rgba(6,4,7,0.97);backdrop-filter:blur(12px);border-botto
 .dc-val{font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;font-weight:700;color:var(--txt2);text-align:right;letter-spacing:0.5px}
 .dc-val.yellow{color:var(--yellow)}
 .dc-val.red{color:var(--red3)}
-
-/* STATUS BADGE */
 .status-prod{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:var(--yellow);background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.25);padding:4px 10px;margin-top:1.5rem;width:100%;justify-content:center}
 .sp-dot{width:6px;height:6px;background:var(--yellow);border-radius:50%;animation:spBlink 1.5s ease-in-out infinite;flex-shrink:0}
 @keyframes spBlink{0%,100%{opacity:1}50%{opacity:0.2}}
 
-/* ══ CAST ════════════════════════════════════════════ */
+/* CAST */
 .cast-section{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 5rem}
 .cs-inner{max-width:1400px;margin:0 auto}
 .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.44rem;letter-spacing:4px;color:var(--yellow);display:flex;align-items:center;gap:8px;margin-bottom:0.6rem}
@@ -159,7 +162,7 @@ nav.scrolled{background:rgba(6,4,7,0.97);backdrop-filter:blur(12px);border-botto
 .cc-role{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2.5px;color:var(--red3);margin-bottom:0.8rem}
 .cc-desc{font-size:0.85rem;color:var(--txt4);line-height:1.6;font-weight:400}
 
-/* ══ PRODUCTION NOTES ════════════════════════════════ */
+/* PRODUCTION NOTES */
 .notes-section{padding:5rem;max-width:1400px;margin:0 auto}
 .notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--border2);border:1px solid var(--border)}
 .note-card{background:var(--bg);padding:1.8rem;position:relative;overflow:hidden}
@@ -170,7 +173,7 @@ nav.scrolled{background:rgba(6,4,7,0.97);backdrop-filter:blur(12px);border-botto
 .nc-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--txt);margin-bottom:0.5rem}
 .nc-text{font-size:0.82rem;color:var(--txt4);line-height:1.65;font-weight:400}
 
-/* ══ CTA FOOTER ══════════════════════════════════════ */
+/* BOTTOM CTA */
 .film-cta{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 5rem;text-align:center;position:relative;overflow:hidden}
 .film-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(192,57,26,0.08) 0%,transparent 70%);pointer-events:none}
 .fcta-logo{font-family:'Bebas Neue',sans-serif;margin-bottom:0.5rem;position:relative;z-index:1}
@@ -184,11 +187,15 @@ nav.scrolled{background:rgba(6,4,7,0.97);backdrop-filter:blur(12px);border-botto
 .btn-out{background:transparent;color:var(--yellow);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:3px;padding:13px 28px;border:2px solid rgba(245,197,24,0.35);transition:all 0.2s}
 .btn-out:hover{background:rgba(245,197,24,0.08);border-color:var(--yellow);transform:translateY(-2px)}
 
-footer{background:var(--bg);border-top:1px solid var(--border);padding:1.2rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem}
-.foot-l{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;color:var(--txt4)}
-.foot-r{display:flex;gap:1.5rem}
-.foot-a{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;color:var(--txt4);text-decoration:none;transition:color 0.2s}
-.foot-a:hover{color:var(--yellow)}
+/* ── FOOTER ──────────────────────────────────────────── */
+footer{background:var(--net-bg);border-top:1px solid var(--border);padding:1.4rem 5rem;position:relative;z-index:2}
+.footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:0.85rem;color:var(--txt3);letter-spacing:2px}
+.footer-brand-sub{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;color:var(--txt4);margin-top:2px}
+.footer-links{display:flex;gap:3px;flex-wrap:wrap}
+.footer-links a{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;color:var(--txt4);text-decoration:none;padding:3px 8px;border:1px solid rgba(245,240,234,0.04);transition:all 0.2s}
+.footer-links a:hover{color:var(--txt3);border-color:var(--border)}
+.footer-copy{width:100%;font-family:'DM Mono',monospace;font-size:0.39rem;letter-spacing:1.5px;color:var(--txt4);padding-top:0.8rem;border-top:1px solid rgba(245,240,234,0.04);margin-top:0.5rem}
 
 /* ANIMATIONS */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
@@ -196,21 +203,51 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:1.2rem 5r
 
 @media(max-width:768px){
   nav{padding:0 1.2rem}
+  .network-bar{padding:0 1.2rem}
   .hero-content{padding:0 1.5rem 4rem}
   .hero-meta-aside{display:none}
   .trailer-section,.info-section,.cast-section,.notes-section,.film-cta{padding:3rem 1.5rem}
   footer{padding:1.2rem 1.5rem}
 }
+@media(max-width:700px){
+  .network-bar{display:none}
+  nav{top:0}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ── NETWORK BAR ────────────────────────────────────── -->
+<div class="network-bar">
+  <span class="nb-label">THE LOL NETWORK</span>
+  <div class="nb-sep"></div>
+  <div class="nb-links">
+    <a href="https://faizzzlol.github.io/thelol/">THE LOL</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/">PAIZ® CORP</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">PAIZ SHOP</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">PAIZ CHICKEN</a>
+    <a href="/PaizCorp/PaizProductions/" class="nb-current">PAIZPRODUCTIONS</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/">GOVERNMENT</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
+    <a href="https://faizzzlol.github.io/thelol/tlr/">TL RAILWAYS</a>
+  </div>
+  <div class="nb-right">
+    <div class="nb-status"><span class="nb-dot"></span>ALL SYSTEMS LIVE</div>
+  </div>
+</div>
+
+<!-- ── NAV ───────────────────────────────────────────── -->
 <nav id="nav">
-  <a href="../" class="nav-back">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    PAIZPRODUCTIONS
-  </a>
+  <div class="nav-left">
+    <a href="https://faizzzlol.github.io/PaizCorp/" class="nav-back-corp">
+      ← PAIZ® CORP
+    </a>
+    <div class="nav-back-sep"></div>
+    <a href="/PaizCorp/PaizProductions/" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      PAIZPRODUCTIONS
+    </a>
+  </div>
   <span class="nav-title">THE LOL: THE MOVIE</span>
   <span class="nav-pp">A PAIZ® CORP FILM</span>
 </nav>
@@ -218,8 +255,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:1.2rem 5r
 <!-- ══ HERO ══ -->
 <div class="hero">
   <div class="hero-bg">
-    <!-- Replace src with actual poster image path once uploaded -->
-    <!-- <img class="hero-bg-img" src="../img/thelol-movie-poster.jpg" alt="The LoL: The Movie Poster"> -->
     <div class="hero-bg-placeholder"></div>
   </div>
   <div class="hero-vignette"></div>
@@ -259,7 +294,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:1.2rem 5r
     </a>
   </div>
 
-  <!-- Right meta -->
   <div class="hero-meta-aside">
     <div class="hma-item">
       <span class="hma-label">STUDIO</span>
@@ -292,11 +326,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:1.2rem 5r
     </div>
 
     <div class="yt-wrapper" id="yt-container">
-      <!-- ═══════════════════════════════════════════════════
-           REPLACE THE VIDEO ID BELOW WITH YOUR TRAILER ID
-           Example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-                    → Video ID is: dQw4w9WgXcQ
-           ═══════════════════════════════════════════════════ -->
       <iframe
         id="yt-iframe"
         src="about:blank"
@@ -307,7 +336,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:1.2rem 5r
         style="display:none">
       </iframe>
 
-      <!-- Placeholder shown until video ID is set -->
       <div class="yt-placeholder" id="yt-placeholder" onclick="loadVideo()">
         <div class="yt-placeholder-bg"></div>
         <div class="yt-play-btn"></div>
@@ -430,32 +458,37 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:1.2rem 5r
   <div class="cta-btns">
     <a href="https://discord.gg/wX5XaWgdXx" class="btn-red" target="_blank">JOIN THE LOL DISCORD</a>
     <a href="https://faizzzlol.github.io/thelol/" class="btn-out" target="_blank">VISIT THE LOL</a>
-    <a href="../" class="btn-out">PAIZPRODUCTIONS</a>
+    <a href="/PaizCorp/PaizProductions/" class="btn-out">PAIZPRODUCTIONS</a>
   </div>
 </div>
 
+<!-- ── FOOTER ─────────────────────────────────────────── -->
 <footer>
-  <span class="foot-l">© 2026 PAIZPRODUCTIONS · PAIZ® CORP · THE LEGEND OF LEGIONA</span>
-  <div class="foot-r">
-    <a href="https://faizzzlol.github.io/PaizCorp/" class="foot-a">PAIZ CORP</a>
-    <a href="https://faizzzlol.github.io/thelol/" class="foot-a">THE LOL</a>
-    <a href="../" class="foot-a">PAIZPRODUCTIONS</a>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">THE LOL: THE MOVIE</div>
+      <div class="footer-brand-sub">A PAIZPRODUCTIONS ORIGINAL · PAIZ® CORP · THE LEGEND OF LEGIONA</div>
+    </div>
+    <div class="footer-links">
+      <a href="/PaizCorp/PaizProductions/">← PAIZPRODUCTIONS</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/">PAIZ® CORP</a>
+      <a href="https://faizzzlol.github.io/thelol/">THE LOL</a>
+      <a href="https://discord.gg/wX5XaWgdXx" target="_blank">DISCORD</a>
+    </div>
+    <div class="footer-copy">© 2026 PAIZPRODUCTIONS · PAIZ® CORP SUBSIDIARY · THE LEGEND OF LEGIONA · FOUNDED BY FAIZ4224</div>
   </div>
 </footer>
 
 <script>
-// Nav scroll effect
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 });
 
-// Load YouTube embed
 function loadVideo() {
   const iframe = document.getElementById('yt-iframe');
   const placeholder = document.getElementById('yt-placeholder');
   const src = iframe.dataset.src;
-  // Only load if a real video ID has been set
   if (src && !src.includes('YOUR_VIDEO_ID_HERE')) {
     iframe.src = src + '&autoplay=1';
     iframe.style.display = 'block';
@@ -465,13 +498,11 @@ function loadVideo() {
   }
 }
 
-// Smooth scroll to trailer
 document.querySelector('.hero-play').addEventListener('click', function(e) {
   e.preventDefault();
   document.getElementById('trailer').scrollIntoView({ behavior: 'smooth' });
 });
 
-// Reveal on scroll
 const reveals = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
