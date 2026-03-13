@@ -7,7 +7,7 @@
     "stock": 0,
     "image": "img/shulker_box.png",
     "category": "Storage",
-    "listed": true,
+    "listed": false,
     "description": "(1x) Store and carry items in bulk.",
     "sold": 0
   },
