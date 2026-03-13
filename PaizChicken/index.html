@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paiz Chicken — Official LoL Food Chain</title>
+<title>Paiz Chicken — Official The LoL Food Chain</title>
 <link rel="icon" type="image/svg+xml" href="/PaizCorp/PaizChicken/pc-favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -16,6 +16,7 @@
   --red-dim:rgba(204,34,0,0.12);
   --border:rgba(253,246,227,0.09);--border2:rgba(253,246,227,0.05);
   --check:rgba(253,246,227,0.025);
+  --net-bg:#0d0d0d;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--txt);font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden}
@@ -23,8 +24,27 @@ body{background:var(--bg);color:var(--txt);font-family:'Nunito',sans-serif;min-h
 /* CHECKERED TEXTURE */
 body::before{content:'';position:fixed;inset:0;background-image:repeating-conic-gradient(var(--check) 0% 25%, transparent 0% 50%);background-size:32px 32px;pointer-events:none;z-index:0;opacity:0.6}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:100;background:var(--red);border-bottom:3px solid #a01a00;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:58px}
+/* ── NETWORK BAR ─────────────────────────────────────── */
+.network-bar{
+  position:sticky;top:0;z-index:400;
+  background:var(--net-bg);border-bottom:1px solid rgba(255,255,255,0.07);
+  height:30px;display:flex;align-items:center;padding:0 2rem;gap:16px;overflow:hidden;
+}
+.nb-label{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:3px;color:rgba(253,246,227,0.28);white-space:nowrap;flex-shrink:0}
+.nb-sep{width:1px;height:12px;background:rgba(255,255,255,0.1);flex-shrink:0}
+.nb-links{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;flex:1}
+.nb-links::-webkit-scrollbar{display:none}
+.nb-links a{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.8px;color:rgba(253,246,227,0.28);text-decoration:none;padding:0 10px;white-space:nowrap;transition:color 0.15s;border-right:1px solid rgba(255,255,255,0.06);line-height:30px}
+.nb-links a:first-child{border-left:1px solid rgba(255,255,255,0.06)}
+.nb-links a:hover{color:rgba(253,246,227,0.55)}
+.nb-links a.nb-current{color:var(--gold);background:rgba(245,166,35,0.07)}
+.nb-right{margin-left:auto;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.nb-status{display:flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:1.5px;color:rgba(74,222,128,0.7);white-space:nowrap}
+.nb-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,0.7);animation:nbPulse 2s ease-in-out infinite}
+@keyframes nbPulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* ── NAV ─────────────────────────────────────────────── */
+nav{position:sticky;top:30px;z-index:100;background:var(--red);border-bottom:3px solid #a01a00;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:58px}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-logo-icon{width:34px;height:34px;background:#0f0a05;border-radius:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:2px solid rgba(255,255,255,0.2);flex-shrink:0}
 .nav-logo-text{font-family:'Anton',sans-serif;font-size:1.3rem;color:#fff;letter-spacing:1px;line-height:1}
@@ -32,8 +52,10 @@ nav{position:sticky;top:0;z-index:100;background:var(--red);border-bottom:3px so
 .nav-links{display:flex;align-items:center;gap:0}
 .nav-link{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:rgba(255,255,255,0.85);text-decoration:none;padding:6px 14px;transition:color 0.2s;text-transform:uppercase}
 .nav-link:hover{color:#fff}
+.nav-link.corp-link{color:rgba(255,255,255,0.55)}
+.nav-link.corp-link:hover{color:rgba(255,255,255,0.85)}
 .nav-divider{width:1px;height:14px;background:rgba(255,255,255,0.2)}
-.cart-btn{background:#0f0a05;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 16px;color:var(--gold);font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;transition:all 0.2s;margin-left:1rem;border:2px solid rgba(245,166,35,0.4)}
+.cart-btn{background:#0f0a05;border:2px solid rgba(245,166,35,0.4);cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 16px;color:var(--gold);font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;transition:all 0.2s;margin-left:1rem}
 .cart-btn:hover{background:var(--gold);color:#0f0a05;border-color:var(--gold)}
 .cart-count{background:var(--gold);color:#0f0a05;font-weight:900;font-size:0.58rem;padding:1px 6px;min-width:20px;text-align:center;font-family:'Anton',sans-serif}
 
@@ -123,7 +145,7 @@ nav{position:sticky;top:0;z-index:100;background:var(--red);border-bottom:3px so
 .qty-b:disabled{opacity:0.3;cursor:not-allowed}
 .qty-n{width:44px;height:28px;background:var(--bg3);border:1px solid var(--border);border-left:none;border-right:none;color:var(--txt);text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;outline:none}
 .qty-n::-webkit-inner-spin-button{-webkit-appearance:none}
-.add-btn{width:100%;padding:10px;background:var(--red);border:none;color:#fff;font-family:'Anton',sans-serif;font-size:0.9rem;letter-spacing:2px;cursor:pointer;transition:all 0.2s;border:2px solid var(--red)}
+.add-btn{width:100%;padding:10px;background:var(--red);border:2px solid var(--red);color:#fff;font-family:'Anton',sans-serif;font-size:0.9rem;letter-spacing:2px;cursor:pointer;transition:all 0.2s}
 .add-btn:hover:not(:disabled){background:var(--red2);border-color:var(--red2)}
 .add-btn:disabled{background:var(--bg4);border-color:var(--border);color:var(--txt4);cursor:not-allowed}
 .empty-state{padding:3rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);background:var(--bg2);grid-column:1/-1}
@@ -154,7 +176,7 @@ nav{position:sticky;top:0;z-index:100;background:var(--red);border-bottom:3px so
 .drawer-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
 .drawer-total-lbl{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2px;color:var(--txt3)}
 .drawer-total-val{font-family:'Anton',sans-serif;font-size:1.4rem;color:var(--gold)}
-.checkout-btn{width:100%;padding:13px;background:var(--red);border:none;color:#fff;font-family:'Anton',sans-serif;font-size:1rem;letter-spacing:3px;cursor:pointer;transition:all 0.2s;border:2px solid var(--red)}
+.checkout-btn{width:100%;padding:13px;background:var(--red);border:2px solid var(--red);color:#fff;font-family:'Anton',sans-serif;font-size:1rem;letter-spacing:3px;cursor:pointer;transition:all 0.2s}
 .checkout-btn:hover{background:var(--red2)}
 .checkout-btn:disabled{background:var(--bg4);border-color:var(--border);color:var(--txt4);cursor:not-allowed}
 
@@ -207,12 +229,21 @@ nav{position:sticky;top:0;z-index:100;background:var(--red);border-bottom:3px so
 .toast.info{border-left:3px solid var(--gold)}
 @keyframes toastIn{from{transform:translateX(20px);opacity:0}to{transform:translateX(0);opacity:1}}
 
-/* FOOTER */
-footer{position:relative;z-index:1;background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2rem;margin-top:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-.footer-brand{font-family:'Anton',sans-serif;font-size:0.9rem;color:var(--txt3);letter-spacing:1px}
-.footer-links{display:flex;gap:16px;align-items:center}
-.footer-link{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4);text-decoration:none}
-.footer-link:hover{color:var(--gold)}
+/* ── FOOTER ──────────────────────────────────────────── */
+footer{position:relative;z-index:1;background:var(--net-bg);border-top:1px solid var(--border);padding:2rem 2rem;margin-top:3rem}
+.footer-inner{max-width:1300px;margin:0 auto}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;padding-bottom:1.4rem;border-bottom:1px solid rgba(253,246,227,0.05)}
+.footer-brand{font-family:'Anton',sans-serif;font-size:1.1rem;color:var(--txt2);letter-spacing:1px}
+.footer-brand-sub{font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:2px;color:var(--txt4);margin-top:3px}
+.footer-col-title{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2.5px;color:var(--txt4);margin-bottom:0.6rem}
+.footer-col-links{display:flex;flex-direction:column;gap:4px}
+.footer-col-links a{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;padding:2px 0;transition:color 0.2s}
+.footer-col-links a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:1.1rem}
+.footer-copy{font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:1.5px;color:var(--txt4)}
+.footer-bottom-links{display:flex;gap:3px}
+.footer-bottom-links a{font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:1.5px;color:var(--txt4);text-decoration:none;padding:3px 8px;border:1px solid rgba(253,246,227,0.04);transition:all 0.2s}
+.footer-bottom-links a:hover{color:var(--txt3);border-color:var(--border2)}
 
 /* SAVING OVERLAY */
 .saving-overlay{position:fixed;inset:0;background:rgba(15,10,5,0.6);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;opacity:0;pointer-events:none;transition:opacity 0.2s;backdrop-filter:blur(4px)}
@@ -221,11 +252,35 @@ footer{position:relative;z-index:1;background:var(--bg2);border-top:1px solid va
 .saving-txt{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--txt3)}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:700px){
+  .network-bar{display:none}
+  nav{top:0}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ── NETWORK BAR ────────────────────────────────────── -->
+<div class="network-bar">
+  <span class="nb-label">THE LOL NETWORK</span>
+  <div class="nb-sep"></div>
+  <div class="nb-links">
+    <a href="https://faizzzlol.github.io/thelol/">THE LOL</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/">PAIZ® CORP</a>
+    <a href="/PaizCorp/PaizShop/">PAIZ SHOP</a>
+    <a href="/PaizCorp/PaizChicken/" class="nb-current">PAIZ CHICKEN</a>
+    <a href="/PaizCorp/PaizProductions/">PAIZPRODUCTIONS</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/">GOVERNMENT</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
+    <a href="https://faizzzlol.github.io/thelol/tlr/">TL RAILWAYS</a>
+  </div>
+  <div class="nb-right">
+    <div class="nb-status"><span class="nb-dot"></span>ALL SYSTEMS LIVE</div>
+  </div>
+</div>
+
+<!-- ── NAV ───────────────────────────────────────────── -->
 <nav>
   <a href="#" class="nav-logo">
     <div class="nav-logo-icon">🍗</div>
@@ -235,9 +290,11 @@ footer{position:relative;z-index:1;background:var(--bg2);border-top:1px solid va
     </div>
   </a>
   <div class="nav-links">
+    <a href="https://faizzzlol.github.io/PaizCorp/" class="nav-link corp-link">← PAIZ® CORP</a>
+    <div class="nav-divider"></div>
     <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/order-history" class="nav-link">ORDER HISTORY</a>
     <div class="nav-divider"></div>
-    <a href="https://discord.gg/thelol" target="_blank" class="nav-link">DISCORD</a>
+    <a href="https://discord.gg/wX5XaWgdXx" target="_blank" class="nav-link">DISCORD</a>
     <div class="nav-divider"></div>
     <a href="https://faizzzlol.github.io/thelol" class="nav-link">THE LOL</a>
   </div>
@@ -272,7 +329,7 @@ footer{position:relative;z-index:1;background:var(--bg2);border-top:1px solid va
   <div class="hero-stripe hero-stripe-left"></div>
   <span class="hero-eyebrow">ESTABLISHED IN THE LEGEND OF LEGIONA</span>
   <h1 class="hero-title">PAIZ<span>CHICKEN</span></h1>
-  <p class="hero-tagline">Hot, fresh & delivered to your doorstep — in Minecraft.</p>
+  <p class="hero-tagline">Hot, fresh &amp; delivered to your doorstep — in Minecraft.</p>
   <div class="hero-badge">
     <span>MAINS</span><span class="hero-badge-sep">✦</span>
     <span>SNACKS</span><span class="hero-badge-sep">✦</span>
@@ -312,9 +369,11 @@ footer{position:relative;z-index:1;background:var(--bg2);border-top:1px solid va
     </div>
     <div class="s-divider"></div>
     <div class="s-section">
-      <span class="s-label">LINKS</span>
+      <span class="s-label">THE LOL NETWORK</span>
+      <a href="https://faizzzlol.github.io/PaizCorp/" class="f-btn" style="text-decoration:none">← PAIZ® CORP</a>
       <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/" class="f-btn" style="text-decoration:none">🏪 PAIZ SHOP</a>
       <a href="https://faizzzlol.github.io/thelol" class="f-btn" style="text-decoration:none">🏰 THE LOL</a>
+      <a href="https://faizzzlol.github.io/thelol/gov/isc/" class="f-btn" style="text-decoration:none">🕵️ ISC ARCHIVE</a>
     </div>
   </aside>
 
@@ -411,12 +470,48 @@ footer{position:relative;z-index:1;background:var(--bg2);border-top:1px solid va
 <div class="saving-overlay" id="saving-overlay"><div class="saving-spin"></div><div class="saving-txt">LOADING MENU...</div></div>
 <div class="toast-wrap" id="toast-wrap"></div>
 
+<!-- ── FOOTER ─────────────────────────────────────────── -->
 <footer>
-  <span class="footer-brand">PAIZ CHICKEN™ — PAIZ® CORP</span>
-  <div class="footer-links">
-    <a class="footer-link" href="https://faizzzlol.github.io/thelol">THE LEGEND OF LEGIONA</a>
-    <a class="footer-link" href="https://faizzzlol.github.io/PaizCorp/">PAIZ® CORP</a>
-    <a class="footer-link" href="https://faizzzlol.github.io/PaizCorp/PaizShop/">PAIZ SHOP</a>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">PAIZ CHICKEN™</div>
+        <div class="footer-brand-sub">SUBSIDIARY-02 · FOOD & BEVERAGE · PAIZ® CORP</div>
+      </div>
+      <div>
+        <div class="footer-col-title">PAIZ CHICKEN</div>
+        <div class="footer-col-links">
+          <a href="/PaizCorp/PaizChicken/">Menu</a>
+          <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/order-history">Order History</a>
+          <a href="https://discord.gg/wX5XaWgdXx" target="_blank">Discord</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">PAIZ® CORP FAMILY</div>
+        <div class="footer-col-links">
+          <a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp</a>
+          <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Paiz Shop</a>
+          <a href="/PaizCorp/PaizProductions/">PaizProductions</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">THE LOL NETWORK</div>
+        <div class="footer-col-links">
+          <a href="https://faizzzlol.github.io/thelol/">The Legend of Legiona</a>
+          <a href="https://faizzzlol.github.io/thelol/gov/">Government</a>
+          <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Archive</a>
+          <a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 PAIZ CHICKEN™ · PAIZ® CORP SUBSIDIARY · THE LEGEND OF LEGIONA · FOUNDED BY FAIZ4224</div>
+      <div class="footer-bottom-links">
+        <a href="https://discord.gg/wX5XaWgdXx" target="_blank">DISCORD</a>
+        <a href="https://faizzzlol.github.io/PaizCorp/">PAIZ® CORP</a>
+        <a href="https://faizzzlol.github.io/thelol/">THE LOL</a>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -443,7 +538,6 @@ async function loadMenu() {
     const r = await fetch(CFG.MENU_URL + '?t=' + Date.now());
     if (!r.ok) throw new Error();
     const fresh = await r.json();
-    // Track price changes
     if (cached) {
       const prev = JSON.parse(cached);
       const prevMap = {};
@@ -490,14 +584,11 @@ function initShop() {
   const cats = [...new Set(listed.map(p => p.category).filter(Boolean))];
   const catEl = document.getElementById('cat-list');
   catEl.innerHTML = cats.map(c => `<button class="f-btn" data-cat="${c}" onclick="setCat(this)">${c.toUpperCase()}</button>`).join('');
-
   document.getElementById('stat-items').textContent = listed.length;
   document.getElementById('stat-avail').textContent = listed.filter(p => p.stock > 0).length;
   document.getElementById('stat-sold').textContent  = listed.reduce((s, p) => s + (p.sold || 0), 0);
   document.getElementById('stat-cats').textContent  = cats.length;
-
   cart = JSON.parse(localStorage.getItem('pc_cart') || '[]');
-  // Sync cart quantities to current stock
   cart = cart.map(ci => {
     const p = menu.find(x => x.id === ci.id);
     if (!p) return null;
@@ -568,7 +659,6 @@ function render() {
     const low  = p.stock > 0 && p.stock <= 5;
     const bCls = out ? 'badge-out' : low ? 'badge-low' : 'badge-stock';
     const bTxt = out ? 'SOLD OUT' : low ? p.stock + ' LEFT' : 'IN STOCK';
-    const inCart = cart.find(c => c.id === p.id)?.qty || 0;
     return `
     <div class="mc${out ? ' sold-out' : ''}">
       <div class="mc-img-area">
@@ -652,7 +742,6 @@ function updateCartUI() {
   document.getElementById('cart-count').textContent = count;
   document.getElementById('cart-total').textContent  = total;
   document.getElementById('checkout-btn').disabled = cart.length === 0;
-
   const body = document.getElementById('cart-items');
   if (!cart.length) {
     body.innerHTML = '<div class="drawer-empty">🍗<br><br>YOUR ORDER IS EMPTY<br><br>ADD ITEMS FROM THE MENU</div>';
@@ -739,11 +828,9 @@ async function placeOrder() {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
     });
     if (!r.ok && r.status !== 204) throw new Error();
-
     const hist = JSON.parse(localStorage.getItem('pc_orders') || '[]');
     hist.unshift({ id: orderId, items: [...cart], total, ign, discord, delivery, server, location, notes, ts });
     localStorage.setItem('pc_orders', JSON.stringify(hist.slice(0, 50)));
-
     cart = []; saveCart(); updateCartUI();
     closeCheckout();
     document.getElementById('success-id').textContent = orderId;
