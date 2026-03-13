@@ -16,11 +16,31 @@
   --red:#f87171;--red-dim:rgba(248,113,113,0.10);
   --blue:#60a5fa;--blue-dim:rgba(96,165,250,0.10);
   --txt:#f2f2f2;--txt2:rgba(242,242,242,0.78);--txt3:rgba(242,242,242,0.52);--txt4:rgba(242,242,242,0.28);
+  --net-bg:#0d0d0d;
 }
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;min-height:100vh}
 
-/* LOGIN */
+/* ── NETWORK BAR ─────────────────────────────────────── */
+.network-bar{
+  height:30px;display:flex;align-items:center;padding:0 4%;gap:16px;overflow:hidden;
+  background:var(--net-bg);border-bottom:1px solid rgba(255,255,255,0.07);
+  position:relative;z-index:200;
+}
+.nb-label{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:3px;color:var(--txt4);white-space:nowrap;flex-shrink:0}
+.nb-sep{width:1px;height:12px;background:rgba(255,255,255,0.1);flex-shrink:0}
+.nb-links{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;flex:1}
+.nb-links::-webkit-scrollbar{display:none}
+.nb-links a{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1.8px;color:var(--txt4);text-decoration:none;padding:0 10px;white-space:nowrap;transition:color 0.15s;border-right:1px solid rgba(255,255,255,0.06);line-height:30px}
+.nb-links a:first-child{border-left:1px solid rgba(255,255,255,0.06)}
+.nb-links a:hover{color:var(--txt3)}
+.nb-links a.nb-current{color:var(--red);background:rgba(248,113,113,0.06)}
+.nb-right{margin-left:auto;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.nb-status{display:flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:1.5px;color:rgba(74,222,128,0.7);white-space:nowrap}
+.nb-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,0.7);animation:nbPulse 2s ease-in-out infinite}
+@keyframes nbPulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* ── LOGIN ───────────────────────────────────────────── */
 #login-screen{position:fixed;inset:0;background:var(--bg);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem}
 .login-box{background:var(--bg2);border:1px solid var(--border);padding:3rem 2.5rem;width:min(420px,100%);animation:fadeIn 0.4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
@@ -34,24 +54,30 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-
 .login-btn{width:100%;padding:12px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;letter-spacing:2px;transition:background 0.2s;margin-top:0.5rem}
 .login-btn:hover{background:var(--accent-dk)}
 .login-error{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;text-align:center;margin-top:0.8rem;display:none}
+.login-corp-note{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:1.5px;color:var(--txt4);text-align:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border2)}
+.login-corp-note a{color:var(--txt3);text-decoration:none;transition:color 0.2s}
+.login-corp-note a:hover{color:var(--txt)}
 #app{display:none}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:center;padding:0 4%;gap:14px;background:rgba(14,14,14,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+/* ── NAV ─────────────────────────────────────────────── */
+nav{position:sticky;top:0;z-index:200;height:54px;display:flex;align-items:center;padding:0 4%;gap:14px;background:rgba(14,14,14,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.nav-sq{width:28px;height:28px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;color:#fff}
-.nav-name{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;color:var(--txt);letter-spacing:-0.2px}
-.nav-tag{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:2px;padding:3px 8px;background:var(--red-dim);border:1px solid rgba(248,113,113,0.2);color:var(--red)}
+.nav-logo-img{width:24px;height:24px;object-fit:contain}
+.nav-sq{width:26px;height:26px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:0.5rem;font-weight:500;color:#fff;flex-shrink:0}
+.nav-name{font-family:'Syne',sans-serif;font-size:0.93rem;font-weight:800;color:var(--txt);letter-spacing:-0.2px}
+.nav-tag{font-family:'IBM Plex Mono',monospace;font-size:0.46rem;letter-spacing:2px;padding:3px 8px;background:var(--red-dim);border:1px solid rgba(248,113,113,0.2);color:var(--red)}
 .nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
-.nav-link{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);transition:all 0.2s}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);transition:all 0.2s}
 .nav-link:hover{color:var(--accent);border-color:rgba(220,38,38,0.2)}
-.logout-btn{padding:6px 14px;background:transparent;border:1px solid rgba(248,113,113,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:1.5px;color:var(--red);transition:all 0.2s}
+.nav-link.corp{color:var(--txt4)}
+.nav-link.corp:hover{color:var(--txt2);border-color:var(--border)}
+.logout-btn{padding:6px 14px;background:transparent;border:1px solid rgba(248,113,113,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--red);transition:all 0.2s}
 .logout-btn:hover{background:var(--red-dim)}
 
-/* HEADER */
+/* ── ADMIN HEADER ────────────────────────────────────── */
 .admin-header{padding:2.5rem 4% 2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;position:relative;overflow:hidden}
 .admin-header::before{content:'';position:absolute;top:-40%;right:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(248,113,113,0.05) 0%,transparent 65%);pointer-events:none}
-.ah-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:3px;color:var(--red);opacity:0.8;margin-bottom:0.6rem}
+.ah-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.51rem;letter-spacing:3px;color:var(--red);opacity:0.8;margin-bottom:0.6rem}
 .ah-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;letter-spacing:-1px;color:var(--txt);line-height:1;margin-bottom:0.3rem}
 .ah-sub{font-size:0.88rem;color:var(--txt3);font-weight:300}
 .ah-stats{display:flex;gap:2px}
@@ -59,7 +85,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .ahs-val{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;display:block;line-height:1;margin-bottom:2px}
 .ahs-key{font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:2px;color:var(--txt4)}
 
-/* BANNERS */
+/* ── BANNERS ─────────────────────────────────────────── */
 .banner{padding:1rem 1.5rem;margin:1.5rem 4% 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .banner-icon{font-size:1.1rem;flex-shrink:0}
 .banner-txt{font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;flex:1;line-height:1.8}
@@ -71,23 +97,21 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 #token-banner .banner-txt{color:var(--red)}
 #token-banner .banner-btn{color:var(--red);border-color:rgba(248,113,113,0.3);background:var(--red-dim)}
 
-/* TABS */
+/* ── TABS ────────────────────────────────────────────── */
 .tabs-wrap{padding:0 4%;margin-top:1.5rem;border-bottom:1px solid var(--border)}
 .tabs{display:flex;gap:2px;max-width:1300px;margin:0 auto}
-.tab-btn{padding:10px 20px;background:transparent;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;display:flex;align-items:center;gap:8px}
+.tab-btn{padding:10px 20px;background:transparent;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.54rem;letter-spacing:2px;color:var(--txt4);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;display:flex;align-items:center;gap:8px}
 .tab-btn:hover{color:var(--txt2)}
 .tab-btn.active{color:var(--txt);border-bottom-color:var(--accent)}
 .tab-badge{background:var(--bg3);border:1px solid var(--border);font-size:0.45rem;padding:1px 6px;color:var(--txt4)}
 .tab-btn.active .tab-badge{background:var(--accent-dim);border-color:rgba(220,38,38,0.3);color:var(--accent)}
 .tab-panel{display:none}.tab-panel.active{display:block}
 
-/* MAIN GRID */
+/* ── MAIN GRID ───────────────────────────────────────── */
 .main{max-width:1300px;margin:0 auto;padding:2rem 4%;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
-
-/* PRODUCTS */
 .section-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border)}
 .sec-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);letter-spacing:-0.3px}
-.add-new-btn{padding:8px 18px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:background 0.2s}
+.add-new-btn{padding:8px 18px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.54rem;font-weight:500;letter-spacing:2px;transition:background 0.2s}
 .add-new-btn:hover{background:var(--accent-dk)}
 .table-search{width:100%;padding:9px 14px;background:var(--bg2);border:1px solid var(--border);color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.88rem;outline:none;margin-bottom:8px;transition:border-color 0.2s}
 .table-search:focus{border-color:var(--accent)}.table-search::placeholder{color:var(--txt4)}
@@ -103,8 +127,8 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .pr-name{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--txt);letter-spacing:-0.2px;margin-bottom:2px}
 .pr-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .pr-price{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--gold)}
-.pr-cat{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:1.5px;color:var(--txt4);padding:2px 6px;border:1px solid var(--border2)}
-.pr-status-tag{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;padding:2px 7px;border:1px solid}
+.pr-cat{font-family:'IBM Plex Mono',monospace;font-size:0.47rem;letter-spacing:1.5px;color:var(--txt4);padding:2px 6px;border:1px solid var(--border2)}
+.pr-status-tag{font-family:'IBM Plex Mono',monospace;font-size:0.46rem;letter-spacing:1.5px;padding:2px 7px;border:1px solid}
 .tag-listed{border-color:rgba(220,38,38,0.35);color:var(--accent);background:var(--accent-dim)}
 .tag-unlisted{border-color:rgba(255,255,255,0.1);color:var(--txt4)}
 .pr-stock-wrap{text-align:center;min-width:80px}
@@ -119,7 +143,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .pr-sold.has-sales{color:var(--accent);border-color:rgba(220,38,38,0.2);background:var(--accent-dim)}
 .best-badge{font-family:"IBM Plex Mono",monospace;font-size:0.44rem;letter-spacing:1.5px;padding:2px 7px;background:var(--gold-dim);border:1px solid rgba(251,191,36,0.3);color:var(--gold);vertical-align:middle;margin-left:6px}
 
-/* TRANSACTIONS TAB */
+/* ── TRANSACTIONS ────────────────────────────────────── */
 .txn-wrap{padding:2rem 4%;max-width:1300px;margin:0 auto}
 .txn-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-bottom:1.4rem;background:var(--border2);border:1px solid var(--border)}
 .txn-stat{background:var(--bg2);padding:0.9rem 1rem;text-align:center}
@@ -130,10 +154,10 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .tf-btn{padding:6px 12px;background:transparent;border:1px solid var(--border2);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;color:var(--txt3);transition:all 0.2s}
 .tf-btn:hover{border-color:var(--accent);color:var(--accent)}
 .tf-btn.active{background:var(--accent-dim);border-color:rgba(220,38,38,0.35);color:var(--accent)}
-.add-txn-btn{padding:8px 18px;background:var(--blue);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.55rem;font-weight:500;letter-spacing:2px;transition:all 0.2s}
+.add-txn-btn{padding:8px 18px;background:var(--blue);color:#000;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.54rem;font-weight:500;letter-spacing:2px;transition:all 0.2s}
 .add-txn-btn:hover{background:#93c5fd}
 
-/* TXN ROWS */
+/* ── TXN ROWS ────────────────────────────────────────── */
 .txn-list{display:flex;flex-direction:column;gap:2px}
 .txn-row{background:var(--bg2);border:1px solid var(--border2);padding:1rem 1.2rem;display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;position:relative;overflow:hidden;transition:background 0.2s}
 .txn-row:hover{background:var(--bg3)}
@@ -142,7 +166,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .txn-row.s-confirmed::before{background:var(--blue)}
 .txn-row.s-delivered::before{background:var(--accent)}
 .txn-row.s-cancelled::before{background:var(--red)}
-.txn-id-line{font-family:'IBM Plex Mono',monospace;font-size:0.57rem;letter-spacing:2px;color:var(--txt3);margin-bottom:3px;display:flex;align-items:center;gap:10px}
+.txn-id-line{font-family:'IBM Plex Mono',monospace;font-size:0.56rem;letter-spacing:2px;color:var(--txt3);margin-bottom:3px;display:flex;align-items:center;gap:10px}
 .txn-main-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:2px}
 .txn-ign{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--txt);letter-spacing:-0.2px}
 .txn-discord{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;color:var(--txt4)}
@@ -159,7 +183,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .s-btn-sm{font-size:0.43rem;letter-spacing:1px;border-color:rgba(255,255,255,0.08);color:var(--txt4)}.s-btn-sm:hover{color:var(--txt2);border-color:var(--border)}
 .txn-empty{text-align:center;padding:4rem;background:var(--bg2);border:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:2px;color:var(--txt4);line-height:2}
 
-/* STATUS BADGE */
+/* ── STATUS BADGES ───────────────────────────────────── */
 .st-badge{font-family:'IBM Plex Mono',monospace;font-size:0.46rem;letter-spacing:1.5px;padding:2px 8px;border:1px solid;display:inline-flex;align-items:center;gap:5px}
 .st-badge::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .st-pending{border-color:rgba(255,255,255,0.12);color:var(--txt3)}.st-pending::before{background:var(--txt4)}
@@ -167,8 +191,8 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .st-delivered{border-color:rgba(220,38,38,0.35);color:var(--accent);background:var(--accent-dim)}.st-delivered::before{background:var(--accent);box-shadow:0 0 5px rgba(220,38,38,0.4)}
 .st-cancelled{border-color:rgba(248,113,113,0.3);color:var(--red);background:var(--red-dim)}.st-cancelled::before{background:var(--red)}
 
-/* RIGHT PANEL */
-.right-panel{display:flex;flex-direction:column;gap:12px;position:sticky;top:76px}
+/* ── RIGHT PANEL ─────────────────────────────────────── */
+.right-panel{display:flex;flex-direction:column;gap:12px;position:sticky;top:54px}
 .panel-box{background:var(--bg2);border:1px solid var(--border);padding:1.4rem}
 .panel-title{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:2.5px;color:var(--txt4);margin-bottom:1rem}
 .token-status{display:flex;align-items:center;gap:8px;padding:8px 10px;margin-bottom:0.9rem;border:1px solid var(--border2);background:var(--bg3)}
@@ -195,7 +219,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .qs-val{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;display:block;line-height:1;margin-bottom:2px}
 .qs-key{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:1.5px;color:var(--txt4)}
 
-/* MODALS */
+/* ── MODALS ──────────────────────────────────────────── */
 .m-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:500;backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1rem}
 .m-overlay.open{display:flex}
 .modal{background:var(--bg2);width:min(520px,100%);max-height:92vh;overflow-y:auto;border:1px solid var(--border);animation:mIn 0.25s ease}
@@ -231,7 +255,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .btn-danger{padding:8px 20px;background:var(--red-dim);color:var(--red);border:1px solid rgba(248,113,113,0.25);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;letter-spacing:2px;transition:all 0.2s}
 .btn-danger:hover{background:rgba(248,113,113,0.15)}
 
-/* Items builder */
+/* ── ITEMS BUILDER ───────────────────────────────────── */
 .items-builder{border:1px solid var(--border);background:var(--bg3)}
 .ib-header{padding:8px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
 .ib-label{font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--txt4)}
@@ -244,7 +268,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .ib-del{width:28px;height:28px;background:transparent;border:1px solid var(--border2);cursor:pointer;color:var(--red);font-size:0.7rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
 .ib-del:hover{background:var(--red-dim)}
 
-/* Stock modal */
+/* ── STOCK MODAL ─────────────────────────────────────── */
 .stock-current{text-align:center;padding:1.5rem 0 1rem;border-bottom:1px solid var(--border);margin-bottom:1.2rem}
 .sc-val{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:var(--txt);display:block;line-height:1;margin-bottom:4px}
 .sc-val.zero{color:var(--red)}
@@ -257,26 +281,56 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
 .confirm-body h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);margin-bottom:0.5rem;letter-spacing:-0.3px}
 .confirm-body p{font-size:0.88rem;color:var(--txt2);font-weight:300;line-height:1.7}
 
-/* SAVING */
+/* ── SAVING OVERLAY ──────────────────────────────────── */
 .saving-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:600;align-items:center;justify-content:center;flex-direction:column;gap:12px}
 .saving-overlay.show{display:flex}
 .saving-spin{width:36px;height:36px;border:3px solid rgba(220,38,38,0.2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .saving-txt{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:2px;color:var(--accent)}
 
-/* TOAST */
+/* ── FOOTER ──────────────────────────────────────────── */
+footer{background:var(--net-bg);border-top:1px solid var(--border);padding:1.2rem 4%;margin-top:3rem}
+.footer-inner{max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.footer-brand{font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:800;color:var(--txt3)}
+.footer-brand-sub{font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:1.5px;color:var(--txt4);margin-top:1px}
+.footer-links{display:flex;gap:3px;flex-wrap:wrap}
+.footer-links a{font-family:'IBM Plex Mono',monospace;font-size:0.43rem;letter-spacing:1.5px;color:var(--txt4);text-decoration:none;padding:3px 8px;border:1px solid rgba(255,255,255,0.04);transition:all 0.2s}
+.footer-links a:hover{color:var(--txt3);border-color:var(--border2)}
+.footer-copy{width:100%;font-family:'IBM Plex Mono',monospace;font-size:0.42rem;letter-spacing:1.5px;color:var(--txt4);padding-top:0.8rem;border-top:1px solid var(--border2);margin-top:0.5rem}
+
+/* ── TOAST ───────────────────────────────────────────── */
 .toast-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:700;display:flex;flex-direction:column;gap:6px}
 .toast{padding:10px 16px;background:var(--bg3);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.55rem;letter-spacing:1px;border:1px solid var(--border);display:flex;align-items:center;gap:8px;animation:tIn 0.25s ease;max-width:300px}
 .toast.ok{border-left:3px solid var(--accent)}.toast.err{border-left:3px solid var(--red)}.toast.info{border-left:3px solid var(--blue)}
 @keyframes tIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
 @media(max-width:1024px){.main{grid-template-columns:1fr}.right-panel{position:static}}
-@media(max-width:700px){.txn-stats{grid-template-columns:repeat(3,1fr)}.txn-row{grid-template-columns:1fr auto}.txn-btns{flex-direction:row;flex-wrap:wrap}.ah-stats{display:none}}
+@media(max-width:700px){.network-bar{display:none}.txn-stats{grid-template-columns:repeat(3,1fr)}.txn-row{grid-template-columns:1fr auto}.txn-btns{flex-direction:row;flex-wrap:wrap}.ah-stats{display:none}}
 @media(max-width:600px){.prod-row{grid-template-columns:40px 1fr auto}.pr-stock-wrap{display:none}.frow{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
+<!-- ── NETWORK BAR (always visible, login overlay sits above) ── -->
+<div class="network-bar">
+  <span class="nb-label">THE LOL NETWORK</span>
+  <div class="nb-sep"></div>
+  <div class="nb-links">
+    <a href="https://faizzzlol.github.io/thelol/">THE LOL</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/">PAIZ® CORP</a>
+    <a href="/PaizCorp/PaizShop/">PAIZ SHOP</a>
+    <a href="/PaizCorp/PaizChicken/">PAIZ CHICKEN</a>
+    <a href="/PaizCorp/PaizProductions/">PAIZPRODUCTIONS</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/">GOVERNMENT</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
+    <a href="https://faizzzlol.github.io/thelol/tlr/">TL RAILWAYS</a>
+  </div>
+  <div class="nb-right">
+    <div class="nb-status"><span class="nb-dot"></span>ALL SYSTEMS LIVE</div>
+  </div>
+</div>
+
+<!-- ── LOGIN SCREEN ──────────────────────────────────── -->
 <div id="login-screen">
   <div class="login-box">
     <span class="login-icon">🔒</span>
@@ -286,27 +340,38 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
       <label class="login-label">PASSWORD</label>
       <div style="position:relative">
         <input type="password" class="login-input" id="login-pass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly')" style="padding-right:44px">
-        <button type="button" onclick="togglePassVis()" id="pass-eye" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--txt4);font-size:1rem;padding:0;line-height:1" title="Show/hide password">SHOW</button>
+        <button type="button" onclick="togglePassVis()" id="pass-eye" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--txt4);font-size:0.6rem;font-family:'IBM Plex Mono',monospace;letter-spacing:1px;padding:0;line-height:1" title="Show/hide password">SHOW</button>
       </div>
     </div>
     <button class="login-btn" onclick="login()">ENTER PANEL</button>
     <div class="login-error" id="login-err">⚠ Incorrect password</div>
+    <div class="login-corp-note">
+      <a href="/PaizCorp/PaizShop/">← Back to Paiz Shop</a>
+      &nbsp;·&nbsp;
+      <a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp</a>
+    </div>
   </div>
 </div>
 
+<!-- ── APP ───────────────────────────────────────────── -->
 <div id="app">
   <nav>
-    <div class="nav-brand"><div class="nav-sq">ADM</div><span class="nav-name">Paiz Shop</span></div>
+    <div class="nav-brand">
+      <img class="nav-logo-img" src="/PaizCorp/PaizShop/ps-logo-final.svg" alt="PS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="nav-sq" style="display:none">ADM</div>
+      <span class="nav-name">Paiz Shop</span>
+    </div>
     <span class="nav-tag">MANAGER PANEL</span>
     <div class="nav-right">
-      <a href="/PaizCorp/PaizShop/" class="nav-link" target="_blank">← VIEW SHOP</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/" class="nav-link corp" target="_blank">← PAIZ® CORP</a>
+      <a href="/PaizCorp/PaizShop/" class="nav-link" target="_blank">VIEW SHOP</a>
       <button class="logout-btn" onclick="logout()">LOGOUT</button>
     </div>
   </nav>
 
   <div class="admin-header">
     <div class="ah-left">
-      <div class="ah-eyebrow">ADMIN · PAIZ SHOP</div>
+      <div class="ah-eyebrow">ADMIN · PAIZ SHOP · PAIZ® CORP</div>
       <div class="ah-title">Manager Panel</div>
       <div class="ah-sub">Manage products, track orders, and update statuses. Syncs to GitHub.</div>
     </div>
@@ -407,9 +472,25 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
       <div class="txn-list" id="txn-list"><div class="txn-empty">Loading transactions...</div></div>
     </div>
   </div>
+
+  <!-- ── FOOTER ─────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Paiz Shop Admin</div>
+        <div class="footer-brand-sub">MANAGER PANEL · PAIZ® CORP INTERNAL</div>
+      </div>
+      <div class="footer-links">
+        <a href="/PaizCorp/PaizShop/" target="_blank">← PAIZ SHOP</a>
+        <a href="https://faizzzlol.github.io/PaizCorp/" target="_blank">PAIZ® CORP</a>
+        <a href="https://discord.gg/wX5XaWgdXx" target="_blank">DISCORD</a>
+      </div>
+      <div class="footer-copy">© 2026 PAIZ SHOP · PAIZ® CORP SUBSIDIARY · THE LEGEND OF LEGIONA · INTERNAL USE ONLY</div>
+    </div>
+  </footer>
 </div>
 
-<!-- PRODUCT MODAL -->
+<!-- ── PRODUCT MODAL ──────────────────────────────────── -->
 <div class="m-overlay" id="product-modal">
   <div class="modal">
     <div class="modal-hd"><h3 id="pm-title">Add Product</h3><button class="modal-close" onclick="closePM()">✕</button></div>
@@ -426,7 +507,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
   </div>
 </div>
 
-<!-- STOCK MODAL -->
+<!-- ── STOCK MODAL ────────────────────────────────────── -->
 <div class="m-overlay" id="stock-modal">
   <div class="modal">
     <div class="modal-hd"><h3>Update Stock</h3><button class="modal-close" onclick="closeSM()">✕</button></div>
@@ -448,17 +529,16 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
   </div>
 </div>
 
-<!-- ADD/EDIT ORDER MODAL -->
+<!-- ── ADD/EDIT ORDER MODAL ───────────────────────────── -->
 <div class="m-overlay" id="txn-modal">
   <div class="modal">
     <div class="modal-hd"><h3 id="txn-modal-title">Add Order</h3><button class="modal-close" onclick="closeTxnModal()">✕</button></div>
     <div class="modal-body">
-      <!-- PASTE PARSER -->
       <div id="paste-section" style="margin-bottom:1.2rem">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--txt4);margin-bottom:0.45rem">PASTE DISCORD NOTIFICATION <span style="color:var(--accent);font-size:0.42rem">(RECOMMENDED)</span></div>
         <textarea id="paste-input" style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);color:var(--txt);font-family:'IBM Plex Mono',monospace;font-size:0.58rem;outline:none;resize:vertical;min-height:90px;line-height:1.7;transition:border-color 0.2s" placeholder="Copy the Discord order notification message and paste it here, then click Parse →"></textarea>
         <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
-          <button onclick="parseDiscordMsg()" style="padding:7px 18px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;letter-spacing:2px;transition:background 0.2s" onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='var(--accent)'">⚡ PARSE & FILL</button>
+          <button onclick="parseDiscordMsg()" style="padding:7px 18px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:0.52rem;font-weight:500;letter-spacing:2px;transition:background 0.2s" onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='var(--accent)'">⚡ PARSE &amp; FILL</button>
           <span id="parse-status" style="font-family:'IBM Plex Mono',monospace;font-size:0.5rem;letter-spacing:1px;color:var(--txt4)"></span>
         </div>
         <div style="margin-top:8px;border-top:1px solid var(--border2);padding-top:8px;font-family:'IBM Plex Mono',monospace;font-size:0.44rem;letter-spacing:1px;color:var(--txt4);line-height:2">
@@ -497,7 +577,7 @@ nav{position:sticky;top:0;z-index:200;height:56px;display:flex;align-items:cente
   </div>
 </div>
 
-<!-- CONFIRM MODAL -->
+<!-- ── CONFIRM MODAL ──────────────────────────────────── -->
 <div class="m-overlay" id="confirm-modal">
   <div class="modal">
     <div class="confirm-body"><span class="confirm-icon" id="cm-icon">⚠️</span><h3 id="cm-title">Are you sure?</h3><p id="cm-msg">This cannot be undone.</p></div>
@@ -598,26 +678,13 @@ function renderTable(){
   el.innerHTML=list.map(p=>{
     const isBest=maxSold>0&&(p.sold||0)===maxSold;
     const sold=p.sold||0;
-    return `
-  <div class="prod-row ${p.listed?'status-listed':'status-unlisted'}">
-    <div class="pr-img">${p.image?`<img src="../${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="pr-img-ph" style="display:none">📦</span>`:`<span class="pr-img-ph">📦</span>`}</div>
-    <div class="pr-info">
-      <div class="pr-name">${p.name}${isBest?'<span class="best-badge">👑 BEST SELLER</span>':''}</div>
-      <div class="pr-meta">
-        <span class="pr-price">◆ ${p.price} ${p.unit||'Diamond'}</span>
-        ${p.category?`<span class="pr-cat">${p.category}</span>`:''}
-        <span class="pr-status-tag ${p.listed?'tag-listed':'tag-unlisted'}">${p.listed?'LISTED':'HIDDEN'}</span>
-        <span class="pr-sold ${sold>0?'has-sales':''}">📦 ${sold} sold</span>
-      </div>
-    </div>
+    return `<div class="prod-row ${p.listed?'status-listed':'status-unlisted'}">
+    <div class="pr-img">${p.image?`<img src="../../${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="pr-img-ph" style="display:none">📦</span>`:`<span class="pr-img-ph">📦</span>`}</div>
+    <div class="pr-info"><div class="pr-name">${p.name}${isBest?'<span class="best-badge">👑 BEST SELLER</span>':''}</div><div class="pr-meta"><span class="pr-price">◆ ${p.price} ${p.unit||'Diamond'}</span>${p.category?`<span class="pr-cat">${p.category}</span>`:''}<span class="pr-status-tag ${p.listed?'tag-listed':'tag-unlisted'}">${p.listed?'LISTED':'HIDDEN'}</span><span class="pr-sold ${sold>0?'has-sales':''}">📦 ${sold} sold</span></div></div>
     <div class="pr-stock-wrap"><span class="pr-stock-num ${p.stock<=0?'zero':''}">${p.stock}</span><span class="pr-stock-lbl">STOCK</span></div>
-    <div class="pr-actions">
-      <button class="act-btn" title="Edit"   onclick="openEditModal('${p.id}')">✏️</button>
-      <button class="act-btn" title="Stock"  onclick="openSM('${p.id}')">📦</button>
-      <button class="act-btn" title="${p.listed?'Hide':'Show'}" onclick="toggleListed('${p.id}')">${p.listed?'👁':'🚫'}</button>
-      <button class="act-btn" title="Delete" onclick="confirmDel('${p.id}')">🗑</button>
-    </div>
-  </div>`}).join('');
+    <div class="pr-actions"><button class="act-btn" title="Edit" onclick="openEditModal('${p.id}')">✏️</button><button class="act-btn" title="Stock" onclick="openSM('${p.id}')">📦</button><button class="act-btn" title="${p.listed?'Hide':'Show'}" onclick="toggleListed('${p.id}')">${p.listed?'👁':'🚫'}</button><button class="act-btn" title="Delete" onclick="confirmDel('${p.id}')">🗑</button></div>
+    </div>`;
+  }).join('');
   renderBestSellers();
 }
 
@@ -632,69 +699,29 @@ function renderTxns(){
   el.innerHTML=sorted.map(t=>{
     const [bc,bt]=badges[t.status]||badges.pending;
     const items=(t.items||[]).map(i=>`${i.name}×${i.qty}`).join(' · ');
-    return `
-    <div class="txn-row s-${t.status}">
-      <div class="txn-info">
-        <div class="txn-id-line">${t.id}&nbsp;<span class="st-badge ${bc}">${bt}</span></div>
-        <div class="txn-main-line"><span class="txn-ign">${t.ign||'—'}</span>${t.discord?`<span class="txn-discord">@${t.discord}</span>`:''}</div>
-        <div class="txn-sub-line"><span>${t.delivery||''}</span>${t.ts?`<span>${t.ts}</span>`:''} ${items?`<span>${items}</span>`:''}</div>
-      </div>
-      <div class="txn-total-wrap"><span class="txn-total-val">◆ ${t.total||0}</span><span class="txn-total-lbl">TOTAL</span></div>
-      <div class="txn-btns">
-        ${t.status==='pending'   ?`<button class="s-btn s-btn-confirm" onclick="setStatus('${t.id}','confirmed')">✅ CONFIRM</button>`:''}
-        ${t.status==='confirmed' ?`<button class="s-btn s-btn-deliver" onclick="setStatus('${t.id}','delivered')">📦 DELIVERED</button>`:''}
-        ${t.status!=='cancelled'&&t.status!=='delivered'?`<button class="s-btn s-btn-cancel" onclick="setStatus('${t.id}','cancelled')">❌ CANCEL</button>`:''}
-        ${t.status!=='pending'   ?`<button class="s-btn s-btn-revert" onclick="setStatus('${t.id}','pending')">↩ REVERT</button>`:''}
-        <button class="s-btn s-btn-sm" onclick="editTxn('${t.id}')">✏️ EDIT</button>
-        <button class="s-btn s-btn-sm" onclick="delTxn('${t.id}')">🗑 DELETE</button>
-      </div>
+    return `<div class="txn-row s-${t.status}">
+    <div class="txn-info"><div class="txn-id-line">${t.id}&nbsp;<span class="st-badge ${bc}">${bt}</span></div><div class="txn-main-line"><span class="txn-ign">${t.ign||'—'}</span>${t.discord?`<span class="txn-discord">@${t.discord}</span>`:''}</div><div class="txn-sub-line"><span>${t.delivery||''}</span>${t.ts?`<span>${t.ts}</span>`:''} ${items?`<span>${items}</span>`:''}</div></div>
+    <div class="txn-total-wrap"><span class="txn-total-val">◆ ${t.total||0}</span><span class="txn-total-lbl">TOTAL</span></div>
+    <div class="txn-btns">${t.status==='pending'?`<button class="s-btn s-btn-confirm" onclick="setStatus('${t.id}','confirmed')">✅ CONFIRM</button>`:''}${t.status==='confirmed'?`<button class="s-btn s-btn-deliver" onclick="setStatus('${t.id}','delivered')">📦 DELIVERED</button>`:''}${t.status!=='cancelled'&&t.status!=='delivered'?`<button class="s-btn s-btn-cancel" onclick="setStatus('${t.id}','cancelled')">❌ CANCEL</button>`:''}${t.status!=='pending'?`<button class="s-btn s-btn-revert" onclick="setStatus('${t.id}','pending')">↩ REVERT</button>`:''}<button class="s-btn s-btn-sm" onclick="editTxn('${t.id}')">✏️ EDIT</button><button class="s-btn s-btn-sm" onclick="delTxn('${t.id}')">🗑 DELETE</button></div>
     </div>`;
   }).join('');
 }
 
 /* STOCK HELPERS */
 function findProdByName(name){const n=name.trim().toLowerCase();return products.find(p=>p.name.toLowerCase()===n||p.id===n.replace(/\s+/g,'_'));}
-function applyStockOp(items,op){
-  // op: -1=deduct, +1=restore
-  let changed=false;
-  (items||[]).forEach(item=>{
-    const p=findProdByName(item.name);
-    if(p){
-      const qty=item.qty||1;
-      if(op===-1){p.stock=Math.max(0,p.stock-qty);p.sold=(p.sold||0)+qty;}
-      else{p.stock=p.stock+qty;p.sold=Math.max(0,(p.sold||0)-qty);}
-      changed=true;
-    }
-  });
-  return changed;
-}
+function applyStockOp(items,op){let changed=false;(items||[]).forEach(item=>{const p=findProdByName(item.name);if(p){const qty=item.qty||1;if(op===-1){p.stock=Math.max(0,p.stock-qty);p.sold=(p.sold||0)+qty;}else{p.stock=p.stock+qty;p.sold=Math.max(0,(p.sold||0)-qty);}changed=true;}});return changed;}
 
 /* TRANSACTION STATUS */
 async function setStatus(id,ns){
   const t=transactions.find(x=>x.id===id);if(!t)return;
   const os=t.status;
-
-  // Stock logic: deduct on pending→confirmed, restore on confirmed/delivered→cancelled/pending
   let stockChanged=false;
-  if(os==='pending'&&ns==='confirmed'){
-    stockChanged=applyStockOp(t.items,-1);
-  } else if((os==='confirmed'||os==='delivered')&&(ns==='cancelled'||ns==='pending')){
-    stockChanged=applyStockOp(t.items,+1);
-  }
-
+  if(os==='pending'&&ns==='confirmed'){stockChanged=applyStockOp(t.items,-1);}
+  else if((os==='confirmed'||os==='delivered')&&(ns==='cancelled'||ns==='pending')){stockChanged=applyStockOp(t.items,+1);}
   t.status=ns;t.statusUpdatedTs=new Date().toLocaleString('en-MY',{timeZone:'Asia/Kuala_Lumpur'});
   const ok=await saveTxns(`[PaizShop] ${id} → ${ns}`);
-  if(!ok){
-    // rollback
-    t.status=os;
-    if(stockChanged){applyStockOp(t.items,os==='pending'&&ns==='confirmed'?+1:-1);}
-    renderTxns();return;
-  }
-  // Save products if stock changed
-  if(stockChanged){
-    await saveProd(`[PaizShop] Stock/sales update from order ${id} (${ns})`);
-    renderTable();
-  }
+  if(!ok){t.status=os;if(stockChanged){applyStockOp(t.items,os==='pending'&&ns==='confirmed'?+1:-1);}renderTxns();return;}
+  if(stockChanged){await saveProd(`[PaizShop] Stock/sales update from order ${id} (${ns})`);renderTable();}
   const note=stockChanged?'\n📦 Stock updated automatically':'';
   addLog(`${id}: ${os} → ${ns}${stockChanged?' + stock updated':''}`);
   dLog('STATUS UPDATE',`**${id}** (${t.ign})\n${os} → **${ns}**\n◆ ${t.total}${note}`,ns==='delivered'?0xDC2626:ns==='confirmed'?0x60a5fa:ns==='cancelled'?0xf87171:0x6b7280);
@@ -706,94 +733,48 @@ async function setStatus(id,ns){
 function openAddTxn(){openTxnModal();}
 function editTxn(id){const t=transactions.find(x=>x.id===id);if(!t)return;editingTxnId=id;document.getElementById('paste-section').style.display='none';document.getElementById('txn-modal-title').textContent='Edit Order';document.getElementById('tm-id').value=t.id;document.getElementById('tm-id').disabled=true;document.getElementById('tm-ign').value=t.ign||'';document.getElementById('tm-discord').value=t.discord||'';document.getElementById('tm-server').value=t.server||'Skyxion: Ragnarok';document.getElementById('tm-location').value=t.location||'';document.getElementById('tm-total').value=t.total||0;document.getElementById('tm-ts').value=t.ts||'';document.getElementById('tm-notes').value=t.notes||'';document.getElementById('tm-status').value=t.status||'pending';document.getElementById('tm-delivery').value=t.delivery||'Delivery';document.getElementById('ib-rows').innerHTML='';(t.items||[]).forEach(i=>addItemRow(i.name,i.qty,i.price));if(!(t.items||[]).length)addItemRow();document.getElementById('txn-modal').classList.add('open');}
 function parseDiscordMsg(){
-  const raw = document.getElementById('paste-input').value.trim();
-  const status = document.getElementById('parse-status');
+  const raw=document.getElementById('paste-input').value.trim();
+  const status=document.getElementById('parse-status');
   if(!raw){status.textContent='⚠ Paste something first';status.style.color='var(--gold)';return;}
-
-  // Discord "Copy Text" strips emojis — format is: label (plain text), then value on next line
-  const lines = raw.split('\n').map(l=>l.trim()).filter(l=>l.length>0);
-
-  function afterLabel(label){
-    for(let i=0;i<lines.length-1;i++){
-      if(lines[i].toLowerCase()===label.toLowerCase()) return lines[i+1];
-    }
-    return '';
-  }
-
-  // Order ID from title: "New Order — ORD-IK53NR"
-  const titleMatch = raw.match(/New Order[^\n]*?[\u2014\-\u2013]\s*(ORD-[A-Z0-9]+)/i);
-  const orderId = titleMatch ? titleMatch[1].trim() : '';
-
-  const ign      = afterLabel('IGN').replace(/`/g,'');
-  const discord  = afterLabel('Discord').replace(/`/g,'');
-  const delivery = afterLabel('Delivery');
-  const server   = afterLabel('Server');
-  const loc      = afterLabel('Location');
-  const ts       = afterLabel('Time (MY)');
-  const notes    = afterLabel('Notes');
-
-  // Total: line containing "◆ X Diamond(s)"
-  const totalMatch = raw.match(/◆\s*(\d+)\s*Diamond/i);
-  const total = totalMatch ? totalMatch[1] : '';
-
-  // Items: lines after "Items" label, format: "Name ×1 = ◆ 5"
-  const parsedItems = [];
-  let inItems = false;
-  const stopLabels = ['notes','time (my)','server','location','delivery','discord','ign','total'];
+  const lines=raw.split('\n').map(l=>l.trim()).filter(l=>l.length>0);
+  function afterLabel(label){for(let i=0;i<lines.length-1;i++){if(lines[i].toLowerCase()===label.toLowerCase())return lines[i+1];}return '';}
+  const titleMatch=raw.match(/New Order[^\n]*?[\u2014\-\u2013]\s*(ORD-[A-Z0-9]+)/i);
+  const orderId=titleMatch?titleMatch[1].trim():'';
+  const ign=afterLabel('IGN').replace(/`/g,'');
+  const discord=afterLabel('Discord').replace(/`/g,'');
+  const delivery=afterLabel('Delivery');
+  const server=afterLabel('Server');
+  const loc=afterLabel('Location');
+  const ts=afterLabel('Time (MY)');
+  const notes=afterLabel('Notes');
+  const totalMatch=raw.match(/◆\s*(\d+)\s*Diamond/i);
+  const total=totalMatch?totalMatch[1]:'';
+  const parsedItems=[];
+  let inItems=false;
+  const stopLabels=['notes','time (my)','server','location','delivery','discord','ign','total'];
   for(let i=0;i<lines.length;i++){
     if(lines[i].toLowerCase()==='items'){inItems=true;continue;}
-    if(inItems){
-      if(stopLabels.includes(lines[i].toLowerCase())){inItems=false;continue;}
-      const m = lines[i].match(/^(.+?)\s*[×x](\d+)\s*=\s*◆\s*(\d+)/i);
-      if(m) parsedItems.push({name:m[1].trim(),qty:parseInt(m[2]),price:parseInt(m[3])});
-    }
+    if(inItems){if(stopLabels.includes(lines[i].toLowerCase())){inItems=false;continue;}const m=lines[i].match(/^(.+?)\s*[×x](\d+)\s*=\s*◆\s*(\d+)/i);if(m)parsedItems.push({name:m[1].trim(),qty:parseInt(m[2]),price:parseInt(m[3])});}
   }
-
-  let filled = 0;
-  if(orderId){ document.getElementById('tm-id').value = orderId; filled++; }
-  if(ign)    { document.getElementById('tm-ign').value = ign; filled++; }
-  if(discord){ document.getElementById('tm-discord').value = discord; filled++; }
-  if(delivery){ document.getElementById('tm-delivery').value = delivery; }
-  if(server) { document.getElementById('tm-server').value = server; }
-  if(loc && loc !== 'N/A'){ document.getElementById('tm-location').value = loc; }
-  if(total)  { document.getElementById('tm-total').value = total; filled++; }
-  if(ts)     { document.getElementById('tm-ts').value = ts; }
-  if(notes && notes.toLowerCase() !== 'none'){ document.getElementById('tm-notes').value = notes; }
-  if(parsedItems.length){
-    document.getElementById('ib-rows').innerHTML = '';
-    parsedItems.forEach(it => addItemRow(it.name, it.qty, it.price));
-    filled++;
-  }
-
-  if(filled >= 3){
-    status.textContent = '✅ Auto-filled ' + filled + ' fields!';
-    status.style.color = 'var(--accent)';
-    document.getElementById('paste-input').style.borderColor = 'rgba(220,38,38,0.4)';
-  } else {
-    status.textContent = '⚠ Only found ' + filled + ' fields — check format';
-    status.style.color = 'var(--gold)';
-  }
+  let filled=0;
+  if(orderId){document.getElementById('tm-id').value=orderId;filled++;}
+  if(ign){document.getElementById('tm-ign').value=ign;filled++;}
+  if(discord){document.getElementById('tm-discord').value=discord;filled++;}
+  if(delivery)document.getElementById('tm-delivery').value=delivery;
+  if(server)document.getElementById('tm-server').value=server;
+  if(loc&&loc!=='N/A')document.getElementById('tm-location').value=loc;
+  if(total){document.getElementById('tm-total').value=total;filled++;}
+  if(ts)document.getElementById('tm-ts').value=ts;
+  if(notes&&notes.toLowerCase()!=='none')document.getElementById('tm-notes').value=notes;
+  if(parsedItems.length){document.getElementById('ib-rows').innerHTML='';parsedItems.forEach(it=>addItemRow(it.name,it.qty,it.price));filled++;}
+  if(filled>=3){status.textContent='✅ Auto-filled '+filled+' fields!';status.style.color='var(--accent)';document.getElementById('paste-input').style.borderColor='rgba(220,38,38,0.4)';}
+  else{status.textContent='⚠ Only found '+filled+' fields — check format';status.style.color='var(--gold)';}
 }
-function openTxnModal(){
-  editingTxnId=null;
-  document.getElementById('txn-modal-title').textContent='Add Order';
-  document.getElementById('paste-input').value='';
-  document.getElementById('parse-status').textContent='';
-  document.getElementById('paste-input').style.borderColor='';
-  ['tm-id','tm-ign','tm-discord','tm-location','tm-total','tm-ts','tm-notes'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('tm-status').value='pending';
-  document.getElementById('tm-delivery').value='Pickup';
-  document.getElementById('tm-server').value='Skyxion: Ragnarok';
-  document.getElementById('ib-rows').innerHTML='';
-  document.getElementById('paste-section').style.display='block';
-  document.getElementById('txn-modal').classList.add('open');
-}
-
+function openTxnModal(){editingTxnId=null;document.getElementById('txn-modal-title').textContent='Add Order';document.getElementById('paste-input').value='';document.getElementById('parse-status').textContent='';document.getElementById('paste-input').style.borderColor='';['tm-id','tm-ign','tm-discord','tm-location','tm-total','tm-ts','tm-notes'].forEach(id=>document.getElementById(id).value='');document.getElementById('tm-status').value='pending';document.getElementById('tm-delivery').value='Pickup';document.getElementById('tm-server').value='Skyxion: Ragnarok';document.getElementById('ib-rows').innerHTML='';document.getElementById('paste-section').style.display='block';document.getElementById('txn-modal').classList.add('open');}
 function closeTxnModal(){document.getElementById('txn-modal').classList.remove('open');editingTxnId=null;}
 function addItemRow(name='',qty='',price=''){const id='ir'+(++rowCount);const d=document.createElement('div');d.className='ib-row';d.id=id;d.innerHTML=`<input type="text" class="ib-inp" placeholder="Item name" value="${name}"><input type="number" class="ib-inp" placeholder="Qty" value="${qty}" min="1"><input type="number" class="ib-inp" placeholder="◆ Price" value="${price}" min="0"><button class="ib-del" onclick="document.getElementById('${id}').remove()">✕</button>`;document.getElementById('ib-rows').appendChild(d);}
 async function saveTxn(){
-  const id=document.getElementById('tm-id').value.trim().toUpperCase();
-  const ign=document.getElementById('tm-ign').value.trim();
+  const id=document.getElementById('tm-id').value.trim().toUpperCase();const ign=document.getElementById('tm-ign').value.trim();
   if(!id||!ign){toast('Order ID and IGN required','err');return;}
   const items=[...document.getElementById('ib-rows').querySelectorAll('.ib-row')].map(r=>{const ins=r.querySelectorAll('input');const name=ins[0].value.trim();const qty=parseInt(ins[1].value)||1;const price=parseInt(ins[2].value)||0;return name?{name,qty,price}:null;}).filter(Boolean);
   const obj={id,ign,discord:document.getElementById('tm-discord').value.trim(),status:document.getElementById('tm-status').value,delivery:document.getElementById('tm-delivery').value,server:document.getElementById('tm-server').value.trim()||'Skyxion: Ragnarok',location:document.getElementById('tm-location').value.trim(),total:parseInt(document.getElementById('tm-total').value)||0,ts:document.getElementById('tm-ts').value.trim(),notes:document.getElementById('tm-notes').value.trim(),items};
@@ -809,15 +790,7 @@ function openAddModal(){editingId=null;document.getElementById('pm-title').textC
 function openEditModal(id){const p=products.find(x=>x.id===id);if(!p)return;editingId=id;document.getElementById('pm-title').textContent='Edit Product';document.getElementById('pm-id').value=p.id;document.getElementById('pm-name').value=p.name;document.getElementById('pm-price').value=p.price;document.getElementById('pm-unit').value=p.unit||'Diamond';document.getElementById('pm-stock').value=p.stock;document.getElementById('pm-category').value=p.category||'';document.getElementById('pm-image').value=p.image||'';document.getElementById('pm-desc').value=p.description||'';document.getElementById('pm-listed').checked=p.listed;document.getElementById('pm-id').disabled=true;document.getElementById('product-modal').classList.add('open');}
 function closePM(){document.getElementById('product-modal').classList.remove('open');editingId=null;}
 async function saveProduct(){
-  const id=document.getElementById('pm-id').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');
-  const name=document.getElementById('pm-name').value.trim();
-  const price=parseInt(document.getElementById('pm-price').value)||0;
-  const unit=document.getElementById('pm-unit').value.trim()||'Diamond';
-  const stock=parseInt(document.getElementById('pm-stock').value)||0;
-  const cat=document.getElementById('pm-category').value.trim();
-  const image=document.getElementById('pm-image').value.trim();
-  const desc=document.getElementById('pm-desc').value.trim();
-  const listed=document.getElementById('pm-listed').checked;
+  const id=document.getElementById('pm-id').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');const name=document.getElementById('pm-name').value.trim();const price=parseInt(document.getElementById('pm-price').value)||0;const unit=document.getElementById('pm-unit').value.trim()||'Diamond';const stock=parseInt(document.getElementById('pm-stock').value)||0;const cat=document.getElementById('pm-category').value.trim();const image=document.getElementById('pm-image').value.trim();const desc=document.getElementById('pm-desc').value.trim();const listed=document.getElementById('pm-listed').checked;
   if(!id||!name){toast('ID and Name required','err');return;}
   const btn=document.getElementById('pm-save');const spin=document.getElementById('pm-spin');btn.disabled=true;spin.style.display='block';
   if(editingId){const idx=products.findIndex(p=>p.id===editingId);if(idx===-1){toast('Not found','err');btn.disabled=false;spin.style.display='none';return;}products[idx]={...products[idx],name,price,unit,stock,category:cat,image,description:desc,listed};const ok=await saveProd(`[PaizShop] Edit: ${name}`);if(ok){addLog(`Edited: ${name}`);dLog('EDITED',`**${name}**`,0x60a5fa);toast('Updated!','ok');closePM();renderTable();updateStats();}}
@@ -833,28 +806,10 @@ function confirmDel(id){const p=products.find(x=>x.id===id);if(!p)return;_delId=
 function closeConfirm(){document.getElementById('confirm-modal').classList.remove('open');_delId=null;}
 async function execDel(){const id=_delId;const p=products.find(x=>x.id===id);if(!p){closeConfirm();return;}closeConfirm();products=products.filter(x=>x.id!==id);const ok=await saveProd(`[PaizShop] Delete: ${p.name}`);if(ok){addLog(`Deleted: ${p.name}`);dLog('DELETED',`**${p.name}**`,0xf87171);toast('Deleted!','info');renderTable();updateStats();}else{products.push(p);renderTable();}}
 
+/* BEST SELLERS */
+function renderBestSellers(){const el=document.getElementById('best-sellers-list');if(!el)return;const sorted=[...products].filter(p=>(p.sold||0)>0).sort((a,b)=>(b.sold||0)-(a.sold||0)).slice(0,5);if(!sorted.length){el.innerHTML='<div class="log-empty">No sales yet.</div>';return;}el.innerHTML=sorted.map((p,i)=>{const medal=i===0?'👑':i===1?'🥈':i===2?'🥉':`#${i+1}`;const pct=sorted[0].sold>0?Math.round(((p.sold||0)/sorted[0].sold)*100):0;return `<div style="background:var(--bg3);border:1px solid var(--border2);padding:8px 10px;margin-bottom:2px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:0.8rem;width:18px">${medal}</span><span style="font-size:0.82rem;color:var(--txt2)">${p.name}</span></div><span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent)">${p.sold} sold</span></div><div style="height:3px;background:var(--bg4)"><div style="height:3px;background:${i===0?'var(--gold)':'var(--accent)'};width:${pct}%;transition:width 0.4s"></div></div></div>`;}).join('');}
+
 /* SAVING / TOAST */
-function renderBestSellers(){
-  const el=document.getElementById('best-sellers-list');if(!el)return;
-  const sorted=[...products].filter(p=>(p.sold||0)>0).sort((a,b)=>(b.sold||0)-(a.sold||0)).slice(0,5);
-  if(!sorted.length){el.innerHTML='<div class="log-empty">No sales yet.</div>';return;}
-  el.innerHTML=sorted.map((p,i)=>{
-    const medal=i===0?'👑':i===1?'🥈':i===2?'🥉':`#${i+1}`;
-    const pct=sorted[0].sold>0?Math.round(((p.sold||0)/sorted[0].sold)*100):0;
-    return `<div style="background:var(--bg3);border:1px solid var(--border2);padding:8px 10px;margin-bottom:2px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-size:0.8rem;width:18px">${medal}</span>
-          <span style="font-size:0.82rem;color:var(--txt2)">${p.name}</span>
-        </div>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--accent)">${p.sold} sold</span>
-      </div>
-      <div style="height:3px;background:var(--bg4);border-radius:0">
-        <div style="height:3px;background:${i===0?'var(--gold)':'var(--accent)'};width:${pct}%;transition:width 0.4s"></div>
-      </div>
-    </div>`;
-  }).join('');
-}
 function showSaving(m){document.getElementById('saving-txt').textContent=m||'SAVING...';document.getElementById('saving-overlay').classList.add('show');}
 function hideSaving(){document.getElementById('saving-overlay').classList.remove('show');}
 function toast(msg,type='ok'){const wrap=document.getElementById('toast-wrap');const el=document.createElement('div');el.className=`toast ${type}`;el.textContent=msg;wrap.appendChild(el);setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity 0.4s';setTimeout(()=>el.remove(),400);},3500);}
