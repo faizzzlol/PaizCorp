@@ -19,7 +19,7 @@
     "stock": 0,
     "image": "img/enchanted_book.gif",
     "category": "Enchantment",
-    "listed": true,
+    "listed": false,
     "description": "(1x). Repair items using XP orbs."
   },
   {
