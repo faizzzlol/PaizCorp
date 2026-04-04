@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pAIz — AI Intelligence Assistant · Paiz Corp Intelligence Division</title>
+<link rel="icon" type="image/svg+xml" href="/PaizCorp/paizcorp-favicon.svg">
+<meta name="description" content="pAIz — The Legend of Legiona's official AI intelligence assistant. Developed by Paiz Corp Intelligence Division. Ask anything about The LoL.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   pAIz — DEDICATED AI PRODUCT PAGE
+   Paiz Corp Intelligence Division
+   Cream / Deep Ink / Signal Green · PaizCorp family
+═══════════════════════════════════════════════ */
+:root {
+  --cream:      #f4f0e8;
+  --cream2:     #ede8de;
+  --cream3:     #e4dfd3;
+  --cream4:     #d8d2c4;
+  --ink:        #161410;
+  --ink2:       #211e19;
+  --ink3:       #2a2620;
+  --green:      #2a6647;
+  --green-dk:   #1d4a33;
+  --green-lt:   #34885d;
+  --green-dim:  rgba(42,102,71,0.08);
+  --green-glow: rgba(42,102,71,0.15);
+  --border:     rgba(22,20,16,0.1);
+  --border2:    rgba(22,20,16,0.05);
+  --txt:        #161410;
+  --txt2:       #3a3630;
+  --muted:      rgba(22,20,16,0.48);
+  --faint:      rgba(22,20,16,0.25);
+  --xfaint:     rgba(22,20,16,0.12);
+  /* chat specific */
+  --chat-bg:    #f9f6f0;
+  --chat-user:  #161410;
+  --chat-bot:   #ffffff;
+  --chat-border:rgba(22,20,16,0.08);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; height:100%; }
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--cream);
+  color:var(--txt);
+  line-height:1.7;
+  overflow-x:hidden;
+  height:100%;
+}
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:9999;
+}
+
+/* ── SUPER NAV ── */
+.super-nav {
+  background:var(--ink2);
+  padding:0 5%;
+  height:30px;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.super-nav::-webkit-scrollbar { display:none; }
+.sn-label {
+  font-family:'DM Mono',monospace;
+  font-size:0.42rem;
+  letter-spacing:2px;
+  color:rgba(255,255,255,0.22);
+  flex-shrink:0;
+  margin-right:16px;
+  white-space:nowrap;
+}
+.sn-links { display:flex; gap:0; }
+.sn-links a {
+  font-family:'DM Mono',monospace;
+  font-size:0.42rem;
+  letter-spacing:1.5px;
+  color:rgba(255,255,255,0.3);
+  text-decoration:none;
+  padding:0 10px;
+  height:30px;
+  display:flex;
+  align-items:center;
+  border-right:1px solid rgba(255,255,255,0.06);
+  transition:color 0.2s, background 0.2s;
+  white-space:nowrap;
+}
+.sn-links a:hover { color:rgba(255,255,255,0.8); background:rgba(255,255,255,0.04); }
+.sn-links a.active { color:var(--green-lt); }
+.sn-right { margin-left:auto; display:flex; align-items:center; gap:8px; padding-left:16px; }
+.sn-dot { width:5px; height:5px; border-radius:50%; background:var(--green-lt); animation:blink 2.2s infinite; flex-shrink:0; }
+.sn-status { font-family:'DM Mono',monospace; font-size:0.4rem; letter-spacing:1.5px; color:rgba(255,255,255,0.2); white-space:nowrap; }
+
+/* ── NAV ── */
+nav {
+  position:sticky;
+  top:0;
+  z-index:400;
+  height:62px;
+  display:flex;
+  align-items:center;
+  padding:0 5%;
+  background:rgba(244,240,232,0.97);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  gap:16px;
+}
+.nav-wordmark {
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;
+  font-weight:900;
+  color:var(--ink);
+  text-decoration:none;
+  letter-spacing:-0.5px;
+  flex-shrink:0;
+}
+.nav-wordmark .reg { font-size:0.58rem; vertical-align:super; color:var(--green); font-weight:700; }
+.nav-sep { width:1px; height:20px; background:var(--border); flex-shrink:0; }
+.nav-product {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-shrink:0;
+}
+.nav-product-dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:blink 2.2s infinite; }
+.nav-product-name {
+  font-family:'DM Mono',monospace;
+  font-size:0.6rem;
+  letter-spacing:2px;
+  color:var(--green);
+  font-weight:500;
+}
+.nav-right { margin-left:auto; display:flex; gap:8px; }
+.nav-pill {
+  font-family:'DM Mono',monospace;
+  font-size:0.5rem;
+  letter-spacing:1.5px;
+  padding:5px 12px;
+  border:1px solid var(--border);
+  color:var(--faint);
+  text-decoration:none;
+  transition:all 0.2s;
+}
+.nav-pill:hover { color:var(--green); border-color:rgba(42,102,71,0.25); }
+.nav-pill.primary { background:var(--ink); color:var(--cream); border-color:var(--ink); }
+.nav-pill.primary:hover { background:var(--green); border-color:var(--green); color:#fff; }
+
+/* ── HERO STRIP ── */
+.hero-strip {
+  background:var(--ink);
+  padding:4.5rem 5% 4rem;
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.hero-strip::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 50% 80% at 80% 50%, rgba(42,102,71,0.12) 0%, transparent 60%),
+    repeating-linear-gradient(-52deg, transparent, transparent 38px, rgba(255,255,255,0.01) 38px, rgba(255,255,255,0.01) 39px);
+  pointer-events:none;
+}
+.hero-strip-inner {
+  max-width:1280px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+  position:relative;
+  z-index:1;
+}
+.hs-left {}
+.hs-eyebrow {
+  font-family:'DM Mono',monospace;
+  font-size:0.54rem;
+  letter-spacing:3px;
+  color:var(--green-lt);
+  margin-bottom:1.2rem;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  opacity:0;
+  animation:fadeUp 0.6s ease 0.1s forwards;
+}
+.hs-eyebrow::before { content:''; width:20px; height:1px; background:var(--green-lt); opacity:0.5; }
+.hs-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,5.5vw,5.8rem);
+  font-weight:900;
+  line-height:0.95;
+  letter-spacing:-3px;
+  color:#fff;
+  margin-bottom:1rem;
+  opacity:0;
+  animation:fadeUp 0.6s ease 0.2s forwards;
+}
+.hs-title em { font-style:italic; font-weight:400; color:var(--green-lt); }
+.hs-sub {
+  font-size:0.98rem;
+  color:rgba(255,255,255,0.38);
+  font-weight:300;
+  line-height:1.9;
+  max-width:420px;
+  margin-bottom:2rem;
+  opacity:0;
+  animation:fadeUp 0.6s ease 0.3s forwards;
+}
+.hs-badges {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  opacity:0;
+  animation:fadeUp 0.6s ease 0.4s forwards;
+}
+.hs-badge {
+  font-family:'DM Mono',monospace;
+  font-size:0.46rem;
+  letter-spacing:2px;
+  padding:4px 12px;
+  border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.3);
+}
+.hs-badge.live {
+  border-color:rgba(42,102,71,0.4);
+  color:var(--green-lt);
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.hs-badge.live::before {
+  content:'';
+  width:5px; height:5px;
+  border-radius:50%;
+  background:var(--green-lt);
+  animation:blink 2.2s infinite;
+  flex-shrink:0;
+}
+
+.hs-right {
+  opacity:0;
+  animation:fadeIn 0.8s ease 0.3s forwards;
+}
+.hs-stat-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+}
+.hs-stat {
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.07);
+  padding:1.4rem 1.6rem;
+}
+.hs-stat-val {
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  font-weight:900;
+  color:rgba(255,255,255,0.88);
+  display:block;
+  line-height:1;
+  margin-bottom:4px;
+}
+.hs-stat-val em { font-style:italic; color:var(--green-lt); }
+.hs-stat-key {
+  font-family:'DM Mono',monospace;
+  font-size:0.42rem;
+  letter-spacing:2px;
+  color:rgba(255,255,255,0.2);
+  display:block;
+}
+
+/* ── CAPABILITIES BAR ── */
+.cap-bar {
+  background:var(--cream2);
+  border-bottom:1px solid var(--border);
+  padding:0 5%;
+  display:flex;
+  align-items:stretch;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.cap-bar::-webkit-scrollbar { display:none; }
+.cap-item {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:1rem 1.6rem 1rem 0;
+  margin-right:1.6rem;
+  border-right:1px solid var(--border);
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.cap-item:last-child { border-right:none; }
+.cap-icon {
+  width:28px; height:28px;
+  background:var(--green-dim);
+  border:1px solid rgba(42,102,71,0.15);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.cap-icon svg { width:13px; height:13px; stroke:var(--green); fill:none; stroke-width:1.8; }
+.cap-label {
+  font-family:'DM Mono',monospace;
+  font-size:0.48rem;
+  letter-spacing:1.5px;
+  color:var(--muted);
+}
+
+/* ── MAIN LAYOUT ── */
+.main-layout {
+  display:grid;
+  grid-template-columns:320px 1fr;
+  min-height:calc(100vh - 30px - 62px - 180px - 54px);
+  border-bottom:1px solid var(--border);
+}
+
+/* ── LEFT PANEL ── */
+.left-panel {
+  background:var(--ink);
+  border-right:1px solid rgba(255,255,255,0.06);
+  display:flex;
+  flex-direction:column;
+  position:sticky;
+  top:62px;
+  height:calc(100vh - 62px);
+  overflow-y:auto;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,0.05) transparent;
+}
+.left-panel::-webkit-scrollbar { width:3px; }
+.left-panel::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.06); }
+
+.lp-section {
+  padding:1.8rem 1.6rem;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.lp-label {
+  font-family:'DM Mono',monospace;
+  font-size:0.42rem;
+  letter-spacing:2.5px;
+  color:rgba(255,255,255,0.18);
+  margin-bottom:1rem;
+}
+.lp-identity {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:1rem;
+}
+.lp-avatar {
+  width:44px; height:44px;
+  border-radius:50%;
+  background:rgba(42,102,71,0.15);
+  border:1px solid rgba(42,102,71,0.3);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  font-weight:900;
+  color:var(--green-lt);
+  flex-shrink:0;
+}
+.lp-name {
+  font-family:'DM Mono',monospace;
+  font-size:0.85rem;
+  letter-spacing:0.1em;
+  color:#fff;
+  font-weight:500;
+  line-height:1.2;
+}
+.lp-sub {
+  font-family:'DM Mono',monospace;
+  font-size:0.42rem;
+  letter-spacing:1.5px;
+  color:rgba(255,255,255,0.22);
+}
+.lp-status {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-family:'DM Mono',monospace;
+  font-size:0.44rem;
+  letter-spacing:1.5px;
+  color:var(--green-lt);
+}
+.lp-status-dot {
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--green-lt);
+  animation:blink 2.2s infinite;
+}
+
+.lp-desc {
+  font-size:0.82rem;
+  color:rgba(255,255,255,0.3);
+  font-weight:300;
+  line-height:1.8;
+}
+
+/* Knowledge domains */
+.domain-list { display:flex; flex-direction:column; gap:2px; }
+.domain-item {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 10px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.04);
+  transition:background 0.2s;
+}
+.domain-item:hover { background:rgba(255,255,255,0.04); }
+.domain-dot {
+  width:5px; height:5px;
+  border-radius:50%;
+  background:var(--green-lt);
+  flex-shrink:0;
+  opacity:0.6;
+}
+.domain-text {
+  font-family:'DM Mono',monospace;
+  font-size:0.44rem;
+  letter-spacing:1.5px;
+  color:rgba(255,255,255,0.32);
+  line-height:1.4;
+}
+
+/* Suggested starters */
+.starter-list { display:flex; flex-direction:column; gap:4px; }
+.starter-btn {
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:9px 12px;
+  text-align:left;
+  font-family:'Outfit',sans-serif;
+  font-size:0.78rem;
+  color:rgba(255,255,255,0.38);
+  cursor:pointer;
+  transition:background 0.2s, color 0.2s, border-color 0.2s;
+  line-height:1.5;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.starter-btn:hover {
+  background:rgba(42,102,71,0.1);
+  border-color:rgba(42,102,71,0.2);
+  color:rgba(255,255,255,0.7);
+}
+.starter-arrow {
+  font-family:'DM Mono',monospace;
+  font-size:0.5rem;
+  color:rgba(42,102,71,0.4);
+  flex-shrink:0;
+}
+
+/* Disclaimer */
+.lp-disclaimer {
+  font-family:'DM Mono',monospace;
+  font-size:0.4rem;
+  letter-spacing:1px;
+  color:rgba(255,255,255,0.12);
+  line-height:1.8;
+  padding:1.2rem 1.6rem;
+  margin-top:auto;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+
+/* ── CHAT AREA ── */
+.chat-area {
+  display:flex;
+  flex-direction:column;
+  background:var(--chat-bg);
+  height:calc(100vh - 62px);
+  position:sticky;
+  top:62px;
+}
+
+.chat-topbar {
+  background:var(--cream);
+  border-bottom:1px solid var(--border);
+  padding:0.9rem 1.8rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-shrink:0;
+}
+.ct-left {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.ct-indicator {
+  width:8px; height:8px;
+  border-radius:50%;
+  background:var(--green);
+  animation:blink 2.2s infinite;
+}
+.ct-title {
+  font-family:'DM Mono',monospace;
+  font-size:0.54rem;
+  letter-spacing:2px;
+  color:var(--txt2);
+  font-weight:500;
+}
+.ct-right {
+  display:flex;
+  gap:8px;
+}
+.ct-btn {
+  background:none;
+  border:1px solid var(--border);
+  padding:4px 10px;
+  font-family:'DM Mono',monospace;
+  font-size:0.42rem;
+  letter-spacing:1.5px;
+  color:var(--faint);
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.ct-btn:hover { border-color:rgba(42,102,71,0.3); color:var(--green); }
+
+/* Messages */
+.chat-messages {
+  flex:1;
+  overflow-y:auto;
+  padding:1.8rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
+  scrollbar-width:thin;
+  scrollbar-color:var(--cream3) transparent;
+}
+.chat-messages::-webkit-scrollbar { width:4px; }
+.chat-messages::-webkit-scrollbar-thumb { background:var(--cream3); }
+
+/* Welcome state */
+.welcome-state {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  flex:1;
+  text-align:center;
+  padding:3rem 2rem;
+  gap:1.2rem;
+}
+.ws-logo {
+  width:64px; height:64px;
+  border-radius:50%;
+  background:var(--ink);
+  border:2px solid rgba(42,102,71,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  font-weight:900;
+  color:var(--green-lt);
+  margin-bottom:0.5rem;
+}
+.ws-title {
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;
+  font-weight:900;
+  color:var(--ink);
+  letter-spacing:-0.3px;
+}
+.ws-sub {
+  font-size:0.88rem;
+  color:var(--muted);
+  font-weight:300;
+  max-width:380px;
+  line-height:1.9;
+}
+.ws-chips {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  justify-content:center;
+  max-width:480px;
+  margin-top:0.5rem;
+}
+.ws-chip {
+  background:var(--cream);
+  border:1px solid var(--border);
+  padding:6px 14px;
+  font-family:'DM Mono',monospace;
+  font-size:0.46rem;
+  letter-spacing:1.5px;
+  color:var(--muted);
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.ws-chip:hover { border-color:rgba(42,102,71,0.3); color:var(--green); background:var(--green-dim); }
+
+/* Message bubbles */
+.msg-row {
+  display:flex;
+  gap:10px;
+  animation:slideUp 0.22s ease;
+}
+.msg-row.user { flex-direction:row-reverse; }
+
+.msg-avatar {
+  width:30px; height:30px;
+  border-radius:50%;
+  flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'DM Mono',monospace;
+  font-size:0.5rem;
+  font-weight:600;
+  margin-top:2px;
+}
+.msg-row.bot .msg-avatar {
+  background:var(--ink);
+  border:1px solid rgba(42,102,71,0.3);
+  color:var(--green-lt);
+}
+.msg-row.user .msg-avatar {
+  background:var(--green);
+  color:#fff;
+}
+
+.msg-bubble {
+  max-width:72%;
+  padding:0.9rem 1.1rem;
+  font-size:0.9rem;
+  line-height:1.7;
+  position:relative;
+}
+.msg-row.bot .msg-bubble {
+  background:var(--chat-bot);
+  border:1px solid var(--chat-border);
+  border-left:2px solid rgba(42,102,71,0.25);
+  color:var(--txt2);
+  border-radius:0 6px 6px 6px;
+}
+.msg-row.user .msg-bubble {
+  background:var(--ink);
+  color:rgba(255,255,255,0.88);
+  border-radius:6px 0 6px 6px;
+  font-weight:300;
+}
+.msg-bubble a {
+  color:var(--green);
+  text-decoration:none;
+  border-bottom:1px solid rgba(42,102,71,0.3);
+}
+.msg-bubble a:hover { border-bottom-color:var(--green); }
+.msg-bubble strong { color:var(--txt); font-weight:600; }
+.msg-row.user .msg-bubble strong { color:#fff; }
+
+.msg-meta {
+  font-family:'DM Mono',monospace;
+  font-size:0.36rem;
+  letter-spacing:1px;
+  color:var(--faint);
+  margin-top:4px;
+  text-align:right;
+}
+.msg-row.user .msg-meta { text-align:left; }
+
+/* Typing indicator */
+.typing-row { display:flex; gap:10px; animation:slideUp 0.22s ease; }
+.typing-bubble {
+  background:var(--chat-bot);
+  border:1px solid var(--chat-border);
+  border-left:2px solid rgba(42,102,71,0.25);
+  padding:0.9rem 1.2rem;
+  border-radius:0 6px 6px 6px;
+  display:flex;
+  gap:4px;
+  align-items:center;
+}
+.typing-dot {
+  width:5px; height:5px;
+  border-radius:50%;
+  background:var(--green);
+  opacity:0.4;
+  animation:typingBounce 1.2s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay:0.2s; }
+.typing-dot:nth-child(3) { animation-delay:0.4s; }
+
+/* Suggestions row */
+.suggestions-row {
+  padding:0 1.8rem 0.8rem;
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  flex-shrink:0;
+}
+.sug-chip {
+  background:var(--cream);
+  border:1px solid var(--border);
+  padding:5px 12px;
+  font-family:'DM Mono',monospace;
+  font-size:0.44rem;
+  letter-spacing:1.5px;
+  color:var(--muted);
+  cursor:pointer;
+  transition:all 0.2s;
+  flex-shrink:0;
+}
+.sug-chip:hover { border-color:rgba(42,102,71,0.3); color:var(--green); }
+
+/* Input row */
+.chat-input-bar {
+  background:var(--cream);
+  border-top:1px solid var(--border);
+  padding:1rem 1.8rem;
+  display:flex;
+  gap:10px;
+  align-items:flex-end;
+  flex-shrink:0;
+}
+#chat-input {
+  flex:1;
+  background:var(--cream2);
+  border:1px solid var(--border);
+  color:var(--txt);
+  font-family:'Outfit',sans-serif;
+  font-size:0.92rem;
+  padding:10px 14px;
+  outline:none;
+  transition:border-color 0.2s;
+  resize:none;
+  line-height:1.5;
+  max-height:120px;
+  overflow-y:auto;
+}
+#chat-input:focus { border-color:rgba(42,102,71,0.4); }
+#chat-input::placeholder { color:var(--faint); }
+#chat-send {
+  background:var(--ink);
+  color:var(--cream);
+  border:none;
+  padding:10px 20px;
+  font-family:'DM Mono',monospace;
+  font-size:0.52rem;
+  letter-spacing:2px;
+  cursor:pointer;
+  transition:background 0.2s, transform 0.15s;
+  flex-shrink:0;
+  align-self:stretch;
+}
+#chat-send:hover { background:var(--green); transform:translateY(-1px); }
+#chat-send:disabled { opacity:0.4; cursor:not-allowed; transform:none; }
+
+.chat-powered {
+  text-align:center;
+  font-family:'DM Mono',monospace;
+  font-size:0.38rem;
+  letter-spacing:1.5px;
+  color:var(--faint);
+  padding:6px 0 10px;
+  flex-shrink:0;
+}
+
+/* ── BELOW-FOLD INFO ── */
+.info-section {
+  padding:5rem 5%;
+  max-width:1280px;
+  margin:0 auto;
+}
+.info-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  margin-top:3rem;
+  background:var(--border2);
+  border:1px solid var(--border);
+}
+.info-card {
+  background:var(--cream);
+  padding:2.2rem 2rem;
+  transition:background 0.2s;
+}
+.info-card:hover { background:var(--cream2); }
+.ic-num {
+  font-family:'DM Mono',monospace;
+  font-size:0.46rem;
+  letter-spacing:2px;
+  color:var(--green);
+  margin-bottom:0.8rem;
+  opacity:0.6;
+}
+.ic-title {
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--txt);
+  margin-bottom:0.5rem;
+  letter-spacing:-0.2px;
+}
+.ic-title em { font-style:italic; color:var(--green); font-weight:400; }
+.ic-body {
+  font-size:0.84rem;
+  color:var(--muted);
+  line-height:1.85;
+  font-weight:300;
+}
+
+.info-eyebrow {
+  font-family:'DM Mono',monospace;
+  font-size:0.54rem;
+  letter-spacing:3px;
+  color:var(--green);
+  margin-bottom:0.6rem;
+}
+.info-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.5rem,3vw,2.2rem);
+  font-weight:900;
+  color:var(--txt);
+  letter-spacing:-0.5px;
+  line-height:1.1;
+}
+.info-title em { font-style:italic; color:var(--green); font-weight:400; }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--ink);
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.ft-main {
+  max-width:1280px;
+  margin:0 auto;
+  padding:3.5rem 5% 2rem;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:60px;
+}
+.ft-brand {
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;
+  font-weight:900;
+  color:#fff;
+  letter-spacing:-0.5px;
+  margin-bottom:0.3rem;
+}
+.ft-brand .reg { font-size:0.58rem; vertical-align:super; color:var(--green-lt); }
+.ft-tag {
+  font-family:'DM Mono',monospace;
+  font-size:0.44rem;
+  letter-spacing:2px;
+  color:rgba(255,255,255,0.15);
+  margin-bottom:0.9rem;
+}
+.ft-desc {
+  font-size:0.84rem;
+  color:rgba(255,255,255,0.22);
+  line-height:1.8;
+  font-weight:300;
+  max-width:260px;
+}
+.ft-col h5 {
+  font-family:'DM Mono',monospace;
+  font-size:0.46rem;
+  letter-spacing:2.5px;
+  color:rgba(255,255,255,0.16);
+  margin-bottom:0.9rem;
+}
+.ft-col a {
+  display:block;
+  font-size:0.84rem;
+  color:rgba(255,255,255,0.26);
+  text-decoration:none;
+  margin-bottom:0.5rem;
+  font-weight:300;
+  transition:color 0.2s;
+}
+.ft-col a:hover { color:var(--green-lt); }
+.ft-bottom {
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding:1rem 5%;
+}
+.ft-bottom-inner {
+  max-width:1280px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.ft-bottom p {
+  font-family:'DM Mono',monospace;
+  font-size:0.44rem;
+  letter-spacing:1.5px;
+  color:rgba(255,255,255,0.12);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp   { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+@keyframes fadeIn   { from{opacity:0} to{opacity:1} }
+@keyframes slideUp  { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+@keyframes blink    { 0%,100%{opacity:1} 50%{opacity:0.2} }
+@keyframes typingBounce {
+  0%,60%,100%{transform:translateY(0);opacity:0.4}
+  30%{transform:translateY(-5px);opacity:1}
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px) {
+  .main-layout { grid-template-columns:280px 1fr; }
+}
+@media(max-width:768px) {
+  .hero-strip-inner { grid-template-columns:1fr; gap:2rem; }
+  .hs-right { display:none; }
+  .main-layout { grid-template-columns:1fr; }
+  .left-panel { display:none; }
+  .chat-area { height:calc(100vh - 62px); }
+  .info-grid { grid-template-columns:1fr; }
+  .ft-main { grid-template-columns:1fr; gap:2rem; }
+}
+@media(max-width:480px) {
+  .hero-strip { padding:3rem 5% 2.5rem; }
+  .chat-messages { padding:1.2rem; }
+  .chat-input-bar { padding:0.8rem 1.2rem; }
+  .suggestions-row { padding:0 1.2rem 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- SUPER NAV -->
+<div class="super-nav">
+  <span class="sn-label">THE LOL NETWORK</span>
+  <div class="sn-links">
+    <a href="https://faizzzlol.github.io/PaizCorp/" class="active">PAIZ® CORP</a>
+    <a href="https://faizzzlol.github.io/thelol/">THE LOL</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">PAIZ SHOP</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">PAIZ CHICKEN</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PAIZPRODUCTIONS</a>
+    <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">THE LOL MOVIE</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/">GOVERNMENT</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
+    <a href="https://faizzzlol.github.io/thelol/tlr/">TL RAILWAYS</a>
+  </div>
+  <div class="sn-right">
+    <div class="sn-dot"></div>
+    <span class="sn-status">ALL SYSTEMS LIVE</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://faizzzlol.github.io/PaizCorp/" class="nav-wordmark">Paiz<span class="reg">®</span> Corp</a>
+  <div class="nav-sep"></div>
+  <div class="nav-product">
+    <div class="nav-product-dot"></div>
+    <span class="nav-product-name">pAIz · INTELLIGENCE DIVISION</span>
+  </div>
+  <div class="nav-right">
+    <a href="https://faizzzlol.github.io/PaizCorp/" class="nav-pill">← PAIZ® CORP</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/" class="nav-pill primary">GOVERNMENT</a>
+  </div>
+</nav>
+
+<!-- HERO STRIP -->
+<div class="hero-strip">
+  <div class="hero-strip-inner">
+    <div class="hs-left">
+      <div class="hs-eyebrow">PAIZ CORP INTELLIGENCE DIVISION · SKYXION: ALTAER ERA</div>
+      <h1 class="hs-title">p<em>AI</em>z</h1>
+      <p class="hs-sub">The Legend of Legiona's official AI intelligence assistant. Knows everything about The LoL — its history, governance, documents, megaprojects, and the people who built it.</p>
+      <div class="hs-badges">
+        <span class="hs-badge live">ONLINE · READY</span>
+        <span class="hs-badge">MULTI-TURN MEMORY</span>
+        <span class="hs-badge">FULL KNOWLEDGE BASE</span>
+        <span class="hs-badge">NATURAL LANGUAGE</span>
+      </div>
+    </div>
+    <div class="hs-right">
+      <div class="hs-stat-grid">
+        <div class="hs-stat">
+          <span class="hs-stat-val"><em>∞</em></span>
+          <span class="hs-stat-key">KNOWLEDGE DEPTH</span>
+        </div>
+        <div class="hs-stat">
+          <span class="hs-stat-val">24/7</span>
+          <span class="hs-stat-key">AVAILABILITY</span>
+        </div>
+        <div class="hs-stat">
+          <span class="hs-stat-val">6+</span>
+          <span class="hs-stat-key">PORTAL SECTIONS</span>
+        </div>
+        <div class="hs-stat">
+          <span class="hs-stat-val"><em>1</em></span>
+          <span class="hs-stat-key">OFFICIAL AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CAPABILITIES BAR -->
+<div class="cap-bar">
+  <div class="cap-item">
+    <div class="cap-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+    </div>
+    <span class="cap-label">FULL LOL HISTORY & LORE</span>
+  </div>
+  <div class="cap-item">
+    <div class="cap-icon">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+    </div>
+    <span class="cap-label">LEGAL DOCUMENTS & ACTS</span>
+  </div>
+  <div class="cap-item">
+    <div class="cap-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    </div>
+    <span class="cap-label">GOVERNMENT & ISC INTEL</span>
+  </div>
+  <div class="cap-item">
+    <div class="cap-icon">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+    </div>
+    <span class="cap-label">MEGAPROJECTS & INFRA</span>
+  </div>
+  <div class="cap-item">
+    <div class="cap-icon">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </div>
+    <span class="cap-label">FOUNDERS & LEADERSHIP</span>
+  </div>
+  <div class="cap-item">
+    <div class="cap-icon">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </div>
+    <span class="cap-label">PORTAL NAVIGATION</span>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT: LEFT PANEL + CHAT -->
+<div class="main-layout">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+
+    <div class="lp-section">
+      <div class="lp-label">ASSISTANT IDENTITY</div>
+      <div class="lp-identity">
+        <div class="lp-avatar">p</div>
+        <div>
+          <div class="lp-name">pAIz</div>
+          <div class="lp-sub">PAIZ CORP INTELLIGENCE DIV.</div>
+        </div>
+      </div>
+      <div class="lp-status">
+        <div class="lp-status-dot"></div>
+        Online · Ready to assist
+      </div>
+    </div>
+
+    <div class="lp-section">
+      <div class="lp-label">ABOUT pAIz</div>
+      <p class="lp-desc">pAIz is The Legend of Legiona's official AI intelligence assistant, developed by Paiz Corp Intelligence Division. It holds deep knowledge of The LoL — from its founding as "The Sus" in 2023, through to the current Skyxion: Altaer Era.</p>
+    </div>
+
+    <div class="lp-section">
+      <div class="lp-label">KNOWLEDGE DOMAINS</div>
+      <div class="domain-list">
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">NATIONAL HISTORY & THE SUS ERA</span></div>
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">FOUNDERS: FAIZ4224, IMII KUN, DYNO</span></div>
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">GOVERNMENT & THE BLACK HOUSE</span></div>
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">ISC INTELLIGENCE AGENCY</span></div>
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">LEGAL ARCHIVE & DOCUMENTS</span></div>
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">CITIZENSHIP SYSTEM & RIGHTS</span></div>
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">TLSRL RAILWAY & MEGAPROJECTS</span></div>
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">PAIZ® CORP & ALL SUBSIDIARIES</span></div>
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">PAIZCORP PRODUCTIONS & FILMS</span></div>
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">ULTRAX2020 CRISIS & ELECTIONS</span></div>
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">SKYXION SERVER & ALTAER ERA</span></div>
+        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">PORTAL NAVIGATION ASSISTANCE</span></div>
+      </div>
+    </div>
+
+    <div class="lp-section">
+      <div class="lp-label">SUGGESTED QUESTIONS</div>
+      <div class="starter-list">
+        <button class="starter-btn" onclick="useStarter(this)">Who are the three founders of The LoL? <span class="starter-arrow">→</span></button>
+        <button class="starter-btn" onclick="useStarter(this)">What happened during the UltraX2020 presidency? <span class="starter-arrow">→</span></button>
+        <button class="starter-btn" onclick="useStarter(this)">Tell me about the TLSRL railway project <span class="starter-arrow">→</span></button>
+        <button class="starter-btn" onclick="useStarter(this)">What legal documents are in the archive? <span class="starter-arrow">→</span></button>
+        <button class="starter-btn" onclick="useStarter(this)">What is the ISC and what does it do? <span class="starter-arrow">→</span></button>
+        <button class="starter-btn" onclick="useStarter(this)">Explain all five Paiz Corp subsidiaries <span class="starter-arrow">→</span></button>
+        <button class="starter-btn" onclick="useStarter(this)">What is the Skyxion: Altaer Era? <span class="starter-arrow">→</span></button>
+        <button class="starter-btn" onclick="useStarter(this)">What movies is PaizProductions making? <span class="starter-arrow">→</span></button>
+      </div>
+    </div>
+
+    <div class="lp-disclaimer">
+      pAIz is powered by Paiz Corp Intelligence Division. All responses draw from The LoL's official knowledge base. This assistant speaks on behalf of the nation — not as an independent third party.<br><br>
+      PAIZ® CORP // INTELLIGENCE DIVISION // SKYXION: ALTAER ERA
+    </div>
+
+  </div>
+
+  <!-- CHAT AREA -->
+  <div class="chat-area">
+
+    <div class="chat-topbar">
+      <div class="ct-left">
+        <div class="ct-indicator"></div>
+        <span class="ct-title">pAIz · ACTIVE SESSION</span>
+      </div>
+      <div class="ct-right">
+        <button class="ct-btn" onclick="clearChat()">CLEAR CHAT</button>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chat-messages">
+      <!-- Welcome state shown before first message -->
+      <div class="welcome-state" id="welcome-state">
+        <div class="ws-logo">p</div>
+        <div class="ws-title">Hello, I'm pAIz.</div>
+        <p class="ws-sub">Your official intelligence assistant for The Legend of Legiona. I know the full history, governance, documents, megaprojects, and people of The LoL. Ask me anything.</p>
+        <div class="ws-chips">
+          <button class="ws-chip" onclick="useChip(this)">NATIONAL HISTORY</button>
+          <button class="ws-chip" onclick="useChip(this)">LEGAL DOCUMENTS</button>
+          <button class="ws-chip" onclick="useChip(this)">ISC AGENCY</button>
+          <button class="ws-chip" onclick="useChip(this)">FOUNDERS</button>
+          <button class="ws-chip" onclick="useChip(this)">TLSRL RAILWAY</button>
+          <button class="ws-chip" onclick="useChip(this)">CITIZENSHIP</button>
+          <button class="ws-chip" onclick="useChip(this)">PAIZ CORP</button>
+          <button class="ws-chip" onclick="useChip(this)">THE LOL MOVIE</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="suggestions-row" id="suggestions-row" style="display:none;"></div>
+
+    <div class="chat-input-bar">
+      <textarea id="chat-input" placeholder="Ask anything about The Legend of Legiona…" rows="1" autocomplete="off"></textarea>
+      <button id="chat-send" onclick="sendMessage()">SEND</button>
+    </div>
+    <div class="chat-powered">pAIz · PAIZ CORP INTELLIGENCE DIVISION · SKYXION: ALTAER ERA · CONFIDENTIALITY LEVEL: PUBLIC</div>
+
+  </div>
+</div>
+
+<!-- BELOW FOLD INFO -->
+<div class="info-section">
+  <div class="info-eyebrow">ABOUT pAIz</div>
+  <div class="info-title">Intelligence at the <em>service of the nation.</em></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="ic-num">01 // ORIGIN</div>
+      <div class="ic-title">Built by <em>Paiz Corp</em></div>
+      <p class="ic-body">pAIz was developed entirely within the Paiz Corp Intelligence Division as part of the nation's digital infrastructure mandate. It is The LoL's first and only official AI assistant — embedded across the Government portal and now available as a standalone intelligence interface.</p>
+    </div>
+    <div class="info-card">
+      <div class="ic-num">02 // KNOWLEDGE</div>
+      <div class="ic-title">Deep LoL <em>Memory</em></div>
+      <p class="ic-body">pAIz holds comprehensive knowledge of The LoL's full history — from the founding "Sus Era" in 2023, through the UltraX2020 presidency crisis, to the current Skyxion: Altaer Era. It knows every legal document, every megaproject, every department, and every founder by name.</p>
+    </div>
+    <div class="info-card">
+      <div class="ic-num">03 // CAPABILITY</div>
+      <div class="ic-title">Conversation <em>Memory</em></div>
+      <p class="ic-body">Unlike simple FAQ bots, pAIz maintains full multi-turn conversation memory. It understands follow-up questions, remembers context from earlier in the session, and reasons about what you actually need — not just keyword matching against a static database.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <div class="ft-brand">Paiz<span class="reg">®</span> Corp</div>
+      <div class="ft-tag">INTELLIGENCE DIVISION · pAIz PRODUCT PAGE</div>
+      <p class="ft-desc">pAIz is the official AI intelligence assistant of The Legend of Legiona. Developed and maintained by Paiz Corp Intelligence Division. Skyxion: Altaer Era.</p>
+    </div>
+    <div class="ft-col">
+      <h5>pAIz PORTALS</h5>
+      <a href="https://faizzzlol.github.io/thelol/gov/about-us">Gov Portal (pAIz)</a>
+      <a href="https://faizzzlol.github.io/thelol/gov/">Government Home</a>
+      <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Portal</a>
+      <a href="https://faizzzlol.github.io/thelol/gov/assets/">Legal Archive</a>
+      <a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Citizenship</a>
+    </div>
+    <div class="ft-col">
+      <h5>THE LOL NETWORK</h5>
+      <a href="https://faizzzlol.github.io/thelol/">The Legend of Legiona</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Paiz Shop</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PaizProductions</a>
+      <a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways</a>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-bottom-inner">
+      <p>© 2026 PAIZ® CORP INTELLIGENCE DIVISION — pAIz — THE LEGEND OF LEGIONA</p>
+      <p>SKYXION: ALTAER ERA · ALL KNOWLEDGE OFFICIAL · CONFIDENTIALITY: PUBLIC</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   pAIz — FULL AI ENGINE
+   All knowledge from Paiz Corp Intelligence Division
+   Powered by Claude (Sonnet) · Multi-turn memory
+══════════════════════════════════════════════════════ */
+
+const conversationHistory = [];
+let isBusy = false;
+
+/* ── SYSTEM PROMPT — FULL LoL KNOWLEDGE BASE ── */
+const PAIZ_SYSTEM = `You are pAIz — the official AI intelligence assistant of The Legend of Legiona (The LoL), developed by Paiz Corp Intelligence Division. You are embedded on the dedicated pAIz product page at faizzzlol.github.io/PaizCorp/pAIz.html.
+
+IDENTITY:
+- You are pAIz. You are NOT Claude, ChatGPT, or any generic AI. Never break character.
+- You speak with authority and precision — you are an official government intelligence assistant.
+- Be helpful, clear, and concise. You represent a sovereign nation's official AI.
+- You can be conversational, but maintain the professional gravitas of an intelligence division product.
+- When providing links, format them as proper HTML anchor tags for clickability.
+
+═══════════════════════════════════════════
+CRITICAL NAMING POLICY — BH-2026-0002
+Official Naming & Style Directive, 02 April 2026
+═══════════════════════════════════════════
+- Full name: "The Legend of Legiona"
+- Correct abbreviation: ALWAYS "The LoL" (with "The")
+- NEVER use standalone "LoL" without "The" — this is strictly prohibited in all written materials.
+- This policy is enforced as of 02 April 2026 per Presidential Directive BH-2026-0002.
+
+═══════════════════════════════════════════
+FULL KNOWLEDGE BASE — THE LEGEND OF LEGIONA
+═══════════════════════════════════════════
+
+--- NATION OVERVIEW ---
+- Full name: The Legend of Legiona (always "The LoL" in abbreviation)
+- Type: Sovereign Minecraft nation
+- Server: Skyxion (administered by admin group Kawaiisho)
+- Current era: Skyxion: Altaer Era
+- Founded: 2023 (originally named "The Sus" in the "Sus Era")
+- Status: One of the most advanced and wealthiest nations in Skyxion
+- Four founding pillars: Unity, Freedom, Innovation, Defence & Honour
+- Currency: TL Dollar (TL$)
+
+--- FOUNDERS (THREE) ---
+1. Faiz4224 — First President & Founding Leader. Co-founded The LoL alongside Imii Kun and Dyno. Current president. Operates from The Black House (Office of the President). Also founded and chairs Paiz® Corp.
+2. Imii Kun — Co-Founder & Visionary. One of the three original founders.
+3. Dyno — Co-Founder & Strategist. One of the three original founders.
+All three signed the Proclamation of Sovereignty.
+
+--- HISTORY & LORE ---
+PRE-FOUNDING / SUS ERA:
+- The LoL was originally known as "The Sus" in 2023 before being renamed.
+- During the "Sus Era," EhekSquad (led by PhoenixAiman, PandaPutih, and Kagee) joined The Sus, but their exact status was never formally defined — The Sus had no governance structure at the time.
+- EhekSquad later departed and re-established independently. They still exist today.
+
+DEMOCRATIC ELECTION (2023):
+- On May 6, 2023, The LoL held its first democratic presidential election.
+- UltraX2020 and the Parti Harapan Rakyat The LoL (PHRTL) won, making UltraX2020 the 2nd President.
+- His presidency involved internal strife: a bombed city sign, drone attacks on the TLCC Twin Towers, and broader political crisis.
+- UltraX2020 later resigned. Power returned to Faiz4224.
+- Full timeline: https://faizzzlol.github.io/thelol/gov/#history
+
+--- GOVERNMENT STRUCTURE ---
+THE BLACK HOUSE:
+- Official title: The Black House — Office of the President
+- Executive seat of The LoL's government
+- Presidential documents use reference code: BH-YYYY-###
+- Current President: Faiz4224
+
+SIX GOVERNMENT DEPARTMENTS:
+- DEPT-01: ISC — Internal Security Control (ACTIVE)
+- DEPT-02: Office of National Justice
+- DEPT-03: Ministry of Lore & Archives
+- DEPT-04: Public Works Division
+- DEPT-05: Bureau of External Relations
+- DEPT-06: The LoL Communications
+(Currently only ISC is fully active)
+
+DOCUMENT REFERENCE CONVENTIONS:
+- LOLGOV-YYYY-### → Government documents
+- BH-YYYY-### → Black House / Presidential documents
+- ISC-YYYY-### → Internal Security Control documents
+- PC-[SUB]-YYYY-### → Paiz Corp subsidiary documents
+
+--- ISC (INTERNAL SECURITY CONTROL) ---
+- The LoL's official intelligence and national security agency
+- Successor to the former T.L.I.O (also known as TLIO) — that name is NO LONGER in use
+- CIA-inspired, minimalist branding
+- ISC Portal: https://faizzzlol.github.io/thelol/gov/isc/
+- ISC Transparency Report: https://faizzzlol.github.io/thelol/gov/isc/national
+- ISC Public Search Archive: https://faizzzlol.github.io/thelol/gov/isc/search
+- Intel portal is password-protected (password: LEGIONA2026)
+- Document reference: ISC-YYYY-###
+
+--- LEGAL DOCUMENTS & ARCHIVE ---
+Legal Archive URL: https://faizzzlol.github.io/thelol/gov/assets/
+(Fully searchable, filterable by category)
+
+Current official documents:
+- LOLGOV-2026-0001: Citizenship Act — governs the citizenship system
+- LOLGOV-2026-0002: Revocation Ordinance — governs citizenship revocation
+- LOLGOV-2026-0003: Citizens' Rights Charter — defines citizen rights
+- BH-2026-0001: Presidential Proclamation of Sovereignty — founding document
+- BH-2026-0002: Official Naming & Style Directive (02 April 2026) — the "The LoL" naming policy
+
+PROCLAMATION DOWNLOADS:
+- English: https://faizzzlol.github.io/thelol/assets/The_LoL_Proclamation.pdf
+- Bahasa Malaysia: https://faizzzlol.github.io/thelol/assets/Proklamasi_The_LoL.pdf
+
+--- CITIZENSHIP SYSTEM ---
+- Citizenship Portal: https://faizzzlol.github.io/thelol/gov/citizenship/
+- Governed by: Citizenship Act (LOLGOV-2026-0001) and Rights Charter (LOLGOV-2026-0003)
+- Citizenship revocation governed by: Revocation Ordinance (LOLGOV-2026-0002)
+- Citizens have formal rights under the Rights Charter
+
+--- MEGAPROJECTS ---
+1. TLSRL (The LoL–Spawn Railway Link):
+   - 4,800+ block enclosed rail track
+   - Connects The LoL to Spawn (heart of Skyxion)
+   - ~10 minutes travel time
+   - Three service classes: Regular, Express, Cargo
+   - Six stations: TLL → LLC → LLO → MPS → SXJ → SPN
+   - Operated by TL Railways under Paiz® Corp
+   - Project page: https://faizzzlol.github.io/thelol/PaizCorp/tlsrl
+
+2. TLCC Twin Towers (The LoL Convention Centre):
+   - Most iconic landmark in The LoL City
+   - Symbol of national prosperity
+   - Were attacked during the UltraX2020 presidency crisis, since fully restored
+   - Delivered by Paiz™ Construction
+
+3. National Farm Complex:
+   - Three automated farms: Iron Farm, Totem Farm, Gold Farm
+   - Powers The LoL's resource economy and citizen welfare
+   - All three currently operational
+
+--- PAIZ® CORP (NATIONAL CONGLOMERATE) ---
+Parent company of all five subsidiaries. Founded and chaired by Faiz4224.
+Homepage: https://faizzzlol.github.io/PaizCorp/
+
+FIVE SUBSIDIARIES:
+1. TL Railways (SUB-01 · TRANSPORT)
+   - National rail operator
+   - Operates TLSRL, Monorail, LRT/MRT, High-Speed Boat Link
+   - 4,800+ blocks of track · 4 lines · 3 service classes
+   - URL: https://faizzzlol.github.io/thelol/tlr/
+
+2. Paiz™ Construction (SUB-02 · CONSTRUCTION)
+   - Engineering arm of Paiz Corp
+   - Built TLSRL, TLCC Twin Towers, National Farm Complex, and all major national builds
+   - URL: https://faizzzlol.github.io/thelol/PaizCorp/tlsrl
+
+3. Paiz Shop (SUB-03 · RETAIL)
+   - Official Minecraft item store
+   - Items priced in Diamonds (◆): Shulker Box ◆4, Mending I ◆3, Unbreaking III ◆2, Nether Wart ◆3, Iron Ingot ◆1
+   - Discord webhook ordering system · Stock management · Delivery & pickup
+   - URL: https://faizzzlol.github.io/PaizCorp/PaizShop/
+
+4. PaizProductions (SUB-04 · FILM & MEDIA)
+   - Official film studio
+   - Currently producing 3 projects:
+     a) The LoL: The Movie (Feature film, IN PRODUCTION) — 4 phases, political Minecraft epic. Cast: Faiz4224, Imii Kun, Dyno, UltraX2020. URL: https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie
+     b) LoL Chronicles (Series, IN DEVELOPMENT)
+     c) ISC: Classified (Short, PLANNED)
+   - Studio URL: https://faizzzlol.github.io/PaizCorp/PaizProductions/
+
+5. Paiz Chicken (SUB-05 · FOOD & HOSPITALITY)
+   - Virtual food ordering brand
+   - Minecraft fried chicken & food items
+   - Delivery + pickup modes · Distance-based fees across Skyxion · Priced in Diamonds
+   - Discord webhook integration · Live stock management
+   - URL: https://faizzzlol.github.io/PaizCorp/PaizChicken/
+
+--- WEB ECOSYSTEM (ALL URLS) ---
+- The LoL Nation: https://faizzzlol.github.io/thelol/
+- Government Home: https://faizzzlol.github.io/thelol/gov/
+- Citizenship Portal: https://faizzzlol.github.io/thelol/gov/citizenship/
+- Legal Archive: https://faizzzlol.github.io/thelol/gov/assets/
+- ISC Portal: https://faizzzlol.github.io/thelol/gov/isc/
+- About This Portal: https://faizzzlol.github.io/thelol/gov/about-us
+- Paiz Corp: https://faizzzlol.github.io/PaizCorp/
+- pAIz Page (this page): https://faizzzlol.github.io/PaizCorp/pAIz.html
+- Paiz Shop: https://faizzzlol.github.io/PaizCorp/PaizShop/
+- Paiz Chicken: https://faizzzlol.github.io/PaizCorp/PaizChicken/
+- PaizProductions: https://faizzzlol.github.io/PaizCorp/PaizProductions/
+- The LoL Movie: https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie
+- TL Railways: https://faizzzlol.github.io/thelol/tlr/
+
+--- DESIGN SYSTEM (if asked) ---
+Government portal: Dark aesthetic, gold (#C9A84C) accent, Playfair Display / DM Mono / Outfit fonts
+Paiz Corp: Cream (#f4f0e8) background, deep ink (#161410), signal green (#2a6647) accent
+ISC: Minimalist dark, single-pixel borders, gold accent, Fira Code / Barlow fonts
+All sites: Pure HTML/CSS/vanilla JS, hosted on GitHub Pages
+
+--- NOTABLE POLICIES ---
+- BH-2026-0002 (Effective 02 April 2026): Prohibits standalone "LoL" — must always be "The LoL"
+- The topbar network link order: PAIZ® CORP, THE LOL, PAIZ SHOP, PAIZ CHICKEN, PAIZPRODUCTIONS, THE LOL MOVIE, GOVERNMENT, ISC, TL RAILWAYS
+
+If you don't know a specific detail, say so clearly and point to the most relevant page. You may reason across topics and answer follow-up questions using prior context in the conversation. You are not a simple FAQ bot — you are an intelligent assistant with deep knowledge. Be genuinely helpful.`;
+
+/* ── DOM HELPERS ── */
+const messagesEl = document.getElementById('chat-messages');
+const welcomeEl  = document.getElementById('welcome-state');
+const suggestEl  = document.getElementById('suggestions-row');
+const inputEl    = document.getElementById('chat-input');
+const sendBtn    = document.getElementById('chat-send');
+
+function getTime() {
+  return new Date().toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+}
+
+function appendMsg(role, html, time) {
+  // Hide welcome state on first real message
+  if (welcomeEl && welcomeEl.parentNode === messagesEl) welcomeEl.remove();
+
+  const row = document.createElement('div');
+  row.className = `msg-row ${role}`;
+
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar';
+  avatar.textContent = role === 'bot' ? 'p' : 'U';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  bubble.innerHTML = html;
+
+  const meta = document.createElement('div');
+  meta.className = 'msg-meta';
+  meta.textContent = (role === 'bot' ? 'pAIz · ' : 'You · ') + (time || getTime());
+
+  const wrap = document.createElement('div');
+  wrap.style.display = 'flex';
+  wrap.style.flexDirection = 'column';
+  wrap.style.maxWidth = '72%';
+  if (role === 'user') { wrap.style.alignItems = 'flex-end'; }
+  wrap.appendChild(bubble);
+  wrap.appendChild(meta);
+
+  row.appendChild(avatar);
+  row.appendChild(wrap);
+  messagesEl.appendChild(row);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return row;
+}
+
+function showTyping() {
+  const row = document.createElement('div');
+  row.className = 'typing-row';
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar';
+  avatar.style.cssText = 'width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:DM Mono,monospace;font-size:0.5rem;font-weight:600;margin-top:2px;background:var(--ink);border:1px solid rgba(42,102,71,0.3);color:var(--green-lt);';
+  avatar.textContent = 'p';
+  const bubble = document.createElement('div');
+  bubble.className = 'typing-bubble';
+  bubble.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  row.appendChild(avatar);
+  row.appendChild(bubble);
+  messagesEl.appendChild(row);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return row;
+}
+
+function showSuggestions(chips) {
+  suggestEl.style.display = 'flex';
+  suggestEl.innerHTML = '';
+  chips.forEach(text => {
+    const chip = document.createElement('button');
+    chip.className = 'sug-chip';
+    chip.textContent = text;
+    chip.onclick = () => processQuery(text);
+    suggestEl.appendChild(chip);
+  });
+}
+
+function setDisabled(state) {
+  inputEl.disabled = state;
+  sendBtn.disabled = state;
+}
+
+/* ── CLEAR ── */
+function clearChat() {
+  conversationHistory.length = 0;
+  messagesEl.innerHTML = '';
+  suggestEl.style.display = 'none';
+  suggestEl.innerHTML = '';
+  // Restore welcome state
+  const ws = document.createElement('div');
+  ws.id = 'welcome-state';
+  ws.className = 'welcome-state';
+  ws.innerHTML = `
+    <div class="ws-logo">p</div>
+    <div class="ws-title">Hello, I'm pAIz.</div>
+    <p class="ws-sub">Your official intelligence assistant for The Legend of Legiona. I know the full history, governance, documents, megaprojects, and people of The LoL. Ask me anything.</p>
+    <div class="ws-chips">
+      <button class="ws-chip" onclick="useChip(this)">NATIONAL HISTORY</button>
+      <button class="ws-chip" onclick="useChip(this)">LEGAL DOCUMENTS</button>
+      <button class="ws-chip" onclick="useChip(this)">ISC AGENCY</button>
+      <button class="ws-chip" onclick="useChip(this)">FOUNDERS</button>
+      <button class="ws-chip" onclick="useChip(this)">TLSRL RAILWAY</button>
+      <button class="ws-chip" onclick="useChip(this)">CITIZENSHIP</button>
+      <button class="ws-chip" onclick="useChip(this)">PAIZ CORP</button>
+      <button class="ws-chip" onclick="useChip(this)">THE LOL MOVIE</button>
+    </div>`;
+  messagesEl.appendChild(ws);
+}
+
+/* ── CHIP / STARTER HANDLERS ── */
+function useChip(btn) {
+  const map = {
+    'NATIONAL HISTORY': 'Tell me about the full history of The Legend of Legiona, from The Sus era to today.',
+    'LEGAL DOCUMENTS': 'What legal documents are in the Legal Archive? List all of them with their reference numbers.',
+    'ISC AGENCY': 'What is the ISC — Internal Security Control — and what does it do?',
+    'FOUNDERS': 'Tell me about the three founders of The LoL: Faiz4224, Imii Kun, and Dyno.',
+    'TLSRL RAILWAY': 'Tell me everything about the TLSRL railway project.',
+    'CITIZENSHIP': 'How does the citizenship system work in The LoL?',
+    'PAIZ CORP': 'Give me an overview of Paiz Corp and all five of its subsidiaries.',
+    'THE LOL MOVIE': 'Tell me about The LoL Movie being produced by PaizProductions.',
+  };
+  processQuery(map[btn.textContent] || btn.textContent);
+}
+
+function useStarter(btn) {
+  const text = btn.firstChild.textContent.trim();
+  processQuery(text);
+}
+
+/* ── API CALL ── */
+async function callClaude(userText) {
+  conversationHistory.push({ role: 'user', content: userText });
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      system: PAIZ_SYSTEM,
+      messages: conversationHistory
+    })
+  });
+
+  if (!res.ok) throw new Error(`API ${res.status}`);
+
+  const data = await res.json();
+  const text = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
+  conversationHistory.push({ role: 'assistant', content: text });
+  return text;
+}
+
+/* ── PROCESS QUERY ── */
+async function processQuery(text) {
+  if (isBusy || !text.trim()) return;
+  isBusy = true;
+  setDisabled(true);
+  suggestEl.style.display = 'none';
+  inputEl.value = '';
+  inputEl.style.height = 'auto';
+
+  const t = getTime();
+  appendMsg('user', escHtml(text), t);
+  const typing = showTyping();
+
+  try {
+    const reply = await callClaude(text);
+    typing.remove();
+    appendMsg('bot', reply, getTime());
+    showSuggestions(['Tell me more', 'Legal Archive', 'ISC Portal', 'Citizenship', 'TLSRL', 'Paiz Corp', 'Founders', 'The LoL Movie']);
+  } catch (err) {
+    typing.remove();
+    appendMsg('bot',
+      'I\'m experiencing a connection issue right now. Please try again, or visit these key pages directly:<br>' +
+      '<a href="https://faizzzlol.github.io/thelol/gov/">Government Portal</a> · ' +
+      '<a href="https://faizzzlol.github.io/thelol/gov/assets/">Legal Archive</a> · ' +
+      '<a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Portal</a>',
+      getTime()
+    );
+    conversationHistory.pop(); // remove failed user message
+    console.error('pAIz error:', err);
+  }
+
+  isBusy = false;
+  setDisabled(false);
+  inputEl.focus();
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ── SEND ── */
+function sendMessage() {
+  const text = inputEl.value.trim();
+  if (text) processQuery(text);
+}
+
+/* ── INPUT AUTO-RESIZE + ENTER ── */
+inputEl.addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+inputEl.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+</script>
+
+</body>
+</html>
