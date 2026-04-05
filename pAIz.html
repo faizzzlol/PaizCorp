@@ -3,697 +3,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>pAIz — AI Intelligence Assistant · Paiz Corp Intelligence Division</title>
+<title>pAIz — AI Intelligence Assistant · Paiz Corp</title>
 <link rel="icon" type="image/svg+xml" href="/PaizCorp/paizcorp-favicon.svg">
-<meta name="description" content="pAIz — The Legend of Legiona's official AI intelligence assistant. Developed by Paiz Corp Intelligence Division. Ask anything about The LoL.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="pAIz — The Legend of Legiona's official AI intelligence assistant.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════════
-   pAIz — DEDICATED AI PRODUCT PAGE
-   Paiz Corp Intelligence Division
-   Dark/Light Theme · No-API Knowledge Engine
-═══════════════════════════════════════════════ */
-
-/* ── THEME VARIABLES ── */
 :root {
-  /* Greens — constant across themes */
-  --green:      #2a6647;
-  --green-dk:   #1d4a33;
-  --green-lt:   #3a8f63;
-  --green-dim:  rgba(42,102,71,0.1);
-  --green-glow: rgba(42,102,71,0.18);
-
-  /* DARK MODE (default) */
-  --page-bg:     #0e0c0a;
-  --page-bg2:    #131109;
-  --page-bg3:    #191612;
-  --surface:     #1c1914;
-  --surface2:    #232019;
-  --surface3:    #2a261f;
-
-  /* Always-dark panels */
-  --ink:         #060504;
-  --ink2:        #080706;
-  --ink3:        #0e0b08;
-
-  /* Text */
-  --txt:         #f0ead8;
-  --txt2:        #c2b99e;
-  --muted:       rgba(240,234,216,0.48);
-  --faint:       rgba(240,234,216,0.25);
-  --xfaint:      rgba(240,234,216,0.12);
-
-  /* Borders */
-  --border:      rgba(255,255,255,0.08);
-  --border2:     rgba(255,255,255,0.04);
-
-  /* Nav */
-  --nav-bg:      rgba(8,7,6,0.96);
-  --nav-wordmark:#f0ead8;
-
-  /* Cap bar */
-  --cap-bg:      #0e0b08;
-  --cap-icon-bg: rgba(42,102,71,0.12);
-  --cap-icon-bd: rgba(42,102,71,0.18);
-
-  /* Chat */
-  --chat-area:   #0e0c0a;
-  --chat-topbar: #0a0908;
-  --bubble-bot:  #1a1714;
-  --bubble-bd:   rgba(255,255,255,0.06);
-  --bubble-user: #0f2d1e;
-  --bubble-utxt: rgba(240,234,216,0.9);
-  --input-bg:    #131109;
-  --input-bd:    rgba(255,255,255,0.08);
-  --input-txt:   #f0ead8;
-
-  /* Info section */
-  --info-bg:     #0e0c0a;
-  --card-bg:     #111009;
-  --card-hover:  #171410;
-
-  /* Left panel */
-  --panel-bg:    #080706;
-  --panel-bd:    rgba(255,255,255,0.05);
-  --domain-bg:   rgba(255,255,255,0.02);
-  --domain-bd:   rgba(255,255,255,0.04);
-
-  /* Chips/suggestions */
-  --chip-bg:     #111009;
-  --chip-hover:  rgba(42,102,71,0.12);
-
-  /* Starter buttons */
-  --starter-bg:  rgba(255,255,255,0.02);
-  --starter-bd:  rgba(255,255,255,0.05);
-  --starter-txt: rgba(240,234,216,0.35);
-  --starter-htxt:rgba(240,234,216,0.75);
-
-  /* Welcome chips */
-  --wchip-bg:    #111009;
-  --wchip-txt:   rgba(240,234,216,0.35);
-
-  /* Toggle */
-  --toggle-bd:   rgba(255,255,255,0.1);
-  --toggle-txt:  rgba(240,234,216,0.4);
-
-  /* Scroll */
-  --scroll-thumb:#222018;
+  --green:#2a6647;--green-lt:#3a9165;--green-dim:rgba(42,102,71,0.1);
+  --bg:#0d0c0a;--bg2:#111009;--bg3:#161410;
+  --surface:#1a1814;--surface2:#211f1a;--ink:#050403;
+  --txt:#ede8da;--txt2:#b5ad9a;--muted:rgba(237,232,218,0.42);
+  --faint:rgba(237,232,218,0.22);--xfaint:rgba(237,232,218,0.1);
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.04);
+  --nav-bg:#0a0908;--nav-border:rgba(255,255,255,0.06);
+  --msg-user-bg:#1d2e24;--msg-user-txt:rgba(237,232,218,0.92);
+  --msg-bot-txt:#ccc6b4;
+  --input-bg:#181612;--input-bd:rgba(255,255,255,0.09);--input-txt:#ede8da;
+  --send-bg:#2a6647;--send-hover:#338056;
+  --chip-bg:#161410;--chip-bd:rgba(255,255,255,0.08);--chip-txt:rgba(237,232,218,0.38);
+  --chip-hbg:rgba(42,102,71,0.12);--chip-hbd:rgba(42,102,71,0.3);--chip-htxt:rgba(237,232,218,0.8);
+  --fup-bg:#111009;--fup-bd:rgba(255,255,255,0.07);--fup-txt:rgba(237,232,218,0.32);
+  --scroll:#2a2720;--sn-bg:#060504;--sn-bd:rgba(255,255,255,0.04);
+  --sn-txt:rgba(255,255,255,0.22);
 }
-
 [data-theme="light"] {
-  --page-bg:     #f4f0e8;
-  --page-bg2:    #ede8de;
-  --page-bg3:    #e4dfd3;
-  --surface:     #ffffff;
-  --surface2:    #f4f0e8;
-  --surface3:    #ede8de;
+  --bg:#f7f4ed;--bg2:#f0ece2;--bg3:#e8e3d8;
+  --surface:#ffffff;--surface2:#f7f4ed;--ink:#161410;
+  --txt:#161410;--txt2:#3d3a32;--muted:rgba(22,20,16,0.5);
+  --faint:rgba(22,20,16,0.3);--xfaint:rgba(22,20,16,0.12);
+  --border:rgba(22,20,16,0.09);--border2:rgba(22,20,16,0.05);
+  --nav-bg:#ffffff;--nav-border:rgba(22,20,16,0.09);
+  --msg-user-bg:#e8f2ec;--msg-user-txt:#1a3a27;
+  --msg-bot-txt:#2e2b24;
+  --input-bg:#ffffff;--input-bd:rgba(22,20,16,0.12);--input-txt:#161410;
+  --send-bg:#2a6647;--send-hover:#1d4a33;
+  --chip-bg:#f7f4ed;--chip-bd:rgba(22,20,16,0.1);--chip-txt:rgba(22,20,16,0.42);
+  --chip-hbg:rgba(42,102,71,0.08);--chip-hbd:rgba(42,102,71,0.25);--chip-htxt:#1d4a33;
+  --fup-bg:#f0ece2;--fup-bd:rgba(22,20,16,0.09);--fup-txt:rgba(22,20,16,0.38);
+  --scroll:#ddd8cc;--sn-bg:#060504;--sn-bd:rgba(255,255,255,0.04);
+  --sn-txt:rgba(255,255,255,0.22);
+}
+html.sw *,html.sw *::before,html.sw *::after{transition:background-color .25s ease,color .25s ease,border-color .25s ease !important}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);display:flex;flex-direction:column}
 
-  /* Always-dark panels stay same */
-  --ink:         #161410;
-  --ink2:        #211e19;
-  --ink3:        #2a2620;
+/* SUPER NAV */
+.sn{background:var(--sn-bg);height:28px;display:flex;align-items:center;padding:0 20px;border-bottom:1px solid var(--sn-bd);overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.sn::-webkit-scrollbar{display:none}
+.sn-label{font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:2px;color:rgba(255,255,255,.14);white-space:nowrap;margin-right:14px;flex-shrink:0}
+.sn-links{display:flex}
+.sn-links a{font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:1.5px;color:var(--sn-txt);text-decoration:none;padding:0 9px;height:28px;display:flex;align-items:center;border-right:1px solid var(--sn-bd);transition:color .15s;white-space:nowrap;flex-shrink:0}
+.sn-links a:hover{color:rgba(255,255,255,.7)}
+.sn-links a.active{color:#3a9165}
+.sn-r{margin-left:auto;display:flex;align-items:center;gap:7px;padding-left:14px;flex-shrink:0}
+.sn-dot{width:4px;height:4px;border-radius:50%;background:#3a9165;animation:blink 2.2s infinite}
+.sn-st{font-family:'DM Mono',monospace;font-size:.38rem;letter-spacing:1.5px;color:rgba(255,255,255,.14);white-space:nowrap}
 
-  --txt:         #161410;
-  --txt2:        #3a3630;
-  --muted:       rgba(22,20,16,0.48);
-  --faint:       rgba(22,20,16,0.28);
-  --xfaint:      rgba(22,20,16,0.12);
+/* TOP NAV */
+.tnav{background:var(--nav-bg);border-bottom:1px solid var(--nav-border);height:56px;display:flex;align-items:center;padding:0 20px;flex-shrink:0;gap:10px}
+.tn-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.tn-logo{width:32px;height:32px;border-radius:50%;background:var(--ink);border:1px solid rgba(42,102,71,.3);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.85rem;font-weight:900;color:#3a9165;flex-shrink:0;transition:border-color .2s}
+.tn-brand:hover .tn-logo{border-color:rgba(42,102,71,.6)}
+.tn-name{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:2px;color:var(--txt);font-weight:500}
+.tn-badge{font-family:'DM Mono',monospace;font-size:.38rem;letter-spacing:1.5px;padding:2px 8px;border:1px solid rgba(42,102,71,.3);color:#3a9165;display:flex;align-items:center;gap:5px}
+.tn-badge::before{content:'';width:4px;height:4px;border-radius:50%;background:#3a9165;animation:blink 2.2s infinite}
+.tn-r{margin-left:auto;display:flex;gap:8px;align-items:center}
+.tn-lnk{font-family:'DM Mono',monospace;font-size:.42rem;letter-spacing:1.5px;color:var(--faint);text-decoration:none;padding:5px 11px;border:1px solid var(--border);transition:all .2s;white-space:nowrap}
+.tn-lnk:hover{color:#3a9165;border-color:rgba(42,102,71,.3)}
+.tn-lnk.pri{background:var(--ink);color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.08)}
+[data-theme="light"] .tn-lnk.pri{background:#161410;color:rgba(255,255,255,.75);border-color:#161410}
+.tn-lnk.pri:hover{background:var(--green);border-color:var(--green);color:#fff}
+.icon-btn{width:32px;height:32px;background:none;border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--faint);transition:all .2s;flex-shrink:0}
+.icon-btn:hover{border-color:rgba(42,102,71,.35);color:#3a9165;background:var(--green-dim)}
+.icon-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.txt-btn{font-family:'DM Mono',monospace;font-size:.42rem;letter-spacing:1.5px;color:var(--faint);background:none;border:1px solid var(--border);cursor:pointer;padding:0 10px;height:32px;transition:all .2s;white-space:nowrap}
+.txt-btn:hover{color:#3a9165;border-color:rgba(42,102,71,.35)}
 
-  --border:      rgba(22,20,16,0.1);
-  --border2:     rgba(22,20,16,0.05);
+/* CHAT SHELL */
+.shell{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
 
-  --nav-bg:      rgba(244,240,232,0.97);
-  --nav-wordmark:#161410;
+/* MESSAGES */
+.msgs-wrap{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--scroll) transparent;min-height:0}
+.msgs-wrap::-webkit-scrollbar{width:4px}
+.msgs-wrap::-webkit-scrollbar-thumb{background:var(--scroll);border-radius:2px}
+.msgs-inner{max-width:740px;margin:0 auto;padding:28px 20px 12px;display:flex;flex-direction:column;gap:4px}
 
-  --cap-bg:      #ede8de;
-  --cap-icon-bg: rgba(42,102,71,0.08);
-  --cap-icon-bd: rgba(42,102,71,0.12);
+/* WELCOME */
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 20px;gap:18px;min-height:calc(100vh - 28px - 56px - 110px)}
+.wlogo{width:68px;height:68px;border-radius:50%;background:var(--bg3);border:1.5px solid rgba(42,102,71,.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:#3a9165}
+.wtitle{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2rem);font-weight:900;letter-spacing:-.5px;color:var(--txt);line-height:1.15}
+.wtitle em{font-style:italic;color:#3a9165;font-weight:400}
+.wsub{font-size:.9rem;color:var(--muted);font-weight:300;max-width:440px;line-height:1.85}
+.wchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:580px;margin-top:6px}
+.chip{background:var(--chip-bg);border:1px solid var(--chip-bd);padding:9px 16px;font-family:'Outfit',sans-serif;font-size:.85rem;color:var(--chip-txt);cursor:pointer;transition:all .18s;border-radius:8px;text-align:left}
+.chip:hover{background:var(--chip-hbg);border-color:var(--chip-hbd);color:var(--chip-htxt)}
 
-  --chat-area:   #f9f6f0;
-  --chat-topbar: #f4f0e8;
-  --bubble-bot:  #ffffff;
-  --bubble-bd:   rgba(22,20,16,0.08);
-  --bubble-user: #161410;
-  --bubble-utxt: rgba(255,255,255,0.88);
-  --input-bg:    #ede8de;
-  --input-bd:    rgba(22,20,16,0.1);
-  --input-txt:   #161410;
+/* MSG GROUPS */
+.mg{display:flex;flex-direction:column;gap:2px;animation:mi .2s ease;margin-bottom:6px}
+@keyframes mi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-  --info-bg:     #f4f0e8;
-  --card-bg:     #f4f0e8;
-  --card-hover:  #ede8de;
+/* USER bubble */
+.mu{align-self:flex-end;background:var(--msg-user-bg);color:var(--msg-user-txt);padding:12px 17px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:.92rem;line-height:1.65}
 
-  --chip-bg:     #f4f0e8;
-  --chip-hover:  rgba(42,102,71,0.08);
+/* BOT row */
+.mb-row{display:flex;gap:12px;align-items:flex-start;max-width:100%}
+.mb-av{width:27px;height:27px;border-radius:50%;flex-shrink:0;background:var(--bg3);border:1px solid rgba(42,102,71,.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.68rem;font-weight:900;color:#3a9165;margin-top:3px}
+.mb-txt{flex:1;min-width:0;font-size:.92rem;line-height:1.78;color:var(--msg-bot-txt);padding-top:3px}
+.mb-txt a{color:#3a9165;text-decoration:none;border-bottom:1px solid rgba(58,145,101,.28);transition:border-color .15s}
+.mb-txt a:hover{border-bottom-color:#3a9165}
+.mb-txt strong{color:var(--txt);font-weight:600}
+[data-theme="light"] .mb-txt strong{color:#161410}
+.mtime{font-family:'DM Mono',monospace;font-size:.35rem;letter-spacing:.8px;color:var(--xfaint);margin-top:3px}
+.mtime.bot{padding-left:39px}
 
-  --starter-bg:  rgba(22,20,16,0.02);
-  --starter-bd:  rgba(22,20,16,0.07);
-  --starter-txt: rgba(22,20,16,0.4);
-  --starter-htxt:#161410;
+/* TYPING */
+.typing-row{display:flex;gap:12px;align-items:flex-start;animation:mi .2s ease}
+.typing-bub{padding:12px 4px;display:flex;gap:5px;align-items:center}
+.td{width:6px;height:6px;border-radius:50%;background:#3a9165;opacity:.4;animation:td 1.3s infinite ease-in-out}
+.td:nth-child(2){animation-delay:.15s}
+.td:nth-child(3){animation-delay:.3s}
+@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.35}30%{transform:translateY(-5px);opacity:.9}}
 
-  --wchip-bg:    #f4f0e8;
-  --wchip-txt:   rgba(22,20,16,0.38);
+/* FOLLOW-UPS */
+.fups{display:flex;gap:6px;flex-wrap:wrap;padding-left:39px;margin-top:10px}
+.fup{background:var(--fup-bg);border:1px solid var(--fup-bd);padding:5px 12px;border-radius:20px;font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:1px;color:var(--fup-txt);cursor:pointer;transition:all .18s}
+.fup:hover{background:var(--chip-hbg);border-color:var(--chip-hbd);color:var(--chip-htxt)}
 
-  --toggle-bd:   rgba(22,20,16,0.12);
-  --toggle-txt:  rgba(22,20,16,0.4);
+/* INPUT */
+.input-area{flex-shrink:0;padding:14px 20px 18px;background:var(--bg)}
+.input-wrap{max-width:740px;margin:0 auto;background:var(--input-bg);border:1px solid var(--input-bd);border-radius:14px;display:flex;align-items:flex-end;gap:10px;padding:11px 11px 11px 17px;transition:border-color .2s,box-shadow .2s}
+.input-wrap:focus-within{border-color:rgba(42,102,71,.42);box-shadow:0 0 0 3px rgba(42,102,71,.07)}
+#ci{flex:1;background:none;border:none;outline:none;font-family:'Outfit',sans-serif;font-size:.97rem;color:var(--input-txt);line-height:1.6;resize:none;min-height:26px;max-height:200px;overflow-y:auto;padding:0}
+#ci::placeholder{color:var(--faint)}
+#cs{width:36px;height:36px;border-radius:8px;border:none;background:var(--send-bg);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .18s,transform .15s,opacity .15s}
+#cs:hover{background:var(--send-hover);transform:scale(1.05)}
+#cs:disabled{opacity:.28;cursor:not-allowed;transform:none}
+#cs svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.input-hint{max-width:740px;margin:7px auto 0;text-align:center;font-family:'DM Mono',monospace;font-size:.36rem;letter-spacing:1px;color:var(--xfaint)}
 
-  --scroll-thumb:#d8d2c4;
-}
-
-/* ── THEME TRANSITION ── */
-html.theme-changing *,
-html.theme-changing *::before,
-html.theme-changing *::after {
-  transition:
-    background-color 0.28s ease,
-    color 0.28s ease,
-    border-color 0.28s ease !important;
-}
-
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; height:100%; }
-body {
-  font-family:'Outfit',sans-serif;
-  background:var(--page-bg);
-  color:var(--txt);
-  line-height:1.7;
-  overflow-x:hidden;
-  height:100%;
-}
-body::before {
-  content:'';
-  position:fixed; inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
-  pointer-events:none;
-  z-index:9999;
-}
-
-/* ── SUPER NAV ── */
-.super-nav {
-  background:var(--ink2);
-  padding:0 5%;
-  height:30px;
-  display:flex;
-  align-items:center;
-  border-bottom:1px solid rgba(255,255,255,0.05);
-  overflow-x:auto;
-  scrollbar-width:none;
-}
-.super-nav::-webkit-scrollbar { display:none; }
-.sn-label {
-  font-family:'DM Mono',monospace;
-  font-size:0.42rem;
-  letter-spacing:2px;
-  color:rgba(255,255,255,0.2);
-  flex-shrink:0;
-  margin-right:16px;
-  white-space:nowrap;
-}
-.sn-links { display:flex; gap:0; }
-.sn-links a {
-  font-family:'DM Mono',monospace;
-  font-size:0.42rem;
-  letter-spacing:1.5px;
-  color:rgba(255,255,255,0.28);
-  text-decoration:none;
-  padding:0 10px;
-  height:30px;
-  display:flex;
-  align-items:center;
-  border-right:1px solid rgba(255,255,255,0.05);
-  transition:color 0.2s, background 0.2s;
-  white-space:nowrap;
-}
-.sn-links a:hover { color:rgba(255,255,255,0.8); background:rgba(255,255,255,0.04); }
-.sn-links a.active { color:var(--green-lt); }
-.sn-right { margin-left:auto; display:flex; align-items:center; gap:8px; padding-left:16px; }
-.sn-dot { width:5px; height:5px; border-radius:50%; background:var(--green-lt); animation:blink 2.2s infinite; flex-shrink:0; }
-.sn-status { font-family:'DM Mono',monospace; font-size:0.4rem; letter-spacing:1.5px; color:rgba(255,255,255,0.18); white-space:nowrap; }
-
-/* ── NAV ── */
-nav {
-  position:sticky;
-  top:0;
-  z-index:400;
-  height:62px;
-  display:flex;
-  align-items:center;
-  padding:0 5%;
-  background:var(--nav-bg);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border);
-  gap:16px;
-}
-.nav-wordmark {
-  font-family:'Playfair Display',serif;
-  font-size:1.2rem;
-  font-weight:900;
-  color:var(--nav-wordmark);
-  text-decoration:none;
-  letter-spacing:-0.5px;
-  flex-shrink:0;
-  transition:color 0.2s;
-}
-.nav-wordmark .reg { font-size:0.58rem; vertical-align:super; color:var(--green); font-weight:700; }
-.nav-sep { width:1px; height:20px; background:var(--border); flex-shrink:0; }
-.nav-product { display:flex; align-items:center; gap:8px; flex-shrink:0; }
-.nav-product-dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:blink 2.2s infinite; }
-.nav-product-name {
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:2px;
-  color:var(--green);
-  font-weight:500;
-}
-.nav-right { margin-left:auto; display:flex; gap:8px; align-items:center; }
-.nav-pill {
-  font-family:'DM Mono',monospace;
-  font-size:0.5rem;
-  letter-spacing:1.5px;
-  padding:5px 12px;
-  border:1px solid var(--border);
-  color:var(--faint);
-  text-decoration:none;
-  transition:all 0.2s;
-  white-space:nowrap;
-}
-.nav-pill:hover { color:var(--green); border-color:rgba(42,102,71,0.25); }
-.nav-pill.primary { background:var(--ink); color:rgba(255,255,255,0.75); border-color:var(--ink3); }
-.nav-pill.primary:hover { background:var(--green); border-color:var(--green); color:#fff; }
-
-/* ── THEME TOGGLE ── */
-.theme-toggle {
-  width:34px; height:28px;
-  background:none;
-  border:1px solid var(--toggle-bd);
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer;
-  transition:border-color 0.2s, background 0.2s;
-  flex-shrink:0;
-  color:var(--toggle-txt);
-  border-radius:2px;
-}
-.theme-toggle:hover {
-  border-color:rgba(42,102,71,0.35);
-  color:var(--green-lt);
-  background:var(--green-dim);
-}
-.theme-toggle svg { width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:1.8; transition:color 0.2s; stroke-linecap:round; stroke-linejoin:round; }
-
-/* ── HERO STRIP ── */
-.hero-strip {
-  background:var(--ink);
-  padding:4.5rem 5% 4rem;
-  position:relative;
-  overflow:hidden;
-  border-bottom:1px solid rgba(255,255,255,0.05);
-}
-.hero-strip::before {
-  content:'';
-  position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse 50% 80% at 80% 50%, rgba(42,102,71,0.12) 0%, transparent 60%),
-    repeating-linear-gradient(-52deg, transparent, transparent 38px, rgba(255,255,255,0.008) 38px, rgba(255,255,255,0.008) 39px);
-  pointer-events:none;
-}
-.hero-strip-inner {
-  max-width:1280px; margin:0 auto;
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:60px; align-items:center;
-  position:relative; z-index:1;
-}
-.hs-eyebrow {
-  font-family:'DM Mono',monospace;
-  font-size:0.54rem; letter-spacing:3px; color:var(--green-lt);
-  margin-bottom:1.2rem;
-  display:flex; align-items:center; gap:10px;
-  opacity:0; animation:fadeUp 0.6s ease 0.1s forwards;
-}
-.hs-eyebrow::before { content:''; width:20px; height:1px; background:var(--green-lt); opacity:0.5; }
-.hs-title {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(3rem,5.5vw,5.8rem);
-  font-weight:900; line-height:0.95; letter-spacing:-3px;
-  color:#fff; margin-bottom:1rem;
-  opacity:0; animation:fadeUp 0.6s ease 0.2s forwards;
-}
-.hs-title em { font-style:italic; font-weight:400; color:var(--green-lt); }
-.hs-sub {
-  font-size:0.98rem; color:rgba(255,255,255,0.36); font-weight:300;
-  line-height:1.9; max-width:420px; margin-bottom:2rem;
-  opacity:0; animation:fadeUp 0.6s ease 0.3s forwards;
-}
-.hs-badges {
-  display:flex; gap:8px; flex-wrap:wrap;
-  opacity:0; animation:fadeUp 0.6s ease 0.4s forwards;
-}
-.hs-badge {
-  font-family:'DM Mono',monospace; font-size:0.46rem; letter-spacing:2px;
-  padding:4px 12px; border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.28);
-}
-.hs-badge.live {
-  border-color:rgba(42,102,71,0.4); color:var(--green-lt);
-  display:flex; align-items:center; gap:6px;
-}
-.hs-badge.live::before {
-  content:''; width:5px; height:5px; border-radius:50%;
-  background:var(--green-lt); animation:blink 2.2s infinite; flex-shrink:0;
-}
-.hs-right { opacity:0; animation:fadeIn 0.8s ease 0.3s forwards; }
-.hs-stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
-.hs-stat {
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.06);
-  padding:1.4rem 1.6rem;
-}
-.hs-stat-val {
-  font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:900;
-  color:rgba(255,255,255,0.85); display:block; line-height:1; margin-bottom:4px;
-}
-.hs-stat-val em { font-style:italic; color:var(--green-lt); }
-.hs-stat-key {
-  font-family:'DM Mono',monospace; font-size:0.42rem; letter-spacing:2px;
-  color:rgba(255,255,255,0.18); display:block;
-}
-
-/* ── CAPABILITIES BAR ── */
-.cap-bar {
-  background:var(--cap-bg);
-  border-bottom:1px solid var(--border);
-  padding:0 5%;
-  display:flex; align-items:stretch;
-  overflow-x:auto; scrollbar-width:none;
-}
-.cap-bar::-webkit-scrollbar { display:none; }
-.cap-item {
-  display:flex; align-items:center; gap:10px;
-  padding:1rem 1.6rem 1rem 0;
-  margin-right:1.6rem;
-  border-right:1px solid var(--border);
-  white-space:nowrap; flex-shrink:0;
-}
-.cap-item:last-child { border-right:none; }
-.cap-icon {
-  width:28px; height:28px;
-  background:var(--cap-icon-bg);
-  border:1px solid var(--cap-icon-bd);
-  display:flex; align-items:center; justify-content:center; flex-shrink:0;
-}
-.cap-icon svg { width:13px; height:13px; stroke:var(--green); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
-.cap-label { font-family:'DM Mono',monospace; font-size:0.48rem; letter-spacing:1.5px; color:var(--muted); }
-
-/* ── MAIN LAYOUT ── */
-.main-layout {
-  display:grid;
-  grid-template-columns:320px 1fr;
-  min-height:calc(100vh - 30px - 62px - 180px - 54px);
-  border-bottom:1px solid var(--border);
-}
-
-/* ── LEFT PANEL ── */
-.left-panel {
-  background:var(--panel-bg);
-  border-right:1px solid var(--panel-bd);
-  display:flex; flex-direction:column;
-  position:sticky; top:62px;
-  height:calc(100vh - 62px);
-  overflow-y:auto;
-  scrollbar-width:thin;
-  scrollbar-color:rgba(255,255,255,0.04) transparent;
-}
-.left-panel::-webkit-scrollbar { width:3px; }
-.left-panel::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.05); }
-
-.lp-section { padding:1.8rem 1.6rem; border-bottom:1px solid var(--panel-bd); }
-.lp-label {
-  font-family:'DM Mono',monospace; font-size:0.42rem; letter-spacing:2.5px;
-  color:rgba(255,255,255,0.16); margin-bottom:1rem;
-}
-.lp-identity { display:flex; align-items:center; gap:12px; margin-bottom:1rem; }
-.lp-avatar {
-  width:44px; height:44px; border-radius:50%;
-  background:rgba(42,102,71,0.12);
-  border:1px solid rgba(42,102,71,0.25);
-  display:flex; align-items:center; justify-content:center;
-  font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:900;
-  color:var(--green-lt); flex-shrink:0;
-}
-.lp-name { font-family:'DM Mono',monospace; font-size:0.85rem; letter-spacing:0.1em; color:#fff; font-weight:500; line-height:1.2; }
-.lp-sub { font-family:'DM Mono',monospace; font-size:0.42rem; letter-spacing:1.5px; color:rgba(255,255,255,0.2); }
-.lp-status { display:flex; align-items:center; gap:6px; font-family:'DM Mono',monospace; font-size:0.44rem; letter-spacing:1.5px; color:var(--green-lt); }
-.lp-status-dot { width:6px; height:6px; border-radius:50%; background:var(--green-lt); animation:blink 2.2s infinite; }
-.lp-desc { font-size:0.82rem; color:rgba(255,255,255,0.28); font-weight:300; line-height:1.8; }
-
-.domain-list { display:flex; flex-direction:column; gap:2px; }
-.domain-item {
-  display:flex; align-items:center; gap:10px;
-  padding:8px 10px;
-  background:var(--domain-bg);
-  border:1px solid var(--domain-bd);
-  transition:background 0.2s;
-}
-.domain-item:hover { background:rgba(42,102,71,0.07); }
-.domain-dot { width:5px; height:5px; border-radius:50%; background:var(--green-lt); flex-shrink:0; opacity:0.55; }
-.domain-text { font-family:'DM Mono',monospace; font-size:0.44rem; letter-spacing:1.5px; color:rgba(255,255,255,0.3); line-height:1.4; }
-
-.starter-list { display:flex; flex-direction:column; gap:4px; }
-.starter-btn {
-  background:var(--starter-bg);
-  border:1px solid var(--starter-bd);
-  padding:9px 12px; text-align:left;
-  font-family:'Outfit',sans-serif; font-size:0.78rem;
-  color:var(--starter-txt);
-  cursor:pointer; transition:background 0.2s, color 0.2s, border-color 0.2s;
-  line-height:1.5; display:flex; align-items:center; justify-content:space-between; gap:8px;
-}
-.starter-btn:hover {
-  background:rgba(42,102,71,0.1);
-  border-color:rgba(42,102,71,0.2);
-  color:var(--starter-htxt);
-}
-.starter-arrow { font-family:'DM Mono',monospace; font-size:0.5rem; color:rgba(42,102,71,0.4); flex-shrink:0; }
-
-.lp-disclaimer {
-  font-family:'DM Mono',monospace; font-size:0.4rem; letter-spacing:1px;
-  color:rgba(255,255,255,0.1); line-height:1.8;
-  padding:1.2rem 1.6rem; margin-top:auto;
-  border-top:1px solid var(--panel-bd);
-}
-
-/* ── CHAT AREA ── */
-.chat-area {
-  display:flex; flex-direction:column;
-  background:var(--chat-area);
-  height:calc(100vh - 62px);
-  position:sticky; top:62px;
-}
-.chat-topbar {
-  background:var(--chat-topbar);
-  border-bottom:1px solid var(--border);
-  padding:0.9rem 1.8rem;
-  display:flex; align-items:center; justify-content:space-between; flex-shrink:0;
-}
-.ct-left { display:flex; align-items:center; gap:10px; }
-.ct-indicator { width:8px; height:8px; border-radius:50%; background:var(--green); animation:blink 2.2s infinite; }
-.ct-title { font-family:'DM Mono',monospace; font-size:0.54rem; letter-spacing:2px; color:var(--txt2); font-weight:500; }
-.ct-right { display:flex; gap:8px; }
-.ct-btn {
-  background:none; border:1px solid var(--border); padding:4px 10px;
-  font-family:'DM Mono',monospace; font-size:0.42rem; letter-spacing:1.5px;
-  color:var(--faint); cursor:pointer; transition:all 0.2s;
-}
-.ct-btn:hover { border-color:rgba(42,102,71,0.3); color:var(--green); }
-
-/* Messages */
-.chat-messages {
-  flex:1; overflow-y:auto;
-  padding:1.8rem; display:flex; flex-direction:column; gap:1.2rem;
-  scrollbar-width:thin; scrollbar-color:var(--scroll-thumb) transparent;
-}
-.chat-messages::-webkit-scrollbar { width:4px; }
-.chat-messages::-webkit-scrollbar-thumb { background:var(--scroll-thumb); }
-
-/* Welcome state */
-.welcome-state {
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  flex:1; text-align:center; padding:3rem 2rem; gap:1.2rem;
-}
-.ws-logo {
-  width:64px; height:64px; border-radius:50%;
-  background:var(--ink2);
-  border:2px solid rgba(42,102,71,0.2);
-  display:flex; align-items:center; justify-content:center;
-  font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:900;
-  color:var(--green-lt); margin-bottom:0.5rem;
-}
-.ws-title { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:900; color:var(--txt); letter-spacing:-0.3px; }
-.ws-sub { font-size:0.88rem; color:var(--muted); font-weight:300; max-width:380px; line-height:1.9; }
-.ws-chips { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; max-width:480px; margin-top:0.5rem; }
-.ws-chip {
-  background:var(--wchip-bg);
-  border:1px solid var(--border);
-  padding:6px 14px; font-family:'DM Mono',monospace; font-size:0.46rem;
-  letter-spacing:1.5px; color:var(--wchip-txt); cursor:pointer; transition:all 0.2s;
-}
-.ws-chip:hover { border-color:rgba(42,102,71,0.3); color:var(--green); background:var(--green-dim); }
-
-/* Message bubbles */
-.msg-row { display:flex; gap:10px; animation:slideUp 0.22s ease; }
-.msg-row.user { flex-direction:row-reverse; }
-.msg-avatar {
-  width:30px; height:30px; border-radius:50%; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  font-family:'DM Mono',monospace; font-size:0.5rem; font-weight:600; margin-top:2px;
-}
-.msg-row.bot .msg-avatar { background:var(--ink2); border:1px solid rgba(42,102,71,0.25); color:var(--green-lt); }
-.msg-row.user .msg-avatar { background:var(--green); color:#fff; }
-
-.msg-bubble {
-  max-width:72%; padding:0.9rem 1.1rem;
-  font-size:0.9rem; line-height:1.75; position:relative;
-}
-.msg-row.bot .msg-bubble {
-  background:var(--bubble-bot);
-  border:1px solid var(--bubble-bd);
-  border-left:2px solid rgba(42,102,71,0.3);
-  color:var(--txt2); border-radius:0 6px 6px 6px;
-}
-.msg-row.user .msg-bubble {
-  background:var(--bubble-user);
-  color:var(--bubble-utxt);
-  border-radius:6px 0 6px 6px; font-weight:300;
-}
-.msg-bubble a { color:var(--green-lt); text-decoration:none; border-bottom:1px solid rgba(58,143,99,0.3); transition:border-color 0.2s; }
-.msg-bubble a:hover { border-bottom-color:var(--green-lt); }
-.msg-bubble strong { color:var(--txt); font-weight:600; }
-.msg-row.user .msg-bubble strong { color:rgba(240,234,216,0.95); }
-[data-theme="light"] .msg-bubble a { color:var(--green); border-bottom-color:rgba(42,102,71,0.3); }
-
-.msg-meta { font-family:'DM Mono',monospace; font-size:0.36rem; letter-spacing:1px; color:var(--faint); margin-top:4px; text-align:right; }
-.msg-row.user .msg-meta { text-align:left; }
-
-/* Typing indicator */
-.typing-row { display:flex; gap:10px; animation:slideUp 0.22s ease; }
-.typing-bubble {
-  background:var(--bubble-bot); border:1px solid var(--bubble-bd);
-  border-left:2px solid rgba(42,102,71,0.25);
-  padding:0.9rem 1.2rem; border-radius:0 6px 6px 6px;
-  display:flex; gap:4px; align-items:center;
-}
-.typing-dot {
-  width:5px; height:5px; border-radius:50%; background:var(--green); opacity:0.5;
-  animation:typingBounce 1.2s infinite;
-}
-.typing-dot:nth-child(2) { animation-delay:0.2s; }
-.typing-dot:nth-child(3) { animation-delay:0.4s; }
-
-/* Suggestions row */
-.suggestions-row {
-  padding:0 1.8rem 0.8rem;
-  display:flex; gap:6px; flex-wrap:wrap; flex-shrink:0;
-}
-.sug-chip {
-  background:var(--chip-bg); border:1px solid var(--border);
-  padding:5px 12px; font-family:'DM Mono',monospace; font-size:0.44rem;
-  letter-spacing:1.5px; color:var(--muted); cursor:pointer; transition:all 0.2s; flex-shrink:0;
-}
-.sug-chip:hover { border-color:rgba(42,102,71,0.3); color:var(--green); background:var(--chip-hover); }
-
-/* Input row */
-.chat-input-bar {
-  background:var(--chat-topbar); border-top:1px solid var(--border);
-  padding:1rem 1.8rem; display:flex; gap:10px; align-items:flex-end; flex-shrink:0;
-}
-#chat-input {
-  flex:1; background:var(--input-bg); border:1px solid var(--input-bd);
-  color:var(--input-txt); font-family:'Outfit',sans-serif; font-size:0.92rem;
-  padding:10px 14px; outline:none; transition:border-color 0.2s;
-  resize:none; line-height:1.5; max-height:120px; overflow-y:auto;
-}
-#chat-input:focus { border-color:rgba(42,102,71,0.4); }
-#chat-input::placeholder { color:var(--faint); }
-#chat-send {
-  background:var(--ink2); color:var(--txt);
-  border:1px solid var(--border);
-  padding:10px 20px; font-family:'DM Mono',monospace; font-size:0.52rem;
-  letter-spacing:2px; cursor:pointer; transition:background 0.2s, transform 0.15s, border-color 0.2s;
-  flex-shrink:0; align-self:stretch;
-}
-#chat-send:hover { background:var(--green); border-color:var(--green); color:#fff; transform:translateY(-1px); }
-#chat-send:disabled { opacity:0.35; cursor:not-allowed; transform:none; }
-[data-theme="light"] #chat-send { background:var(--ink); color:rgba(255,255,255,0.8); border-color:var(--ink); }
-[data-theme="light"] #chat-send:hover { background:var(--green); border-color:var(--green); }
-
-.chat-powered {
-  text-align:center; font-family:'DM Mono',monospace; font-size:0.38rem;
-  letter-spacing:1.5px; color:var(--faint); padding:6px 0 10px; flex-shrink:0;
-}
-
-/* ── BELOW-FOLD INFO ── */
-.info-section { background:var(--info-bg); padding:5rem 5%; }
-.info-inner { max-width:1280px; margin:0 auto; }
-.info-grid {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:3rem;
-  background:var(--border2); border:1px solid var(--border);
-}
-.info-card { background:var(--card-bg); padding:2.2rem 2rem; transition:background 0.2s; }
-.info-card:hover { background:var(--card-hover); }
-.ic-num { font-family:'DM Mono',monospace; font-size:0.46rem; letter-spacing:2px; color:var(--green); margin-bottom:0.8rem; opacity:0.6; }
-.ic-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--txt); margin-bottom:0.5rem; letter-spacing:-0.2px; }
-.ic-title em { font-style:italic; color:var(--green); font-weight:400; }
-.ic-body { font-size:0.84rem; color:var(--muted); line-height:1.85; font-weight:300; }
-.info-eyebrow { font-family:'DM Mono',monospace; font-size:0.54rem; letter-spacing:3px; color:var(--green); margin-bottom:0.6rem; }
-.info-title { font-family:'Playfair Display',serif; font-size:clamp(1.5rem,3vw,2.2rem); font-weight:900; color:var(--txt); letter-spacing:-0.5px; line-height:1.1; }
-.info-title em { font-style:italic; color:var(--green); font-weight:400; }
-
-/* ── FOOTER ── */
-footer { background:var(--ink); border-top:1px solid rgba(255,255,255,0.05); }
-.ft-main { max-width:1280px; margin:0 auto; padding:3.5rem 5% 2rem; display:grid; grid-template-columns:2fr 1fr 1fr; gap:60px; }
-.ft-brand { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:900; color:#fff; letter-spacing:-0.5px; margin-bottom:0.3rem; }
-.ft-brand .reg { font-size:0.58rem; vertical-align:super; color:var(--green-lt); }
-.ft-tag { font-family:'DM Mono',monospace; font-size:0.44rem; letter-spacing:2px; color:rgba(255,255,255,0.14); margin-bottom:0.9rem; }
-.ft-desc { font-size:0.84rem; color:rgba(255,255,255,0.2); line-height:1.8; font-weight:300; max-width:260px; }
-.ft-col h5 { font-family:'DM Mono',monospace; font-size:0.46rem; letter-spacing:2.5px; color:rgba(255,255,255,0.14); margin-bottom:0.9rem; }
-.ft-col a { display:block; font-size:0.84rem; color:rgba(255,255,255,0.24); text-decoration:none; margin-bottom:0.5rem; font-weight:300; transition:color 0.2s; }
-.ft-col a:hover { color:var(--green-lt); }
-.ft-bottom { border-top:1px solid rgba(255,255,255,0.05); padding:1rem 5%; }
-.ft-bottom-inner { max-width:1280px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
-.ft-bottom p { font-family:'DM Mono',monospace; font-size:0.44rem; letter-spacing:1.5px; color:rgba(255,255,255,0.1); }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp   { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
-@keyframes fadeIn   { from{opacity:0} to{opacity:1} }
-@keyframes slideUp  { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
-@keyframes blink    { 0%,100%{opacity:1} 50%{opacity:0.2} }
-@keyframes typingBounce {
-  0%,60%,100%{transform:translateY(0);opacity:0.4}
-  30%{transform:translateY(-5px);opacity:1}
-}
-
-/* ── RESPONSIVE ── */
-@media(max-width:1024px){ .main-layout{ grid-template-columns:280px 1fr; } }
-@media(max-width:768px){
-  .hero-strip-inner{ grid-template-columns:1fr; gap:2rem; }
-  .hs-right{ display:none; }
-  .main-layout{ grid-template-columns:1fr; }
-  .left-panel{ display:none; }
-  .chat-area{ height:calc(100vh - 62px); }
-  .info-grid{ grid-template-columns:1fr; }
-  .ft-main{ grid-template-columns:1fr; gap:2rem; }
-}
-@media(max-width:480px){
-  .hero-strip{ padding:3rem 5% 2.5rem; }
-  .chat-messages{ padding:1.2rem; }
-  .chat-input-bar{ padding:0.8rem 1.2rem; }
-  .suggestions-row{ padding:0 1.2rem 0.8rem; }
-  .nav-right .nav-pill:not(.primary){ display:none; }
-}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@media(max-width:600px){.msgs-inner{padding:18px 14px 10px}.input-area{padding:10px 14px 14px}.tn-lnk:not(.pri){display:none}.welcome{padding:30px 14px;gap:14px}}
 </style>
 </head>
 <body>
 
-<!-- SUPER NAV -->
-<div class="super-nav">
+<div class="sn">
   <span class="sn-label">THE LOL NETWORK</span>
   <div class="sn-links">
     <a href="https://faizzzlol.github.io/PaizCorp/" class="active">PAIZ® CORP</a>
@@ -706,940 +161,148 @@ footer { background:var(--ink); border-top:1px solid rgba(255,255,255,0.05); }
     <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
     <a href="https://faizzzlol.github.io/thelol/tlr/">TL RAILWAYS</a>
   </div>
-  <div class="sn-right">
-    <div class="sn-dot"></div>
-    <span class="sn-status">ALL SYSTEMS LIVE</span>
-  </div>
+  <div class="sn-r"><div class="sn-dot"></div><span class="sn-st">ALL SYSTEMS LIVE</span></div>
 </div>
 
-<!-- NAV -->
-<nav>
-  <a href="https://faizzzlol.github.io/PaizCorp/" class="nav-wordmark">Paiz<span class="reg">®</span> Corp</a>
-  <div class="nav-sep"></div>
-  <div class="nav-product">
-    <div class="nav-product-dot"></div>
-    <span class="nav-product-name">pAIz · INTELLIGENCE DIVISION</span>
-  </div>
-  <div class="nav-right">
-    <a href="https://faizzzlol.github.io/PaizCorp/" class="nav-pill">← PAIZ® CORP</a>
-    <a href="https://faizzzlol.github.io/thelol/gov/" class="nav-pill primary">GOVERNMENT</a>
-    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-      <!-- icon injected by JS -->
-    </button>
+<nav class="tnav">
+  <a href="https://faizzzlol.github.io/PaizCorp/" class="tn-brand">
+    <div class="tn-logo">p</div>
+    <span class="tn-name">pAIz</span>
+  </a>
+  <div class="tn-badge">ONLINE</div>
+  <div class="tn-r">
+    <a href="https://faizzzlol.github.io/PaizCorp/" class="tn-lnk">← PAIZ® CORP</a>
+    <a href="https://faizzzlol.github.io/thelol/gov/" class="tn-lnk pri">GOVERNMENT</a>
+    <button class="icon-btn" id="tbtn" onclick="toggleTheme()" title="Toggle theme"></button>
+    <button class="txt-btn" onclick="clearChat()">NEW CHAT</button>
   </div>
 </nav>
 
-<!-- HERO STRIP -->
-<div class="hero-strip">
-  <div class="hero-strip-inner">
-    <div class="hs-left">
-      <div class="hs-eyebrow">PAIZ CORP INTELLIGENCE DIVISION · SKYXION: ALTAER ERA</div>
-      <h1 class="hs-title">p<em>AI</em>z</h1>
-      <p class="hs-sub">The Legend of Legiona's official intelligence assistant. Knows the full history, governance, documents, megaprojects, and people of The LoL — no connection required.</p>
-      <div class="hs-badges">
-        <span class="hs-badge live">ONLINE · READY</span>
-        <span class="hs-badge">FULL KNOWLEDGE BASE</span>
-        <span class="hs-badge">CONVERSATION MEMORY</span>
-        <span class="hs-badge">NATURAL LANGUAGE</span>
-      </div>
-    </div>
-    <div class="hs-right">
-      <div class="hs-stat-grid">
-        <div class="hs-stat"><span class="hs-stat-val"><em>27+</em></span><span class="hs-stat-key">KNOWLEDGE DOMAINS</span></div>
-        <div class="hs-stat"><span class="hs-stat-val">24/7</span><span class="hs-stat-key">AVAILABILITY</span></div>
-        <div class="hs-stat"><span class="hs-stat-val">6+</span><span class="hs-stat-key">PORTAL SECTIONS</span></div>
-        <div class="hs-stat"><span class="hs-stat-val"><em>1</em></span><span class="hs-stat-key">OFFICIAL AI</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CAPABILITIES BAR -->
-<div class="cap-bar">
-  <div class="cap-item">
-    <div class="cap-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-    <span class="cap-label">FULL LOL HISTORY & LORE</span>
-  </div>
-  <div class="cap-item">
-    <div class="cap-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
-    <span class="cap-label">LEGAL DOCUMENTS & ACTS</span>
-  </div>
-  <div class="cap-item">
-    <div class="cap-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-    <span class="cap-label">GOVERNMENT & ISC INTEL</span>
-  </div>
-  <div class="cap-item">
-    <div class="cap-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
-    <span class="cap-label">MEGAPROJECTS & INFRA</span>
-  </div>
-  <div class="cap-item">
-    <div class="cap-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-    <span class="cap-label">FOUNDERS & LEADERSHIP</span>
-  </div>
-  <div class="cap-item">
-    <div class="cap-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
-    <span class="cap-label">PORTAL NAVIGATION</span>
-  </div>
-</div>
-
-<!-- MAIN LAYOUT -->
-<div class="main-layout">
-
-  <!-- LEFT PANEL -->
-  <div class="left-panel">
-    <div class="lp-section">
-      <div class="lp-label">ASSISTANT IDENTITY</div>
-      <div class="lp-identity">
-        <div class="lp-avatar">p</div>
-        <div>
-          <div class="lp-name">pAIz</div>
-          <div class="lp-sub">PAIZ CORP INTELLIGENCE DIV.</div>
-        </div>
-      </div>
-      <div class="lp-status"><div class="lp-status-dot"></div>Online · Ready to assist</div>
-    </div>
-
-    <div class="lp-section">
-      <div class="lp-label">ABOUT pAIz</div>
-      <p class="lp-desc">pAIz is The Legend of Legiona's official intelligence assistant, developed by Paiz Corp Intelligence Division. It holds deep knowledge of The LoL — from its founding as "The Sus" in 2023, through to the current Skyxion: Altaer Era.</p>
-    </div>
-
-    <div class="lp-section">
-      <div class="lp-label">KNOWLEDGE DOMAINS</div>
-      <div class="domain-list">
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">NATIONAL HISTORY & THE SUS ERA</span></div>
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">FOUNDERS: FAIZ4224, IMII KUN, DYNO</span></div>
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">GOVERNMENT & THE BLACK HOUSE</span></div>
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">ISC INTELLIGENCE AGENCY</span></div>
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">LEGAL ARCHIVE & DOCUMENTS</span></div>
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">CITIZENSHIP SYSTEM & RIGHTS</span></div>
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">TLSRL RAILWAY & MEGAPROJECTS</span></div>
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">PAIZ® CORP & ALL SUBSIDIARIES</span></div>
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">PAIZCORP PRODUCTIONS & FILMS</span></div>
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">ULTRAX2020 CRISIS & ELECTIONS</span></div>
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">SKYXION SERVER & ALTAER ERA</span></div>
-        <div class="domain-item"><div class="domain-dot"></div><span class="domain-text">PORTAL NAVIGATION ASSISTANCE</span></div>
-      </div>
-    </div>
-
-    <div class="lp-section">
-      <div class="lp-label">SUGGESTED QUESTIONS</div>
-      <div class="starter-list">
-        <button class="starter-btn" onclick="useStarter(this)">Who are the three founders of The LoL? <span class="starter-arrow">→</span></button>
-        <button class="starter-btn" onclick="useStarter(this)">What happened during the UltraX2020 presidency? <span class="starter-arrow">→</span></button>
-        <button class="starter-btn" onclick="useStarter(this)">Tell me about the TLSRL railway project <span class="starter-arrow">→</span></button>
-        <button class="starter-btn" onclick="useStarter(this)">What legal documents are in the archive? <span class="starter-arrow">→</span></button>
-        <button class="starter-btn" onclick="useStarter(this)">What is the ISC and what does it do? <span class="starter-arrow">→</span></button>
-        <button class="starter-btn" onclick="useStarter(this)">Explain all five Paiz Corp subsidiaries <span class="starter-arrow">→</span></button>
-        <button class="starter-btn" onclick="useStarter(this)">What is the Skyxion: Altaer Era? <span class="starter-arrow">→</span></button>
-        <button class="starter-btn" onclick="useStarter(this)">What movies is PaizProductions making? <span class="starter-arrow">→</span></button>
-      </div>
-    </div>
-
-    <div class="lp-disclaimer">
-      pAIz draws entirely from The LoL's official knowledge base — no external API required. All responses are authoritative, sourced from Paiz Corp Intelligence Division records.<br><br>
-      PAIZ® CORP // INTELLIGENCE DIVISION // SKYXION: ALTAER ERA
-    </div>
-  </div>
-
-  <!-- CHAT AREA -->
-  <div class="chat-area">
-    <div class="chat-topbar">
-      <div class="ct-left">
-        <div class="ct-indicator"></div>
-        <span class="ct-title">pAIz · ACTIVE SESSION</span>
-      </div>
-      <div class="ct-right">
-        <button class="ct-btn" onclick="clearChat()">CLEAR CHAT</button>
-      </div>
-    </div>
-
-    <div class="chat-messages" id="chat-messages">
-      <div class="welcome-state" id="welcome-state">
-        <div class="ws-logo">p</div>
-        <div class="ws-title">Hello, I'm pAIz.</div>
-        <p class="ws-sub">Your official intelligence assistant for The Legend of Legiona. I know the full history, governance, documents, megaprojects, and people of The LoL. Ask me anything.</p>
-        <div class="ws-chips">
-          <button class="ws-chip" onclick="useChip(this)">NATIONAL HISTORY</button>
-          <button class="ws-chip" onclick="useChip(this)">LEGAL DOCUMENTS</button>
-          <button class="ws-chip" onclick="useChip(this)">ISC AGENCY</button>
-          <button class="ws-chip" onclick="useChip(this)">FOUNDERS</button>
-          <button class="ws-chip" onclick="useChip(this)">TLSRL RAILWAY</button>
-          <button class="ws-chip" onclick="useChip(this)">CITIZENSHIP</button>
-          <button class="ws-chip" onclick="useChip(this)">PAIZ CORP</button>
-          <button class="ws-chip" onclick="useChip(this)">THE LOL MOVIE</button>
+<div class="shell">
+  <div class="msgs-wrap" id="mw">
+    <div class="msgs-inner" id="mi">
+      <div class="welcome" id="welcome">
+        <div class="wlogo">p</div>
+        <div class="wtitle">Hello. I'm p<em>AI</em>z.</div>
+        <p class="wsub">The official intelligence assistant of The Legend of Legiona, developed by Paiz Corp Intelligence Division. Ask me anything about The LoL.</p>
+        <div class="wchips">
+          <button class="chip" onclick="useChip(this)">Who are the three founders of The LoL?</button>
+          <button class="chip" onclick="useChip(this)">Tell me about The Legend of Legiona's history</button>
+          <button class="chip" onclick="useChip(this)">What is the ISC intelligence agency?</button>
+          <button class="chip" onclick="useChip(this)">Explain all five Paiz Corp subsidiaries</button>
+          <button class="chip" onclick="useChip(this)">What legal documents exist in the archive?</button>
+          <button class="chip" onclick="useChip(this)">Tell me about the TLSRL railway project</button>
+          <button class="chip" onclick="useChip(this)">What happened during the UltraX2020 presidency?</button>
+          <button class="chip" onclick="useChip(this)">Tell me about The LoL Movie</button>
         </div>
       </div>
     </div>
-
-    <div class="suggestions-row" id="suggestions-row" style="display:none;"></div>
-
-    <div class="chat-input-bar">
-      <textarea id="chat-input" placeholder="Ask anything about The Legend of Legiona…" rows="1" autocomplete="off"></textarea>
-      <button id="chat-send" onclick="sendMessage()">SEND</button>
-    </div>
-    <div class="chat-powered">pAIz · PAIZ CORP INTELLIGENCE DIVISION · SKYXION: ALTAER ERA · CONFIDENTIALITY LEVEL: PUBLIC</div>
   </div>
-
-</div>
-
-<!-- BELOW FOLD INFO -->
-<div class="info-section">
-  <div class="info-inner">
-    <div class="info-eyebrow">ABOUT pAIz</div>
-    <div class="info-title">Intelligence at the <em>service of the nation.</em></div>
-    <div class="info-grid">
-      <div class="info-card">
-        <div class="ic-num">01 // ORIGIN</div>
-        <div class="ic-title">Built by <em>Paiz Corp</em></div>
-        <p class="ic-body">pAIz was developed entirely within the Paiz Corp Intelligence Division as part of the nation's digital infrastructure mandate. It is The LoL's first and only official intelligence assistant — embedded across the Government portal and available as a standalone intelligence interface.</p>
-      </div>
-      <div class="info-card">
-        <div class="ic-num">02 // KNOWLEDGE</div>
-        <div class="ic-title">Deep LoL <em>Memory</em></div>
-        <p class="ic-body">pAIz holds comprehensive knowledge of The LoL's full history — from the founding "Sus Era" in 2023, through the UltraX2020 presidency crisis, to the current Skyxion: Altaer Era. It knows every legal document, every megaproject, every department, and every founder by name.</p>
-      </div>
-      <div class="info-card">
-        <div class="ic-num">03 // CAPABILITY</div>
-        <div class="ic-title">No Internet <em>Required</em></div>
-        <p class="ic-body">pAIz operates entirely from its local knowledge base — no external API calls, no connectivity required. The full intelligence of The LoL's records is embedded directly into this page, available instantly at all times regardless of external service availability.</p>
-      </div>
+  <div class="input-area">
+    <div class="input-wrap">
+      <textarea id="ci" placeholder="Ask anything about The Legend of Legiona…" rows="1" autocomplete="off"></textarea>
+      <button id="cs" onclick="sendMsg()" title="Send">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+      </button>
     </div>
+    <p class="input-hint">pAIz · Paiz Corp Intelligence Division · Skyxion: Altaer Era · Confidentiality: Public</p>
   </div>
 </div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="ft-main">
-    <div>
-      <div class="ft-brand">Paiz<span class="reg">®</span> Corp</div>
-      <div class="ft-tag">INTELLIGENCE DIVISION · pAIz PRODUCT PAGE</div>
-      <p class="ft-desc">pAIz is the official intelligence assistant of The Legend of Legiona. Developed and maintained by Paiz Corp Intelligence Division. Skyxion: Altaer Era.</p>
-    </div>
-    <div class="ft-col">
-      <h5>pAIz PORTALS</h5>
-      <a href="https://faizzzlol.github.io/thelol/gov/about-us">Gov Portal (pAIz)</a>
-      <a href="https://faizzzlol.github.io/thelol/gov/">Government Home</a>
-      <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Portal</a>
-      <a href="https://faizzzlol.github.io/thelol/gov/assets/">Legal Archive</a>
-      <a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Citizenship</a>
-    </div>
-    <div class="ft-col">
-      <h5>THE LOL NETWORK</h5>
-      <a href="https://faizzzlol.github.io/thelol/">The Legend of Legiona</a>
-      <a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp</a>
-      <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Paiz Shop</a>
-      <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PaizProductions</a>
-      <a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways</a>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-bottom-inner">
-      <p>© 2026 PAIZ® CORP INTELLIGENCE DIVISION — pAIz — THE LEGEND OF LEGIONA</p>
-      <p>SKYXION: ALTAER ERA · ALL KNOWLEDGE OFFICIAL · CONFIDENTIALITY: PUBLIC</p>
-    </div>
-  </div>
-</footer>
 
 <script>
-/* ══════════════════════════════════════════════════════════════
-   pAIz — LOCAL INTELLIGENCE ENGINE
-   Full knowledge base · No API required · Multi-turn session memory
-   Paiz Corp Intelligence Division · Skyxion: Altaer Era
-══════════════════════════════════════════════════════════════ */
+/* pAIz — Local Intelligence Engine */
+let theme=localStorage.getItem('paiz-theme')||'dark';
+document.documentElement.setAttribute('data-theme',theme);
+setIcon();
+function toggleTheme(){const h=document.documentElement;h.classList.add('sw');theme=theme==='dark'?'light':'dark';h.setAttribute('data-theme',theme);localStorage.setItem('paiz-theme',theme);setIcon();setTimeout(()=>h.classList.remove('sw'),300)}
+function setIcon(){const b=document.getElementById('tbtn');if(!b)return;b.innerHTML=theme==='dark'?'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>':'<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';b.title=theme==='dark'?'Switch to light mode':'Switch to dark mode'}
 
-/* ── THEME ENGINE ── */
-let currentTheme = localStorage.getItem('paiz-theme') || 'dark';
-document.documentElement.setAttribute('data-theme', currentTheme);
-renderThemeIcon();
-
-function toggleTheme() {
-  const html = document.documentElement;
-  html.classList.add('theme-changing');
-  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', currentTheme);
-  localStorage.setItem('paiz-theme', currentTheme);
-  renderThemeIcon();
-  setTimeout(() => html.classList.remove('theme-changing'), 320);
-}
-
-function renderThemeIcon() {
-  const btn = document.getElementById('theme-toggle');
-  if (!btn) return;
-  if (currentTheme === 'dark') {
-    // Show sun icon (click → go light)
-    btn.innerHTML = `<svg viewBox="0 0 24 24" aria-label="Switch to light mode">
-      <circle cx="12" cy="12" r="5"/>
-      <line x1="12" y1="1" x2="12" y2="3"/>
-      <line x1="12" y1="21" x2="12" y2="23"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="1" y1="12" x2="3" y2="12"/>
-      <line x1="21" y1="12" x2="23" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-    </svg>`;
-    btn.title = 'Switch to light mode';
-  } else {
-    // Show moon icon (click → go dark)
-    btn.innerHTML = `<svg viewBox="0 0 24 24" aria-label="Switch to dark mode">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-    </svg>`;
-    btn.title = 'Switch to dark mode';
-  }
-}
-
-/* ══════════════════════════════════════════════════════════════
-   KNOWLEDGE BASE
-   Each entry: id, keywords[], response (HTML), followups[]
-   Scoring: multi-word phrases weighted by token count × char length
-══════════════════════════════════════════════════════════════ */
-const KB = [
-
-  /* 0 — GREETING */
-  {
-    id: 'greeting',
-    keywords: ['hello', 'hi ', 'hey ', 'good morning', 'good evening', 'good afternoon', 'greetings', 'what\'s up', 'wassup', 'yo ', 'sup '],
-    followups: ['Who are the founders?', 'History of The LoL', 'What is the ISC?', 'Paiz Corp overview'],
-    response: `Welcome. I'm <strong>pAIz</strong> — the official intelligence assistant of <strong>The Legend of Legiona</strong>, developed by Paiz Corp Intelligence Division.<br><br>I hold comprehensive knowledge of The LoL across all domains: its full history from the Sus Era to the current Skyxion: Altaer Era, government and ISC, the legal archive, megaprojects, all five Paiz® Corp subsidiaries, and the people who built the nation.<br><br>What would you like to know?`
-  },
-
-  /* 1 — HELP / CAPABILITIES */
-  {
-    id: 'help',
-    keywords: ['what can you do', 'help', 'capabilities', 'what do you know', 'what are you', 'who are you', 'about yourself', 'about paiz', 'what is paiz', 'how do you work', 'introduce yourself'],
-    followups: ['National history', 'Government structure', 'Legal archive', 'Paiz Corp subsidiaries'],
-    response: `I'm <strong>pAIz</strong> — the official intelligence assistant of The Legend of Legiona, built by Paiz Corp Intelligence Division. Here's the full scope of what I know:<br><br>
-<strong>— National History & Lore</strong> — Complete timeline from The Sus Era (2023) to today, including the UltraX2020 presidency and EhekSquad origins.<br>
-<strong>— Founders & Leadership</strong> — Faiz4224, Imii Kun, Dyno, and the full government structure.<br>
-<strong>— Government & The Black House</strong> — Six departments, ISC intelligence agency, document reference conventions.<br>
-<strong>— Legal Archive</strong> — All official acts, ordinances, charters, and proclamations with reference numbers.<br>
-<strong>— Megaprojects</strong> — TLSRL Railway, TLCC Twin Towers, National Farm Complex.<br>
-<strong>— Paiz® Corp</strong> — All five subsidiaries: TL Railways, Paiz Construction, Paiz Shop, PaizProductions, Paiz Chicken.<br>
-<strong>— Portal Navigation</strong> — Every official URL across The LoL web ecosystem.<br><br>
-Ask me anything.`
-  },
-
-  /* 2 — FOUNDERS */
-  {
-    id: 'founders',
-    keywords: ['founder', 'founders', 'faiz4224', 'imii kun', 'imii', 'dyno', 'who created', 'who started', 'who built the lol', 'three founders', 'founding members', 'co-founder', 'first president', 'president faiz'],
-    followups: ['History of The LoL', 'The Black House', 'Paiz Corp', 'The LoL Movie cast'],
-    response: `<strong>The Three Founders of The Legend of Legiona</strong><br><br>
-The LoL was co-founded by three individuals who collectively signed the <a href="https://faizzzlol.github.io/thelol/assets/The_LoL_Proclamation.pdf">Proclamation of Sovereignty</a>:<br><br>
-<strong>Faiz4224</strong> — First President & Founding Leader. The principal architect of The LoL's governance, digital infrastructure, and national identity. Currently serving as President, operating from <em>The Black House</em> (Office of the President). Also founded and chairs Paiz® Corp, The LoL's national conglomerate.<br><br>
-<strong>Imii Kun</strong> — Co-Founder & Visionary. One of the original three founding members, key to the nation's early vision and strategic direction.<br><br>
-<strong>Dyno</strong> — Co-Founder & Strategist. The third founding member. Together with Faiz4224 and Imii Kun, established The LoL as a sovereign Minecraft nation on the Skyxion server.<br><br>
-All three appear in the cast of <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a>, currently in production by PaizProductions.`
-  },
-
-  /* 3 — HISTORY */
-  {
-    id: 'history',
-    keywords: ['history', 'sus era', 'the sus', 'how did it start', 'origin', 'when was the lol founded', 'began', 'background', 'lore', 'timeline', 'past', 'founding story'],
-    followups: ['UltraX2020 crisis', 'EhekSquad', 'Skyxion: Altaer Era', 'Founders'],
-    response: `<strong>Full History of The Legend of Legiona</strong><br><br>
-<strong>The Sus Era (2023 · Pre-Founding)</strong><br>
-The nation originated as "The Sus" — an informal settlement on Skyxion in 2023 with no formal governance. During this period, EhekSquad (led by PhoenixAiman, PandaPutih, and Kagee) had an association with The Sus, though their exact status was never formally defined. They later departed and re-established as an independent entity. EhekSquad still exists today.<br><br>
-<strong>The Founding (2023)</strong><br>
-Faiz4224, alongside co-founders Imii Kun and Dyno, formally established The Legend of Legiona as a sovereign nation — signing the Proclamation of Sovereignty, building governance structures, and establishing the national currency (TL Dollar) and infrastructure.<br><br>
-<strong>First Democratic Election (May 6, 2023)</strong><br>
-The LoL held its first democratic presidential election. UltraX2020 and the <em>Parti Harapan Rakyat The LoL (PHRTL)</em> won — making UltraX2020 the 2nd President.<br><br>
-<strong>The UltraX2020 Crisis</strong><br>
-UltraX2020's presidency was defined by internal conflict: a bombed city sign, drone attacks on the TLCC Twin Towers, and broader political crisis. He eventually resigned, returning power to Faiz4224.<br><br>
-<strong>Skyxion: Altaer Era (Present)</strong><br>
-The LoL now operates as one of the most advanced and wealthiest nations on Skyxion — with a full government, intelligence agency, railway network, legal archive, and national conglomerate.<br><br>
-<a href="https://faizzzlol.github.io/thelol/gov/#history">Full timeline at Government Portal →</a>`
-  },
-
-  /* 4 — ULTRAX2020 */
-  {
-    id: 'ultrax2020',
-    keywords: ['ultrax2020', 'ultrax', '2nd president', 'second president', 'phrtl', 'parti harapan', 'crisis', 'resigned', 'drone attack', 'bombed city', 'election 2023', 'internal strife'],
-    followups: ['History of The LoL', 'TLCC Twin Towers', 'Current government', 'The LoL Movie'],
-    response: `<strong>The UltraX2020 Presidency & Crisis</strong><br><br>
-On <strong>May 6, 2023</strong>, The LoL held its first democratic presidential election. UltraX2020, running under the <em>Parti Harapan Rakyat The LoL (PHRTL)</em>, won — becoming The LoL's <strong>2nd President</strong>.<br><br>
-His tenure became one of the most turbulent periods in national history:<br><br>
-— A city sign was bombed in an act of internal sabotage.<br>
-— Drone attacks were carried out against the <strong>TLCC Twin Towers</strong>, The LoL's most iconic landmark, causing significant damage.<br>
-— Broader political crisis and civil strife destabilized the administration.<br><br>
-UltraX2020 ultimately <strong>resigned</strong> from office. Governance returned to founding President <strong>Faiz4224</strong>, who has led the nation since. The TLCC Twin Towers were fully restored after the attacks.<br><br>
-UltraX2020 appears as a principal cast member in <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a> — his presidency forms the central political arc of the film.`
-  },
-
-  /* 5 — GOVERNMENT STRUCTURE */
-  {
-    id: 'government',
-    keywords: ['government', 'black house', 'departments', 'ministry', 'office of the president', 'government structure', 'national justice', 'lore archives', 'public works', 'external relations', 'communications', 'dept', 'executive branch', 'six departments'],
-    followups: ['ISC Agency', 'Legal archive', 'Founding President Faiz4224', 'Citizenship'],
-    response: `<strong>Government Structure of The Legend of Legiona</strong><br><br>
-<strong>The Black House — Office of the President</strong><br>
-The executive seat of The LoL's government. Equivalent to a White House. Currently occupied by <strong>Faiz4224</strong>, First President and Founding Leader. Presidential documents carry the reference code <em>BH-YYYY-###</em>.<br><br>
-<strong>Six Government Departments:</strong><br>
-— <strong>DEPT-01: ISC</strong> — Internal Security Control (Intelligence Agency) · <em>ACTIVE</em><br>
-— <strong>DEPT-02:</strong> Office of National Justice<br>
-— <strong>DEPT-03:</strong> Ministry of Lore & Archives<br>
-— <strong>DEPT-04:</strong> Public Works Division<br>
-— <strong>DEPT-05:</strong> Bureau of External Relations<br>
-— <strong>DEPT-06:</strong> The LoL Communications<br><br>
-Currently, ISC (DEPT-01) is the only fully active department.<br><br>
-<strong>Document Reference Conventions:</strong><br>
-— <em>LOLGOV-YYYY-###</em> → Government documents<br>
-— <em>BH-YYYY-###</em> → Black House / Presidential documents<br>
-— <em>ISC-YYYY-###</em> → ISC documents<br>
-— <em>PC-[SUB]-YYYY-###</em> → Paiz Corp subsidiary documents<br><br>
-<a href="https://faizzzlol.github.io/thelol/gov/">Visit the Government Portal →</a>`
-  },
-
-  /* 6 — ISC */
-  {
-    id: 'isc',
-    keywords: ['isc', 'internal security control', 'intelligence agency', 'security agency', 'classified', 'tlio', 't.l.i.o', 'clearance', 'intel portal', 'national security', 'intelligence division'],
-    followups: ['Government structure', 'Legal documents', 'ISC portal links', 'History'],
-    response: `<strong>ISC — Internal Security Control</strong><br><br>
-The ISC is The LoL's official national intelligence and security agency — Government Department 01 (DEPT-01), and the equivalent of a CIA within The LoL's governance framework.<br><br>
-<strong>Background:</strong> The ISC succeeds the former <em>T.L.I.O</em> (The LoL Intelligence Organisation). The T.L.I.O name is no longer in use — it has been fully replaced by <em>Internal Security Control</em>.<br><br>
-<strong>Branding:</strong> Minimalist pure-dark aesthetic with gold accent — classified, authoritative, and precise. Operates under a separate design system from the Paiz® Corp family.<br><br>
-<strong>Public Portals:</strong><br>
-— <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Main Portal</a><br>
-— <a href="https://faizzzlol.github.io/thelol/gov/isc/national">ISC Transparency Report</a><br>
-— <a href="https://faizzzlol.github.io/thelol/gov/isc/search">ISC Public Search Archive</a><br><br>
-<strong>Intel Portal:</strong> Password-protected. Clearance code: <em>LEGIONA2026</em>.<br><br>
-All ISC documents follow the <em>ISC-YYYY-###</em> reference convention.`
-  },
-
-  /* 7 — LEGAL DOCUMENTS */
-  {
-    id: 'legal_docs',
-    keywords: ['legal', 'documents', 'archive', 'acts', 'laws', 'ordinance', 'rights charter', 'proclamation', 'legal archive', 'document list', 'lolgov', 'bh-2026', 'all documents', 'official documents'],
-    followups: ['Citizenship system', 'Naming policy (BH-2026-0002)', 'Government portal', 'ISC'],
-    response: `<strong>Legal Archive — Official Documents of The LoL</strong><br><br>
-All official documents are hosted at the <a href="https://faizzzlol.github.io/thelol/gov/assets/">Legal Archive</a> — fully searchable and filterable by category.<br><br>
-<strong>LOLGOV-2026-0001 — Citizenship Act</strong><br>
-<em>Governs the full citizenship system — eligibility, application, and status.</em><br><br>
-<strong>LOLGOV-2026-0002 — Revocation Ordinance</strong><br>
-<em>Governs conditions and procedures for citizenship revocation.</em><br><br>
-<strong>LOLGOV-2026-0003 — Citizens' Rights Charter</strong><br>
-<em>Defines the fundamental rights of all citizens of The LoL.</em><br><br>
-<strong>BH-2026-0001 — Presidential Proclamation of Sovereignty</strong><br>
-<em>The founding document of The Legend of Legiona. Available in <a href="https://faizzzlol.github.io/thelol/assets/The_LoL_Proclamation.pdf">English (PDF)</a> and <a href="https://faizzzlol.github.io/thelol/assets/Proklamasi_The_LoL.pdf">Bahasa Malaysia (PDF)</a>.</em><br><br>
-<strong>BH-2026-0002 — Official Naming & Style Directive (02 April 2026)</strong><br>
-<em>Mandates "The LoL" as the only approved abbreviation. Standalone "LoL" strictly prohibited.</em><br><br>
-<a href="https://faizzzlol.github.io/thelol/gov/assets/">Browse the full Legal Archive →</a>`
-  },
-
-  /* 8 — CITIZENSHIP */
-  {
-    id: 'citizenship',
-    keywords: ['citizenship', 'citizen', 'apply', 'application', 'citizen rights', 'how to join', 'become a citizen', 'citizenship portal', 'revocation', 'rights charter', 'lolgov-2026-0001'],
-    followups: ['Legal archive', 'Citizens Rights Charter', 'Government portal', 'Special Territory of Landen'],
-    response: `<strong>Citizenship System of The Legend of Legiona</strong><br><br>
-The LoL operates a formal citizenship system governed by three official documents:<br><br>
-<strong>LOLGOV-2026-0001 — Citizenship Act:</strong> Defines eligibility criteria, the application process, and citizenship status categories.<br><br>
-<strong>LOLGOV-2026-0003 — Citizens' Rights Charter:</strong> Guarantees the fundamental rights of all recognised citizens of The LoL.<br><br>
-<strong>LOLGOV-2026-0002 — Revocation Ordinance:</strong> Establishes the conditions and procedures under which citizenship may be revoked.<br><br>
-<strong>How to Apply:</strong> Applications are submitted through the official Citizenship Portal via an online application form with document submission capability.<br><br>
-<a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Apply for Citizenship →</a><br><br>
-Notable citizens include <strong>ikanuwu</strong> (also known as ikanowo) and <strong>ImanHafizz</strong>, who govern the Special Administrative Territory of Landen.`
-  },
-
-  /* 9 — TLSRL RAILWAY */
-  {
-    id: 'tlsrl',
-    keywords: ['tlsrl', 'spawn railway', 'rail link', 'train', 'stations', 'railway project', 'tll', 'llc', 'llo', 'mps', 'sxj', 'spn', 'express service', 'cargo service', '4800', 'enclosed rail'],
-    followups: ['TL Railways operator', 'Paiz Corp', 'Megaprojects overview', 'TLCC Twin Towers'],
-    response: `<strong>TLSRL — The LoL–Spawn Railway Link</strong><br><br>
-The TLSRL is The LoL's flagship infrastructure project — a fully enclosed rail system connecting the nation to the heart of Skyxion.<br><br>
-<strong>Key Specifications:</strong><br>
-— <strong>Track length:</strong> 4,800+ blocks of fully enclosed railway<br>
-— <strong>Travel time:</strong> ~10 minutes from The LoL to Spawn<br>
-— <strong>Service classes:</strong> Regular · Express · Cargo<br>
-— <strong>Six stations:</strong> TLL → LLC → LLO → MPS → SXJ → SPN<br><br>
-<strong>Operator:</strong> TL Railways (Paiz® Corp SUB-01 · Transport Division)<br>
-<strong>Builder:</strong> Paiz™ Construction (Paiz® Corp SUB-02)<br><br>
-The TLSRL is part of TL Railways' wider network, which also operates a Monorail, LRT/MRT, and High-Speed Boat Link across Skyxion.<br><br>
-<a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways Portal →</a>`
-  },
-
-  /* 10 — PAIZ CORP OVERVIEW */
-  {
-    id: 'paiz_corp',
-    keywords: ['paiz corp', 'paiz® corp', 'paiz corporation', 'all subsidiaries', 'five subsidiaries', 'conglomerate', 'national company', 'paiz group', 'overview paiz', 'what is paiz corp'],
-    followups: ['Paiz Shop', 'Paiz Chicken', 'PaizProductions', 'TL Railways & TLSRL'],
-    response: `<strong>Paiz® Corp — National Conglomerate of The LoL</strong><br><br>
-Paiz® Corp is The Legend of Legiona's official national conglomerate, founded and chaired by <strong>Faiz4224</strong>. It operates across five sectors:<br><br>
-<strong>SUB-01 · TL Railways</strong> — National rail operator. Runs the TLSRL (4,800+ block link to Spawn), Monorail, LRT/MRT, and High-Speed Boat Link. <a href="https://faizzzlol.github.io/thelol/tlr/">→</a><br><br>
-<strong>SUB-02 · Paiz™ Construction</strong> — Engineering arm. Built the TLSRL, TLCC Twin Towers, National Farm Complex, and all major national infrastructure.<br><br>
-<strong>SUB-03 · Paiz Shop</strong> — Official Minecraft item retail store. Items priced in Diamonds. Discord webhook ordering. <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">→</a><br><br>
-<strong>SUB-04 · PaizProductions</strong> — Official film and media studio. Currently producing The LoL: The Movie, LoL Chronicles, and ISC: Classified. <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">→</a><br><br>
-<strong>SUB-05 · Paiz Chicken</strong> — Virtual food ordering brand. Minecraft food items, delivery & pickup across Skyxion, priced in Diamonds. <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">→</a><br><br>
-<a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp Homepage →</a>`
-  },
-
-  /* 11 — PAIZ SHOP */
-  {
-    id: 'paiz_shop',
-    keywords: ['paiz shop', 'shop', 'store', 'buy items', 'shulker', 'mending', 'unbreaking', 'nether wart', 'iron ingot', 'retail', 'item shop', 'minecraft store'],
-    followups: ['Paiz Corp overview', 'Paiz Chicken', 'TL Dollar currency', 'Government portal'],
-    response: `<strong>Paiz Shop — Official Minecraft Item Store</strong><br><br>
-Paiz Shop (Paiz® Corp SUB-03) is The LoL's official retail outlet for Minecraft items, priced in Diamonds (◆).<br><br>
-<strong>Current Catalogue:</strong><br>
-— Shulker Box · <strong>◆4</strong><br>
-— Mending I · <strong>◆3</strong><br>
-— Unbreaking III · <strong>◆2</strong><br>
-— Nether Wart · <strong>◆3</strong><br>
-— Iron Ingot · <strong>◆1</strong><br><br>
-<strong>Ordering System:</strong> Orders are placed through the Paiz Shop portal and processed via a Discord webhook integration. Stock is managed dynamically — deliveries and pickups can be arranged in-game.<br><br>
-<a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Visit Paiz Shop →</a>`
-  },
-
-  /* 12 — PAIZ CHICKEN */
-  {
-    id: 'paiz_chicken',
-    keywords: ['paiz chicken', 'chicken', 'food', 'restaurant', 'order food', 'food delivery', 'pickup food', 'food brand', 'hospitality', 'virtual food'],
-    followups: ['Paiz Shop', 'Paiz Corp overview', 'TL Dollar currency', 'PaizProductions'],
-    response: `<strong>Paiz Chicken — Virtual Food Brand</strong><br><br>
-Paiz Chicken (Paiz® Corp SUB-05) is The LoL's official virtual food ordering brand, operating across the Skyxion server.<br><br>
-<strong>What They Offer:</strong><br>
-— Minecraft fried chicken and food items<br>
-— Delivery and pickup modes<br>
-— Distance-based delivery fees calculated across Skyxion<br>
-— Items priced in Diamonds (◆)<br><br>
-<strong>Platform:</strong> Orders submitted through the Paiz Chicken portal with Discord webhook integration for real-time order processing and live stock management.<br><br>
-<a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Order from Paiz Chicken →</a>`
-  },
-
-  /* 13 — PAIZPRODUCTIONS */
-  {
-    id: 'paiz_productions',
-    keywords: ['paizproductions', 'paiz productions', 'film studio', 'movie studio', 'production studio', 'all films', 'three films', 'three projects', 'isc classified', 'lol chronicles', 'media division'],
-    followups: ['The LoL Movie', 'ISC: Classified', 'LoL Chronicles series', 'Paiz Corp overview'],
-    response: `<strong>PaizProductions — Official Film Studio</strong><br><br>
-PaizProductions (Paiz® Corp SUB-04) is The Legend of Legiona's official film and media production studio — responsible for all cinematic output from The LoL.<br><br>
-<strong>Current Production Slate (3 Projects):</strong><br><br>
-<strong>1. The LoL: The Movie</strong> — Feature Film · <em>IN PRODUCTION</em><br>
-The flagship. A 4-phase Minecraft political epic. Cast: Faiz4224, Imii Kun, Dyno, UltraX2020. <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">Film page →</a><br><br>
-<strong>2. LoL Chronicles</strong> — Series · <em>IN DEVELOPMENT</em><br>
-An episodic series expanding The LoL's lore and national story.<br><br>
-<strong>3. ISC: Classified</strong> — Short Film · <em>PLANNED</em><br>
-An intelligence-focused short set within the ISC universe.<br><br>
-<a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PaizProductions Studio →</a>`
-  },
-
-  /* 14 — THE LOL MOVIE */
-  {
-    id: 'lol_movie',
-    keywords: ['the lol movie', 'lol movie', 'thelolmovie', 'feature film', 'four phases', 'movie cast', 'in production film', 'political epic', 'minecraft film', 'paizproductions movie'],
-    followups: ['PaizProductions studio', 'Founders in the film', 'UltraX2020 presidency', 'ISC: Classified'],
-    response: `<strong>The LoL: The Movie — Official Feature Film</strong><br><br>
-The flagship production of PaizProductions — a full-length Minecraft political epic chronicling the entire history of The Legend of Legiona.<br><br>
-<strong>Status:</strong> IN PRODUCTION<br>
-<strong>Format:</strong> Feature Film · 4 Phases<br><br>
-<strong>Cast:</strong><br>
-— <strong>Faiz4224</strong> — First President & Founding Leader<br>
-— <strong>Imii Kun</strong> — Co-Founder & Visionary<br>
-— <strong>Dyno</strong> — Co-Founder & Strategist<br>
-— <strong>UltraX2020</strong> — 2nd President (the political crisis arc)<br><br>
-The four-phase structure covers The LoL's full arc — from the Sus Era through the first democratic election, the UltraX2020 crisis, and the rise of the Altaer Era.<br><br>
-<a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL Movie Official Page →</a>`
-  },
-
-  /* 15 — MEGAPROJECTS OVERVIEW */
-  {
-    id: 'megaprojects',
-    keywords: ['megaproject', 'megaprojects', 'infrastructure', 'national projects', 'big projects', 'major projects', 'all projects'],
-    followups: ['TLSRL Railway', 'TLCC Twin Towers', 'National Farm Complex', 'Paiz Construction'],
-    response: `<strong>National Megaprojects of The Legend of Legiona</strong><br><br>
-The LoL has three flagship megaprojects defining its national infrastructure, all engineered by <strong>Paiz™ Construction</strong>:<br><br>
-<strong>1. TLSRL — The LoL–Spawn Railway Link</strong><br>
-4,800+ block enclosed rail track connecting The LoL to Skyxion's Spawn. Six stations, three service classes (Regular, Express, Cargo), ~10 minute end-to-end journey. Operated by TL Railways.<br><br>
-<strong>2. TLCC Twin Towers — The LoL Convention Centre</strong><br>
-The most iconic landmark in The LoL City. A symbol of national prosperity. Targeted during the UltraX2020 crisis via drone attacks — since fully restored.<br><br>
-<strong>3. National Farm Complex</strong><br>
-Three fully automated farms powering The LoL's resource economy:<br>
-— Iron Farm · Totem Farm · Gold Farm (all currently operational)<br><br>
-These three projects collectively represent The LoL's standing as one of the most advanced nations on Skyxion.`
-  },
-
-  /* 16 — TLCC TWIN TOWERS */
-  {
-    id: 'tlcc',
-    keywords: ['tlcc', 'twin towers', 'convention centre', 'convention center', 'landmark', 'towers attacked', 'towers bombed', 'most iconic', 'lol city'],
-    followups: ['UltraX2020 crisis', 'National Farm Complex', 'Paiz Construction', 'TLSRL Railway'],
-    response: `<strong>TLCC Twin Towers — The LoL Convention Centre</strong><br><br>
-The TLCC Twin Towers are the most iconic landmark in The LoL City — twin skyscrapers that stand as a symbol of the nation's prosperity, ambition, and resilience.<br><br>
-<strong>Construction:</strong> Engineered and delivered by Paiz™ Construction (Paiz® Corp SUB-02).<br><br>
-<strong>The UltraX2020 Crisis:</strong> During the 2nd presidency, the TLCC Twin Towers were targeted in drone attacks — a defining act of the political crisis era. The towers sustained significant damage and were subsequently fully restored to their original state.<br><br>
-Today, the TLCC Twin Towers stand fully operational and remain the centrepiece of The LoL's city skyline — a testament to the nation's resilience.`
-  },
-
-  /* 17 — NATIONAL FARMS */
-  {
-    id: 'farms',
-    keywords: ['farm', 'farms', 'iron farm', 'totem farm', 'gold farm', 'automated farm', 'farm complex', 'national farm', 'resource economy'],
-    followups: ['Megaprojects', 'TLSRL Railway', 'Paiz Corp', 'Citizenship'],
-    response: `<strong>National Farm Complex</strong><br><br>
-The National Farm Complex powers The LoL's resource economy and supports citizen welfare. It consists of three fully automated farms, all currently operational:<br><br>
-— <strong>Iron Farm</strong> — Automated iron ingot production. The backbone of The LoL's crafting and construction economy.<br>
-— <strong>Totem Farm</strong> — Automated totem of undying production. Critical for high-risk operations and citizen safety.<br>
-— <strong>Gold Farm</strong> — Automated gold ingot production. Supports trade, equipment crafting, and economic reserves.<br><br>
-All three farms were engineered and built by <strong>Paiz™ Construction</strong> as part of The LoL's national infrastructure mandate.`
-  },
-
-  /* 18 — TL DOLLAR / CURRENCY */
-  {
-    id: 'currency',
-    keywords: ['tl dollar', 'tl$', 'currency', 'money', 'exchange rate', 'how much is', 'iron worth', 'emerald worth', 'diamond worth', 'netherite worth', 'national currency'],
-    followups: ['Paiz Shop', 'Paiz Chicken', 'Paiz Corp', 'Megaprojects'],
-    response: `<strong>TL Dollar (TL$) — National Currency</strong><br><br>
-The TL Dollar (TL$) is the official currency of The Legend of Legiona, pegged to Minecraft item values for in-game trade and commerce.<br><br>
-<strong>Official Exchange Rates:</strong><br>
-— Iron Ingot → <strong>TL$1</strong><br>
-— Gold Ingot → <strong>TL$5</strong><br>
-— Emerald → <strong>TL$10</strong><br>
-— Diamond → <strong>TL$30</strong><br>
-— Netherite → <strong>TL$150</strong><br><br>
-The TL Dollar is used across Paiz® Corp commercial services — transactions at Paiz Shop and Paiz Chicken are denominated in both TL$ and the Diamond (◆) pricing standard.`
-  },
-
-  /* 19 — EHEKSQUAD */
-  {
-    id: 'eheksquad',
-    keywords: ['eheksquad', 'ehek squad', 'phoenixaiman', 'pandaputih', 'kagee', 'sus era group', 'the sus members'],
-    followups: ['History of The LoL', 'The Sus Era', 'Founders', 'Skyxion server'],
-    response: `<strong>EhekSquad — Historical Context</strong><br><br>
-EhekSquad is a group that had an association with The Sus — the pre-founding settlement that became The LoL — during 2023.<br><br>
-<strong>Members:</strong> PhoenixAiman, PandaPutih, and Kagee.<br><br>
-<strong>Historical Status:</strong> Their exact relationship with The Sus was never formally defined — whether members, allies, or residents — as The Sus operated without any governance structure at the time.<br><br>
-EhekSquad eventually departed The Sus and re-established as an independent entity on Skyxion. They <strong>still exist today</strong> as their own independent group.<br><br>
-Their departure predates the formal founding of The Legend of Legiona. They have no official affiliation with The LoL's current government, ISC, or any national institutions.`
-  },
-
-  /* 20 — NAMING POLICY */
-  {
-    id: 'naming',
-    keywords: ['naming policy', 'style directive', 'bh-2026-0002', 'the lol name', 'lol abbreviation', 'standalone lol', 'prohibited name', 'how to write the lol', 'official name rules', 'naming directive'],
-    followups: ['Legal archive', 'Government policies', 'The Black House', 'All official documents'],
-    response: `<strong>Official Naming & Style Directive — BH-2026-0002</strong><br><br>
-Issued by The Black House on <strong>02 April 2026</strong>, this directive establishes the only approved name forms for The Legend of Legiona:<br><br>
-<strong>✓ Approved:</strong> "The Legend of Legiona" — Full official name. Required in all formal contexts.<br>
-<strong>✓ Approved:</strong> "The LoL" — The only permitted abbreviation. The "The" prefix is mandatory and non-negotiable.<br>
-<strong>✗ Prohibited:</strong> "LoL" — Standalone usage without "The" is strictly prohibited in all written materials, official or otherwise.<br><br>
-This policy took effect immediately upon issuance on 02 April 2026. It applies to all government documents, public-facing communications, and official web materials across The LoL's entire ecosystem.<br><br>
-<em>Reference: BH-2026-0002 · Policy · The Black House · 02 April 2026</em><br><br>
-<a href="https://faizzzlol.github.io/thelol/gov/assets/">View in Legal Archive →</a>`
-  },
-
-  /* 21 — SKYXION / ALTAER ERA */
-  {
-    id: 'skyxion',
-    keywords: ['skyxion', 'altaer era', 'altaer', 'minecraft server', 'kawaiisho', 'current era', 'server admin', 'which server'],
-    followups: ['History of The LoL', 'TLSRL Railway', 'Government structure', 'Founders'],
-    response: `<strong>Skyxion Server & The Altaer Era</strong><br><br>
-<strong>Skyxion</strong> is the Minecraft multiplayer server where The Legend of Legiona is based. The server is administered by the external group <strong>Kawaiisho</strong> — entirely separate from The LoL's own governance and lore.<br><br>
-<strong>Skyxion: Altaer Era</strong> is the current active era of the server. The LoL operates within this era as one of the most advanced and wealthiest nations on Skyxion — with full government, intelligence agency, railway network, and legal archive.<br><br>
-The "Skyxion: Altaer Era" designation appears across The LoL's entire web ecosystem as the official temporal marker for all current-era documents, products, and communications.<br><br>
-Prior eras referenced in The LoL's history: The Sus Era (pre-founding, 2023), and the period of the UltraX2020 presidency.`
-  },
-
-  /* 22 — LANDEN / SPECIAL TERRITORY */
-  {
-    id: 'landen',
-    keywords: ['landen', 'special administrative territory', 'sat', 'ikanuwu', 'ikanowo', 'imanhafizz', 'territory of landen'],
-    followups: ['Citizenship system', 'Government structure', 'Founders', 'National history'],
-    response: `<strong>Special Administrative Territory of Landen</strong><br><br>
-Landen is a <strong>Special Administrative Territory (SAT)</strong> under The Legend of Legiona's jurisdiction — a distinct administrative region with its own local governance, operating within The LoL's national framework.<br><br>
-<strong>Governing Officials of Landen:</strong><br>
-— <strong>ikanuwu</strong> (also known as ikanowo) — Co-governor<br>
-— <strong>ImanHafizz</strong> — Co-governor<br><br>
-Both are recognised citizens of The LoL and hold official governing roles within the Landen territory. Landen represents The LoL's commitment to structured, delegated regional administration across its jurisdiction.`
-  },
-
-  /* 23 — NAVIGATION */
-  {
-    id: 'navigation',
-    keywords: ['link', 'links', 'url', 'website', 'portal link', 'where can i find', 'navigate to', 'all pages', 'all portals', 'websites list', 'find the government', 'find the isc'],
-    followups: ['Government portal', 'ISC portal', 'Paiz Corp', 'Legal archive'],
-    response: `<strong>The LoL Web Ecosystem — All Official Portals</strong><br><br>
-<strong>Nation & Government:</strong><br>
-— <a href="https://faizzzlol.github.io/thelol/">The Legend of Legiona (Nation)</a><br>
-— <a href="https://faizzzlol.github.io/thelol/gov/">Government Portal</a><br>
-— <a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Citizenship Portal</a><br>
-— <a href="https://faizzzlol.github.io/thelol/gov/assets/">Legal Archive</a><br>
-— <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Portal</a><br>
-— <a href="https://faizzzlol.github.io/thelol/gov/about-us">About This Portal</a><br><br>
-<strong>Paiz® Corp & Subsidiaries:</strong><br>
-— <a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp</a><br>
-— <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Paiz Shop</a><br>
-— <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Paiz Chicken</a><br>
-— <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PaizProductions</a><br>
-— <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL Movie</a><br>
-— <a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways</a><br><br>
-<strong>You're currently at:</strong> <a href="https://faizzzlol.github.io/PaizCorp/pAIz.html">pAIz Intelligence Portal</a>`
-  },
-
-  /* 24 — TL RAILWAYS (operator) */
-  {
-    id: 'tl_railways',
-    keywords: ['tl railways', 'tlr', 'rail operator', 'monorail', 'lrt', 'mrt', 'high speed boat', 'boat link', 'railway network', 'rail network', 'transport network'],
-    followups: ['TLSRL Railway project', 'Paiz Corp overview', 'Megaprojects', 'Paiz Construction'],
-    response: `<strong>TL Railways — National Rail & Transit Operator</strong><br><br>
-TL Railways (Paiz® Corp SUB-01 · Transport Division) is The LoL's official national rail and transit operator.<br><br>
-<strong>Network Lines:</strong><br>
-— <strong>TLSRL</strong> — The LoL–Spawn Railway Link (4,800+ blocks, 6 stations, 3 service classes: Regular · Express · Cargo)<br>
-— <strong>Monorail</strong> — Urban transit within The LoL City<br>
-— <strong>LRT/MRT</strong> — Light and mass rapid transit services<br>
-— <strong>High-Speed Boat Link</strong> — Water-based high-speed connection across Skyxion<br><br>
-<strong>TLSRL Stations:</strong> TLL → LLC → LLO → MPS → SXJ → SPN<br><br>
-TL Railways is operated under Paiz® Corp and its entire network was engineered by Paiz™ Construction.<br><br>
-<a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways Portal →</a>`
-  },
-
-  /* 25 — PAIZ CONSTRUCTION */
-  {
-    id: 'paiz_construction',
-    keywords: ['paiz construction', 'construction arm', 'engineering arm', 'who built', 'construction division', 'built by paiz', 'national builder'],
-    followups: ['TLSRL Railway', 'TLCC Twin Towers', 'National Farm Complex', 'Paiz Corp overview'],
-    response: `<strong>Paiz™ Construction — Engineering Division</strong><br><br>
-Paiz™ Construction (Paiz® Corp SUB-02 · Construction & Engineering) is The LoL's official national engineering and construction arm.<br><br>
-<strong>Completed Projects:</strong><br>
-— <strong>TLSRL</strong> — The LoL–Spawn Railway Link (4,800+ block fully enclosed rail network)<br>
-— <strong>TLCC Twin Towers</strong> — Iconic twin skyscrapers; restored after UltraX2020 crisis attacks<br>
-— <strong>National Farm Complex</strong> — Three automated farms (Iron, Totem, Gold)<br>
-— All major national builds and infrastructure across The LoL's territory<br><br>
-Paiz™ Construction is the engine behind every significant physical structure in The LoL — from civic landmarks to essential economic infrastructure.`
-  },
-
-  /* 26 — DESIGN / TECH STACK */
-  {
-    id: 'design',
-    keywords: ['design system', 'tech stack', 'built with', 'github pages', 'html css', 'what font', 'color scheme', 'how is the website built', 'web stack'],
-    followups: ['Paiz Corp portals', 'Government portal', 'ISC portal', 'Navigation'],
-    response: `<strong>Web Ecosystem & Design System</strong><br><br>
-The entire LoL web ecosystem is built with pure <strong>HTML, CSS, and vanilla JavaScript</strong> — no frameworks, no backends. All hosted on <strong>GitHub Pages</strong>.<br><br>
-<strong>Paiz® Corp Design System:</strong><br>
-— Background: Cream (#f4f0e8) in light mode<br>
-— Accent: Signal Green (#2a6647 / #3a8f63)<br>
-— Fonts: Playfair Display · DM Mono · Outfit<br><br>
-<strong>Government Portal:</strong><br>
-— Dark aesthetic, gold (#C9A84C) accent, same font stack<br><br>
-<strong>ISC Portal:</strong><br>
-— Minimalist pure dark (#090807), single-pixel borders<br>
-— Gold (#c6a664) as sole accent · Fira Code · Barlow fonts<br><br>
-<strong>pAIz (this page):</strong><br>
-— Full dark/light theme switching with <code>localStorage</code> persistence<br>
-— Dark default, green accent, Playfair · DM Mono · Outfit font stack<br><br>
-All cross-site links use absolute <code>https://faizzzlol.github.io/…</code> URLs.`
-  }
-
+const KB=[
+{id:'greeting',kw:['hello','hi','hey','hei','hai','hye','good morning','good evening','good afternoon','greetings','wassup','yo','sup','salam','assalamualaikum','wsp','howdy','hola','morning','evening',"what's up"],fup:['Who are the founders?','What is the ISC?','History of The LoL','Paiz Corp overview'],r:`Welcome. I'm <strong>pAIz</strong> — the official intelligence assistant of <strong>The Legend of Legiona (The LoL)</strong>, developed by Paiz Corp Intelligence Division.<br><br>I hold comprehensive knowledge of The LoL across all domains: full national history, government and ISC, legal archive, megaprojects, all five Paiz® Corp subsidiaries, and the people who built the nation.<br><br>What would you like to know?`},
+{id:'help',kw:['what can you do','help','capabilities','what do you know','what are you','who are you','about yourself','about paiz','what is paiz','how do you work','introduce yourself','what do you cover','what topics'],fup:['National history','Government structure','Legal archive','Paiz Corp'],r:`I'm <strong>pAIz</strong> — The Legend of Legiona's official intelligence assistant. My full knowledge scope:<br><br><strong>National History & Lore</strong> — Full timeline from The Sus Era (2023) to today, including the UltraX2020 crisis.<br><strong>Founders & Leadership</strong> — Faiz4224, Imii Kun, Dyno and full government structure.<br><strong>Government & The Black House</strong> — Six departments, ISC intelligence agency, document conventions.<br><strong>Legal Archive</strong> — All official acts, ordinances, charters and proclamations.<br><strong>Megaprojects</strong> — TLSRL Railway, TLCC Twin Towers, National Farm Complex.<br><strong>Paiz® Corp</strong> — All five subsidiaries: TL Railways, Paiz Construction, Paiz Shop, PaizProductions, Paiz Chicken.<br><strong>Portal Navigation</strong> — Every official URL in The LoL web ecosystem.<br><br>Ask me anything.`},
+{id:'founders',kw:['founder','founders','faiz4224','imii kun','imii','dyno','who created','who started','who built the lol','three founders','founding members','co-founder','first president','president faiz'],fup:['History of The LoL','The Black House','Paiz Corp','The LoL Movie cast'],r:`<strong>The Three Founders of The Legend of Legiona</strong><br><br>The LoL was co-founded by three individuals who signed the <a href="https://faizzzlol.github.io/thelol/assets/The_LoL_Proclamation.pdf">Proclamation of Sovereignty</a>:<br><br><strong>Faiz4224</strong> — First President & Founding Leader. Principal architect of The LoL's governance and digital infrastructure. Currently serving as President, operating from <em>The Black House</em>. Also founded and chairs Paiz® Corp.<br><br><strong>Imii Kun</strong> — Co-Founder & Visionary. One of the original three founding members, key to the nation's early vision.<br><br><strong>Dyno</strong> — Co-Founder & Strategist. Together with Faiz4224 and Imii Kun, established The LoL as a sovereign Minecraft nation on Skyxion.<br><br>All three appear in <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a>, currently in production.`},
+{id:'history',kw:['history','sus era','the sus','how did it start','origin','when was','began','background','lore','timeline','past','founding story'],fup:['UltraX2020 crisis','EhekSquad','Skyxion: Altaer Era','Founders'],r:`<strong>Full History of The Legend of Legiona</strong><br><br><strong>The Sus Era (2023 · Pre-Founding)</strong><br>The nation originated as "The Sus" — an informal settlement on Skyxion with no formal governance. EhekSquad (PhoenixAiman, PandaPutih, Kagee) had an undefined association with The Sus. They later departed independently. EhekSquad still exists today.<br><br><strong>The Founding (2023)</strong><br>Faiz4224, Imii Kun and Dyno formally established The Legend of Legiona as a sovereign nation, signing the Proclamation of Sovereignty and establishing the TL Dollar and national infrastructure.<br><br><strong>First Democratic Election (May 6, 2023)</strong><br>UltraX2020 and the <em>Parti Harapan Rakyat The LoL (PHRTL)</em> won — making UltraX2020 the 2nd President.<br><br><strong>The UltraX2020 Crisis</strong><br>A bombed city sign, drone attacks on the TLCC Twin Towers, and broader political crisis defined his tenure. UltraX2020 eventually resigned; power returned to Faiz4224.<br><br><strong>Skyxion: Altaer Era (Present)</strong><br>The LoL now operates as one of Skyxion's most advanced nations.<br><br><a href="https://faizzzlol.github.io/thelol/gov/#history">Full timeline →</a>`},
+{id:'ultrax',kw:['ultrax2020','ultrax','2nd president','second president','phrtl','parti harapan','crisis','resigned','drone attack','bombed city','election 2023','internal strife'],fup:['History of The LoL','TLCC Twin Towers','Current government','The LoL Movie'],r:`<strong>The UltraX2020 Presidency & Crisis</strong><br><br>On <strong>May 6, 2023</strong>, UltraX2020 won The LoL's first democratic election under the <em>Parti Harapan Rakyat The LoL (PHRTL)</em> — becoming the <strong>2nd President</strong>.<br><br>His tenure:<br>— A city sign was bombed in an act of internal sabotage.<br>— Drone attacks targeted the <strong>TLCC Twin Towers</strong>, causing significant damage.<br>— Broader political crisis destabilised the administration.<br><br>UltraX2020 <strong>resigned</strong>. Governance returned to Faiz4224. The TLCC Twin Towers were fully restored.<br><br>He appears as a principal cast member in <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a> — his presidency is the film's central political arc.`},
+{id:'government',kw:['government','black house','departments','ministry','office of the president','government structure','national justice','lore archives','public works','external relations','communications','dept','executive','six departments'],fup:['ISC Agency','Legal archive','Faiz4224 presidency','Citizenship'],r:`<strong>Government Structure of The Legend of Legiona</strong><br><br><strong>The Black House — Office of the President</strong><br>Executive seat of The LoL's government. Currently: <strong>Faiz4224</strong>. Documents: <em>BH-YYYY-###</em>.<br><br><strong>Six Government Departments:</strong><br>— DEPT-01: <strong>ISC</strong> — Internal Security Control · ACTIVE<br>— DEPT-02: Office of National Justice<br>— DEPT-03: Ministry of Lore & Archives<br>— DEPT-04: Public Works Division<br>— DEPT-05: Bureau of External Relations<br>— DEPT-06: The LoL Communications<br><br>Only ISC (DEPT-01) is fully active currently.<br><br>Document conventions: LOLGOV-YYYY-### / BH-YYYY-### / ISC-YYYY-###<br><br><a href="https://faizzzlol.github.io/thelol/gov/">Government Portal →</a>`},
+{id:'isc',kw:['isc','internal security control','intelligence agency','security agency','classified','tlio','t.l.i.o','clearance','intel portal','national security'],fup:['Government structure','Legal documents','History'],r:`<strong>ISC — Internal Security Control</strong><br><br>The LoL's official national intelligence agency — Government Department 01 (DEPT-01), equivalent to a CIA.<br><br>Successor to the former <em>T.L.I.O</em> — that name is no longer in use.<br><br><strong>Public Portals:</strong><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Main Portal</a><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/national">Transparency Report</a><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/search">Public Search Archive</a><br><br><strong>Intel Portal</strong> is password-protected. Clearance code: <em>LEGIONA2026</em>.<br>Document reference: <em>ISC-YYYY-###</em>`},
+{id:'legal',kw:['legal','documents','archive','acts','laws','ordinance','rights charter','proclamation','legal archive','document list','lolgov','bh-2026','all documents','official documents'],fup:['Citizenship','Naming policy','Government portal','ISC'],r:`<strong>Legal Archive — Official Documents</strong><br><br>Hosted at <a href="https://faizzzlol.github.io/thelol/gov/assets/">Legal Archive</a> — fully searchable by category.<br><br><strong>LOLGOV-2026-0001</strong> — Citizenship Act<br><strong>LOLGOV-2026-0002</strong> — Revocation Ordinance<br><strong>LOLGOV-2026-0003</strong> — Citizens' Rights Charter<br><strong>BH-2026-0001</strong> — Presidential Proclamation of Sovereignty (<a href="https://faizzzlol.github.io/thelol/assets/The_LoL_Proclamation.pdf">EN</a> / <a href="https://faizzzlol.github.io/thelol/assets/Proklamasi_The_LoL.pdf">BM</a>)<br><strong>BH-2026-0002</strong> — Official Naming & Style Directive (02 Apr 2026)<br><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">Browse Legal Archive →</a>`},
+{id:'citizenship',kw:['citizenship','citizen','apply','application','citizen rights','how to join','become a citizen','citizenship portal','revocation','rights charter'],fup:['Legal archive','Government portal','Landen territory'],r:`<strong>Citizenship System</strong><br><br>Governed by three documents:<br><br><strong>LOLGOV-2026-0001 — Citizenship Act:</strong> Eligibility, application process, and status.<br><strong>LOLGOV-2026-0003 — Citizens' Rights Charter:</strong> Fundamental rights of all citizens.<br><strong>LOLGOV-2026-0002 — Revocation Ordinance:</strong> Conditions for revocation.<br><br>Applications via the online Citizenship Portal with formal form and eleven declaration checkboxes. Citizenship is era-bound and renewable. All decisions rest with Faiz4224.<br><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Apply for Citizenship →</a>`},
+{id:'tlsrl',kw:['tlsrl','spawn railway','rail link','train','stations','railway project','tll','llc','llo','mps','sxj','spn','express service','cargo service','4800','enclosed rail'],fup:['TL Railways','Paiz Corp','Megaprojects','TLCC Twin Towers'],r:`<strong>TLSRL — The LoL–Spawn Railway Link</strong><br><br>— Track: <strong>4,800+ blocks</strong> fully enclosed<br>— Travel time: <strong>~10 minutes</strong> end-to-end<br>— Classes: Regular · Express · Cargo<br>— Stations: <strong>TLL → LLC → LLO → MPS → SXJ → SPN</strong><br><br>Operated by TL Railways (Paiz® Corp SUB-01). Built by Paiz™ Construction (SUB-02).<br><br><a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways Portal →</a>`},
+{id:'paiz_corp',kw:['paiz corp','paiz® corp','paiz corporation','all subsidiaries','five subsidiaries','conglomerate','national company','paiz group','overview paiz','what is paiz corp'],fup:['Paiz Shop','Paiz Chicken','PaizProductions','TL Railways'],r:`<strong>Paiz® Corp — National Conglomerate</strong><br><br>Founded and chaired by <strong>Faiz4224</strong>. Five subsidiaries:<br><br><strong>SUB-01 · TL Railways</strong> — National rail operator. TLSRL, Monorail, LRT/MRT, High-Speed Boat Link. <a href="https://faizzzlol.github.io/thelol/tlr/">→</a><br><strong>SUB-02 · Paiz™ Construction</strong> — Built TLSRL, TLCC Twin Towers, National Farm Complex and all major infrastructure.<br><strong>SUB-03 · Paiz Shop</strong> — Official Minecraft item store. Items in Diamonds. <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">→</a><br><strong>SUB-04 · PaizProductions</strong> — Film studio. The LoL Movie, LoL Chronicles, ISC: Classified. <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">→</a><br><strong>SUB-05 · Paiz Chicken</strong> — Virtual food ordering. Delivery across Skyxion. <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">→</a><br><br><a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp Homepage →</a>`},
+{id:'paiz_shop',kw:['paiz shop','shop','store','buy items','shulker','mending','unbreaking','nether wart','iron ingot','retail','item shop','minecraft store'],fup:['Paiz Corp','Paiz Chicken','TL Dollar'],r:`<strong>Paiz Shop — Official Item Store</strong><br><br>Paiz® Corp SUB-03. Priced in Diamonds (◆):<br><br>Shulker Box ◆4 · Mending I ◆3 · Nether Wart ◆3 · Unbreaking III ◆2 · Iron Ingot ◆1<br><br>Orders via portal → Discord webhook. Live stock management, delivery and pickup.<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Visit Paiz Shop →</a>`},
+{id:'paiz_chicken',kw:['paiz chicken','chicken','food','restaurant','order food','food delivery','pickup food','food brand','virtual food'],fup:['Paiz Shop','Paiz Corp','TL Dollar'],r:`<strong>Paiz Chicken — Virtual Food Brand</strong><br><br>Paiz® Corp SUB-05. Minecraft food ordering across Skyxion.<br><br>Delivery + pickup · Distance-based fees · Priced in Diamonds · Discord webhook integration · Live stock management<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Order from Paiz Chicken →</a>`},
+{id:'productions',kw:['paizproductions','paiz productions','film studio','movie studio','production studio','all films','three projects','isc classified','lol chronicles','media division'],fup:['The LoL Movie','Paiz Corp'],r:`<strong>PaizProductions — Official Film Studio</strong><br><br>Paiz® Corp SUB-04. Three active projects:<br><br><strong>1. The LoL: The Movie</strong> — Feature Film · IN PRODUCTION · 4 phases. Cast: Faiz4224, Imii Kun, Dyno, UltraX2020. <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">→</a><br><strong>2. LoL Chronicles</strong> — Series · IN DEVELOPMENT<br><strong>3. ISC: Classified</strong> — Short Film · PLANNED<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PaizProductions →</a>`},
+{id:'lolmovie',kw:['the lol movie','lol movie','thelolmovie','feature film','four phases','movie cast','in production film','political epic','minecraft film'],fup:['PaizProductions','Founders','UltraX2020 presidency'],r:`<strong>The LoL: The Movie</strong><br><br>Status: <strong>IN PRODUCTION</strong> · 4 Phases · Minecraft political epic<br><br><strong>Cast:</strong><br>Faiz4224 — First President & Founding Leader<br>Imii Kun — Co-Founder & Visionary<br>Dyno — Co-Founder & Strategist<br>UltraX2020 — 2nd President (political crisis arc)<br><br>The four phases cover The LoL's full arc from the Sus Era to the Altaer Era.<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">Official Film Page →</a>`},
+{id:'megaprojects',kw:['megaproject','megaprojects','infrastructure','national projects','big projects','major projects','all projects'],fup:['TLSRL Railway','TLCC Twin Towers','National Farm Complex'],r:`<strong>National Megaprojects</strong><br><br>All engineered by Paiz™ Construction:<br><br><strong>1. TLSRL</strong> — The LoL–Spawn Railway Link. 4,800+ block enclosed rail, 6 stations, 3 service classes.<br><strong>2. TLCC Twin Towers</strong> — Most iconic landmark in The LoL City. Attacked during UltraX2020 crisis, fully restored.<br><strong>3. National Farm Complex</strong> — Iron Farm · Totem Farm · Gold Farm (all operational).`},
+{id:'tlcc',kw:['tlcc','twin towers','convention centre','convention center','landmark','towers attacked','towers bombed','most iconic','lol city'],fup:['UltraX2020 crisis','National Farm Complex','TLSRL Railway'],r:`<strong>TLCC Twin Towers</strong><br><br>The most iconic landmark in The LoL City. Built by Paiz™ Construction. During the UltraX2020 presidency, drone attacks caused significant damage. The towers were fully restored and remain the centrepiece of The LoL's skyline.`},
+{id:'farms',kw:['farm','farms','iron farm','totem farm','gold farm','automated farm','farm complex','national farm','resource economy'],fup:['Megaprojects','TLSRL','Paiz Corp'],r:`<strong>National Farm Complex</strong><br><br>Three fully automated farms — all currently operational:<br><br><strong>Iron Farm</strong> — Backbone of crafting and construction economy<br><strong>Totem Farm</strong> — Totem of undying production for high-risk operations<br><strong>Gold Farm</strong> — Supports trade and economic reserves<br><br>All engineered by Paiz™ Construction.`},
+{id:'currency',kw:['tl dollar','tl$','currency','money','exchange rate','iron worth','emerald worth','diamond worth','netherite worth','national currency'],fup:['Paiz Shop','Paiz Chicken','Paiz Corp'],r:`<strong>TL Dollar (TL$) — National Currency</strong><br><br>Iron Ingot → TL$1 · Gold Ingot → TL$5 · Emerald → TL$10 · Diamond → TL$30 · Netherite → TL$150`},
+{id:'eheksquad',kw:['eheksquad','ehek squad','phoenixaiman','pandaputih','kagee'],fup:['History of The LoL','Founders'],r:`<strong>EhekSquad — Historical Context</strong><br><br>Members: PhoenixAiman, PandaPutih, Kagee.<br><br>Had an undefined association with The Sus (pre-founding settlement) in 2023. The Sus had no formal governance at the time. EhekSquad departed and re-established independently. They <strong>still exist today</strong> with no affiliation to The LoL's institutions.`},
+{id:'naming',kw:['naming policy','style directive','bh-2026-0002','the lol name','lol abbreviation','standalone lol','prohibited name','how to write the lol','naming directive'],fup:['Legal archive','The Black House'],r:`<strong>Official Naming & Style Directive — BH-2026-0002</strong><br><br>Issued by The Black House on <strong>02 April 2026</strong>:<br><br>✓ <strong>"The Legend of Legiona"</strong> — Full official name<br>✓ <strong>"The LoL"</strong> — Only permitted abbreviation. The "The" is mandatory.<br>✗ <strong>"LoL"</strong> — Standalone usage STRICTLY PROHIBITED in all materials.<br><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">View in Legal Archive →</a>`},
+{id:'skyxion',kw:['skyxion','altaer era','altaer','minecraft server','kawaiisho','current era','server admin','which server'],fup:['History of The LoL','TLSRL Railway','Government structure'],r:`<strong>Skyxion Server & The Altaer Era</strong><br><br><strong>Skyxion</strong> is the Minecraft server where The LoL is based, administered by <strong>Kawaiisho</strong> — separate from The LoL's governance.<br><br><strong>Skyxion: Altaer Era</strong> is the current era. The LoL operates as one of Skyxion's most advanced nations with full government, ISC, railway network, and legal archive.`},
+{id:'landen',kw:['landen','special administrative territory','sat','ikanuwu','ikanowo','imanhafizz'],fup:['Citizenship','Government structure'],r:`<strong>Special Administrative Territory of Landen</strong><br><br>Landen is an SAT under The LoL's jurisdiction with its own local governance.<br><br>Governing officials: <strong>ikanuwu</strong> (also ikanowo) and <strong>ImanHafizz</strong> — both recognised citizens of The LoL.`},
+{id:'nav',kw:['link','links','url','website','portal link','where can i find','navigate to','all pages','all portals','websites list'],fup:['Government portal','ISC portal','Paiz Corp','Legal archive'],r:`<strong>All Official Portals</strong><br><br><a href="https://faizzzlol.github.io/thelol/">The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/thelol/gov/">Government Portal</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Citizenship Portal</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">Legal Archive</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Portal</a><br><a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PaizProductions</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL Movie</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways</a>`},
+{id:'railways',kw:['tl railways','tlr','rail operator','monorail','lrt','mrt','high speed boat','boat link','railway network','transport network'],fup:['TLSRL project','Paiz Corp','Megaprojects'],r:`<strong>TL Railways — National Transit Operator</strong><br><br>Paiz® Corp SUB-01. Network lines:<br><br><strong>TLSRL</strong> — The LoL–Spawn Link (4,800+ blocks, 6 stations, 3 classes)<br><strong>Monorail</strong> — Urban transit within The LoL City<br><strong>LRT/MRT</strong> — Mass rapid transit services<br><strong>High-Speed Boat Link</strong> — Water-based connection across Skyxion<br><br><a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways Portal →</a>`}
 ];
 
-/* ══════════════════════════════════════════════════════════════
-   MATCHING ENGINE
-══════════════════════════════════════════════════════════════ */
-function scoreEntry(entry, query) {
-  let score = 0;
-  const words = query.split(/\s+/);
-  for (const kw of entry.keywords) {
-    if (query.includes(kw)) {
-      // Weight by specificity: more words = more specific = higher score
-      const tokens = kw.trim().split(/\s+/).length;
-      score += tokens * Math.max(kw.length, 4);
-    }
+function score(e,q){let s=0;for(const k of e.kw){const kt=k.trim();if(q.includes(kt)||q===kt){const t=kt.split(/\s+/).length;s+=t*Math.max(kt.length,4);if(q===kt)s+=20}}return s}
+function best(txt){const q=txt.toLowerCase().trim();let b=null,bs=0;for(const e of KB){const s=score(e,q);if(s>bs){bs=s;b=e}}return bs>0?b:null}
+const FALLBACK=`I don't have specific intelligence on that query.<br><br>I can help with: <strong>The LoL's history</strong>, <strong>founders</strong>, <strong>government & ISC</strong>, <strong>legal documents</strong>, <strong>megaprojects</strong>, <strong>Paiz® Corp</strong>, <strong>citizenship</strong>, <strong>TLSRL Railway</strong>, <strong>TL Dollar</strong>, and <strong>portal navigation</strong>.`;
+const FF=['Who are the founders?','History of The LoL','ISC Agency','Paiz Corp','Legal archive','TLSRL Railway'];
+
+const mw=document.getElementById('mw');
+const mi=document.getElementById('mi');
+const ci=document.getElementById('ci');
+const cs=document.getElementById('cs');
+let busy=false;
+
+function ts(){return new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}
+function bot(){mw.scrollTo({top:mw.scrollHeight,behavior:'smooth'})}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function addUser(t){
+  const w=document.getElementById('welcome');if(w)w.remove();
+  const g=document.createElement('div');g.className='mg';
+  g.innerHTML=`<div class="mu">${esc(t)}</div><div class="mtime" style="text-align:right">${ts()}</div>`;
+  mi.appendChild(g);bot();
+}
+function addTyping(){
+  const el=document.createElement('div');el.className='typing-row';el.id='typ';
+  el.innerHTML=`<div class="mb-av">p</div><div class="typing-bub"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
+  mi.appendChild(el);bot();
+}
+function addBot(html,fups){
+  const el=document.getElementById('typ');if(el)el.remove();
+  const g=document.createElement('div');g.className='mg';
+  const row=document.createElement('div');row.className='mb-row';
+  row.innerHTML=`<div class="mb-av">p</div><div class="mb-txt">${html}</div>`;
+  const time=document.createElement('div');time.className='mtime bot';time.textContent=`pAIz · ${ts()}`;
+  g.appendChild(row);g.appendChild(time);
+  if(fups&&fups.length){
+    const fu=document.createElement('div');fu.className='fups';
+    fups.forEach(f=>{const b=document.createElement('button');b.className='fup';b.textContent=f;b.onclick=()=>processQuery(f);fu.appendChild(b)});
+    g.appendChild(fu);
   }
-  return score;
+  mi.appendChild(g);bot();
 }
 
-function findBestMatch(userText) {
-  const q = userText.toLowerCase().trim();
-  let best = null, bestScore = 0;
-  for (const entry of KB) {
-    const s = scoreEntry(entry, q);
-    if (s > bestScore) { bestScore = s; best = entry; }
-  }
-  return bestScore > 0 ? best : null;
+async function processQuery(t){
+  if(busy||!t.trim())return;busy=true;cs.disabled=true;ci.value='';ci.style.height='auto';
+  addUser(t);addTyping();
+  await new Promise(r=>setTimeout(r,480+Math.random()*600));
+  const m=best(t);addBot(m?m.r:FALLBACK,m?m.fup:FF);
+  busy=false;cs.disabled=false;ci.focus();
 }
-
-const FALLBACK_RESPONSE = `I don't have specific intelligence on that query in my current knowledge base.<br><br>
-I can answer questions about: <strong>The LoL's history</strong>, <strong>founders</strong>, <strong>government & ISC</strong>, <strong>legal documents</strong>, <strong>megaprojects</strong>, <strong>Paiz® Corp</strong> and its five subsidiaries, <strong>citizenship</strong>, <strong>TLSRL Railway</strong>, <strong>TL Dollar</strong>, and <strong>portal navigation</strong>.<br><br>
-Try rephrasing your question, or use one of the suggested topics below.`;
-
-const FALLBACK_FOLLOWUPS = ['Who are the founders?', 'History of The LoL', 'ISC Agency', 'Paiz Corp overview', 'Legal archive', 'TLSRL Railway'];
-
-/* ══════════════════════════════════════════════════════════════
-   CONVERSATION MEMORY (session only)
-══════════════════════════════════════════════════════════════ */
-const sessionHistory = []; // {q, a} pairs for context
-let isBusy = false;
-
-/* ══════════════════════════════════════════════════════════════
-   DOM HELPERS
-══════════════════════════════════════════════════════════════ */
-const messagesEl = document.getElementById('chat-messages');
-const suggestEl  = document.getElementById('suggestions-row');
-const inputEl    = document.getElementById('chat-input');
-const sendBtn    = document.getElementById('chat-send');
-
-function getTime() {
-  return new Date().toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+function sendMsg(){const t=ci.value.trim();if(t)processQuery(t)}
+function useChip(b){processQuery(b.textContent.trim())}
+function clearChat(){
+  mi.innerHTML='';
+  const w=document.createElement('div');w.className='welcome';w.id='welcome';
+  w.innerHTML=`<div class="wlogo">p</div><div class="wtitle">Hello. I'm p<em>AI</em>z.</div><p class="wsub">The official intelligence assistant of The Legend of Legiona, developed by Paiz Corp Intelligence Division. Ask me anything about The LoL.</p><div class="wchips"><button class="chip" onclick="useChip(this)">Who are the three founders of The LoL?</button><button class="chip" onclick="useChip(this)">Tell me about The Legend of Legiona's history</button><button class="chip" onclick="useChip(this)">What is the ISC intelligence agency?</button><button class="chip" onclick="useChip(this)">Explain all five Paiz Corp subsidiaries</button><button class="chip" onclick="useChip(this)">What legal documents exist in the archive?</button><button class="chip" onclick="useChip(this)">Tell me about the TLSRL railway project</button><button class="chip" onclick="useChip(this)">What happened during the UltraX2020 presidency?</button><button class="chip" onclick="useChip(this)">Tell me about The LoL Movie</button></div>`;
+  mi.appendChild(w);
 }
-
-function appendMsg(role, html, time) {
-  const welcome = document.getElementById('welcome-state');
-  if (welcome) welcome.remove();
-
-  const row = document.createElement('div');
-  row.className = `msg-row ${role}`;
-
-  const avatar = document.createElement('div');
-  avatar.className = 'msg-avatar';
-  avatar.textContent = role === 'bot' ? 'p' : 'U';
-
-  const bubble = document.createElement('div');
-  bubble.className = 'msg-bubble';
-  bubble.innerHTML = html;
-
-  const meta = document.createElement('div');
-  meta.className = 'msg-meta';
-  meta.textContent = (role === 'bot' ? 'pAIz · ' : 'You · ') + (time || getTime());
-
-  const wrap = document.createElement('div');
-  wrap.style.cssText = `display:flex;flex-direction:column;max-width:72%;${role==='user'?'align-items:flex-end;':''}`;
-  wrap.appendChild(bubble);
-  wrap.appendChild(meta);
-
-  row.appendChild(avatar);
-  row.appendChild(wrap);
-  messagesEl.appendChild(row);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-  return row;
-}
-
-function showTyping() {
-  const row = document.createElement('div');
-  row.className = 'typing-row';
-  const avatar = document.createElement('div');
-  avatar.className = 'msg-avatar';
-  avatar.style.cssText = 'width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:DM Mono,monospace;font-size:0.5rem;font-weight:600;margin-top:2px;background:var(--ink2);border:1px solid rgba(42,102,71,0.25);color:var(--green-lt);';
-  avatar.textContent = 'p';
-  const bubble = document.createElement('div');
-  bubble.className = 'typing-bubble';
-  bubble.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
-  row.appendChild(avatar);
-  row.appendChild(bubble);
-  messagesEl.appendChild(row);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-  return row;
-}
-
-function showSuggestions(chips) {
-  suggestEl.style.display = 'flex';
-  suggestEl.innerHTML = '';
-  chips.forEach(text => {
-    const chip = document.createElement('button');
-    chip.className = 'sug-chip';
-    chip.textContent = text;
-    chip.onclick = () => processQuery(text);
-    suggestEl.appendChild(chip);
-  });
-}
-
-function setDisabled(state) {
-  inputEl.disabled = state;
-  sendBtn.disabled = state;
-}
-
-/* ── CLEAR ── */
-function clearChat() {
-  sessionHistory.length = 0;
-  messagesEl.innerHTML = '';
-  suggestEl.style.display = 'none';
-  suggestEl.innerHTML = '';
-  const ws = document.createElement('div');
-  ws.id = 'welcome-state';
-  ws.className = 'welcome-state';
-  ws.innerHTML = `
-    <div class="ws-logo">p</div>
-    <div class="ws-title">Hello, I'm pAIz.</div>
-    <p class="ws-sub">Your official intelligence assistant for The Legend of Legiona. I know the full history, governance, documents, megaprojects, and people of The LoL. Ask me anything.</p>
-    <div class="ws-chips">
-      <button class="ws-chip" onclick="useChip(this)">NATIONAL HISTORY</button>
-      <button class="ws-chip" onclick="useChip(this)">LEGAL DOCUMENTS</button>
-      <button class="ws-chip" onclick="useChip(this)">ISC AGENCY</button>
-      <button class="ws-chip" onclick="useChip(this)">FOUNDERS</button>
-      <button class="ws-chip" onclick="useChip(this)">TLSRL RAILWAY</button>
-      <button class="ws-chip" onclick="useChip(this)">CITIZENSHIP</button>
-      <button class="ws-chip" onclick="useChip(this)">PAIZ CORP</button>
-      <button class="ws-chip" onclick="useChip(this)">THE LOL MOVIE</button>
-    </div>`;
-  messagesEl.appendChild(ws);
-}
-
-/* ── CHIP / STARTER HANDLERS ── */
-const CHIP_MAP = {
-  'NATIONAL HISTORY': 'Tell me about the full history of The Legend of Legiona, from The Sus era to today.',
-  'LEGAL DOCUMENTS': 'What legal documents are in the Legal Archive? List all of them with their reference numbers.',
-  'ISC AGENCY': 'What is the ISC — Internal Security Control — and what does it do?',
-  'FOUNDERS': 'Tell me about the three founders of The LoL: Faiz4224, Imii Kun, and Dyno.',
-  'TLSRL RAILWAY': 'Tell me everything about the TLSRL railway project.',
-  'CITIZENSHIP': 'How does the citizenship system work in The LoL?',
-  'PAIZ CORP': 'Give me an overview of Paiz Corp and all five of its subsidiaries.',
-  'THE LOL MOVIE': 'Tell me about The LoL Movie being produced by PaizProductions.',
-};
-function useChip(btn) { processQuery(CHIP_MAP[btn.textContent] || btn.textContent); }
-function useStarter(btn) { processQuery(btn.firstChild.textContent.trim()); }
-
-/* ── PROCESS QUERY ── */
-async function processQuery(text) {
-  if (isBusy || !text.trim()) return;
-  isBusy = true;
-  setDisabled(true);
-  suggestEl.style.display = 'none';
-  inputEl.value = '';
-  inputEl.style.height = 'auto';
-
-  const t = getTime();
-  appendMsg('user', escHtml(text), t);
-  const typing = showTyping();
-
-  // Simulate processing delay (feels natural, not instant)
-  const delay = 500 + Math.random() * 700;
-  await new Promise(r => setTimeout(r, delay));
-
-  const match = findBestMatch(text);
-  const response = match ? match.response : FALLBACK_RESPONSE;
-  const followups = match ? match.followups : FALLBACK_FOLLOWUPS;
-
-  typing.remove();
-  appendMsg('bot', response, getTime());
-  showSuggestions(followups);
-
-  sessionHistory.push({ q: text, a: match ? match.id : 'fallback' });
-
-  isBusy = false;
-  setDisabled(false);
-  inputEl.focus();
-}
-
-function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-/* ── SEND ── */
-function sendMessage() {
-  const text = inputEl.value.trim();
-  if (text) processQuery(text);
-}
-
-/* ── INPUT AUTO-RESIZE + ENTER ── */
-inputEl.addEventListener('input', function() {
-  this.style.height = 'auto';
-  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-});
-inputEl.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-});
+ci.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,200)+'px'});
+ci.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg()}});
 </script>
-
 </body>
 </html>
