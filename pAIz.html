@@ -11,7 +11,7 @@
 :root {
   --green:#2a6647;--green-lt:#3a9165;--green-dim:rgba(42,102,71,0.1);
   --bg:#0d0c0a;--bg2:#111009;--bg3:#161410;
-  --surface:#1a1814;--surface2:#211f1a;--ink:#050403;
+  --surface:#1a1814;--surface2:#211f1a;
   --txt:#ede8da;--txt2:#b5ad9a;--muted:rgba(237,232,218,0.42);
   --faint:rgba(237,232,218,0.22);--xfaint:rgba(237,232,218,0.1);
   --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.04);
@@ -25,10 +25,12 @@
   --fup-bg:#111009;--fup-bd:rgba(255,255,255,0.07);--fup-txt:rgba(237,232,218,0.32);
   --scroll:#2a2720;--sn-bg:#060504;--sn-bd:rgba(255,255,255,0.04);
   --sn-txt:rgba(255,255,255,0.22);
+  --gold:#c9a84c;--gold-dim:rgba(201,168,76,0.15);
+  --red:#c44;--blue:#5b9cf6;--amber:#f6a035;
 }
 [data-theme="light"] {
   --bg:#f7f4ed;--bg2:#f0ece2;--bg3:#e8e3d8;
-  --surface:#ffffff;--surface2:#f7f4ed;--ink:#161410;
+  --surface:#ffffff;--surface2:#f7f4ed;
   --txt:#161410;--txt2:#3d3a32;--muted:rgba(22,20,16,0.5);
   --faint:rgba(22,20,16,0.3);--xfaint:rgba(22,20,16,0.12);
   --border:rgba(22,20,16,0.09);--border2:rgba(22,20,16,0.05);
@@ -36,14 +38,13 @@
   --msg-user-bg:#e8f2ec;--msg-user-txt:#1a3a27;
   --msg-bot-txt:#2e2b24;
   --input-bg:#ffffff;--input-bd:rgba(22,20,16,0.12);--input-txt:#161410;
-  --send-bg:#2a6647;--send-hover:#1d4a33;
   --chip-bg:#f7f4ed;--chip-bd:rgba(22,20,16,0.1);--chip-txt:rgba(22,20,16,0.42);
   --chip-hbg:rgba(42,102,71,0.08);--chip-hbd:rgba(42,102,71,0.25);--chip-htxt:#1d4a33;
   --fup-bg:#f0ece2;--fup-bd:rgba(22,20,16,0.09);--fup-txt:rgba(22,20,16,0.38);
   --scroll:#ddd8cc;--sn-bg:#060504;--sn-bd:rgba(255,255,255,0.04);
   --sn-txt:rgba(255,255,255,0.22);
 }
-html.sw *,html.sw *::before,html.sw *::after{transition:background-color .25s ease,color .25s ease,border-color .25s ease !important}
+html.sw *,html.sw *::before,html.sw *::after{transition:background-color .25s,color .25s,border-color .25s !important}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);display:flex;flex-direction:column}
@@ -61,17 +62,18 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 .sn-st{font-family:'DM Mono',monospace;font-size:.38rem;letter-spacing:1.5px;color:rgba(255,255,255,.14);white-space:nowrap}
 
 /* TOP NAV */
-.tnav{background:var(--nav-bg);border-bottom:1px solid var(--nav-border);height:56px;display:flex;align-items:center;padding:0 20px;flex-shrink:0;gap:10px}
+.tnav{background:var(--nav-bg);border-bottom:1px solid var(--nav-border);height:54px;display:flex;align-items:center;padding:0 18px;flex-shrink:0;gap:10px}
 .tn-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.tn-logo{width:32px;height:32px;border-radius:50%;background:var(--ink);border:1px solid rgba(42,102,71,.3);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.85rem;font-weight:900;color:#3a9165;flex-shrink:0;transition:border-color .2s}
-.tn-brand:hover .tn-logo{border-color:rgba(42,102,71,.6)}
+.tn-logo{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#1a2e20,#0d0c0a);border:1px solid rgba(42,102,71,.4);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.9rem;font-weight:900;color:#3a9165;flex-shrink:0;transition:border-color .2s,box-shadow .2s;position:relative;overflow:hidden}
+.tn-logo::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(58,145,101,.15),transparent 70%)}
+.tn-brand:hover .tn-logo{border-color:rgba(42,102,71,.7);box-shadow:0 0 12px rgba(42,102,71,.25)}
 .tn-name{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:2px;color:var(--txt);font-weight:500}
 .tn-badge{font-family:'DM Mono',monospace;font-size:.38rem;letter-spacing:1.5px;padding:2px 8px;border:1px solid rgba(42,102,71,.3);color:#3a9165;display:flex;align-items:center;gap:5px}
 .tn-badge::before{content:'';width:4px;height:4px;border-radius:50%;background:#3a9165;animation:blink 2.2s infinite}
 .tn-r{margin-left:auto;display:flex;gap:8px;align-items:center}
 .tn-lnk{font-family:'DM Mono',monospace;font-size:.42rem;letter-spacing:1.5px;color:var(--faint);text-decoration:none;padding:5px 11px;border:1px solid var(--border);transition:all .2s;white-space:nowrap}
 .tn-lnk:hover{color:#3a9165;border-color:rgba(42,102,71,.3)}
-.tn-lnk.pri{background:var(--ink);color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.08)}
+.tn-lnk.pri{background:var(--bg3);color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.08)}
 [data-theme="light"] .tn-lnk.pri{background:#161410;color:rgba(255,255,255,.75);border-color:#161410}
 .tn-lnk.pri:hover{background:var(--green);border-color:var(--green);color:#fff}
 .icon-btn{width:32px;height:32px;background:none;border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--faint);transition:all .2s;flex-shrink:0}
@@ -80,6 +82,10 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 .txt-btn{font-family:'DM Mono',monospace;font-size:.42rem;letter-spacing:1.5px;color:var(--faint);background:none;border:1px solid var(--border);cursor:pointer;padding:0 10px;height:32px;transition:all .2s;white-space:nowrap}
 .txt-btn:hover{color:#3a9165;border-color:rgba(42,102,71,.35)}
 
+/* LANG INDICATOR */
+.lang-flag{font-family:'DM Mono',monospace;font-size:.38rem;letter-spacing:1px;padding:3px 8px;border:1px solid var(--border);color:var(--faint);transition:all .2s;flex-shrink:0}
+.lang-flag.bm{border-color:rgba(201,168,76,.3);color:var(--gold)}
+
 /* CHAT SHELL */
 .shell{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
 
@@ -87,16 +93,24 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 .msgs-wrap{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--scroll) transparent;min-height:0}
 .msgs-wrap::-webkit-scrollbar{width:4px}
 .msgs-wrap::-webkit-scrollbar-thumb{background:var(--scroll);border-radius:2px}
-.msgs-inner{max-width:740px;margin:0 auto;padding:28px 20px 12px;display:flex;flex-direction:column;gap:4px}
+.msgs-inner{max-width:760px;margin:0 auto;padding:28px 20px 12px;display:flex;flex-direction:column;gap:4px}
 
 /* WELCOME */
-.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 20px;gap:18px;min-height:calc(100vh - 28px - 56px - 110px)}
-.wlogo{width:68px;height:68px;border-radius:50%;background:var(--bg3);border:1.5px solid rgba(42,102,71,.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:#3a9165}
-.wtitle{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2rem);font-weight:900;letter-spacing:-.5px;color:var(--txt);line-height:1.15}
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;gap:16px;min-height:calc(100vh - 28px - 54px - 110px)}
+.wlogo{width:72px;height:72px;border-radius:50%;background:var(--bg3);border:1.5px solid rgba(42,102,71,.3);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:#3a9165;position:relative;overflow:hidden}
+.wlogo::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 35% 35%,rgba(58,145,101,.12),transparent 70%)}
+.wtitle{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2.1rem);font-weight:900;letter-spacing:-.5px;color:var(--txt);line-height:1.15}
 .wtitle em{font-style:italic;color:#3a9165;font-weight:400}
-.wsub{font-size:.9rem;color:var(--muted);font-weight:300;max-width:440px;line-height:1.85}
-.wchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:580px;margin-top:6px}
-.chip{background:var(--chip-bg);border:1px solid var(--chip-bd);padding:9px 16px;font-family:'Outfit',sans-serif;font-size:.85rem;color:var(--chip-txt);cursor:pointer;transition:all .18s;border-radius:8px;text-align:left}
+.wsub{font-size:.88rem;color:var(--muted);font-weight:300;max-width:460px;line-height:1.85}
+.wbm{font-size:.78rem;color:var(--faint);font-weight:300;font-style:italic}
+
+/* CATEGORY TABS */
+.wcat{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:2px}
+.wcat-btn{font-family:'DM Mono',monospace;font-size:.38rem;letter-spacing:1.5px;padding:4px 10px;border:1px solid var(--border);color:var(--faint);cursor:pointer;background:none;transition:all .18s}
+.wcat-btn:hover,.wcat-btn.on{border-color:rgba(42,102,71,.35);color:#3a9165;background:var(--green-dim)}
+
+.wchips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:620px;margin-top:4px}
+.chip{background:var(--chip-bg);border:1px solid var(--chip-bd);padding:8px 14px;font-family:'Outfit',sans-serif;font-size:.82rem;color:var(--chip-txt);cursor:pointer;transition:all .18s;border-radius:8px;text-align:left;line-height:1.3}
 .chip:hover{background:var(--chip-hbg);border-color:var(--chip-hbd);color:var(--chip-htxt)}
 
 /* MSG GROUPS */
@@ -104,46 +118,51 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 @keyframes mi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
 /* USER bubble */
-.mu{align-self:flex-end;background:var(--msg-user-bg);color:var(--msg-user-txt);padding:12px 17px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:.92rem;line-height:1.65}
+.mu{align-self:flex-end;background:var(--msg-user-bg);color:var(--msg-user-txt);padding:11px 16px;border-radius:18px 18px 4px 18px;max-width:72%;font-size:.9rem;line-height:1.65}
 
 /* BOT row */
 .mb-row{display:flex;gap:12px;align-items:flex-start;max-width:100%}
-.mb-av{width:27px;height:27px;border-radius:50%;flex-shrink:0;background:var(--bg3);border:1px solid rgba(42,102,71,.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.68rem;font-weight:900;color:#3a9165;margin-top:3px}
-.mb-txt{flex:1;min-width:0;font-size:.92rem;line-height:1.78;color:var(--msg-bot-txt);padding-top:3px}
+.mb-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:var(--bg3);border:1px solid rgba(42,102,71,.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.7rem;font-weight:900;color:#3a9165;margin-top:3px}
+.mb-txt{flex:1;min-width:0;font-size:.9rem;line-height:1.8;color:var(--msg-bot-txt);padding-top:3px}
 .mb-txt a{color:#3a9165;text-decoration:none;border-bottom:1px solid rgba(58,145,101,.28);transition:border-color .15s}
 .mb-txt a:hover{border-bottom-color:#3a9165}
 .mb-txt strong{color:var(--txt);font-weight:600}
+.mb-txt em{color:var(--gold);font-style:italic}
 [data-theme="light"] .mb-txt strong{color:#161410}
+.mb-txt .tag{font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:1px;padding:1px 6px;border:1px solid rgba(42,102,71,.25);color:#3a9165;border-radius:3px;display:inline-block;margin:0 2px}
+.mb-txt .tag.gold{border-color:rgba(201,168,76,.3);color:var(--gold)}
+.mb-txt .tag.red{border-color:rgba(196,68,68,.3);color:var(--red)}
+.mb-txt .list-item{display:block;padding:3px 0 3px 12px;border-left:2px solid rgba(42,102,71,.25);margin:3px 0;font-size:.88rem}
 .mtime{font-family:'DM Mono',monospace;font-size:.35rem;letter-spacing:.8px;color:var(--xfaint);margin-top:3px}
-.mtime.bot{padding-left:39px}
+.mtime.bot{padding-left:40px}
 
 /* TYPING */
 .typing-row{display:flex;gap:12px;align-items:flex-start;animation:mi .2s ease}
-.typing-bub{padding:12px 4px;display:flex;gap:5px;align-items:center}
+.typing-bub{padding:10px 6px;display:flex;gap:5px;align-items:center}
 .td{width:6px;height:6px;border-radius:50%;background:#3a9165;opacity:.4;animation:td 1.3s infinite ease-in-out}
 .td:nth-child(2){animation-delay:.15s}
 .td:nth-child(3){animation-delay:.3s}
 @keyframes td{0%,60%,100%{transform:translateY(0);opacity:.35}30%{transform:translateY(-5px);opacity:.9}}
 
 /* FOLLOW-UPS */
-.fups{display:flex;gap:6px;flex-wrap:wrap;padding-left:39px;margin-top:10px}
-.fup{background:var(--fup-bg);border:1px solid var(--fup-bd);padding:5px 12px;border-radius:20px;font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:1px;color:var(--fup-txt);cursor:pointer;transition:all .18s}
+.fups{display:flex;gap:6px;flex-wrap:wrap;padding-left:40px;margin-top:10px}
+.fup{background:var(--fup-bg);border:1px solid var(--fup-bd);padding:5px 11px;border-radius:20px;font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:1px;color:var(--fup-txt);cursor:pointer;transition:all .18s}
 .fup:hover{background:var(--chip-hbg);border-color:var(--chip-hbd);color:var(--chip-htxt)}
 
 /* INPUT */
-.input-area{flex-shrink:0;padding:14px 20px 18px;background:var(--bg)}
-.input-wrap{max-width:740px;margin:0 auto;background:var(--input-bg);border:1px solid var(--input-bd);border-radius:14px;display:flex;align-items:flex-end;gap:10px;padding:11px 11px 11px 17px;transition:border-color .2s,box-shadow .2s}
+.input-area{flex-shrink:0;padding:12px 20px 16px;background:var(--bg)}
+.input-wrap{max-width:760px;margin:0 auto;background:var(--input-bg);border:1px solid var(--input-bd);border-radius:14px;display:flex;align-items:flex-end;gap:10px;padding:10px 10px 10px 16px;transition:border-color .2s,box-shadow .2s}
 .input-wrap:focus-within{border-color:rgba(42,102,71,.42);box-shadow:0 0 0 3px rgba(42,102,71,.07)}
-#ci{flex:1;background:none;border:none;outline:none;font-family:'Outfit',sans-serif;font-size:.97rem;color:var(--input-txt);line-height:1.6;resize:none;min-height:26px;max-height:200px;overflow-y:auto;padding:0}
+#ci{flex:1;background:none;border:none;outline:none;font-family:'Outfit',sans-serif;font-size:.95rem;color:var(--input-txt);line-height:1.6;resize:none;min-height:26px;max-height:180px;overflow-y:auto;padding:0}
 #ci::placeholder{color:var(--faint)}
 #cs{width:36px;height:36px;border-radius:8px;border:none;background:var(--send-bg);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .18s,transform .15s,opacity .15s}
 #cs:hover{background:var(--send-hover);transform:scale(1.05)}
 #cs:disabled{opacity:.28;cursor:not-allowed;transform:none}
 #cs svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.input-hint{max-width:740px;margin:7px auto 0;text-align:center;font-family:'DM Mono',monospace;font-size:.36rem;letter-spacing:1px;color:var(--xfaint)}
+.input-hint{max-width:760px;margin:6px auto 0;text-align:center;font-family:'DM Mono',monospace;font-size:.35rem;letter-spacing:1px;color:var(--xfaint)}
 
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-@media(max-width:600px){.msgs-inner{padding:18px 14px 10px}.input-area{padding:10px 14px 14px}.tn-lnk:not(.pri){display:none}.welcome{padding:30px 14px;gap:14px}}
+@media(max-width:600px){.msgs-inner{padding:16px 14px 10px}.input-area{padding:10px 14px 14px}.tn-lnk:not(.pri){display:none}.welcome{padding:28px 14px;gap:12px}}
 </style>
 </head>
 <body>
@@ -170,6 +189,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
     <span class="tn-name">pAIz</span>
   </a>
   <div class="tn-badge">ONLINE</div>
+  <span class="lang-flag" id="langFlag">EN</span>
   <div class="tn-r">
     <a href="https://faizzzlol.github.io/PaizCorp/" class="tn-lnk">← PAIZ® CORP</a>
     <a href="https://faizzzlol.github.io/thelol/gov/" class="tn-lnk pri">GOVERNMENT</a>
@@ -183,79 +203,417 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
     <div class="msgs-inner" id="mi">
       <div class="welcome" id="welcome">
         <div class="wlogo">p</div>
-        <div class="wtitle">Hello. I'm p<em>AI</em>z.</div>
-        <p class="wsub">The official intelligence assistant of The Legend of Legiona, developed by Paiz Corp Intelligence Division. Ask me anything about The LoL.</p>
-        <div class="wchips">
-          <button class="chip" onclick="useChip(this)">Who are the three founders of The LoL?</button>
-          <button class="chip" onclick="useChip(this)">Tell me about The Legend of Legiona's history</button>
-          <button class="chip" onclick="useChip(this)">What is the ISC intelligence agency?</button>
-          <button class="chip" onclick="useChip(this)">Explain all five Paiz Corp subsidiaries</button>
-          <button class="chip" onclick="useChip(this)">What legal documents exist in the archive?</button>
-          <button class="chip" onclick="useChip(this)">Tell me about the TLSRL railway project</button>
-          <button class="chip" onclick="useChip(this)">What happened during the UltraX2020 presidency?</button>
-          <button class="chip" onclick="useChip(this)">Tell me about The LoL Movie</button>
+        <div class="wtitle">Yo. I'm p<em>AI</em>z.</div>
+        <p class="wsub">Official intelligence assistant of The Legend of Legiona — developed by Paiz Corp Intelligence Division. Ask me anything, in any way you want, in English or BM.</p>
+        <p class="wbm">Boleh tanya dalam Bahasa Malaysia jugak. Tak kisah slang pun. Tanya je.</p>
+        <div class="wcat">
+          <button class="wcat-btn on" onclick="showCat('all',this)">ALL</button>
+          <button class="wcat-btn" onclick="showCat('history',this)">HISTORY</button>
+          <button class="wcat-btn" onclick="showCat('gov',this)">GOVERNMENT</button>
+          <button class="wcat-btn" onclick="showCat('corp',this)">PAIZ CORP</button>
+          <button class="wcat-btn" onclick="showCat('lore',this)">LORE</button>
         </div>
+        <div class="wchips" id="wchips"></div>
       </div>
     </div>
   </div>
   <div class="input-area">
     <div class="input-wrap">
-      <textarea id="ci" placeholder="Ask anything about The Legend of Legiona…" rows="1" autocomplete="off"></textarea>
+      <textarea id="ci" placeholder="Ask anything... boleh BM pun, slang pun okay — Ask about The LoL." rows="1" autocomplete="off"></textarea>
       <button id="cs" onclick="sendMsg()" title="Send">
         <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
       </button>
     </div>
-    <p class="input-hint">pAIz · Paiz Corp Intelligence Division · Skyxion: Altaer Era · Confidentiality: Public</p>
+    <p class="input-hint">pAIz · Paiz Corp Intelligence Division · Skyxion: Altaer Era · BM & EN supported · No API used</p>
   </div>
 </div>
 
 <script>
-/* pAIz — Local Intelligence Engine */
+/* ═══════════════════════════════════════════════════════
+   pAIz v3.0 — MEGA UPGRADE — FULL BM+EN SLANG ENGINE
+   No API. Pure local intelligence.
+═══════════════════════════════════════════════════════ */
+
+/* ── THEME ── */
 let theme=localStorage.getItem('paiz-theme')||'dark';
 document.documentElement.setAttribute('data-theme',theme);
 setIcon();
 function toggleTheme(){const h=document.documentElement;h.classList.add('sw');theme=theme==='dark'?'light':'dark';h.setAttribute('data-theme',theme);localStorage.setItem('paiz-theme',theme);setIcon();setTimeout(()=>h.classList.remove('sw'),300)}
-function setIcon(){const b=document.getElementById('tbtn');if(!b)return;b.innerHTML=theme==='dark'?'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>':'<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';b.title=theme==='dark'?'Switch to light mode':'Switch to dark mode'}
+function setIcon(){const b=document.getElementById('tbtn');if(!b)return;b.innerHTML=theme==='dark'?'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>':'<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';b.title=theme==='dark'?'Light mode':'Dark mode'}
 
-const KB=[
-{id:'greeting',kw:['hello','hi','hey','hei','hai','hye','good morning','good evening','good afternoon','greetings','wassup','yo','sup','salam','assalamualaikum','wsp','howdy','hola','morning','evening',"what's up"],fup:['Who are the founders?','What is the ISC?','History of The LoL','Paiz Corp overview'],r:`Welcome. I'm <strong>pAIz</strong> — the official intelligence assistant of <strong>The Legend of Legiona (The LoL)</strong>, developed by Paiz Corp Intelligence Division.<br><br>I hold comprehensive knowledge of The LoL across all domains: full national history, government and ISC, legal archive, megaprojects, all five Paiz® Corp subsidiaries, and the people who built the nation.<br><br>What would you like to know?`},
-{id:'help',kw:['what can you do','help','capabilities','what do you know','what are you','who are you','about yourself','about paiz','what is paiz','how do you work','introduce yourself','what do you cover','what topics'],fup:['National history','Government structure','Legal archive','Paiz Corp'],r:`I'm <strong>pAIz</strong> — The Legend of Legiona's official intelligence assistant. My full knowledge scope:<br><br><strong>National History & Lore</strong> — Full timeline from The Sus Era (2023) to today, including the UltraX2020 crisis.<br><strong>Founders & Leadership</strong> — Faiz4224, Imii Kun, Dyno and full government structure.<br><strong>Government & The Black House</strong> — Six departments, ISC intelligence agency, document conventions.<br><strong>Legal Archive</strong> — All official acts, ordinances, charters and proclamations.<br><strong>Megaprojects</strong> — TLSRL Railway, TLCC Twin Towers, National Farm Complex.<br><strong>Paiz® Corp</strong> — All five subsidiaries: TL Railways, Paiz Construction, Paiz Shop, PaizProductions, Paiz Chicken.<br><strong>Portal Navigation</strong> — Every official URL in The LoL web ecosystem.<br><br>Ask me anything.`},
-{id:'founders',kw:['founder','founders','faiz4224','imii kun','imii','dyno','who created','who started','who built the lol','three founders','founding members','co-founder','first president','president faiz'],fup:['History of The LoL','The Black House','Paiz Corp','The LoL Movie cast'],r:`<strong>The Three Founders of The Legend of Legiona</strong><br><br>The LoL was co-founded by three individuals who signed the <a href="https://faizzzlol.github.io/thelol/assets/The_LoL_Proclamation.pdf">Proclamation of Sovereignty</a>:<br><br><strong>Faiz4224</strong> — First President & Founding Leader. Principal architect of The LoL's governance and digital infrastructure. Currently serving as President, operating from <em>The Black House</em>. Also founded and chairs Paiz® Corp.<br><br><strong>Imii Kun</strong> — Co-Founder & Visionary. One of the original three founding members, key to the nation's early vision.<br><br><strong>Dyno</strong> — Co-Founder & Strategist. Together with Faiz4224 and Imii Kun, established The LoL as a sovereign Minecraft nation on Skyxion.<br><br>All three appear in <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a>, currently in production.`},
-{id:'history',kw:['history','sus era','the sus','how did it start','origin','when was','began','background','lore','timeline','past','founding story'],fup:['UltraX2020 crisis','EhekSquad','Skyxion: Altaer Era','Founders'],r:`<strong>Full History of The Legend of Legiona</strong><br><br><strong>The Sus Era (2023 · Pre-Founding)</strong><br>The nation originated as "The Sus" — an informal settlement on Skyxion with no formal governance. EhekSquad (PhoenixAiman, PandaPutih, Kagee) had an undefined association with The Sus. They later departed independently. EhekSquad still exists today.<br><br><strong>The Founding (2023)</strong><br>Faiz4224, Imii Kun and Dyno formally established The Legend of Legiona as a sovereign nation, signing the Proclamation of Sovereignty and establishing the TL Dollar and national infrastructure.<br><br><strong>First Democratic Election (May 6, 2023)</strong><br>UltraX2020 and the <em>Parti Harapan Rakyat The LoL (PHRTL)</em> won — making UltraX2020 the 2nd President.<br><br><strong>The UltraX2020 Crisis</strong><br>A bombed city sign, drone attacks on the TLCC Twin Towers, and broader political crisis defined his tenure. UltraX2020 eventually resigned; power returned to Faiz4224.<br><br><strong>Skyxion: Altaer Era (Present)</strong><br>The LoL now operates as one of Skyxion's most advanced nations.<br><br><a href="https://faizzzlol.github.io/thelol/gov/#history">Full timeline →</a>`},
-{id:'ultrax',kw:['ultrax2020','ultrax','2nd president','second president','phrtl','parti harapan','crisis','resigned','drone attack','bombed city','election 2023','internal strife'],fup:['History of The LoL','TLCC Twin Towers','Current government','The LoL Movie'],r:`<strong>The UltraX2020 Presidency & Crisis</strong><br><br>On <strong>May 6, 2023</strong>, UltraX2020 won The LoL's first democratic election under the <em>Parti Harapan Rakyat The LoL (PHRTL)</em> — becoming the <strong>2nd President</strong>.<br><br>His tenure:<br>— A city sign was bombed in an act of internal sabotage.<br>— Drone attacks targeted the <strong>TLCC Twin Towers</strong>, causing significant damage.<br>— Broader political crisis destabilised the administration.<br><br>UltraX2020 <strong>resigned</strong>. Governance returned to Faiz4224. The TLCC Twin Towers were fully restored.<br><br>He appears as a principal cast member in <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a> — his presidency is the film's central political arc.`},
-{id:'government',kw:['government','black house','departments','ministry','office of the president','government structure','national justice','lore archives','public works','external relations','communications','dept','executive','six departments'],fup:['ISC Agency','Legal archive','Faiz4224 presidency','Citizenship'],r:`<strong>Government Structure of The Legend of Legiona</strong><br><br><strong>The Black House — Office of the President</strong><br>Executive seat of The LoL's government. Currently: <strong>Faiz4224</strong>. Documents: <em>BH-YYYY-###</em>.<br><br><strong>Six Government Departments:</strong><br>— DEPT-01: <strong>ISC</strong> — Internal Security Control · ACTIVE<br>— DEPT-02: Office of National Justice<br>— DEPT-03: Ministry of Lore & Archives<br>— DEPT-04: Public Works Division<br>— DEPT-05: Bureau of External Relations<br>— DEPT-06: The LoL Communications<br><br>Only ISC (DEPT-01) is fully active currently.<br><br>Document conventions: LOLGOV-YYYY-### / BH-YYYY-### / ISC-YYYY-###<br><br><a href="https://faizzzlol.github.io/thelol/gov/">Government Portal →</a>`},
-{id:'isc',kw:['isc','internal security control','intelligence agency','security agency','classified','tlio','t.l.i.o','clearance','intel portal','national security'],fup:['Government structure','Legal documents','History'],r:`<strong>ISC — Internal Security Control</strong><br><br>The LoL's official national intelligence agency — Government Department 01 (DEPT-01), equivalent to a CIA.<br><br>Successor to the former <em>T.L.I.O</em> — that name is no longer in use.<br><br><strong>Public Portals:</strong><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Main Portal</a><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/national">Transparency Report</a><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/search">Public Search Archive</a><br><br><strong>Intel Portal</strong> is password-protected. Clearance code: <em>LEGIONA2026</em>.<br>Document reference: <em>ISC-YYYY-###</em>`},
-{id:'legal',kw:['legal','documents','archive','acts','laws','ordinance','rights charter','proclamation','legal archive','document list','lolgov','bh-2026','all documents','official documents'],fup:['Citizenship','Naming policy','Government portal','ISC'],r:`<strong>Legal Archive — Official Documents</strong><br><br>Hosted at <a href="https://faizzzlol.github.io/thelol/gov/assets/">Legal Archive</a> — fully searchable by category.<br><br><strong>LOLGOV-2026-0001</strong> — Citizenship Act<br><strong>LOLGOV-2026-0002</strong> — Revocation Ordinance<br><strong>LOLGOV-2026-0003</strong> — Citizens' Rights Charter<br><strong>BH-2026-0001</strong> — Presidential Proclamation of Sovereignty (<a href="https://faizzzlol.github.io/thelol/assets/The_LoL_Proclamation.pdf">EN</a> / <a href="https://faizzzlol.github.io/thelol/assets/Proklamasi_The_LoL.pdf">BM</a>)<br><strong>BH-2026-0002</strong> — Official Naming & Style Directive (02 Apr 2026)<br><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">Browse Legal Archive →</a>`},
-{id:'citizenship',kw:['citizenship','citizen','apply','application','citizen rights','how to join','become a citizen','citizenship portal','revocation','rights charter'],fup:['Legal archive','Government portal','Landen territory'],r:`<strong>Citizenship System</strong><br><br>Governed by three documents:<br><br><strong>LOLGOV-2026-0001 — Citizenship Act:</strong> Eligibility, application process, and status.<br><strong>LOLGOV-2026-0003 — Citizens' Rights Charter:</strong> Fundamental rights of all citizens.<br><strong>LOLGOV-2026-0002 — Revocation Ordinance:</strong> Conditions for revocation.<br><br>Applications via the online Citizenship Portal with formal form and eleven declaration checkboxes. Citizenship is era-bound and renewable. All decisions rest with Faiz4224.<br><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Apply for Citizenship →</a>`},
-{id:'tlsrl',kw:['tlsrl','spawn railway','rail link','train','stations','railway project','tll','llc','llo','mps','sxj','spn','express service','cargo service','4800','enclosed rail'],fup:['TL Railways','Paiz Corp','Megaprojects','TLCC Twin Towers'],r:`<strong>TLSRL — The LoL–Spawn Railway Link</strong><br><br>— Track: <strong>4,800+ blocks</strong> fully enclosed<br>— Travel time: <strong>~10 minutes</strong> end-to-end<br>— Classes: Regular · Express · Cargo<br>— Stations: <strong>TLL → LLC → LLO → MPS → SXJ → SPN</strong><br><br>Operated by TL Railways (Paiz® Corp SUB-01). Built by Paiz™ Construction (SUB-02).<br><br><a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways Portal →</a>`},
-{id:'paiz_corp',kw:['paiz corp','paiz® corp','paiz corporation','all subsidiaries','five subsidiaries','conglomerate','national company','paiz group','overview paiz','what is paiz corp'],fup:['Paiz Shop','Paiz Chicken','PaizProductions','TL Railways'],r:`<strong>Paiz® Corp — National Conglomerate</strong><br><br>Founded and chaired by <strong>Faiz4224</strong>. Five subsidiaries:<br><br><strong>SUB-01 · TL Railways</strong> — National rail operator. TLSRL, Monorail, LRT/MRT, High-Speed Boat Link. <a href="https://faizzzlol.github.io/thelol/tlr/">→</a><br><strong>SUB-02 · Paiz™ Construction</strong> — Built TLSRL, TLCC Twin Towers, National Farm Complex and all major infrastructure.<br><strong>SUB-03 · Paiz Shop</strong> — Official Minecraft item store. Items in Diamonds. <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">→</a><br><strong>SUB-04 · PaizProductions</strong> — Film studio. The LoL Movie, LoL Chronicles, ISC: Classified. <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">→</a><br><strong>SUB-05 · Paiz Chicken</strong> — Virtual food ordering. Delivery across Skyxion. <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">→</a><br><br><a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp Homepage →</a>`},
-{id:'paiz_shop',kw:['paiz shop','shop','store','buy items','shulker','mending','unbreaking','nether wart','iron ingot','retail','item shop','minecraft store'],fup:['Paiz Corp','Paiz Chicken','TL Dollar'],r:`<strong>Paiz Shop — Official Item Store</strong><br><br>Paiz® Corp SUB-03. Priced in Diamonds (◆):<br><br>Shulker Box ◆4 · Mending I ◆3 · Nether Wart ◆3 · Unbreaking III ◆2 · Iron Ingot ◆1<br><br>Orders via portal → Discord webhook. Live stock management, delivery and pickup.<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Visit Paiz Shop →</a>`},
-{id:'paiz_chicken',kw:['paiz chicken','chicken','food','restaurant','order food','food delivery','pickup food','food brand','virtual food'],fup:['Paiz Shop','Paiz Corp','TL Dollar'],r:`<strong>Paiz Chicken — Virtual Food Brand</strong><br><br>Paiz® Corp SUB-05. Minecraft food ordering across Skyxion.<br><br>Delivery + pickup · Distance-based fees · Priced in Diamonds · Discord webhook integration · Live stock management<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Order from Paiz Chicken →</a>`},
-{id:'productions',kw:['paizproductions','paiz productions','film studio','movie studio','production studio','all films','three projects','isc classified','lol chronicles','media division'],fup:['The LoL Movie','Paiz Corp'],r:`<strong>PaizProductions — Official Film Studio</strong><br><br>Paiz® Corp SUB-04. Three active projects:<br><br><strong>1. The LoL: The Movie</strong> — Feature Film · IN PRODUCTION · 4 phases. Cast: Faiz4224, Imii Kun, Dyno, UltraX2020. <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">→</a><br><strong>2. LoL Chronicles</strong> — Series · IN DEVELOPMENT<br><strong>3. ISC: Classified</strong> — Short Film · PLANNED<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PaizProductions →</a>`},
-{id:'lolmovie',kw:['the lol movie','lol movie','thelolmovie','feature film','four phases','movie cast','in production film','political epic','minecraft film'],fup:['PaizProductions','Founders','UltraX2020 presidency'],r:`<strong>The LoL: The Movie</strong><br><br>Status: <strong>IN PRODUCTION</strong> · 4 Phases · Minecraft political epic<br><br><strong>Cast:</strong><br>Faiz4224 — First President & Founding Leader<br>Imii Kun — Co-Founder & Visionary<br>Dyno — Co-Founder & Strategist<br>UltraX2020 — 2nd President (political crisis arc)<br><br>The four phases cover The LoL's full arc from the Sus Era to the Altaer Era.<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">Official Film Page →</a>`},
-{id:'megaprojects',kw:['megaproject','megaprojects','infrastructure','national projects','big projects','major projects','all projects'],fup:['TLSRL Railway','TLCC Twin Towers','National Farm Complex'],r:`<strong>National Megaprojects</strong><br><br>All engineered by Paiz™ Construction:<br><br><strong>1. TLSRL</strong> — The LoL–Spawn Railway Link. 4,800+ block enclosed rail, 6 stations, 3 service classes.<br><strong>2. TLCC Twin Towers</strong> — Most iconic landmark in The LoL City. Attacked during UltraX2020 crisis, fully restored.<br><strong>3. National Farm Complex</strong> — Iron Farm · Totem Farm · Gold Farm (all operational).`},
-{id:'tlcc',kw:['tlcc','twin towers','convention centre','convention center','landmark','towers attacked','towers bombed','most iconic','lol city'],fup:['UltraX2020 crisis','National Farm Complex','TLSRL Railway'],r:`<strong>TLCC Twin Towers</strong><br><br>The most iconic landmark in The LoL City. Built by Paiz™ Construction. During the UltraX2020 presidency, drone attacks caused significant damage. The towers were fully restored and remain the centrepiece of The LoL's skyline.`},
-{id:'farms',kw:['farm','farms','iron farm','totem farm','gold farm','automated farm','farm complex','national farm','resource economy'],fup:['Megaprojects','TLSRL','Paiz Corp'],r:`<strong>National Farm Complex</strong><br><br>Three fully automated farms — all currently operational:<br><br><strong>Iron Farm</strong> — Backbone of crafting and construction economy<br><strong>Totem Farm</strong> — Totem of undying production for high-risk operations<br><strong>Gold Farm</strong> — Supports trade and economic reserves<br><br>All engineered by Paiz™ Construction.`},
-{id:'currency',kw:['tl dollar','tl$','currency','money','exchange rate','iron worth','emerald worth','diamond worth','netherite worth','national currency'],fup:['Paiz Shop','Paiz Chicken','Paiz Corp'],r:`<strong>TL Dollar (TL$) — National Currency</strong><br><br>Iron Ingot → TL$1 · Gold Ingot → TL$5 · Emerald → TL$10 · Diamond → TL$30 · Netherite → TL$150`},
-{id:'eheksquad',kw:['eheksquad','ehek squad','phoenixaiman','pandaputih','kagee'],fup:['History of The LoL','Founders'],r:`<strong>EhekSquad — Historical Context</strong><br><br>Members: PhoenixAiman, PandaPutih, Kagee.<br><br>Had an undefined association with The Sus (pre-founding settlement) in 2023. The Sus had no formal governance at the time. EhekSquad departed and re-established independently. They <strong>still exist today</strong> with no affiliation to The LoL's institutions.`},
-{id:'naming',kw:['naming policy','style directive','bh-2026-0002','the lol name','lol abbreviation','standalone lol','prohibited name','how to write the lol','naming directive'],fup:['Legal archive','The Black House'],r:`<strong>Official Naming & Style Directive — BH-2026-0002</strong><br><br>Issued by The Black House on <strong>02 April 2026</strong>:<br><br>✓ <strong>"The Legend of Legiona"</strong> — Full official name<br>✓ <strong>"The LoL"</strong> — Only permitted abbreviation. The "The" is mandatory.<br>✗ <strong>"LoL"</strong> — Standalone usage STRICTLY PROHIBITED in all materials.<br><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">View in Legal Archive →</a>`},
-{id:'skyxion',kw:['skyxion','altaer era','altaer','minecraft server','kawaiisho','current era','server admin','which server'],fup:['History of The LoL','TLSRL Railway','Government structure'],r:`<strong>Skyxion Server & The Altaer Era</strong><br><br><strong>Skyxion</strong> is the Minecraft server where The LoL is based, administered by <strong>Kawaiisho</strong> — separate from The LoL's governance.<br><br><strong>Skyxion: Altaer Era</strong> is the current era. The LoL operates as one of Skyxion's most advanced nations with full government, ISC, railway network, and legal archive.`},
-{id:'landen',kw:['landen','special administrative territory','sat','ikanuwu','ikanowo','imanhafizz'],fup:['Citizenship','Government structure'],r:`<strong>Special Administrative Territory of Landen</strong><br><br>Landen is an SAT under The LoL's jurisdiction with its own local governance.<br><br>Governing officials: <strong>ikanuwu</strong> (also ikanowo) and <strong>ImanHafizz</strong> — both recognised citizens of The LoL.`},
-{id:'nav',kw:['link','links','url','website','portal link','where can i find','navigate to','all pages','all portals','websites list'],fup:['Government portal','ISC portal','Paiz Corp','Legal archive'],r:`<strong>All Official Portals</strong><br><br><a href="https://faizzzlol.github.io/thelol/">The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/thelol/gov/">Government Portal</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Citizenship Portal</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">Legal Archive</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Portal</a><br><a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PaizProductions</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL Movie</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways</a>`},
-{id:'railways',kw:['tl railways','tlr','rail operator','monorail','lrt','mrt','high speed boat','boat link','railway network','transport network'],fup:['TLSRL project','Paiz Corp','Megaprojects'],r:`<strong>TL Railways — National Transit Operator</strong><br><br>Paiz® Corp SUB-01. Network lines:<br><br><strong>TLSRL</strong> — The LoL–Spawn Link (4,800+ blocks, 6 stations, 3 classes)<br><strong>Monorail</strong> — Urban transit within The LoL City<br><strong>LRT/MRT</strong> — Mass rapid transit services<br><strong>High-Speed Boat Link</strong> — Water-based connection across Skyxion<br><br><a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways Portal →</a>`}
-];
+/* ── BM DETECTION KEYWORDS ── */
+const BM_WORDS=['apa','siapa','macam','camne','mana','bila','kenapa','mcm','nk','nak','tak','ada','tiada','boleh','bagus','habis','dah','dah','okay','ok','sapa','la','lah','kan','wei','weh','bro','sis','eh','ai','aiyo','aih','haah','memang','pun','je','je','tau','tahu','cerita','kisah','sejarah','tentang','bercerita','tolong','help','tanya','mintak','minta','bagi','buat','pergi','balik','masuk','keluar','pasal','pasal','sebab','kerana','sampai','punya','kita','kami','korang','korang','diorang','dia','mereka','saya','aku','ko','awak','hang','den','wak','abang','kakak','adik'];
+function detectBM(q){const w=q.toLowerCase().split(/\s+/);return w.some(x=>BM_WORDS.includes(x))||/[a-z]+(lah|kan|la|wei|weh|ke|pun|je|dah|tak)$/.test(q.toLowerCase())}
 
-function score(e,q){let s=0;for(const k of e.kw){const kt=k.trim();if(q.includes(kt)||q===kt){const t=kt.split(/\s+/).length;s+=t*Math.max(kt.length,4);if(q===kt)s+=20}}return s}
-function best(txt){const q=txt.toLowerCase().trim();let b=null,bs=0;for(const e of KB){const s=score(e,q);if(s>bs){bs=s;b=e}}return bs>0?b:null}
-const FALLBACK=`I don't have specific intelligence on that query.<br><br>I can help with: <strong>The LoL's history</strong>, <strong>founders</strong>, <strong>government & ISC</strong>, <strong>legal documents</strong>, <strong>megaprojects</strong>, <strong>Paiz® Corp</strong>, <strong>citizenship</strong>, <strong>TLSRL Railway</strong>, <strong>TL Dollar</strong>, and <strong>portal navigation</strong>.`;
-const FF=['Who are the founders?','History of The LoL','ISC Agency','Paiz Corp','Legal archive','TLSRL Railway'];
+/* ═══════════════════════════════════════════════════════
+   KNOWLEDGE BASE — COMPREHENSIVE EN + BM + SLANG
+═══════════════════════════════════════════════════════ */
+const KB = [
 
+/* ── GREETINGS ── */
+{id:'greeting',cat:'all',
+kw:['hello','hi','hey','hei','hai','hye','hewlo','hewwoo','heww','heyyy','heyy','helo','helo','hola','heyyy','morning','good morning','good evening','good afternoon','selamat pagi','selamat petang','selamat malam','pagi','petang','malam','salam','assalamualaikum','assalam','waalaikumsalam','wslm','wlm','alaikumsalam','asl','wsp','wassup','wasap','sup','sup bro','supp','yo','yo paiz','oi','oi paiz','aye','greetings','howdy','namaste','bonjour','ohayou','konnichiwa','annyeong','annyeong haseyo','apa khabar','apa kabo','apa cerita','apahal','apahal paiz','camne','camne paiz','macam mana','apa hal','sihat','ok tak','dah makan'],
+fup:['Who are the founders?','Siapa pengasas The LoL?','Apa tu ISC?','History of The LoL'],
+r:(bm)=>bm?
+`Eh, wassup! Aku <strong>pAIz</strong> — AI assistant rasmi The Legend of Legiona (The LoL), dibuat oleh Paiz Corp Intelligence Division. 😄<br><br>Aku boleh jawab apa-apa pasal The LoL — dari sejarah, kerajaan, ISC, undang-undang, projek mega, sampai la ke lima syarikat Paiz® Corp. Tanya je, slang pun boleh!`:
+`Yo! I'm <strong>pAIz</strong> — the official intelligence assistant of <strong>The Legend of Legiona (The LoL)</strong>, by Paiz Corp Intelligence Division. 🟩<br><br>I hold full intel on everything LoL — history, government, ISC, legal docs, megaprojects, all five Paiz® Corp subsidiaries, and all the lore. What do you wanna know?`},
+
+/* ── HELP / CAPABILITIES ── */
+{id:'help',cat:'all',
+kw:['what can you do','help me','boleh buat apa','apa yang kau boleh buat','capabilities','apa ko tahu','apa kau tahu','what do you know','what are you','who are you','pasal diri ko','pasal kau','pasal paiz','perkenalkan diri','introduce yourself','what do you cover','what topics','topik apa','tahu apa','pasal apa','about yourself','about paiz','what is paiz','how do you work','aku boleh tanya apa','nak tanya apa'],
+fup:['National history','Government structure','Paiz Corp','Legal archive'],
+r:(bm)=>bm?
+`Aku <strong>pAIz</strong> — assistant perisikan rasmi The LoL. Ni yang aku tau:<br><br><strong>📜 Sejarah & Lore</strong> — dari era The Sus (2023) sampai sekarang<br><strong>👥 Pengasas & Kepimpinan</strong> — Faiz4224, Imii Kun, Dyno<br><strong>🏛️ Kerajaan & Black House</strong> — enam jabatan, ISC<br><strong>📄 Arkib Undang-undang</strong> — semua akta, proklamasi, ordinan<br><strong>🚂 Projek Mega</strong> — TLSRL, TLCC, Farm Complex<br><strong>🏢 Paiz® Corp</strong> — semua 5 subsidiari<br><strong>🗺️ Navigasi Portal</strong> — semua link rasmi The LoL<br><br>Tanya je bro, tak payah formal! 😄`:
+`I'm <strong>pAIz</strong>, The LoL's official AI. Here's my full knowledge scope:<br><br><strong>📜 National History & Lore</strong> — full timeline from The Sus Era to today<br><strong>👥 Founders & Leadership</strong> — Faiz4224, Imii Kun, Dyno<br><strong>🏛️ Government & The Black House</strong> — six departments, ISC<br><strong>📄 Legal Archive</strong> — all acts, charters, proclamations<br><strong>🚂 Megaprojects</strong> — TLSRL Railway, TLCC, National Farm Complex<br><strong>🏢 Paiz® Corp</strong> — all five subsidiaries<br><strong>🗺️ Portal Navigation</strong> — every official URL in the ecosystem<br><br>Ask me anything, any way you want.`},
+
+/* ── FOUNDERS (GENERAL) ── */
+{id:'founders',cat:'history',
+kw:['founder','founders','pengasas','siapa pengasas','pengasas thelol','pengasas the lol','who founded','siapa yang buat','siapa yang cipta','siapa yang tubuhkan','orang yang buat thelol','faiz imii dyno','three founders','tiga pengasas','founding members','ahli pengasas','who created the lol','who started','who built','siapa buat thelol','siapa create thelol','founders the lol','pendiri','pengasas nation'],
+fup:['Tell me about Faiz4224','Cerita pasal Imii Kun','Who is Dyno?','History of The LoL'],
+r:(bm)=>bm?
+`The LoL diasaskan oleh <strong>tiga orang</strong> yang tandatangan Proklamasi Kedaulatan:<br><br><strong>🟩 Faiz4224</strong> — Presiden Pertama & Pemimpin Pengasas. Dia yang reka bentuk kerajaan dan infrastruktur The LoL. Sekarang masih berkhidmat sebagai Presiden dari <em>The Black House</em>. Dia jugak pengasas dan pengerusi Paiz® Corp.<br><br><strong>🟩 Imii Kun</strong> — Pengasas Bersama & Visionary. Satu daripada tiga pengasas asal, kunci kepada visi awal negara.<br><br><strong>🟩 Dyno</strong> — Pengasas Bersama & Ahli Strategi. Bersama-sama dengan Faiz4224 dan Imii Kun, tubuhkan The LoL sebagai negara Minecraft berdaulat.<br><br>Ketiga-tiga mereka muncul dalam <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a> yang sedang dalam pengeluaran.`:
+`The LoL was co-founded by <strong>three individuals</strong> who signed the Proclamation of Sovereignty:<br><br><strong>🟩 Faiz4224</strong> — First President & Founding Leader. Principal architect of The LoL's governance and digital infrastructure. Currently serving as President from <em>The Black House</em>. Also founded and chairs Paiz® Corp.<br><br><strong>🟩 Imii Kun</strong> — Co-Founder & Visionary. One of the original three, key to the nation's early vision and identity.<br><br><strong>🟩 Dyno</strong> — Co-Founder & Strategist. Together with the others, established The LoL as a sovereign Minecraft nation on Skyxion.<br><br>All three appear in <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a>.`},
+
+/* ── FAIZ4224 ── */
+{id:'faiz',cat:'history',
+kw:['faiz4224','faiz','about faiz','pasal faiz','siapa faiz','faiz4224 tu siapa','first president','presiden pertama','presiden faiz','founder faiz','faiz the lol','president faiz','faiz corp','faiz paiz','faiz pengasas','the black house president','pengerusi paiz corp','faiz corp chairman'],
+fup:['The Black House','Paiz Corp','Founders'],
+r:(bm)=>bm?
+`<strong>Faiz4224</strong> — Presiden Pertama The LoL dan Pengerusi Paiz® Corp. 👑<br><br>Dia la otak di sebalik semua benda:<br>— Cadangkan projek TLSRL Railway (4,800+ blok rel!)<br>— Komisen pembinaan TLCC Twin Towers<br>— Tubuhkan TL Railways & Paiz™ Construction<br>— Lancarkan PaizShop<br>— Lulus filem The LoL Movie melalui PaizProductions<br>— Buka Paiz Chicken<br><br>Semua syarikat dalam Paiz® Corp wujud untuk berkhidmat kepada rakyat The LoL. Dari The Black House, dia terus memimpin The LoL.`:
+`<strong>Faiz4224</strong> — First President of The LoL and Chairman of Paiz® Corp. 👑<br><br>The mind behind everything:<br>— Proposed the TLSRL Railway (4,800+ blocks!)<br>— Commissioned the TLCC Twin Towers<br>— Established TL Railways & Paiz™ Construction<br>— Launched PaizShop<br>— Greenlit The LoL Movie through PaizProductions<br>— Opened Paiz Chicken<br><br>Every company under Paiz® Corp exists to serve The LoL's citizens. He operates from The Black House.`},
+
+/* ── IMII KUN ── */
+{id:'imii',cat:'history',
+kw:['imii kun','imii','about imii','pasal imii','siapa imii','imii the lol','imii founder','imii co-founder','imii kun tu siapa'],
+fup:['Founders','History of The LoL','The LoL Movie cast'],
+r:(bm)=>bm?
+`<strong>Imii Kun</strong> — Pengasas Bersama & Visionary The Legend of Legiona. 🟩<br><br>Salah seorang daripada tiga pengasas asal yang tandatangan Proklamasi Kedaulatan. Dia memainkan peranan penting dalam visi awal negara dan jadi tiang kekuatan dalam pembinaan identiti The LoL. Dia juga muncul dalam <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a> sebagai pelakon utama.`:
+`<strong>Imii Kun</strong> — Co-Founder & Visionary of The Legend of Legiona. 🟩<br><br>One of the three original founders who signed the Proclamation of Sovereignty. Imii Kun played a key role in the nation's early vision and served as a pillar of strength in building The LoL's identity. Also appears in <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a> as a principal cast member.`},
+
+/* ── DYNO ── */
+{id:'dyno',cat:'history',
+kw:['dyno','itzdynozz','itzdyno','about dyno','pasal dyno','siapa dyno','dyno the lol','dyno founder','dyno co-founder','dyno tu siapa'],
+fup:['Founders','History of The LoL','The LoL Movie cast'],
+r:(bm)=>bm?
+`<strong>Dyno</strong> (juga dikenali sebagai ItzDynozz) — Pengasas Bersama & Ahli Strategi The Legend of Legiona. 🟩<br><br>Satu daripada tiga orang yang tubuhkan The LoL dari awal era The Sus lagi. Kebijaksanaan dan keazaman dia bimbing negara menuju masa depan yang gemilang. Dia juga muncul sebagai pelakon utama dalam <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a>.`:
+`<strong>Dyno</strong> (also known as ItzDynozz) — Co-Founder & Strategist of The Legend of Legiona. 🟩<br><br>One of the three who established The LoL from the earliest Sus Era. His wisdom and determination illuminated the path toward the nation's future. Also appears as principal cast in <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a>.`},
+
+/* ── FULL HISTORY ── */
+{id:'history',cat:'history',
+kw:['history','sejarah','full history','cerita thelol','kisah thelol','macam mana thelol bermula','macam mana the lol mula','how did it start','how it started','how it began','origin','asal usul','asal usul thelol','latar belakang','background','lore','timeline','past','founding story','kisah penubuhan','mula dari mana','camne start','camne thelol start','bila start','bila thelol start','dulu camne','apa jadi dulu','the story'],
+fup:['Era The Sus','UltraX2020 crisis','Skyxion: Altaer Era','Founders'],
+r:(bm)=>bm?
+`<strong>Sejarah Penuh The Legend of Legiona</strong> 📜<br><br><strong>Era The Sus (2023 · Sebelum Penubuhan)</strong><br>Negara bermula sebagai "The Sus" — penempatan tidak rasmi di Skyxion tanpa tadbir urus. EhekSquad (PhoenixAiman, PandaPutih, Kagee) ada asosiasi tak formal dengan The Sus. Diorang keluar kemudian, EhekSquad masih wujud sampai sekarang.<br><br><strong>Penubuhan (2023)</strong><br>Faiz4224, Imii Kun dan Dyno tubuhkan The Legend of Legiona secara rasmi, tandatangan Proklamasi Kedaulatan.<br><br><strong>Pilihan Raya Demokratik Pertama (6 Mei 2023)</strong><br>UltraX2020 dan parti PHRTL menang — jadikan dia Presiden ke-2.<br><br><strong>Krisis UltraX2020</strong><br>Papan tanda bandar dibom, serangan dron ke atas TLCC Twin Towers, huru-hara politik. UltraX2020 akhirnya letak jawatan; kuasa kembali ke Faiz4224.<br><br><strong>Skyxion: Altaer Era (Sekarang)</strong><br>The LoL kini antara negara paling maju di Skyxion. ISC aktif, TLSRL beroperasi, dan web ecosystem The LoL penuh beroperasi.<br><br><a href="https://faizzzlol.github.io/thelol/about">Baca sejarah penuh →</a>`:
+`<strong>Full History of The Legend of Legiona</strong> 📜<br><br><strong>The Sus Era (2023 · Pre-Founding)</strong><br>Started as "The Sus" — an informal settlement on Skyxion with no governance. EhekSquad (PhoenixAiman, PandaPutih, Kagee) had an undefined association with The Sus — not citizens, allies, or residents. They departed and re-established EhekSquad independently. It still exists today.<br><br><strong>The Founding (2023)</strong><br>Faiz4224, Imii Kun & Dyno formally established The Legend of Legiona, signing the Proclamation of Sovereignty and establishing the TL Dollar and national infrastructure.<br><br><strong>First Democratic Election (May 6, 2023)</strong><br>UltraX2020 and the <em>Parti Harapan Rakyat The LoL (PHRTL)</em> won — making UltraX2020 the 2nd President.<br><br><strong>The UltraX2020 Crisis</strong><br>A bombed city sign, drone attacks on the TLCC Twin Towers, broader political chaos. UltraX2020 resigned; power returned to Faiz4224.<br><br><strong>Skyxion: Altaer Era (Present)</strong><br>The LoL now operates as one of Skyxion's most advanced nations.<br><br><a href="https://faizzzlol.github.io/thelol/about">Read the full history →</a>`},
+
+/* ── THE SUS ERA ── */
+{id:'thesus',cat:'history',
+kw:['the sus','the sus era','sus era','sus squad','era the sus','asal the sus','before the lol','sebelum the lol','masa the sus','sus nation','before founding','bila the sus','apa tu the sus'],
+fup:['EhekSquad','Founders','Full History'],
+r:(bm)=>bm?
+`<strong>Era The Sus (2023)</strong> 🏕️<br><br>Sebelum The Legend of Legiona wujud, negara dikenali sebagai <strong>"The Sus"</strong> — penempatan tidak rasmi di dunia Skyxion. Tiada struktur kerajaan, tiada dasar, tiada tadbir urus formal.<br><br>EhekSquad — diketuai oleh PhoenixAiman, PandaPutih, dan Kagee — ada asosiasi yang tidak ditakrifkan dengan The Sus. Status mereka sebagai warganegara, sekutu, atau hanya penduduk tidak pernah diformalisasikan. Diorang akhirnya berpisah dan tubuhkan semula EhekSquad secara bebas. EhekSquad masih wujud sampai hari ni.<br><br>Kemudian Faiz4224, Imii Kun & Dyno menukar nama kepada <strong>The Legend of Legiona</strong> dan tubuhkan kerajaan formal.`:
+`<strong>The Sus Era (2023)</strong> 🏕️<br><br>Before The Legend of Legiona existed, the nation was known as <strong>"The Sus"</strong> — an informal settlement with no formal governance structure, no policy, no citizenship framework.<br><br>EhekSquad — led by PhoenixAiman, PandaPutih, and Kagee — had an undefined association with The Sus. Their exact status as citizens, allies, or residents was never formally defined as The Sus had no governance structure. They later departed and re-established EhekSquad independently. It still exists today.<br><br>Faiz4224, Imii Kun & Dyno then renamed and formally established <strong>The Legend of Legiona</strong>.`},
+
+/* ── EHEKSQUAD ── */
+{id:'eheksquad',cat:'lore',
+kw:['eheksquad','ehek squad','ehek','phoenixaiman','pandaputih','kagee','the sus members','sus era people','siapa eheksquad','pasal eheksquad'],
+fup:['The Sus Era','History of The LoL','Founders'],
+r:(bm)=>bm?
+`<strong>EhekSquad</strong> — Konteks Sejarah 🏕️<br><br>Ahli: PhoenixAiman, PandaPutih, Kagee.<br><br>Mereka ada asosiasi yang tidak ditakrifkan dengan The Sus (penempatan pra-penubuhan) pada 2023. Masa The Sus, tiada tadbir urus formal — jadi status mereka sebagai warganegara, sekutu, atau penduduk tidak pernah ditentukan. EhekSquad akhirnya berpisah dan tubuhkan semula secara bebas. Mereka <strong>masih wujud hari ini</strong> tanpa sebarang hubungan formal dengan institusi The LoL.`:
+`<strong>EhekSquad</strong> — Historical Context 🏕️<br><br>Members: PhoenixAiman, PandaPutih, Kagee.<br><br>Had an undefined association with The Sus (pre-founding settlement) in 2023. Since The Sus had no formal governance, their exact status as citizens, allies, or residents was never defined. EhekSquad departed and re-established independently. They <strong>still exist today</strong> with no formal affiliation to The LoL's institutions.`},
+
+/* ── ULTRAX2020 ── */
+{id:'ultrax',cat:'history',
+kw:['ultrax2020','ultrax','ultra x','2nd president','presiden ke-2','second president','phrtl','parti harapan rakyat','crisis','krisis','resigned','letak jawatan','drone attack','serangan dron','bombed city','bandar dibom','election 2023','pilihan raya 2023','internal strife','huru hara','ultrax presidency','pemerintahan ultrax','ultrax tu siapa','siapa ultrax','pasal ultrax','apa jadi ultrax'],
+fup:['History of The LoL','TLCC Twin Towers','Current government','The LoL Movie'],
+r:(bm)=>bm?
+`<strong>Presiden UltraX2020 & Krisis</strong> ⚡<br><br>Pada <strong>6 Mei 2023</strong>, UltraX2020 menang pilihan raya demokratik pertama The LoL di bawah parti <em>Parti Harapan Rakyat The LoL (PHRTL)</em> — jadi <strong>Presiden ke-2</strong>.<br><br>Sewaktu pemerintahannya:<br>— Papan tanda bandar <strong>dibom</strong> dalam satu tindakan sabotaj dalaman<br>— Serangan dron ke atas <strong>TLCC Twin Towers</strong> menyebabkan kerosakan teruk<br>— Huru-hara politik yang besar melanda kerajaan<br><br>UltraX2020 akhirnya <strong>letak jawatan</strong>. Tadbir urus kembali ke Faiz4224. TLCC Twin Towers dipulihkan sepenuhnya.<br><br>Dia muncul sebagai pelakon utama dalam <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a> — pemerintahannya jadi arc politik utama filem tu.`:
+`<strong>The UltraX2020 Presidency & Crisis</strong> ⚡<br><br>On <strong>May 6, 2023</strong>, UltraX2020 won The LoL's first democratic election under the <em>Parti Harapan Rakyat The LoL (PHRTL)</em> — becoming the <strong>2nd President</strong>.<br><br>During his tenure:<br>— A city sign was <strong>bombed</strong> in an act of internal sabotage<br>— Drone attacks targeted the <strong>TLCC Twin Towers</strong>, causing significant damage<br>— Broader political crisis destabilised the administration<br><br>UltraX2020 <strong>resigned</strong>. Governance returned to Faiz4224. The TLCC Twin Towers were fully restored.<br><br>He appears as a principal cast member in <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">The LoL: The Movie</a> — his presidency is the film's central political arc.`},
+
+/* ── GOVERNMENT ── */
+{id:'government',cat:'gov',
+kw:['government','kerajaan','government structure','struktur kerajaan','black house','the black house','departments','jabatan','ministry','kementerian','office of the president','pejabat presiden','government structure','struktur kerajaan','national justice','lore archives','public works','external relations','communications','dept','executive','six departments','enam jabatan','apa jabatan','senarai jabatan','all departments','all departments','department list','gov structure','pasal kerajaan','government the lol','thelol gov'],
+fup:['ISC Agency','Legal archive','Faiz4224 presidency','Citizenship'],
+r:(bm)=>bm?
+`<strong>Struktur Kerajaan The Legend of Legiona</strong> 🏛️<br><br><strong>The Black House — Pejabat Presiden</strong><br>Pusat eksekutif kerajaan The LoL. Sekarang: <strong>Faiz4224</strong>. Dokumen: BH-YYYY-###.<br><br><strong>Enam Jabatan Kerajaan:</strong><br>— DEPT-01: <strong>ISC</strong> — Internal Security Control · AKTIF<br>— DEPT-02: Pejabat Keadilan Nasional<br>— DEPT-03: Kementerian Lore & Arkib<br>— DEPT-04: Bahagian Kerja Awam<br>— DEPT-05: Biro Hubungan Luar<br>— DEPT-06: The LoL Communications<br><br>Hanya ISC (DEPT-01) yang sepenuhnya aktif buat masa ni.<br><br>Konvensi dokumen: LOLGOV-YYYY-### / BH-YYYY-### / ISC-YYYY-###<br><br><a href="https://faizzzlol.github.io/thelol/gov/">Portal Kerajaan →</a>`:
+`<strong>Government Structure of The Legend of Legiona</strong> 🏛️<br><br><strong>The Black House — Office of the President</strong><br>Executive seat of The LoL's government. Currently: <strong>Faiz4224</strong>. Documents use code BH-YYYY-###.<br><br><strong>Six Government Departments:</strong><br>— DEPT-01: <strong>ISC</strong> — Internal Security Control · ACTIVE<br>— DEPT-02: Office of National Justice<br>— DEPT-03: Ministry of Lore & Archives<br>— DEPT-04: Public Works Division<br>— DEPT-05: Bureau of External Relations<br>— DEPT-06: The LoL Communications<br><br>Only ISC (DEPT-01) is fully active currently.<br><br>Document conventions: LOLGOV-YYYY-### / BH-YYYY-### / ISC-YYYY-###<br><br><a href="https://faizzzlol.github.io/thelol/gov/">Government Portal →</a>`},
+
+/* ── THE BLACK HOUSE ── */
+{id:'blackhouse',cat:'gov',
+kw:['black house','the black house','presidential office','pejabat presiden','white house thelol','presidential palace','where does faiz work','mana presiden kerja','bh-2026','bh 2026','black house thelol','apa tu black house'],
+fup:['Government structure','Faiz4224','Naming Directive'],
+r:(bm)=>bm?
+`<strong>The Black House</strong> 🏚️<br><br>The Black House ialah nama rasmi untuk Pejabat Presiden The Legend of Legiona — setara dengan Rumah Putih (White House). Ia merupakan pusat eksekutif kerajaan The LoL.<br><br>Presiden semasa: <strong>Faiz4224</strong><br>Kod dokumen: <strong>BH-YYYY-###</strong><br><br>Dokumen yang dikeluarkan dari The Black House termasuk proklamasi presiden, arahan dasar, dan keputusan eksekutif. Contohnya, BH-2026-0002 ialah Arahan Penamaan & Gaya Rasmi The LoL.`:
+`<strong>The Black House</strong> 🏚️<br><br>The Black House is the official name for the Office of the President of The Legend of Legiona — The LoL's equivalent of the White House. It serves as the executive seat of government.<br><br>Current President: <strong>Faiz4224</strong><br>Document code: <strong>BH-YYYY-###</strong><br><br>Documents issued from The Black House include presidential proclamations, policy directives, and executive decisions — such as BH-2026-0002, the Official Naming & Style Directive.`},
+
+/* ── ISC ── */
+{id:'isc',cat:'gov',
+kw:['isc','internal security control','intelligence agency','security agency','classified','tlio','t.l.i.o','clearance','intel portal','national security','agensi perisikan','keselamatan','perisikan','apa tu isc','isc tu apa','isc the lol','about isc','pasal isc','isc agency','spy agency','thelol spy','intelligence the lol','isc intel','masuk isc','how to access isc','clearance code','password isc','kata laluan isc','legiona2026','isc password'],
+fup:['Government structure','Legal documents','History'],
+r:(bm)=>bm?
+`<strong>ISC — Internal Security Control</strong> 🔒<br><br>Agensi perisikan dan keselamatan nasional rasmi The LoL — Jabatan Kerajaan 01 (DEPT-01), setara dengan CIA.<br><br>Pengganti kepada <em>T.L.I.O</em> yang lama — nama tu dah tak digunakan lagi.<br><br><strong>Portal Awam:</strong><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/">Portal Utama ISC</a><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/national">Laporan Ketelusan</a><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/search">Arkib Carian Awam</a><br><br><strong>Portal Intel</strong> dilindungi kata laluan.<br>Kod akses: <em class="tag">LEGIONA2026</em><br>Rujukan dokumen: ISC-YYYY-###`:
+`<strong>ISC — Internal Security Control</strong> 🔒<br><br>The LoL's official national intelligence agency — Government Department 01 (DEPT-01), equivalent to a CIA.<br><br>Successor to the former <em>T.L.I.O</em> — that name is no longer in use.<br><br><strong>Public Portals:</strong><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Main Portal</a><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/national">National Transparency Report</a><br>— <a href="https://faizzzlol.github.io/thelol/gov/isc/search">Public Search Archive</a><br><br><strong>Intel Portal</strong> is password-protected.<br>Clearance code: <em class="tag">LEGIONA2026</em><br>Document reference: ISC-YYYY-###`},
+
+/* ── LEGAL ARCHIVE ── */
+{id:'legal',cat:'gov',
+kw:['legal','undang-undang','documents','dokumen','archive','arkib','acts','akta','laws','undang undang','ordinance','ordinan','rights charter','piagam hak','proclamation','proklamasi','legal archive','arkib undang-undang','document list','senarai dokumen','lolgov','bh-2026','all documents','official documents','document archive','all docs','official docs','law the lol','undang thelol','akta kewarganegaraan','akta warganegara'],
+fup:['Citizenship','Naming policy','Government portal','ISC'],
+r:(bm)=>bm?
+`<strong>Arkib Undang-undang — Dokumen Rasmi</strong> 📄<br><br>Boleh dicari di <a href="https://faizzzlol.github.io/thelol/gov/assets/">Arkib Undang-undang</a> — boleh tapis mengikut kategori.<br><br><span class="tag">LOLGOV-2026-0001</span> — Akta Kewarganegaraan<br><span class="tag">LOLGOV-2026-0002</span> — Ordinan Pembatalan<br><span class="tag">LOLGOV-2026-0003</span> — Piagam Hak Warganegara<br><span class="tag">LOLGOV-2026-0004</span> — Rangka Kerja Dasar Kerajaan<br><span class="tag gold">BH-2026-0001</span> — Proklamasi Presiden tentang Kewarganegaraan<br><span class="tag gold">BH-2026-0002</span> — Arahan Penamaan & Gaya Rasmi (02 Apr 2026)<br><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">Layari Arkib →</a>`:
+`<strong>Legal Archive — Official Documents</strong> 📄<br><br>Hosted at <a href="https://faizzzlol.github.io/thelol/gov/assets/">Legal Archive</a> — searchable and filterable by category.<br><br><span class="tag">LOLGOV-2026-0001</span> — Citizenship Act<br><span class="tag">LOLGOV-2026-0002</span> — Revocation Ordinance<br><span class="tag">LOLGOV-2026-0003</span> — Citizens' Rights Charter<br><span class="tag">LOLGOV-2026-0004</span> — Government Policy Framework<br><span class="tag gold">BH-2026-0001</span> — Presidential Proclamation on Citizenship<br><span class="tag gold">BH-2026-0002</span> — Official Naming & Style Directive (02 Apr 2026)<br><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">Browse Legal Archive →</a>`},
+
+/* ── CITIZENSHIP ── */
+{id:'citizenship',cat:'gov',
+kw:['citizenship','kewarganegaraan','citizen','warganegara','apply','mohon','permohonan','application','citizen rights','hak warganegara','how to join','macam mana nak join','become a citizen','jadi warganegara','jadi rakyat','citizenship portal','portal kewarganegaraan','revocation','pembatalan','rights charter','piagam hak','how to apply','cara mohon','boleh join','nak join thelol','join the lol','masuk the lol','thelol join','join thelol','syarat warganegara','syarat masuk'],
+fup:['Legal archive','Government portal','Skyxion server'],
+r:(bm)=>bm?
+`<strong>Sistem Kewarganegaraan The LoL</strong> 🪪<br><br>Dikawal oleh tiga dokumen:<br><br><strong>LOLGOV-2026-0001 — Akta Kewarganegaraan:</strong> Kelayakan, proses permohonan, dan status.<br><strong>LOLGOV-2026-0003 — Piagam Hak Warganegara:</strong> Hak asasi semua warganegara.<br><strong>LOLGOV-2026-0002 — Ordinan Pembatalan:</strong> Syarat pembatalan kewarganegaraan.<br><br>Permohonan melalui Portal Kewarganegaraan online dengan borang rasmi dan sebelas kotak semak perisytiharan. Kewarganegaraan terikat dengan era dan boleh diperbaharui. Semua keputusan terletak pada Faiz4224.<br><br>Syarat asas: 16 tahun ke atas, pemain Skyxion aktif, tiada rekod server yang buruk.<br><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Mohon Kewarganegaraan →</a>`:
+`<strong>The LoL Citizenship System</strong> 🪪<br><br>Governed by three documents:<br><br><strong>LOLGOV-2026-0001 — Citizenship Act:</strong> Eligibility, application process, and status.<br><strong>LOLGOV-2026-0003 — Citizens' Rights Charter:</strong> Fundamental rights of all citizens.<br><strong>LOLGOV-2026-0002 — Revocation Ordinance:</strong> Conditions under which citizenship may be revoked.<br><br>Applications via the online Citizenship Portal with a formal form and eleven declaration checkboxes. Citizenship is era-bound and renewable. All decisions rest with Faiz4224.<br><br>Basic requirements: 16+, active Skyxion player, clean server record.<br><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Apply for Citizenship →</a>`},
+
+/* ── NAMING POLICY ── */
+{id:'naming',cat:'gov',
+kw:['naming policy','dasar penamaan','style directive','arahan gaya','bh-2026-0002','bh 2026 0002','the lol name','nama the lol','lol abbreviation','singkatan lol','standalone lol','prohibited name','nama dilarang','how to write the lol','macam mana tulis the lol','cara tulis the lol','cara eja the lol','naming directive','arahan penamaan','abbreviation the lol','singkatan the lol','lol is banned','lol dilarang'],
+fup:['Legal archive','The Black House'],
+r:(bm)=>bm?
+`<strong>Arahan Penamaan & Gaya Rasmi — BH-2026-0002</strong> ✍️<br><br>Dikeluarkan oleh The Black House pada <strong>02 April 2026</strong>:<br><br>✅ <strong>"The Legend of Legiona"</strong> — Nama rasmi penuh<br>✅ <strong>"The LoL"</strong> — Singkatan yang dibenarkan SAHAJA. "The" WAJIB ada.<br>❌ <strong>"LoL"</strong> — Penggunaan bersendirian DILARANG KERAS dalam semua bahan.<br><br>Pelanggaran dasar ni boleh jadi masalah rasmi. Sentiasa gunakan "The LoL" — bukan "LoL" sahaja.<br><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">Lihat dalam Arkib Undang-undang →</a>`:
+`<strong>Official Naming & Style Directive — BH-2026-0002</strong> ✍️<br><br>Issued by The Black House on <strong>02 April 2026</strong>:<br><br>✅ <strong>"The Legend of Legiona"</strong> — Full official name<br>✅ <strong>"The LoL"</strong> — Only permitted abbreviation. The "The" is mandatory.<br>❌ <strong>"LoL"</strong> (standalone) — STRICTLY PROHIBITED in all written materials.<br><br>Always use "The LoL" — never bare "LoL" on its own.<br><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">View in Legal Archive →</a>`},
+
+/* ── TLSRL ── */
+{id:'tlsrl',cat:'corp',
+kw:['tlsrl','spawn railway','railway link','tren','kereta api','train','stations','stesen','railway project','projek rel','tll','llc','llo','mps','sxj','spn','express service','cargo service','4800','4 800','enclosed rail','rel penutup','how long is tlsrl','berapa blok tlsrl','berapa panjang tlsrl','panjang tlsrl','tlsrl stations','stesen tlsrl','tlsrl route','laluan tlsrl','travel time tlsrl','berapa lama tlsrl','masa perjalanan tlsrl','tlsrl how long','how to use tlsrl','cara guna tlsrl'],
+fup:['TL Railways','Paiz Corp','Megaprojects','TLCC Twin Towers'],
+r:(bm)=>bm?
+`<strong>TLSRL — The LoL–Spawn Railway Link</strong> 🚂<br><br>— Trek: <strong>4,800+ blok</strong> sepenuhnya tertutup<br>— Masa perjalanan: <strong>~10 minit</strong> hujung ke hujung<br>— Kelas perkhidmatan: Regular · Express · Cargo<br>— Stesen: <strong>TLL → LLC → LLO → MPS → SXJ → SPN</strong><br><br>Dioperasikan oleh TL Railways (Paiz® Corp SUB-01). Dibina oleh Paiz™ Construction (SUB-02). Dicadangkan oleh Faiz4224.<br><br>Ini projek infrastruktur terbesar dan paling epic dalam sejarah The LoL! 💪<br><br><a href="https://faizzzlol.github.io/thelol/tlr/">Portal TL Railways →</a>`:
+`<strong>TLSRL — The LoL–Spawn Railway Link</strong> 🚂<br><br>— Track: <strong>4,800+ blocks</strong> fully enclosed<br>— Travel time: <strong>~10 minutes</strong> end-to-end<br>— Service tiers: Regular · Express · Cargo<br>— Stations: <strong>TLL → LLC → LLO → MPS → SXJ → SPN</strong><br><br>Operated by TL Railways (Paiz® Corp SUB-01). Built by Paiz™ Construction (SUB-02). Proposed by Faiz4224. The most ambitious infrastructure project in The LoL's history.<br><br><a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways Portal →</a>`},
+
+/* ── TL RAILWAYS ── */
+{id:'railways',cat:'corp',
+kw:['tl railways','tlr','tl railways','national rail','rail operator','monorail','lrt','mrt','high speed boat','boat link','hsb','railway network','rangkaian rel','transport network','rangkaian pengangkutan','all lines','semua laluan','how many lines','berapa laluan','lines tlr','tlr lines','four lines','empat laluan','tl railways subsidiaries','tlr subsidiary'],
+fup:['TLSRL project','Paiz Corp','Megaprojects'],
+r:(bm)=>bm?
+`<strong>TL Railways — Pengendali Transit Nasional</strong> 🚆<br><br>Paiz® Corp SUB-01. Empat laluan rangkaian:<br><br><strong>TLSRL</strong> — The LoL–Spawn Link (4,800+ blok, 6 stesen, 3 kelas)<br><strong>Monorail</strong> — Transit bandar dalam The LoL City<br><strong>LRT/MRT</strong> — Perkhidmatan transit massa pantas<br><strong>High-Speed Boat Link (HSB)</strong> — Sambungan berasaskan air merentasi Skyxion<br><br><a href="https://faizzzlol.github.io/thelol/tlr/">Portal TL Railways →</a>`:
+`<strong>TL Railways — National Transit Operator</strong> 🚆<br><br>Paiz® Corp SUB-01. Four network lines:<br><br><strong>TLSRL</strong> — The LoL–Spawn Link (4,800+ blocks, 6 stations, 3 service classes)<br><strong>Monorail</strong> — Urban transit within The LoL City<br><strong>LRT/MRT</strong> — Mass rapid transit services<br><strong>High-Speed Boat Link (HSB)</strong> — Water-based connection across Skyxion<br><br><a href="https://faizzzlol.github.io/thelol/tlr/">TL Railways Portal →</a>`},
+
+/* ── PAIZ CORP ── */
+{id:'paiz_corp',cat:'corp',
+kw:['paiz corp','paiz® corp','paiz corporation','all subsidiaries','semua subsidiari','five subsidiaries','lima subsidiari','conglomerate','konglomerat','national company','syarikat negara','paiz group','kumpulan paiz','overview paiz','apa tu paiz corp','paiz corp tu apa','pasal paiz corp','about paiz corp','what is paiz corp','all companies','semua syarikat','subsidiaries list','senarai subsidiari'],
+fup:['Paiz Shop','Paiz Chicken','PaizProductions','TL Railways'],
+r:(bm)=>bm?
+`<strong>Paiz® Corp — Konglomerat Nasional</strong> 🏢<br><br>Diasaskan dan diketuai oleh <strong>Faiz4224</strong>. Lima subsidiari:<br><br><strong>SUB-01 · TL Railways</strong> — Pengendali rel nasional. TLSRL, Monorail, LRT/MRT, High-Speed Boat Link. <a href="https://faizzzlol.github.io/thelol/tlr/">→</a><br><strong>SUB-02 · Paiz™ Construction</strong> — Bina TLSRL, TLCC Twin Towers, National Farm Complex dan semua infrastruktur utama.<br><strong>SUB-03 · Paiz Shop</strong> — Kedai item Minecraft rasmi. Item dalam Diamonds. <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">→</a><br><strong>SUB-04 · PaizProductions</strong> — Studio filem. The LoL Movie, LoL Chronicles, ISC: Classified. <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">→</a><br><strong>SUB-05 · Paiz Chicken</strong> — Pesanan makanan virtual. Penghantaran merentasi Skyxion. <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">→</a><br><br><a href="https://faizzzlol.github.io/PaizCorp/">Laman Utama Paiz® Corp →</a>`:
+`<strong>Paiz® Corp — National Conglomerate</strong> 🏢<br><br>Founded and chaired by <strong>Faiz4224</strong>. Five subsidiaries:<br><br><strong>SUB-01 · TL Railways</strong> — National rail operator. TLSRL, Monorail, LRT/MRT, High-Speed Boat Link. <a href="https://faizzzlol.github.io/thelol/tlr/">→</a><br><strong>SUB-02 · Paiz™ Construction</strong> — Built TLSRL, TLCC Twin Towers, National Farm Complex and all major infrastructure.<br><strong>SUB-03 · Paiz Shop</strong> — Official Minecraft item store. Items priced in Diamonds. <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">→</a><br><strong>SUB-04 · PaizProductions</strong> — Film studio. The LoL Movie, LoL Chronicles, ISC: Classified. <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">→</a><br><strong>SUB-05 · Paiz Chicken</strong> — Virtual food ordering. Delivery across Skyxion. <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">→</a><br><br><a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp Homepage →</a>`},
+
+/* ── PAIZ SHOP ── */
+{id:'paiz_shop',cat:'corp',
+kw:['paiz shop','kedai paiz','shop','store','kedai','buy items','beli item','shulker','mending','unbreaking','nether wart','iron ingot','retail','item shop','minecraft store','kedai minecraft','apa ada kat shop','barang apa ada','harga item','price items','berapa harga','shop items','list items','senarai item'],
+fup:['Paiz Corp','Paiz Chicken','TL Dollar'],
+r:(bm)=>bm?
+`<strong>Paiz Shop — Kedai Item Rasmi</strong> 🛒<br><br>Paiz® Corp SUB-03. Semua item berharga dalam Diamond (◆):<br><br>Shulker Box ◆4 · Mending I ◆3 · Nether Wart ◆3 · Unbreaking III ◆2 · Iron Ingot ◆1<br><br>Buat pesanan melalui portal → Discord webhook. Pengurusan stok langsung, penghantaran dan kutipan tersedia.<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Lawati Paiz Shop →</a>`:
+`<strong>Paiz Shop — Official Item Store</strong> 🛒<br><br>Paiz® Corp SUB-03. All items priced in Diamonds (◆):<br><br>Shulker Box ◆4 · Mending I ◆3 · Nether Wart ◆3 · Unbreaking III ◆2 · Iron Ingot ◆1<br><br>Orders via portal → Discord webhook. Live stock management, delivery and pickup available.<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Visit Paiz Shop →</a>`},
+
+/* ── PAIZ CHICKEN ── */
+{id:'paiz_chicken',cat:'corp',
+kw:['paiz chicken','chicken','ayam','food','makanan','restaurant','restoran','order food','pesan makanan','food delivery','penghantaran makanan','pickup food','virtual food','makanan maya','fast food','makan','nak makan','lapar','lapar paiz','hungry','paiz food','food order'],
+fup:['Paiz Shop','Paiz Corp','TL Dollar'],
+r:(bm)=>bm?
+`<strong>Paiz Chicken — Jenama Makanan Virtual</strong> 🍗<br><br>Paiz® Corp SUB-05. Pesanan makanan Minecraft merentasi Skyxion.<br><br>Penghantaran + kutipan · Bayaran mengikut jarak · Berharga dalam Diamonds · Integrasi Discord webhook · Pengurusan stok langsung<br><br>Lapar ke? Order la! 😄<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Order dari Paiz Chicken →</a>`:
+`<strong>Paiz Chicken — Virtual Food Brand</strong> 🍗<br><br>Paiz® Corp SUB-05. Minecraft food ordering across Skyxion.<br><br>Delivery + pickup · Distance-based fees · Priced in Diamonds · Discord webhook integration · Live stock management<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Order from Paiz Chicken →</a>`},
+
+/* ── PAIZPRODUCTIONS ── */
+{id:'productions',cat:'corp',
+kw:['paizproductions','paiz productions','film studio','studio filem','movie studio','production studio','all films','semua filem','three projects','tiga projek','isc classified','lol chronicles','media division','bahagian media','studio paiz','about paizproductions','pasal paizproductions'],
+fup:['The LoL Movie','Paiz Corp'],
+r:(bm)=>bm?
+`<strong>PaizProductions — Studio Filem Rasmi</strong> 🎬<br><br>Paiz® Corp SUB-04. Tiga projek aktif:<br><br><strong>1. The LoL: The Movie</strong> — Filem Panjang · DALAM PENGELUARAN · 4 fasa. Pelakon: Faiz4224, Imii Kun, Dyno, UltraX2020. <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">→</a><br><strong>2. LoL Chronicles</strong> — Siri · DALAM PEMBANGUNAN<br><strong>3. ISC: Classified</strong> — Filem Pendek · DIRANCANG<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PaizProductions →</a>`:
+`<strong>PaizProductions — Official Film Studio</strong> 🎬<br><br>Paiz® Corp SUB-04. Three active projects:<br><br><strong>1. The LoL: The Movie</strong> — Feature Film · IN PRODUCTION · 4 phases. Cast: Faiz4224, Imii Kun, Dyno, UltraX2020. <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">→</a><br><strong>2. LoL Chronicles</strong> — Series · IN DEVELOPMENT<br><strong>3. ISC: Classified</strong> — Short Film · PLANNED<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PaizProductions →</a>`},
+
+/* ── THE LOL MOVIE ── */
+{id:'lolmovie',cat:'corp',
+kw:['the lol movie','lol movie','thelolmovie','filem thelol','feature film','four phases','empat fasa','movie cast','pelakon filem','in production','dalam pengeluaran','political epic','minecraft film','filem minecraft','the lol the movie','thelol movie','movie thelol','bila keluar','when release','bila siap','bila launch','movie release','lol movie cast','siapa pelakon','pelakon the lol movie'],
+fup:['PaizProductions','Founders','UltraX2020 presidency'],
+r:(bm)=>bm?
+`<strong>The LoL: The Movie</strong> 🎬<br><br>Status: <strong>DALAM PENGELUARAN</strong> · 4 Fasa · Epik politik Minecraft<br><br><strong>Pelakon:</strong><br>Faiz4224 — Presiden Pertama & Pemimpin Pengasas<br>Imii Kun — Pengasas Bersama & Visionary<br>Dyno — Pengasas Bersama & Ahli Strategi<br>UltraX2020 — Presiden ke-2 (arc krisis politik)<br><br>Empat fasa merangkumi keseluruhan perjalanan The LoL dari era Sus kepada era Altaer. Hype gila! 🔥<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">Laman Filem Rasmi →</a>`:
+`<strong>The LoL: The Movie</strong> 🎬<br><br>Status: <strong>IN PRODUCTION</strong> · 4 Phases · Political Minecraft Epic<br><br><strong>Cast:</strong><br>Faiz4224 — First President & Founding Leader<br>Imii Kun — Co-Founder & Visionary<br>Dyno — Co-Founder & Strategist<br>UltraX2020 — 2nd President (political crisis arc)<br><br>The four phases cover The LoL's full arc from the Sus Era to the Altaer Era.<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">Official Film Page →</a>`},
+
+/* ── MEGAPROJECTS ── */
+{id:'megaprojects',cat:'corp',
+kw:['megaproject','megaprojects','projek mega','infrastructure','infrastruktur','national projects','projek nasional','big projects','projek besar','major projects','projek utama','all projects','semua projek','apa projek ada','what projects are there','twin towers','tlcc','farm complex','ladang','national farm'],
+fup:['TLSRL Railway','TLCC Twin Towers','National Farm Complex'],
+r:(bm)=>bm?
+`<strong>Projek Mega Nasional</strong> 🏗️<br><br>Semua direka bentuk oleh Paiz™ Construction:<br><br><strong>1. TLSRL</strong> — The LoL–Spawn Railway Link. 4,800+ blok rel tertutup, 6 stesen, 3 kelas perkhidmatan.<br><strong>2. TLCC Twin Towers</strong> — Mercu tanda paling ikonik di The LoL City. Diserang semasa krisis UltraX2020, telah dipulihkan sepenuhnya.<br><strong>3. National Farm Complex</strong> — Iron Farm · Totem Farm · Gold Farm (semua beroperasi). Tulang belakang ekonomi The LoL.`:
+`<strong>National Megaprojects</strong> 🏗️<br><br>All engineered by Paiz™ Construction:<br><br><strong>1. TLSRL</strong> — The LoL–Spawn Railway Link. 4,800+ block enclosed rail, 6 stations, 3 service classes.<br><strong>2. TLCC Twin Towers</strong> — Most iconic landmark in The LoL City. Attacked during UltraX2020 crisis, fully restored.<br><strong>3. National Farm Complex</strong> — Iron Farm · Totem Farm · Gold Farm (all operational). Backbone of The LoL's economy.`},
+
+/* ── TLCC TWIN TOWERS ── */
+{id:'tlcc',cat:'corp',
+kw:['tlcc','twin towers','menara kembar','convention centre','convention center','landmark','towers attacked','menara diserang','towers bombed','menara dibom','most iconic','paling ikonik','lol city','the lol city','bandar the lol','tlcc twin towers','pasal tlcc','apa tu tlcc'],
+fup:['UltraX2020 crisis','National Farm Complex','TLSRL Railway'],
+r:(bm)=>bm?
+`<strong>TLCC Twin Towers</strong> 🏙️<br><br>Mercu tanda paling ikonik di The LoL City — The LoL Convention Centre Twin Towers. Dibina oleh Paiz™ Construction. Semasa pemerintahan UltraX2020, serangan dron menyebabkan kerosakan teruk. Menara-menara ini telah <strong>dipulihkan sepenuhnya</strong> dan masih jadi pusat skyline The LoL hingga kini.`:
+`<strong>TLCC Twin Towers</strong> 🏙️<br><br>The most iconic landmark in The LoL City — The LoL Convention Centre Twin Towers. Built by Paiz™ Construction. During the UltraX2020 presidency, drone attacks caused significant damage. The towers were <strong>fully restored</strong> and remain the centrepiece of The LoL's skyline to this day.`},
+
+/* ── NATIONAL FARM COMPLEX ── */
+{id:'farms',cat:'corp',
+kw:['farm','farms','ladang','iron farm','ladang besi','totem farm','gold farm','ladang emas','automated farm','ladang automatik','farm complex','kompleks ladang','national farm','ladang nasional','resource economy','ekonomi sumber','farming','iron gold totem','pasal farm','apa farm ada'],
+fup:['Megaprojects','TLSRL','Paiz Corp'],
+r:(bm)=>bm?
+`<strong>National Farm Complex</strong> 🌾<br><br>Tiga ladang automatik sepenuhnya — semua beroperasi:<br><br><strong>Iron Farm</strong> — Tulang belakang ekonomi kraf dan pembinaan<br><strong>Totem Farm</strong> — Pengeluaran totem kematian untuk operasi berisiko tinggi<br><strong>Gold Farm</strong> — Menyokong perdagangan dan rizab ekonomi<br><br>Semua direka bentuk oleh Paiz™ Construction. Ni yang buat ekonomi The LoL kuat!`:
+`<strong>National Farm Complex</strong> 🌾<br><br>Three fully automated farms — all currently operational:<br><br><strong>Iron Farm</strong> — Backbone of crafting and construction economy<br><strong>Totem Farm</strong> — Totem of undying production for high-risk operations<br><strong>Gold Farm</strong> — Supports trade and economic reserves<br><br>All engineered by Paiz™ Construction.`},
+
+/* ── TL DOLLAR ── */
+{id:'currency',cat:'lore',
+kw:['tl dollar','tl$','currency','wang','duit','mata wang','money','exchange rate','kadar pertukaran','iron worth','nilai besi','emerald worth','nilai zamrud','diamond worth','nilai berlian','netherite worth','nilai netherite','national currency','mata wang nasional','tldollar','tl dolar','how much','berapa','exchange','tukar','nilai duit','berapa nilai'],
+fup:['Paiz Shop','Paiz Chicken','Paiz Corp'],
+r:(bm)=>bm?
+`<strong>TL Dollar (TL$) — Mata Wang Nasional</strong> 💰<br><br>Iron Ingot → TL$1<br>Gold Ingot → TL$5<br>Emerald → TL$10<br>Diamond → TL$30<br>Netherite → TL$150<br><br>Ini kadar pertukaran rasmi The LoL!`:
+`<strong>TL Dollar (TL$) — National Currency</strong> 💰<br><br>Iron Ingot → TL$1 · Gold Ingot → TL$5 · Emerald → TL$10 · Diamond → TL$30 · Netherite → TL$150`},
+
+/* ── SKYXION ── */
+{id:'skyxion',cat:'lore',
+kw:['skyxion','altaer era','era altaer','altaer','minecraft server','server minecraft','kawaiisho','current era','era semasa','server admin','admin server','which server','server mana','skyxion server','what server','apa server','server the lol','the lol server','pasal skyxion','apa tu skyxion','skyxion tu apa'],
+fup:['History of The LoL','TLSRL Railway','Government structure'],
+r:(bm)=>bm?
+`<strong>Skyxion & Altaer Era</strong> 🌐<br><br><strong>Skyxion</strong> ialah server Minecraft di mana The LoL berada, ditadbir oleh <strong>Kawaiisho</strong> — berasingan daripada pentadbiran The LoL sendiri.<br><br><strong>Skyxion: Altaer Era</strong> ialah era semasa. The LoL beroperasi sebagai salah satu negara paling maju di Skyxion dengan kerajaan penuh, ISC, rangkaian rel, dan arkib undang-undang yang lengkap.`:
+`<strong>Skyxion Server & The Altaer Era</strong> 🌐<br><br><strong>Skyxion</strong> is the Minecraft server where The LoL is based, administered by <strong>Kawaiisho</strong> — entirely separate from The LoL's governance.<br><br><strong>Skyxion: Altaer Era</strong> is the current era. The LoL operates as one of Skyxion's most advanced nations with a full government, ISC, railway network, and legal archive.`},
+
+/* ── LANDEN ── */
+{id:'landen',cat:'lore',
+kw:['landen','special administrative territory','sat','ikanuwu','ikanowo','imanhafizz','iman hafizz','wilayah pentadbiran khas','territory','wilayah','pasal landen','apa tu landen','landen tu apa'],
+fup:['Citizenship','Government structure'],
+r:(bm)=>bm?
+`<strong>Wilayah Pentadbiran Khas (SAT) Landen</strong> 🗺️<br><br>Landen ialah SAT di bawah bidang kuasa The LoL dengan tadbir urus tempatan tersendiri.<br><br>Pegawai pemerintah: <strong>ikanuwu</strong> (juga ikanowo) dan <strong>ImanHafizz</strong> — kedua-dua diiktiraf sebagai warganegara rasmi The LoL.`:
+`<strong>Special Administrative Territory of Landen</strong> 🗺️<br><br>Landen is a Special Administrative Territory (SAT) under The LoL's jurisdiction with its own local governance.<br><br>Governing officials: <strong>ikanuwu</strong> (also ikanowo) and <strong>ImanHafizz</strong> — both recognised citizens of The LoL.`},
+
+/* ── ALL PORTALS / LINKS ── */
+{id:'nav',cat:'all',
+kw:['link','links','url','website','portal link','where can i find','mana nak cari','navigate to','all pages','semua halaman','all portals','semua portal','websites list','senarai laman','portals list','all links','semua link','official links','link rasmi','website the lol','thelol website','lol website','paiz website','semua website'],
+fup:['Government portal','ISC portal','Paiz Corp','Legal archive'],
+r:(bm)=>bm?
+`<strong>Semua Portal Rasmi</strong> 🔗<br><br><a href="https://faizzzlol.github.io/thelol/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://faizzzlol.github.io/thelol/gov/">🏛️ Portal Kerajaan</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">🪪 Portal Kewarganegaraan</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">📄 Arkib Undang-undang</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">🔒 Portal ISC</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">🎥 The LoL Movie</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">🚂 TL Railways</a>`:
+`<strong>All Official Portals</strong> 🔗<br><br><a href="https://faizzzlol.github.io/thelol/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://faizzzlol.github.io/thelol/gov/">🏛️ Government Portal</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">🪪 Citizenship Portal</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">📄 Legal Archive</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">🔒 ISC Portal</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">🎥 The LoL Movie</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">🚂 TL Railways</a>`},
+
+/* ── WHAT IS THE LOL ── */
+{id:'whatlol',cat:'all',
+kw:['what is the lol','apa tu the lol','the lol tu apa','apa itu the lol','what is the legend of legiona','apa tu legend of legiona','about the lol','pasal the lol','tell me about the lol','cerita pasal the lol','explain the lol','terangkan the lol','describe the lol','the lol minecraft','minecraft nation','negara minecraft','is the lol a country','adakah the lol negara','what is thelol'],
+fup:['History of The LoL','Founders','Government structure','Paiz Corp'],
+r:(bm)=>bm?
+`<strong>The Legend of Legiona (The LoL)</strong> 🟩<br><br>The LoL ialah <strong>negara berdaulat Minecraft</strong> yang terletak di server Skyxion, dalam era Skyxion: Altaer Era yang sedang berlaku sekarang. Ditadbir oleh kumpulan admin Kawaiisho.<br><br>Diasaskan pada 2023 oleh tiga pengasas: Faiz4224, Imii Kun, dan Dyno — asalnya dikenali sebagai "The Sus" sebelum ditukar nama.<br><br>The LoL bukan sekadar kumpulan Minecraft biasa — ia ada:<br>— Kerajaan formal dengan 6 jabatan<br>— Agensi perisikan (ISC)<br>— Arkib undang-undang dengan dokumen rasmi<br>— Rangkaian rel 4,800+ blok (TLSRL)<br>— Konglomerat nasional (Paiz® Corp) dengan 5 subsidiari<br>— Sistem kewarganegaraan formal<br><br>Negara yang paling maju di Skyxion! 💪`:
+`<strong>The Legend of Legiona (The LoL)</strong> 🟩<br><br>The LoL is a <strong>sovereign Minecraft nation</strong> located on the Skyxion server, in the current Skyxion: Altaer Era. The server is administered by the Kawaiisho group — separate from The LoL's own governance.<br><br>Founded in 2023 by three founders: Faiz4224, Imii Kun, and Dyno — originally known as "The Sus" before being renamed.<br><br>The LoL is far more than a regular Minecraft group — it has:<br>— Formal government with 6 departments<br>— An intelligence agency (ISC)<br>— A legal archive with official documents<br>— A 4,800+ block rail network (TLSRL)<br>— A national conglomerate (Paiz® Corp) with 5 subsidiaries<br>— A formal citizenship system<br><br>One of the most advanced nations in Skyxion.`},
+
+/* ── PAIZ CONSTRUCTION ── */
+{id:'paiz_construction',cat:'corp',
+kw:['paiz construction','paiz™ construction','construction','pembinaan','engineering','kejuruteraan','who built tlsrl','siapa bina tlsrl','who built twin towers','siapa bina menara','builder thelol','pembin thelol','construction company','syarikat pembinaan','sub-02','sub 02'],
+fup:['TLSRL','TLCC Twin Towers','Paiz Corp'],
+r:(bm)=>bm?
+`<strong>Paiz™ Construction</strong> 🔨<br><br>Paiz® Corp SUB-02 — bahagian kejuruteraan dan pembinaan Paiz® Corp. Mereka yang bertanggungjawab membina semua struktur utama dalam The LoL:<br><br>— Landasan TLSRL (4,800+ blok)<br>— TLCC Twin Towers<br>— National Farm Complex (Iron, Totem, Gold farms)<br>— Semua pembinaan infrastruktur nasional utama<br><br>Kalau ada bangunan besar dalam The LoL, diorang yang buat! 💪`:
+`<strong>Paiz™ Construction</strong> 🔨<br><br>Paiz® Corp SUB-02 — the engineering and build arm of Paiz® Corp. Responsible for building every major structure in The LoL:<br><br>— TLSRL track (4,800+ blocks)<br>— TLCC Twin Towers<br>— National Farm Complex (Iron, Totem, Gold farms)<br>— All major national infrastructure<br><br>If it's a major build in The LoL, Paiz™ Construction built it.`},
+
+/* ── CURRENT ERA ── */
+{id:'era',cat:'lore',
+kw:['altaer era','current era','era semasa','era altaer','skyxion altaer','era baru','new era','what era','era apa sekarang','era sekarang','current server era','era terkini','altaer'],
+fup:['Skyxion','History of The LoL'],
+r:(bm)=>bm?
+`<strong>Skyxion: Altaer Era</strong> 🌐<br><br>Ini ialah era server Skyxion semasa. The LoL aktif dan beroperasi sepenuhnya dalam era ini — dengan kerajaan, ISC, TLSRL, web ecosystem, dan sistem kewarganegaraan semua berfungsi.`:
+`<strong>Skyxion: Altaer Era</strong> 🌐<br><br>This is the current Skyxion server era. The LoL is fully active and operational in this era — government, ISC, TLSRL, full web ecosystem, and citizenship system all running.`},
+
+/* ── ABOUT pAIz ITSELF ── */
+{id:'aboutpaiz',cat:'all',
+kw:['what are you','siapa kau','apa kau','kau ni apa','kau ni siapa','apa tu paiz','paiz tu apa','about paiz ai','paiz ai','about you','pasal kau','who made you','siapa buat kau','siapa cipta kau','paiz creator','paiz developer','how are you made','macam mana buat kau','no api','tanpa api','offline ai','local ai'],
+fup:['What is The LoL?','Help and capabilities'],
+r:(bm)=>bm?
+`Aku <strong>pAIz</strong> — assistant perisikan AI rasmi The Legend of Legiona. 🤖<br><br>Dibuat oleh <strong>Paiz Corp Intelligence Division</strong>. Aku bukan API pihak ketiga — aku AI tempatan sepenuhnya, berjalan tanpa sebarang panggilan API. Semua ilmu aku ada dalam aku je.<br><br>Aku boleh jawab dalam <strong>Bahasa Melayu atau English</strong> — slang, formal, rojak pun okay. Aku faham semua cara kau tanya. 😄`:
+`I'm <strong>pAIz</strong> — The Legend of Legiona's official AI intelligence assistant. 🤖<br><br>Made by <strong>Paiz Corp Intelligence Division</strong>. I'm a fully local AI — no API calls, no third-party connections. All my knowledge lives inside me.<br><br>I respond in <strong>Bahasa Malaysia or English</strong> — slang, formal, rojak, whatever. I get you. 😄`},
+
+]; // end KB
+
+/* ── CHIP CATALOGUE ── */
+const ALL_CHIPS = {
+  all:[
+    'Who are The LoL founders?','Siapa pengasas The LoL?',
+    'Tell me about The LoL','Apa tu The LoL?',
+    'Explain all 5 Paiz Corp subsidiaries','Semua subsidiari Paiz Corp',
+    'What is the ISC?','Apa tu ISC?',
+    'All official portal links','Semua link portal rasmi'
+  ],
+  history:[
+    'History of The LoL','Sejarah The LoL',
+    'The Sus Era','Era The Sus',
+    'Who is Faiz4224?','Pasal Faiz4224',
+    'UltraX2020 crisis','Krisis UltraX2020',
+    'Who is EhekSquad?','Pasal EhekSquad'
+  ],
+  gov:[
+    'Government structure','Struktur kerajaan',
+    'What is the ISC?','Apa tu ISC?',
+    'How to apply citizenship','Cara mohon kewarganegaraan',
+    'All legal documents','Semua dokumen undang-undang',
+    'The Black House','Naming policy BH-2026-0002'
+  ],
+  corp:[
+    'What is Paiz Corp?','Apa tu Paiz Corp?',
+    'TLSRL Railway','Kereta api TLSRL',
+    'Paiz Shop items & prices','The LoL Movie',
+    'National Megaprojects','Paiz Chicken order'
+  ],
+  lore:[
+    'TL Dollar exchange rates','Kadar pertukaran TL Dollar',
+    'Skyxion server & Altaer Era','Landen territory',
+    'TLCC Twin Towers','National Farm Complex',
+    'Current server era','EhekSquad history'
+  ]
+};
+
+let curCat='all';
+function showCat(cat,btn){
+  curCat=cat;
+  document.querySelectorAll('.wcat-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderChips();
+}
+function renderChips(){
+  const ch=document.getElementById('wchips');
+  if(!ch)return;
+  const chips=ALL_CHIPS[curCat]||ALL_CHIPS.all;
+  ch.innerHTML=chips.map(c=>`<button class="chip" onclick="useChip(this)">${c}</button>`).join('');
+}
+renderChips();
+
+/* ── SCORING ENGINE ── */
+function score(e,q){
+  let s=0;
+  for(const k of e.kw){
+    const kt=k.trim().toLowerCase();
+    if(q===kt){s+=kt.split(/\s+/).length*18+30;continue}
+    if(q.includes(kt)){const t=kt.split(/\s+/).length;s+=t*Math.max(kt.length,4)+2;continue}
+    // partial word match bonus
+    const kw=kt.split(/\s+/);const qw=q.split(/\s+/);
+    const shared=kw.filter(w=>w.length>3&&qw.some(qword=>qword.includes(w)||w.includes(qword)));
+    if(shared.length>0)s+=shared.length*3;
+  }
+  return s;
+}
+
+function bestMatch(txt){
+  const q=txt.toLowerCase().trim().replace(/[?!.,;:'"]/g,'');
+  let best=null,bs=0;
+  for(const e of KB){const s=score(e,q);if(s>bs){bs=s;best=e}}
+  return bs>2?best:null;
+}
+
+/* ── FALLBACK ── */
+function fallback(bm){
+  return bm?
+  `Hmm, aku tak faham soalan tu betul-betul. 🤔 Cuba tanya dengan cara lain?<br><br>Aku boleh tolong dengan: <strong>sejarah The LoL</strong>, <strong>pengasas</strong>, <strong>kerajaan & ISC</strong>, <strong>dokumen undang-undang</strong>, <strong>projek mega</strong>, <strong>Paiz® Corp</strong>, <strong>kewarganegaraan</strong>, <strong>TLSRL</strong>, <strong>TL Dollar</strong>, dan <strong>navigasi portal</strong>.`:
+  `Hmm, didn't quite catch that one. 🤔 Try asking a different way?<br><br>I can help with: <strong>The LoL's history</strong>, <strong>founders</strong>, <strong>government & ISC</strong>, <strong>legal documents</strong>, <strong>megaprojects</strong>, <strong>Paiz® Corp</strong>, <strong>citizenship</strong>, <strong>TLSRL Railway</strong>, <strong>TL Dollar</strong>, and <strong>portal navigation</strong>.`;
+}
+const FF_EN=['Who are the founders?','What is The LoL?','ISC Agency','Paiz Corp overview','Legal archive','TLSRL Railway'];
+const FF_BM=['Siapa pengasas?','Apa tu The LoL?','Agensi ISC','Overview Paiz Corp','Arkib undang-undang','Kereta api TLSRL'];
+
+/* ── DOM UTILS ── */
 const mw=document.getElementById('mw');
 const mi=document.getElementById('mi');
 const ci=document.getElementById('ci');
 const cs=document.getElementById('cs');
+const langFlag=document.getElementById('langFlag');
 let busy=false;
-
 function ts(){return new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}
 function bot(){mw.scrollTo({top:mw.scrollHeight,behavior:'smooth'})}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
@@ -288,9 +646,15 @@ function addBot(html,fups){
 
 async function processQuery(t){
   if(busy||!t.trim())return;busy=true;cs.disabled=true;ci.value='';ci.style.height='auto';
+  const bm=detectBM(t);
+  langFlag.textContent=bm?'BM':'EN';
+  langFlag.className='lang-flag'+(bm?' bm':'');
   addUser(t);addTyping();
-  await new Promise(r=>setTimeout(r,480+Math.random()*600));
-  const m=best(t);addBot(m?m.r:FALLBACK,m?m.fup:FF);
+  await new Promise(r=>setTimeout(r,380+Math.random()*520));
+  const m=bestMatch(t);
+  const html=m?(typeof m.r==='function'?m.r(bm):m.r):fallback(bm);
+  const fuList=m?m.fup:(bm?FF_BM:FF_EN);
+  addBot(html,fuList);
   busy=false;cs.disabled=false;ci.focus();
 }
 function sendMsg(){const t=ci.value.trim();if(t)processQuery(t)}
@@ -298,10 +662,12 @@ function useChip(b){processQuery(b.textContent.trim())}
 function clearChat(){
   mi.innerHTML='';
   const w=document.createElement('div');w.className='welcome';w.id='welcome';
-  w.innerHTML=`<div class="wlogo">p</div><div class="wtitle">Hello. I'm p<em>AI</em>z.</div><p class="wsub">The official intelligence assistant of The Legend of Legiona, developed by Paiz Corp Intelligence Division. Ask me anything about The LoL.</p><div class="wchips"><button class="chip" onclick="useChip(this)">Who are the three founders of The LoL?</button><button class="chip" onclick="useChip(this)">Tell me about The Legend of Legiona's history</button><button class="chip" onclick="useChip(this)">What is the ISC intelligence agency?</button><button class="chip" onclick="useChip(this)">Explain all five Paiz Corp subsidiaries</button><button class="chip" onclick="useChip(this)">What legal documents exist in the archive?</button><button class="chip" onclick="useChip(this)">Tell me about the TLSRL railway project</button><button class="chip" onclick="useChip(this)">What happened during the UltraX2020 presidency?</button><button class="chip" onclick="useChip(this)">Tell me about The LoL Movie</button></div>`;
+  w.innerHTML=`<div class="wlogo">p</div><div class="wtitle">Yo. I'm p<em>AI</em>z.</div><p class="wsub">Official intelligence assistant of The Legend of Legiona — by Paiz Corp Intelligence Division. Ask me anything, EN or BM.</p><p class="wbm">Boleh tanya dalam Bahasa Malaysia jugak. Slang pun okay.</p><div class="wcat"><button class="wcat-btn on" onclick="showCat('all',this)">ALL</button><button class="wcat-btn" onclick="showCat('history',this)">HISTORY</button><button class="wcat-btn" onclick="showCat('gov',this)">GOVERNMENT</button><button class="wcat-btn" onclick="showCat('corp',this)">PAIZ CORP</button><button class="wcat-btn" onclick="showCat('lore',this)">LORE</button></div><div class="wchips" id="wchips"></div>`;
   mi.appendChild(w);
+  curCat='all';renderChips();
+  langFlag.textContent='EN';langFlag.className='lang-flag';
 }
-ci.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,200)+'px'});
+ci.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,180)+'px'});
 ci.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg()}});
 </script>
 </body>
