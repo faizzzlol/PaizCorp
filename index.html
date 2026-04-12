@@ -49,6 +49,9 @@ html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--txt);line-height:1.7;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
 
+/* ── SCROLL PROGRESS ─────────────────────────── */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--green),var(--green-lt));z-index:10000;transition:width 0.06s linear;pointer-events:none}
+
 /* ── SUPER-NAV (The LoL Network Banner) ─────── */
 .super-nav{background:var(--ink2);padding:0 5%;height:30px;display:flex;align-items:center;gap:0;border-bottom:1px solid rgba(255,255,255,0.06)}
 .sn-label{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:2px;color:rgba(255,255,255,0.22);flex-shrink:0;margin-right:16px}
@@ -68,11 +71,25 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .nav-links{display:flex;gap:2px}
 .nav-links a{padding:5px 12px;font-family:'DM Mono',monospace;font-size:0.57rem;letter-spacing:1.5px;color:var(--muted);text-decoration:none;transition:color 0.2s}
 .nav-links a:hover,.nav-links a.on{color:var(--green)}
-.nav-right{margin-left:auto;display:flex;gap:8px}
+.nav-right{margin-left:auto;display:flex;gap:8px;align-items:center}
 .nav-pill{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:1.5px;padding:5px 12px;border:1px solid var(--border);color:var(--faint);text-decoration:none;transition:all 0.2s}
 .nav-pill:hover{color:var(--green);border-color:rgba(42,102,71,0.25)}
 .nav-pill.primary{background:var(--ink);color:var(--cream);border-color:var(--ink)}
 .nav-pill.primary:hover{background:var(--green);border-color:var(--green);color:#fff}
+
+/* ── HAMBURGER ───────────────────────────────── */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;margin-left:8px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--ink);transition:transform 0.3s,opacity 0.3s,background 0.2s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ── MOBILE NAV ──────────────────────────────── */
+.mob-nav{display:none;position:fixed;top:92px;left:0;right:0;z-index:399;background:rgba(244,240,232,0.99);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0.6rem 5%;flex-direction:column}
+.mob-nav.open{display:flex}
+.mob-nav a{padding:13px 0;font-family:'DM Mono',monospace;font-size:0.57rem;letter-spacing:1.5px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border2);transition:color 0.2s,padding-left 0.2s}
+.mob-nav a:last-child{border-bottom:none}
+.mob-nav a:hover{color:var(--green);padding-left:6px}
 
 /* ── HERO ─────────────────────────────────────── */
 .hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh}
@@ -102,7 +119,8 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .hps-key{font-family:'DM Mono',monospace;font-size:0.45rem;letter-spacing:2px;color:rgba(255,255,255,0.2);display:block}
 
 /* ── TICKER ───────────────────────────────────── */
-.ticker{background:var(--green);padding:0.6rem 0;overflow:hidden}
+.ticker{background:var(--green);padding:0.6rem 0;overflow:hidden;cursor:default}
+.ticker:hover .ticker-track{animation-play-state:paused}
 .ticker-track{display:flex;animation:ticker 28s linear infinite;white-space:nowrap}
 .ti{display:inline-flex;align-items:center;gap:18px;padding:0 26px;font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:2px;color:rgba(255,255,255,0.78);flex-shrink:0}
 .td{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.3)}
@@ -171,8 +189,8 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .eco-sub-status::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green-lt);animation:blink 2.2s infinite;flex-shrink:0}
 .eco-sub-status.wip{color:#fbbf24}
 .eco-sub-status.wip::before{background:#fbbf24}
-.eco-sub-arrow{position:absolute;bottom:14px;right:14px;font-family:'DM Mono',monospace;font-size:0.45rem;letter-spacing:1px;color:rgba(255,255,255,0.12);transition:color 0.2s}
-.eco-sub:hover .eco-sub-arrow{color:rgba(255,255,255,0.4)}
+.eco-sub-arrow{position:absolute;bottom:14px;right:14px;font-family:'DM Mono',monospace;font-size:0.45rem;letter-spacing:1px;color:rgba(255,255,255,0.12);transition:color 0.2s,right 0.2s}
+.eco-sub:hover .eco-sub-arrow{color:rgba(255,255,255,0.4);right:10px}
 
 /* Film child node */
 .eco-film-wrap{padding-left:2rem;border-left:1px solid rgba(255,255,255,0.04);margin-left:26px;margin-top:2px;display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
@@ -259,7 +277,6 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .sub.prod .sub-link{color:var(--prod);border-color:rgba(92,26,74,0.3)}
 .sub.chick .sub-link{color:var(--chick);border-color:rgba(138,58,16,0.3)}
 .sub-link:hover{gap:14px}
-/* Sub child items */
 .sub-children{margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--border);display:flex;flex-direction:column;gap:4px}
 .sc-item{display:flex;align-items:center;gap:8px;text-decoration:none;padding:4px 0;transition:gap 0.15s}
 .sc-item:hover{gap:12px}
@@ -267,8 +284,6 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .sub.prod .sc-tag{border-color:rgba(92,26,74,0.2);color:var(--prod)}
 .sc-title{font-size:0.8rem;color:var(--muted);font-weight:300}
 .sc-arrow{font-family:'DM Mono',monospace;font-size:0.5rem;color:var(--faint);margin-left:auto}
-
-/* Sub item pills */
 .sub-items{margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--border);display:flex;flex-wrap:wrap;gap:4px}
 .si-pill{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:1px;padding:3px 8px;background:var(--cream3);border:1px solid var(--border);color:var(--faint);display:flex;align-items:center;gap:4px}
 .si-pill .si-price{color:var(--shop)}
@@ -338,9 +353,16 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .ns-site:hover{background:var(--cream2);border-color:var(--border)}
 .ns-site-id{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;color:var(--faint)}
 .ns-site-name{font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;color:var(--txt);line-height:1.2}
-.ns-site-url{font-family:'DM Mono',monospace;font-size:0.36rem;letter-spacing:1px;color:var(--faint);word-break:break-all;line-height:1.5}
+.ns-site-url{font-family:'DM Mono',monospace;font-size:0.36rem;letter-spacing:1px;color:var(--faint);word-break:break-all;line-height:1.5;cursor:copy;transition:color 0.2s;position:relative}
+.ns-site-url:hover{color:var(--green)}
+.ns-site-url::after{content:'COPY';position:absolute;right:0;top:-14px;font-size:0.35rem;letter-spacing:1.5px;background:var(--green);color:#fff;padding:1px 4px;opacity:0;transition:opacity 0.2s;pointer-events:none}
+.ns-site-url:hover::after{opacity:1}
 .ns-site-status{display:flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:1.5px;color:var(--green);margin-top:auto}
 .ns-site-status::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--green);animation:blink 2.2s infinite}
+
+/* ── TOAST ────────────────────────────────────── */
+#toast{position:fixed;bottom:28px;right:28px;background:var(--ink);color:var(--cream);font-family:'DM Mono',monospace;font-size:0.48rem;letter-spacing:2px;padding:11px 20px;z-index:10000;opacity:0;transform:translateY(8px);transition:opacity 0.25s,transform 0.25s;pointer-events:none;border-left:2px solid var(--green)}
+#toast.show{opacity:1;transform:none}
 
 /* ── FOOTER ───────────────────────────────────── */
 footer{background:var(--ink)}
@@ -389,6 +411,7 @@ footer{background:var(--ink)}
   .proj-grid{grid-template-columns:1fr}
   .founder{grid-template-columns:1fr}
   .nav-links{display:none}
+  .hamburger{display:flex}
   .eco-subs-wrap,.eco-film-wrap{grid-template-columns:1fr}
   .eco-root-stats,.eco-corp-stats{display:none}
   .sn-links a{font-size:0.36rem;padding:0 6px}
@@ -406,6 +429,9 @@ footer{background:var(--ink)}
 </style>
 </head>
 <body>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <!-- SUPER NAV (The LoL Network) -->
 <div class="super-nav">
@@ -440,8 +466,20 @@ footer{background:var(--ink)}
   </div>
   <div class="nav-right">
     <a href="https://faizzzlol.github.io/thelol/" class="nav-pill primary">← THE LOL</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE NAV -->
+<div class="mob-nav" id="mobNav">
+  <a href="#ecosystem">ECOSYSTEM</a>
+  <a href="#subsidiaries">SUBSIDIARIES</a>
+  <a href="#portfolio">PORTFOLIO</a>
+  <a href="#timeline">TIMELINE</a>
+  <a href="#leadership">LEADERSHIP</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -477,7 +515,7 @@ footer{background:var(--ink)}
   <span class="ti">PAIZ CHICKEN<span class="td"></span></span>
   <span class="ti">TLSRL · 4,800+ BLOCKS<span class="td"></span></span>
   <span class="ti">THE LOL MOVIE · IN PRODUCTION<span class="td"></span></span>
-  <span class="ti">SKYXION: RAGNAROK<span class="td"></span></span>
+  <span class="ti">SKYXION: ALTAER<span class="td"></span></span>
   <span class="ti">ISC · INTERNAL SECURITY CONTROL<span class="td"></span></span>
   <span class="ti">◆ DIAMOND ECONOMY<span class="td"></span></span>
   <span class="ti">TL RAILWAYS<span class="td"></span></span>
@@ -487,7 +525,7 @@ footer{background:var(--ink)}
   <span class="ti">PAIZ CHICKEN<span class="td"></span></span>
   <span class="ti">TLSRL · 4,800+ BLOCKS<span class="td"></span></span>
   <span class="ti">THE LOL MOVIE · IN PRODUCTION<span class="td"></span></span>
-  <span class="ti">SKYXION: RAGNAROK<span class="td"></span></span>
+  <span class="ti">SKYXION: ALTAER<span class="td"></span></span>
   <span class="ti">ISC · INTERNAL SECURITY CONTROL<span class="td"></span></span>
   <span class="ti">◆ DIAMOND ECONOMY<span class="td"></span></span>
 </div></div>
@@ -506,7 +544,7 @@ footer{background:var(--ink)}
         <div class="eco-root-icon">LoL</div>
         <div class="eco-root-body">
           <div class="eco-name">The Legend of <em>Legiona</em></div>
-          <div class="eco-desc">SOVEREIGN NATION · SKYXION: RAGNAROK · EST. 2023 · SUPER WEBSITE</div>
+          <div class="eco-desc">SOVEREIGN NATION · SKYXION: ALTAER · EST. 2023 · SUPER WEBSITE</div>
         </div>
         <div class="eco-root-stats">
           <div class="ers-item"><span class="ers-val">3</span><span class="ers-key">FOUNDERS</span></div>
@@ -714,7 +752,6 @@ footer{background:var(--ink)}
           <div><span class="ss-val">5</span><span class="ss-key">ITEMS</span></div>
           <div><span class="ss-val">◆</span><span class="ss-key">DIAMONDS</span></div>
         </div>
-        <!-- Shop items -->
         <div class="sub-items">
           <span class="si-pill">Shulker Box <span class="si-price">◆4</span></span>
           <span class="si-pill">Mending I <span class="si-price">◆3</span></span>
@@ -738,7 +775,6 @@ footer{background:var(--ink)}
           <div><span class="ss-val">4</span><span class="ss-key">PHASES</span></div>
           <div><span class="ss-val">3</span><span class="ss-key">PRODUCTIONS</span></div>
         </div>
-        <!-- Sub productions -->
         <div class="sub-children">
           <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie" class="sc-item">
             <span class="sc-tag">FEATURE</span>
@@ -834,10 +870,10 @@ footer{background:var(--ink)}
 
 <!-- METRICS -->
 <div class="metrics reveal">
-  <div class="metric"><span class="m-val"><em>5</em></span><div class="m-key">SUBSIDIARIES</div></div>
-  <div class="metric"><span class="m-val">6+</span><div class="m-key">PROJECTS</div></div>
-  <div class="metric"><span class="m-val">4,800+</span><div class="m-key">BLOCKS · TLSRL</div></div>
-  <div class="metric"><span class="m-val"><em>1</em></span><div class="m-key">FEATURE FILM</div></div>
+  <div class="metric"><span class="m-val" data-count="5" data-em="true"><em>5</em></span><div class="m-key">SUBSIDIARIES</div></div>
+  <div class="metric"><span class="m-val" data-count="6" data-suffix="+">6+</span><div class="m-key">PROJECTS</div></div>
+  <div class="metric"><span class="m-val" data-count="4800" data-suffix="+">4,800+</span><div class="m-key">BLOCKS · TLSRL</div></div>
+  <div class="metric"><span class="m-val" data-count="1" data-em="true"><em>1</em></span><div class="m-key">FEATURE FILM</div></div>
   <div class="metric"><span class="m-val">◆</span><div class="m-key">DIAMOND ECONOMY</div></div>
 </div>
 
@@ -849,7 +885,7 @@ footer{background:var(--ink)}
         <div class="eyebrow">CORPORATE HISTORY</div>
         <h2>How We <em>Grew.</em></h2>
       </div>
-      <div class="sh-right">SKYXION: RAGNAROK<br>THE LOL TERRITORY</div>
+      <div class="sh-right">SKYXION: ALTAER<br>THE LOL TERRITORY</div>
     </div>
     <div class="timeline stagger">
       <div class="tl-item">
@@ -945,25 +981,109 @@ footer{background:var(--ink)}
   <div class="ft-bottom">
     <div class="ft-bottom-inner">
       <p>© 2026 PAIZ® CORP — ALL RIGHTS RESERVED — THE LEGEND OF LEGIONA</p>
-      <p>FOUNDED BY FAIZ4224 · SKYXION: RAGNAROK · 6 SITES · ALL LIVE</p>
+      <p>FOUNDED BY FAIZ4224 · SKYXION: ALTAER · 6 SITES · ALL LIVE</p>
     </div>
   </div>
 </footer>
 
+<!-- TOAST -->
+<div id="toast"></div>
+
 <script>
-  // Scroll reveal
+  /* ── SCROLL REVEAL ─────────────────────────── */
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.06 });
   document.querySelectorAll('.reveal, .stagger').forEach(el => obs.observe(el));
 
-  // Active nav highlight
+  /* ── ACTIVE NAV HIGHLIGHT ──────────────────── */
   const secs = ['ecosystem','subsidiaries','portfolio','timeline','leadership'];
   const links = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
     let cur = '';
     secs.forEach(id => { const el = document.getElementById(id); if (el && window.scrollY >= el.offsetTop - 110) cur = id; });
     links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + cur));
+  }, { passive: true });
+
+  /* ── SCROLL PROGRESS BAR ───────────────────── */
+  const prog = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (max > 0 ? (window.scrollY / max * 100) : 0) + '%';
+  }, { passive: true });
+
+  /* ── MOBILE HAMBURGER NAV ──────────────────── */
+  const hamburger = document.getElementById('hamburger');
+  const mobNav = document.getElementById('mobNav');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobNav.classList.toggle('open');
+  });
+  mobNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobNav.classList.remove('open');
+    });
+  });
+  // Close on outside click
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !mobNav.contains(e.target)) {
+      hamburger.classList.remove('open');
+      mobNav.classList.remove('open');
+    }
+  });
+
+  /* ── TOAST NOTIFICATION ────────────────────── */
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._tid);
+    t._tid = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  /* ── METRIC COUNTERS ───────────────────────── */
+  const counterEls = document.querySelectorAll('.m-val[data-count]');
+  const cObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.count, 10);
+      const suffix = el.dataset.suffix || '';
+      const useEm = el.dataset.em === 'true';
+      const dur = 1600;
+      const t0 = performance.now();
+      function tick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        const v = Math.round(ease * target);
+        const fmt = target >= 1000 ? v.toLocaleString() : String(v);
+        el.innerHTML = useEm ? `<em>${fmt}${suffix}</em>` : `${fmt}${suffix}`;
+        if (p < 1) requestAnimationFrame(tick);
+        else {
+          // Snap to final
+          const finalFmt = target >= 1000 ? target.toLocaleString() : String(target);
+          el.innerHTML = useEm ? `<em>${finalFmt}${suffix}</em>` : `${finalFmt}${suffix}`;
+        }
+      }
+      requestAnimationFrame(tick);
+      cObs.unobserve(el);
+    });
+  }, { threshold: 0.7 });
+  counterEls.forEach(el => cObs.observe(el));
+
+  /* ── CLICK-TO-COPY ON NETWORK STATUS URLS ─── */
+  document.querySelectorAll('.ns-site-url').forEach(urlEl => {
+    urlEl.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const url = 'https://' + this.textContent.trim();
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('COPIED → ' + this.textContent.trim());
+      }).catch(() => {
+        showToast('COPY FAILED');
+      });
+    });
   });
 </script>
 </body>
