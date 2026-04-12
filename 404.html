@@ -114,7 +114,6 @@ body::before {
   border-radius: 50%;
   animation: blink 1.2s ease-in-out infinite;
 }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
 /* ── VOID SECTION ── */
 .void-section {
@@ -125,6 +124,8 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: crosshair;
+  user-select: none;
 }
 
 /* Stars */
@@ -141,7 +142,7 @@ body::before {
   animation: twinkle var(--d, 3s) ease-in-out infinite;
   opacity: var(--o, 0.4);
 }
-@keyframes twinkle { 0%,100%{opacity:var(--o,0.4)} 50%{opacity:0.1} }
+@keyframes twinkle { 0%,100%{opacity:var(--o,0.4)} 50%{opacity:0.05} }
 
 /* Void gradient fade */
 .void-section::after {
@@ -153,6 +154,7 @@ body::before {
   height: 120px;
   background: linear-gradient(to bottom, transparent, var(--cream));
   pointer-events: none;
+  z-index: 3;
 }
 
 /* 404 BIG NUMBER */
@@ -166,14 +168,69 @@ body::before {
   letter-spacing: -4px;
   position: relative;
   z-index: 1;
-  user-select: none;
   text-align: center;
+  transition: text-shadow 0.1s;
 }
 .void-404 span {
   display: inline-block;
   animation: floatNum var(--nd, 4s) ease-in-out infinite;
 }
 @keyframes floatNum { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+/* Glitch animation */
+.void-404.glitch {
+  animation: glitchAnim 0.55s steps(2) forwards !important;
+}
+.void-404.glitch span {
+  animation: none !important;
+}
+@keyframes glitchAnim {
+  0%   { text-shadow: 3px 0 #ff003c, -3px 0 #00eeff; letter-spacing: -6px; transform: skewX(-2deg); }
+  15%  { text-shadow: -4px 0 #ff003c, 4px 0 #00eeff; letter-spacing: -2px; transform: skewX(2deg); }
+  30%  { text-shadow: 2px 0 #ff003c; letter-spacing: -5px; transform: skewX(0); }
+  45%  { text-shadow: -2px 0 #00eeff, 3px 0 #ff003c; letter-spacing: -3px; transform: skewX(-1deg); }
+  60%  { text-shadow: 4px 0 #ff003c, -2px 0 #00eeff; letter-spacing: -4px; transform: skewX(1deg); }
+  75%  { text-shadow: -1px 0 #00eeff; letter-spacing: -5px; transform: skewX(0); }
+  90%  { text-shadow: 2px 0 #ff003c; letter-spacing: -4px; }
+  100% { text-shadow: none; letter-spacing: -4px; transform: skewX(0); }
+}
+
+/* Click ripple in void */
+.void-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  pointer-events: none;
+  animation: rippleOut 0.6s ease-out forwards;
+  transform: scale(0);
+  z-index: 2;
+}
+@keyframes rippleOut {
+  to { transform: scale(1); opacity: 0; }
+}
+
+/* Click hint label */
+.void-click-hint {
+  position: absolute;
+  bottom: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.38rem;
+  letter-spacing: 2.5px;
+  color: rgba(255,255,255,0.12);
+  z-index: 4;
+  pointer-events: none;
+  white-space: nowrap;
+  animation: fadeHint 3s ease 1.5s forwards;
+  opacity: 0;
+}
+@keyframes fadeHint {
+  0%   { opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; }
+}
 
 /* FALLING PIXEL CHARACTER */
 .pixel-char {
@@ -191,7 +248,6 @@ body::before {
   100% { transform: translateY(-8px) rotate(-3deg); }
 }
 
-/* pixel art SVG character inline */
 .char-wrap {
   display: flex;
   flex-direction: column;
@@ -216,6 +272,56 @@ body::before {
   padding-bottom: 4rem;
   position: relative;
   z-index: 1;
+}
+
+/* ── VOID TIMER ──────────────────────────────── */
+.void-timer {
+  position: fixed;
+  top: 72px;
+  right: 2.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.38rem;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.15);
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+/* ── KEYBOARD HINTS ──────────────────────────── */
+.kb-hint {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.kb-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.kb-key {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.42rem;
+  letter-spacing: 1px;
+  color: rgba(26,18,9,0.45);
+  background: var(--cream2);
+  border: 1px solid var(--border);
+  padding: 3px 7px;
+  line-height: 1;
+}
+.kb-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.38rem;
+  letter-spacing: 1.5px;
+  color: var(--ink4);
 }
 
 /* ── MAIN CONTENT ── */
@@ -419,12 +525,15 @@ footer {
 .d3 { animation-delay: 0.3s; }
 .d4 { animation-delay: 0.45s; }
 .d5 { animation-delay: 0.6s; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
 @media (max-width: 600px) {
   .topbar { padding: 1rem 1.2rem; }
   .main { padding: 2.5rem 1.2rem 2rem; }
   footer { padding: 1rem 1.2rem; }
   .home-btn-gold { margin-left: 0; margin-top: 6px; }
+  .kb-hint { right: 1.2rem; bottom: 4.5rem; }
+  .void-timer { right: 1.2rem; }
 }
 </style>
 </head>
@@ -441,12 +550,31 @@ footer {
     <span class="topbar-status">404 ERROR</span>
   </header>
 
+  <!-- VOID TIMER -->
+  <div class="void-timer" id="voidTimer">0s IN THE VOID</div>
+
+  <!-- KEYBOARD HINTS -->
+  <div class="kb-hint" id="kbHint">
+    <div class="kb-row">
+      <span class="kb-key">H</span>
+      <span class="kb-label">HOME</span>
+    </div>
+    <div class="kb-row">
+      <span class="kb-key">B</span>
+      <span class="kb-label">GO BACK</span>
+    </div>
+    <div class="kb-row">
+      <span class="kb-key">ESC</span>
+      <span class="kb-label">GO BACK</span>
+    </div>
+  </div>
+
   <!-- VOID -->
-  <div class="void-section">
+  <div class="void-section" id="voidSection">
     <!-- Stars -->
     <div class="stars" id="stars"></div>
 
-    <div class="void-404">
+    <div class="void-404" id="num404">
       <span style="--nd:3.8s">4</span><span style="--nd:4.2s">0</span><span style="--nd:3.5s">4</span>
     </div>
 
@@ -502,6 +630,7 @@ footer {
     </div>
 
     <p class="void-subtitle">YOU HAVE FALLEN INTO THE VOID</p>
+    <div class="void-click-hint">CLICK THE VOID TO ADD STARS</div>
   </div>
 
   <!-- MAIN -->
@@ -588,31 +717,111 @@ footer {
 </div>
 
 <script>
-// Show the bad path
+/* ── SHOW BAD PATH ───────────────────────────── */
 (function() {
   const p = window.location.pathname;
   document.getElementById('bad-path').textContent = p || '/unknown';
 })();
 
-// Generate random stars in the void
+/* ── GENERATE RANDOM STARS ───────────────────── */
 (function() {
   const container = document.getElementById('stars');
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 80; i++) spawnStar(container);
+
+  function spawnStar(container, x, y) {
     const s = document.createElement('div');
     s.className = 'star';
     const size = Math.random() * 2.5 + 0.5;
     s.style.cssText = [
       'width:' + size + 'px',
       'height:' + size + 'px',
-      'top:' + Math.random() * 100 + '%',
-      'left:' + Math.random() * 100 + '%',
+      'top:' + (y !== undefined ? y : Math.random() * 100) + '%',
+      'left:' + (x !== undefined ? x : Math.random() * 100) + '%',
       '--d:' + (Math.random() * 3 + 2) + 's',
       '--o:' + (Math.random() * 0.5 + 0.1),
       'animation-delay:' + (Math.random() * 4) + 's'
     ].join(';');
     container.appendChild(s);
+    return s;
   }
+
+  window._spawnStar = spawnStar;
 })();
+
+/* ── CLICK VOID TO ADD STARS ─────────────────── */
+document.getElementById('voidSection').addEventListener('click', function(e) {
+  if (e.target.closest('a, button')) return;
+
+  const rect = this.getBoundingClientRect();
+  const relX = ((e.clientX - rect.left) / rect.width) * 100;
+  const relY = ((e.clientY - rect.top) / rect.height) * 100;
+
+  // Spawn star cluster around click point
+  const container = document.getElementById('stars');
+  for (let i = 0; i < 6; i++) {
+    const ox = (Math.random() - 0.5) * 10;
+    const oy = (Math.random() - 0.5) * 10;
+    window._spawnStar(container,
+      Math.max(0, Math.min(100, relX + ox)),
+      Math.max(0, Math.min(100, relY + oy))
+    );
+  }
+
+  // Click ripple
+  const ripple = document.createElement('div');
+  ripple.className = 'void-ripple';
+  const size = 80;
+  ripple.style.cssText = [
+    'width:' + size + 'px',
+    'height:' + size + 'px',
+    'left:' + (e.clientX - rect.left - size / 2) + 'px',
+    'top:' + (e.clientY - rect.top - size / 2) + 'px'
+  ].join(';');
+  this.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 700);
+});
+
+/* ── PERIODIC GLITCH ─────────────────────────── */
+(function() {
+  const el = document.getElementById('num404');
+  function glitch() {
+    el.classList.add('glitch');
+    setTimeout(() => el.classList.remove('glitch'), 560);
+    // Schedule next glitch randomly between 4–9s
+    setTimeout(glitch, Math.random() * 5000 + 4000);
+  }
+  // First glitch after 2.5s
+  setTimeout(glitch, 2500);
+})();
+
+/* ── VOID TIMER ──────────────────────────────── */
+(function() {
+  const start = Date.now();
+  const timerEl = document.getElementById('voidTimer');
+  // Show after 3 seconds
+  setTimeout(() => { timerEl.style.opacity = '1'; }, 3000);
+  setInterval(() => {
+    const s = Math.floor((Date.now() - start) / 1000);
+    timerEl.textContent = s + 's IN THE VOID';
+  }, 1000);
+})();
+
+/* ── KEYBOARD HINTS (show after 2s) ─────────── */
+(function() {
+  const hint = document.getElementById('kbHint');
+  setTimeout(() => { hint.style.opacity = '1'; }, 2000);
+})();
+
+/* ── KEYBOARD SHORTCUTS ──────────────────────── */
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'h' || e.key === 'H') {
+    window.location.href = 'https://faizzzlol.github.io/PaizCorp/';
+  }
+  if (e.key === 'b' || e.key === 'B' || e.key === 'Escape') {
+    history.back();
+  }
+});
 </script>
 </body>
 </html>
