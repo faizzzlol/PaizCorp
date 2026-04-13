@@ -2,13 +2,13 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>pAIz v4.0 — AI Intelligence Assistant · Paiz Corp</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>pAIz v5.0 — The Omniscient · Paiz Corp</title>
 <link rel="icon" type="image/svg+xml" href="/PaizCorp/paizcorp-favicon.svg">
-<meta name="description" content="pAIz — The Legend of Legiona's official AI intelligence assistant. Now with image search & preview.">
+<meta name="description" content="pAIz v5.0 — The Legend of Legiona's omniscient AI. Full ecosystem knowledge, slash commands, image preview, context memory. EN & BM.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════ TOKENS ══════════════════════════════ */
+/* ═══════════════════════════ TOKENS ═══════════════════════════ */
 :root {
   --green:#2a6647;--green-lt:#3a9165;--green-dim:rgba(42,102,71,0.1);
   --bg:#0d0c0a;--bg2:#111009;--bg3:#161410;
@@ -29,6 +29,7 @@
   --gold:#c9a84c;--gold-dim:rgba(201,168,76,0.15);
   --red:#c44;--blue:#5b9cf6;--amber:#f6a035;
   --img-border:rgba(42,102,71,0.2);
+  --cmd-bg:rgba(42,102,71,0.08);
 }
 [data-theme="light"] {
   --bg:#f7f4ed;--bg2:#f0ece2;--bg3:#e8e3d8;
@@ -46,6 +47,7 @@
   --scroll:#ddd8cc;--sn-bg:#060504;--sn-bd:rgba(255,255,255,0.04);
   --sn-txt:rgba(255,255,255,0.22);
   --img-border:rgba(42,102,71,0.25);
+  --cmd-bg:rgba(42,102,71,0.05);
 }
 html.sw *,html.sw *::before,html.sw *::after{transition:background-color .25s,color .25s,border-color .25s !important}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -86,31 +88,27 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 .txt-btn{font-family:'DM Mono',monospace;font-size:.42rem;letter-spacing:1.5px;color:var(--faint);background:none;border:1px solid var(--border);cursor:pointer;padding:0 10px;height:32px;transition:all .2s;white-space:nowrap}
 .txt-btn:hover{color:#3a9165;border-color:rgba(42,102,71,.35)}
 
-/* LANG INDICATOR */
+/* LANG + SEARCH INDICATORS */
 .lang-flag{font-family:'DM Mono',monospace;font-size:.38rem;letter-spacing:1px;padding:3px 8px;border:1px solid var(--border);color:var(--faint);transition:all .2s;flex-shrink:0}
 .lang-flag.bm{border-color:rgba(201,168,76,.3);color:var(--gold)}
-
-/* SEARCH MODE INDICATOR */
 .search-mode-indicator{font-family:'DM Mono',monospace;font-size:.38rem;letter-spacing:1px;padding:2px 8px;border:1px solid rgba(91,156,246,.3);color:#5b9cf6;display:none;flex-shrink:0;align-items:center;gap:4px}
 .search-mode-indicator.show{display:flex}
 .search-mode-indicator::before{content:'⌕';font-size:.5rem}
 
 /* CHAT SHELL */
 .shell{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
-
-/* MESSAGES */
 .msgs-wrap{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--scroll) transparent;min-height:0}
 .msgs-wrap::-webkit-scrollbar{width:4px}
 .msgs-wrap::-webkit-scrollbar-thumb{background:var(--scroll);border-radius:2px}
-.msgs-inner{max-width:800px;margin:0 auto;padding:28px 20px 12px;display:flex;flex-direction:column;gap:4px}
+.msgs-inner{max-width:820px;margin:0 auto;padding:28px 20px 12px;display:flex;flex-direction:column;gap:4px}
 
 /* WELCOME */
-.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;gap:16px;min-height:calc(100vh - 28px - 54px - 110px)}
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;gap:16px;min-height:calc(100vh - 28px - 54px - 106px)}
 .wlogo{width:72px;height:72px;border-radius:50%;background:var(--bg3);border:1.5px solid rgba(42,102,71,.3);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:#3a9165;position:relative;overflow:hidden}
 .wlogo::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 35% 35%,rgba(58,145,101,.12),transparent 70%)}
 .wtitle{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2.1rem);font-weight:900;letter-spacing:-.5px;color:var(--txt);line-height:1.15}
 .wtitle em{font-style:italic;color:#3a9165;font-weight:400}
-.wsub{font-size:.88rem;color:var(--muted);font-weight:300;max-width:460px;line-height:1.85}
+.wsub{font-size:.88rem;color:var(--muted);font-weight:300;max-width:480px;line-height:1.85}
 .wbm{font-size:.78rem;color:var(--faint);font-weight:300;font-style:italic}
 .wnew{font-family:'DM Mono',monospace;font-size:.42rem;letter-spacing:1.5px;padding:4px 12px;border:1px solid rgba(42,102,71,.35);color:#3a9165;background:rgba(42,102,71,.06);display:inline-flex;align-items:center;gap:6px}
 .wnew-dot{width:5px;height:5px;border-radius:50%;background:#3a9165;animation:blink 1.5s infinite}
@@ -121,21 +119,21 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 .wcat-btn:hover,.wcat-btn.on{border-color:rgba(42,102,71,.35);color:#3a9165;background:var(--green-dim)}
 .wcat-btn.img-cat{border-color:rgba(201,168,76,.2);color:var(--gold)}
 .wcat-btn.img-cat.on,.wcat-btn.img-cat:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.4);color:var(--gold)}
-
 .wchips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:680px;margin-top:4px}
 .chip{background:var(--chip-bg);border:1px solid var(--chip-bd);padding:8px 14px;font-family:'Outfit',sans-serif;font-size:.82rem;color:var(--chip-txt);cursor:pointer;transition:all .18s;border-radius:8px;text-align:left;line-height:1.3}
 .chip:hover{background:var(--chip-hbg);border-color:var(--chip-hbd);color:var(--chip-htxt)}
 .chip.img-chip{border-color:rgba(201,168,76,.15);font-size:.78rem}
 .chip.img-chip:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.35);color:var(--gold)}
 
+/* COMMAND HINT BAR */
+.cmd-hint-bar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:2px}
+.cmd-hint{font-family:'DM Mono',monospace;font-size:.35rem;letter-spacing:1px;color:var(--xfaint);background:var(--cmd-bg);padding:3px 10px;border-radius:20px;border:1px solid var(--border)}
+.cmd-hint kbd{font-family:'DM Mono',monospace;background:var(--surface);padding:1px 5px;border-radius:4px;color:#3a9165;margin:0 2px}
+
 /* MSG GROUPS */
 .mg{display:flex;flex-direction:column;gap:2px;animation:mi .2s ease;margin-bottom:6px}
 @keyframes mi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-/* USER bubble */
 .mu{align-self:flex-end;background:var(--msg-user-bg);color:var(--msg-user-txt);padding:11px 16px;border-radius:18px 18px 4px 18px;max-width:72%;font-size:.9rem;line-height:1.65}
-
-/* BOT row */
 .mb-row{display:flex;gap:12px;align-items:flex-start;max-width:100%}
 .mb-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:var(--bg3);border:1px solid rgba(42,102,71,.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.7rem;font-weight:900;color:#3a9165;margin-top:3px}
 .mb-txt{flex:1;min-width:0;font-size:.9rem;line-height:1.8;color:var(--msg-bot-txt);padding-top:3px}
@@ -151,7 +149,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 .mtime{font-family:'DM Mono',monospace;font-size:.35rem;letter-spacing:.8px;color:var(--xfaint);margin-top:3px}
 .mtime.bot{padding-left:40px}
 
-/* ═══════════ IMAGE PREVIEW SYSTEM ═══════════ */
+/* IMAGE GRID */
 .img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:4px;margin-top:10px;border-radius:4px;overflow:hidden}
 .img-grid.single{grid-template-columns:1fr}
 .img-grid.duo{grid-template-columns:1fr 1fr}
@@ -163,21 +161,18 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 .img-caption::before{content:'';width:12px;height:1px;background:rgba(42,102,71,.4)}
 .img-caption.gold-cap{color:rgba(201,168,76,.5)}
 .img-caption.gold-cap::before{background:rgba(201,168,76,.4)}
-.img-count-badge{font-family:'DM Mono',monospace;font-size:.38rem;letter-spacing:1px;padding:2px 7px;border:1px solid var(--img-border);color:#3a9165;display:inline-block;margin-top:5px;cursor:pointer;transition:all .2s}
-.img-count-badge:hover{background:var(--green-dim)}
 
-/* Search results */
+/* SEARCH RESULTS */
 .search-results{margin-top:10px;display:flex;flex-direction:column;gap:3px}
 .sr-item{background:var(--surface);border:1px solid var(--border);padding:10px 14px;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:all .2s;color:var(--txt)}
 .sr-item:hover{border-color:rgba(42,102,71,.3);background:var(--surface2)}
-.sr-left{}
 .sr-tag{font-family:'DM Mono',monospace;font-size:.38rem;letter-spacing:1.5px;color:#3a9165;opacity:.7;display:block;margin-bottom:3px}
 .sr-name{font-size:.85rem;color:var(--txt);font-weight:500;display:block}
 .sr-desc{font-size:.75rem;color:var(--muted);font-weight:300;display:block;margin-top:2px}
 .sr-arrow{font-family:'DM Mono',monospace;font-size:.5rem;color:rgba(42,102,71,.5);flex-shrink:0;transition:color .2s}
 .sr-item:hover .sr-arrow{color:#3a9165}
 
-/* ═══════════ LIGHTBOX ═══════════ */
+/* LIGHTBOX */
 #lb{position:fixed;inset:0;z-index:99999;background:rgba(4,5,4,.97);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s ease}
 #lb.open{opacity:1;pointer-events:auto}
 .lb-inner{max-width:1080px;width:100%;position:relative;display:flex;flex-direction:column;align-items:center;gap:0}
@@ -217,11 +212,15 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 #cs:hover{background:var(--send-hover);transform:scale(1.05)}
 #cs:disabled{opacity:.28;cursor:not-allowed;transform:none}
 #cs svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.input-hint{max-width:800px;margin:6px auto 0;text-align:center;font-family:'DM Mono',monospace;font-size:.35rem;letter-spacing:1px;color:var(--xfaint)}
-.input-hint .hint-cmd{color:rgba(42,102,71,.45);font-style:normal}
 
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-@media(max-width:600px){.msgs-inner{padding:16px 14px 10px}.input-area{padding:10px 14px 14px}.tn-lnk:not(.pri){display:none}.welcome{padding:28px 14px;gap:12px}.img-grid{grid-template-columns:1fr 1fr!important}}
+@media(max-width:600px){
+  .msgs-inner{padding:16px 14px 10px}
+  .input-area{padding:10px 14px 14px}
+  .tn-lnk:not(.pri){display:none}
+  .welcome{padding:28px 14px;gap:12px}
+  .img-grid{grid-template-columns:1fr 1fr!important}
+}
 </style>
 </head>
 <body>
@@ -238,8 +237,9 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
     <a href="https://faizzzlol.github.io/thelol/gov/">GOVERNMENT</a>
     <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
     <a href="https://faizzzlol.github.io/thelol/tlr/">TL RAILWAYS</a>
+    <a href="https://faizzzlol.github.io/freakyniggas/">FREAKY NIGGAS</a>
   </div>
-  <div class="sn-r"><div class="sn-dot"></div><span class="sn-st">ALL SYSTEMS LIVE</span></div>
+  <div class="sn-r"><div class="sn-dot"></div><span class="sn-st">OMNISCIENT</span></div>
 </div>
 
 <nav class="tnav">
@@ -247,8 +247,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
     <div class="tn-logo">p</div>
     <span class="tn-name">pAIz</span>
   </a>
-  <div class="tn-badge">ONLINE</div>
-  <span class="tn-version">v4.0</span>
+  <div class="tn-badge">v5.0 OMNISCIENT</div>
+  <span class="tn-version">BUILD 2026.04.13</span>
   <span class="lang-flag" id="langFlag">EN</span>
   <span class="search-mode-indicator" id="searchIndicator">SEARCH MODE</span>
   <div class="tn-r">
@@ -259,7 +259,6 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
   </div>
 </nav>
 
-<!-- LIGHTBOX -->
 <div id="lb">
   <div class="lb-inner">
     <button class="lb-close" onclick="lbClose()">✕ CLOSE</button>
@@ -281,38 +280,42 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
     <div class="msgs-inner" id="mi">
       <div class="welcome" id="welcome">
         <div class="wlogo">p</div>
-        <div class="wnew"><span class="wnew-dot"></span>v4.0 — IMAGE SEARCH ENABLED</div>
-        <div class="wtitle">Yo. I'm p<em>AI</em>z.</div>
-        <p class="wsub">Official intelligence assistant of The Legend of Legiona. Now with full image search — preview real gallery photos, ISC archive records, and portal assets right here in chat.</p>
-        <p class="wbm">Boleh tanya dalam BM jugak. Type <strong style="color:#3a9165">"search [anything]"</strong> or <strong style="color:#c9a84c">"show me [topic]"</strong> to search everything.</p>
+        <div class="wnew"><span class="wnew-dot"></span>v5.0 — OMNISCIENT · FULL ECOSYSTEM INTEGRATION</div>
+        <div class="wtitle">I am p<em>AI</em>z. I know everything.</div>
+        <p class="wsub">The LoL · Paiz® Corp · ISC · Freaky Niggas · Government · Legal · TLSRL · Citizenship — all indexed. Use <kbd>/</kbd> commands or just ask naturally. BM & EN.</p>
+        <p class="wbm">Taip <strong>/show tlcc</strong> atau <strong>/search kewarganegaraan</strong> — aku faham.</p>
         <div class="wcat">
           <button class="wcat-btn on" onclick="showCat('all',this)">ALL</button>
           <button class="wcat-btn" onclick="showCat('history',this)">HISTORY</button>
           <button class="wcat-btn" onclick="showCat('gov',this)">GOVERNMENT</button>
           <button class="wcat-btn" onclick="showCat('corp',this)">PAIZ CORP</button>
+          <button class="wcat-btn" onclick="showCat('fn',this)">FREAKY NIGGAS</button>
           <button class="wcat-btn img-cat" onclick="showCat('images',this)">📷 PHOTOS</button>
           <button class="wcat-btn img-cat" onclick="showCat('isc_img',this)">🔒 ISC FILES</button>
         </div>
         <div class="wchips" id="wchips"></div>
+        <div class="cmd-hint-bar">
+          <span class="cmd-hint"><kbd>/search</kbd> anything · <kbd>/show</kbd> photos · <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/clear</kbd> · <kbd>/theme</kbd> · <kbd>/help</kbd></span>
+        </div>
       </div>
     </div>
   </div>
   <div class="input-area">
     <div class="input-wrap">
-      <textarea id="ci" placeholder="Ask anything, or type 'show me ...' to preview photos..." rows="1" autocomplete="off"></textarea>
-      <button id="cs" onclick="sendMsg()" title="Send">
+      <textarea id="ci" placeholder="Ask anything, or use /help for commands…" rows="1" autocomplete="off"></textarea>
+      <button id="cs" onclick="sendMsg()" title="Send (Enter)">
         <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
       </button>
     </div>
-    <p class="input-hint">pAIz v4.0 · <em class="hint-cmd">search [query]</em> · <em class="hint-cmd">show me [topic]</em> · BM & EN · No API · Paiz Corp Intelligence Division</p>
   </div>
 </div>
 
 <script>
-/* ═══════════════════════════════════════════════════════
-   pAIz v4.0 — IMAGE SEARCH EDITION
-   No API. Full local. Real image previews.
-═══════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   pAIz v5.0 — OMNISCIENT
+   Full KB merge · Slash commands · Context memory · BM+EN
+   Bugs fixed: /clear flash, /help crash, /gov crash, /isc crash
+═══════════════════════════════════════════════════════════════ */
 
 /* ── THEME ── */
 let theme = localStorage.getItem('paiz-theme') || 'dark';
@@ -336,52 +339,43 @@ function setIcon() {
   b.title = theme === 'dark' ? 'Light mode' : 'Dark mode';
 }
 
-/* ── BM DETECTION ── */
-const BM_WORDS = ['apa','siapa','macam','camne','mana','bila','kenapa','mcm','nk','nak','tak','ada','tiada','boleh','bagus','habis','dah','okay','ok','sapa','la','lah','kan','wei','weh','bro','sis','eh','ai','aiyo','aih','haah','memang','pun','je','tau','tahu','cerita','kisah','sejarah','tentang','bercerita','tolong','tanya','mintak','minta','bagi','buat','pergi','balik','masuk','keluar','pasal','sebab','kerana','sampai','punya','kita','kami','korang','diorang','dia','mereka','saya','aku','ko','awak','hang','den','wak','abang','kakak','adik','tunjuk','gambar','tengok','lihat','cari','nombor'];
+/* ── BM DETECTION (expanded v5) ── */
+const BM_WORDS = ['apa','siapa','macam','camne','mana','bila','kenapa','mcm','nk','nak','tak','ada','tiada','boleh','bagus','habis','dah','okay','ok','sapa','la','lah','kan','wei','weh','bro','sis','eh','ai','aiyo','aih','haah','memang','pun','je','tau','tahu','cerita','kisah','sejarah','tentang','bercerita','tolong','tanya','mintak','minta','bagi','buat','pergi','balik','masuk','keluar','pasal','sebab','kerana','sampai','punya','kita','kami','korang','diorang','dia','mereka','saya','aku','ko','awak','hang','den','wak','abang','kakak','adik','tunjuk','gambar','tengok','lihat','cari','nombor','status','semak','permohonan','warganegara','rakyat'];
 function detectBM(q) {
   const w = q.toLowerCase().split(/\s+/);
   return w.some(x => BM_WORDS.includes(x)) || /[a-z]+(lah|kan|la|wei|weh|ke|pun|je|dah|tak)$/.test(q.toLowerCase());
 }
 
-/* ── IMAGE PATHS (real gallery + ISC archive) ── */
+/* ── IMAGE PATHS ── */
 const GALLERY_ROOT = '/thelol/gallery/assets';
 const ISC_ROOT = '/thelol/gov/isc/assets/publics';
 
-/* ── LIGHTBOX STATE ── */
-let lbImages = [];
-let lbIndex = 0;
-function lbOpen(images, idx = 0, title = '') {
+/* ── LIGHTBOX ── */
+let lbImages = [], lbIndex = 0;
+function lbOpen(images, idx = 0) {
   lbImages = Array.isArray(images) ? images : [images];
   lbIndex = idx;
-  lbRender(title);
+  lbRender();
   document.getElementById('lb').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-function lbRender(titleOverride) {
+function lbRender() {
   const img = document.getElementById('lb-img');
   img.style.opacity = '0';
   img.src = lbImages[lbIndex];
   img.onload = () => { img.style.opacity = '1'; img.style.transition = 'opacity .2s'; };
-  document.getElementById('lb-title').textContent = titleOverride || `IMAGE ${lbIndex + 1} / ${lbImages.length}`;
-  document.getElementById('lb-info').textContent = `PAIZ® CORP · THE LOL NETWORK`;
+  document.getElementById('lb-title').textContent = `IMAGE ${lbIndex+1} / ${lbImages.length}`;
+  document.getElementById('lb-info').textContent = 'PAIZ® CORP · THE LOL NETWORK';
   const nav = document.getElementById('lb-nav');
   if (lbImages.length > 1) {
     nav.style.display = 'flex';
-    document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${lbImages.length}`;
+    document.getElementById('lb-counter').textContent = `${lbIndex+1} / ${lbImages.length}`;
     document.getElementById('lb-prev').disabled = lbIndex === 0;
     document.getElementById('lb-next').disabled = lbIndex === lbImages.length - 1;
-  } else {
-    nav.style.display = 'none';
-  }
+  } else { nav.style.display = 'none'; }
 }
-function lbStep(d) {
-  lbIndex = Math.max(0, Math.min(lbImages.length - 1, lbIndex + d));
-  lbRender();
-}
-function lbClose() {
-  document.getElementById('lb').classList.remove('open');
-  document.body.style.overflow = '';
-}
+function lbStep(d) { lbIndex = Math.max(0, Math.min(lbImages.length-1, lbIndex+d)); lbRender(); }
+function lbClose() { document.getElementById('lb').classList.remove('open'); document.body.style.overflow = ''; }
 document.getElementById('lb').addEventListener('click', e => { if (e.target === document.getElementById('lb')) lbClose(); });
 document.addEventListener('keydown', e => {
   if (!document.getElementById('lb').classList.contains('open')) return;
@@ -390,8 +384,8 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbStep(1);
 });
 
-/* ── IMAGE GRID RENDERER ── */
-function imgGrid(paths, caption = '', gridClass = '') {
+/* ── IMAGE GRID ── */
+function imgGrid(paths, caption = '') {
   if (!paths || !paths.length) return '';
   const cls = paths.length === 1 ? 'single' : paths.length === 2 ? 'duo' : paths.length === 3 ? 'trio' : '';
   const imgs = paths.map((p, i) =>
@@ -400,40 +394,44 @@ function imgGrid(paths, caption = '', gridClass = '') {
       onerror="this.style.display='none'" alt="Photo ${i+1}">`
   ).join('');
   const cap = caption ? `<div class="img-caption">${caption}</div>` : '';
-  return `<div class="img-grid ${cls} ${gridClass}">${imgs}</div>${cap}`;
+  return `<div class="img-grid ${cls}">${imgs}</div>${cap}`;
 }
 
-/* ── PORTAL SEARCH DATA ── */
+/* ── PORTALS (24 entries) ── */
 const PORTALS = [
-  { tag: 'NATION HOME', name: 'The Legend of Legiona', url: 'https://faizzzlol.github.io/thelol/', desc: 'Main hub — history, network, founders, bento grid' },
-  { tag: 'GOVERNMENT', name: 'Government Portal', url: 'https://faizzzlol.github.io/thelol/gov/', desc: 'Proclamation, history, departments, megaprojects' },
-  { tag: 'INTELLIGENCE', name: 'ISC Portal', url: 'https://faizzzlol.github.io/thelol/gov/isc/', desc: 'Internal Security Control — intelligence agency' },
-  { tag: 'ISC ARCHIVE', name: 'ISC National Transparency', url: 'https://faizzzlol.github.io/thelol/gov/isc/national', desc: 'Public records, TLIO history, operational timeline' },
-  { tag: 'ISC SEARCH', name: 'ISC Public Archive Search', url: 'https://faizzzlol.github.io/thelol/gov/isc/search', desc: 'Declassified missions, legal docs, incidents' },
-  { tag: 'CITIZENSHIP', name: 'Citizenship Portal', url: 'https://faizzzlol.github.io/thelol/gov/citizenship/', desc: 'Apply, renew, check eligibility and obligations' },
-  { tag: 'LEGAL DOCS', name: 'Legal Archive', url: 'https://faizzzlol.github.io/thelol/gov/assets/', desc: 'All acts, proclamations, decrees — searchable' },
-  { tag: 'HISTORY', name: 'About The LoL', url: 'https://faizzzlol.github.io/thelol/about', desc: 'Full interactive national timeline — 7 chapters' },
-  { tag: 'GALLERY', name: 'Photo Gallery', url: 'https://faizzzlol.github.io/thelol/gallery', desc: 'Complete photo archive 2020–2024, 8 eras' },
-  { tag: 'TRANSPORT', name: 'TL Railways', url: 'https://faizzzlol.github.io/thelol/tlr/', desc: '4 lines, TLSRL, Monorail, LRT, HSB' },
-  { tag: 'TLSRL', name: 'TLSRL Project Brief', url: 'https://faizzzlol.github.io/thelol/PaizCorp/tlsrl', desc: '4,800+ blocks rail link, full spec sheet' },
-  { tag: 'PAIZ CORP', name: 'Paiz® Corp Hub', url: 'https://faizzzlol.github.io/PaizCorp/', desc: 'All 5 subsidiaries, ecosystem map, portfolio' },
-  { tag: 'RETAIL', name: 'Paiz Shop', url: 'https://faizzzlol.github.io/PaizCorp/PaizShop/', desc: 'Minecraft item store, diamond prices, order system' },
-  { tag: 'FOOD', name: 'Paiz Chicken', url: 'https://faizzzlol.github.io/PaizCorp/PaizChicken/', desc: 'Virtual food ordering across Skyxion' },
-  { tag: 'FILM STUDIO', name: 'PaizProductions', url: 'https://faizzzlol.github.io/PaizCorp/PaizProductions/', desc: 'Official film studio, 3 productions' },
-  { tag: 'FEATURE FILM', name: 'The LoL: The Movie', url: 'https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie', desc: 'In production — cast, synopsis, production notes' },
-  { tag: 'CURRENCY', name: 'TL$ Currency Converter', url: 'https://faizzzlol.github.io/thelol/finance/currency-converter', desc: 'TL Dollar exchange rates, EN/BM bilingual' },
-  { tag: 'AI ASSISTANT', name: 'pAIz v4.0', url: 'https://faizzzlol.github.io/PaizCorp/pAIz.html', desc: 'This page — The LoL AI with image search' },
+  { tag:'NATION HOME',    name:'The Legend of Legiona',       url:'https://faizzzlol.github.io/thelol/',                                    desc:'Main hub — history, network, founders, bento grid' },
+  { tag:'GOVERNMENT',     name:'Government Portal',            url:'https://faizzzlol.github.io/thelol/gov/',                               desc:'Proclamation, history, departments, megaprojects' },
+  { tag:'BLACK HOUSE',    name:'Office of the President',      url:'https://faizzzlol.github.io/thelol/gov/black-house',                    desc:'The Black House — executive office of Faiz4224' },
+  { tag:'INTELLIGENCE',   name:'ISC Portal',                   url:'https://faizzzlol.github.io/thelol/gov/isc/',                           desc:'Internal Security Control — intelligence agency' },
+  { tag:'ISC ARCHIVE',    name:'ISC National Transparency',    url:'https://faizzzlol.github.io/thelol/gov/isc/national',                   desc:'Public records, TLIO history, operational timeline' },
+  { tag:'ISC SEARCH',     name:'ISC Public Archive Search',    url:'https://faizzzlol.github.io/thelol/gov/isc/search',                     desc:'Declassified missions, legal docs, incidents' },
+  { tag:'CITIZENSHIP',    name:'Citizenship Portal',           url:'https://faizzzlol.github.io/thelol/gov/citizenship/',                   desc:'Apply, renew, check eligibility and obligations' },
+  { tag:'CITIZEN STATUS', name:'Citizenship Status Checker',   url:'https://faizzzlol.github.io/thelol/gov/citizenship/status',             desc:'Check application status by reference number' },
+  { tag:'LEGAL DOCS',     name:'Legal Archive',                url:'https://faizzzlol.github.io/thelol/gov/assets/',                        desc:'All acts, proclamations, decrees — searchable' },
+  { tag:'HISTORY',        name:'About The LoL',                url:'https://faizzzlol.github.io/thelol/about',                              desc:'Full interactive national timeline — 7 chapters' },
+  { tag:'GALLERY',        name:'Photo Gallery',                url:'https://faizzzlol.github.io/thelol/gallery',                            desc:'Complete photo archive 2020–2024, 8 eras' },
+  { tag:'TRANSPORT',      name:'TL Railways',                  url:'https://faizzzlol.github.io/thelol/tlr/',                               desc:'4 lines, TLSRL, Monorail, LRT, HSB' },
+  { tag:'TLSRL',          name:'TLSRL Project Brief',          url:'https://faizzzlol.github.io/thelol/PaizCorp/tlsrl',                     desc:'4,800+ blocks rail link, full spec sheet' },
+  { tag:'PAIZ CORP',      name:'Paiz® Corp Hub',               url:'https://faizzzlol.github.io/PaizCorp/',                                 desc:'All 5 subsidiaries, ecosystem map, portfolio' },
+  { tag:'RETAIL',         name:'Paiz Shop',                    url:'https://faizzzlol.github.io/PaizCorp/PaizShop/',                        desc:'Minecraft item store, diamond prices, order system' },
+  { tag:'FOOD',           name:'Paiz Chicken',                 url:'https://faizzzlol.github.io/PaizCorp/PaizChicken/',                     desc:'Virtual food ordering across Skyxion' },
+  { tag:'FILM STUDIO',    name:'PaizProductions',              url:'https://faizzzlol.github.io/PaizCorp/PaizProductions/',                  desc:'Official film studio, 3 productions' },
+  { tag:'FEATURE FILM',   name:'The LoL: The Movie',           url:'https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie',      desc:'In production — cast, synopsis, production notes' },
+  { tag:'CURRENCY',       name:'TL$ Currency Converter',       url:'https://faizzzlol.github.io/thelol/finance/currency-converter',         desc:'TL Dollar exchange rates, EN/BM bilingual' },
+  { tag:'AI ASSISTANT',   name:'pAIz v5.0',                   url:'https://faizzzlol.github.io/PaizCorp/pAIz.html',                        desc:'This page — omniscient AI with slash commands' },
+  { tag:'FREAKY NIGGAS',  name:'Freaky Niggas Community',      url:'https://faizzzlol.github.io/freakyniggas/',                             desc:'Dark monochrome glitch aesthetic · Minecraft servers · Freaky News' },
+  { tag:'FREAKY NEWS',    name:'Freaky News (EN/BM)',          url:'https://faizzzlol.github.io/freakyniggas/news',                         desc:'Bilingual news with localStorage EN/BM toggle' },
+  { tag:'FN SERVERS',     name:'Freaky Niggas Servers',        url:'https://faizzzlol.github.io/freakyniggas/servers',                      desc:'Minecraft server listings' },
+  { tag:'FN FEEDBACK',    name:'Freaky Niggas Feedback',       url:'https://faizzzlol.github.io/freakyniggas/feedback',                     desc:'Submit feedback form' },
 ];
 
-/* ═══════════════════════════════════════════════════
-   IMAGE KNOWLEDGE BASE — real gallery/ISC photos
-═══════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   IMAGE KNOWLEDGE BASE — complete v4 data, all real paths
+══════════════════════════════════════════════════════════ */
 const IMG_KB = [
-  /* ─ NEVERLAND ERA ─ */
   {
     id:'img_neverland', cat:'images',
     kw:['neverland','show neverland','neverland 2020','gambar neverland','tunjuk neverland','era 0','pre era','before the sus','sebelum the sus','neverland photos','era neverland','show era 0'],
-    title:'Neverland Era (2020)',
     era:'ERA 0 // PRE-THE-SUS // 2020',
     images:[
       `${GALLERY_ROOT}/[1]_NEVERLAND_2020/byDYNO_a_selfie_with_syaz_dyno_and_unidentified_player.jpg`,
@@ -441,28 +439,20 @@ const IMG_KB = [
       `${GALLERY_ROOT}/[1]_NEVERLAND_2020/IDK.jpg`,
       `${GALLERY_ROOT}/[1]_NEVERLAND_2020/sendbyDYNO.jpg`,
     ],
-    r:(bm)=>bm?
-    `Ini gambar dari <strong>Era Neverland (2020)</strong> — zaman sebelum The Sus, sebelum The LoL. Server Skyxion awal.`
+    r:(bm)=>bm?`Ini gambar dari <strong>Era Neverland (2020)</strong> — zaman sebelum The Sus, sebelum The LoL. Server Skyxion awal. Gambar oleh Dyno.`
     :`Photos from the <strong>Neverland Era (2020)</strong> — before The Sus, before The LoL. The earliest surviving images from Skyxion's first days. Shot by Dyno.`
   },
-  /* ─ THE SUS BASE ─ */
   {
     id:'img_sus', cat:'images',
     kw:['the sus','show the sus','sus base','first base','artificial island','asal the sus','gambar the sus','tunjuk the sus','sus island','sus era','era 1','show era 1','tunjuk era 1'],
-    title:'The First Sus Base',
     era:'ERA 1 // THE SUS // 2022',
-    images:[
-      `${GALLERY_ROOT}/[2]_THE_SUS/byDYNO_FIRST_THE_SUS_BASE.jpg`,
-    ],
-    r:(bm)=>bm?
-    `<strong>Pangkalan Sus Pertama</strong> — pulau buatan di mana semuanya bermula. Faiz4224, ItzDynozz, dan Imii Kun bina di sini.`
+    images:[`${GALLERY_ROOT}/[2]_THE_SUS/byDYNO_FIRST_THE_SUS_BASE.jpg`],
+    r:(bm)=>bm?`<strong>Pangkalan Sus Pertama</strong> — pulau buatan di mana semuanya bermula. Faiz4224, ItzDynozz, dan Imii Kun bina di sini — farm, chest, furnace.`
     :`<strong>The First Sus Base</strong> — the artificial island where it all began. Faiz4224, ItzDynozz and Imii Kun built everything here — farms, chests, furnaces. This is the moment that started it all.`
   },
-  /* ─ THE LOL FOUNDED ─ */
   {
     id:'img_founded', cat:'images',
     kw:['the lol founded','penubuhan','founded','first day','hari pertama','gambar penubuhan','tunjuk penubuhan','founding day','1st day thelol','show founding','era 2','first the lol','2023 february','feb 2023'],
-    title:'The LoL Founded — Feb 21, 2023',
     era:'ERA 2 // GOLDEN ERA // FEB 2023',
     images:[
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023_02_21_‏‎7_12_04_ PM_byFaiz4224_THE_LOL_WAS_FOUNDED.png`,
@@ -470,15 +460,12 @@ const IMG_KB = [
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-02-21_OTW_TO_THE_LOL_WITH_IMII.png`,
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-02-22_BY_Faiz4224_EARLY.png`,
     ],
-    r:(bm)=>bm?
-    `<strong>The Legend of Legiona diasaskan</strong> pada 21 Februari 2023, pukul 7:12 PM. Imii Kun menamakan semula The Sus. Sejarah bermula.`
+    r:(bm)=>bm?`<strong>The Legend of Legiona diasaskan</strong> pada 21 Februari 2023, pukul 7:12 PM. Imii Kun menamakan semula The Sus. Sejarah bermula.`
     :`<strong>The Legend of Legiona was founded</strong> on February 21, 2023 at 7:12 PM. The moment Imii Kun renamed The Sus and history began. First spawn, the journey across the ocean, the earliest settlement.`
   },
-  /* ─ THE LOL CITY ─ */
   {
     id:'img_city', cat:'images',
-    kw:['the lol city','bandar thelol','city view','pandangan bandar','gambar bandar','tunjuk bandar','show city','tlcc','main road','jalan utama','golden era','city photos','lol city','show lol city','city thelol'],
-    title:'The LoL City — Golden Era',
+    kw:['the lol city','bandar thelol','city view','pandangan bandar','gambar bandar','tunjuk bandar','show city','main road','jalan utama','golden era','city photos','lol city','show lol city','city thelol'],
     era:'ERA 2 // GOLDEN ERA // 2023',
     images:[
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-29 (4).png`,
@@ -486,15 +473,12 @@ const IMG_KB = [
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-15 (6).png`,
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-05-01 (2).png`,
     ],
-    r:(bm)=>bm?
-    `<strong>The LoL City</strong> semasa era keemasannya — jalan utama, TLCC Twin Towers, dan pokok cherry blossom. Indah gila! 🌸`
+    r:(bm)=>bm?`<strong>The LoL City</strong> semasa era keemasannya — jalan utama, TLCC Twin Towers, dan pokok cherry blossom. Indah gila! 🌸`
     :`<strong>The LoL City</strong> during the Golden Era — the main road with TLCC Twin Towers dominating the skyline, cherry blossom trees, and the THE LOL globe structure. The city at its most beautiful.`
   },
-  /* ─ TLCC TWIN TOWERS ─ */
   {
     id:'img_tlcc', cat:'images',
     kw:['tlcc','twin towers','menara kembar','tlcc view','top of tlcc','tlcc construction','tlcc photos','gambar tlcc','tunjuk tlcc','show tlcc','convention centre','menara'],
-    title:'TLCC Twin Towers',
     era:'ERA 2 // GOLDEN ERA // 2023',
     images:[
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-03-03_BY_Faiz4224_THE_LOL_CITY_VIEW_FROM_TLCC.png`,
@@ -502,43 +486,32 @@ const IMG_KB = [
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-15_BY_Faiz4224_FIRST_ELEVATOR_INSIDE_TLCC_IN_THE_LOL.png`,
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-29 (2).png`,
     ],
-    r:(bm)=>bm?
-    `<strong>TLCC Twin Towers</strong> — mercu tanda paling ikonik The LoL. Gambar ni dari puncak menara (Y=320 — had ketinggian Minecraft!), lif pertama dalam TLCC, dan tapak pembinaan Menara 2.`
-    :`<strong>TLCC Twin Towers</strong> — The LoL's most iconic landmark. These shots include the view from the absolute height limit (Y=320!), the first elevator inside TLCC, and Tower 2 groundbreaking. The tallest structure in all of Skyxion.`
+    r:(bm)=>bm?`<strong>TLCC Twin Towers</strong> — mercu tanda paling ikonik The LoL. Dari puncak menara (Y=320 — had ketinggian Minecraft!), lif pertama dalam TLCC, dan tapak pembinaan Menara 2.`
+    :`<strong>TLCC Twin Towers</strong> — The LoL's most iconic landmark. The view from the absolute height limit (Y=320!), the first elevator inside TLCC, and Tower 2 groundbreaking. The tallest structure in all of Skyxion.`
   },
-  /* ─ TERRITORY MAP ─ */
   {
     id:'img_map', cat:'images',
     kw:['territory','map','peta','tunjuk peta','show map','gambar peta','thelol map','peta thelol','seed map','chunkbase','territory map'],
-    title:'The LoL Territory Maps',
     era:'ERA 2 // GOLDEN ERA // 2023',
     images:[
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/byFAIZ_THE_LOL_MAP_INGAME.png`,
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/THE_LOL_MAP.png`,
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-14 (3).png`,
     ],
-    r:(bm)=>bm?
-    `<strong>Peta Wilayah The LoL</strong> — peta dalam game dan peta ChunkBase rasmi (Seed 1371621129). Lokasi yang ditanda: The LoL City, Highlands, Hi-Tech, Outpost, Flutopia, dan Bandar The LoL.`
-    :`<strong>The LoL Territory Maps</strong> — the in-game map and the official ChunkBase seed map (Seed 1371621129, Bedrock 1.19). Marked locations include The LoL City, Highlands, Hi-Tech, Outpost, Flutopia, and Bandar The LoL.`
+    r:(bm)=>bm?`<strong>Peta Wilayah The LoL</strong> — peta dalam game dan peta ChunkBase rasmi (Seed 1371621129). Lokasi: The LoL City, Highlands, Hi-Tech, Outpost, Flutopia, Bandar The LoL.`
+    :`<strong>The LoL Territory Maps</strong> — the in-game map and the official ChunkBase seed map (Seed 1371621129, Bedrock 1.19). Locations: The LoL City, Highlands, Hi-Tech, Outpost, Flutopia, Bandar The LoL.`
   },
-  /* ─ IRON FARM ─ */
   {
     id:'img_farm', cat:'images',
     kw:['farm','iron farm','ladang','national farm','gambar farm','show farm','tunjuk farm','first farm','ikan farm'],
-    title:'National Farm Complex',
     era:'ERA 2 // GOLDEN ERA // APR 2023',
-    images:[
-      `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-20_BY_Faiz4224_FIRST_IRON_FARM_BY_IKAN.png`,
-    ],
-    r:(bm)=>bm?
-    `<strong>Iron Farm Pertama</strong> — dibina oleh Ikan (ikanuwu). Pandangan dari atas platform air yang dikelilingi ladang buluh. Mula penggerak ekonomi The LoL!`
+    images:[`${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-20_BY_Faiz4224_FIRST_IRON_FARM_BY_IKAN.png`],
+    r:(bm)=>bm?`<strong>Iron Farm Pertama</strong> — dibina oleh Ikan (ikanuwu). Pandangan dari atas platform air yang dikelilingi ladang buluh. Mula penggerak ekonomi The LoL!`
     :`<strong>The First Iron Farm</strong> — built by Ikan (ikanuwu). Aerial view of the water platform surrounded by bamboo farms. The beginning of The LoL's economic engine.`
   },
-  /* ─ TLSRL RAILWAY ─ */
   {
     id:'img_tlsrl', cat:'images',
     kw:['tlsrl','show tlsrl','railway photos','gambar kereta api','tunjuk tlsrl','railway','train','tren','rail','kereta api','track','landasan','tlsrl photos','railway images'],
-    title:'TLSRL — The LoL–Spawn Railway Link',
     era:'ERA 5 // RESTORATION // 2024',
     images:[
       `${GALLERY_ROOT}/assets/2024-01-13-1.png`,
@@ -546,15 +519,12 @@ const IMG_KB = [
       `${GALLERY_ROOT}/assets/2024-02-04-1.png`,
       `${GALLERY_ROOT}/assets/2024-01-27-1.png`,
     ],
-    r:(bm)=>bm?
-    `<strong>TLSRL — The LoL–Spawn Railway Link</strong>: Binaan rel merentasi hutan autumn, stesen platform waktu malam, jambatan viadukt, dan landasan yang dibina blok demi blok. Lebih 4,800 blok! 🚂`
+    r:(bm)=>bm?`<strong>TLSRL — The LoL–Spawn Railway Link</strong>: Binaan rel merentasi hutan autumn, stesen platform waktu malam, jambatan viadukt, dan landasan yang dibina blok demi blok. Lebih 4,800 blok! 🚂`
     :`<strong>TLSRL Railway</strong> in construction — riding through an autumn forest valley, the platform station at night lit by lanterns, viaduct bridges crossing gorges, and track laying in the rain. This is how 4,800+ blocks gets built — one block at a time.`
   },
-  /* ─ TERMINAL BERSEPADU SPAWN ─ */
   {
     id:'img_terminal', cat:'images',
     kw:['terminal','terminal bersepadu spawn','spawn terminal','gambar terminal','tunjuk terminal','show terminal','station','stesen spawn','integrated terminal'],
-    title:'Terminal Bersepadu Spawn',
     era:'ERA 5 // RESTORATION // APR 2024',
     images:[
       `${GALLERY_ROOT}/assets/2024-04-05.png`,
@@ -562,15 +532,12 @@ const IMG_KB = [
       `${GALLERY_ROOT}/assets/2024-04-05-2.png`,
       `${GALLERY_ROOT}/assets/2024-04-05-3.png`,
     ],
-    r:(bm)=>bm?
-    `<strong>Terminal Bersepadu Spawn</strong> — pusat TLSRL. Dewan agung dengan arah ke Platform 1&2, HSB, Kafeteria, Info, E-Chest. Bangunan dalaman paling gah dalam sejarah The LoL!`
+    r:(bm)=>bm?`<strong>Terminal Bersepadu Spawn</strong> — pusat TLSRL. Dewan agung dengan arah ke Platform 1&2, HSB, Kafeteria, Info, E-Chest. Bangunan dalaman paling gah dalam sejarah The LoL!`
     :`<strong>Terminal Bersepadu Spawn</strong> — TLSRL's centrepiece. The grand hall with directional signs to Platforms 1&2, HSB, Food Court, Info, E-Chest. Portrait artwork on walls. Multi-level with Level G. The most ambitious interior build in The LoL's history.`
   },
-  /* ─ ENDER DRAGON ─ */
   {
     id:'img_dragon', cat:'images',
     kw:['ender dragon','dragon','end','naga','gambar dragon','show dragon','tunjuk dragon','fight dragon','lawan dragon','the end','end poem','end poem faiz','faiz4224 end poem'],
-    title:'Ender Dragon Fight — June 2024',
     era:'ERA 7 // FINAL ACTIVE ERA // JUNE 2024',
     images:[
       `${GALLERY_ROOT}/assets/2024-06-22-3.png`,
@@ -578,142 +545,108 @@ const IMG_KB = [
       `${GALLERY_ROOT}/assets/2024-06-22-5.png`,
       `${GALLERY_ROOT}/assets/2024-06-22-6.png`,
     ],
-    r:(bm)=>bm?
-    `<strong>Pertarungan Ender Dragon</strong> — Faiz4224 dan Dyno (LonelyDynozz) bersama lawan dragon. Chat: "3...2...1..." Epic gila. Dan End Poem sendiri address <strong>Faiz4224?</strong> — "Yes. Take care." Day 936. 👑`
+    r:(bm)=>bm?`<strong>Pertarungan Ender Dragon</strong> — Faiz4224 dan Dyno (LonelyDynozz) bersama lawan dragon. Chat: "3...2...1..." Epic gila. Dan End Poem sendiri address <strong>Faiz4224?</strong> — "Yes. Take care." Day 936. 👑`
     :`<strong>The Ender Dragon fight</strong> — Faiz4224 and LonelyDynozz (Dyno) counting down together. The dragon's HP bar. "hancurkan end crystal." And then… the End Poem itself addresses <strong>Faiz4224?</strong> — "Yes. Take care. It has reached a higher level now." Day 936.`
   },
-  /* ─ END CITY ─ */
   {
     id:'img_end_city', cat:'images',
     kw:['end city','elytra','purpur','gambar end city','show end city','tunjuk end city','flying elytra','end city photos'],
-    title:'End City Exploration',
     era:'ERA 7 // FINAL ACTIVE ERA // JUNE 2024',
     images:[
       `${GALLERY_ROOT}/assets/2024-06-22-7.png`,
       `${GALLERY_ROOT}/assets/2024-06-22-8.png`,
     ],
-    r:(bm)=>bm?
-    `<strong>End City</strong> — gambar <em>Diamond Sword Faiz4224</em> dengan full enchants, dan Faiz4224 terbang dengan Elytra. Day 958!`
+    r:(bm)=>bm?`<strong>End City</strong> — gambar <em>Diamond Sword Faiz4224</em> dengan full enchants, dan Faiz4224 terbang dengan Elytra. Day 958!`
     :`<strong>End City exploration</strong> — the legendary "Diamond Sword Faiz4224" in a chest room (Fire Aspect II, Unbreaking III, Sharpness IV, Looting III, Knockback II, Mending I), and Elytra flight between End City islands. Day 958.`
   },
-  /* ─ BYE THELOL ─ */
   {
     id:'img_bye', cat:'images',
     kw:['bye thelol','goodbye','selamat tinggal','emotional photo','gambar sedih','most emotional','gambar thelol terakhir','goodbye photo','bye','farewell'],
-    title:'"bye thelol" — The Last Flight',
     era:'ERA 7 // FINAL ACTIVE ERA // JUNE 20, 2024',
-    images:[
-      `${GALLERY_ROOT}/assets/2024-06-20.png`,
-    ],
-    r:(bm)=>bm?
-    `Gambar paling sedih dalam arkib. Chat: <em>"bye thelol"</em>. Faiz4224 terbang di atas bukit cherry blossom The LoL atas strider di atas lava, melihat ke bawah pada tanah yang dibina. June 20, 2024. 💔`
+    images:[`${GALLERY_ROOT}/assets/2024-06-20.png`],
+    r:(bm)=>bm?`Gambar paling sedih dalam arkib. Chat: <em>"bye thelol"</em>. Faiz4224 terbang di atas bukit cherry blossom atas strider di atas lava, melihat ke bawah pada tanah yang dibina. June 20, 2024. 💔`
     :`The most poignant image in the entire archive. Chat simply reads: <em>"bye thelol."</em> Faiz4224 flying above The LoL's cherry blossom hills on a strider over lava, looking down at the land he built. June 20, 2024.`
   },
-  /* ─ LAST DAY ─ */
   {
     id:'img_lastday', cat:'images',
     kw:['last day','hari terakhir','aug 24','august 24 2024','last screenshot','gambar terakhir','final day','wyvern','dragon wyvern','show last day','tunjuk hari terakhir'],
-    title:'The Last Day — Aug 24, 2024',
     era:'ERA 7 // FINAL ACTIVE ERA // AUG 24, 2024',
-    images:[
-      `${GALLERY_ROOT}/[5]_THE_LOL_LATEST_2024/2024-08-24.png`,
-    ],
-    r:(bm)=>bm?
-    `<strong>Hari Terakhir</strong> — 24 Ogos 2024. Hari ke-2729. Wyvern naga terbang di langit biru cerah di atas daerah. Screenshot terakhir yang pernah diambil di server ni. Hujung satu era bermula pada 2020.`
-    :`<strong>The Last Day</strong> — August 24, 2024. Day 2729. A custom wyvern dragon soars through a clear blue sky above the district. The last screenshot ever taken on this server. The end of an era that began in 2020 — from Neverland, to The Sus, to The Legend of Legiona.`
+    images:[`${GALLERY_ROOT}/[5]_THE_LOL_LATEST_2024/2024-08-24.png`],
+    r:(bm)=>bm?`<strong>Hari Terakhir</strong> — 24 Ogos 2024. Hari ke-2729. Wyvern naga terbang di langit biru cerah di atas daerah. Screenshot terakhir yang pernah diambil di server ni. Hujung satu era bermula pada 2020.`
+    :`<strong>The Last Day</strong> — August 24, 2024. Day 2729. A custom wyvern dragon soars through a clear blue sky above the district. The last screenshot ever taken on this server. The end of an era that began in 2020.`
   },
-  /* ─ ISC TLCC ATTACK ─ */
   {
     id:'img_tlcc_attack', cat:'isc_img',
     kw:['tlcc attack','menara diserang','drone attack','serangan dron','tlcc bombed','tlcc attacked','show attack','gambar serangan','tunjuk serangan','ultrax attack','isc attack files','show tlcc attack'],
-    title:'ISC FILE: TLCC Twin Towers Attack',
     era:'ERA 4 // CHAOS // ISC CLASSIFIED',
     images:[
       `${ISC_ROOT}/SAFETY-OPS/IMG-20230530-WA0004.jpg`,
       `${ISC_ROOT}/SAFETY-OPS/IMG-20230530-WA0005.jpg`,
     ],
-    r:(bm)=>bm?
-    `<span class="tag red">ISC CLASSIFIED</span><br><strong>Serangan ke atas TLCC Twin Towers</strong> — dokumentasi pasca-insiden dari hub komersial dan tingkat kediaman TLCC selepas serangan pada 2023-05-30. Bukti gangguan struktur dan akses tanpa kebenaran didokumen.`
+    r:(bm)=>bm?`<span class="tag red">ISC CLASSIFIED</span><br><strong>Serangan ke atas TLCC Twin Towers</strong> — dokumentasi pasca-insiden dari hub komersial dan tingkat kediaman TLCC selepas serangan pada 2023-05-30. Bukti gangguan struktur dan akses tanpa kebenaran didokumen.`
     :`<span class="tag red">ISC CLASSIFIED</span><br><strong>Attack on TLCC Twin Towers</strong> — post-incident documentation of the commercial hub and residential levels following the 2023-05-30 event. Structural tampering and unauthorized access documented under ISC jurisdiction.`
   },
-  /* ─ ISC THE LOL CITY ATTACKS ─ */
   {
     id:'img_tlc_attacks', cat:'isc_img',
     kw:['city bombing','bandar dibom','city attacked','sign bombed','tanda dibom','ultrax crisis','chaos era attack','isc incident report','tlc attacks','show city attack','gambar insiden'],
-    title:'ISC FILE: The LoL City Attacks',
     era:'ERA 4 // CHAOS // ISC INCIDENT REPORT',
     images:[
       `${ISC_ROOT}/TLC_ATTACKS/2023-05-11 (3).png`,
       `${ISC_ROOT}/TLC_ATTACKS/2023-05-12 (2).png`,
     ],
-    r:(bm)=>bm?
-    `<span class="tag red">ISC INCIDENT REPORT</span><br><strong>Serangan di The LoL City</strong> — letupan pertama dilaporkan oleh rakyat The LoL, diikuti dengan papan tanda bandar yang <strong>dibom</strong>. Didokumen semasa era pemerintahan UltraX2020.`
+    r:(bm)=>bm?`<span class="tag red">ISC INCIDENT REPORT</span><br><strong>Serangan di The LoL City</strong> — letupan pertama dilaporkan oleh rakyat The LoL, diikuti dengan papan tanda bandar yang <strong>dibom</strong>. Didokumen semasa era pemerintahan UltraX2020.`
     :`<span class="tag red">ISC INCIDENT REPORT</span><br><strong>The LoL City Attacks</strong> — the initial explosion reported by The LoL people, followed by the <strong>city sign bombing</strong>. Documented during the UltraX2020 presidency. The darkest chapter in The LoL's history.`
   },
-  /* ─ ISC SAFETY OPS ─ */
   {
     id:'img_safety_ops', cat:'isc_img',
     kw:['safety ops','operation','ops','isc operation','safety operation','isc ops','show ops','gambar ops','classified ops','operasi','field operation'],
-    title:'ISC FILE: Safety Operations',
     era:'ISC CLASSIFIED // SAFETY-OPS RECORDS',
     images:[
       `${ISC_ROOT}/SAFETY-OPS/2023-03-03 (6).png`,
       `${ISC_ROOT}/SAFETY-OPS/2023-05-11 (1).png`,
       `${ISC_ROOT}/SAFETY-OPS/2023-05-11 (2).png`,
     ],
-    r:(bm)=>bm?
-    `<span class="tag red">ISC CLASSIFIED</span><br><strong>Rekod Operasi Keselamatan</strong> — rekod lapangan dari operasi kawalan keselamatan. Details operasi disekat daripada rekod awam.`
+    r:(bm)=>bm?`<span class="tag red">ISC CLASSIFIED</span><br><strong>Rekod Operasi Keselamatan</strong> — rekod lapangan dari operasi kawalan keselamatan. Details operasi disekat daripada rekod awam.`
     :`<span class="tag red">ISC CLASSIFIED</span><br><strong>Safety Operations Records</strong> — field imagery from clandestine operations within Skyxion. Operative identities and mission specifics have been expunged from the public record.`
   },
-  /* ─ ISC LEGACY RECORDS ─ */
   {
     id:'img_legacy', cat:'isc_img',
     kw:['legacy records','neverland isc','isc neverland','legacy isc','isc legacy','old records','rekod lama','show legacy','gambar legacy','flowey isc','isc 2020'],
-    title:'ISC FILE: Legacy Records (Neverland Era)',
     era:'PRE-ERA // ISC LEGACY ARCHIVE // 2020',
     images:[
       `${ISC_ROOT}/LEGACY_RECORDS/WhatsApp Image 2026-03-04 at 2.12.54 AM (1).jpeg`,
       `${ISC_ROOT}/LEGACY_RECORDS/WhatsApp Image 2026-03-04 at 2.12.54 AM.jpg`,
     ],
-    r:(bm)=>bm?
-    `<span class="tag gold">ISC LEGACY ARCHIVE</span><br><strong>Rekod Warisan: Era Neverland</strong> — gambar arkib dari zaman pra-Skyxion (2020). Mendokumen operasi awal dan beban taktik Unit-█████. Salah satu daripada sedikit rekod yang terselamat dari era ini.`
+    r:(bm)=>bm?`<span class="tag gold">ISC LEGACY ARCHIVE</span><br><strong>Rekod Warisan: Era Neverland</strong> — gambar arkib dari zaman pra-Skyxion (2020). Mendokumen operasi awal dan beban taktik Unit-█████. Salah satu daripada sedikit rekod yang terselamat dari era ini.`
     :`<span class="tag gold">ISC LEGACY ARCHIVE</span><br><strong>Legacy Records: Neverland Era (2020)</strong> — archived footage from pre-Skyxion operations. Documents early experimental procedures and Unit-█████ tactical loadout. One of the few surviving records from this era.`
   },
-  /* ─ HORROR SURVIVAL EVENT ─ */
   {
     id:'img_horror', cat:'images',
     kw:['horror survival','event server','random effects','gambar event','show event','server event','horror event','chaos event game'],
-    title:'Horror Survival Server Event',
     era:'ERA 7 // FINAL ACTIVE ERA // JUNE 2024',
     images:[
       `${GALLERY_ROOT}/assets/2024-06-23-6.png`,
       `${GALLERY_ROOT}/assets/2024-06-23-7.png`,
       `${GALLERY_ROOT}/assets/2024-06-23-8.png`,
     ],
-    r:(bm)=>bm?
-    `<strong>Horror Survival Event</strong> — screen kemerah-merahan, semua kesan random dapat, hampir mati dengan 2 nyawa. Dyno: "bottle o enchanting ada x". Faiz: "pergh semua effect dpt". Chaos gila! 😂`
+    r:(bm)=>bm?`<strong>Horror Survival Event</strong> — screen kemerah-merahan, semua kesan random dapat, hampir mati dengan 2 nyawa. Dyno: "bottle o enchanting ada x". Faiz: "pergh semua effect dpt". Chaos gila! 😂`
     :`<strong>Horror Survival Server Event</strong> — the screen tinted red from random status effects, barely alive with 2 hearts. LonelyDynozz: "bottle o enchanting ada x". Faiz4224: "pergh semua effect dpt". The most chaotic server event in the final era.`
   },
-  /* ─ GEAR SHOWCASE ─ */
   {
     id:'img_gear', cat:'images',
     kw:['pedang faiz','diamond sword faiz','netherite boots','gear faiz','weapon','senjata','show gear','gambar senjata','equipment','enchanted sword'],
-    title:'The Legendary Gear of Faiz4224',
     era:'ERA 7 // FINAL ACTIVE ERA // 2024',
     images:[
       `${GALLERY_ROOT}/assets/2024-06-22.png`,
       `${GALLERY_ROOT}/assets/2024-06-29-2.png`,
       `${GALLERY_ROOT}/assets/2024-06-23-3.png`,
     ],
-    r:(bm)=>bm?
-    `<strong>Senjata Lagenda Faiz4224</strong>: "Diamond Sword Faiz4224" (Fire Aspect II, Unbreaking III, Sharpness IV, Looting III, Knockback II, Mending I) → upgrade ke "Pedang Faiz4224" Netherite dengan Sharpness V. Plus Netherite Boots dengan Depth Strider III, Soul Speed III, Thorns II, dan banyak lagi! Lengkap gila.`
+    r:(bm)=>bm?`<strong>Senjata Lagenda Faiz4224</strong>: "Diamond Sword Faiz4224" (Fire Aspect II, Unbreaking III, Sharpness IV, Looting III, Knockback II, Mending I) → upgrade ke "Pedang Faiz4224" Netherite dengan Sharpness V. Plus Netherite Boots dengan Depth Strider III, Soul Speed III, Thorns II! Lengkap gila.`
     :`<strong>The Legendary Gear</strong>: The "Diamond Sword Faiz4224" (Fire Aspect II, Unbreaking III, Sharpness IV, Looting III, Knockback II, Mending I) later upgraded to the Netherite "Pedang Faiz4224" with Sharpness V. Paired with Netherite Boots featuring Depth Strider III, Soul Speed III, Thorns II, Protection IV and more.`
   },
-  /* ─ ALL ERA 2 PHOTOS ─ */
   {
     id:'img_era2_all', cat:'images',
     kw:['show era 2','tunjuk era 2','golden era photos','gambar golden era','era emas','era golden','all golden era','golden era images'],
-    title:'Golden Era Photo Collection (2023)',
     era:'ERA 2 // GOLDEN ERA // 2023',
     images:[
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-02-24_BY_Faiz4224_FIRST_FUNICULAR_RAILWAY_TO_THE_LOL_HILL.png`,
@@ -721,15 +654,12 @@ const IMG_KB = [
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-22 (1).png`,
       `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-05-01 (3).png`,
     ],
-    r:(bm)=>bm?
-    `<strong>Koleksi Era Emas (2023)</strong> — funicular railway pertama ke bukit The LoL, program penanaman semula pokok, Faiz4224 meninjau dari tiang tinggi (11 hari, 16 jam masa bermain!), dan pembinaan TLCC Tower 2.`
+    r:(bm)=>bm?`<strong>Koleksi Era Emas (2023)</strong> — funicular railway pertama ke bukit The LoL, program penanaman semula pokok, Faiz4224 meninjau dari tiang tinggi (11 hari, 16 jam masa bermain!), dan pembinaan TLCC Tower 2.`
     :`<strong>Golden Era Collection (2023)</strong> — the first funicular railway up The LoL Hill, the national tree replanting programme, Faiz4224 surveying from a pillar (11 days 16 hours playtime!), and TLCC Tower 2 under construction.`
   },
-  /* ─ FINAL ERA GENERAL ─ */
   {
     id:'img_final', cat:'images',
     kw:['show era 7','tunjuk era 7','final era photos','gambar akhir','2024 photos','june 2024','latest photos','last server photos','show 2024'],
-    title:'Final Active Era Photos (2024)',
     era:'ERA 7 // FINAL ACTIVE ERA // 2024',
     images:[
       `${GALLERY_ROOT}/assets/2024-06-15.png`,
@@ -737,36 +667,44 @@ const IMG_KB = [
       `${GALLERY_ROOT}/assets/2024-07-06.png`,
       `${GALLERY_ROOT}/[5]_THE_LOL_LATEST_2024/2024-07-14__1_.png`,
     ],
-    r:(bm)=>bm?
-    `<strong>Era Aktif Terakhir (2024)</strong> — LonelyDynozz (Dyno) dalam padang, bangunan sky platform purpur, lantai Trial Chamber yang penuh dengan gold nugget dari vault, dan pandangan aerial malam dari puncak menara tinggi di atas daerah baru.`
+    r:(bm)=>bm?`<strong>Era Aktif Terakhir (2024)</strong> — LonelyDynozz (Dyno) dalam padang, bangunan sky platform purpur, lantai Trial Chamber yang penuh dengan gold nugget dari vault, dan pandangan aerial malam dari puncak menara.`
     :`<strong>Final Active Era (2024)</strong> — LonelyDynozz (Dyno) spotted in a field, a sky platform build with purpur blocks, a Trial Chamber floor carpeted in gold nuggets from vault rewards, and a night aerial shot from atop a tall tower overlooking the new district.`
   },
 ];
 
-/* ═══════════════════════════════════════════════════
-   TEXT KNOWLEDGE BASE (expanded)
-═══════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   TEXT KNOWLEDGE BASE — complete v4 data + v5 new entries
+══════════════════════════════════════════════════════════ */
 const KB = [
+
 /* ── GREETINGS ── */
 {id:'greeting',cat:'all',
 kw:['hello','hi','hey','hei','hai','hye','hewlo','helo','hola','morning','good morning','good evening','selamat pagi','selamat petang','selamat malam','pagi','petang','malam','salam','assalamualaikum','wslm','wsp','wassup','wasap','sup','yo','oi','aye','howdy','namaste','apa khabar','apa kabo','apa cerita','apahal','camne','macam mana','sihat','ok tak'],
 fup:['Who are the founders?','What is The LoL?','Show me photos','Search government'],
 r:(bm)=>bm?
-`Eh, wassup! Aku <strong>pAIz v4.0</strong> — AI assistant rasmi The Legend of Legiona! 😄<br><br>Sekarang aku dah boleh <strong>tunjuk gambar</strong> dari galeri, arkib ISC, dan semua portal. Cuba taip:<br>→ <em>show me the lol city</em><br>→ <em>search citizenship</em><br>→ <em>tunjuk gambar TLCC</em>`:
-`Yo! I'm <strong>pAIz v4.0</strong> — The LoL's official AI, now with image search! 🟩<br><br>I can show you real gallery photos, ISC archive files, and search everything. Try:<br>→ <em>show me the lol city</em><br>→ <em>search citizenship</em><br>→ <em>show me the last day</em>`},
+`Eh, wassup! Aku <strong>pAIz v5.0 — Omniscient</strong> — AI assistant rasmi The Legend of Legiona! 😄<br><br>Cuba slash commands baru:<br>→ <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> — Shortcut jabatan<br>→ <kbd>/search [topik]</kbd> — Cari semua portal<br>→ <kbd>/show [gambar]</kbd> — Preview foto<br>→ <kbd>/help</kbd> — Semua arahan`:
+`Yo! I'm <strong>pAIz v5.0 — Omniscient</strong> — The LoL's official AI! 🟩<br><br>New slash commands in v5:<br>→ <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> — Department shortcuts<br>→ <kbd>/search [topic]</kbd> — Search all portals<br>→ <kbd>/show [photo]</kbd> — Preview gallery photos<br>→ <kbd>/help</kbd> — All commands`},
 
 /* ── HELP ── */
 {id:'help',cat:'all',
-kw:['what can you do','help me','boleh buat apa','apa yang kau boleh buat','capabilities','apa ko tahu','what do you know','what are you','who are you','about yourself','about paiz','what is paiz','how do you work','aku boleh tanya apa','nak tanya apa','new features','feature baru','apa baru'],
+kw:['what can you do','help me','boleh buat apa','apa yang kau boleh buat','capabilities','apa ko tahu','what do you know','what are you','who are you','about yourself','about paiz','what is paiz','how do you work','aku boleh tanya apa','nak tanya apa','new features','feature baru','apa baru','commands','slash commands','arahan'],
 fup:['Show me photos','Search history','Search government','Paiz Corp'],
 r:(bm)=>bm?
-`Aku <strong>pAIz v4.0</strong> — sekarang dengan <strong>image search</strong>! 🎉<br><br><strong>🆕 Baru dalam v4.0:</strong><br>→ Taip <em>"show me [topic]"</em> atau <em>"tunjuk [topik]"</em> untuk preview gambar<br>→ Taip <em>"search [query]"</em> atau <em>"cari [query]"</em> untuk cari semua portal<br>→ Klik gambar untuk buka lightbox zoom<br><br><strong>📚 Knowledge base:</strong> Sejarah · Kerajaan · ISC · Paiz Corp · Undang-undang · Lore · Gambar galeri`:
-`I'm <strong>pAIz v4.0</strong> — now with <strong>image search & preview</strong>! 🎉<br><br><strong>🆕 New in v4.0:</strong><br>→ Type <em>"show me [topic]"</em> to preview real gallery photos inline<br>→ Type <em>"search [query]"</em> to search all portal pages<br>→ Click any image to open the lightbox<br><br><strong>📚 Knowledge:</strong> History · Government · ISC · Paiz Corp · Legal Docs · Lore · Gallery Photos`},
+`Aku <strong>pAIz v5.0 — OMNISCIENT</strong> 🎉<br><br><strong>🆕 Slash Commands (v5.0):</strong><br>→ <kbd>/search [query]</kbd> — Cari semua portal<br>→ <kbd>/show [topic]</kbd> — Preview gambar dari galeri<br>→ <kbd>/gov</kbd> — Struktur kerajaan<br>→ <kbd>/isc</kbd> — Portal ISC<br>→ <kbd>/fn</kbd> — Freaky Niggas<br>→ <kbd>/clear</kbd> — Chat baru<br>→ <kbd>/theme</kbd> — Tukar tema<br>→ <kbd>/help</kbd> — Halaman ini<br><br><strong>📚 Tanya je:</strong> Sejarah · Kerajaan · ISC · Paiz Corp · Undang-undang · Freaky Niggas · Gambar galeri`:
+`I'm <strong>pAIz v5.0 — OMNISCIENT</strong> 🎉<br><br><strong>🆕 Slash Commands (v5.0):</strong><br>→ <kbd>/search [query]</kbd> — Search all portals<br>→ <kbd>/show [topic]</kbd> — Preview gallery photos<br>→ <kbd>/gov</kbd> — Government structure<br>→ <kbd>/isc</kbd> — ISC portal<br>→ <kbd>/fn</kbd> — Freaky Niggas<br>→ <kbd>/clear</kbd> — New chat<br>→ <kbd>/theme</kbd> — Toggle theme<br>→ <kbd>/help</kbd> — This menu<br><br><strong>📚 Just ask about:</strong> History · Government · ISC · Paiz Corp · Legal Docs · Freaky Niggas · Gallery Photos`},
+
+/* ── WHAT IS THE LOL ── */
+{id:'whatlol',cat:'all',
+kw:['what is the lol','apa tu the lol','the lol tu apa','apa itu the lol','what is the legend of legiona','apa tu legend of legiona','about the lol','pasal the lol','tell me about the lol','explain the lol','terangkan the lol','the lol minecraft','minecraft nation','negara minecraft','is the lol a country','what is thelol'],
+fup:['History','Founders','Government','Paiz Corp'],
+r:(bm)=>bm?
+`<strong>The Legend of Legiona (The LoL)</strong> 🟩<br><br>Negara berdaulat Minecraft di server Skyxion, era Altaer. Diasaskan 2023 oleh Faiz4224, Imii Kun & Dyno. Asalnya "The Sus".<br><br>The LoL ada:<br>— Kerajaan formal (6 jabatan + The Black House)<br>— Agensi perisikan (ISC)<br>— Arkib undang-undang dengan dokumen rasmi<br>— Rangkaian rel 4,800+ blok (TLSRL)<br>— Konglomerat nasional (Paiz® Corp) 5 subsidiari<br>— Sistem kewarganegaraan formal<br>— Galeri foto lengkap 2020-2024`:
+`<strong>The Legend of Legiona (The LoL)</strong> 🟩<br><br>A sovereign Minecraft nation on the Skyxion server, Altaer Era. Founded 2023 by Faiz4224, Imii Kun & Dyno. Originally called "The Sus".<br><br>The LoL has:<br>— Formal government (6 departments + The Black House)<br>— Intelligence agency (ISC)<br>— Legal archive with official documents<br>— 4,800+ block rail network (TLSRL)<br>— National conglomerate (Paiz® Corp) with 5 subsidiaries<br>— Formal citizenship system<br>— Complete photo archive 2020-2024`},
 
 /* ── FOUNDERS ── */
 {id:'founders',cat:'history',
 kw:['founder','founders','pengasas','siapa pengasas','pengasas thelol','who founded','siapa yang buat','siapa yang cipta','orang yang buat thelol','faiz imii dyno','three founders','tiga pengasas','founding members','who created','who started','who built','siapa buat thelol'],
-fup:['Tell me about Faiz4224','Who is Dyno?','History of The LoL','Show founding photos'],
+fup:['Tell me about Faiz4224','History of The LoL','Show founding photos'],
 r:(bm)=>bm?
 `The LoL diasaskan oleh <strong>tiga orang</strong>:<br><br><strong>🟩 Faiz4224</strong> — Presiden Pertama & Pemimpin Pengasas. Reka bentuk kerajaan dan infrastruktur. Sekarang memimpin dari The Black House. Pengasas dan pengerusi Paiz® Corp.<br><br><strong>🟩 Imii Kun</strong> — Pengasas Bersama & Visionary. Yang menamakan semula The Sus kepada The Legend of Legiona.<br><br><strong>🟩 Dyno</strong> — Pengasas Bersama & Ahli Strategi. Sekarang dikenali sebagai LonelyDynozz. Muncul dalam The LoL: The Movie.`:
 `The LoL was co-founded by <strong>three individuals</strong>:<br><br><strong>🟩 Faiz4224</strong> — First President & Founding Leader. Architect of governance and infrastructure. Currently serving from The Black House. Founded and chairs Paiz® Corp.<br><br><strong>🟩 Imii Kun</strong> — Co-Founder & Visionary. The one who proposed renaming The Sus to The Legend of Legiona.<br><br><strong>🟩 Dyno</strong> — Co-Founder & Strategist. Also known as LonelyDynozz. Appears in The LoL: The Movie.`},
@@ -795,13 +733,21 @@ r:(bm)=>bm?
 `<strong>Struktur Kerajaan The LoL</strong> 🏛️<br><br><strong>The Black House</strong> — Pejabat Presiden. Presiden: Faiz4224. Kod dokumen: BH-YYYY-###<br><br><strong>Enam Jabatan:</strong><br>— DEPT-01: <strong>ISC</strong> · AKTIF<br>— DEPT-02: Pejabat Keadilan Nasional<br>— DEPT-03: Kementerian Lore & Arkib<br>— DEPT-04: Bahagian Kerja Awam<br>— DEPT-05: Biro Hubungan Luar<br>— DEPT-06: The LoL Communications<br><br><a href="https://faizzzlol.github.io/thelol/gov/">Portal Kerajaan →</a>`:
 `<strong>Government Structure of The LoL</strong> 🏛️<br><br><strong>The Black House</strong> — Office of the President. Current: Faiz4224. Documents: BH-YYYY-###<br><br><strong>Six Departments:</strong><br>— DEPT-01: <strong>ISC</strong> · ACTIVE<br>— DEPT-02: Office of National Justice<br>— DEPT-03: Ministry of Lore & Archives<br>— DEPT-04: Public Works Division<br>— DEPT-05: Bureau of External Relations<br>— DEPT-06: The LoL Communications<br><br><a href="https://faizzzlol.github.io/thelol/gov/">Government Portal →</a>`},
 
+/* ── BLACK HOUSE (v5 new) ── */
+{id:'blackhouse',cat:'gov',
+kw:['black house','office of the president','pejabat presiden','bh-','the black house','president office','black house page','ofis presiden'],
+fup:['Faiz4224','Government structure','Legal documents'],
+r:(bm)=>bm?
+`<strong>The Black House</strong> — Pejabat Rasmi Presiden The LoL, setara dengan White House. Presiden semasa: Faiz4224.<br><br>Dokumen rasmi menggunakan awalan <span class="tag gold">BH-YYYY-###</span>.<br><br><a href="https://faizzzlol.github.io/thelol/gov/black-house">Laman Black House →</a>`:
+`<strong>The Black House</strong> — Official Office of the President of The LoL, equivalent to the White House. Current President: Faiz4224.<br><br>Official documents use prefix <span class="tag gold">BH-YYYY-###</span>.<br><br><a href="https://faizzzlol.github.io/thelol/gov/black-house">Black House Page →</a>`},
+
 /* ── ISC ── */
 {id:'isc',cat:'gov',
 kw:['isc','internal security control','intelligence agency','security agency','classified','tlio','t.l.i.o','clearance','intel portal','national security','agensi perisikan','keselamatan','perisikan','apa tu isc','isc tu apa','isc the lol','about isc','pasal isc','isc agency','spy agency','clearance code','password isc','kata laluan isc','legiona2026','isc password'],
 fup:['Show ISC attack files','Show ISC operations','Government structure','Legal documents'],
 r:(bm)=>bm?
-`<strong>ISC — Internal Security Control</strong> 🔒<br><br>Agensi perisikan rasmi The LoL — DEPT-01. Pengganti kepada <em>T.L.I.O</em> lama.<br><br>Portal: <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Portal</a> · <a href="https://faizzzlol.github.io/thelol/gov/isc/national">Ketelusan</a> · <a href="https://faizzzlol.github.io/thelol/gov/isc/search">Arkib Carian</a><br><br>Kod akses Intel Portal: <em class="tag">LEGIONA2026</em>`:
-`<strong>ISC — Internal Security Control</strong> 🔒<br><br>The LoL's official intelligence agency — DEPT-01. Successor to the former <em>T.L.I.O</em>.<br><br>Portals: <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Main</a> · <a href="https://faizzzlol.github.io/thelol/gov/isc/national">Transparency</a> · <a href="https://faizzzlol.github.io/thelol/gov/isc/search">Public Archive</a><br><br>Intel Portal access code: <em class="tag">LEGIONA2026</em>`},
+`<strong>ISC — Internal Security Control</strong> 🔒<br><br>Agensi perisikan rasmi The LoL — DEPT-01. Pengganti kepada <em>T.L.I.O</em> lama.<br><br>Portal: <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Portal</a> · <a href="https://faizzzlol.github.io/thelol/gov/isc/national">Ketelusan</a> · <a href="https://faizzzlol.github.io/thelol/gov/isc/search">Arkib Carian</a><br><br>Kod akses Intel Portal: <span class="tag">LEGIONA2026</span>`:
+`<strong>ISC — Internal Security Control</strong> 🔒<br><br>The LoL's official intelligence agency — DEPT-01. Successor to the former <em>T.L.I.O</em>.<br><br>Portals: <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC Main</a> · <a href="https://faizzzlol.github.io/thelol/gov/isc/national">Transparency</a> · <a href="https://faizzzlol.github.io/thelol/gov/isc/search">Public Archive</a><br><br>Intel Portal access code: <span class="tag">LEGIONA2026</span>`},
 
 /* ── LEGAL ── */
 {id:'legal',cat:'gov',
@@ -814,10 +760,18 @@ r:(bm)=>bm?
 /* ── CITIZENSHIP ── */
 {id:'citizenship',cat:'gov',
 kw:['citizenship','kewarganegaraan','citizen','warganegara','apply','mohon','permohonan','application','citizen rights','hak warganegara','how to join','macam mana nak join','become a citizen','jadi warganegara','jadi rakyat','how to apply','cara mohon','boleh join','nak join thelol','join the lol','masuk the lol','syarat warganegara','syarat masuk'],
-fup:['Legal archive','Government portal','Check status'],
+fup:['Legal archive','Government portal','Check citizenship status'],
 r:(bm)=>bm?
 `<strong>Kewarganegaraan The LoL</strong> 🪪<br><br>Syarat asas: 16 tahun ke atas · Pemain Skyxion aktif · Tiada rekod server buruk<br><br>Dikawal oleh:<br>· LOLGOV-2026-0001 — Akta Kewarganegaraan<br>· LOLGOV-2026-0003 — Piagam Hak Warganegara<br>· LOLGOV-2026-0002 — Ordinan Pembatalan<br><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Mohon Kewarganegaraan →</a>`:
 `<strong>The LoL Citizenship</strong> 🪪<br><br>Basic requirements: 16+ · Active Skyxion player · Clean server record<br><br>Governed by:<br>· LOLGOV-2026-0001 — Citizenship Act<br>· LOLGOV-2026-0003 — Citizens' Rights Charter<br>· LOLGOV-2026-0002 — Revocation Ordinance<br><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Apply for Citizenship →</a>`},
+
+/* ── CITIZENSHIP STATUS (v5 new) ── */
+{id:'citizen_status',cat:'gov',
+kw:['check status','semak status','application status','status permohonan','reference number','thelol-ctzn','citizenship status','cek status','status checker','check application','semak permohonan'],
+fup:['Apply citizenship','Legal archive'],
+r:(bm)=>bm?
+`<strong>Penyemak Status Kewarganegaraan</strong> 🔎<br><br>Masukkan nombor rujukan (format <span class="tag">THELOL-CTZN-YYYY-####</span>) untuk semak status permohonan anda.<br><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/status">Semak Sekarang →</a>`:
+`<strong>Citizenship Status Checker</strong> 🔎<br><br>Enter your reference number (format <span class="tag">THELOL-CTZN-YYYY-####</span>) to check your application status.<br><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/status">Check Now →</a>`},
 
 /* ── NAMING POLICY ── */
 {id:'naming',cat:'gov',
@@ -863,7 +817,7 @@ r:(bm)=>bm?
 {id:'paiz_chicken',cat:'corp',
 kw:['paiz chicken','chicken','ayam','food','makanan','restaurant','restoran','order food','pesan makanan','food delivery','penghantaran makanan','virtual food','fast food','makan','nak makan','lapar','hungry','paiz food'],
 fup:['Paiz Shop','Paiz Corp','TL Dollar'],
-r:(bm)=>bm?`<strong>Paiz Chicken</strong> 🍗<br><br>Paiz® Corp SUB-05. Pesanan makanan Minecraft merentasi Skyxion. Penghantaran + kutipan · Dalam Diamonds · Discord webhook. <br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Order →</a>`:
+r:(bm)=>bm?`<strong>Paiz Chicken</strong> 🍗<br><br>Paiz® Corp SUB-05. Pesanan makanan Minecraft merentasi Skyxion. Penghantaran + kutipan · Dalam Diamonds · Discord webhook.<br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Order →</a>`:
 `<strong>Paiz Chicken</strong> 🍗<br><br>Paiz® Corp SUB-05. Minecraft food ordering across Skyxion. Delivery + pickup · Diamonds · Discord webhook.<br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Order Now →</a>`},
 
 /* ── PAIZ SHOP ── */
@@ -895,40 +849,39 @@ fup:['History','Government'],
 r:(bm)=>bm?`<strong>Skyxion & Altaer Era</strong> 🌐<br><br>Skyxion ialah server Minecraft di mana The LoL berada, ditadbir oleh <strong>Kawaiisho</strong>. <strong>Skyxion: Altaer Era</strong> ialah era semasa.`:
 `<strong>Skyxion & Altaer Era</strong> 🌐<br><br>Skyxion is the Minecraft server where The LoL operates, administered by <strong>Kawaiisho</strong>. <strong>Skyxion: Altaer Era</strong> is the current era.`},
 
-/* ── ALL PORTALS / NAV ── */
+/* ── ALL PORTALS ── */
 {id:'nav',cat:'all',
 kw:['link','links','url','website','portal link','where can i find','mana nak cari','all pages','semua halaman','all portals','semua portal','all links','semua link','official links','link rasmi','website the lol','all websites','senarai laman','portals list'],
 fup:['Government portal','ISC portal','Paiz Corp','Gallery'],
 r:(bm)=>bm?
-`<strong>Semua Portal Rasmi</strong> 🔗<br><br><a href="https://faizzzlol.github.io/thelol/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://faizzzlol.github.io/thelol/gov/">🏛️ Kerajaan</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">🪪 Kewarganegaraan</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">📄 Arkib Undang-undang</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">🚂 TL Railways</a><br><a href="https://faizzzlol.github.io/thelol/gallery">📷 Gallery</a>`:
-`<strong>All Official Portals</strong> 🔗<br><br><a href="https://faizzzlol.github.io/thelol/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://faizzzlol.github.io/thelol/gov/">🏛️ Government</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">🪪 Citizenship</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">📄 Legal Archive</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">🚂 TL Railways</a><br><a href="https://faizzzlol.github.io/thelol/gallery">📷 Gallery</a>`},
+`<strong>Semua Portal Rasmi</strong> 🔗<br><br><a href="https://faizzzlol.github.io/thelol/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://faizzzlol.github.io/thelol/gov/">🏛️ Kerajaan</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">🪪 Kewarganegaraan</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">📄 Arkib Undang-undang</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">🚂 TL Railways</a><br><a href="https://faizzzlol.github.io/thelol/gallery">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a>`:
+`<strong>All Official Portals</strong> 🔗<br><br><a href="https://faizzzlol.github.io/thelol/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://faizzzlol.github.io/thelol/gov/">🏛️ Government</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">🪪 Citizenship</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">📄 Legal Archive</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">🚂 TL Railways</a><br><a href="https://faizzzlol.github.io/thelol/gallery">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a>`},
 
-/* ── GALLERY INFO ── */
+/* ── GALLERY ── */
 {id:'gallery',cat:'images',
 kw:['gallery','galeri','photo gallery','galeri foto','all photos','semua gambar','browse photos','browse gallery','thelol gallery','8 eras','photo archive','arkib foto','how many photos','berapa gambar','gallery page'],
 fup:['Show Neverland photos','Show The Sus','Show The LoL City','Show TLSRL'],
 r:(bm)=>bm?
-`<strong>Galeri Foto Rasmi The LoL</strong> 📷<br><br>Arkib visual lengkap dari 2020–2024 merentasi 8 era. Gambar oleh Faiz4224, Dyno, Ikan dan lain-lain.<br><br>Taip <em>"show me [topik]"</em> untuk preview gambar di sini, atau lawati galeri penuh:<br><a href="https://faizzzlol.github.io/thelol/gallery">Galeri Penuh →</a>`:
-`<strong>The LoL Official Photo Gallery</strong> 📷<br><br>Complete visual archive from 2020–2024 across 8 eras. Captured by Faiz4224, Dyno, Ikan and others.<br><br>Type <em>"show me [topic]"</em> to preview any photos here, or visit the full gallery:<br><a href="https://faizzzlol.github.io/thelol/gallery">Full Gallery →</a>`},
+`<strong>Galeri Foto Rasmi The LoL</strong> 📷<br><br>Arkib visual lengkap dari 2020–2024 merentasi 8 era. Gambar oleh Faiz4224, Dyno, Ikan dan lain-lain.<br><br>Taip <em>"show me [topik]"</em> atau <em>"/show [topik]"</em> untuk preview gambar di sini, atau lawati galeri penuh:<br><a href="https://faizzzlol.github.io/thelol/gallery">Galeri Penuh →</a>`:
+`<strong>The LoL Official Photo Gallery</strong> 📷<br><br>Complete visual archive from 2020–2024 across 8 eras. Captured by Faiz4224, Dyno, Ikan and others.<br><br>Type <em>"show me [topic]"</em> or <em>"/show [topic]"</em> to preview any photos here, or visit the full gallery:<br><a href="https://faizzzlol.github.io/thelol/gallery">Full Gallery →</a>`},
 
-/* ── WHAT IS THE LOL ── */
-{id:'whatlol',cat:'all',
-kw:['what is the lol','apa tu the lol','the lol tu apa','apa itu the lol','what is the legend of legiona','apa tu legend of legiona','about the lol','pasal the lol','tell me about the lol','explain the lol','terangkan the lol','the lol minecraft','minecraft nation','negara minecraft','is the lol a country','what is thelol'],
-fup:['History','Founders','Government','Paiz Corp'],
+/* ── FREAKY NIGGAS (v5 new) ── */
+{id:'fn_about',cat:'fn',
+kw:['freaky niggas','what is freaky niggas','fn community','freaky niggas site','pasal freaky niggas','apa tu fn','freaky','fn minecraft','freaky niggas community','fn page','fn website','laman fn'],
+fup:['Freaky News','FN Servers','Search Freaky Niggas'],
 r:(bm)=>bm?
-`<strong>The Legend of Legiona (The LoL)</strong> 🟩<br><br>Negara berdaulat Minecraft di server Skyxion, era Altaer. Diasaskan 2023 oleh Faiz4224, Imii Kun & Dyno. Asalnya "The Sus".<br><br>The LoL ada:<br>— Kerajaan formal (6 jabatan + The Black House)<br>— Agensi perisikan (ISC)<br>— Arkib undang-undang dengan dokumen rasmi<br>— Rangkaian rel 4,800+ blok (TLSRL)<br>— Konglomerat nasional (Paiz® Corp) 5 subsidiari<br>— Sistem kewarganegaraan formal<br>— Galeri foto lengkap 2020-2024`:
-`<strong>The Legend of Legiona (The LoL)</strong> 🟩<br><br>A sovereign Minecraft nation on the Skyxion server, Altaer Era. Founded 2023 by Faiz4224, Imii Kun & Dyno. Originally called "The Sus".<br><br>The LoL has:<br>— Formal government (6 departments + The Black House)<br>— Intelligence agency (ISC)<br>— Legal archive with official documents<br>— 4,800+ block rail network (TLSRL)<br>— National conglomerate (Paiz® Corp) with 5 subsidiaries<br>— Formal citizenship system<br>— Complete photo archive 2020-2024`},
+`<strong>Freaky Niggas (FN)</strong> 🖤<br><br>Komuniti Minecraft dengan estetik dark monochrome glitch. Laman penuh:<br><br>→ <a href="https://faizzzlol.github.io/freakyniggas/">Home</a> — Halaman utama<br>→ <a href="https://faizzzlol.github.io/freakyniggas/servers">Servers</a> — Senarai server Minecraft<br>→ <a href="https://faizzzlol.github.io/freakyniggas/news">Freaky News</a> — Berita EN/BM toggle<br>→ <a href="https://faizzzlol.github.io/freakyniggas/feedback">Feedback</a> — Borang maklum balas`:
+`<strong>Freaky Niggas (FN)</strong> 🖤<br><br>A Minecraft community with dark monochrome glitch aesthetic. Full pages:<br><br>→ <a href="https://faizzzlol.github.io/freakyniggas/">Home</a> — Main landing page<br>→ <a href="https://faizzzlol.github.io/freakyniggas/servers">Servers</a> — Minecraft server listings<br>→ <a href="https://faizzzlol.github.io/freakyniggas/news">Freaky News</a> — Bilingual news EN/BM toggle via localStorage<br>→ <a href="https://faizzzlol.github.io/freakyniggas/feedback">Feedback</a> — Feedback form`},
+
 ];
 
-/* ═══════════════════════════════════════
-   UNIFIED SCORING ENGINE
-═══════════════════════════════════════ */
+/* ── SCORING ENGINE ── */
 function scoreEntry(kw, q) {
   let s = 0;
   for (const k of kw) {
     const kt = k.trim().toLowerCase();
-    if (q === kt)               { s += kt.split(/\s+/).length * 20 + 40; continue; }
-    if (q.includes(kt))         { s += kt.split(/\s+/).length * 12 + 4; continue; }
+    if (q === kt)                        { s += kt.split(/\s+/).length * 20 + 40; continue; }
+    if (q.includes(kt))                  { s += kt.split(/\s+/).length * 12 + 4; continue; }
     if (kt.includes(q) && q.length > 3) { s += 5; continue; }
     const kw2 = kt.split(/\s+/), qw = q.split(/\s+/);
     const shared = kw2.filter(w => w.length > 3 && qw.some(qword => qword.includes(w) || w.includes(qword)));
@@ -940,98 +893,53 @@ function scoreEntry(kw, q) {
 function bestMatch(txt) {
   const q = txt.toLowerCase().trim().replace(/[?!.,;:'"]/g, '');
   let bestTxt = null, bestImg = null, bsTxt = 0, bsImg = 0;
-
-  for (const e of KB) {
-    const s = scoreEntry(e.kw, q);
-    if (s > bsTxt) { bsTxt = s; bestTxt = e; }
-  }
-  for (const e of IMG_KB) {
-    const s = scoreEntry(e.kw, q);
-    if (s > bsImg) { bsImg = s; bestImg = e; }
-  }
-
-  // Return whichever scored higher (with minimum threshold)
-  if (bsImg > 2 && bsImg >= bsTxt) return { type: 'image', entry: bestImg };
-  if (bsTxt > 2) return { type: 'text', entry: bestTxt };
+  for (const e of KB)     { const s = scoreEntry(e.kw, q); if (s > bsTxt) { bsTxt = s; bestTxt = e; } }
+  for (const e of IMG_KB) { const s = scoreEntry(e.kw, q); if (s > bsImg) { bsImg = s; bestImg = e; } }
+  if (bsImg > 2 && bsImg >= bsTxt) return { type:'image', entry:bestImg };
+  if (bsTxt > 2) return { type:'text', entry:bestTxt };
   return null;
 }
 
-/* ── "show me" / "tunjuk" intent detection ── */
-function isShowIntent(q) {
-  return /^(show me|show|tunjuk|gambar|tengok|preview|lihat gambar|foto|photos? of|images? of|pic|pics)/i.test(q.trim());
-}
+function isShowIntent(q)   { return /^(show me|show|tunjuk|gambar|tengok|preview|lihat gambar|foto|photos? of|images? of|pic|pics)/i.test(q.trim()); }
+function isSearchIntent(q) { return /^(search|cari|find|look for|lookup|look up|apa ada pasal|ada tak|seach)/i.test(q.trim()); }
 
-/* ── "search" intent detection ── */
-function isSearchIntent(q) {
-  return /^(search|cari|find|look for|lookup|look up|apa ada pasal|ada tak|seach)/i.test(q.trim());
-}
-
-/* ── Portal search ── */
 function searchPortals(query) {
   const q = query.toLowerCase();
-  const scored = PORTALS.map(p => {
+  return PORTALS.map(p => {
     let s = 0;
-    if (p.name.toLowerCase().includes(q)) s += 20;
-    if (p.desc.toLowerCase().includes(q)) s += 10;
-    if (p.tag.toLowerCase().includes(q)) s += 15;
+    if (p.name.toLowerCase().includes(q))  s += 20;
+    if (p.desc.toLowerCase().includes(q))  s += 10;
+    if (p.tag.toLowerCase().includes(q))   s += 15;
     return { ...p, s };
-  }).filter(p => p.s > 0).sort((a, b) => b.s - a.s).slice(0, 6);
-  return scored;
+  }).filter(p => p.s > 0).sort((a,b) => b.s-a.s).slice(0, 6);
 }
 
-/* ── Search all KB ── */
 function searchAllKB(query) {
   const q = query.toLowerCase().trim();
-  const textResults = KB.map(e => ({ type:'text', entry:e, score: scoreEntry(e.kw, q) })).filter(r => r.score > 0);
-  const imgResults  = IMG_KB.map(e => ({ type:'image', entry:e, score: scoreEntry(e.kw, q) })).filter(r => r.score > 0);
-  return [...textResults, ...imgResults].sort((a,b) => b.score - a.score).slice(0, 5);
+  const tr = KB.map(e    => ({ type:'text',  entry:e, score:scoreEntry(e.kw, q) })).filter(r => r.score > 0);
+  const ir = IMG_KB.map(e => ({ type:'image', entry:e, score:scoreEntry(e.kw, q) })).filter(r => r.score > 0);
+  return [...tr, ...ir].sort((a,b) => b.score-a.score).slice(0, 5);
 }
 
-/* ── FALLBACK ── */
 function fallback(bm) {
   return bm
-    ? `Hmm, tak faham betul-betul. 🤔 Cuba cara lain atau taip <em>"search [topik]"</em> untuk cari semua portal, atau <em>"show me [topik]"</em> untuk preview gambar.`
-    : `Didn't catch that one. 🤔 Try <em>"search [topic]"</em> to search all portals, or <em>"show me [topic]"</em> to preview gallery photos.`;
+    ? `Hmm, tak faham betul-betul. 🤔 Cuba <kbd>/search [topik]</kbd> atau <kbd>/show [gambar]</kbd> atau <kbd>/help</kbd> untuk senarai arahan.`
+    : `Didn't catch that one. 🤔 Try <kbd>/search [topic]</kbd>, <kbd>/show [photo]</kbd>, or <kbd>/help</kbd> for all commands.`;
 }
 
-/* ═══════════════════════════════════════
-   CHIPS CATALOGUE
-═══════════════════════════════════════ */
-const ALL_CHIPS = {
-  all:[
-    'Who are The LoL founders?','What is The LoL?',
-    'Show me The LoL City 📷','Show me TLSRL 📷',
-    'search government','search citizenship'
-  ],
-  history:[
-    'History of The LoL','Show founding photos 📷',
-    'UltraX2020 crisis','Show neverland 📷',
-    'EhekSquad','Show ender dragon 📷'
-  ],
-  gov:[
-    'Government structure','ISC agency',
-    'search citizenship','All legal documents',
-    'The Black House','Naming policy'
-  ],
-  corp:[
-    'All 5 Paiz Corp subsidiaries','Show TLSRL railway 📷',
-    'The LoL Movie','show terminal 📷',
-    'Paiz Chicken','TL Dollar exchange'
-  ],
-  images:[
-    'Show me The LoL City 📷','Show me TLSRL 📷',
-    'Show me the last day 📷','Show me ender dragon 📷',
-    'Show me the sus base 📷','Show me neverland 📷',
-    'Show golden era photos 📷','Show TLCC Twin Towers 📷',
-    'Show bye thelol photo 📷','Show terminal photos 📷'
-  ],
-  isc_img:[
-    'Show ISC TLCC attack files 📷','Show ISC operations 📷',
-    'Show ISC legacy records 📷','Show ISC city attacks 📷',
-    'ISC clearance code','What is ISC?'
-  ],
-};
+/* ── CONTEXT MEMORY ── */
+let lastContext = null;
 
+/* ── CHIPS ── */
+const ALL_CHIPS = {
+  all:['Who are The LoL founders?','What is The LoL?','Show me The LoL City 📷','Show me TLSRL 📷','/search government','/search citizenship'],
+  history:['History of The LoL','Show founding photos 📷','UltraX2020 crisis','Show neverland 📷','EhekSquad','Show ender dragon 📷'],
+  gov:['Government structure','ISC agency','/search citizenship','All legal documents','The Black House','Naming policy'],
+  corp:['All 5 Paiz Corp subsidiaries','Show TLSRL railway 📷','The LoL Movie','show terminal 📷','Paiz Chicken','TL Dollar exchange'],
+  fn:['What is Freaky Niggas?','Freaky News page','FN Servers','/search freaky niggas'],
+  images:['Show me The LoL City 📷','Show me TLSRL 📷','Show me the last day 📷','Show me ender dragon 📷','Show me the sus base 📷','Show me neverland 📷','Show golden era photos 📷','Show TLCC Twin Towers 📷','Show bye thelol photo 📷','Show terminal photos 📷'],
+  isc_img:['Show ISC TLCC attack files 📷','Show ISC operations 📷','Show ISC legacy records 📷','Show ISC city attacks 📷','ISC clearance code','What is ISC?'],
+};
 let curCat = 'all';
 function showCat(cat, btn) {
   curCat = cat;
@@ -1050,19 +958,14 @@ function renderChips() {
 }
 renderChips();
 
-/* ═══════════════════════════════════════
-   DOM UTILITIES
-═══════════════════════════════════════ */
-const mw = document.getElementById('mw');
-const mi = document.getElementById('mi');
-const ci = document.getElementById('ci');
-const cs = document.getElementById('cs');
-const langFlag = document.getElementById('langFlag');
-const searchIndicator = document.getElementById('searchIndicator');
+/* ── DOM ── */
+const mw = document.getElementById('mw'), mi = document.getElementById('mi');
+const ci = document.getElementById('ci'), cs = document.getElementById('cs');
+const langFlag = document.getElementById('langFlag'), searchIndicator = document.getElementById('searchIndicator');
 let busy = false;
 
-function ts() { return new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); }
-function bot() { mw.scrollTo({ top: mw.scrollHeight, behavior: 'smooth' }); }
+function ts() { return new Date().toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' }); }
+function bot() { mw.scrollTo({ top:mw.scrollHeight, behavior:'smooth' }); }
 
 function addUser(t) {
   const w = document.getElementById('welcome'); if (w) w.remove();
@@ -1084,154 +987,165 @@ function addBot(html, fups, extra = '') {
   g.appendChild(row); g.appendChild(time);
   if (fups && fups.length) {
     const fu = document.createElement('div'); fu.className = 'fups';
-    fups.forEach(f => { const b = document.createElement('button'); b.className = 'fup'; b.textContent = f; b.onclick = () => processQuery(f); fu.appendChild(b); });
+    fups.forEach(f => {
+      const b = document.createElement('button'); b.className = 'fup';
+      b.textContent = f; b.onclick = () => processQuery(f); fu.appendChild(b);
+    });
     g.appendChild(fu);
   }
   mi.appendChild(g); bot();
 }
 
-/* ═══════════════════════════════════════
-   SEARCH RESULTS RENDERER
-═══════════════════════════════════════ */
 function renderPortalResults(results, bm) {
   if (!results.length) return bm ? 'Tiada hasil ditemui.' : 'No results found.';
   const header = bm ? `<strong>Hasil Carian (${results.length} portal):</strong>` : `<strong>Search Results (${results.length} portals):</strong>`;
   const items = results.map(p =>
     `<a href="${p.url}" class="sr-item" target="_blank" rel="noopener">
-      <div class="sr-left">
-        <span class="sr-tag">${p.tag}</span>
-        <span class="sr-name">${p.name}</span>
-        <span class="sr-desc">${p.desc}</span>
-      </div>
+      <div class="sr-left"><span class="sr-tag">${p.tag}</span><span class="sr-name">${p.name}</span><span class="sr-desc">${p.desc}</span></div>
       <span class="sr-arrow">→</span>
     </a>`
   ).join('');
   return `${header}<div class="search-results">${items}</div>`;
 }
 
-/* ═══════════════════════════════════════
-   PROCESS QUERY
-═══════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   PROCESS QUERY — v5 with all bugs fixed
+══════════════════════════════════════════════════════════ */
 async function processQuery(t) {
   if (busy || !t.trim()) return;
+  const raw = t.trim();
+
+  /* FIX: UI-only commands execute immediately — no user bubble, no typing flash */
+  if (/^\/clear$/i.test(raw)) { clearChat(); return; }
+  if (/^\/theme$/i.test(raw)) { toggleTheme(); return; }
+
   busy = true; cs.disabled = true; ci.value = ''; ci.style.height = 'auto';
-  const bm = detectBM(t);
+  const bm = detectBM(raw);
   langFlag.textContent = bm ? 'BM' : 'EN';
   langFlag.className = 'lang-flag' + (bm ? ' bm' : '');
-  addUser(t);
+  addUser(raw);
   addTyping();
-  await new Promise(r => setTimeout(r, 320 + Math.random() * 480));
+  await new Promise(r => setTimeout(r, 350 + Math.random() * 400));
 
-  const raw = t.trim().toLowerCase();
+  const lower = raw.toLowerCase();
 
-  /* ── SEARCH MODE ── */
-  if (isSearchIntent(raw)) {
-    searchIndicator.classList.add('show');
-    const query = raw.replace(/^(search|cari|find|look for|lookup|look up|apa ada pasal|ada tak|seach)\s*/i, '').trim();
-    const portalResults = searchPortals(query);
-    const kbResults = searchAllKB(query);
+  /* ── SLASH COMMANDS ── */
+  if (raw.startsWith('/')) {
+    const parts = raw.slice(1).split(/\s+/);
+    const cmd   = parts[0].toLowerCase();
+    const arg   = parts.slice(1).join(' ').trim();
 
-    let html = '';
-    if (bm) {
-      html = `<strong>🔍 Mencari: "${query}"</strong><br><br>`;
-    } else {
-      html = `<strong>🔍 Searching for: "${query}"</strong><br><br>`;
+    /* Direct KB shortcuts — FIX: safe lookup, never crashes */
+    const kbMap = { gov:'government', isc:'isc', fn:'fn_about', help:'help' };
+    if (kbMap[cmd]) {
+      const e = KB.find(x => x.id === kbMap[cmd]);
+      if (e) { addBot(e.r(bm), e.fup || []); lastContext = e; }
+      else   { addBot(fallback(bm), []); }
+      busy = false; cs.disabled = false; ci.focus(); return;
     }
 
-    // KB matches (text + image)
-    if (kbResults.length) {
-      const kbLabel = bm ? 'Jawapan daripada KB pAIz:' : 'From pAIz knowledge base:';
-      html += `<em style="font-size:.8rem;color:var(--faint)">${kbLabel}</em><br>`;
-      const first = kbResults[0];
-      if (first.type === 'image') {
-        html += `${first.entry.r(bm)}<br>${imgGrid(first.entry.images.slice(0,3), first.entry.era)}<br>`;
-      } else {
-        html += `${first.entry.r(bm)}<br><br>`;
+    /* /search [query] */
+    if (cmd === 'search') {
+      const q = arg || (bm ? 'kerajaan' : 'government');
+      searchIndicator.classList.add('show');
+      const portalResults = searchPortals(q);
+      const kbResults     = searchAllKB(q);
+      let html = bm ? `<strong>🔍 Mencari: "${q}"</strong><br><br>` : `<strong>🔍 Searching: "${q}"</strong><br><br>`;
+      if (kbResults.length) {
+        html += `<em style="font-size:.8rem;color:var(--faint)">${bm?'Daripada KB pAIz:':'From pAIz KB:'}</em><br>`;
+        const first = kbResults[0];
+        if (first.type === 'image') html += `${first.entry.r(bm)}<br>${imgGrid(first.entry.images.slice(0,3), first.entry.era)}<br>`;
+        else html += `${first.entry.r(bm)}<br><br>`;
       }
+      if (portalResults.length) html += renderPortalResults(portalResults, bm);
+      if (!kbResults.length && !portalResults.length) html += fallback(bm);
+      addBot(html, bm ? ['/search government','/search isc','/search paiz corp'] : ['/search history','/search ISC','/search Paiz Corp']);
+      setTimeout(() => searchIndicator.classList.remove('show'), 2000);
+      busy = false; cs.disabled = false; ci.focus(); return;
     }
 
-    // Portal results
-    if (portalResults.length) {
-      html += renderPortalResults(portalResults, bm);
-    }
-
-    if (!kbResults.length && !portalResults.length) {
-      html += fallback(bm);
-    }
-
-    const fups = bm
-      ? ['search government','search isc','search citizenship','search paiz corp']
-      : ['search history','search ISC','search citizenship','search Paiz Corp'];
-    addBot(html, fups);
-    setTimeout(() => searchIndicator.classList.remove('show'), 2000);
-
-  /* ── IMAGE / SHOW MODE ── */
-  } else if (isShowIntent(raw)) {
-    const stripped = raw.replace(/^(show me|show|tunjuk|gambar|tengok|preview|lihat gambar|foto|photos? of|images? of|pic|pics)\s*/i, '').trim();
-    const match = bestMatch(stripped);
-
-    if (match && match.type === 'image') {
-      const e = match.entry;
-      const textHtml = e.r(bm);
-      const imageHtml = imgGrid(e.images, e.era);
-      const fups = [
-        bm ? 'Show me more photos' : 'Show me more photos',
-        'Show founding photos 📷',
-        'Show me the last day 📷',
-        'Show ISC attack files 📷'
-      ];
-      addBot(textHtml, fups, imageHtml);
-    } else if (match && match.type === 'text') {
-      // Try image KB anyway for fallback
-      const imgMatch = IMG_KB.reduce((best, e) => {
-        const s = scoreEntry(e.kw, stripped);
-        return s > best.score ? { entry: e, score: s } : best;
-      }, { entry: null, score: 0 });
-
-      if (imgMatch.entry && imgMatch.score > 1) {
-        const e = imgMatch.entry;
-        addBot(e.r(bm), ['Show me more','search gallery'], imgGrid(e.images, e.era));
+    /* /show [topic] */
+    if (cmd === 'show') {
+      const q = arg || 'neverland';
+      const match = bestMatch(q);
+      if (match && match.type === 'image') {
+        addBot(match.entry.r(bm), ['Show founding photos','Show me the last day','Show ISC attack files'], imgGrid(match.entry.images, match.entry.era));
+        lastContext = match.entry;
       } else {
         addBot(
-          (bm ? `Hmm, tak jumpa gambar untuk "<em>${stripped}</em>". Tapi ni yang aku tahu:` : `No photos found for "<em>${stripped}</em>". But here's what I know:`),
-          ['Show Neverland 📷','Show The LoL City 📷','Show TLSRL 📷','Show last day 📷']
+          bm ? `Tak jumpa gambar untuk "<em>${q}</em>". Cuba /show neverland atau /show tlcc.`
+             : `No images found for "<em>${q}</em>". Try /show neverland or /show tlcc.`,
+          ['/show neverland','/show tlcc','/show tlsrl','/show ender dragon']
         );
+      }
+      busy = false; cs.disabled = false; ci.focus(); return;
+    }
+
+    /* Unknown slash command — fall through to normal matching */
+  }
+
+  /* ── CONTEXT MEMORY ── */
+  if (lower.includes('tell me more') && lastContext) {
+    addBot(lastContext.r(bm), lastContext.fup || []);
+    busy = false; cs.disabled = false; ci.focus(); return;
+  }
+
+  /* ── SEARCH INTENT ── */
+  if (isSearchIntent(lower)) {
+    searchIndicator.classList.add('show');
+    const q = lower.replace(/^(search|cari|find|look for|lookup|look up|apa ada pasal|ada tak|seach)\s*/i, '').trim();
+    const portalResults = searchPortals(q);
+    const kbResults     = searchAllKB(q);
+    let html = bm ? `<strong>🔍 Mencari: "${q}"</strong><br><br>` : `<strong>🔍 Searching for: "${q}"</strong><br><br>`;
+    if (kbResults.length) {
+      html += `<em style="font-size:.8rem;color:var(--faint)">${bm?'Jawapan daripada KB pAIz:':'From pAIz knowledge base:'}</em><br>`;
+      const first = kbResults[0];
+      if (first.type === 'image') html += `${first.entry.r(bm)}<br>${imgGrid(first.entry.images.slice(0,3), first.entry.era)}<br>`;
+      else html += `${first.entry.r(bm)}<br><br>`;
+    }
+    if (portalResults.length) html += renderPortalResults(portalResults, bm);
+    if (!kbResults.length && !portalResults.length) html += fallback(bm);
+    addBot(html, bm ? ['search government','search isc','search citizenship','search paiz corp'] : ['search history','search ISC','search citizenship','search Paiz Corp']);
+    setTimeout(() => searchIndicator.classList.remove('show'), 2000);
+
+  /* ── SHOW INTENT ── */
+  } else if (isShowIntent(lower)) {
+    const stripped = lower.replace(/^(show me|show|tunjuk|gambar|tengok|preview|lihat gambar|foto|photos? of|images? of|pic|pics)\s*/i, '').trim();
+    const match = bestMatch(stripped);
+    if (match && match.type === 'image') {
+      addBot(match.entry.r(bm), ['Show founding photos','Show me the last day','Show ISC attack files'], imgGrid(match.entry.images, match.entry.era));
+      lastContext = match.entry;
+    } else if (match && match.type === 'text') {
+      const imgMatch = IMG_KB.reduce((best, e) => { const s = scoreEntry(e.kw, stripped); return s > best.score ? {entry:e,score:s} : best; }, {entry:null,score:0});
+      if (imgMatch.entry && imgMatch.score > 1) {
+        addBot(imgMatch.entry.r(bm), ['Show me more','search gallery'], imgGrid(imgMatch.entry.images, imgMatch.entry.era));
+      } else {
+        addBot(bm ? `Tak jumpa gambar untuk "<em>${stripped}</em>". Tapi ni yang aku tahu:` : `No photos found for "<em>${stripped}</em>". But here's what I know:`,
+          ['Show Neverland','Show The LoL City','Show TLSRL','Show last day']);
       }
     } else {
       addBot(
-        bm ? `Hmm tak jumpa gambar untuk tu. Cuba <em>show me neverland</em>, <em>show me tlsrl</em>, atau <em>show me the lol city</em>.`
-           : `Couldn't find photos for that. Try <em>show me neverland</em>, <em>show me tlsrl</em>, or <em>show me the lol city</em>.`,
-        ['Show Neverland 📷','Show The LoL City 📷','Show TLSRL 📷','Show ISC files 📷']
+        bm ? `Tak jumpa gambar untuk tu. Cuba <em>/show neverland</em>, <em>/show tlsrl</em>, atau <em>/show tlcc</em>.`
+           : `Couldn't find photos for that. Try <em>/show neverland</em>, <em>/show tlsrl</em>, or <em>/show tlcc</em>.`,
+        ['/show neverland','/show The LoL City','/show TLSRL','/show ISC files']
       );
     }
 
   /* ── STANDARD QUERY ── */
   } else {
-    const match = bestMatch(raw);
-
+    const match = bestMatch(lower);
     if (match) {
       if (match.type === 'image') {
-        const e = match.entry;
-        addBot(e.r(bm), ['Show me more','Show founding 📷','search everything'], imgGrid(e.images, e.era));
+        addBot(match.entry.r(bm), ['Show me more','Show founding','search everything'], imgGrid(match.entry.images, match.entry.era));
+        lastContext = match.entry;
       } else {
-        const e = match.entry;
-        // Check if there's a relevant image to attach
-        const imgMatch = IMG_KB.reduce((best, img) => {
-          const s = scoreEntry(img.kw, raw);
-          return s > best.score ? { entry: img, score: s } : best;
-        }, { entry: null, score: 0 });
-
-        if (imgMatch.entry && imgMatch.score > 6) {
-          const imgHtml = imgGrid(imgMatch.entry.images.slice(0, 2), imgMatch.entry.era);
-          addBot(e.r(bm), e.fup || [], imgHtml);
-        } else {
-          addBot(e.r(bm), e.fup || []);
-        }
+        const imgMatch = IMG_KB.reduce((best, img) => { const s = scoreEntry(img.kw, lower); return s > best.score ? {entry:img,score:s} : best; }, {entry:null,score:0});
+        const extra = (imgMatch.entry && imgMatch.score > 6) ? imgGrid(imgMatch.entry.images.slice(0,2), imgMatch.entry.era) : '';
+        addBot(match.entry.r(bm), match.entry.fup || [], extra);
+        lastContext = match.entry;
       }
     } else {
-      addBot(fallback(bm), bm
-        ? ['Sejarah The LoL','Kerajaan','Paiz Corp','Show me photos']
-        : ['History of The LoL','Government','Paiz Corp','Show me photos']);
+      addBot(fallback(bm), bm ? ['Sejarah The LoL','Kerajaan','Paiz Corp','Show me photos'] : ['History of The LoL','Government','Paiz Corp','Show me photos']);
     }
   }
 
@@ -1240,46 +1154,53 @@ async function processQuery(t) {
 
 function sendMsg() { const t = ci.value.trim(); if (t) processQuery(t); }
 function useChip(b) { processQuery(b.textContent.replace('📷','').trim()); }
+
 function clearChat() {
   mi.innerHTML = '';
+  lastContext = null;
   const w = document.createElement('div'); w.className = 'welcome'; w.id = 'welcome';
   w.innerHTML = `
     <div class="wlogo">p</div>
-    <div class="wnew"><span class="wnew-dot"></span>v4.0 — IMAGE SEARCH ENABLED</div>
-    <div class="wtitle">Yo. I'm p<em>AI</em>z.</div>
-    <p class="wsub">Type <strong style="color:#3a9165">"search [topic]"</strong> or <strong style="color:#c9a84c">"show me [topic]"</strong> to find anything. BM & EN supported.</p>
-    <p class="wbm">Boleh taip "tunjuk gambar TLCC" atau "cari kewarganegaraan" — aku faham semua cara.</p>
+    <div class="wnew"><span class="wnew-dot"></span>v5.0 — OMNISCIENT</div>
+    <div class="wtitle">I am p<em>AI</em>z. I know everything.</div>
+    <p class="wsub">The LoL · Paiz® Corp · ISC · Freaky Niggas · Government · Legal · TLSRL · Citizenship — all indexed.</p>
+    <p class="wbm">Taip /help untuk senarai arahan penuh.</p>
     <div class="wcat">
       <button class="wcat-btn on" onclick="showCat('all',this)">ALL</button>
       <button class="wcat-btn" onclick="showCat('history',this)">HISTORY</button>
       <button class="wcat-btn" onclick="showCat('gov',this)">GOVERNMENT</button>
       <button class="wcat-btn" onclick="showCat('corp',this)">PAIZ CORP</button>
+      <button class="wcat-btn" onclick="showCat('fn',this)">FREAKY NIGGAS</button>
       <button class="wcat-btn img-cat" onclick="showCat('images',this)">📷 PHOTOS</button>
       <button class="wcat-btn img-cat" onclick="showCat('isc_img',this)">🔒 ISC FILES</button>
     </div>
-    <div class="wchips" id="wchips"></div>`;
+    <div class="wchips" id="wchips"></div>
+    <div class="cmd-hint-bar">
+      <span class="cmd-hint"><kbd>/search</kbd> anything · <kbd>/show</kbd> photos · <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/clear</kbd> · <kbd>/theme</kbd> · <kbd>/help</kbd></span>
+    </div>`;
   mi.appendChild(w);
   curCat = 'all'; renderChips();
   langFlag.textContent = 'EN'; langFlag.className = 'lang-flag';
   searchIndicator.classList.remove('show');
 }
 
-/* TEXTAREA AUTO-HEIGHT */
-ci.addEventListener('input', function () {
+/* ── TEXTAREA AUTO-HEIGHT ── */
+ci.addEventListener('input', function() {
   this.style.height = 'auto';
   this.style.height = Math.min(this.scrollHeight, 180) + 'px';
 });
-ci.addEventListener('keydown', function (e) {
+ci.addEventListener('keydown', function(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+  if (e.ctrlKey && e.key === 'k') { e.preventDefault(); ci.focus(); }
 });
 
-/* TOUCH SWIPE on lightbox */
+/* ── TOUCH SWIPE ── */
 let lbTx = 0;
-document.getElementById('lb').addEventListener('touchstart', e => { lbTx = e.touches[0].clientX; }, { passive: true });
+document.getElementById('lb').addEventListener('touchstart', e => { lbTx = e.touches[0].clientX; }, { passive:true });
 document.getElementById('lb').addEventListener('touchend', e => {
   const d = lbTx - e.changedTouches[0].clientX;
   if (Math.abs(d) > 50) lbStep(d > 0 ? 1 : -1);
-}, { passive: true });
+}, { passive:true });
 </script>
 </body>
 </html>
