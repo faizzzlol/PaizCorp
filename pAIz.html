@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>pAIz v5.0 — The Omniscient · Paiz Corp</title>
+<title>pAIz v5.1 — The Omniscient · Paiz Corp</title>
 <link rel="icon" type="image/svg+xml" href="/PaizCorp/paizcorp-favicon.svg">
-<meta name="description" content="pAIz v5.0 — The Legend of Legiona's omniscient AI. Full ecosystem knowledge, slash commands, image preview, context memory. EN & BM.">
+<meta name="description" content="pAIz v5.1 — The Legend of Legiona's omniscient AI. Full ecosystem knowledge, slash commands, image preview, context memory. EN & BM.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════ TOKENS ═══════════════════════════ */
@@ -123,7 +123,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 .chip{background:var(--chip-bg);border:1px solid var(--chip-bd);padding:8px 14px;font-family:'Outfit',sans-serif;font-size:.82rem;color:var(--chip-txt);cursor:pointer;transition:all .18s;border-radius:8px;text-align:left;line-height:1.3}
 .chip:hover{background:var(--chip-hbg);border-color:var(--chip-hbd);color:var(--chip-htxt)}
 .chip.img-chip{border-color:rgba(201,168,76,.15);font-size:.78rem}
-.chip.img-chip:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.35);color:var(--gold)}
+.chip.img-chip:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,60,.35);color:var(--gold)}
 
 /* COMMAND HINT BAR */
 .cmd-hint-bar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:2px}
@@ -145,6 +145,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 .mb-txt .tag{font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:1px;padding:1px 6px;border:1px solid rgba(42,102,71,.25);color:#3a9165;border-radius:3px;display:inline-block;margin:0 2px}
 .mb-txt .tag.gold{border-color:rgba(201,168,76,.3);color:var(--gold)}
 .mb-txt .tag.red{border-color:rgba(196,68,68,.3);color:var(--red)}
+.mb-txt .tag.blue{border-color:rgba(91,156,246,.3);color:var(--blue)}
+.mb-txt .tag.new{border-color:rgba(42,102,71,.4);color:#3a9165;background:rgba(42,102,71,.08)}
 .mb-txt .list-item{display:block;padding:3px 0 3px 12px;border-left:2px solid rgba(42,102,71,.25);margin:3px 0;font-size:.88rem}
 .mtime{font-family:'DM Mono',monospace;font-size:.35rem;letter-spacing:.8px;color:var(--xfaint);margin-top:3px}
 .mtime.bot{padding-left:40px}
@@ -238,6 +240,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
     <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
     <a href="https://faizzzlol.github.io/thelol/tlr/">TL RAILWAYS</a>
     <a href="https://faizzzlol.github.io/freakyniggas/">FREAKY NIGGAS</a>
+    <a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html">FN SMP</a>
   </div>
   <div class="sn-r"><div class="sn-dot"></div><span class="sn-st">OMNISCIENT</span></div>
 </div>
@@ -247,8 +250,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
     <div class="tn-logo">p</div>
     <span class="tn-name">pAIz</span>
   </a>
-  <div class="tn-badge">v5.0 OMNISCIENT</div>
-  <span class="tn-version">BUILD 2026.04.13</span>
+  <div class="tn-badge">v5.1 OMNISCIENT</div>
+  <span class="tn-version">BUILD 2026.04.24</span>
   <span class="lang-flag" id="langFlag">EN</span>
   <span class="search-mode-indicator" id="searchIndicator">SEARCH MODE</span>
   <div class="tn-r">
@@ -280,22 +283,23 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
     <div class="msgs-inner" id="mi">
       <div class="welcome" id="welcome">
         <div class="wlogo">p</div>
-        <div class="wnew"><span class="wnew-dot"></span>v5.0 — OMNISCIENT · FULL ECOSYSTEM INTEGRATION</div>
+        <div class="wnew"><span class="wnew-dot"></span>v5.1 — OMNISCIENT · FN SMP INTEGRATED</div>
         <div class="wtitle">I am p<em>AI</em>z. I know everything.</div>
-        <p class="wsub">The LoL · Paiz® Corp · ISC · Freaky Niggas · Government · Legal · TLSRL · Citizenship — all indexed. Use <kbd>/</kbd> commands or just ask naturally. BM & EN.</p>
-        <p class="wbm">Taip <strong>/show tlcc</strong> atau <strong>/search kewarganegaraan</strong> — aku faham.</p>
+        <p class="wsub">The LoL · Paiz® Corp · ISC · Freaky Niggas · FN SMP · Government · Legal · TLSRL · Citizenship — all indexed. Use <kbd>/</kbd> commands or just ask naturally. BM & EN.</p>
+        <p class="wbm">Taip <strong>/show tlcc</strong> atau <strong>/search fn smp</strong> — aku faham.</p>
         <div class="wcat">
           <button class="wcat-btn on" onclick="showCat('all',this)">ALL</button>
           <button class="wcat-btn" onclick="showCat('history',this)">HISTORY</button>
           <button class="wcat-btn" onclick="showCat('gov',this)">GOVERNMENT</button>
           <button class="wcat-btn" onclick="showCat('corp',this)">PAIZ CORP</button>
           <button class="wcat-btn" onclick="showCat('fn',this)">FREAKY NIGGAS</button>
+          <button class="wcat-btn" onclick="showCat('fnsmp',this)">⛏ FN SMP</button>
           <button class="wcat-btn img-cat" onclick="showCat('images',this)">📷 PHOTOS</button>
           <button class="wcat-btn img-cat" onclick="showCat('isc_img',this)">🔒 ISC FILES</button>
         </div>
         <div class="wchips" id="wchips"></div>
         <div class="cmd-hint-bar">
-          <span class="cmd-hint"><kbd>/search</kbd> anything · <kbd>/show</kbd> photos · <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/clear</kbd> · <kbd>/theme</kbd> · <kbd>/help</kbd></span>
+          <span class="cmd-hint"><kbd>/search</kbd> anything · <kbd>/show</kbd> photos · <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/fnsmp</kbd> · <kbd>/clear</kbd> · <kbd>/theme</kbd> · <kbd>/help</kbd></span>
         </div>
       </div>
     </div>
@@ -312,9 +316,9 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
-   pAIz v5.0 — OMNISCIENT
-   Full KB merge · Slash commands · Context memory · BM+EN
-   Bugs fixed: /clear flash, /help crash, /gov crash, /isc crash
+   pAIz v5.1 — OMNISCIENT
+   v5.0 base + FN SMP full KB integration (7 new entries)
+   New: /fnsmp slash command · FN SMP portal entries · FN SMP chips tab
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── THEME ── */
@@ -340,7 +344,7 @@ function setIcon() {
 }
 
 /* ── BM DETECTION (expanded v5) ── */
-const BM_WORDS = ['apa','siapa','macam','camne','mana','bila','kenapa','mcm','nk','nak','tak','ada','tiada','boleh','bagus','habis','dah','okay','ok','sapa','la','lah','kan','wei','weh','bro','sis','eh','ai','aiyo','aih','haah','memang','pun','je','tau','tahu','cerita','kisah','sejarah','tentang','bercerita','tolong','tanya','mintak','minta','bagi','buat','pergi','balik','masuk','keluar','pasal','sebab','kerana','sampai','punya','kita','kami','korang','diorang','dia','mereka','saya','aku','ko','awak','hang','den','wak','abang','kakak','adik','tunjuk','gambar','tengok','lihat','cari','nombor','status','semak','permohonan','warganegara','rakyat'];
+const BM_WORDS = ['apa','siapa','macam','camne','mana','bila','kenapa','mcm','nk','nak','tak','ada','tiada','boleh','bagus','habis','dah','okay','ok','sapa','la','lah','kan','wei','weh','bro','sis','eh','ai','aiyo','aih','haah','memang','pun','je','tau','tahu','cerita','kisah','sejarah','tentang','bercerita','tolong','tanya','mintak','minta','bagi','buat','pergi','balik','masuk','keluar','pasal','sebab','kerana','sampai','punya','kita','kami','korang','diorang','dia','mereka','saya','aku','ko','awak','hang','den','wak','abang','kakak','adik','tunjuk','gambar','tengok','lihat','cari','nombor','status','semak','permohonan','warganegara','rakyat','cara','masalah','plugin','server','join','laporan'];
 function detectBM(q) {
   const w = q.toLowerCase().split(/\s+/);
   return w.some(x => BM_WORDS.includes(x)) || /[a-z]+(lah|kan|la|wei|weh|ke|pun|je|dah|tak)$/.test(q.toLowerCase());
@@ -397,7 +401,7 @@ function imgGrid(paths, caption = '') {
   return `<div class="img-grid ${cls}">${imgs}</div>${cap}`;
 }
 
-/* ── PORTALS (24 entries) ── */
+/* ── PORTALS (26 entries — added FN SMP + Report) ── */
 const PORTALS = [
   { tag:'NATION HOME',    name:'The Legend of Legiona',       url:'https://faizzzlol.github.io/thelol/',                                    desc:'Main hub — history, network, founders, bento grid' },
   { tag:'GOVERNMENT',     name:'Government Portal',            url:'https://faizzzlol.github.io/thelol/gov/',                               desc:'Proclamation, history, departments, megaprojects' },
@@ -418,15 +422,17 @@ const PORTALS = [
   { tag:'FILM STUDIO',    name:'PaizProductions',              url:'https://faizzzlol.github.io/PaizCorp/PaizProductions/',                  desc:'Official film studio, 3 productions' },
   { tag:'FEATURE FILM',   name:'The LoL: The Movie',           url:'https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie',      desc:'In production — cast, synopsis, production notes' },
   { tag:'CURRENCY',       name:'TL$ Currency Converter',       url:'https://faizzzlol.github.io/thelol/finance/currency-converter',         desc:'TL Dollar exchange rates, EN/BM bilingual' },
-  { tag:'AI ASSISTANT',   name:'pAIz v5.0',                   url:'https://faizzzlol.github.io/PaizCorp/pAIz.html',                        desc:'This page — omniscient AI with slash commands' },
+  { tag:'AI ASSISTANT',   name:'pAIz v5.1',                   url:'https://faizzzlol.github.io/PaizCorp/pAIz',                        desc:'This page — omniscient AI with slash commands' },
   { tag:'FREAKY NIGGAS',  name:'Freaky Niggas Community',      url:'https://faizzzlol.github.io/freakyniggas/',                             desc:'Dark monochrome glitch aesthetic · Minecraft servers · Freaky News' },
   { tag:'FREAKY NEWS',    name:'Freaky News (EN/BM)',          url:'https://faizzzlol.github.io/freakyniggas/news',                         desc:'Bilingual news with localStorage EN/BM toggle' },
   { tag:'FN SERVERS',     name:'Freaky Niggas Servers',        url:'https://faizzzlol.github.io/freakyniggas/servers',                      desc:'Minecraft server listings' },
   { tag:'FN FEEDBACK',    name:'Freaky Niggas Feedback',       url:'https://faizzzlol.github.io/freakyniggas/feedback',                     desc:'Submit feedback form' },
+  { tag:'FN SMP',         name:'FN SMP — Freaky Niggas',       url:'https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp',         desc:'Java & Bedrock crossplay SMP · V1.3.3 · 10 slots · minekeep.net · Singapore' },
+  { tag:'FN SMP REPORT',  name:'FN SMP Report System',         url:'https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp-report',  desc:'Submit bug, player, server issue or suggestion reports to admin team' },
 ];
 
 /* ══════════════════════════════════════════════════════════
-   IMAGE KNOWLEDGE BASE — complete v4 data, all real paths
+   IMAGE KNOWLEDGE BASE — complete v5.1 (unchanged from v5.0)
 ══════════════════════════════════════════════════════════ */
 const IMG_KB = [
   {
@@ -673,25 +679,25 @@ const IMG_KB = [
 ];
 
 /* ══════════════════════════════════════════════════════════
-   TEXT KNOWLEDGE BASE — complete v4 data + v5 new entries
+   TEXT KNOWLEDGE BASE — v5.0 entries + 7 new FN SMP entries
 ══════════════════════════════════════════════════════════ */
 const KB = [
 
 /* ── GREETINGS ── */
 {id:'greeting',cat:'all',
 kw:['hello','hi','hey','hei','hai','hye','hewlo','helo','hola','morning','good morning','good evening','selamat pagi','selamat petang','selamat malam','pagi','petang','malam','salam','assalamualaikum','wslm','wsp','wassup','wasap','sup','yo','oi','aye','howdy','namaste','apa khabar','apa kabo','apa cerita','apahal','camne','macam mana','sihat','ok tak'],
-fup:['Who are the founders?','What is The LoL?','Show me photos','Search government'],
+fup:['Who are the founders?','What is The LoL?','Show me photos','What is FN SMP?'],
 r:(bm)=>bm?
-`Eh, wassup! Aku <strong>pAIz v5.0 — Omniscient</strong> — AI assistant rasmi The Legend of Legiona! 😄<br><br>Cuba slash commands baru:<br>→ <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> — Shortcut jabatan<br>→ <kbd>/search [topik]</kbd> — Cari semua portal<br>→ <kbd>/show [gambar]</kbd> — Preview foto<br>→ <kbd>/help</kbd> — Semua arahan`:
-`Yo! I'm <strong>pAIz v5.0 — Omniscient</strong> — The LoL's official AI! 🟩<br><br>New slash commands in v5:<br>→ <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> — Department shortcuts<br>→ <kbd>/search [topic]</kbd> — Search all portals<br>→ <kbd>/show [photo]</kbd> — Preview gallery photos<br>→ <kbd>/help</kbd> — All commands`},
+`Eh, wassup! Aku <strong>pAIz v5.1 — Omniscient</strong> — AI assistant rasmi The Legend of Legiona! 😄<br><br>Cuba slash commands:<br>→ <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/fnsmp</kbd> — Shortcut jabatan<br>→ <kbd>/search [topik]</kbd> — Cari semua portal<br>→ <kbd>/show [gambar]</kbd> — Preview foto<br>→ <kbd>/help</kbd> — Semua arahan`:
+`Yo! I'm <strong>pAIz v5.1 — Omniscient</strong> — The LoL's official AI! 🟩<br><br>Slash commands:<br>→ <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/fnsmp</kbd> — Department shortcuts<br>→ <kbd>/search [topic]</kbd> — Search all portals<br>→ <kbd>/show [photo]</kbd> — Preview gallery photos<br>→ <kbd>/help</kbd> — All commands`},
 
 /* ── HELP ── */
 {id:'help',cat:'all',
 kw:['what can you do','help me','boleh buat apa','apa yang kau boleh buat','capabilities','apa ko tahu','what do you know','what are you','who are you','about yourself','about paiz','what is paiz','how do you work','aku boleh tanya apa','nak tanya apa','new features','feature baru','apa baru','commands','slash commands','arahan'],
-fup:['Show me photos','Search history','Search government','Paiz Corp'],
+fup:['Show me photos','Search history','Search government','What is FN SMP?'],
 r:(bm)=>bm?
-`Aku <strong>pAIz v5.0 — OMNISCIENT</strong> 🎉<br><br><strong>🆕 Slash Commands (v5.0):</strong><br>→ <kbd>/search [query]</kbd> — Cari semua portal<br>→ <kbd>/show [topic]</kbd> — Preview gambar dari galeri<br>→ <kbd>/gov</kbd> — Struktur kerajaan<br>→ <kbd>/isc</kbd> — Portal ISC<br>→ <kbd>/fn</kbd> — Freaky Niggas<br>→ <kbd>/clear</kbd> — Chat baru<br>→ <kbd>/theme</kbd> — Tukar tema<br>→ <kbd>/help</kbd> — Halaman ini<br><br><strong>📚 Tanya je:</strong> Sejarah · Kerajaan · ISC · Paiz Corp · Undang-undang · Freaky Niggas · Gambar galeri`:
-`I'm <strong>pAIz v5.0 — OMNISCIENT</strong> 🎉<br><br><strong>🆕 Slash Commands (v5.0):</strong><br>→ <kbd>/search [query]</kbd> — Search all portals<br>→ <kbd>/show [topic]</kbd> — Preview gallery photos<br>→ <kbd>/gov</kbd> — Government structure<br>→ <kbd>/isc</kbd> — ISC portal<br>→ <kbd>/fn</kbd> — Freaky Niggas<br>→ <kbd>/clear</kbd> — New chat<br>→ <kbd>/theme</kbd> — Toggle theme<br>→ <kbd>/help</kbd> — This menu<br><br><strong>📚 Just ask about:</strong> History · Government · ISC · Paiz Corp · Legal Docs · Freaky Niggas · Gallery Photos`},
+`Aku <strong>pAIz v5.1 — OMNISCIENT</strong> 🎉<br><br><strong>Slash Commands:</strong><br>→ <kbd>/search [query]</kbd> — Cari semua portal<br>→ <kbd>/show [topic]</kbd> — Preview gambar dari galeri<br>→ <kbd>/gov</kbd> — Struktur kerajaan<br>→ <kbd>/isc</kbd> — Portal ISC<br>→ <kbd>/fn</kbd> — Freaky Niggas<br>→ <kbd>/fnsmp</kbd> — FN SMP server info<br>→ <kbd>/clear</kbd> — Chat baru<br>→ <kbd>/theme</kbd> — Tukar tema<br>→ <kbd>/help</kbd> — Halaman ini<br><br><strong>📚 Tanya je:</strong> Sejarah · Kerajaan · ISC · Paiz Corp · FN SMP · Gambar galeri`:
+`I'm <strong>pAIz v5.1 — OMNISCIENT</strong> 🎉<br><br><strong>Slash Commands:</strong><br>→ <kbd>/search [query]</kbd> — Search all portals<br>→ <kbd>/show [topic]</kbd> — Preview gallery photos<br>→ <kbd>/gov</kbd> — Government structure<br>→ <kbd>/isc</kbd> — ISC portal<br>→ <kbd>/fn</kbd> — Freaky Niggas<br>→ <kbd>/fnsmp</kbd> — FN SMP server info<br>→ <kbd>/clear</kbd> — New chat<br>→ <kbd>/theme</kbd> — Toggle theme<br>→ <kbd>/help</kbd> — This menu<br><br><strong>📚 Just ask about:</strong> History · Government · ISC · Paiz Corp · FN SMP · Gallery Photos`},
 
 /* ── WHAT IS THE LOL ── */
 {id:'whatlol',cat:'all',
@@ -733,7 +739,7 @@ r:(bm)=>bm?
 `<strong>Struktur Kerajaan The LoL</strong> 🏛️<br><br><strong>The Black House</strong> — Pejabat Presiden. Presiden: Faiz4224. Kod dokumen: BH-YYYY-###<br><br><strong>Enam Jabatan:</strong><br>— DEPT-01: <strong>ISC</strong> · AKTIF<br>— DEPT-02: Pejabat Keadilan Nasional<br>— DEPT-03: Kementerian Lore & Arkib<br>— DEPT-04: Bahagian Kerja Awam<br>— DEPT-05: Biro Hubungan Luar<br>— DEPT-06: The LoL Communications<br><br><a href="https://faizzzlol.github.io/thelol/gov/">Portal Kerajaan →</a>`:
 `<strong>Government Structure of The LoL</strong> 🏛️<br><br><strong>The Black House</strong> — Office of the President. Current: Faiz4224. Documents: BH-YYYY-###<br><br><strong>Six Departments:</strong><br>— DEPT-01: <strong>ISC</strong> · ACTIVE<br>— DEPT-02: Office of National Justice<br>— DEPT-03: Ministry of Lore & Archives<br>— DEPT-04: Public Works Division<br>— DEPT-05: Bureau of External Relations<br>— DEPT-06: The LoL Communications<br><br><a href="https://faizzzlol.github.io/thelol/gov/">Government Portal →</a>`},
 
-/* ── BLACK HOUSE (v5 new) ── */
+/* ── BLACK HOUSE ── */
 {id:'blackhouse',cat:'gov',
 kw:['black house','office of the president','pejabat presiden','bh-','the black house','president office','black house page','ofis presiden'],
 fup:['Faiz4224','Government structure','Legal documents'],
@@ -765,7 +771,7 @@ r:(bm)=>bm?
 `<strong>Kewarganegaraan The LoL</strong> 🪪<br><br>Syarat asas: 16 tahun ke atas · Pemain Skyxion aktif · Tiada rekod server buruk<br><br>Dikawal oleh:<br>· LOLGOV-2026-0001 — Akta Kewarganegaraan<br>· LOLGOV-2026-0003 — Piagam Hak Warganegara<br>· LOLGOV-2026-0002 — Ordinan Pembatalan<br><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Mohon Kewarganegaraan →</a>`:
 `<strong>The LoL Citizenship</strong> 🪪<br><br>Basic requirements: 16+ · Active Skyxion player · Clean server record<br><br>Governed by:<br>· LOLGOV-2026-0001 — Citizenship Act<br>· LOLGOV-2026-0003 — Citizens' Rights Charter<br>· LOLGOV-2026-0002 — Revocation Ordinance<br><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">Apply for Citizenship →</a>`},
 
-/* ── CITIZENSHIP STATUS (v5 new) ── */
+/* ── CITIZENSHIP STATUS ── */
 {id:'citizen_status',cat:'gov',
 kw:['check status','semak status','application status','status permohonan','reference number','thelol-ctzn','citizenship status','cek status','status checker','check application','semak permohonan'],
 fup:['Apply citizenship','Legal archive'],
@@ -852,10 +858,10 @@ r:(bm)=>bm?`<strong>Skyxion & Altaer Era</strong> 🌐<br><br>Skyxion ialah serv
 /* ── ALL PORTALS ── */
 {id:'nav',cat:'all',
 kw:['link','links','url','website','portal link','where can i find','mana nak cari','all pages','semua halaman','all portals','semua portal','all links','semua link','official links','link rasmi','website the lol','all websites','senarai laman','portals list'],
-fup:['Government portal','ISC portal','Paiz Corp','Gallery'],
+fup:['Government portal','ISC portal','Paiz Corp','Gallery','FN SMP'],
 r:(bm)=>bm?
-`<strong>Semua Portal Rasmi</strong> 🔗<br><br><a href="https://faizzzlol.github.io/thelol/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://faizzzlol.github.io/thelol/gov/">🏛️ Kerajaan</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">🪪 Kewarganegaraan</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">📄 Arkib Undang-undang</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">🚂 TL Railways</a><br><a href="https://faizzzlol.github.io/thelol/gallery">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a>`:
-`<strong>All Official Portals</strong> 🔗<br><br><a href="https://faizzzlol.github.io/thelol/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://faizzzlol.github.io/thelol/gov/">🏛️ Government</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">🪪 Citizenship</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">📄 Legal Archive</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">🚂 TL Railways</a><br><a href="https://faizzzlol.github.io/thelol/gallery">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a>`},
+`<strong>Semua Portal Rasmi</strong> 🔗<br><br><a href="https://faizzzlol.github.io/thelol/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://faizzzlol.github.io/thelol/gov/">🏛️ Kerajaan</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">🪪 Kewarganegaraan</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">📄 Arkib Undang-undang</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">🚂 TL Railways</a><br><a href="https://faizzzlol.github.io/thelol/gallery">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html">⛏ FN SMP</a>`:
+`<strong>All Official Portals</strong> 🔗<br><br><a href="https://faizzzlol.github.io/thelol/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://faizzzlol.github.io/thelol/gov/">🏛️ Government</a><br><a href="https://faizzzlol.github.io/thelol/gov/citizenship/">🪪 Citizenship</a><br><a href="https://faizzzlol.github.io/thelol/gov/assets/">📄 Legal Archive</a><br><a href="https://faizzzlol.github.io/thelol/gov/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://faizzzlol.github.io/thelol/tlr/">🚂 TL Railways</a><br><a href="https://faizzzlol.github.io/thelol/gallery">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html">⛏ FN SMP</a>`},
 
 /* ── GALLERY ── */
 {id:'gallery',cat:'images',
@@ -865,13 +871,77 @@ r:(bm)=>bm?
 `<strong>Galeri Foto Rasmi The LoL</strong> 📷<br><br>Arkib visual lengkap dari 2020–2024 merentasi 8 era. Gambar oleh Faiz4224, Dyno, Ikan dan lain-lain.<br><br>Taip <em>"show me [topik]"</em> atau <em>"/show [topik]"</em> untuk preview gambar di sini, atau lawati galeri penuh:<br><a href="https://faizzzlol.github.io/thelol/gallery">Galeri Penuh →</a>`:
 `<strong>The LoL Official Photo Gallery</strong> 📷<br><br>Complete visual archive from 2020–2024 across 8 eras. Captured by Faiz4224, Dyno, Ikan and others.<br><br>Type <em>"show me [topic]"</em> or <em>"/show [topic]"</em> to preview any photos here, or visit the full gallery:<br><a href="https://faizzzlol.github.io/thelol/gallery">Full Gallery →</a>`},
 
-/* ── FREAKY NIGGAS (v5 new) ── */
+/* ── FREAKY NIGGAS ── */
 {id:'fn_about',cat:'fn',
 kw:['freaky niggas','what is freaky niggas','fn community','freaky niggas site','pasal freaky niggas','apa tu fn','freaky','fn minecraft','freaky niggas community','fn page','fn website','laman fn'],
-fup:['Freaky News','FN Servers','Search Freaky Niggas'],
+fup:['Freaky News','FN Servers','What is FN SMP?','Search Freaky Niggas'],
 r:(bm)=>bm?
-`<strong>Freaky Niggas (FN)</strong> 🖤<br><br>Komuniti Minecraft dengan estetik dark monochrome glitch. Laman penuh:<br><br>→ <a href="https://faizzzlol.github.io/freakyniggas/">Home</a> — Halaman utama<br>→ <a href="https://faizzzlol.github.io/freakyniggas/servers">Servers</a> — Senarai server Minecraft<br>→ <a href="https://faizzzlol.github.io/freakyniggas/news">Freaky News</a> — Berita EN/BM toggle<br>→ <a href="https://faizzzlol.github.io/freakyniggas/feedback">Feedback</a> — Borang maklum balas`:
-`<strong>Freaky Niggas (FN)</strong> 🖤<br><br>A Minecraft community with dark monochrome glitch aesthetic. Full pages:<br><br>→ <a href="https://faizzzlol.github.io/freakyniggas/">Home</a> — Main landing page<br>→ <a href="https://faizzzlol.github.io/freakyniggas/servers">Servers</a> — Minecraft server listings<br>→ <a href="https://faizzzlol.github.io/freakyniggas/news">Freaky News</a> — Bilingual news EN/BM toggle via localStorage<br>→ <a href="https://faizzzlol.github.io/freakyniggas/feedback">Feedback</a> — Feedback form`},
+`<strong>Freaky Niggas (FN)</strong> 🖤<br><br>Komuniti Minecraft dengan estetik dark monochrome glitch. Laman penuh:<br><br>→ <a href="https://faizzzlol.github.io/freakyniggas/">Home</a> — Halaman utama<br>→ <a href="https://faizzzlol.github.io/freakyniggas/servers">Servers</a> — Senarai server Minecraft<br>→ <a href="https://faizzzlol.github.io/freakyniggas/news">Freaky News</a> — Berita EN/BM toggle<br>→ <a href="https://faizzzlol.github.io/freakyniggas/feedback">Feedback</a> — Borang maklum balas<br>→ <a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html">FN SMP</a> — Server Minecraft FN crossplay`:
+`<strong>Freaky Niggas (FN)</strong> 🖤<br><br>A Minecraft community with dark monochrome glitch aesthetic. Full pages:<br><br>→ <a href="https://faizzzlol.github.io/freakyniggas/">Home</a> — Main landing page<br>→ <a href="https://faizzzlol.github.io/freakyniggas/servers">Servers</a> — Minecraft server listings<br>→ <a href="https://faizzzlol.github.io/freakyniggas/news">Freaky News</a> — Bilingual news EN/BM toggle<br>→ <a href="https://faizzzlol.github.io/freakyniggas/feedback">Feedback</a> — Feedback form<br>→ <a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html">FN SMP</a> — FN crossplay Minecraft server`},
+
+/* ══════════════════════════════════════════════════════════
+   ▼▼▼ NEW IN v5.1 — FN SMP KNOWLEDGE BASE (7 entries) ▼▼▼
+══════════════════════════════════════════════════════════ */
+
+/* ── FN SMP: ABOUT ── */
+{id:'fnsmp_about',cat:'fnsmp',
+kw:['fn smp','fnsmp','freaky nsmp','freakynsmp','what is fn smp','apa tu fn smp','fn smp tu apa','about fn smp','pasal fn smp','server fn smp','fn server info','crossplay server fn','semi vanilla server','minecraft server fn','fn smp info','server info fn','fn smp overview','joint server','crossplay smp','paper server fn','10 slots','10 slot server','minekeep server','sg server minecraft','singapore server minecraft','fn x thelol','fn thelol server','fn smp version','v1.3.3'],
+fup:['How to join FN SMP','FN SMP plugins','FN SMP changelog','FN SMP known issues'],
+r:(bm)=>bm?
+`<strong>FN SMP</strong> ⛏️<br><br>Server Minecraft bersama antara <strong>Freaky Niggas × The Legend of Legiona</strong> — dua komuniti, satu dunia.<br><br><span class="tag new">V1.3.3</span> <span class="tag blue">AKTIF</span><br><br>— <strong>Mod:</strong> Java & Bedrock Crossplay<br>— <strong>Jenis:</strong> Semi-Vanilla Survival<br>— <strong>Engine:</strong> Paper<br>— <strong>Slot:</strong> 10 pemain<br>— <strong>Hosting:</strong> MineKeep (Singapore) — free tier<br>— <strong>Versi:</strong> 1.7.2 – latest (Java) · Bedrock support via Geyser<br>— <strong>Crossplay:</strong> Geyser + Floodgate (Java ↔ Bedrock)<br><br><strong>⚠️ Nota:</strong> Java cracked/TLauncher tidak disokong — guna Bedrock edition sebagai alternatif.<br><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html">FN SMP Page →</a>`:
+`<strong>FN SMP</strong> ⛏️<br><br>A joint Minecraft server between <strong>Freaky Niggas × The Legend of Legiona</strong> — two communities, one world.<br><br><span class="tag new">V1.3.3</span> <span class="tag blue">ACTIVE</span><br><br>— <strong>Mode:</strong> Java & Bedrock Crossplay<br>— <strong>Type:</strong> Semi-Vanilla Survival<br>— <strong>Engine:</strong> Paper<br>— <strong>Slots:</strong> 10 players<br>— <strong>Hosting:</strong> MineKeep (Singapore) — free tier<br>— <strong>Version:</strong> 1.7.2 – latest (Java) · Bedrock via Geyser<br>— <strong>Crossplay:</strong> Geyser + Floodgate (Java ↔ Bedrock)<br><br><strong>⚠️ Note:</strong> Cracked Java / TLauncher not supported — use Bedrock edition instead.<br><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html">FN SMP Page →</a>`},
+
+/* ── FN SMP: HOW TO JOIN ── */
+{id:'fnsmp_join',cat:'fnsmp',
+kw:['how to join fn smp','cara join fn smp','java ip fn smp','bedrock ip fn smp','server address fn','ip fn smp','fn smp ip','connect fn smp','join fn smp','freakynsmp.minekeep.gg','bedrock port fn','19132','join server fn','minecraft server ip fn','copy ip fn','add fn smp','fn smp address','fn smp port','bedrock join','java join fn','cara masuk fn smp','nak join fn smp','masuk fn smp','ip server fn'],
+fup:['FN SMP info','FN SMP plugins','Submit FN SMP report'],
+r:(bm)=>bm?
+`<strong>Cara Join FN SMP</strong> 🔌<br><br><strong>🟠 Java Edition</strong><br>IP: <code style="font-family:'DM Mono',monospace;color:#3a9165">freakynsmp.minekeep.gg</code><br>Port: Default · Versi 1.7.2 – Latest · Premium sahaja<br><br><strong>🟢 Bedrock Edition</strong><br>IP: <code style="font-family:'DM Mono',monospace;color:#3a9165">freakynsmp.bedrock.minekeep.gg</code><br>Port: <strong>19132</strong> · Win10/11 · Mobile · Console<br><br><strong>⚡ Launch terus:</strong> <a href="minecraft://?addExternalServer=FN SMP|freakynsmp.bedrock.minekeep.gg:19132">Add to Bedrock automatically →</a><br><br><strong>💬 WhatsApp Group:</strong> <a href="https://chat.whatsapp.com/E0Z4puJdXR8HhRcjoce3h6">Join untuk updates →</a><br><br><em>Cracked Java tak disokong — pakai Bedrock edition (mobile/PC/emulator).</em>`:
+`<strong>How to Join FN SMP</strong> 🔌<br><br><strong>🟠 Java Edition</strong><br>IP: <code style="font-family:'DM Mono',monospace;color:#3a9165">freakynsmp.minekeep.gg</code><br>Port: Default · Version 1.7.2 – Latest · Premium only<br><br><strong>🟢 Bedrock Edition</strong><br>IP: <code style="font-family:'DM Mono',monospace;color:#3a9165">freakynsmp.bedrock.minekeep.gg</code><br>Port: <strong>19132</strong> · Win10/11 · Mobile · Console<br><br><strong>⚡ Quick launch:</strong> <a href="minecraft://?addExternalServer=FN SMP|freakynsmp.bedrock.minekeep.gg:19132">Auto-add to Bedrock →</a><br><br><strong>💬 WhatsApp Group:</strong> <a href="https://chat.whatsapp.com/E0Z4puJdXR8HhRcjoce3h6">Join for updates →</a><br><br><em>Cracked Java not supported — use Bedrock edition (mobile/PC/emulator) instead.</em>`},
+
+/* ── FN SMP: PLUGINS ── */
+{id:'fnsmp_plugins',cat:'fnsmp',
+kw:['fn smp plugins','plugin fn smp','senarai plugin fn','plugin list fn','auraskills fn','chestsort fn','chunky fn','discordsrv fn','essentialsx fn','floodgate fn','geyser fn','gsit fn','imageframe fn','interactivechat fn','jobsreborn fn','luckperms fn','packetevents fn','placeholderapi fn','protocollib fn','realscoreboard fn','skinsrestorer fn','vault fn','viabackwards fn','viaversion fn','20 plugins fn','active plugins fn','what plugins fn smp','plugin apa ada fn','jobs fn smp','rpg fn smp','economy fn smp','skill fn smp','auraskills smp','jobs reborn smp'],
+fup:['FN SMP changelog','FN SMP info','FN SMP roadmap'],
+r:(bm)=>bm?
+`<strong>Plugin Aktif FN SMP</strong> 🔌 — <span class="tag new">20 Plugin</span><br><br><strong>🎮 RPG & Ekonomi</strong><br>→ <strong>AuraSkills</strong> — Sistem leveling RPG penuh (rebalanced V1.3.3)<br>→ <strong>JobsReborn</strong> <span class="tag new">Baru</span> — Cari wang dengan mine/farm/hunt/fish/build<br>→ <strong>Vault</strong> — API ekonomi asas<br><br><strong>🔗 Crossplay Core</strong><br>→ <strong>Geyser</strong> — Jambatan Java ↔ Bedrock<br>→ <strong>Floodgate</strong> — Auth Bedrock tanpa akaun Java<br>→ <strong>SkinsRestorer</strong> — Skin untuk Bedrock & offline players<br><br><strong>🛠️ Utility & QoL</strong><br>→ <strong>EssentialsX</strong> <span class="tag new">Baru</span> — /afk, /msg, /reply (teleport/homes dimatikan)<br>→ <strong>ChestSort</strong> — Auto-sort inventory & chest<br>→ <strong>GSit</strong> — Duduk, baring, merangkak<br>→ <strong>Chunky</strong> — Pre-gen chunks<br><br><strong>💬 Chat & Display</strong><br>→ <strong>InteractiveChat</strong> — Rich chat dengan item preview<br>→ <strong>DiscordSRV</strong> — Bridge Discord ↔ in-game<br>→ <strong>RealScoreboard</strong> — Sidebar stats live<br>→ <strong>ImageFrame</strong> — Render gambar dalam item frame<br><br><strong>⚙️ Compatibility & Libs</strong><br>→ ViaVersion · ViaBackwards · LuckPerms · PlaceholderAPI · ProtocolLib · packetevents`:
+`<strong>FN SMP Active Plugins</strong> 🔌 — <span class="tag new">20 Plugins</span><br><br><strong>🎮 RPG & Economy</strong><br>→ <strong>AuraSkills</strong> — Full RPG leveling system (rebalanced in V1.3.3)<br>→ <strong>JobsReborn</strong> <span class="tag new">New</span> — Earn currency by mining/farming/hunting/fishing/building<br>→ <strong>Vault</strong> — Economy API foundation<br><br><strong>🔗 Crossplay Core</strong><br>→ <strong>Geyser</strong> — Java ↔ Bedrock translation layer<br>→ <strong>Floodgate</strong> — Bedrock auth without a Java account<br>→ <strong>SkinsRestorer</strong> — Skins for Bedrock & offline players<br><br><strong>🛠️ Utility & QoL</strong><br>→ <strong>EssentialsX</strong> <span class="tag new">New</span> — /afk, /msg, /reply (teleports/homes disabled)<br>→ <strong>ChestSort</strong> — Auto-sort inventory & chests<br>→ <strong>GSit</strong> — Sit, lay, crawl on any block<br>→ <strong>Chunky</strong> — Background chunk pre-generation<br><br><strong>💬 Chat & Display</strong><br>→ <strong>InteractiveChat</strong> — Rich chat with clickable item previews<br>→ <strong>DiscordSRV</strong> — Discord ↔ in-game bridge<br>→ <strong>RealScoreboard</strong> — Animated live stats sidebar<br>→ <strong>ImageFrame</strong> — Render custom images on item frames<br><br><strong>⚙️ Compatibility & Libs</strong><br>→ ViaVersion · ViaBackwards · LuckPerms · PlaceholderAPI · ProtocolLib · packetevents`},
+
+/* ── FN SMP: CHANGELOG ── */
+{id:'fnsmp_changelog',cat:'fnsmp',
+kw:['fn smp changelog','update fn smp','fn smp update history','v1.3','v1.3.1','v1.3.2','v1.3.3','version history fn','update fn smp latest','economy update fn','soft launch fn','semua update fn','versi terbaru fn','fn smp version','fn smp latest update','fn smp release','changelog fn','update log fn','fn smp patch','april 2026 fn'],
+fup:['FN SMP plugins','FN SMP known issues','FN SMP roadmap'],
+r:(bm)=>bm?
+`<strong>Changelog FN SMP</strong> 📋<br><br><span class="tag new">V1.3.3</span> <em>22 Apr 2026 — Economy Update</em><br>→ ✅ Tambah <strong>EssentialsX</strong> (/afk, /msg, /reply sahaja)<br>→ ✅ Tambah <strong>JobsReborn</strong> (economy layer atas Vault)<br>→ ❌ Buang IC DiscordSRV Addon (gagal load)<br>→ ⚡ Rebalance <strong>AuraSkills</strong> (XP sources, loot tables, mana costs)<br><br><span class="tag">V1.3.2</span> <em>18 Apr 2026</em><br>→ ✅ Tambah: RealScoreboard · InteractiveChat · IC DiscordSRV Addon · ImageFrame · ProtocolLib · PlaceholderAPI<br><br><span class="tag">V1.3.1</span> <em>17 Apr 2026</em><br>→ ⚡ Buang LagFixer (redundant dengan Paper)<br>→ ⚡ Simulation distance 10 → 5<br>→ ⚡ Tuned entity activation range<br>→ ↑ LuckPerms expanded permissions<br>→ ✅ Tambah Vault<br><br><span class="tag">V1.3</span> <em>16 Apr 2026 — Soft Launch</em><br>→ ✅ Tambah: AuraSkills · LagFixer · ChestSort · LuckPerms<br>→ ❌ Buang Simple Voice Chat (performance)`:
+`<strong>FN SMP Changelog</strong> 📋<br><br><span class="tag new">V1.3.3</span> <em>22 Apr 2026 — Economy Update</em><br>→ ✅ Added <strong>EssentialsX</strong> (/afk, /msg, /reply only)<br>→ ✅ Added <strong>JobsReborn</strong> (economy on top of Vault)<br>→ ❌ Removed IC DiscordSRV Addon (load failure)<br>→ ⚡ Rebalanced <strong>AuraSkills</strong> (XP sources, loot tables, mana costs)<br><br><span class="tag">V1.3.2</span> <em>18 Apr 2026</em><br>→ ✅ Added: RealScoreboard · InteractiveChat · IC DiscordSRV Addon · ImageFrame · ProtocolLib · PlaceholderAPI<br><br><span class="tag">V1.3.1</span> <em>17 Apr 2026</em><br>→ ⚡ Removed LagFixer (redundant with Paper)<br>→ ⚡ Simulation distance 10 → 5<br>→ ⚡ Tuned entity activation range<br>→ ↑ LuckPerms expanded permissions<br>→ ✅ Added Vault<br><br><span class="tag">V1.3</span> <em>16 Apr 2026 — Soft Launch</em><br>→ ✅ Added: AuraSkills · LagFixer · ChestSort · LuckPerms<br>→ ❌ Removed Simple Voice Chat (performance concerns)`},
+
+/* ── FN SMP: KNOWN ISSUES ── */
+{id:'fnsmp_issues',cat:'fnsmp',
+kw:['fn smp issues','known issues fn','cracked java fn smp','tlauncher fn smp','cracked client fn','tlauncher tak boleh join','java cracked fn','bedrock player list fn','low ram fn','lag fn smp','server lag fn','masalah fn smp','problem fn smp','isu fn smp','performance fn smp','workaround fn smp','fn smp bug','fn smp fix','kenapa tak boleh join','kenapa lag','server issue fn','bedrock invisible fn'],
+fup:['How to join FN SMP','FN SMP info','Submit FN SMP report'],
+r:(bm)=>bm?
+`<strong>Isu Diketahui — FN SMP</strong> ⚠️<br><br><span class="tag red">HIGH</span> <strong>Cracked Java / TLauncher</strong><br>Tak boleh dibaiki — Proxy MineKeep (free tier) tak bagi akses config. <em>Workaround: Guna Bedrock edition (mobile/Win10/emulator).</em><br><br><span class="tag" style="border-color:rgba(251,146,60,.3);color:#fb923c">MED</span> <strong>RAM Rendah / Lag</strong><br>Free tier ada had RAM. TNT explosions atau farm besar boleh cause TPS drops. <em>Workaround: Upgrade ke paid plan.</em><br><br><span class="tag" style="border-color:rgba(251,191,36,.3);color:#fbbf24">LOW</span> <strong>Bedrock Player List Tak Nampak</strong><br>Pemain Bedrock mungkin tak keluar dalam player list walaupun online. Geyser bridged players tak sentiasa terdedah melalui standard query API. Count dikira, tapi nama & skin tak boleh diambil. <em>Status: Dalam penyiasatan.</em>`:
+`<strong>Known Issues — FN SMP</strong> ⚠️<br><br><span class="tag red">HIGH</span> <strong>Cracked Java / TLauncher Access</strong><br>Cannot be fixed — MineKeep's Proxy config is not exposed on the free plan. <em>Workaround: Use Bedrock edition (mobile/Win10/emulator).</em><br><br><span class="tag" style="border-color:rgba(251,146,60,.3);color:#fb923c">MED</span> <strong>Low RAM / Performance Lag</strong><br>Free tier RAM limit. Heavy activities like TNT or large mob farms cause TPS drops. <em>Workaround: Migrate to paid plan.</em><br><br><span class="tag" style="border-color:rgba(251,191,36,.3);color:#fbbf24">LOW</span> <strong>Bedrock Player List Visibility</strong><br>Bedrock players connected via Geyser may not appear in player lists even when online. Count is included in total but names/skins can't be retrieved. <em>Status: Investigating query protocol options.</em>`},
+
+/* ── FN SMP: ROADMAP ── */
+{id:'fnsmp_roadmap',cat:'fnsmp',
+kw:['fn smp roadmap','planned features fn','fn smp future','upcoming fn smp','what is coming fn smp','voice chat fn smp','proximity voice fn','custom weapons fn','chat config fn','scoreboard fn smp','fn smp plans','coming soon fn smp','roadmap fn','feature baru fn smp','bila voice chat fn','akan datang fn smp'],
+fup:['FN SMP changelog','FN SMP plugins','FN SMP info'],
+r:(bm)=>bm?
+`<strong>Roadmap FN SMP</strong> 🗺️<br><br><span class="tag blue">IN DEV</span> <strong>Chat & Scoreboard</strong><br>Configure InteractiveChat untuk rich chat dengan item preview & player mentions. RealScoreboard customisation dengan live AuraSkills stats & JobsReborn balance.<br><br><span class="tag">PLANNED</span> <strong>Proximity Voice Chat</strong><br>Voice chat berasaskan proximity untuk Java & Bedrock. Dengar pemain hanya bila dekat. Perlukan resources server yang lebih baik.<br><br><span class="tag">PLANNED</span> <strong>Custom Weapons</strong><br>Senjata khas dan gameplay enhancements luar had vanilla. Special items, unique abilities, dan lore-tied content untuk integrasi The LoL × FN.`:
+`<strong>FN SMP Roadmap</strong> 🗺️<br><br><span class="tag blue">IN DEV</span> <strong>Chat & Scoreboard</strong><br>Configuring InteractiveChat for rich chat with item previews & player mentions. RealScoreboard customisation with live AuraSkills stats & JobsReborn balances.<br><br><span class="tag">PLANNED</span> <strong>Proximity Voice Chat</strong><br>Proximity-based voice chat for Java & Bedrock — hear players only when nearby. Requires better server resources to run smoothly.<br><br><span class="tag">PLANNED</span> <strong>Custom Weapons</strong><br>Custom weapons & gameplay enhancements beyond vanilla limits. Special items, unique abilities, and lore-tied content integrating The LoL × FN worlds.`},
+
+/* ── FN SMP: REPORT SYSTEM ── */
+{id:'fnsmp_report',cat:'fnsmp',
+kw:['report fn smp','submit report fn','bug report fn smp','player report fn smp','server issue fn smp','suggestion fn smp','report player fn','report bug fn smp','report griefing fn','how to report fn smp','cara report fn smp','laporan fn smp','report system fn smp','laporkan pemain fn','griefing fn smp','cheat fn smp','report cheat fn smp','report form fn smp','fn smp transparency','submit laporan fn','admin fn smp','how to contact admin fn','discord admin fn'],
+fup:['FN SMP known issues','FN SMP info','How to join FN SMP'],
+r:(bm)=>bm?
+`<strong>Sistem Laporan FN SMP</strong> 📋<br><br>Laporan dihantar terus ke Discord admin team dalam masa nyata. 4 jenis laporan:<br><br><span class="tag red">🐛 Bug Report</span> — Sesuatu yang rosak atau tak berfungsi<br><span class="tag" style="border-color:rgba(251,146,60,.3);color:#fb923c">⚠️ Server Issue</span> — Lag, crash, downtime, prestasi<br><span class="tag gold">🚨 Player Report</span> — Griefing, cheat, harassment, melanggar rules<br><span class="tag blue">💡 Suggestion</span> — Idea, plugin request, cadangan<br><br><em>Laporan palsu boleh lead to tindakan balik. Submit genuine reports sahaja.</em><br><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp-report.html">Submit Report →</a>`:
+`<strong>FN SMP Report System</strong> 📋<br><br>Reports go directly to the Discord admin team in real time. 4 report types:<br><br><span class="tag red">🐛 Bug Report</span> — Something broken or not working as expected<br><span class="tag" style="border-color:rgba(251,146,60,.3);color:#fb923c">⚠️ Server Issue</span> — Lag, crashes, downtime, performance<br><span class="tag gold">🚨 Player Report</span> — Griefing, cheating, harassment, rule violations<br><span class="tag blue">💡 Suggestion</span> — Ideas, plugin requests, improvements<br><br><em>False reports may result in action taken against the reporter. Genuine reports only.</em><br><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp-report.html">Submit Report →</a>`},
+
+/* ══════════════════════════════════════════════════════════
+   ▲▲▲ END OF FN SMP ENTRIES ▲▲▲
+══════════════════════════════════════════════════════════ */
 
 ];
 
@@ -923,20 +993,21 @@ function searchAllKB(query) {
 
 function fallback(bm) {
   return bm
-    ? `Hmm, tak faham betul-betul. 🤔 Cuba <kbd>/search [topik]</kbd> atau <kbd>/show [gambar]</kbd> atau <kbd>/help</kbd> untuk senarai arahan.`
-    : `Didn't catch that one. 🤔 Try <kbd>/search [topic]</kbd>, <kbd>/show [photo]</kbd>, or <kbd>/help</kbd> for all commands.`;
+    ? `Hmm, tak faham betul-betul. 🤔 Cuba <kbd>/search [topik]</kbd> atau <kbd>/show [gambar]</kbd> atau <kbd>/fnsmp</kbd> untuk info server, atau <kbd>/help</kbd> untuk senarai arahan.`
+    : `Didn't catch that one. 🤔 Try <kbd>/search [topic]</kbd>, <kbd>/show [photo]</kbd>, <kbd>/fnsmp</kbd> for server info, or <kbd>/help</kbd> for all commands.`;
 }
 
 /* ── CONTEXT MEMORY ── */
 let lastContext = null;
 
-/* ── CHIPS ── */
+/* ── CHIPS — updated with fnsmp tab ── */
 const ALL_CHIPS = {
-  all:['Who are The LoL founders?','What is The LoL?','Show me The LoL City 📷','Show me TLSRL 📷','/search government','/search citizenship'],
+  all:['Who are The LoL founders?','What is The LoL?','Show me The LoL City 📷','Show me TLSRL 📷','/search government','What is FN SMP?'],
   history:['History of The LoL','Show founding photos 📷','UltraX2020 crisis','Show neverland 📷','EhekSquad','Show ender dragon 📷'],
   gov:['Government structure','ISC agency','/search citizenship','All legal documents','The Black House','Naming policy'],
   corp:['All 5 Paiz Corp subsidiaries','Show TLSRL railway 📷','The LoL Movie','show terminal 📷','Paiz Chicken','TL Dollar exchange'],
-  fn:['What is Freaky Niggas?','Freaky News page','FN Servers','/search freaky niggas'],
+  fn:['What is Freaky Niggas?','Freaky News page','FN Servers','What is FN SMP?','/search fn smp'],
+  fnsmp:['What is FN SMP?','How to join FN SMP','FN SMP plugins','FN SMP changelog','FN SMP known issues','FN SMP roadmap','Submit FN SMP report'],
   images:['Show me The LoL City 📷','Show me TLSRL 📷','Show me the last day 📷','Show me ender dragon 📷','Show me the sus base 📷','Show me neverland 📷','Show golden era photos 📷','Show TLCC Twin Towers 📷','Show bye thelol photo 📷','Show terminal photos 📷'],
   isc_img:['Show ISC TLCC attack files 📷','Show ISC operations 📷','Show ISC legacy records 📷','Show ISC city attacks 📷','ISC clearance code','What is ISC?'],
 };
@@ -1009,13 +1080,13 @@ function renderPortalResults(results, bm) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   PROCESS QUERY — v5 with all bugs fixed
+   PROCESS QUERY — v5.1 (added /fnsmp shortcut)
 ══════════════════════════════════════════════════════════ */
 async function processQuery(t) {
   if (busy || !t.trim()) return;
   const raw = t.trim();
 
-  /* FIX: UI-only commands execute immediately — no user bubble, no typing flash */
+  /* UI-only commands — no bubble, no flash */
   if (/^\/clear$/i.test(raw)) { clearChat(); return; }
   if (/^\/theme$/i.test(raw)) { toggleTheme(); return; }
 
@@ -1035,8 +1106,8 @@ async function processQuery(t) {
     const cmd   = parts[0].toLowerCase();
     const arg   = parts.slice(1).join(' ').trim();
 
-    /* Direct KB shortcuts — FIX: safe lookup, never crashes */
-    const kbMap = { gov:'government', isc:'isc', fn:'fn_about', help:'help' };
+    /* Direct KB shortcuts */
+    const kbMap = { gov:'government', isc:'isc', fn:'fn_about', help:'help', fnsmp:'fnsmp_about' };
     if (kbMap[cmd]) {
       const e = KB.find(x => x.id === kbMap[cmd]);
       if (e) { addBot(e.r(bm), e.fup || []); lastContext = e; }
@@ -1059,7 +1130,7 @@ async function processQuery(t) {
       }
       if (portalResults.length) html += renderPortalResults(portalResults, bm);
       if (!kbResults.length && !portalResults.length) html += fallback(bm);
-      addBot(html, bm ? ['/search government','/search isc','/search paiz corp'] : ['/search history','/search ISC','/search Paiz Corp']);
+      addBot(html, bm ? ['/search fn smp','/search government','/search isc','/search paiz corp'] : ['/search fn smp','/search history','/search ISC','/search Paiz Corp']);
       setTimeout(() => searchIndicator.classList.remove('show'), 2000);
       busy = false; cs.disabled = false; ci.focus(); return;
     }
@@ -1081,7 +1152,7 @@ async function processQuery(t) {
       busy = false; cs.disabled = false; ci.focus(); return;
     }
 
-    /* Unknown slash command — fall through to normal matching */
+    /* Unknown slash — fall through */
   }
 
   /* ── CONTEXT MEMORY ── */
@@ -1105,7 +1176,7 @@ async function processQuery(t) {
     }
     if (portalResults.length) html += renderPortalResults(portalResults, bm);
     if (!kbResults.length && !portalResults.length) html += fallback(bm);
-    addBot(html, bm ? ['search government','search isc','search citizenship','search paiz corp'] : ['search history','search ISC','search citizenship','search Paiz Corp']);
+    addBot(html, bm ? ['search fn smp','search government','search isc','search citizenship'] : ['search fn smp','search history','search ISC','search citizenship']);
     setTimeout(() => searchIndicator.classList.remove('show'), 2000);
 
   /* ── SHOW INTENT ── */
@@ -1145,7 +1216,7 @@ async function processQuery(t) {
         lastContext = match.entry;
       }
     } else {
-      addBot(fallback(bm), bm ? ['Sejarah The LoL','Kerajaan','Paiz Corp','Show me photos'] : ['History of The LoL','Government','Paiz Corp','Show me photos']);
+      addBot(fallback(bm), bm ? ['Sejarah The LoL','Kerajaan','FN SMP','Show me photos'] : ['History of The LoL','Government','FN SMP','Show me photos']);
     }
   }
 
@@ -1161,22 +1232,23 @@ function clearChat() {
   const w = document.createElement('div'); w.className = 'welcome'; w.id = 'welcome';
   w.innerHTML = `
     <div class="wlogo">p</div>
-    <div class="wnew"><span class="wnew-dot"></span>v5.0 — OMNISCIENT</div>
+    <div class="wnew"><span class="wnew-dot"></span>v5.1 — OMNISCIENT · FN SMP INTEGRATED</div>
     <div class="wtitle">I am p<em>AI</em>z. I know everything.</div>
-    <p class="wsub">The LoL · Paiz® Corp · ISC · Freaky Niggas · Government · Legal · TLSRL · Citizenship — all indexed.</p>
-    <p class="wbm">Taip /help untuk senarai arahan penuh.</p>
+    <p class="wsub">The LoL · Paiz® Corp · ISC · Freaky Niggas · FN SMP · Government · Legal · TLSRL · Citizenship — all indexed.</p>
+    <p class="wbm">Taip /help untuk senarai arahan penuh. Cuba /fnsmp untuk info server!</p>
     <div class="wcat">
       <button class="wcat-btn on" onclick="showCat('all',this)">ALL</button>
       <button class="wcat-btn" onclick="showCat('history',this)">HISTORY</button>
       <button class="wcat-btn" onclick="showCat('gov',this)">GOVERNMENT</button>
       <button class="wcat-btn" onclick="showCat('corp',this)">PAIZ CORP</button>
       <button class="wcat-btn" onclick="showCat('fn',this)">FREAKY NIGGAS</button>
+      <button class="wcat-btn" onclick="showCat('fnsmp',this)">⛏ FN SMP</button>
       <button class="wcat-btn img-cat" onclick="showCat('images',this)">📷 PHOTOS</button>
       <button class="wcat-btn img-cat" onclick="showCat('isc_img',this)">🔒 ISC FILES</button>
     </div>
     <div class="wchips" id="wchips"></div>
     <div class="cmd-hint-bar">
-      <span class="cmd-hint"><kbd>/search</kbd> anything · <kbd>/show</kbd> photos · <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/clear</kbd> · <kbd>/theme</kbd> · <kbd>/help</kbd></span>
+      <span class="cmd-hint"><kbd>/search</kbd> anything · <kbd>/show</kbd> photos · <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/fnsmp</kbd> · <kbd>/clear</kbd> · <kbd>/theme</kbd> · <kbd>/help</kbd></span>
     </div>`;
   mi.appendChild(w);
   curCat = 'all'; renderChips();
