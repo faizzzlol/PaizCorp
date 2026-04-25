@@ -53,15 +53,16 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--green),var(--green-lt));z-index:10000;transition:width 0.06s linear;pointer-events:none}
 
 /* ── SUPER-NAV (The LoL Network Banner) ─────── */
-.super-nav{background:var(--ink2);padding:0 5%;height:30px;display:flex;align-items:center;gap:0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.super-nav{background:var(--ink2);padding:0 5%;height:30px;display:flex;align-items:center;gap:0;border-bottom:1px solid rgba(255,255,255,0.06);overflow-x:auto;scrollbar-width:none}
+.super-nav::-webkit-scrollbar{display:none}
 .sn-label{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:2px;color:rgba(255,255,255,0.22);flex-shrink:0;margin-right:16px}
-.sn-links{display:flex;gap:0;flex:1}
-.sn-links a{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:1.5px;color:rgba(255,255,255,0.3);text-decoration:none;padding:0 10px;height:30px;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,0.06);transition:color 0.2s,background 0.2s}
+.sn-links{display:flex;gap:0}
+.sn-links a{font-family:'DM Mono',monospace;font-size:0.42rem;letter-spacing:1.5px;color:rgba(255,255,255,0.3);text-decoration:none;padding:0 10px;height:30px;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,0.06);transition:color 0.2s,background 0.2s;white-space:nowrap;flex-shrink:0}
 .sn-links a:hover{color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.04)}
 .sn-links a.active{color:var(--green-lt)}
-.sn-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.sn-right{margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0;padding-left:16px}
 .sn-dot{width:5px;height:5px;border-radius:50%;background:var(--green-lt);animation:blink 2.2s infinite;flex-shrink:0}
-.sn-status{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;color:rgba(255,255,255,0.2)}
+.sn-status{font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:1.5px;color:rgba(255,255,255,0.2);white-space:nowrap}
 
 /* ── NAV ──────────────────────────────────────── */
 nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:center;padding:0 5%;background:rgba(244,240,232,0.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);gap:16px}
@@ -121,7 +122,7 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 /* ── TICKER ───────────────────────────────────── */
 .ticker{background:var(--green);padding:0.6rem 0;overflow:hidden;cursor:default}
 .ticker:hover .ticker-track{animation-play-state:paused}
-.ticker-track{display:flex;animation:ticker 28s linear infinite;white-space:nowrap}
+.ticker-track{display:flex;animation:ticker 34s linear infinite;white-space:nowrap}
 .ti{display:inline-flex;align-items:center;gap:18px;padding:0 26px;font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:2px;color:rgba(255,255,255,0.78);flex-shrink:0}
 .td{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.3)}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -201,6 +202,19 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .eco-film-title em{font-style:italic;color:#a060a0;font-weight:400}
 .eco-film-meta{font-size:0.76rem;color:rgba(255,255,255,0.22);font-weight:300;line-height:1.5}
 .eco-film-pill{align-self:flex-start;font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:1.5px;padding:2px 8px;border:1px solid rgba(92,26,74,0.3);color:rgba(92,26,74,0.8)}
+
+/* FN Community sibling node */
+.eco-fn-wrap{padding-left:2rem;border-left:1px solid rgba(255,255,255,0.05);margin-left:26px;margin-top:8px;display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+.eco-fn{padding:1.1rem 1.4rem;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);text-decoration:none;transition:background 0.2s;display:flex;flex-direction:column;gap:8px;position:relative}
+.eco-fn:hover{background:rgba(255,255,255,0.05)}
+.eco-fn-badge{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;padding:2px 7px;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.04);align-self:flex-start}
+.eco-fn-name{font-family:'Playfair Display',serif;font-size:0.92rem;font-weight:900;color:rgba(255,255,255,0.85);line-height:1.2;letter-spacing:-0.2px}
+.eco-fn-desc{font-size:0.78rem;color:rgba(255,255,255,0.25);line-height:1.65;font-weight:300}
+.eco-fn-status{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:1.5px;color:rgba(255,255,255,0.35);display:flex;align-items:center;gap:5px;margin-top:auto}
+.eco-fn-status::before{content:'';width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.4);flex-shrink:0}
+.eco-fn-arrow{position:absolute;bottom:12px;right:12px;font-family:'DM Mono',monospace;font-size:0.42rem;color:rgba(255,255,255,0.1);transition:color 0.2s,right 0.2s}
+.eco-fn:hover .eco-fn-arrow{color:rgba(255,255,255,0.38);right:8px}
+.eco-sibling-label{margin-left:26px;padding-left:2rem;font-family:'DM Mono',monospace;font-size:0.4rem;letter-spacing:2px;color:rgba(255,255,255,0.14);margin-top:16px;margin-bottom:6px;border-left:1px solid rgba(255,255,255,0.05)}
 
 /* ── ABOUT STRIP ──────────────────────────────── */
 .about-strip{display:grid;grid-template-columns:1fr 2fr;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -348,7 +362,8 @@ nav{position:sticky;top:0;z-index:400;height:62px;display:flex;align-items:cente
 .ns-title{font-family:'DM Mono',monospace;font-size:0.54rem;letter-spacing:3px;color:var(--faint)}
 .ns-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 2.2s infinite}
 .ns-live{font-family:'DM Mono',monospace;font-size:0.48rem;letter-spacing:2px;color:var(--green)}
-.ns-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border)}
+/* Updated: 3-col grid to accommodate 9 sites nicely */
+.ns-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
 .ns-site{background:var(--cream);padding:1.2rem 1rem;border:1px solid transparent;transition:all 0.2s;text-decoration:none;display:flex;flex-direction:column;gap:8px}
 .ns-site:hover{background:var(--cream2);border-color:var(--border)}
 .ns-site-id{font-family:'DM Mono',monospace;font-size:0.38rem;letter-spacing:2px;color:var(--faint)}
@@ -412,7 +427,7 @@ footer{background:var(--ink)}
   .founder{grid-template-columns:1fr}
   .nav-links{display:none}
   .hamburger{display:flex}
-  .eco-subs-wrap,.eco-film-wrap{grid-template-columns:1fr}
+  .eco-subs-wrap,.eco-film-wrap,.eco-fn-wrap{grid-template-columns:1fr}
   .eco-root-stats,.eco-corp-stats{display:none}
   .sn-links a{font-size:0.36rem;padding:0 6px}
 }
@@ -437,8 +452,8 @@ footer{background:var(--ink)}
 <div class="super-nav">
   <span class="sn-label">THE LOL NETWORK</span>
   <div class="sn-links">
-    <a href="https://faizzzlol.github.io/thelol/">THE LOL</a>
     <a href="https://faizzzlol.github.io/PaizCorp/" class="active">PAIZ® CORP</a>
+    <a href="https://faizzzlol.github.io/thelol/">THE LOL</a>
     <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">PAIZ SHOP</a>
     <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">PAIZ CHICKEN</a>
     <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">PAIZPRODUCTIONS</a>
@@ -446,10 +461,12 @@ footer{background:var(--ink)}
     <a href="https://faizzzlol.github.io/thelol/gov/">GOVERNMENT</a>
     <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
     <a href="https://faizzzlol.github.io/thelol/tlr/">TL RAILWAYS</a>
+    <a href="https://faizzzlol.github.io/freakyniggas/">FREAKY NIGGAS</a>
+    <a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html">FN SMP</a>
   </div>
   <div class="sn-right">
     <div class="sn-dot"></div>
-    <span class="sn-status">ALL SYSTEMS LIVE</span>
+    <span class="sn-status">ALL SYSTEMS LIVE · SKYXION: ALTAER ERA</span>
   </div>
 </div>
 
@@ -465,6 +482,7 @@ footer{background:var(--ink)}
     <a href="#leadership">LEADERSHIP</a>
   </div>
   <div class="nav-right">
+    <a href="https://faizzzlol.github.io/PaizCorp/pAIz" class="nav-pill">pAIz AI</a>
     <a href="https://faizzzlol.github.io/thelol/" class="nav-pill primary">← THE LOL</a>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -515,9 +533,12 @@ footer{background:var(--ink)}
   <span class="ti">PAIZ CHICKEN<span class="td"></span></span>
   <span class="ti">TLSRL · 4,800+ BLOCKS<span class="td"></span></span>
   <span class="ti">THE LOL MOVIE · IN PRODUCTION<span class="td"></span></span>
-  <span class="ti">SKYXION: ALTAER<span class="td"></span></span>
+  <span class="ti">SKYXION: ALTAER ERA<span class="td"></span></span>
   <span class="ti">ISC · INTERNAL SECURITY CONTROL<span class="td"></span></span>
   <span class="ti">◆ DIAMOND ECONOMY<span class="td"></span></span>
+  <span class="ti">FN SMP · V1.3.3 · JAVA & BEDROCK CROSSPLAY<span class="td"></span></span>
+  <span class="ti">FREAKY NIGGAS × THE LOL<span class="td"></span></span>
+  <span class="ti">pAIz v5.1 · OMNISCIENT<span class="td"></span></span>
   <span class="ti">TL RAILWAYS<span class="td"></span></span>
   <span class="ti">PAIZ™ CONSTRUCTION<span class="td"></span></span>
   <span class="ti">PAIZ SHOP<span class="td"></span></span>
@@ -525,9 +546,12 @@ footer{background:var(--ink)}
   <span class="ti">PAIZ CHICKEN<span class="td"></span></span>
   <span class="ti">TLSRL · 4,800+ BLOCKS<span class="td"></span></span>
   <span class="ti">THE LOL MOVIE · IN PRODUCTION<span class="td"></span></span>
-  <span class="ti">SKYXION: ALTAER<span class="td"></span></span>
+  <span class="ti">SKYXION: ALTAER ERA<span class="td"></span></span>
   <span class="ti">ISC · INTERNAL SECURITY CONTROL<span class="td"></span></span>
   <span class="ti">◆ DIAMOND ECONOMY<span class="td"></span></span>
+  <span class="ti">FN SMP · V1.3.3 · JAVA & BEDROCK CROSSPLAY<span class="td"></span></span>
+  <span class="ti">FREAKY NIGGAS × THE LOL<span class="td"></span></span>
+  <span class="ti">pAIz v5.1 · OMNISCIENT<span class="td"></span></span>
 </div></div>
 
 <!-- ECOSYSTEM MAP -->
@@ -544,7 +568,7 @@ footer{background:var(--ink)}
         <div class="eco-root-icon">LoL</div>
         <div class="eco-root-body">
           <div class="eco-name">The Legend of <em>Legiona</em></div>
-          <div class="eco-desc">SOVEREIGN NATION · SKYXION: ALTAER · EST. 2023 · SUPER WEBSITE</div>
+          <div class="eco-desc">SOVEREIGN NATION · SKYXION: ALTAER ERA · EST. 2023 · SUPER WEBSITE</div>
         </div>
         <div class="eco-root-stats">
           <div class="ers-item"><span class="ers-val">3</span><span class="ers-key">FOUNDERS</span></div>
@@ -631,6 +655,26 @@ footer{background:var(--ink)}
         </div>
 
       </div>
+
+      <!-- SIBLING: Freaky Niggas community -->
+      <div class="eco-sibling-label">AFFILIATED COMMUNITY · JOINT SERVER</div>
+      <div class="eco-fn-wrap">
+        <a href="https://faizzzlol.github.io/freakyniggas/" class="eco-fn">
+          <span class="eco-fn-badge">COMMUNITY · FREAKY NIGGAS</span>
+          <div class="eco-fn-name">Freaky Niggas</div>
+          <div class="eco-fn-desc">Affiliated Minecraft community. Dark monochrome glitch aesthetic. Freaky News, server listings, feedback portal.</div>
+          <div class="eco-fn-status">LIVE</div>
+          <span class="eco-fn-arrow">→</span>
+        </a>
+        <a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html" class="eco-fn">
+          <span class="eco-fn-badge">JOINT SERVER · FN SMP · V1.3.3</span>
+          <div class="eco-fn-name">FN SMP</div>
+          <div class="eco-fn-desc">Freaky Niggas × The Legend of Legiona joint server. Java & Bedrock crossplay · Semi-Vanilla · 10 slots · Singapore node.</div>
+          <div class="eco-fn-status">ACTIVE</div>
+          <span class="eco-fn-arrow">→</span>
+        </a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -678,6 +722,24 @@ footer{background:var(--ink)}
         <div class="ns-site-id">FILM-001</div>
         <div class="ns-site-name">The LoL: The Movie</div>
         <div class="ns-site-url">faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie</div>
+        <div class="ns-site-status">LIVE</div>
+      </a>
+      <a href="https://faizzzlol.github.io/freakyniggas/" class="ns-site">
+        <div class="ns-site-id">FN-001</div>
+        <div class="ns-site-name">Freaky Niggas</div>
+        <div class="ns-site-url">faizzzlol.github.io/freakyniggas/</div>
+        <div class="ns-site-status">LIVE</div>
+      </a>
+      <a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html" class="ns-site">
+        <div class="ns-site-id">FN-002 · V1.3.3</div>
+        <div class="ns-site-name">FN SMP</div>
+        <div class="ns-site-url">faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html</div>
+        <div class="ns-site-status">LIVE</div>
+      </a>
+      <a href="https://faizzzlol.github.io/PaizCorp/pAIz" class="ns-site">
+        <div class="ns-site-id">AI-001 · V5.1</div>
+        <div class="ns-site-name">pAIz — Omniscient AI</div>
+        <div class="ns-site-url">faizzzlol.github.io/PaizCorp/pAIz</div>
         <div class="ns-site-status">LIVE</div>
       </a>
     </div>
@@ -858,11 +920,12 @@ footer{background:var(--ink)}
         <div class="status">OPERATIONAL</div>
       </div>
       <div class="proj">
-        <div class="proj-id">PROJECT-CHICK-006 · FOOD</div>
-        <h3>Paiz <em>Chicken</em></h3>
-        <p>Virtual food ordering system with Discord webhook integration, stock management, and distance-based delivery fees across Skyxion.</p>
+        <div class="proj-id">PROJECT-FNSMP-006 · JOINT · COMMUNITY</div>
+        <h3>FN <em>SMP</em></h3>
+        <p>Joint server with Freaky Niggas — Java & Bedrock crossplay, Semi-Vanilla survival. V1.3.3 with AuraSkills RPG, JobsReborn economy, 20 active plugins. Singapore node via MineKeep.</p>
+        <div class="proj-chips"><span class="chip">V1.3.3</span><span class="chip">CROSSPLAY</span><span class="chip">10 SLOTS</span><span class="chip">20 PLUGINS</span></div>
         <div class="status">OPERATIONAL</div>
-        <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/" class="proj-link">ORDER →</a>
+        <a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html" class="proj-link">VIEW FN SMP →</a>
       </div>
     </div>
   </div>
@@ -885,7 +948,7 @@ footer{background:var(--ink)}
         <div class="eyebrow">CORPORATE HISTORY</div>
         <h2>How We <em>Grew.</em></h2>
       </div>
-      <div class="sh-right">SKYXION: ALTAER<br>THE LOL TERRITORY</div>
+      <div class="sh-right">SKYXION: ALTAER ERA<br>THE LOL TERRITORY</div>
     </div>
     <div class="timeline stagger">
       <div class="tl-item">
@@ -919,8 +982,15 @@ footer{background:var(--ink)}
       <div class="tl-item">
         <div class="tl-year">2026</div>
         <div class="tl-body">
-          <h4>Conglomerate Expansion & Full Web Ecosystem</h4>
-          <p>All five subsidiaries fully operational. Paiz Shop upgraded with Discord webhook ordering and GitHub-powered admin system. Full web ecosystem live across 6 interconnected sites. Paiz® Corp enters its most ambitious phase yet.</p>
+          <h4>FN SMP Launched — Freaky Niggas × The LoL</h4>
+          <p>The LoL partners with Freaky Niggas to launch FN SMP — a joint Java & Bedrock crossplay server on a Singapore node. Version 1.3.3 brings 20 active plugins including AuraSkills RPG and JobsReborn economy.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026</div>
+        <div class="tl-body">
+          <h4>Full Web Ecosystem & pAIz Omniscient</h4>
+          <p>All five subsidiaries fully operational. Full web ecosystem live across 9 interconnected sites. pAIz v5.1 launches as the network's omniscient AI assistant — indexing The LoL, Paiz Corp, ISC, Freaky Niggas and FN SMP with bilingual BM/EN support.</p>
         </div>
       </div>
     </div>
@@ -940,7 +1010,7 @@ footer{background:var(--ink)}
     <div class="fr-title">The mind behind <em>Paiz® Corp.</em></div>
     <div class="fr-body">
       <p><strong>Faiz4224</strong> founded Paiz® Corp as The LoL's answer to one question: how do you build a self-sufficient sovereign nation from nothing? The answer — a national conglomerate spanning every sector the nation needs.</p>
-      <p>As First President of The Legend of Legiona, Faiz4224 proposed the TLSRL railway, commissioned the TLCC Twin Towers, established TL Railways, launched PaizShop, greenlit The LoL Movie through PaizProductions, and opened Paiz Chicken. Every company exists to serve The LoL's citizens.</p>
+      <p>As First President of The Legend of Legiona, Faiz4224 proposed the TLSRL railway, commissioned the TLCC Twin Towers, established TL Railways, launched PaizShop, greenlit The LoL Movie through PaizProductions, opened Paiz Chicken, and co-launched FN SMP with the Freaky Niggas community. Every company exists to serve The LoL's citizens.</p>
     </div>
   </div>
 </div>
@@ -974,14 +1044,16 @@ footer{background:var(--ink)}
       <a href="https://faizzzlol.github.io/thelol/">Nation Home</a>
       <a href="https://faizzzlol.github.io/thelol/gov/">Government</a>
       <a href="https://faizzzlol.github.io/thelol/gov/isc/">ISC</a>
-      <a href="https://faizzzlol.github.io/thelol/gov/isc/search">ISC Archive</a>
+      <a href="https://faizzzlol.github.io/freakyniggas/">Freaky Niggas</a>
+      <a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp.html">FN SMP</a>
+      <a href="https://faizzzlol.github.io/PaizCorp/pAIz">pAIz AI</a>
       <a href="https://faizzzlol.github.io/thelol/about">History</a>
     </div>
   </div>
   <div class="ft-bottom">
     <div class="ft-bottom-inner">
       <p>© 2026 PAIZ® CORP — ALL RIGHTS RESERVED — THE LEGEND OF LEGIONA</p>
-      <p>FOUNDED BY FAIZ4224 · SKYXION: ALTAER · 6 SITES · ALL LIVE</p>
+      <p>FOUNDED BY FAIZ4224 · SKYXION: ALTAER ERA · 9 SITES · ALL LIVE</p>
     </div>
   </div>
 </footer>
@@ -1025,7 +1097,6 @@ footer{background:var(--ink)}
       mobNav.classList.remove('open');
     });
   });
-  // Close on outside click
   document.addEventListener('click', e => {
     if (!hamburger.contains(e.target) && !mobNav.contains(e.target)) {
       hamburger.classList.remove('open');
@@ -1061,7 +1132,6 @@ footer{background:var(--ink)}
         el.innerHTML = useEm ? `<em>${fmt}${suffix}</em>` : `${fmt}${suffix}`;
         if (p < 1) requestAnimationFrame(tick);
         else {
-          // Snap to final
           const finalFmt = target >= 1000 ? target.toLocaleString() : String(target);
           el.innerHTML = useEm ? `<em>${finalFmt}${suffix}</em>` : `${finalFmt}${suffix}`;
         }
