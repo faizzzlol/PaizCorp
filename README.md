@@ -3,17 +3,17 @@
 > **The national conglomerate of The Legend of Legiona.**  
 > Railways. Construction. Retail. Film. Food.
 
-[![Live Site](https://img.shields.io/badge/Live%20Site-faizzzlol.github.io%2FPaizCorp-2a6647?style=flat-square)](https://faizzzlol.github.io/PaizCorp/)
-[![The LoL](https://img.shields.io/badge/The%20LoL-Nation%20Home-161410?style=flat-square)](https://faizzzlol.github.io/thelol/)
+[![Live Site](https://img.shields.io/badge/Live%20Site-faizzzlol.github.io%2FPaizCorp-2a6647?style=flat-square)](https://faizzzlol.github.io/paizcorp/)
+[![The LoL](https://img.shields.io/badge/The%20LoL-Nation%20Home-161410?style=flat-square)](https://thelegendoflegiona.github.io/main/)
 [![Server](https://img.shields.io/badge/Server-Skyxion%3A%20Ragnarok-4a5540?style=flat-square)]()
 
 ---
 
 ## Overview
 
-Paiz® Corp is a multi-division national conglomerate operating within **The Legend of Legiona (The LoL)** — a sovereign Minecraft nation on Skyxion: Ragnarok. Founded by **Faiz4224**, Paiz® Corp oversees five subsidiaries spanning every sector the nation needs: transport, construction, retail, film production, and food.
+Paiz® Corp is a multi-division national conglomerate operating within **The Legend of Legiona (The LoL)** — a sovereign Minecraft nation on Skyxion: Altaër. Founded by **Faiz4224**, Paiz® Corp oversees five subsidiaries spanning every sector the nation needs: transport, logistic, industries, construction, retail, film production, and food.
 
-**Live site →** [faizzzlol.github.io/PaizCorp](https://faizzzlol.github.io/PaizCorp/)
+**Live site →** [faizzzlol.github.io/PaizCorp](https://faizzzlol.github.io/paizcorp/)
 
 ---
 
