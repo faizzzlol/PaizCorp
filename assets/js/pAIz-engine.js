@@ -1,7 +1,21 @@
 /**
  * ═══════════════════════════════════════════════════════════════
- *  pAIz Engine v5.2
+ *  pAIz Engine v5.3
  *  Reusable KB + logic for The Legend of Legiona / Paiz® Corp AI.
+ *
+ *  CHANGELOG v5.3 (2026.05.13):
+ *  — Added: National ID System (NIS) knowledge — 3 new KB entries
+ *  — Added: 3 new NIS portals (Portal, Registry, ID Card)
+ *  — Added: 'nis' chip category
+ *  — Fixed: History lore corrected from WhatsApp primary sources
+ *    · Ender dragon fight confirmed Feb 27 2023 (Faiz+Dyno only; imii didn't participate)
+ *    · ikanuwu (Ajim) confirmed ≠ IkanOwo (Iman/ImanHafizz) — official
+ *    · Dyno's MC username history: DinosaurHuman → LonelyDynozz
+ *    · Unemployment Era officially named Jan 20 2026 (post-SPM results)
+ *    · Dyno bought Minecraft Java+Bedrock (RM50) March 5 2026
+ *    · "The Sus" name confirmed taken from Indonesian MC roleplay series
+ *  — Fixed: Citizenship KB now references NIS ID assignment
+ *  — Fixed: Nav KB updated with NIS links
  *
  *  Usage on any page:
  *    <script src="https://faizzzlol.github.io/paizcorp/assets/js/pAIz-engine.js"></script>
@@ -25,7 +39,6 @@
   'use strict';
 
   /* ── ROOTS ── */
-  // IMPORTANT: verify these paths match your actual repo structure
   const GALLERY_ROOT = 'https://thelegendoflegiona.github.io/gallery';
   const ISC_ROOT     = 'https://thelegendoflegiona.github.io/isc';
 
@@ -40,7 +53,7 @@
     'dia','mereka','saya','aku','ko','awak','hang','den','wak','abang','kakak',
     'adik','tunjuk','gambar','tengok','lihat','cari','nombor','status','semak',
     'permohonan','warganegara','rakyat','cara','masalah','plugin','server',
-    'join','laporan',
+    'join','laporan','ic','kad','pengenalan','daftar','semak ic',
   ];
 
   function detectBM(q) {
@@ -49,7 +62,7 @@
       /[a-z]+(lah|kan|la|wei|weh|ke|pun|je|dah|tak)$/.test(q.toLowerCase());
   }
 
-  /* ── PORTALS (26 entries) ── */
+  /* ── PORTALS (29 entries) ── */
   const PORTALS = [
     { tag:'NATION HOME',   name:'The Legend of Legiona',       url:'https://thelegendoflegiona.github.io/main/',                                  desc:'Main hub — history, network, founders, bento grid' },
     { tag:'GOVERNMENT',    name:'Government Portal',            url:'https://thelegendoflegiona.github.io/gov/',                                   desc:'Proclamation, history, departments, megaprojects' },
@@ -59,6 +72,9 @@
     { tag:'ISC SEARCH',    name:'ISC Public Archive Search',    url:'https://thelegendoflegiona.github.io/isc/search/',                            desc:'Declassified missions, legal docs, incidents' },
     { tag:'CITIZENSHIP',   name:'Citizenship Portal',           url:'https://thelegendoflegiona.github.io/gov/systems/citizenship/',               desc:'Apply, renew, check eligibility and obligations' },
     { tag:'CITIZEN STATUS',name:'Citizenship Status Checker',   url:'https://thelegendoflegiona.github.io/gov/systems/citizenship/status',         desc:'Check application status by reference number' },
+    { tag:'NIS PORTAL',    name:'National ID Portal',           url:'https://thelegendoflegiona.github.io/gov/systems/id/',                        desc:'THELOLGOV-NIS · National Identification System — ID services hub' },
+    { tag:'NIS REGISTRY',  name:'Citizen Registry',             url:'https://thelegendoflegiona.github.io/gov/systems/id/registry',                desc:'Publicly verify any The LoL National ID number (THELOL-YYYY-#####)' },
+    { tag:'NIS ID CARD',   name:'Digital ID Card Viewer',       url:'https://thelegendoflegiona.github.io/gov/systems/id/id-card',                 desc:'View your official digital NIC — enter your THELOL ID' },
     { tag:'LEGAL DOCS',    name:'Legal Archive',                url:'https://thelegendoflegiona.github.io/gov/systems/archives/',                  desc:'All acts, proclamations, decrees — searchable' },
     { tag:'HISTORY',       name:'About The LoL',                url:'https://thelegendoflegiona.github.io/main/about/',                            desc:'Full interactive national timeline — 7 chapters' },
     { tag:'GALLERY',       name:'Photo Gallery',                url:'https://thelegendoflegiona.github.io/gallery/',                               desc:'Complete photo archive 2020–2024, 8 eras' },
@@ -70,7 +86,7 @@
     { tag:'FILM STUDIO',   name:'PaizProductions',              url:'https://faizzzlol.github.io/paizcorp/paizproductions/',                       desc:'Official film studio, 3 productions' },
     { tag:'FEATURE FILM',  name:'The LoL: The Movie',           url:'https://faizzzlol.github.io/paizcorp/paizproductions/thelolmovie',            desc:'In production — cast, synopsis, production notes' },
     { tag:'CURRENCY',      name:'TL$ Currency Converter',       url:'https://thelegendoflegiona.github.io/gov/finance/',                           desc:'TL Dollar exchange rates, EN/BM bilingual' },
-    { tag:'AI ASSISTANT',  name:'pAIz v5.2',                    url:'https://faizzzlol.github.io/paizcorp/pAIz',                                   desc:'Omniscient AI assistant with slash commands' },
+    { tag:'AI ASSISTANT',  name:'pAIz v5.3',                    url:'https://faizzzlol.github.io/paizcorp/pAIz',                                   desc:'Omniscient AI assistant with slash commands' },
     { tag:'FREAKY NIGGAS', name:'Freaky Niggas Community',      url:'https://faizzzlol.github.io/freakyniggas/',                                   desc:'Dark monochrome glitch aesthetic · Minecraft servers · Freaky News' },
     { tag:'FREAKY NEWS',   name:'Freaky News (EN/BM)',          url:'https://faizzzlol.github.io/freakyniggas/news',                               desc:'Bilingual news with localStorage EN/BM toggle' },
     { tag:'FN SERVERS',    name:'Freaky Niggas Servers',        url:'https://faizzzlol.github.io/freakyniggas/servers',                            desc:'Minecraft server listings' },
@@ -353,8 +369,8 @@
       kw:['hello','hi','hey','hei','hai','hye','hewlo','helo','hola','morning','good morning','good evening','selamat pagi','selamat petang','selamat malam','pagi','petang','malam','salam','assalamualaikum','wslm','wsp','wassup','wasap','sup','yo','oi','aye','howdy','namaste','apa khabar','apa kabo','apa cerita','apahal','camne','macam mana','sihat','ok tak'],
       fup:['Who are the founders?','What is The LoL?','Show me photos','What is FN SMP?'],
       r:(bm)=>bm
-        ?`Eh, wassup! Aku <strong>pAIz v5.2 — Omniscient</strong> — AI assistant rasmi The Legend of Legiona! 😄<br><br>Cuba slash commands:<br>→ <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/fnsmp</kbd> — Shortcut jabatan<br>→ <kbd>/search [topik]</kbd> — Cari semua portal<br>→ <kbd>/show [gambar]</kbd> — Preview foto<br>→ <kbd>/help</kbd> — Semua arahan`
-        :`Yo! I'm <strong>pAIz v5.2 — Omniscient</strong> — The LoL's official AI! 🟩<br><br>Slash commands:<br>→ <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/fnsmp</kbd> — Department shortcuts<br>→ <kbd>/search [topic]</kbd> — Search all portals<br>→ <kbd>/show [photo]</kbd> — Preview gallery photos<br>→ <kbd>/help</kbd> — All commands`,
+        ?`Eh, wassup! Aku <strong>pAIz v5.3 — Omniscient</strong> — AI assistant rasmi The Legend of Legiona! 😄<br><br>Cuba slash commands:<br>→ <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/fnsmp</kbd> — Shortcut jabatan<br>→ <kbd>/search [topik]</kbd> — Cari semua portal<br>→ <kbd>/show [gambar]</kbd> — Preview foto<br>→ <kbd>/help</kbd> — Semua arahan`
+        :`Yo! I'm <strong>pAIz v5.3 — Omniscient</strong> — The LoL's official AI! 🟩<br><br>Slash commands:<br>→ <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/fnsmp</kbd> — Department shortcuts<br>→ <kbd>/search [topic]</kbd> — Search all portals<br>→ <kbd>/show [photo]</kbd> — Preview gallery photos<br>→ <kbd>/help</kbd> — All commands`,
     },
 
     /* HELP */
@@ -362,8 +378,8 @@
       kw:['what can you do','help me','boleh buat apa','apa yang kau boleh buat','capabilities','apa ko tahu','what do you know','what are you','who are you','about yourself','about paiz','what is paiz','how do you work','aku boleh tanya apa','nak tanya apa','new features','feature baru','apa baru','commands','slash commands','arahan'],
       fup:['Show me photos','Search history','Search government','What is FN SMP?'],
       r:(bm)=>bm
-        ?`Aku <strong>pAIz v5.2 — OMNISCIENT</strong> 🎉<br><br><strong>Slash Commands:</strong><br>→ <kbd>/search [query]</kbd> — Cari semua portal<br>→ <kbd>/show [topic]</kbd> — Preview gambar dari galeri<br>→ <kbd>/gov</kbd> — Struktur kerajaan<br>→ <kbd>/isc</kbd> — Portal ISC<br>→ <kbd>/fn</kbd> — Freaky Niggas<br>→ <kbd>/fnsmp</kbd> — FN SMP server info<br>→ <kbd>/clear</kbd> — Chat baru<br>→ <kbd>/theme</kbd> — Tukar tema<br>→ <kbd>/help</kbd> — Halaman ini<br><br><strong>📚 Tanya je:</strong> Sejarah · Kerajaan · ISC · Paiz Corp · FN SMP · Gambar galeri`
-        :`I'm <strong>pAIz v5.2 — OMNISCIENT</strong> 🎉<br><br><strong>Slash Commands:</strong><br>→ <kbd>/search [query]</kbd> — Search all portals<br>→ <kbd>/show [topic]</kbd> — Preview gallery photos<br>→ <kbd>/gov</kbd> — Government structure<br>→ <kbd>/isc</kbd> — ISC portal<br>→ <kbd>/fn</kbd> — Freaky Niggas<br>→ <kbd>/fnsmp</kbd> — FN SMP server info<br>→ <kbd>/clear</kbd> — New chat<br>→ <kbd>/theme</kbd> — Toggle theme<br>→ <kbd>/help</kbd> — This menu<br><br><strong>📚 Just ask about:</strong> History · Government · ISC · Paiz Corp · FN SMP · Gallery Photos`,
+        ?`Aku <strong>pAIz v5.3 — OMNISCIENT</strong> 🎉<br><br><strong>Slash Commands:</strong><br>→ <kbd>/search [query]</kbd> — Cari semua portal<br>→ <kbd>/show [topic]</kbd> — Preview gambar dari galeri<br>→ <kbd>/gov</kbd> — Struktur kerajaan<br>→ <kbd>/isc</kbd> — Portal ISC<br>→ <kbd>/fn</kbd> — Freaky Niggas<br>→ <kbd>/fnsmp</kbd> — FN SMP server info<br>→ <kbd>/clear</kbd> — Chat baru<br>→ <kbd>/theme</kbd> — Tukar tema<br>→ <kbd>/help</kbd> — Halaman ini<br><br><strong>📚 Tanya je:</strong> Sejarah · Kerajaan · ISC · Paiz Corp · NIS · FN SMP · Gambar galeri`
+        :`I'm <strong>pAIz v5.3 — OMNISCIENT</strong> 🎉<br><br><strong>Slash Commands:</strong><br>→ <kbd>/search [query]</kbd> — Search all portals<br>→ <kbd>/show [topic]</kbd> — Preview gallery photos<br>→ <kbd>/gov</kbd> — Government structure<br>→ <kbd>/isc</kbd> — ISC portal<br>→ <kbd>/fn</kbd> — Freaky Niggas<br>→ <kbd>/fnsmp</kbd> — FN SMP server info<br>→ <kbd>/clear</kbd> — New chat<br>→ <kbd>/theme</kbd> — Toggle theme<br>→ <kbd>/help</kbd> — This menu<br><br><strong>📚 Just ask about:</strong> History · Government · ISC · Paiz Corp · NIS · FN SMP · Gallery Photos`,
     },
 
     /* WHAT IS THE LOL */
@@ -371,8 +387,8 @@
       kw:['what is the lol','apa tu the lol','the lol tu apa','apa itu the lol','what is the legend of legiona','apa tu legend of legiona','about the lol','pasal the lol','tell me about the lol','explain the lol','terangkan the lol','the lol minecraft','minecraft nation','negara minecraft','is the lol a country','what is thelol'],
       fup:['History','Founders','Government','Paiz Corp'],
       r:(bm)=>bm
-        ?`<strong>The Legend of Legiona (The LoL)</strong> 🟩<br><br>Negara berdaulat Minecraft di server Skyxion, era Altaër. Diasaskan 2023 oleh Faiz4224, Imii Kun & Dyno. Asalnya "The Sus".<br><br>The LoL ada:<br>— Kerajaan formal (6 jabatan + The Black House)<br>— Agensi perisikan (ISC)<br>— Arkib undang-undang dengan dokumen rasmi<br>— Rangkaian rel 4,800+ blok (TLSRL)<br>— Konglomerat nasional (Paiz® Corp) 5 subsidiari<br>— Sistem kewarganegaraan formal<br>— Galeri foto lengkap 2020–2024`
-        :`<strong>The Legend of Legiona (The LoL)</strong> 🟩<br><br>A sovereign Minecraft nation on the Skyxion server, Altaër Era. Founded 2023 by Faiz4224, Imii Kun & Dyno. Originally called "The Sus".<br><br>The LoL has:<br>— Formal government (6 departments + The Black House)<br>— Intelligence agency (ISC)<br>— Legal archive with official documents<br>— 4,800+ block rail network (TLSRL)<br>— National conglomerate (Paiz® Corp) with 5 subsidiaries<br>— Formal citizenship system<br>— Complete photo archive 2020–2024`,
+        ?`<strong>The Legend of Legiona (The LoL)</strong> 🟩<br><br>Negara berdaulat Minecraft di server Skyxion, era Altaër. Diasaskan 2023 oleh Faiz4224, Imii Kun & Dyno. Asalnya "The Sus".<br><br>The LoL ada:<br>— Kerajaan formal (6 jabatan + The Black House)<br>— Agensi perisikan (ISC)<br>— Sistem ID Nasional (NIS) dengan kad digital<br>— Arkib undang-undang dengan dokumen rasmi<br>— Rangkaian rel 4,800+ blok (TLSRL)<br>— Konglomerat nasional (Paiz® Corp) 5 subsidiari<br>— Sistem kewarganegaraan formal<br>— Galeri foto lengkap 2020–2024`
+        :`<strong>The Legend of Legiona (The LoL)</strong> 🟩<br><br>A sovereign Minecraft nation on the Skyxion server, Altaër Era. Founded 2023 by Faiz4224, Imii Kun & Dyno. Originally called "The Sus".<br><br>The LoL has:<br>— Formal government (6 departments + The Black House)<br>— Intelligence agency (ISC)<br>— National ID System (NIS) with digital ID cards<br>— Legal archive with official documents<br>— 4,800+ block rail network (TLSRL)<br>— National conglomerate (Paiz® Corp) with 5 subsidiaries<br>— Formal citizenship system<br>— Complete photo archive 2020–2024`,
     },
 
     /* FOUNDERS */
@@ -380,8 +396,8 @@
       kw:['founder','founders','pengasas','siapa pengasas','pengasas thelol','who founded','siapa yang buat','siapa yang cipta','orang yang buat thelol','faiz imii dyno','three founders','tiga pengasas','founding members','who created','who started','who built','siapa buat thelol'],
       fup:['Tell me about Faiz4224','History of The LoL','Show founding photos'],
       r:(bm)=>bm
-        ?`The LoL diasaskan oleh <strong>tiga orang</strong>:<br><br><strong>🟩 Faiz4224</strong> — Presiden Pertama & Pemimpin Pengasas. Reka bentuk kerajaan dan infrastruktur. Sekarang memimpin dari The Black House. Pengasas dan pengerusi Paiz® Corp.<br><br><strong>🟩 Imii Kun</strong> — Pengasas Bersama & Visionary. Yang menamakan semula The Sus kepada The Legend of Legiona.<br><br><strong>🟩 Dyno</strong> — Pengasas Bersama & Ahli Strategi. Sekarang dikenali sebagai LonelyDynozz. Muncul dalam The LoL: The Movie.`
-        :`The LoL was co-founded by <strong>three individuals</strong>:<br><br><strong>🟩 Faiz4224</strong> — First President & Founding Leader. Architect of governance and infrastructure. Currently serving from The Black House. Founded and chairs Paiz® Corp.<br><br><strong>🟩 Imii Kun</strong> — Co-Founder & Visionary. The one who proposed renaming The Sus to The Legend of Legiona.<br><br><strong>🟩 Dyno</strong> — Co-Founder & Strategist. Also known as LonelyDynozz. Appears in The LoL: The Movie.`,
+        ?`The LoL diasaskan oleh <strong>tiga orang</strong>:<br><br><strong>🟩 Faiz4224</strong> — Presiden Pertama & Pemimpin Pengasas. Reka bentuk kerajaan dan infrastruktur. Sekarang memimpin dari The Black House. Pengasas dan pengerusi Paiz® Corp.<br><br><strong>🟩 Imii Kun</strong> — Pengasas Bersama & Visionary. Yang menamakan semula The Sus kepada The Legend of Legiona pada 21 Feb 2023.<br><br><strong>🟩 Dyno</strong> — Pengasas Bersama & Ahli Strategi. Username lama: DinosaurHuman → LonelyDynozz. Beli Minecraft Java+Bedrock pada 5 Mac 2026 (RM50). Muncul dalam The LoL: The Movie.`
+        :`The LoL was co-founded by <strong>three individuals</strong>:<br><br><strong>🟩 Faiz4224</strong> — First President & Founding Leader. Architect of governance and infrastructure. Currently serving from The Black House. Founded and chairs Paiz® Corp.<br><br><strong>🟩 Imii Kun</strong> — Co-Founder & Visionary. The one who proposed renaming The Sus to The Legend of Legiona on Feb 21, 2023.<br><br><strong>🟩 Dyno</strong> — Co-Founder & Strategist. Former MC username: DinosaurHuman → LonelyDynozz. Bought Minecraft Java+Bedrock on March 5, 2026 (RM50). Appears in The LoL: The Movie.`,
     },
 
     /* HISTORY */
@@ -389,8 +405,8 @@
       kw:['history','sejarah','full history','cerita thelol','kisah thelol','macam mana thelol bermula','how did it start','how it started','origin','asal usul','timeline','past','founding story','kisah penubuhan','mula dari mana','camne start','bila start','dulu camne','apa jadi dulu','the story','tell me about the lol history'],
       fup:['The Sus Era','UltraX2020 crisis','EhekSquad','Show era photos'],
       r:(bm)=>bm
-        ?`<strong>Sejarah Penuh The Legend of Legiona</strong> 📜<br><br><strong>Era Neverland (2020)</strong> — Sebelum The Sus. Server awal Skyxion. Dyno, Faiz4224 main bersama.<br><br><strong>The Sus (2022)</strong> — Penempatan tidak rasmi. EhekSquad ada asosiasi tak formal, kemudian keluar. EhekSquad masih wujud.<br><br><strong>Penubuhan (Feb 21, 2023)</strong> — Imii Kun namakan semula. The Legend of Legiona lahir!<br><br><strong>Pilihan Raya Pertama (6 Mei 2023)</strong> — UltraX2020 menang, jadi Presiden ke-2.<br><br><strong>Era Krisis (2023)</strong> — Papan tanda dibom, TLCC diserang dron. UltraX2020 letak jawatan.<br><br><strong>Pemulihan (Nov 8, 2023)</strong> — TLIO ditubuhkan. Faiz4224 kembali memimpin.<br><br><strong>Era Altaër (2025–2026)</strong> — ISC aktif. Web ecosystem penuh beroperasi.`
-        :`<strong>Full History of The Legend of Legiona</strong> 📜<br><br><strong>Neverland Era (2020)</strong> — Pre-Sus. Early Skyxion server days.<br><br><strong>The Sus (2022)</strong> — Informal settlement. EhekSquad (PhoenixAiman, PandaPutih, Kagee) had undefined association, later departed independently — still exists today.<br><br><strong>Founding (Feb 21, 2023)</strong> — Imii Kun renamed it. The Legend of Legiona born!<br><br><strong>First Election (May 6, 2023)</strong> — UltraX2020 won under PHRTL. Became 2nd President.<br><br><strong>Crisis Era (2023)</strong> — City sign bombed, TLCC drone attacked. UltraX2020 resigned.<br><br><strong>Recovery (Nov 8, 2023)</strong> — TLIO established. Faiz4224 resumed leadership.<br><br><strong>Altaër Era (2025–2026)</strong> — ISC active. Full web ecosystem live.`,
+        ?`<strong>Sejarah Penuh The Legend of Legiona</strong> 📜<br><br><strong>Era Neverland (2020)</strong> — Sebelum The Sus. Server awal Skyxion. Dyno, Faiz4224 main bersama.<br><br><strong>The Sus (2022)</strong> — Penempatan tidak rasmi. Nama "The Sus" diambil dari series roleplay MC Indonesia. EhekSquad ada asosiasi tak formal, kemudian keluar secara bebas. Masih wujud hari ini.<br><br><strong>Penubuhan (21 Feb 2023)</strong> — Imii Kun namakan semula. The Legend of Legiona lahir! Kumpulan WhatsApp pertama dicipta 24 Dis 2021 oleh Faiz — sebelum reboot rasmi.<br><br><strong>27 Feb 2023</strong> — Faiz & Dyno kalahkan Ender Dragon (Imii tidak mengambil bahagian). Ikan (Ajim) join malam yang sama.<br><br><strong>Pilihan Raya Pertama (6 Mei 2023)</strong> — UltraX2020 menang (4 undi), jadi Presiden ke-2.<br><br><strong>Era Krisis (2023)</strong> — Papan tanda dibom, TLCC diserang. UltraX2020 letak jawatan.<br><br><strong>Pemulihan (Nov 8, 2023)</strong> — TLIO ditubuhkan. Faiz4224 kembali memimpin.<br><br><strong>Unemployment Era (Jan 2026)</strong> — Selepas keputusan SPM (20 Jan 2026). Dyno beli Minecraft semula (5 Mac 2026, RM50).<br><br><strong>Era Altaër (2026)</strong> — ISC aktif. NIS dilancarkan. Web ecosystem penuh beroperasi.`
+        :`<strong>Full History of The Legend of Legiona</strong> 📜<br><br><strong>Neverland Era (2020)</strong> — Pre-Sus. Early Skyxion server days with Dyno & Faiz.<br><br><strong>The Sus (2022)</strong> — Informal settlement. The name "The Sus" was inspired by an Indonesian Minecraft roleplay series. EhekSquad (PhoenixAiman, PandaPutih, Kagee) had undefined association, later departed independently — still exists today.<br><br><strong>Founding (Feb 21, 2023)</strong> — Imii Kun renamed it. WhatsApp group was originally created Dec 24, 2021 by Faiz before the reboot.<br><br><strong>Feb 27, 2023</strong> — Faiz & Dyno defeated the Ender Dragon together (Imii didn't participate). Ikan (Ajim) joined the same night.<br><br><strong>First Election (May 6, 2023)</strong> — UltraX2020 won (4 votes) under PHRTL. Became 2nd President.<br><br><strong>Crisis Era (2023)</strong> — City sign bombed, TLCC attacked. UltraX2020 resigned. Power returned to Faiz4224.<br><br><strong>Recovery (Nov 8, 2023)</strong> — TLIO established. Faiz4224 resumed leadership.<br><br><strong>Unemployment Era (Jan 2026)</strong> — Post-SPM results (Jan 20, 2026). Dyno re-bought Minecraft (Mar 5, 2026, RM50 Java+Bedrock).<br><br><strong>Altaër Era (2026)</strong> — ISC active. NIS launched. Full web ecosystem live.`,
     },
 
     /* FAIZ4224 */
@@ -402,10 +418,19 @@
         :`<strong>Faiz4224</strong> — First President of The LoL and Chairman of Paiz® Corp. 👑<br><br>The mind behind everything: proposed TLSRL, commissioned TLCC Twin Towers, established TL Railways & Paiz™ Construction, launched PaizShop, greenlit The LoL Movie, opened Paiz Chicken. Operates from <em>The Black House</em>.`,
     },
 
+    /* IKAN / IKANUWU */
+    { id:'ikan', cat:'history',
+      kw:['ikanuwu','ikan','ajim','iman hazim','ikanowo','imanowo','ikan vs ikanowo','siapa ikan','ikan tu siapa','min. kewangan','finance minister'],
+      fup:['Founders','History','Government structure'],
+      r:(bm)=>bm
+        ?`<strong>ikanuwu = Ajim</strong> (nama penuh: Iman Hazim Izdiyad bin Idris) — Menteri Kewangan The LoL. Join 27 Feb 2023, malam yang sama Ender Dragon dikalahkan.<br><br>⚠️ <strong>IkanOwo ≠ ikan</strong> — IkanOwo adalah username Iman Hafizz (companion berbeza yang guna akaun kedua). Dua orang berbeza.`
+        :`<strong>ikanuwu = Ajim</strong> (full name: Iman Hazim Izdiyad bin Idris) — Minister of Finance of The LoL. Joined Feb 27, 2023, the same night the Ender Dragon was defeated.<br><br>⚠️ <strong>IkanOwo ≠ ikan</strong> — IkanOwo is the username of Iman Hafizz (a different companion using a second account). They are two separate people.`,
+    },
+
     /* GOVERNMENT */
     { id:'government', cat:'gov',
       kw:['government','kerajaan','government structure','struktur kerajaan','black house','the black house','departments','jabatan','ministry','office of the president','six departments','enam jabatan','gov structure','pasal kerajaan','government the lol','thelol gov'],
-      fup:['ISC Agency','Legal archive','Citizenship','Faiz4224'],
+      fup:['ISC Agency','Legal archive','Citizenship','National ID System'],
       r:(bm)=>bm
         ?`<strong>Struktur Kerajaan The LoL</strong> 🏛️<br><br><strong>The Black House</strong> — Pejabat Presiden. Presiden: Faiz4224. Kod dokumen: BH-YYYY-###<br><br><strong>Enam Jabatan:</strong><br>— DEPT-01: <strong>ISC</strong> · AKTIF<br>— DEPT-02: Pejabat Keadilan Nasional<br>— DEPT-03: Kementerian Lore & Arkib<br>— DEPT-04: Bahagian Kerja Awam<br>— DEPT-05: Biro Hubungan Luar<br>— DEPT-06: The LoL Communications<br><br><a href="https://thelegendoflegiona.github.io/gov/">Portal Kerajaan →</a>`
         :`<strong>Government Structure of The LoL</strong> 🏛️<br><br><strong>The Black House</strong> — Office of the President. Current: Faiz4224. Documents: BH-YYYY-###<br><br><strong>Six Departments:</strong><br>— DEPT-01: <strong>ISC</strong> · ACTIVE<br>— DEPT-02: Office of National Justice<br>— DEPT-03: Ministry of Lore & Archives<br>— DEPT-04: Public Works Division<br>— DEPT-05: Bureau of External Relations<br>— DEPT-06: The LoL Communications<br><br><a href="https://thelegendoflegiona.github.io/gov/">Government Portal →</a>`,
@@ -425,8 +450,8 @@
       kw:['isc','internal security control','intelligence agency','security agency','classified','tlio','t.l.i.o','clearance','intel portal','national security','agensi perisikan','keselamatan','perisikan','apa tu isc','isc tu apa','isc the lol','about isc','pasal isc','isc agency','spy agency','clearance code','password isc','kata laluan isc','legiona2026','isc password'],
       fup:['Show ISC attack files','Show ISC operations','Government structure','Legal documents'],
       r:(bm)=>bm
-        ?`<strong>ISC — Internal Security Control</strong> 🔒<br><br>Agensi perisikan rasmi The LoL — DEPT-01. Pengganti kepada <em>T.L.I.O</em> lama.<br><br>Portal: <a href="https://thelegendoflegiona.github.io/isc/">ISC Portal</a> · <a href="https://thelegendoflegiona.github.io/isc/national/">Ketelusan</a> · <a href="https://thelegendoflegiona.github.io/isc/search/">Arkib Carian</a><br><br>Kod akses Intel Portal: <span class="tag">LEGIONA2026</span>`
-        :`<strong>ISC — Internal Security Control</strong> 🔒<br><br>The LoL's official intelligence agency — DEPT-01. Successor to the former <em>T.L.I.O</em>.<br><br>Portals: <a href="https://thelegendoflegiona.github.io/isc/">ISC Main</a> · <a href="https://thelegendoflegiona.github.io/isc/national/">Transparency</a> · <a href="https://thelegendoflegiona.github.io/isc/search/">Public Archive</a><br><br>Intel Portal access code: <span class="tag">LEGIONA2026</span>`,
+        ?`<strong>ISC — Internal Security Control</strong> 🔒<br><br>Agensi perisikan rasmi The LoL — DEPT-01. Pengganti kepada <em>T.L.I.O</em> (Nov 2023), yang menggantikan PPTL (10 Mei 2023).<br><br>Portal: <a href="https://thelegendoflegiona.github.io/isc/">ISC Portal</a> · <a href="https://thelegendoflegiona.github.io/isc/national/">Ketelusan</a> · <a href="https://thelegendoflegiona.github.io/isc/search/">Arkib Carian</a><br><br>Kod akses Intel Portal: <span class="tag">LEGIONA2026</span>`
+        :`<strong>ISC — Internal Security Control</strong> 🔒<br><br>The LoL's official intelligence agency — DEPT-01. Successor to <em>T.L.I.O</em> (Nov 2023), which replaced PPTL (May 10, 2023).<br><br>Portals: <a href="https://thelegendoflegiona.github.io/isc/">ISC Main</a> · <a href="https://thelegendoflegiona.github.io/isc/national/">Transparency</a> · <a href="https://thelegendoflegiona.github.io/isc/search/">Public Archive</a><br><br>Intel Portal access code: <span class="tag">LEGIONA2026</span>`,
     },
 
     /* LEGAL */
@@ -441,19 +466,47 @@
     /* CITIZENSHIP */
     { id:'citizenship', cat:'gov',
       kw:['citizenship','kewarganegaraan','citizen','warganegara','apply','mohon','permohonan','application','citizen rights','hak warganegara','how to join','macam mana nak join','become a citizen','jadi warganegara','jadi rakyat','how to apply','cara mohon','boleh join','nak join thelol','join the lol','masuk the lol','syarat warganegara','syarat masuk'],
-      fup:['Legal archive','Government portal','Check citizenship status'],
+      fup:['National ID System','Legal archive','Government portal','Check citizenship status'],
       r:(bm)=>bm
-        ?`<strong>Kewarganegaraan The LoL</strong> 🪪<br><br>Syarat asas: 16 tahun ke atas · Pemain Skyxion aktif · Tiada rekod server buruk<br><br>Dikawal oleh:<br>· LOLGOV-2026-0001 — Akta Kewarganegaraan<br>· LOLGOV-2026-0003 — Piagam Hak Warganegara<br>· LOLGOV-2026-0002 — Ordinan Pembatalan<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">Mohon Kewarganegaraan →</a>`
-        :`<strong>The LoL Citizenship</strong> 🪪<br><br>Basic requirements: 16+ · Active Skyxion player · Clean server record<br><br>Governed by:<br>· LOLGOV-2026-0001 — Citizenship Act<br>· LOLGOV-2026-0003 — Citizens' Rights Charter<br>· LOLGOV-2026-0002 — Revocation Ordinance<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">Apply for Citizenship →</a>`,
+        ?`<strong>Kewarganegaraan The LoL</strong> 🪪<br><br>Syarat asas: 16 tahun ke atas · Pemain Skyxion aktif · Tiada rekod server buruk<br><br>Dikawal oleh:<br>· LOLGOV-2026-0001 — Akta Kewarganegaraan<br>· LOLGOV-2026-0003 — Piagam Hak Warganegara<br>· LOLGOV-2026-0002 — Ordinan Pembatalan<br><br>Setelah diluluskan, The Black House akan keluarkan <strong>The LoL ID</strong> melalui sistem NIS (format: THELOL-YYYY-#####).<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">Mohon Kewarganegaraan →</a> · <a href="https://thelegendoflegiona.github.io/gov/systems/id/">Portal NIS →</a>`
+        :`<strong>The LoL Citizenship</strong> 🪪<br><br>Basic requirements: 16+ · Active Skyxion player · Clean server record<br><br>Governed by:<br>· LOLGOV-2026-0001 — Citizenship Act<br>· LOLGOV-2026-0003 — Citizens' Rights Charter<br>· LOLGOV-2026-0002 — Revocation Ordinance<br><br>Upon approval, The Black House issues a <strong>The LoL ID</strong> via the NIS (format: THELOL-YYYY-#####).<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">Apply for Citizenship →</a> · <a href="https://thelegendoflegiona.github.io/gov/systems/id/">NIS Portal →</a>`,
     },
 
     /* CITIZENSHIP STATUS */
     { id:'citizen_status', cat:'gov',
       kw:['check status','semak status','application status','status permohonan','reference number','thelol-ctzn','citizenship status','cek status','status checker','check application','semak permohonan'],
-      fup:['Apply citizenship','Legal archive'],
+      fup:['Apply citizenship','National ID System','Legal archive'],
       r:(bm)=>bm
         ?`<strong>Penyemak Status Kewarganegaraan</strong> 🔎<br><br>Masukkan nombor rujukan (format <span class="tag">THELOL-CTZN-YYYY-####</span>) untuk semak status permohonan anda.<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/status">Semak Sekarang →</a>`
         :`<strong>Citizenship Status Checker</strong> 🔎<br><br>Enter your reference number (format <span class="tag">THELOL-CTZN-YYYY-####</span>) to check your application status.<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/status">Check Now →</a>`,
+    },
+
+    /* ══════════════════════════════════════
+       NATIONAL ID SYSTEM (NIS) — NEW v5.3
+    ══════════════════════════════════════ */
+
+    { id:'nis_overview', cat:'gov',
+      kw:['national id','national id system','nis','the lol id','thelol id','thelol-','id system','id number','id portal','national identification','pengenalan nasional','sistem id','kad pengenalan digital','digital id','ic thelol','id thelol','ic the lol','what is nis','apa tu nis','nis portal','id card portal','kad id','get my id','how to get id','cara dapat id'],
+      fup:['View Digital ID Card','Verify a The LoL ID','Citizenship','Government structure'],
+      r:(bm)=>bm
+        ?`<strong>National Identification System (NIS)</strong> 🪪<br><br>Sistem pengenalan nasional rasmi The LoL. Dikendalikan oleh The Black House. Setiap warganegara yang diluluskan akan diberikan ID kekal.<br><br><strong>Format ID:</strong> <span class="tag">THELOL-YYYY-#####</span><br>Contoh: <code>THELOL-2026-00001</code><br><br><strong>Portal NIS:</strong><br>→ <a href="https://thelegendoflegiona.github.io/gov/systems/id/">🏛️ NIS Portal Home</a><br>→ <a href="https://thelegendoflegiona.github.io/gov/systems/id/registry">🔍 Citizen Registry</a> — semak ID mana-mana warganegara<br>→ <a href="https://thelegendoflegiona.github.io/gov/systems/id/id-card">🪪 Digital ID Card</a> — lihat kad ID digital kau<br><br><strong>Tier Kewarganegaraan:</strong> Citizen · Senior Citizen · Elder · Founding Citizen<br><strong>Status:</strong> Active · Suspended · Revoked`
+        :`<strong>National Identification System (NIS)</strong> 🪪<br><br>The LoL's official national identification system. Administered by The Black House. Every approved citizen receives a permanent unique ID.<br><br><strong>ID Format:</strong> <span class="tag">THELOL-YYYY-#####</span><br>Example: <code>THELOL-2026-00001</code><br><br><strong>NIS Portals:</strong><br>→ <a href="https://thelegendoflegiona.github.io/gov/systems/id/">🏛️ NIS Portal Home</a><br>→ <a href="https://thelegendoflegiona.github.io/gov/systems/id/registry">🔍 Citizen Registry</a> — verify any citizen's ID<br>→ <a href="https://thelegendoflegiona.github.io/gov/systems/id/id-card">🪪 Digital ID Card</a> — view your digital ID card<br><br><strong>Citizenship Tiers:</strong> Citizen · Senior Citizen · Elder · Founding Citizen<br><strong>Status types:</strong> Active · Suspended · Revoked`,
+    },
+
+    { id:'nis_registry', cat:'gov',
+      kw:['citizen registry','registry','verify id','verify citizen','semak id','look up id','cari id','find citizen','public registry','thelol registry','check if citizen','semak warganegara','is this person a citizen','citizen lookup','id lookup','who is thelol','nis registry','open registry'],
+      fup:['Digital ID Card','National ID System','Citizenship'],
+      r:(bm)=>bm
+        ?`<strong>Citizen Registry</strong> 🔍<br><br>Akses awam. Masukkan mana-mana The LoL ID untuk sahkan status kewarganegaraan, tier, dan tarikh pendaftaran.<br><br><strong>Maklumat yang dipaparkan:</strong><br>— Username Minecraft<br>— Status (Active / Suspended / Revoked)<br>— Tier Kewarganegaraan<br>— Tarikh Diterbitkan<br>— Wilayah<br>— Status Wallet TL$<br>— Nota Awam<br><br>Format: <span class="tag">THELOL-YYYY-#####</span> (awalan THELOL- dikira auto)<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/id/registry">Buka Registry →</a>`
+        :`<strong>Citizen Registry</strong> 🔍<br><br>Public access. Enter any The LoL ID to verify citizenship status, tier, and registration date.<br><br><strong>Information displayed:</strong><br>— Minecraft username<br>— Status (Active / Suspended / Revoked)<br>— Citizenship Tier<br>— Issuance Date<br>— Territory<br>— TL$ Wallet status<br>— Public note<br><br>Format: <span class="tag">THELOL-YYYY-#####</span> (THELOL- prefix auto-applied)<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/id/registry">Open Registry →</a>`,
+    },
+
+    { id:'nis_id_card', cat:'gov',
+      kw:['digital id card','id card','kad id digital','id card thelol','thelol id card','view id card','lihat kad id','my id card','kad saya','show id card','paparkan kad','digital nic','national id card','how to view id card','cara lihat kad id','get id card','id card viewer'],
+      fup:['Citizen Registry','National ID System','Citizenship'],
+      r:(bm)=>bm
+        ?`<strong>Digital ID Card</strong> 🪪<br><br>Kad pengenalan digital rasmi The LoL yang boleh dipapar dan dicetak.<br><br><strong>Isi kandungan kad:</strong><br>— Nama / Username Minecraft<br>— Nombor ID: <code>THELOL-YYYY-#####</code><br>— Tier & Status kewarganegaraan<br>— Avatar Minecraft (Java: Minotar · Bedrock: Crafthead)<br>— Tarikh diterbitkan · Wilayah · Status Wallet<br>— MRZ bar (machine-readable zone)<br>— Lajur holografi, status warna (hijau/merah/emas)<br><br>Masukkan ID kau di bawah untuk lihat kad kau:<br><a href="https://thelegendoflegiona.github.io/gov/systems/id/id-card">Papar Kad ID →</a>`
+        :`<strong>Digital ID Card</strong> 🪪<br><br>The LoL's official digital identification card — viewable and printable.<br><br><strong>Card contents:</strong><br>— Minecraft username<br>— ID number: <code>THELOL-YYYY-#####</code><br>— Citizenship tier & status<br>— Minecraft avatar (Java: Minotar · Bedrock: Crafthead)<br>— Issue date · Territory · Wallet status<br>— MRZ bar (machine-readable zone aesthetic)<br>— Holographic strip, colour-coded status bar (green/red/gold)<br><br>Enter your ID to view your card:<br><a href="https://thelegendoflegiona.github.io/gov/systems/id/id-card">View My ID Card →</a>`,
     },
 
     /* NAMING POLICY */
@@ -470,8 +523,8 @@
       kw:['ultrax2020','ultrax','ultra x','2nd president','presiden ke-2','second president','phrtl','crisis','krisis','resigned','letak jawatan','drone attack','serangan dron','bombed city','election 2023','pilihan raya 2023','ultrax presidency','apa jadi ultrax','pasal ultrax','chaos era'],
       fup:['Show ISC attack files','Show TLCC photos','History','The LoL Movie'],
       r:(bm)=>bm
-        ?`<strong>UltraX2020 & Krisis (2023)</strong> ⚡<br><br>Menang pilihan raya 6 Mei 2023 di bawah <em>PHRTL</em> — jadi <strong>Presiden ke-2</strong>.<br><br>Semasa pemerintahannya:<br>— Papan tanda bandar <strong>dibom</strong><br>— Serangan dron ke atas <strong>TLCC Twin Towers</strong><br>— Huru-hara politik besar<br><br>UltraX2020 <strong>letak jawatan</strong>. Kuasa kembali ke Faiz4224.`
-        :`<strong>UltraX2020 Presidency & Crisis (2023)</strong> ⚡<br><br>Won the first democratic election May 6, 2023 under <em>PHRTL</em> — became <strong>2nd President</strong>.<br><br>During his tenure:<br>— City sign was <strong>bombed</strong><br>— Drone attacks on <strong>TLCC Twin Towers</strong><br>— Broader political crisis<br><br>UltraX2020 <strong>resigned</strong>. Power returned to Faiz4224.`,
+        ?`<strong>UltraX2020 & Krisis (2023)</strong> ⚡<br><br>Menang pilihan raya 6 Mei 2023 di bawah <em>PHRTL</em> dengan 4 undi — jadi <strong>Presiden ke-2</strong>. Faiz4224 dapat 2 undi, ikanuwu dapat 3 undi. 9 pengundi.<br><br>Semasa pemerintahannya:<br>— Tapak Legiona Presidential Palace hancur (11 Mei 2023)<br>— Papan tanda bandar <strong>dibom</strong><br>— Serangan ke atas <strong>TLCC Twin Towers</strong><br>— Huru-hara politik besar<br><br>UltraX2020 <strong>letak jawatan/dibuang</strong>. Kuasa kembali ke Faiz4224.`
+        :`<strong>UltraX2020 Presidency & Crisis (2023)</strong> ⚡<br><br>Won the first democratic election May 6, 2023 under <em>PHRTL</em> with 4 votes — became <strong>2nd President</strong>. Faiz4224 received 2 votes, ikanuwu got 3. 9 total voters.<br><br>During his tenure:<br>— The Legiona Presidential Palace foundations were destroyed (May 11, 2023)<br>— City sign was <strong>bombed</strong><br>— Attacks on <strong>TLCC Twin Towers</strong><br>— Broader political crisis<br><br>UltraX2020 <strong>resigned/was removed</strong>. Power returned to Faiz4224.`,
     },
 
     /* EHEKSQUAD */
@@ -479,8 +532,8 @@
       kw:['eheksquad','ehek squad','ehek','phoenixaiman','pandaputih','kagee','the sus members','sus era people','siapa eheksquad','pasal eheksquad'],
       fup:['The Sus Era','History of The LoL','Founders'],
       r:(bm)=>bm
-        ?`<strong>EhekSquad</strong> — Ahli: PhoenixAiman, PandaPutih, Kagee.<br><br>Ada asosiasi tak ditakrifkan dengan The Sus (2023). Masa The Sus, tiada tadbir urus formal. Status mereka tidak pernah ditetapkan. Diorang keluar dan tubuh semula EhekSquad secara bebas. <strong>Masih wujud hari ini</strong> tanpa hubungan formal dengan The LoL.`
-        :`<strong>EhekSquad</strong> — Members: PhoenixAiman, PandaPutih, Kagee.<br><br>Had an undefined association with The Sus (2023). Since The Sus had no formal governance, their exact status was never defined. They departed and re-established independently. <strong>Still exists today</strong> with no formal affiliation to The LoL.`,
+        ?`<strong>EhekSquad</strong> — Ahli: PhoenixAiman, PandaPutih, Kagee.<br><br>Ada asosiasi tak ditakrifkan dengan The Sus (2023). Semasa The Sus, tiada tadbir urus formal — status mereka tidak pernah ditetapkan. Diorang keluar dan tubuh semula EhekSquad secara bebas. <strong>Masih wujud hari ini</strong> tanpa hubungan formal dengan The LoL. PandaPutih dilaporkan berpengaruh dalam Skyxion menjelang 2026.`
+        :`<strong>EhekSquad</strong> — Members: PhoenixAiman, PandaPutih, Kagee.<br><br>Had an undefined association with The Sus (2023). Since The Sus had no formal governance, their exact status was never defined. They departed and re-established independently. <strong>Still exists today</strong> with no formal affiliation to The LoL. PandaPutih reportedly influential in Skyxion by 2026.`,
     },
 
     /* TLSRL */
@@ -542,17 +595,17 @@
       kw:['skyxion','altaer era','era altaer','altaer','minecraft server','server minecraft','kawaiisho','current era','era semasa','server admin','which server','server mana','skyxion server','what server','apa server','server the lol'],
       fup:['History','Government'],
       r:(bm)=>bm
-        ?`<strong>Skyxion & Altaër Era</strong> 🌐<br><br>Skyxion ialah server Minecraft di mana The LoL berada, ditadbir oleh <strong>Kawaiisho</strong>. <strong>Skyxion: Altaër Era</strong> ialah era semasa.`
-        :`<strong>Skyxion & Altaër Era</strong> 🌐<br><br>Skyxion is the Minecraft server where The LoL operates, administered by <strong>Kawaiisho</strong>. <strong>Skyxion: Altaër Era</strong> is the current era.`,
+        ?`<strong>Skyxion & Altaër Era</strong> 🌐<br><br>Skyxion ialah server Minecraft di mana The LoL berada, ditadbir oleh <strong>Kawaiisho</strong>. <strong>Skyxion: Altaër Era</strong> ialah era semasa — dunia baru dipersiapkan, The LoL comeback dibincangkan sejak April 2026.`
+        :`<strong>Skyxion & Altaër Era</strong> 🌐<br><br>Skyxion is the Minecraft server where The LoL operates, administered by <strong>Kawaiisho</strong>. <strong>Skyxion: Altaër Era</strong> is the current era — a new world is being prepared, with The LoL comeback discussed since April 2026.`,
     },
 
     /* ALL PORTALS NAV */
     { id:'nav', cat:'all',
       kw:['link','links','url','website','portal link','where can i find','mana nak cari','all pages','semua halaman','all portals','semua portal','all links','semua link','official links','link rasmi','website the lol','all websites','senarai laman','portals list'],
-      fup:['Government portal','ISC portal','Paiz Corp','Gallery','FN SMP'],
+      fup:['Government portal','ISC portal','National ID System','Paiz Corp','Gallery','FN SMP'],
       r:(bm)=>bm
-        ?`<strong>Semua Portal Rasmi</strong> 🔗<br><br><a href="https://thelegendoflegiona.github.io/main/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/paizcorp/">🏢 Paiz® Corp</a><br><a href="https://thelegendoflegiona.github.io/gov/">🏛️ Kerajaan</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">🪪 Kewarganegaraan</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/archives/">📄 Arkib Undang-undang</a><br><a href="https://thelegendoflegiona.github.io/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/paizcorp/paizshop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/paizcorp/paizchicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/paizcorp/paizproductions/">🎬 PaizProductions</a><br><a href="https://thelegendoflegiona.github.io/tlrailways/">🚂 TL Railways</a><br><a href="https://thelegendoflegiona.github.io/gallery/">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp">⛏ FN SMP</a>`
-        :`<strong>All Official Portals</strong> 🔗<br><br><a href="https://thelegendoflegiona.github.io/main/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/paizcorp/">🏢 Paiz® Corp</a><br><a href="https://thelegendoflegiona.github.io/gov/">🏛️ Government</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">🪪 Citizenship</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/archives/">📄 Legal Archive</a><br><a href="https://thelegendoflegiona.github.io/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/paizcorp/paizshop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/paizcorp/paizchicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/paizcorp/paizproductions/">🎬 PaizProductions</a><br><a href="https://thelegendoflegiona.github.io/tlrailways/">🚂 TL Railways</a><br><a href="https://thelegendoflegiona.github.io/gallery/">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp">⛏ FN SMP</a>`,
+        ?`<strong>Semua Portal Rasmi</strong> 🔗<br><br><a href="https://thelegendoflegiona.github.io/main/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/paizcorp/">🏢 Paiz® Corp</a><br><a href="https://thelegendoflegiona.github.io/gov/">🏛️ Kerajaan</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">🪪 Kewarganegaraan</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/id/">🪪 National ID Portal (NIS)</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/id/registry">🔍 Citizen Registry</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/archives/">📄 Arkib Undang-undang</a><br><a href="https://thelegendoflegiona.github.io/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/paizcorp/paizshop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/paizcorp/paizchicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/paizcorp/paizproductions/">🎬 PaizProductions</a><br><a href="https://thelegendoflegiona.github.io/tlrailways/">🚂 TL Railways</a><br><a href="https://thelegendoflegiona.github.io/gallery/">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp">⛏ FN SMP</a>`
+        :`<strong>All Official Portals</strong> 🔗<br><br><a href="https://thelegendoflegiona.github.io/main/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/paizcorp/">🏢 Paiz® Corp</a><br><a href="https://thelegendoflegiona.github.io/gov/">🏛️ Government</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">🪪 Citizenship</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/id/">🪪 National ID Portal (NIS)</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/id/registry">🔍 Citizen Registry</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/archives/">📄 Legal Archive</a><br><a href="https://thelegendoflegiona.github.io/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/paizcorp/paizshop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/paizcorp/paizchicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/paizcorp/paizproductions/">🎬 PaizProductions</a><br><a href="https://thelegendoflegiona.github.io/tlrailways/">🚂 TL Railways</a><br><a href="https://thelegendoflegiona.github.io/gallery/">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp">⛏ FN SMP</a>`,
     },
 
     /* GALLERY */
@@ -637,10 +690,11 @@
   const ALL_CHIPS = {
     all:['Who are The LoL founders?','What is The LoL?','Show me The LoL City 📷','Show me TLSRL 📷','/search government','What is FN SMP?'],
     history:['History of The LoL','Show founding photos 📷','UltraX2020 crisis','Show neverland 📷','EhekSquad','Show ender dragon 📷'],
-    gov:['Government structure','ISC agency','/search citizenship','All legal documents','The Black House','Naming policy'],
+    gov:['Government structure','ISC agency','National ID System','/search citizenship','All legal documents','The Black House','Naming policy'],
     corp:['All 5 Paiz Corp subsidiaries','Show TLSRL railway 📷','The LoL Movie','show terminal 📷','Paiz Chicken','TL Dollar exchange'],
     fn:['What is Freaky Niggas?','Freaky News page','FN Servers','What is FN SMP?','/search fn smp'],
     fnsmp:['What is FN SMP?','How to join FN SMP','FN SMP plugins','FN SMP changelog','FN SMP known issues','FN SMP roadmap','Submit FN SMP report'],
+    nis:['What is the National ID System?','How to view my ID Card','Verify a The LoL ID','Citizen Registry','Citizenship tiers explained','National ID Portal'],
     images:['Show me The LoL City 📷','Show me TLSRL 📷','Show me the last day 📷','Show me ender dragon 📷','Show me the sus base 📷','Show me neverland 📷','Show golden era photos 📷','Show TLCC Twin Towers 📷','Show bye thelol photo 📷','Show terminal photos 📷'],
     isc_img:['Show ISC TLCC attack files 📷','Show ISC operations 📷','Show ISC legacy records 📷','Show ISC city attacks 📷','ISC clearance code','What is ISC?'],
   };
@@ -717,7 +771,7 @@
 
   /* ── EXPOSE ── */
   window.PaizEngine = {
-    VERSION:       '5.2',
+    VERSION:       '5.3',
     BUILD:         '2026.05.13',
     GALLERY_ROOT,
     ISC_ROOT,
