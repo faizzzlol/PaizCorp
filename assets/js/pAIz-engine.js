@@ -25,8 +25,9 @@
   'use strict';
 
   /* ── ROOTS ── */
-  const GALLERY_ROOT = '#';
-  const ISC_ROOT     = '#';
+  // IMPORTANT: verify these paths match your actual repo structure
+  const GALLERY_ROOT = 'https://thelegendoflegiona.github.io/gallery';
+  const ISC_ROOT     = 'https://thelegendoflegiona.github.io/isc';
 
   /* ── BM DETECTION ── */
   const BM_WORDS = [
@@ -51,31 +52,31 @@
   /* ── PORTALS (26 entries) ── */
   const PORTALS = [
     { tag:'NATION HOME',   name:'The Legend of Legiona',       url:'https://thelegendoflegiona.github.io/main/',                                  desc:'Main hub — history, network, founders, bento grid' },
-    { tag:'GOVERNMENT',    name:'Government Portal',            url:'https://thelegendoflegiona.github.io/gov/',                              desc:'Proclamation, history, departments, megaprojects' },
-    { tag:'BLACK HOUSE',   name:'Office of the President',      url:'https://thelegendoflegiona.github.io/black-house',                   desc:'The Black House — executive office of Faiz4224' },
-    { tag:'INTELLIGENCE',  name:'ISC Portal',                   url:'https://thelegendoflegiona.github.io/isc/',                          desc:'Internal Security Control — intelligence agency' },
-    { tag:'ISC ARCHIVE',   name:'ISC National Transparency',    url:'https://thelegendoflegiona.github.io/isc/national/',                  desc:'Public records, TLIO history, operational timeline' },
-    { tag:'ISC SEARCH',    name:'ISC Public Archive Search',    url:'https://thelegendoflegiona.github.io/isc/search/',                    desc:'Declassified missions, legal docs, incidents' },
-    { tag:'CITIZENSHIP',   name:'Citizenship Portal',           url:'https://thelegendoflegiona.github.io/gov/systems/citizenship/',                  desc:'Apply, renew, check eligibility and obligations' },
-    { tag:'CITIZEN STATUS',name:'Citizenship Status Checker',   url:'https://thelegendoflegiona.github.io/gov/systems/citizenship/status',            desc:'Check application status by reference number' },
-    { tag:'LEGAL DOCS',    name:'Legal Archive',                url:'https://thelegendoflegiona.github.io/gov/systems/archives/',                       desc:'All acts, proclamations, decrees — searchable' },
-    { tag:'HISTORY',       name:'About The LoL',                url:'https://thelegendoflegiona.github.io/main/about/',                             desc:'Full interactive national timeline — 7 chapters' },
-    { tag:'GALLERY',       name:'Photo Gallery',                url:'https://thelegendoflegiona.github.io/gallery/',                           desc:'Complete photo archive 2020–2024, 8 eras' },
-    { tag:'TRANSPORT',     name:'TL Railways',                  url:'https://thelegendoflegiona.github.io/tlrailways/',                              desc:'4 lines, TLSRL, Monorail, LRT, HSB' },
-    { tag:'TLSRL',         name:'TLSRL Project Brief',          url:'https://faizzzlol.github.io/paizcorp/paizconstructions/tlsrl/',                    desc:'4,800+ blocks rail link, full spec sheet' },
-    { tag:'PAIZ CORP',     name:'Paiz® Corp Hub',               url:'https://faizzzlol.github.io/paizcorp/',                                desc:'All 5 subsidiaries, ecosystem map, portfolio' },
-    { tag:'RETAIL',        name:'Paiz Shop',                    url:'https://faizzzlol.github.io/paizcorp/paizshop/',                       desc:'Minecraft item store, diamond prices, order system' },
-    { tag:'FOOD',          name:'Paiz Chicken',                 url:'https://faizzzlol.github.io/paizcorp/paizchicken/',                    desc:'Virtual food ordering across Skyxion' },
-    { tag:'FILM STUDIO',   name:'PaizProductions',              url:'https://faizzzlol.github.io/paizcorp/paizproductions/',                 desc:'Official film studio, 3 productions' },
-    { tag:'FEATURE FILM',  name:'The LoL: The Movie',           url:'https://faizzzlol.github.io/paizcorp/paizproductions/thelolmovie',     desc:'In production — cast, synopsis, production notes' },
-    { tag:'CURRENCY',      name:'TL$ Currency Converter',       url:'https://thelegendoflegiona.github.io/gov/finance/',        desc:'TL Dollar exchange rates, EN/BM bilingual' },
-    { tag:'AI ASSISTANT',  name:'pAIz v5.2',                    url:'https://faizzzlol.github.io/paizcorp/pAIz',                            desc:'Omniscient AI assistant with slash commands' },
-    { tag:'FREAKY NIGGAS', name:'Freaky Niggas Community',      url:'https://faizzzlol.github.io/freakyniggas/',                            desc:'Dark monochrome glitch aesthetic · Minecraft servers · Freaky News' },
-    { tag:'FREAKY NEWS',   name:'Freaky News (EN/BM)',          url:'https://faizzzlol.github.io/freakyniggas/news',                        desc:'Bilingual news with localStorage EN/BM toggle' },
-    { tag:'FN SERVERS',    name:'Freaky Niggas Servers',        url:'https://faizzzlol.github.io/freakyniggas/servers',                     desc:'Minecraft server listings' },
-    { tag:'FN FEEDBACK',   name:'Freaky Niggas Feedback',       url:'https://faizzzlol.github.io/freakyniggas/feedback',                    desc:'Submit feedback form' },
-    { tag:'FN SMP',        name:'FN SMP — Freaky Niggas',       url:'https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp',             desc:'Java & Bedrock crossplay SMP · V1.3.3 · 10 slots · minekeep.net · Singapore' },
-    { tag:'FN SMP REPORT', name:'FN SMP Report System',         url:'https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp-report',      desc:'Submit bug, player, server issue or suggestion reports to admin team' },
+    { tag:'GOVERNMENT',    name:'Government Portal',            url:'https://thelegendoflegiona.github.io/gov/',                                   desc:'Proclamation, history, departments, megaprojects' },
+    { tag:'BLACK HOUSE',   name:'Office of the President',      url:'https://thelegendoflegiona.github.io/gov/black-house',                        desc:'The Black House — executive office of Faiz4224' },
+    { tag:'INTELLIGENCE',  name:'ISC Portal',                   url:'https://thelegendoflegiona.github.io/isc/',                                   desc:'Internal Security Control — intelligence agency' },
+    { tag:'ISC ARCHIVE',   name:'ISC National Transparency',    url:'https://thelegendoflegiona.github.io/isc/national/',                          desc:'Public records, TLIO history, operational timeline' },
+    { tag:'ISC SEARCH',    name:'ISC Public Archive Search',    url:'https://thelegendoflegiona.github.io/isc/search/',                            desc:'Declassified missions, legal docs, incidents' },
+    { tag:'CITIZENSHIP',   name:'Citizenship Portal',           url:'https://thelegendoflegiona.github.io/gov/systems/citizenship/',               desc:'Apply, renew, check eligibility and obligations' },
+    { tag:'CITIZEN STATUS',name:'Citizenship Status Checker',   url:'https://thelegendoflegiona.github.io/gov/systems/citizenship/status',         desc:'Check application status by reference number' },
+    { tag:'LEGAL DOCS',    name:'Legal Archive',                url:'https://thelegendoflegiona.github.io/gov/systems/archives/',                  desc:'All acts, proclamations, decrees — searchable' },
+    { tag:'HISTORY',       name:'About The LoL',                url:'https://thelegendoflegiona.github.io/main/about/',                            desc:'Full interactive national timeline — 7 chapters' },
+    { tag:'GALLERY',       name:'Photo Gallery',                url:'https://thelegendoflegiona.github.io/gallery/',                               desc:'Complete photo archive 2020–2024, 8 eras' },
+    { tag:'TRANSPORT',     name:'TL Railways',                  url:'https://thelegendoflegiona.github.io/tlrailways/',                            desc:'4 lines, TLSRL, Monorail, LRT, HSB' },
+    { tag:'TLSRL',         name:'TLSRL Project Brief',          url:'https://faizzzlol.github.io/paizcorp/paizconstructions/tlsrl/',               desc:'4,800+ blocks rail link, full spec sheet' },
+    { tag:'PAIZ CORP',     name:'Paiz® Corp Hub',               url:'https://faizzzlol.github.io/paizcorp/',                                      desc:'All 5 subsidiaries, ecosystem map, portfolio' },
+    { tag:'RETAIL',        name:'Paiz Shop',                    url:'https://faizzzlol.github.io/paizcorp/paizshop/',                              desc:'Minecraft item store, diamond prices, order system' },
+    { tag:'FOOD',          name:'Paiz Chicken',                 url:'https://faizzzlol.github.io/paizcorp/paizchicken/',                           desc:'Virtual food ordering across Skyxion' },
+    { tag:'FILM STUDIO',   name:'PaizProductions',              url:'https://faizzzlol.github.io/paizcorp/paizproductions/',                       desc:'Official film studio, 3 productions' },
+    { tag:'FEATURE FILM',  name:'The LoL: The Movie',           url:'https://faizzzlol.github.io/paizcorp/paizproductions/thelolmovie',            desc:'In production — cast, synopsis, production notes' },
+    { tag:'CURRENCY',      name:'TL$ Currency Converter',       url:'https://thelegendoflegiona.github.io/gov/finance/',                           desc:'TL Dollar exchange rates, EN/BM bilingual' },
+    { tag:'AI ASSISTANT',  name:'pAIz v5.2',                    url:'https://faizzzlol.github.io/paizcorp/pAIz',                                   desc:'Omniscient AI assistant with slash commands' },
+    { tag:'FREAKY NIGGAS', name:'Freaky Niggas Community',      url:'https://faizzzlol.github.io/freakyniggas/',                                   desc:'Dark monochrome glitch aesthetic · Minecraft servers · Freaky News' },
+    { tag:'FREAKY NEWS',   name:'Freaky News (EN/BM)',          url:'https://faizzzlol.github.io/freakyniggas/news',                               desc:'Bilingual news with localStorage EN/BM toggle' },
+    { tag:'FN SERVERS',    name:'Freaky Niggas Servers',        url:'https://faizzzlol.github.io/freakyniggas/servers',                            desc:'Minecraft server listings' },
+    { tag:'FN FEEDBACK',   name:'Freaky Niggas Feedback',       url:'https://faizzzlol.github.io/freakyniggas/feedback',                           desc:'Submit feedback form' },
+    { tag:'FN SMP',        name:'FN SMP — Freaky Niggas',       url:'https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp',                   desc:'Java & Bedrock crossplay SMP · V1.3.3 · 10 slots · minekeep.net · Singapore' },
+    { tag:'FN SMP REPORT', name:'FN SMP Report System',         url:'https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp-report',            desc:'Submit bug, player, server issue or suggestion reports to admin team' },
   ];
 
   /* ── IMAGE KNOWLEDGE BASE ── */
@@ -406,8 +407,8 @@
       kw:['government','kerajaan','government structure','struktur kerajaan','black house','the black house','departments','jabatan','ministry','office of the president','six departments','enam jabatan','gov structure','pasal kerajaan','government the lol','thelol gov'],
       fup:['ISC Agency','Legal archive','Citizenship','Faiz4224'],
       r:(bm)=>bm
-        ?`<strong>Struktur Kerajaan The LoL</strong> 🏛️<br><br><strong>The Black House</strong> — Pejabat Presiden. Presiden: Faiz4224. Kod dokumen: BH-YYYY-###<br><br><strong>Enam Jabatan:</strong><br>— DEPT-01: <strong>ISC</strong> · AKTIF<br>— DEPT-02: Pejabat Keadilan Nasional<br>— DEPT-03: Kementerian Lore & Arkib<br>— DEPT-04: Bahagian Kerja Awam<br>— DEPT-05: Biro Hubungan Luar<br>— DEPT-06: The LoL Communications<br><br><a href="https://thelegendoflegiona.github.io/main/gov/">Portal Kerajaan →</a>`
-        :`<strong>Government Structure of The LoL</strong> 🏛️<br><br><strong>The Black House</strong> — Office of the President. Current: Faiz4224. Documents: BH-YYYY-###<br><br><strong>Six Departments:</strong><br>— DEPT-01: <strong>ISC</strong> · ACTIVE<br>— DEPT-02: Office of National Justice<br>— DEPT-03: Ministry of Lore & Archives<br>— DEPT-04: Public Works Division<br>— DEPT-05: Bureau of External Relations<br>— DEPT-06: The LoL Communications<br><br><a href="https://thelegendoflegiona.github.io/main/gov/">Government Portal →</a>`,
+        ?`<strong>Struktur Kerajaan The LoL</strong> 🏛️<br><br><strong>The Black House</strong> — Pejabat Presiden. Presiden: Faiz4224. Kod dokumen: BH-YYYY-###<br><br><strong>Enam Jabatan:</strong><br>— DEPT-01: <strong>ISC</strong> · AKTIF<br>— DEPT-02: Pejabat Keadilan Nasional<br>— DEPT-03: Kementerian Lore & Arkib<br>— DEPT-04: Bahagian Kerja Awam<br>— DEPT-05: Biro Hubungan Luar<br>— DEPT-06: The LoL Communications<br><br><a href="https://thelegendoflegiona.github.io/gov/">Portal Kerajaan →</a>`
+        :`<strong>Government Structure of The LoL</strong> 🏛️<br><br><strong>The Black House</strong> — Office of the President. Current: Faiz4224. Documents: BH-YYYY-###<br><br><strong>Six Departments:</strong><br>— DEPT-01: <strong>ISC</strong> · ACTIVE<br>— DEPT-02: Office of National Justice<br>— DEPT-03: Ministry of Lore & Archives<br>— DEPT-04: Public Works Division<br>— DEPT-05: Bureau of External Relations<br>— DEPT-06: The LoL Communications<br><br><a href="https://thelegendoflegiona.github.io/gov/">Government Portal →</a>`,
     },
 
     /* BLACK HOUSE */
@@ -415,8 +416,8 @@
       kw:['black house','office of the president','pejabat presiden','bh-','the black house','president office','black house page','ofis presiden'],
       fup:['Faiz4224','Government structure','Legal documents'],
       r:(bm)=>bm
-        ?`<strong>The Black House</strong> — Pejabat Rasmi Presiden The LoL. Presiden semasa: Faiz4224.<br><br>Dokumen rasmi menggunakan awalan <span class="tag gold">BH-YYYY-###</span>.<br><br><a href="https://thelegendoflegiona.github.io/main/gov/black-house">Laman Black House →</a>`
-        :`<strong>The Black House</strong> — Official Office of the President of The LoL. Current President: Faiz4224.<br><br>Official documents use prefix <span class="tag gold">BH-YYYY-###</span>.<br><br><a href="https://thelegendoflegiona.github.io/main/gov/black-house">Black House Page →</a>`,
+        ?`<strong>The Black House</strong> — Pejabat Rasmi Presiden The LoL. Presiden semasa: Faiz4224.<br><br>Dokumen rasmi menggunakan awalan <span class="tag gold">BH-YYYY-###</span>.<br><br><a href="https://thelegendoflegiona.github.io/gov/black-house">Laman Black House →</a>`
+        :`<strong>The Black House</strong> — Official Office of the President of The LoL. Current President: Faiz4224.<br><br>Official documents use prefix <span class="tag gold">BH-YYYY-###</span>.<br><br><a href="https://thelegendoflegiona.github.io/gov/black-house">Black House Page →</a>`,
     },
 
     /* ISC */
@@ -424,8 +425,8 @@
       kw:['isc','internal security control','intelligence agency','security agency','classified','tlio','t.l.i.o','clearance','intel portal','national security','agensi perisikan','keselamatan','perisikan','apa tu isc','isc tu apa','isc the lol','about isc','pasal isc','isc agency','spy agency','clearance code','password isc','kata laluan isc','legiona2026','isc password'],
       fup:['Show ISC attack files','Show ISC operations','Government structure','Legal documents'],
       r:(bm)=>bm
-        ?`<strong>ISC — Internal Security Control</strong> 🔒<br><br>Agensi perisikan rasmi The LoL — DEPT-01. Pengganti kepada <em>T.L.I.O</em> lama.<br><br>Portal: <a href="https://thelegendoflegiona.github.io/main/gov/isc/">ISC Portal</a> · <a href="https://thelegendoflegiona.github.io/main/gov/isc/national">Ketelusan</a> · <a href="https://thelegendoflegiona.github.io/main/gov/isc/search">Arkib Carian</a><br><br>Kod akses Intel Portal: <span class="tag">LEGIONA2026</span>`
-        :`<strong>ISC — Internal Security Control</strong> 🔒<br><br>The LoL's official intelligence agency — DEPT-01. Successor to the former <em>T.L.I.O</em>.<br><br>Portals: <a href="https://thelegendoflegiona.github.io/main/gov/isc/">ISC Main</a> · <a href="https://thelegendoflegiona.github.io/main/gov/isc/national">Transparency</a> · <a href="https://thelegendoflegiona.github.io/main/gov/isc/search">Public Archive</a><br><br>Intel Portal access code: <span class="tag">LEGIONA2026</span>`,
+        ?`<strong>ISC — Internal Security Control</strong> 🔒<br><br>Agensi perisikan rasmi The LoL — DEPT-01. Pengganti kepada <em>T.L.I.O</em> lama.<br><br>Portal: <a href="https://thelegendoflegiona.github.io/isc/">ISC Portal</a> · <a href="https://thelegendoflegiona.github.io/isc/national/">Ketelusan</a> · <a href="https://thelegendoflegiona.github.io/isc/search/">Arkib Carian</a><br><br>Kod akses Intel Portal: <span class="tag">LEGIONA2026</span>`
+        :`<strong>ISC — Internal Security Control</strong> 🔒<br><br>The LoL's official intelligence agency — DEPT-01. Successor to the former <em>T.L.I.O</em>.<br><br>Portals: <a href="https://thelegendoflegiona.github.io/isc/">ISC Main</a> · <a href="https://thelegendoflegiona.github.io/isc/national/">Transparency</a> · <a href="https://thelegendoflegiona.github.io/isc/search/">Public Archive</a><br><br>Intel Portal access code: <span class="tag">LEGIONA2026</span>`,
     },
 
     /* LEGAL */
@@ -433,8 +434,8 @@
       kw:['legal','undang-undang','documents','dokumen','archive','arkib','acts','akta','laws','rights charter','piagam hak','proclamation','proklamasi','legal archive','arkib undang-undang','document list','lolgov','bh-2026','all documents','official documents','law the lol'],
       fup:['Citizenship','Naming policy','Government portal','ISC'],
       r:(bm)=>bm
-        ?`<strong>Arkib Undang-undang</strong> 📄<br><br><span class="tag">LOLGOV-2026-0001</span> — Akta Kewarganegaraan<br><span class="tag">LOLGOV-2026-0002</span> — Ordinan Pembatalan<br><span class="tag">LOLGOV-2026-0003</span> — Piagam Hak Warganegara<br><span class="tag">LOLGOV-2026-0004</span> — Rangka Kerja Dasar Kerajaan<br><span class="tag gold">BH-2026-0001</span> — Proklamasi Presiden<br><span class="tag gold">BH-2026-0002</span> — Arahan Penamaan & Gaya (02 Apr 2026)<br><br><a href="https://thelegendoflegiona.github.io/main/gov/assets/">Layari Arkib →</a>`
-        :`<strong>Legal Archive</strong> 📄<br><br><span class="tag">LOLGOV-2026-0001</span> — Citizenship Act<br><span class="tag">LOLGOV-2026-0002</span> — Revocation Ordinance<br><span class="tag">LOLGOV-2026-0003</span> — Citizens' Rights Charter<br><span class="tag">LOLGOV-2026-0004</span> — Government Policy Framework<br><span class="tag gold">BH-2026-0001</span> — Presidential Proclamation<br><span class="tag gold">BH-2026-0002</span> — Official Naming & Style Directive<br><br><a href="https://thelegendoflegiona.github.io/main/gov/assets/">Browse Legal Archive →</a>`,
+        ?`<strong>Arkib Undang-undang</strong> 📄<br><br><span class="tag">LOLGOV-2026-0001</span> — Akta Kewarganegaraan<br><span class="tag">LOLGOV-2026-0002</span> — Ordinan Pembatalan<br><span class="tag">LOLGOV-2026-0003</span> — Piagam Hak Warganegara<br><span class="tag">LOLGOV-2026-0004</span> — Rangka Kerja Dasar Kerajaan<br><span class="tag gold">BH-2026-0001</span> — Proklamasi Presiden<br><span class="tag gold">BH-2026-0002</span> — Arahan Penamaan & Gaya (02 Apr 2026)<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/archives/">Layari Arkib →</a>`
+        :`<strong>Legal Archive</strong> 📄<br><br><span class="tag">LOLGOV-2026-0001</span> — Citizenship Act<br><span class="tag">LOLGOV-2026-0002</span> — Revocation Ordinance<br><span class="tag">LOLGOV-2026-0003</span> — Citizens' Rights Charter<br><span class="tag">LOLGOV-2026-0004</span> — Government Policy Framework<br><span class="tag gold">BH-2026-0001</span> — Presidential Proclamation<br><span class="tag gold">BH-2026-0002</span> — Official Naming & Style Directive<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/archives/">Browse Legal Archive →</a>`,
     },
 
     /* CITIZENSHIP */
@@ -442,8 +443,8 @@
       kw:['citizenship','kewarganegaraan','citizen','warganegara','apply','mohon','permohonan','application','citizen rights','hak warganegara','how to join','macam mana nak join','become a citizen','jadi warganegara','jadi rakyat','how to apply','cara mohon','boleh join','nak join thelol','join the lol','masuk the lol','syarat warganegara','syarat masuk'],
       fup:['Legal archive','Government portal','Check citizenship status'],
       r:(bm)=>bm
-        ?`<strong>Kewarganegaraan The LoL</strong> 🪪<br><br>Syarat asas: 16 tahun ke atas · Pemain Skyxion aktif · Tiada rekod server buruk<br><br>Dikawal oleh:<br>· LOLGOV-2026-0001 — Akta Kewarganegaraan<br>· LOLGOV-2026-0003 — Piagam Hak Warganegara<br>· LOLGOV-2026-0002 — Ordinan Pembatalan<br><br><a href="https://thelegendoflegiona.github.io/main/gov/citizenship/">Mohon Kewarganegaraan →</a>`
-        :`<strong>The LoL Citizenship</strong> 🪪<br><br>Basic requirements: 16+ · Active Skyxion player · Clean server record<br><br>Governed by:<br>· LOLGOV-2026-0001 — Citizenship Act<br>· LOLGOV-2026-0003 — Citizens' Rights Charter<br>· LOLGOV-2026-0002 — Revocation Ordinance<br><br><a href="https://thelegendoflegiona.github.io/main/gov/citizenship/">Apply for Citizenship →</a>`,
+        ?`<strong>Kewarganegaraan The LoL</strong> 🪪<br><br>Syarat asas: 16 tahun ke atas · Pemain Skyxion aktif · Tiada rekod server buruk<br><br>Dikawal oleh:<br>· LOLGOV-2026-0001 — Akta Kewarganegaraan<br>· LOLGOV-2026-0003 — Piagam Hak Warganegara<br>· LOLGOV-2026-0002 — Ordinan Pembatalan<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">Mohon Kewarganegaraan →</a>`
+        :`<strong>The LoL Citizenship</strong> 🪪<br><br>Basic requirements: 16+ · Active Skyxion player · Clean server record<br><br>Governed by:<br>· LOLGOV-2026-0001 — Citizenship Act<br>· LOLGOV-2026-0003 — Citizens' Rights Charter<br>· LOLGOV-2026-0002 — Revocation Ordinance<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">Apply for Citizenship →</a>`,
     },
 
     /* CITIZENSHIP STATUS */
@@ -451,8 +452,8 @@
       kw:['check status','semak status','application status','status permohonan','reference number','thelol-ctzn','citizenship status','cek status','status checker','check application','semak permohonan'],
       fup:['Apply citizenship','Legal archive'],
       r:(bm)=>bm
-        ?`<strong>Penyemak Status Kewarganegaraan</strong> 🔎<br><br>Masukkan nombor rujukan (format <span class="tag">THELOL-CTZN-YYYY-####</span>) untuk semak status permohonan anda.<br><br><a href="https://thelegendoflegiona.github.io/main/gov/citizenship/status">Semak Sekarang →</a>`
-        :`<strong>Citizenship Status Checker</strong> 🔎<br><br>Enter your reference number (format <span class="tag">THELOL-CTZN-YYYY-####</span>) to check your application status.<br><br><a href="https://thelegendoflegiona.github.io/main/gov/citizenship/status">Check Now →</a>`,
+        ?`<strong>Penyemak Status Kewarganegaraan</strong> 🔎<br><br>Masukkan nombor rujukan (format <span class="tag">THELOL-CTZN-YYYY-####</span>) untuk semak status permohonan anda.<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/status">Semak Sekarang →</a>`
+        :`<strong>Citizenship Status Checker</strong> 🔎<br><br>Enter your reference number (format <span class="tag">THELOL-CTZN-YYYY-####</span>) to check your application status.<br><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/status">Check Now →</a>`,
     },
 
     /* NAMING POLICY */
@@ -487,8 +488,8 @@
       kw:['tlsrl','spawn railway','railway link','tren','kereta api','train','stations','stesen','railway project','projek rel','tll','llc','llo','mps','sxj','spn','express service','cargo service','4800','berapa blok tlsrl','berapa panjang tlsrl','panjang tlsrl','tlsrl stations','tlsrl route'],
       fup:['TL Railways','Paiz Corp','Show TLSRL photos','Show terminal photos'],
       r:(bm)=>bm
-        ?`<strong>TLSRL — The LoL–Spawn Railway Link</strong> 🚂<br><br>Trek: <strong>4,800+ blok</strong> tertutup · Masa: <strong>~10 minit</strong> · 3 kelas · 6 stesen<br>Stesen: <strong>TLL → LLC → LLO → MPS → SXJ → SPN</strong><br><br>Dioperasikan oleh TL Railways. Dibina oleh Paiz™ Construction. Dicadangkan oleh Faiz4224.<br><a href="https://thelegendoflegiona.github.io/main/tlr/">TL Railways →</a>`
-        :`<strong>TLSRL — The LoL–Spawn Railway Link</strong> 🚂<br><br>Track: <strong>4,800+ blocks</strong> enclosed · Time: <strong>~10 minutes</strong> · 3 tiers · 6 stations<br>Stations: <strong>TLL → LLC → LLO → MPS → SXJ → SPN</strong><br><br>Operated by TL Railways. Built by Paiz™ Construction. Proposed by Faiz4224.<br><a href="https://thelegendoflegiona.github.io/main/tlr/">TL Railways →</a>`,
+        ?`<strong>TLSRL — The LoL–Spawn Railway Link</strong> 🚂<br><br>Trek: <strong>4,800+ blok</strong> tertutup · Masa: <strong>~10 minit</strong> · 3 kelas · 6 stesen<br>Stesen: <strong>TLL → LLC → LLO → MPS → SXJ → SPN</strong><br><br>Dioperasikan oleh TL Railways. Dibina oleh Paiz™ Construction. Dicadangkan oleh Faiz4224.<br><a href="https://thelegendoflegiona.github.io/tlrailways/">TL Railways →</a>`
+        :`<strong>TLSRL — The LoL–Spawn Railway Link</strong> 🚂<br><br>Track: <strong>4,800+ blocks</strong> enclosed · Time: <strong>~10 minutes</strong> · 3 tiers · 6 stations<br>Stations: <strong>TLL → LLC → LLO → MPS → SXJ → SPN</strong><br><br>Operated by TL Railways. Built by Paiz™ Construction. Proposed by Faiz4224.<br><a href="https://thelegendoflegiona.github.io/tlrailways/">TL Railways →</a>`,
     },
 
     /* PAIZ CORP */
@@ -496,8 +497,8 @@
       kw:['paiz corp','paiz® corp','paiz corporation','all subsidiaries','semua subsidiari','five subsidiaries','lima subsidiari','conglomerate','konglomerat','national company','paiz group','overview paiz','apa tu paiz corp','pasal paiz corp','about paiz corp','all companies','semua syarikat'],
       fup:['Paiz Shop','Paiz Chicken','PaizProductions','TL Railways'],
       r:(bm)=>bm
-        ?`<strong>Paiz® Corp — Konglomerat Nasional</strong> 🏢<br><br>Diasaskan dan diketuai oleh Faiz4224. Lima subsidiari:<br><br><strong>SUB-01 · TL Railways</strong> — Rel nasional · <a href="https://thelegendoflegiona.github.io/main/tlr/">→</a><br><strong>SUB-02 · Paiz™ Construction</strong> — Bina TLSRL, TLCC, farms<br><strong>SUB-03 · Paiz Shop</strong> — Kedai item Minecraft · <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">→</a><br><strong>SUB-04 · PaizProductions</strong> — Studio filem · <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">→</a><br><strong>SUB-05 · Paiz Chicken</strong> — Pesanan makanan · <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">→</a><br><br><a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp →</a>`
-        :`<strong>Paiz® Corp — National Conglomerate</strong> 🏢<br><br>Founded and chaired by Faiz4224. Five subsidiaries:<br><br><strong>SUB-01 · TL Railways</strong> — National rail · <a href="https://thelegendoflegiona.github.io/main/tlr/">→</a><br><strong>SUB-02 · Paiz™ Construction</strong> — Built TLSRL, TLCC, farms<br><strong>SUB-03 · Paiz Shop</strong> — Minecraft item store · <a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">→</a><br><strong>SUB-04 · PaizProductions</strong> — Film studio · <a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">→</a><br><strong>SUB-05 · Paiz Chicken</strong> — Food ordering · <a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">→</a><br><br><a href="https://faizzzlol.github.io/PaizCorp/">Paiz® Corp →</a>`,
+        ?`<strong>Paiz® Corp — Konglomerat Nasional</strong> 🏢<br><br>Diasaskan dan diketuai oleh Faiz4224. Lima subsidiari:<br><br><strong>SUB-01 · TL Railways</strong> — Rel nasional · <a href="https://thelegendoflegiona.github.io/tlrailways/">→</a><br><strong>SUB-02 · Paiz™ Construction</strong> — Bina TLSRL, TLCC, farms<br><strong>SUB-03 · Paiz Shop</strong> — Kedai item Minecraft · <a href="https://faizzzlol.github.io/paizcorp/paizshop/">→</a><br><strong>SUB-04 · PaizProductions</strong> — Studio filem · <a href="https://faizzzlol.github.io/paizcorp/paizproductions/">→</a><br><strong>SUB-05 · Paiz Chicken</strong> — Pesanan makanan · <a href="https://faizzzlol.github.io/paizcorp/paizchicken/">→</a><br><br><a href="https://faizzzlol.github.io/paizcorp/">Paiz® Corp →</a>`
+        :`<strong>Paiz® Corp — National Conglomerate</strong> 🏢<br><br>Founded and chaired by Faiz4224. Five subsidiaries:<br><br><strong>SUB-01 · TL Railways</strong> — National rail · <a href="https://thelegendoflegiona.github.io/tlrailways/">→</a><br><strong>SUB-02 · Paiz™ Construction</strong> — Built TLSRL, TLCC, farms<br><strong>SUB-03 · Paiz Shop</strong> — Minecraft item store · <a href="https://faizzzlol.github.io/paizcorp/paizshop/">→</a><br><strong>SUB-04 · PaizProductions</strong> — Film studio · <a href="https://faizzzlol.github.io/paizcorp/paizproductions/">→</a><br><strong>SUB-05 · Paiz Chicken</strong> — Food ordering · <a href="https://faizzzlol.github.io/paizcorp/paizchicken/">→</a><br><br><a href="https://faizzzlol.github.io/paizcorp/">Paiz® Corp →</a>`,
     },
 
     /* PAIZ CHICKEN */
@@ -505,8 +506,8 @@
       kw:['paiz chicken','chicken','ayam','food','makanan','restaurant','restoran','order food','pesan makanan','food delivery','penghantaran makanan','virtual food','fast food','makan','nak makan','lapar','hungry','paiz food'],
       fup:['Paiz Shop','Paiz Corp','TL Dollar'],
       r:(bm)=>bm
-        ?`<strong>Paiz Chicken</strong> 🍗<br><br>Paiz® Corp SUB-05. Pesanan makanan Minecraft merentasi Skyxion. Penghantaran + kutipan · Dalam Diamonds · Discord webhook.<br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Order →</a>`
-        :`<strong>Paiz Chicken</strong> 🍗<br><br>Paiz® Corp SUB-05. Minecraft food ordering across Skyxion. Delivery + pickup · Diamonds · Discord webhook.<br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">Order Now →</a>`,
+        ?`<strong>Paiz Chicken</strong> 🍗<br><br>Paiz® Corp SUB-05. Pesanan makanan Minecraft merentasi Skyxion. Penghantaran + kutipan · Dalam Diamonds · Discord webhook.<br><a href="https://faizzzlol.github.io/paizcorp/paizchicken/">Order →</a>`
+        :`<strong>Paiz Chicken</strong> 🍗<br><br>Paiz® Corp SUB-05. Minecraft food ordering across Skyxion. Delivery + pickup · Diamonds · Discord webhook.<br><a href="https://faizzzlol.github.io/paizcorp/paizchicken/">Order Now →</a>`,
     },
 
     /* PAIZ SHOP */
@@ -514,8 +515,8 @@
       kw:['paiz shop','kedai paiz','shop','store','kedai','buy items','beli item','shulker','mending','unbreaking','nether wart','iron ingot','retail','item shop','minecraft store','apa ada kat shop','barang apa ada','harga item','price items'],
       fup:['Paiz Corp','Paiz Chicken','TL Dollar'],
       r:(bm)=>bm
-        ?`<strong>Paiz Shop</strong> 🛒<br><br>Paiz® Corp SUB-03. Item dalam Diamond (◆):<br>Shulker Box ◆4 · Mending I ◆3 · Nether Wart ◆3 · Unbreaking III ◆2 · Iron Ingot ◆1<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Lawati Kedai →</a>`
-        :`<strong>Paiz Shop</strong> 🛒<br><br>Paiz® Corp SUB-03. Items in Diamonds (◆):<br>Shulker Box ◆4 · Mending I ◆3 · Nether Wart ◆3 · Unbreaking III ◆2 · Iron Ingot ◆1<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">Visit Shop →</a>`,
+        ?`<strong>Paiz Shop</strong> 🛒<br><br>Paiz® Corp SUB-03. Item dalam Diamond (◆):<br>Shulker Box ◆4 · Mending I ◆3 · Nether Wart ◆3 · Unbreaking III ◆2 · Iron Ingot ◆1<br><br><a href="https://faizzzlol.github.io/paizcorp/paizshop/">Lawati Kedai →</a>`
+        :`<strong>Paiz Shop</strong> 🛒<br><br>Paiz® Corp SUB-03. Items in Diamonds (◆):<br>Shulker Box ◆4 · Mending I ◆3 · Nether Wart ◆3 · Unbreaking III ◆2 · Iron Ingot ◆1<br><br><a href="https://faizzzlol.github.io/paizcorp/paizshop/">Visit Shop →</a>`,
     },
 
     /* LOL MOVIE */
@@ -523,8 +524,8 @@
       kw:['the lol movie','lol movie','thelolmovie','filem thelol','feature film','four phases','empat fasa','movie cast','pelakon filem','in production','movie thelol','bila keluar','when release','movie release','lol movie cast','siapa pelakon','pasal movie'],
       fup:['PaizProductions','Founders','UltraX2020'],
       r:(bm)=>bm
-        ?`<strong>The LoL: The Movie</strong> 🎬<br><br>Status: <strong>DALAM PENGELUARAN</strong><br><br>Pelakon: Faiz4224 · Imii Kun · Dyno · UltraX2020<br>4 fasa · Epik politik Minecraft · Studio: PaizProductions<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">Laman Filem →</a>`
-        :`<strong>The LoL: The Movie</strong> 🎬<br><br>Status: <strong>IN PRODUCTION</strong><br><br>Cast: Faiz4224 · Imii Kun · Dyno · UltraX2020<br>4 phases · Political Minecraft epic · Studio: PaizProductions<br><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/thelolmovie">Film Page →</a>`,
+        ?`<strong>The LoL: The Movie</strong> 🎬<br><br>Status: <strong>DALAM PENGELUARAN</strong><br><br>Pelakon: Faiz4224 · Imii Kun · Dyno · UltraX2020<br>4 fasa · Epik politik Minecraft · Studio: PaizProductions<br><br><a href="https://faizzzlol.github.io/paizcorp/paizproductions/thelolmovie">Laman Filem →</a>`
+        :`<strong>The LoL: The Movie</strong> 🎬<br><br>Status: <strong>IN PRODUCTION</strong><br><br>Cast: Faiz4224 · Imii Kun · Dyno · UltraX2020<br>4 phases · Political Minecraft epic · Studio: PaizProductions<br><br><a href="https://faizzzlol.github.io/paizcorp/paizproductions/thelolmovie">Film Page →</a>`,
     },
 
     /* CURRENCY */
@@ -532,8 +533,8 @@
       kw:['tl dollar','tl$','currency','wang','duit','mata wang','exchange rate','kadar pertukaran','iron worth','diamond worth','netherite worth','national currency','mata wang nasional','tldollar','tl dolar','how much','berapa','nilai duit'],
       fup:['Paiz Shop','Paiz Chicken'],
       r:(bm)=>bm
-        ?`<strong>TL Dollar (TL$)</strong> 💰<br><br>Iron Ingot → TL$1 · Gold Ingot → TL$5 · Emerald → TL$10 · Diamond → TL$30 · Netherite → TL$150<br><br><a href="https://thelegendoflegiona.github.io/main/finance/currency-converter">Penukar Mata Wang →</a>`
-        :`<strong>TL Dollar (TL$)</strong> 💰<br><br>Iron → TL$1 · Gold → TL$5 · Emerald → TL$10 · Diamond → TL$30 · Netherite → TL$150<br><br><a href="https://thelegendoflegiona.github.io/main/finance/currency-converter">Currency Converter →</a>`,
+        ?`<strong>TL Dollar (TL$)</strong> 💰<br><br>Iron Ingot → TL$1 · Gold Ingot → TL$5 · Emerald → TL$10 · Diamond → TL$30 · Netherite → TL$150<br><br><a href="https://thelegendoflegiona.github.io/gov/finance/">Penukar Mata Wang →</a>`
+        :`<strong>TL Dollar (TL$)</strong> 💰<br><br>Iron → TL$1 · Gold → TL$5 · Emerald → TL$10 · Diamond → TL$30 · Netherite → TL$150<br><br><a href="https://thelegendoflegiona.github.io/gov/finance/">Currency Converter →</a>`,
     },
 
     /* SKYXION */
@@ -550,8 +551,8 @@
       kw:['link','links','url','website','portal link','where can i find','mana nak cari','all pages','semua halaman','all portals','semua portal','all links','semua link','official links','link rasmi','website the lol','all websites','senarai laman','portals list'],
       fup:['Government portal','ISC portal','Paiz Corp','Gallery','FN SMP'],
       r:(bm)=>bm
-        ?`<strong>Semua Portal Rasmi</strong> 🔗<br><br><a href="https://thelegendoflegiona.github.io/main/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://thelegendoflegiona.github.io/main/gov/">🏛️ Kerajaan</a><br><a href="https://thelegendoflegiona.github.io/main/gov/citizenship/">🪪 Kewarganegaraan</a><br><a href="https://thelegendoflegiona.github.io/main/gov/assets/">📄 Arkib Undang-undang</a><br><a href="https://thelegendoflegiona.github.io/main/gov/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://thelegendoflegiona.github.io/main/tlr/">🚂 TL Railways</a><br><a href="https://thelegendoflegiona.github.io/main/gallery">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp">⛏ FN SMP</a>`
-        :`<strong>All Official Portals</strong> 🔗<br><br><a href="https://thelegendoflegiona.github.io/main/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/PaizCorp/">🏢 Paiz® Corp</a><br><a href="https://thelegendoflegiona.github.io/main/gov/">🏛️ Government</a><br><a href="https://thelegendoflegiona.github.io/main/gov/citizenship/">🪪 Citizenship</a><br><a href="https://thelegendoflegiona.github.io/main/gov/assets/">📄 Legal Archive</a><br><a href="https://thelegendoflegiona.github.io/main/gov/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizShop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizChicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/PaizCorp/PaizProductions/">🎬 PaizProductions</a><br><a href="https://thelegendoflegiona.github.io/main/tlr/">🚂 TL Railways</a><br><a href="https://thelegendoflegiona.github.io/main/gallery">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp">⛏ FN SMP</a>`,
+        ?`<strong>Semua Portal Rasmi</strong> 🔗<br><br><a href="https://thelegendoflegiona.github.io/main/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/paizcorp/">🏢 Paiz® Corp</a><br><a href="https://thelegendoflegiona.github.io/gov/">🏛️ Kerajaan</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">🪪 Kewarganegaraan</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/archives/">📄 Arkib Undang-undang</a><br><a href="https://thelegendoflegiona.github.io/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/paizcorp/paizshop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/paizcorp/paizchicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/paizcorp/paizproductions/">🎬 PaizProductions</a><br><a href="https://thelegendoflegiona.github.io/tlrailways/">🚂 TL Railways</a><br><a href="https://thelegendoflegiona.github.io/gallery/">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp">⛏ FN SMP</a>`
+        :`<strong>All Official Portals</strong> 🔗<br><br><a href="https://thelegendoflegiona.github.io/main/">🏠 The Legend of Legiona</a><br><a href="https://faizzzlol.github.io/paizcorp/">🏢 Paiz® Corp</a><br><a href="https://thelegendoflegiona.github.io/gov/">🏛️ Government</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/citizenship/">🪪 Citizenship</a><br><a href="https://thelegendoflegiona.github.io/gov/systems/archives/">📄 Legal Archive</a><br><a href="https://thelegendoflegiona.github.io/isc/">🔒 ISC</a><br><a href="https://faizzzlol.github.io/paizcorp/paizshop/">🛒 Paiz Shop</a><br><a href="https://faizzzlol.github.io/paizcorp/paizchicken/">🍗 Paiz Chicken</a><br><a href="https://faizzzlol.github.io/paizcorp/paizproductions/">🎬 PaizProductions</a><br><a href="https://thelegendoflegiona.github.io/tlrailways/">🚂 TL Railways</a><br><a href="https://thelegendoflegiona.github.io/gallery/">📷 Gallery</a><br><a href="https://faizzzlol.github.io/freakyniggas/">🖤 Freaky Niggas</a><br><a href="https://faizzzlol.github.io/freakyniggas/minecraft/fnsmp">⛏ FN SMP</a>`,
     },
 
     /* GALLERY */
@@ -559,8 +560,8 @@
       kw:['gallery','galeri','photo gallery','galeri foto','all photos','semua gambar','browse photos','browse gallery','thelol gallery','8 eras','photo archive','arkib foto','how many photos','berapa gambar','gallery page'],
       fup:['Show Neverland photos','Show The Sus','Show The LoL City','Show TLSRL'],
       r:(bm)=>bm
-        ?`<strong>Galeri Foto Rasmi The LoL</strong> 📷<br><br>Arkib visual lengkap dari 2020–2024 merentasi 8 era. Gambar oleh Faiz4224, Dyno, Ikan dan lain-lain.<br><br>Taip <em>"tunjuk [topik]"</em> atau <em>"/show [topik]"</em> untuk preview gambar di sini, atau lawati galeri penuh:<br><a href="https://thelegendoflegiona.github.io/main/gallery">Galeri Penuh →</a>`
-        :`<strong>The LoL Official Photo Gallery</strong> 📷<br><br>Complete visual archive from 2020–2024 across 8 eras. Captured by Faiz4224, Dyno, Ikan and others.<br><br>Type <em>"show me [topic]"</em> or <em>"/show [topic]"</em> to preview any photos here, or visit the full gallery:<br><a href="https://thelegendoflegiona.github.io/main/gallery">Full Gallery →</a>`,
+        ?`<strong>Galeri Foto Rasmi The LoL</strong> 📷<br><br>Arkib visual lengkap dari 2020–2024 merentasi 8 era. Gambar oleh Faiz4224, Dyno, Ikan dan lain-lain.<br><br>Taip <em>"tunjuk [topik]"</em> atau <em>"/show [topik]"</em> untuk preview gambar di sini, atau lawati galeri penuh:<br><a href="https://thelegendoflegiona.github.io/gallery/">Galeri Penuh →</a>`
+        :`<strong>The LoL Official Photo Gallery</strong> 📷<br><br>Complete visual archive from 2020–2024 across 8 eras. Captured by Faiz4224, Dyno, Ikan and others.<br><br>Type <em>"show me [topic]"</em> or <em>"/show [topic]"</em> to preview any photos here, or visit the full gallery:<br><a href="https://thelegendoflegiona.github.io/gallery/">Full Gallery →</a>`,
     },
 
     /* FREAKY NIGGAS */
