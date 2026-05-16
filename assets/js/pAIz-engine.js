@@ -39,6 +39,8 @@
   'use strict';
 
   /* ── ROOTS ── */
+  // GALLERY_ROOT kept as a page link only — NOT a file path root.
+  // All gallery images are on i.ibb.co with unique hashes (see gallery/assets/js/script.js).
   const GALLERY_ROOT = 'https://thelegendoflegiona.github.io/gallery';
   const ISC_ROOT     = 'https://thelegendoflegiona.github.io/isc';
 
@@ -102,10 +104,10 @@
       kw:['neverland','show neverland','neverland 2020','gambar neverland','tunjuk neverland','era 0','pre era','before the sus','sebelum the sus','neverland photos','era neverland','show era 0'],
       era:'ERA 0 // PRE-THE-SUS // 2020',
       images:[
-        `${GALLERY_ROOT}/[1]_NEVERLAND_2020/byDYNO_a_selfie_with_syaz_dyno_and_unidentified_player.jpg`,
-        `${GALLERY_ROOT}/[1]_NEVERLAND_2020/byDYNO_maybe_BEFORE_THE_FLOWEY_BLOODMOON_EVENT.jpg`,
-        `${GALLERY_ROOT}/[1]_NEVERLAND_2020/IDK.jpg`,
-        `${GALLERY_ROOT}/[1]_NEVERLAND_2020/sendbyDYNO.jpg`,
+        `https://i.ibb.co/VYvYdGrm/by-DYNO-a-selfie-with-syaz-dyno-and-unidentified-player.jpg`,
+        `https://i.ibb.co/zWsF28tk/by-DYNO-maybe-BEFORE-THE-FLOWEY-BLOODMOON-EVENT.jpg`,
+        `https://i.ibb.co/VW4SSyJN/IDK.jpg`,
+        `https://i.ibb.co/6hLjDgZ/sendby-DYNO.jpg`,
       ],
       r:(bm)=>bm
         ?`Ini gambar dari <strong>Era Neverland (2020)</strong> — zaman sebelum The Sus, sebelum The LoL. Server Skyxion awal. Gambar oleh Dyno.`
@@ -115,7 +117,9 @@
       id:'img_sus', cat:'images',
       kw:['the sus','show the sus','sus base','first base','artificial island','asal the sus','gambar the sus','tunjuk the sus','sus island','sus era','era 1','show era 1','tunjuk era 1'],
       era:'ERA 1 // THE SUS // 2022',
-      images:[`${GALLERY_ROOT}/[2]_THE_SUS/byDYNO_FIRST_THE_SUS_BASE.jpg`],
+      images:[
+        `https://i.ibb.co/4ZD2SHxM/by-DYNO-FIRST-THE-SUS-BASE.jpg`,
+      ],
       r:(bm)=>bm
         ?`<strong>Pangkalan Sus Pertama</strong> — pulau buatan di mana semuanya bermula. Faiz4224, ItzDynozz, dan Imii Kun bina di sini — farm, chest, furnace.`
         :`<strong>The First Sus Base</strong> — the artificial island where it all began. Faiz4224, ItzDynozz and Imii Kun built everything here — farms, chests, furnaces. This is the moment that started it all.`,
@@ -125,10 +129,10 @@
       kw:['the lol founded','penubuhan','founded','first day','hari pertama','gambar penubuhan','tunjuk penubuhan','founding day','1st day thelol','show founding','era 2','first the lol','2023 february','feb 2023'],
       era:'ERA 2 // GOLDEN ERA // FEB 2023',
       images:[
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023_02_21_‏‎7_12_04_ PM_byFaiz4224_THE_LOL_WAS_FOUNDED.png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-02-20_BY_Faiz4224_FIRST_SPAWN_INTO_THE_SERVER_IN_WORLD_SPAWNPOINT.png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-02-21_OTW_TO_THE_LOL_WITH_IMII.png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-02-22_BY_Faiz4224_EARLY.png`,
+        `https://i.ibb.co/mrHzmLX8/2023-02-21-7-12-04-PM-by-Faiz4224-THE-LOL-WAS-FOUNDED.png`,
+        `https://i.ibb.co/ZZVdQKh/2023-02-20-BY-Faiz4224-FIRST-SPAWN-INTO-THE-SERVER-IN-WORLD-SPAWNPOINT.png`,
+        `https://i.ibb.co/WNcmFYs1/2023-02-21-OTW-TO-THE-LOL-WITH-IMII.png`,
+        `https://i.ibb.co/pBrQDV83/2023-02-22-BY-Faiz4224-EARLY.png`,
       ],
       r:(bm)=>bm
         ?`<strong>The Legend of Legiona diasaskan</strong> pada 21 Februari 2023, pukul 7:12 PM. Imii Kun menamakan semula The Sus. Sejarah bermula.`
@@ -139,10 +143,10 @@
       kw:['the lol city','bandar thelol','city view','pandangan bandar','gambar bandar','tunjuk bandar','show city','main road','jalan utama','golden era','city photos','lol city','show lol city','city thelol'],
       era:'ERA 2 // GOLDEN ERA // 2023',
       images:[
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-29 (4).png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-05-12 (5).png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-15 (6).png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-05-01 (2).png`,
+        `https://i.ibb.co/DDGdDZvQ/2023-04-29-4.png`,
+        `https://i.ibb.co/Y9xKxXC/2023-05-12-5.png`,
+        `https://i.ibb.co/nM2WjjQ1/2023-04-15-6.png`,
+        `https://i.ibb.co/tpMvtZLT/2023-05-01-2.png`,
       ],
       r:(bm)=>bm
         ?`<strong>The LoL City</strong> semasa era keemasannya — jalan utama, TLCC Twin Towers, dan pokok cherry blossom. Indah gila! 🌸`
@@ -153,10 +157,10 @@
       kw:['tlcc','twin towers','menara kembar','tlcc view','top of tlcc','tlcc construction','tlcc photos','gambar tlcc','tunjuk tlcc','show tlcc','convention centre','menara'],
       era:'ERA 2 // GOLDEN ERA // 2023',
       images:[
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-03-03_BY_Faiz4224_THE_LOL_CITY_VIEW_FROM_TLCC.png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-03-03_BY_Faiz4224_HIGHEST_STRUCTURED_IN_THE_LOL_AND_SKYXION.png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-15_BY_Faiz4224_FIRST_ELEVATOR_INSIDE_TLCC_IN_THE_LOL.png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-29 (2).png`,
+        `https://i.ibb.co/5hTVcQGC/2023-03-03-BY-Faiz4224-THE-LOL-CITY-VIEW-FROM-TLCC.png`,
+        `https://i.ibb.co/dJrw5Z81/2023-03-03-BY-Faiz4224-HIGHEST-STRUCTURED-IN-THE-LOL-AND-SKYXION.png`,
+        `https://i.ibb.co/gZZCwRq8/2023-04-15-BY-Faiz4224-FIRST-ELEVATOR-INSIDE-TLCC-IN-THE-LOL.png`,
+        `https://i.ibb.co/PZGtQbpZ/2023-04-29-2.png`,
       ],
       r:(bm)=>bm
         ?`<strong>TLCC Twin Towers</strong> — mercu tanda paling ikonik The LoL. Dari puncak menara (Y=320 — had ketinggian Minecraft!), lif pertama dalam TLCC, dan tapak pembinaan Menara 2.`
@@ -167,9 +171,9 @@
       kw:['territory','map','peta','tunjuk peta','show map','gambar peta','thelol map','peta thelol','seed map','chunkbase','territory map'],
       era:'ERA 2 // GOLDEN ERA // 2023',
       images:[
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/byFAIZ_THE_LOL_MAP_INGAME.png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/THE_LOL_MAP.png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-14 (3).png`,
+        `https://i.ibb.co/4Rv4T2pJ/by-FAIZ-THE-LOL-MAP-INGAME.png`,
+        `https://i.ibb.co/Lqd9CQ2/THE-LOL-MAP.png`,
+        `https://i.ibb.co/Lh87B6d2/2023-04-14-3.png`,
       ],
       r:(bm)=>bm
         ?`<strong>Peta Wilayah The LoL</strong> — peta dalam game dan peta ChunkBase rasmi (Seed 1371621129). Lokasi: The LoL City, Highlands, Hi-Tech, Outpost, Flutopia, Bandar The LoL.`
@@ -179,7 +183,9 @@
       id:'img_farm', cat:'images',
       kw:['farm','iron farm','ladang','national farm','gambar farm','show farm','tunjuk farm','first farm','ikan farm'],
       era:'ERA 2 // GOLDEN ERA // APR 2023',
-      images:[`${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-20_BY_Faiz4224_FIRST_IRON_FARM_BY_IKAN.png`],
+      images:[
+        `https://i.ibb.co/0VmLfrCV/2023-04-20-BY-Faiz4224-FIRST-IRON-FARM-BY-IKAN.png`,
+      ],
       r:(bm)=>bm
         ?`<strong>Iron Farm Pertama</strong> — dibina oleh Ikan (ikanuwu). Pandangan dari atas platform air yang dikelilingi ladang buluh. Mula penggerak ekonomi The LoL!`
         :`<strong>The First Iron Farm</strong> — built by Ikan (ikanuwu). Aerial view of the water platform surrounded by bamboo farms. The beginning of The LoL's economic engine.`,
@@ -189,10 +195,10 @@
       kw:['tlsrl','show tlsrl','railway photos','gambar kereta api','tunjuk tlsrl','railway','train','tren','rail','kereta api','track','landasan','tlsrl photos','railway images'],
       era:'ERA 5 // RESTORATION // 2024',
       images:[
-        `${GALLERY_ROOT}/assets/2024-01-13-1.png`,
-        `${GALLERY_ROOT}/assets/2024-01-24.png`,
-        `${GALLERY_ROOT}/assets/2024-02-04-1.png`,
-        `${GALLERY_ROOT}/assets/2024-01-27-1.png`,
+        `https://i.ibb.co/7tbWqfHQ/2024-01-13-1.png`,
+        `https://i.ibb.co/v4SVbcPb/2024-01-24.png`,
+        `https://i.ibb.co/d08zkbm0/2024-02-04-1.png`,
+        `https://i.ibb.co/fdVw3T2X/2024-01-27-1.png`,
       ],
       r:(bm)=>bm
         ?`<strong>TLSRL — The LoL–Spawn Railway Link</strong>: Binaan rel merentasi hutan autumn, stesen platform waktu malam, jambatan viadukt, dan landasan yang dibina blok demi blok. Lebih 4,800 blok! 🚂`
@@ -203,10 +209,10 @@
       kw:['terminal','terminal bersepadu spawn','spawn terminal','gambar terminal','tunjuk terminal','show terminal','station','stesen spawn','integrated terminal'],
       era:'ERA 5 // RESTORATION // APR 2024',
       images:[
-        `${GALLERY_ROOT}/assets/2024-04-05.png`,
-        `${GALLERY_ROOT}/assets/2024-04-05-1.png`,
-        `${GALLERY_ROOT}/assets/2024-04-05-2.png`,
-        `${GALLERY_ROOT}/assets/2024-04-05-3.png`,
+        `https://i.ibb.co/XfNtsXd2/2024-04-05.png`,
+        `https://i.ibb.co/wZjXP5xp/2024-04-05-1.png`,
+        `https://i.ibb.co/0jWGYVvK/2024-04-05-2.png`,
+        `https://i.ibb.co/6KJgSDd/2024-04-05-3.png`,
       ],
       r:(bm)=>bm
         ?`<strong>Terminal Bersepadu Spawn</strong> — pusat TLSRL. Dewan agung dengan arah ke Platform 1&2, HSB, Kafeteria, Info, E-Chest. Bangunan dalaman paling gah dalam sejarah The LoL!`
@@ -217,10 +223,10 @@
       kw:['ender dragon','dragon','end','naga','gambar dragon','show dragon','tunjuk dragon','fight dragon','lawan dragon','the end','end poem','end poem faiz','faiz4224 end poem'],
       era:'ERA 7 // FINAL ACTIVE ERA // JUNE 2024',
       images:[
-        `${GALLERY_ROOT}/assets/2024-06-22-3.png`,
-        `${GALLERY_ROOT}/assets/2024-06-22-4.png`,
-        `${GALLERY_ROOT}/assets/2024-06-22-5.png`,
-        `${GALLERY_ROOT}/assets/2024-06-22-6.png`,
+        `https://i.ibb.co/20CyTH5d/2024-06-22-3.png`,
+        `https://i.ibb.co/2YcfFD81/2024-06-22-4.png`,
+        `https://i.ibb.co/GvZRd3R5/2024-06-22-5.png`,
+        `https://i.ibb.co/JDtGL07/2024-06-22-6.png`,
       ],
       r:(bm)=>bm
         ?`<strong>Pertarungan Ender Dragon</strong> — Faiz4224 dan Dyno (LonelyDynozz) bersama lawan dragon. Chat: "3...2...1..." Epic gila. Dan End Poem sendiri address <strong>Faiz4224?</strong> — "Yes. Take care." Day 936. 👑`
@@ -231,8 +237,8 @@
       kw:['end city','elytra','purpur','gambar end city','show end city','tunjuk end city','flying elytra','end city photos'],
       era:'ERA 7 // FINAL ACTIVE ERA // JUNE 2024',
       images:[
-        `${GALLERY_ROOT}/assets/2024-06-22-7.png`,
-        `${GALLERY_ROOT}/assets/2024-06-22-8.png`,
+        `https://i.ibb.co/LdWYydDn/2024-06-22-7.png`,
+        `https://i.ibb.co/PZJK4dv0/2024-06-22-8.png`,
       ],
       r:(bm)=>bm
         ?`<strong>End City</strong> — gambar <em>Diamond Sword Faiz4224</em> dengan full enchants, dan Faiz4224 terbang dengan Elytra. Day 958!`
@@ -242,7 +248,9 @@
       id:'img_bye', cat:'images',
       kw:['bye thelol','goodbye','selamat tinggal','emotional photo','gambar sedih','most emotional','gambar thelol terakhir','goodbye photo','bye','farewell'],
       era:'ERA 7 // FINAL ACTIVE ERA // JUNE 20, 2024',
-      images:[`${GALLERY_ROOT}/assets/2024-06-20.png`],
+      images:[
+        `https://i.ibb.co/JRhdktc9/2024-06-20.png`,
+      ],
       r:(bm)=>bm
         ?`Gambar paling sedih dalam arkib. Chat: <em>"bye thelol"</em>. Faiz4224 terbang di atas bukit cherry blossom atas strider di atas lava, melihat ke bawah pada tanah yang dibina. June 20, 2024. 💔`
         :`The most poignant image in the entire archive. Chat simply reads: <em>"bye thelol."</em> Faiz4224 flying above The LoL's cherry blossom hills on a strider over lava, looking down at the land he built. June 20, 2024.`,
@@ -251,12 +259,15 @@
       id:'img_lastday', cat:'images',
       kw:['last day','hari terakhir','aug 24','august 24 2024','last screenshot','gambar terakhir','final day','wyvern','dragon wyvern','show last day','tunjuk hari terakhir'],
       era:'ERA 7 // FINAL ACTIVE ERA // AUG 24, 2024',
-      images:[`${GALLERY_ROOT}/[5]_THE_LOL_LATEST_2024/2024-08-24.png`],
+      images:[
+        `https://i.ibb.co/v6SV8hnP/2024-08-24.png`,
+      ],
       r:(bm)=>bm
         ?`<strong>Hari Terakhir</strong> — 24 Ogos 2024. Hari ke-2729. Wyvern naga terbang di langit biru cerah di atas daerah. Screenshot terakhir yang pernah diambil di server ni.`
         :`<strong>The Last Day</strong> — August 24, 2024. Day 2729. A custom wyvern dragon soars through a clear blue sky above the district. The last screenshot ever taken on this server.`,
     },
     {
+      // ISC images — these live on the ISC GitHub repo, ISC_ROOT still valid here
       id:'img_tlcc_attack', cat:'isc_img',
       kw:['tlcc attack','menara diserang','drone attack','serangan dron','tlcc bombed','tlcc attacked','show attack','gambar serangan','tunjuk serangan','ultrax attack','isc attack files','show tlcc attack'],
       era:'ERA 4 // CHAOS // ISC CLASSIFIED',
@@ -310,9 +321,9 @@
       kw:['horror survival','event server','random effects','gambar event','show event','server event','horror event','chaos event game'],
       era:'ERA 7 // FINAL ACTIVE ERA // JUNE 2024',
       images:[
-        `${GALLERY_ROOT}/assets/2024-06-23-6.png`,
-        `${GALLERY_ROOT}/assets/2024-06-23-7.png`,
-        `${GALLERY_ROOT}/assets/2024-06-23-8.png`,
+        `https://i.ibb.co/spVhdS4q/2024-06-23-6.png`,
+        `https://i.ibb.co/233LF9Tf/2024-06-23-7.png`,
+        `https://i.ibb.co/VYhPMpTw/2024-06-23-8.png`,
       ],
       r:(bm)=>bm
         ?`<strong>Horror Survival Event</strong> — screen kemerah-merahan, semua kesan random dapat, hampir mati dengan 2 nyawa. Dyno: "bottle o enchanting ada x". Faiz: "pergh semua effect dpt". Chaos gila! 😂`
@@ -323,9 +334,9 @@
       kw:['pedang faiz','diamond sword faiz','netherite boots','gear faiz','weapon','senjata','show gear','gambar senjata','equipment','enchanted sword'],
       era:'ERA 7 // FINAL ACTIVE ERA // 2024',
       images:[
-        `${GALLERY_ROOT}/assets/2024-06-22.png`,
-        `${GALLERY_ROOT}/assets/2024-06-29-2.png`,
-        `${GALLERY_ROOT}/assets/2024-06-23-3.png`,
+        `https://i.ibb.co/hJ8PbBHn/2024-06-22-1.png`,   // Diamond Sword Faiz4224 — Cave Clearing (FIXED: was wrongly 2024-06-22.png "Ocean Floor")
+        `https://i.ibb.co/xq9nmZRb/2024-06-29-2.png`,   // Netherite Boots Faiz4224
+        `https://i.ibb.co/zTFbvD7C/2024-06-23-3.png`,   // Terminal — Pedang Faiz4224
       ],
       r:(bm)=>bm
         ?`<strong>Senjata Lagenda Faiz4224</strong>: "Diamond Sword Faiz4224" (Fire Aspect II, Unbreaking III, Sharpness IV, Looting III, Knockback II, Mending I) → upgrade ke "Pedang Faiz4224" Netherite dengan Sharpness V. Plus Netherite Boots dengan Depth Strider III, Soul Speed III, Thorns II!`
@@ -336,10 +347,10 @@
       kw:['show era 2','tunjuk era 2','golden era photos','gambar golden era','era emas','era golden','all golden era','golden era images'],
       era:'ERA 2 // GOLDEN ERA // 2023',
       images:[
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-02-24_BY_Faiz4224_FIRST_FUNICULAR_RAILWAY_TO_THE_LOL_HILL.png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-03-07_BY_Faiz4224_PROGRAM_PENANAMAN_SEMULA_POKOK.png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-04-22 (1).png`,
-        `${GALLERY_ROOT}/[3]_FIRST_THE_LOL/2023-05-01 (3).png`,
+        `https://i.ibb.co/zTLjH1nB/2023-02-24-BY-Faiz4224-FIRST-FUNICULAR-RAILWAY-TO-THE-LOL-HILL.png`,
+        `https://i.ibb.co/sp89ZX2R/2023-03-07-BY-Faiz4224-PROGRAM-PENANAMAN-SEMULA-POKOK.png`,
+        `https://i.ibb.co/k6hWTgFB/2023-04-22-1.png`,
+        `https://i.ibb.co/wF9pSdkV/2023-05-01-3.png`,
       ],
       r:(bm)=>bm
         ?`<strong>Koleksi Era Emas (2023)</strong> — funicular railway pertama ke bukit The LoL, program penanaman semula pokok, Faiz4224 meninjau dari tiang tinggi (11 hari, 16 jam masa bermain!), dan pembinaan TLCC Tower 2.`
@@ -350,10 +361,10 @@
       kw:['show era 7','tunjuk era 7','final era photos','gambar akhir','2024 photos','june 2024','latest photos','last server photos','show 2024'],
       era:'ERA 7 // FINAL ACTIVE ERA // 2024',
       images:[
-        `${GALLERY_ROOT}/assets/2024-06-15.png`,
-        `${GALLERY_ROOT}/assets/2024-07-01.png`,
-        `${GALLERY_ROOT}/assets/2024-07-06.png`,
-        `${GALLERY_ROOT}/[5]_THE_LOL_LATEST_2024/2024-07-14__1_.png`,
+        `https://i.ibb.co/TDmLBZ2L/2024-06-15.png`,
+        `https://i.ibb.co/5ggTdWPz/2024-07-01.png`,
+        `https://i.ibb.co/23xXC9KW/2024-07-06.png`,
+        `https://i.ibb.co/6JLCdWzQ/2024-07-14-1.png`,
       ],
       r:(bm)=>bm
         ?`<strong>Era Aktif Terakhir (2024)</strong> — LonelyDynozz (Dyno) dalam padang, bangunan sky platform purpur, lantai Trial Chamber yang penuh dengan gold nugget dari vault, dan pandangan aerial malam dari puncak menara.`
