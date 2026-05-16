@@ -2,10 +2,16 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>pAIz v5.2 · Paiz Corp</title>
+<!-- FIX 6: removed contradictory maximum-scale=1.0 + user-scalable=yes -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- FIX 1: v5.2 → v5.3 -->
+<title>pAIz v5.3 · Paiz Corp</title>
 <link rel="icon" type="image/svg+xml" href="/paizcorp/paizcorp-favicon.svg">
-<meta name="description" content="pAIz v5.2 — The Legend of Legiona's omniscient AI. Full ecosystem knowledge, slash commands, image preview, context memory. EN & BM.">
+<meta name="description" content="pAIz v5.3 — The Legend of Legiona's omniscient AI. Full ecosystem knowledge, slash commands, image preview, context memory. EN & BM.">
+<meta property="og:title" content="pAIz v5.3 · Paiz® Corp">
+<meta property="og:description" content="The LoL's omniscient AI — government, ISC, NIS, FN SMP, history, gallery. Ask in EN or BM.">
+<meta property="og:url" content="https://faizzzlol.github.io/paizcorp/pAIz">
+<meta name="theme-color" content="#0d0c0a">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════ TOKENS ═══════════════════════════ */
@@ -53,6 +59,20 @@ html.sw *,html.sw *::before,html.sw *::after{transition:background-color .25s,co
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);display:flex;flex-direction:column}
+
+/* FIX 5: Global kbd styling — covers KB responses + wsub + cmd-hint */
+kbd{
+  font-family:'DM Mono',monospace;
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:1px 6px;
+  border-radius:4px;
+  color:#3a9165;
+  font-size:.85em;
+  margin:0 1px;
+  white-space:nowrap;
+}
+[data-theme="light"] kbd{background:#f0ece2;border-color:rgba(22,20,16,.12);}
 
 /* SUPER NAV */
 .sn{background:var(--sn-bg);height:28px;display:flex;align-items:center;padding:0 20px;border-bottom:1px solid var(--sn-bd);overflow-x:auto;scrollbar-width:none;flex-shrink:0}
@@ -119,16 +139,21 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 .wcat-btn:hover,.wcat-btn.on{border-color:rgba(42,102,71,.35);color:#3a9165;background:var(--green-dim)}
 .wcat-btn.img-cat{border-color:rgba(201,168,76,.2);color:var(--gold)}
 .wcat-btn.img-cat.on,.wcat-btn.img-cat:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.4);color:var(--gold)}
+/* FIX 2: NIS tab — purple/civic tone to distinguish from gov/images */
+.wcat-btn.nis-cat{border-color:rgba(91,156,246,.2);color:var(--blue)}
+.wcat-btn.nis-cat.on,.wcat-btn.nis-cat:hover{background:rgba(91,156,246,.07);border-color:rgba(91,156,246,.4);color:var(--blue)}
+
 .wchips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:680px;margin-top:4px}
 .chip{background:var(--chip-bg);border:1px solid var(--chip-bd);padding:8px 14px;font-family:'Outfit',sans-serif;font-size:.82rem;color:var(--chip-txt);cursor:pointer;transition:all .18s;border-radius:8px;text-align:left;line-height:1.3}
 .chip:hover{background:var(--chip-hbg);border-color:var(--chip-hbd);color:var(--chip-htxt)}
 .chip.img-chip{border-color:rgba(201,168,76,.15);font-size:.78rem}
 .chip.img-chip:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,60,.35);color:var(--gold)}
+.chip.nis-chip{border-color:rgba(91,156,246,.15);font-size:.78rem}
+.chip.nis-chip:hover{background:rgba(91,156,246,.07);border-color:rgba(91,156,246,.35);color:var(--blue)}
 
 /* COMMAND HINT BAR */
 .cmd-hint-bar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:2px}
 .cmd-hint{font-family:'DM Mono',monospace;font-size:.35rem;letter-spacing:1px;color:var(--xfaint);background:var(--cmd-bg);padding:3px 10px;border-radius:20px;border:1px solid var(--border)}
-.cmd-hint kbd{font-family:'DM Mono',monospace;background:var(--surface);padding:1px 5px;border-radius:4px;color:#3a9165;margin:0 2px}
 
 /* MSG GROUPS */
 .mg{display:flex;flex-direction:column;gap:2px;animation:mi .2s ease;margin-bottom:6px}
@@ -222,6 +247,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
   .tn-lnk:not(.pri){display:none}
   .welcome{padding:28px 14px;gap:12px}
   .img-grid{grid-template-columns:1fr 1fr!important}
+  .wcat{gap:4px}
+  .wcat-btn{font-size:.34rem;padding:3px 8px}
 }
 </style>
 </head>
@@ -248,7 +275,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
     <div class="tn-logo">p</div>
     <span class="tn-name">pAIz</span>
   </a>
-  <div class="tn-badge">v5.2 OMNISCIENT</div>
+  <!-- FIX 1: v5.2 → v5.3 -->
+  <div class="tn-badge">v5.3 OMNISCIENT</div>
   <span class="tn-version">BUILD 2026.05.13</span>
   <span class="lang-flag" id="langFlag">EN</span>
   <span class="search-mode-indicator" id="searchIndicator">SEARCH MODE</span>
@@ -279,27 +307,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
 <div class="shell">
   <div class="msgs-wrap" id="mw">
     <div class="msgs-inner" id="mi">
-      <div class="welcome" id="welcome">
-        <div class="wlogo">p</div>
-        <div class="wnew"><span class="wnew-dot"></span>v5.2 — OMNISCIENT · FN SMP INTEGRATED</div>
-        <div class="wtitle">I am p<em>AI</em>z. I know everything.</div>
-        <p class="wsub">The LoL · Paiz® Corp · ISC · Freaky Niggas · FN SMP · Government · Legal · TLSRL · Citizenship — all indexed. Use <kbd>/</kbd> commands or just ask naturally. BM & EN.</p>
-        <p class="wbm">Taip <strong>/show tlcc</strong> atau <strong>/search fn smp</strong> — aku faham.</p>
-        <div class="wcat">
-          <button class="wcat-btn on" onclick="showCat('all',this)">ALL</button>
-          <button class="wcat-btn" onclick="showCat('history',this)">HISTORY</button>
-          <button class="wcat-btn" onclick="showCat('gov',this)">GOVERNMENT</button>
-          <button class="wcat-btn" onclick="showCat('corp',this)">PAIZ CORP</button>
-          <button class="wcat-btn" onclick="showCat('fn',this)">FREAKY NIGGAS</button>
-          <button class="wcat-btn" onclick="showCat('fnsmp',this)">⛏ FN SMP</button>
-          <button class="wcat-btn img-cat" onclick="showCat('images',this)">📷 PHOTOS</button>
-          <button class="wcat-btn img-cat" onclick="showCat('isc_img',this)">🔒 ISC FILES</button>
-        </div>
-        <div class="wchips" id="wchips"></div>
-        <div class="cmd-hint-bar">
-          <span class="cmd-hint"><kbd>/search</kbd> anything · <kbd>/show</kbd> photos · <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/fnsmp</kbd> · <kbd>/clear</kbd> · <kbd>/theme</kbd> · <kbd>/help</kbd></span>
-        </div>
-      </div>
+      <!-- FIX 4: Welcome HTML now generated by buildWelcomeEl() — no duplication -->
     </div>
   </div>
   <div class="input-area">
@@ -312,16 +320,12 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);displ
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════
-     pAIz Engine — KB, scoring, image grid, BM detection
-     All KB/logic lives here. UI shell below consumes pAIzEngine.*
-════════════════════════════════════════════════════════════ -->
 <script src="/paizcorp/assets/js/pAIz-engine.js"></script>
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
-   pAIz v5.2 — UI SHELL
-   KB / scoring / imgGrid / BM detection → pAIzEngine.*
+   pAIz v5.3 — UI SHELL
+   KB / scoring / imgGrid / BM detection → PaizEngine.*
    This file: theme · lightbox · chips · chat DOM · processQuery
 ═══════════════════════════════════════════════════════════════ */
 
@@ -350,7 +354,6 @@ function setIcon() {
 }
 
 /* ── LIGHTBOX ── */
-/* imgGrid() in paiz-engine.js calls window.lbOpen — must stay global */
 let lbImages = [], lbIndex = 0;
 
 function lbOpen(images, idx = 0) {
@@ -400,7 +403,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbStep(1);
 });
 
-/* Touch swipe in lightbox */
 let lbTx = 0;
 document.getElementById('lb').addEventListener('touchstart', e => { lbTx = e.touches[0].clientX; }, { passive: true });
 document.getElementById('lb').addEventListener('touchend',   e => {
@@ -408,27 +410,68 @@ document.getElementById('lb').addEventListener('touchend',   e => {
   if (Math.abs(d) > 50) lbStep(d > 0 ? 1 : -1);
 }, { passive: true });
 
-/* ── CHIPS — sourced from PaizEngine.ALL_CHIPS ── */
+/* ── CHIPS ── */
 let curCat = 'all';
 
 function showCat(cat, btn) {
   curCat = cat;
   document.querySelectorAll('.wcat-btn').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
+  if (btn) btn.classList.add('on');
   renderChips();
 }
 
 function renderChips() {
   const ch = document.getElementById('wchips');
   if (!ch) return;
-  const chips  = PaizEngine.ALL_CHIPS[curCat] || PaizEngine.ALL_CHIPS.all;
-  const isImg  = curCat === 'images' || curCat === 'isc_img';
+  const chips = PaizEngine.ALL_CHIPS[curCat] || PaizEngine.ALL_CHIPS.all;
+  const isImg = curCat === 'images' || curCat === 'isc_img';
+  const isNis = curCat === 'nis';
   ch.innerHTML = chips.map(c =>
-    `<button class="chip${isImg ? ' img-chip' : ''}" onclick="useChip(this)">${c}</button>`
+    `<button class="chip${isImg ? ' img-chip' : ''}${isNis ? ' nis-chip' : ''}" onclick="useChip(this)">${c}</button>`
   ).join('');
 }
 
-renderChips();
+/* ══════════════════════════════════════════════
+   FIX 4: buildWelcomeEl() — single source of truth
+   Used by both initial render and clearChat()
+══════════════════════════════════════════════ */
+function buildWelcomeEl() {
+  const w = document.createElement('div');
+  w.className = 'welcome';
+  w.id = 'welcome';
+  w.innerHTML = `
+    <div class="wlogo">p</div>
+    <div class="wnew"><span class="wnew-dot"></span>v5.3 — OMNISCIENT · NIS + FN SMP</div>
+    <div class="wtitle">I am p<em>AI</em>z. I know everything.</div>
+    <p class="wsub">The LoL · Paiz® Corp · ISC · Freaky Niggas · FN SMP · Government · Legal · TLSRL · Citizenship — all indexed. Use <kbd>/</kbd> commands or just ask naturally. BM & EN.</p>
+    <p class="wbm">Taip <strong>/show tlcc</strong> atau <strong>/search fn smp</strong> — aku faham.</p>
+    <div class="wcat">
+      <button class="wcat-btn on"         onclick="showCat('all',this)">ALL</button>
+      <button class="wcat-btn"            onclick="showCat('history',this)">HISTORY</button>
+      <button class="wcat-btn"            onclick="showCat('gov',this)">GOVERNMENT</button>
+      <button class="wcat-btn"            onclick="showCat('corp',this)">PAIZ CORP</button>
+      <button class="wcat-btn"            onclick="showCat('fn',this)">FREAKY NIGGAS</button>
+      <button class="wcat-btn"            onclick="showCat('fnsmp',this)">⛏ FN SMP</button>
+      <button class="wcat-btn nis-cat"    onclick="showCat('nis',this)">🪪 NIS</button>
+      <button class="wcat-btn img-cat"    onclick="showCat('images',this)">📷 PHOTOS</button>
+      <button class="wcat-btn img-cat"    onclick="showCat('isc_img',this)">🔒 ISC FILES</button>
+    </div>
+    <div class="wchips" id="wchips"></div>
+    <div class="cmd-hint-bar">
+      <span class="cmd-hint">
+        <kbd>/search</kbd> · <kbd>/show</kbd> · <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/nis</kbd> · <kbd>/fn</kbd> · <kbd>/fnsmp</kbd> · <kbd>/clear</kbd> · <kbd>/theme</kbd> · <kbd>/help</kbd>
+      </span>
+    </div>`;
+  return w;
+}
+
+/* Initial render */
+(function initWelcome() {
+  const mi = document.getElementById('mi');
+  mi.appendChild(buildWelcomeEl());
+  curCat = 'all';
+  renderChips();
+})();
 
 /* ── DOM REFS ── */
 const mw              = document.getElementById('mw');
@@ -513,13 +556,12 @@ function renderPortalResults(results, bm) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   PROCESS QUERY — all KB/scoring via PaizEngine.*
+   PROCESS QUERY
 ══════════════════════════════════════════════════════════ */
 async function processQuery(t) {
   if (busy || !t.trim()) return;
   const raw = t.trim();
 
-  /* UI-only commands — no bubble */
   if (/^\/clear$/i.test(raw)) { clearChat(); return; }
   if (/^\/theme$/i.test(raw)) { toggleTheme(); return; }
 
@@ -544,8 +586,16 @@ async function processQuery(t) {
     const cmd   = parts[0].toLowerCase();
     const arg   = parts.slice(1).join(' ').trim();
 
-    /* Direct KB shortcuts → map to KB entry IDs */
-    const kbMap = { gov: 'government', isc: 'isc', fn: 'fn_about', help: 'help', fnsmp: 'fnsmp_about' };
+    /* FIX 3: Added nis: 'nis_overview' to kbMap */
+    const kbMap = {
+      gov:   'government',
+      isc:   'isc',
+      fn:    'fn_about',
+      help:  'help',
+      fnsmp: 'fnsmp_about',
+      nis:   'nis_overview',   // ← NEW
+    };
+
     if (kbMap[cmd]) {
       const e = PaizEngine.KB.find(x => x.id === kbMap[cmd]);
       if (e) { addBot(e.r(bm), e.fup || []); lastContext = e; }
@@ -553,7 +603,6 @@ async function processQuery(t) {
       busy = false; cs.disabled = false; ci.focus(); return;
     }
 
-    /* /search [query] */
     if (cmd === 'search') {
       const q = arg || (bm ? 'kerajaan' : 'government');
       searchIndicator.classList.add('show');
@@ -577,7 +626,6 @@ async function processQuery(t) {
       busy = false; cs.disabled = false; ci.focus(); return;
     }
 
-    /* /show [topic] */
     if (cmd === 'show') {
       const q     = arg || 'neverland';
       const match = PaizEngine.bestMatch(q);
@@ -594,8 +642,6 @@ async function processQuery(t) {
       }
       busy = false; cs.disabled = false; ci.focus(); return;
     }
-
-    /* Unknown slash — fall through to standard query */
   }
 
   /* ── CONTEXT MEMORY ── */
@@ -690,35 +736,15 @@ async function processQuery(t) {
 
 /* ── SEND / CHIP / CLEAR ── */
 function sendMsg() { const t = ci.value.trim(); if (t) processQuery(t); }
-function useChip(b) { processQuery(b.textContent.replace('📷', '').trim()); }
 
+/* Strip decorative emoji from chip text before querying */
+function useChip(b) { processQuery(b.textContent.replace(/[📷⛏🔒🪪]/g, '').trim()); }
+
+/* FIX 4: clearChat uses buildWelcomeEl() — no more duplicated HTML */
 function clearChat() {
   mi.innerHTML = '';
   lastContext  = null;
-  const w = document.createElement('div');
-  w.className = 'welcome';
-  w.id = 'welcome';
-  w.innerHTML = `
-    <div class="wlogo">p</div>
-    <div class="wnew"><span class="wnew-dot"></span>v5.2 — OMNISCIENT · FN SMP INTEGRATED</div>
-    <div class="wtitle">I am p<em>AI</em>z. I know everything.</div>
-    <p class="wsub">The LoL · Paiz® Corp · ISC · Freaky Niggas · FN SMP · Government · Legal · TLSRL · Citizenship — all indexed.</p>
-    <p class="wbm">Taip /help untuk senarai arahan penuh. Cuba /fnsmp untuk info server!</p>
-    <div class="wcat">
-      <button class="wcat-btn on" onclick="showCat('all',this)">ALL</button>
-      <button class="wcat-btn" onclick="showCat('history',this)">HISTORY</button>
-      <button class="wcat-btn" onclick="showCat('gov',this)">GOVERNMENT</button>
-      <button class="wcat-btn" onclick="showCat('corp',this)">PAIZ CORP</button>
-      <button class="wcat-btn" onclick="showCat('fn',this)">FREAKY NIGGAS</button>
-      <button class="wcat-btn" onclick="showCat('fnsmp',this)">⛏ FN SMP</button>
-      <button class="wcat-btn img-cat" onclick="showCat('images',this)">📷 PHOTOS</button>
-      <button class="wcat-btn img-cat" onclick="showCat('isc_img',this)">🔒 ISC FILES</button>
-    </div>
-    <div class="wchips" id="wchips"></div>
-    <div class="cmd-hint-bar">
-      <span class="cmd-hint"><kbd>/search</kbd> anything · <kbd>/show</kbd> photos · <kbd>/gov</kbd> · <kbd>/isc</kbd> · <kbd>/fn</kbd> · <kbd>/fnsmp</kbd> · <kbd>/clear</kbd> · <kbd>/theme</kbd> · <kbd>/help</kbd></span>
-    </div>`;
-  mi.appendChild(w);
+  mi.appendChild(buildWelcomeEl());
   curCat = 'all';
   renderChips();
   langFlag.textContent = 'EN';
@@ -727,10 +753,14 @@ function clearChat() {
 }
 
 /* ── TEXTAREA AUTO-HEIGHT ── */
-ci.addEventListener('input', function () {
-  this.style.height = 'auto';
-  this.style.height = Math.min(this.scrollHeight, 180) + 'px';
-});
+function adjustHeight() {
+  ci.style.height = 'auto';
+  ci.style.height = Math.min(ci.scrollHeight, 180) + 'px';
+}
+
+ci.addEventListener('input', adjustHeight);
+/* FIX 7: handle paste — recalculate height after paste content is inserted */
+ci.addEventListener('paste', () => setTimeout(adjustHeight, 0));
 
 ci.addEventListener('keydown', function (e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
